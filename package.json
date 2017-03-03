@@ -1,0 +1,98 @@
+{
+  "name": "react-polymorph",
+  "description": "React components with highly customizable logic, markup and styles.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Code Adventure",
+    "url": "https://github.com/CodeAdventure"
+  },
+  "contributors": [
+    {
+      "name": "Dominik Guzei",
+      "email": "dominik.guzei@gmail.com",
+      "url": "http://www.linkedin.com/in/dominik-guzei"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeAdventure/react-polymorph.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CodeAdventure/react-polymorph/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "customizable",
+    "skins",
+    "themes"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.2",
+    "classnames": "^2.2.5",
+    "react-css-themr": "^2.0.0"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "^2.35.3",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.0",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.9",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-dev-expression": "^0.2.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-env": "^1.1.1",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2016": "^6.16.0",
+    "babel-preset-es2017": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-react-optimize": "^1.0.1",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-preset-stage-1": "^6.16.0",
+    "cpx": "^1.5.0",
+    "cross-env": "^3.1.4",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "mobx": "^3.1.0",
+    "mobx-react": "^4.1.0",
+    "node-sass": "^4.0.0",
+    "react": "^15.4.0",
+    "react-addons-css-transition-group": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^4.1.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.0"
+  },
+  "scripts": {
+    "components": "babel ./source/components --out-dir ./lib/components",
+    "skins": "babel ./source/skins --out-dir ./lib/skins",
+    "babel": "npm run components && npm run skins",
+    "build": "cross-env NODE_ENV=production npm run babel && npm run sass",
+    "clean": "rimraf ./lib",
+    "prebuild": "npm run clean",
+    "prepublish": "npm run build",
+    "sass": "cpx \"./source/themes/**/*.scss\" ./lib/themes",
+    "storybook": "start-storybook -p 6543 -c storybook"
+  },
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "classnames": "^2.2.5",
+    "react": "^0.14 || ~15.4.0",
+    "react-addons-css-transition-group": "^0.14.0 || ~15.4.0",
+    "react-dom": "^0.14.0 || ~15.4.0"
+  }
+}

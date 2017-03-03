@@ -1,0 +1,28 @@
+@import "config";
+
+.root {
+  position: relative;
+}
+
+.label {
+  font-size: 16px;
+  font-family: $theme-font-medium;
+  color: #5e6066;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.error {
+  font-family: $theme-font-regular;
+  font-size: 14px;
+  color: #ea4c5b;
+  opacity: 0.5;
+  margin-bottom: 10px;
+  float: right;
+}
+
+.disabled {
+  .label {
+    color: #b6b6b6;
+  }
+}
