@@ -5,10 +5,14 @@ import { themr } from 'react-css-themr';
 import { INPUT } from './identifiers';
 import FormFieldSkin from './FormFieldSkin';
 
+const metaProps = [
+  'skin', 'theme', 'registerSkinInputElement', 'error'
+];
+
 export default themr(INPUT, null, { withRef: true })((props) => (
   <FormFieldSkin input={
     <input
-      {...omit(props, ['skin', 'theme', 'registerSkinInputElement', 'error'])}
+      {...omit(props, metaProps)}
       className={classnames([
         props.className,
         props.theme.input,
