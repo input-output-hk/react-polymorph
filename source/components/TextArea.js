@@ -38,8 +38,8 @@ export default class TextArea extends Input {
     }
   }
 
-  registerSkinInputElement(element) {
-    super.registerSkinInputElement(element);
+  registerSkinFormElement(element) {
+    super.registerSkinFormElement(element);
     this._handleAutoresize();
   }
 

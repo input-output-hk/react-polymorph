@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { omit } from 'lodash';
 
+const registerSkinFormElementError = `You have to register the skin form 
+element by calling the props.registerSkinFormElement(element)`;
+
 export default class FormField extends Component {
 
   static propTypes = {
     skin: PropTypes.element.isRequired,
-    value: PropTypes.string,
     label: PropTypes.string,
-    placeholder: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -16,39 +17,27 @@ export default class FormField extends Component {
   };
 
   static defaultProps = {
-    value: '',
     disabled: false,
   };
 
-  skinInputElement = null;
+  skinFormElement = null;
 
-  registerSkinInputElement = (input) => this.skinInputElement = input;
+  registerSkinFormElement = (input) => this.skinFormElement = input;
 
-  focus = () => this.skinInputElement && this.skinInputElement.focus();
+  focus = () => {
+    if (!this.skinFormElement) throw new Error(registerSkinFormElementError);
+    this.skinFormElement && this.skinFormElement.focus();
+  };
 
-  blur = () => this.skinInputElement && this.skinInputElement.blur();
-
-  onChange = (event) => {
-    const { onChange, disabled } = this.props;
-    if (disabled) return;
-    if(onChange) onChange(this._processValue(event.target.value), event);
+  blur = () => {
+    if (!this.skinFormElement) throw new Error(registerSkinFormElementError);
+    this.skinFormElement && this.skinFormElement.blur();
   };
 
   render() {
-    const { skin, value } = this.props;
-    return React.cloneElement(skin, Object.assign({
-      value: this._processValue(value),
-      onChange: this.onChange,
-      registerSkinInputElement: this.registerSkinInputElement,
-    }, this._propsForSkin()));
-  }
-
-  _propsForSkin() {
-    return omit(this.props, ['value', 'onChange']);
-  }
-
-  _processValue(value) {
-    return value;
+    return React.cloneElement(this.props.skin, Object.assign({
+      registerSkinFormElement: this.registerSkinFormElement,
+    }, this.props));
   }
 
 }

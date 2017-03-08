@@ -6,7 +6,7 @@ import { TEXT_AREA } from './identifiers';
 import FormFieldSkin from './FormFieldSkin';
 
 const metaProps = [
-  'skin', 'theme', 'registerSkinInputElement', 'error', 'autoResize'
+  'skin', 'theme', 'registerSkinFormElement', 'error', 'autoResize'
 ];
 
 export default themr(TEXT_AREA, null, { withRef: true })((props) => (
@@ -19,7 +19,7 @@ export default themr(TEXT_AREA, null, { withRef: true })((props) => (
         props.disabled ? props.theme.disabled : null,
         props.error ? props.theme.errored : null,
       ])}
-      ref={textarea => props.registerSkinInputElement(textarea)}
+      ref={textarea => props.registerSkinFormElement(textarea)}
     >
     </textarea>
   } {...props} />

@@ -5,6 +5,8 @@ import FormField from './FormField';
 export default class Input extends FormField {
 
   static propTypes = Object.assign({}, FormField.propTypes, {
+    value: PropTypes.string,
+    placeholder: PropTypes.string,
     maxLength: PropTypes.number,
     onKeyPress: PropTypes.func,
   });
@@ -13,11 +15,17 @@ export default class Input extends FormField {
     value: '',
   };
 
+  onChange = (event) => {
+    const { onChange, disabled } = this.props;
+    if (disabled) return;
+    if(onChange) onChange(this._processValue(event.target.value), event);
+  };
+
   _processValue(value) {
     return flow([
       this._enforceStringValue,
       this._enforceMaxLength
-    ]).call(this, super._processValue(value));
+    ]).call(this, value);
   }
 
   _enforceStringValue(value) {
