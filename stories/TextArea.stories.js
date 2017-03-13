@@ -34,6 +34,8 @@ storiesOf('TextArea', module)
 
   .add('placeholder', () => <TextArea placeholder="Your Comment" skin={<SimpleTextAreaSkin />} />)
 
+  .add('maxLength(5)', () => <TextArea maxLength={5} skin={<SimpleTextAreaSkin />} />)
+
   .add('error', () => (
     <div>
       <TextArea label="With label" error="Something went wrong" skin={<SimpleTextAreaSkin />} />

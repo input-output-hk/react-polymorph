@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { omit } from 'lodash';
 
-const registerSkinFormElementError = `You have to register the skin form 
-element by calling the props.registerSkinFormElement(element)`;
+const registerSkinElementError = `You have to register the skin form 
+element by calling the props.registerSkinElement(element)`;
 
 export default class FormField extends Component {
 
@@ -22,21 +22,21 @@ export default class FormField extends Component {
 
   skinFormElement = null;
 
-  registerSkinFormElement = (input) => this.skinFormElement = input;
+  registerSkinElement = (input) => this.skinFormElement = input;
 
   focus = () => {
-    if (!this.skinFormElement) throw new Error(registerSkinFormElementError);
+    if (!this.skinFormElement) throw new Error(registerSkinElementError);
     this.skinFormElement && this.skinFormElement.focus();
   };
 
   blur = () => {
-    if (!this.skinFormElement) throw new Error(registerSkinFormElementError);
+    if (!this.skinFormElement) throw new Error(registerSkinElementError);
     this.skinFormElement && this.skinFormElement.blur();
   };
 
   render() {
     return React.cloneElement(this.props.skin, Object.assign({
-      registerSkinFormElement: this.registerSkinFormElement,
+      registerSkinElement: this.registerSkinElement,
     }, this.props));
   }
 

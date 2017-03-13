@@ -1,0 +1,24 @@
+@import "config";
+
+.button {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: $theme-font-light;
+  border: 1px solid #5e6066;
+  padding: 14px 20px;
+  color: #FFF;
+  background: red;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.disabled {
+  border-color: #cfcfcf;
+  background-color: #fcfafa;
+}
