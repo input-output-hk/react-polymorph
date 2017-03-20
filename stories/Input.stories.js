@@ -3,8 +3,8 @@ import { storiesOf, action } from '@kadira/storybook';
 import { observable, action as mobxAction } from 'mobx';
 import SimpleThemeProvider from './support/SimpleThemeProvider';
 import PropsObserver from './support/PropsObserver';
-import Input from '../lib/components/Input';
-import SimpleInputSkin from '../lib/skins/simple/InputSkin';
+import Input from '../source/components/Input';
+import SimpleInputSkin from '../source/skins/simple/InputSkin';
 
 storiesOf('Input', module)
 
