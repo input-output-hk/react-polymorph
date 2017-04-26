@@ -3,8 +3,8 @@ import { storiesOf, action } from '@kadira/storybook';
 import { observable, action as mobxAction } from 'mobx';
 import SimpleThemeProvider from './support/SimpleThemeProvider';
 import PropsObserver from './support/PropsObserver';
-import TextArea from '../lib/components/TextArea';
-import SimpleTextAreaSkin from '../lib/skins/simple/TextAreaSkin';
+import TextArea from '../source/components/TextArea';
+import SimpleTextAreaSkin from '../source/skins/simple/TextAreaSkin';
 
 storiesOf('TextArea', module)
 
@@ -33,6 +33,8 @@ storiesOf('TextArea', module)
   .add('label', () => <TextArea label="Your Comment" skin={<SimpleTextAreaSkin />} />)
 
   .add('placeholder', () => <TextArea placeholder="Your Comment" skin={<SimpleTextAreaSkin />} />)
+
+  .add('maxLength(5)', () => <TextArea maxLength={5} skin={<SimpleTextAreaSkin />} />)
 
   .add('error', () => (
     <div>

@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import { omit } from 'lodash';
+import React, { PropTypes } from 'react';
+import SkinnableComponent from './SkinnableComponent';
 
-const registerSkinFormElementError = `You have to register the skin form 
-element by calling the props.registerSkinFormElement(element)`;
+const registerSkinElementError = `You have to register the skin
+element by calling the props.registerSkinElement(element)`;
 
-export default class FormField extends Component {
+export default class FormField extends SkinnableComponent {
 
-  static propTypes = {
+  static propTypes = Object.assign({}, SkinnableComponent.propTypes, {
     skin: PropTypes.element.isRequired,
     label: PropTypes.string,
     onChange: PropTypes.func,
@@ -14,30 +14,20 @@ export default class FormField extends Component {
     onBlur: PropTypes.func,
     disabled: PropTypes.bool,
     error: PropTypes.string,
-  };
+  });
 
   static defaultProps = {
     disabled: false,
   };
 
-  skinFormElement = null;
-
-  registerSkinFormElement = (input) => this.skinFormElement = input;
-
   focus = () => {
-    if (!this.skinFormElement) throw new Error(registerSkinFormElementError);
-    this.skinFormElement && this.skinFormElement.focus();
+    if (!this.skinElement) throw new Error(registerSkinElementError);
+    this.skinElement && this.skinElement.focus();
   };
 
   blur = () => {
-    if (!this.skinFormElement) throw new Error(registerSkinFormElementError);
-    this.skinFormElement && this.skinFormElement.blur();
+    if (!this.skinElement) throw new Error(registerSkinElementError);
+    this.skinElement && this.skinElement.blur();
   };
-
-  render() {
-    return React.cloneElement(this.props.skin, Object.assign({
-      registerSkinFormElement: this.registerSkinFormElement,
-    }, this.props));
-  }
 
 }

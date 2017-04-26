@@ -11,15 +11,21 @@ export default class Input extends FormField {
     onKeyPress: PropTypes.func,
   });
 
-  static defaultProps = {
+  static defaultProps = Object.assign({}, FormField.defaultProps, {
     value: '',
-  };
+  });
 
   onChange = (event) => {
     const { onChange, disabled } = this.props;
     if (disabled) return;
     if(onChange) onChange(this._processValue(event.target.value), event);
   };
+
+  prepareSkinProps(props) {
+    return Object.assign({}, super.prepareSkinProps(props), {
+      onChange: this.onChange,
+    });
+  }
 
   _processValue(value) {
     return flow([

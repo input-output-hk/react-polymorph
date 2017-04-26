@@ -6,7 +6,7 @@ import { INPUT } from './identifiers';
 import FormFieldSkin from './FormFieldSkin';
 
 const metaProps = [
-  'skin', 'theme', 'registerSkinFormElement', 'error'
+  'skin', 'theme', 'registerSkinElement', 'error'
 ];
 
 export default themr(INPUT, null, { withRef: true })((props) => (
@@ -19,7 +19,7 @@ export default themr(INPUT, null, { withRef: true })((props) => (
         props.disabled ? props.theme.disabled : null,
         props.error ? props.theme.errored : null,
       ])}
-      ref={input => props.registerSkinFormElement(input)}
+      ref={input => props.registerSkinElement(input)}
     />
   } {...props} />
 ));
