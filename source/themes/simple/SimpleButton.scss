@@ -1,24 +1,31 @@
 @import "config";
 
-.button {
+.root {
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: $theme-button-font-size;
   font-family: $theme-font-light;
-  border: 1px solid #5e6066;
-  padding: 14px 20px;
-  color: #FFF;
-  background: red;
+  padding: $theme-button-padding;
+  color: $theme-button-label-color;
+  background-color: $theme-button-bg-color-normal;
+  border: none;
+  border-radius: $theme-button-border-radius;
+
+  &:not(.disabled) {
+    &:hover {
+      background-color: $theme-button-bg-color-hover;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: $theme-button-bg-color-active
+    }
+  }
 
   &:focus {
     outline: none;
   }
-
-  &:active {
-    opacity: 0.8;
-  }
 }
 
 .disabled {
-  border-color: #cfcfcf;
-  background-color: #fcfafa;
+  background-color: $theme-button-bg-color-disabled;
 }

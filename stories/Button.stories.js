@@ -29,4 +29,5 @@ storiesOf('Button', module)
   // ====== Stories ======
 
   .add('plain', () => <Button label="Button label" skin={<SimpleButtonSkin />} />)
+
   .add('disabled', () => <Button label="Button label" disabled skin={<SimpleButtonSkin />} />);

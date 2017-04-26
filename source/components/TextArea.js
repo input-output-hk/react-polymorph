@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { isFunction, isString, flow, pick } from 'lodash';
 import Input from './Input';
 
 export default class TextArea extends Input {
@@ -44,7 +43,7 @@ export default class TextArea extends Input {
   }
 
   _handleAutoresize = () => {
-    const element = this.skinInputElement;
+    const element = this.skinElement;
     if (!element) return;
 
     // compute the height difference between inner height and outer height
