@@ -3,6 +3,10 @@ import Input from './Input';
 
 export default class TextArea extends Input {
 
+  static SKIN_PARTS = {
+    TEXT_AREA: 'textarea',
+  };
+
   static propTypes = Object.assign({}, Input.propTypes, {
     autoResize: PropTypes.bool,
     rows: PropTypes.number,
@@ -11,6 +15,8 @@ export default class TextArea extends Input {
   static defaultProps = Object.assign({}, Input.defaultProps, {
     autoResize: true,
   });
+
+  static metaProps = Input.metaProps.concat(['autoResize']);
 
   componentDidMount () {
     if (this.props.autoResize) {
@@ -37,13 +43,13 @@ export default class TextArea extends Input {
     }
   }
 
-  registerSkinElement(element) {
-    super.registerSkinElement(element);
+  registerSkinPart(element) {
+    super.registerSkinPart(element);
     this._handleAutoresize();
   }
 
   _handleAutoresize = () => {
-    const element = this.skinElement;
+    const element = this.skinParts[TextArea.SKIN_PARTS.TEXT_AREA];
     if (!element) return;
 
     // compute the height difference between inner height and outer height
