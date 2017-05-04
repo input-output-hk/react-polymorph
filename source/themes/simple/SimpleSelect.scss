@@ -1,0 +1,81 @@
+@import "config";
+@import "mixins/arrow";
+
+.select {
+  position: relative;
+}
+
+.selectInput {
+  cursor: pointer;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 20px;
+    left: calc(100% - 32px);
+    background: url('./assets/select-down-arrow.svg') no-repeat;
+    width: 11px;
+    height: 7px;
+    -webkit-background-size: 11px;
+    background-size: 11px;
+  }
+}
+
+.options {
+  position: relative;
+  font-size: 16px;
+  font-family: $theme-font-light;
+  border: 1px solid #c6cdd6;
+  list-style: none;
+  padding: 0;
+  border-radius: 2px;
+
+  @include arrow(up, white, #c6cdd6, 10px);
+  &.firstOptionHovered {
+    @include arrow(up, #edf0f3, #c6cdd6, 10px);
+  }
+}
+
+.option {
+  padding: 14px 20px;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: #edf0f3;
+  }
+}
+
+// ======= SPECIAL STATES =======
+
+.select {
+
+  // ==== STATE: isOpen ====
+
+  &.isOpen {
+    .selectInput:after {
+      background-image: url('./assets/select-up-arrow.svg');
+    }
+  }
+
+  // ==== STATE: openUpward ====
+
+  &.openUpward {
+    .selectInput:after {
+      background-image: url('./assets/select-up-arrow.svg');
+    }
+    &.isOpen {
+      .selectInput:after {
+        background-image: url('./assets/select-down-arrow.svg');
+      }
+    }
+    .options {
+      position: absolute;
+      width: 100%;
+      bottom: calc(100% - 27px);
+      @include arrow(down, white, #c6cdd6, 10px);
+      &.firstOptionHovered {
+        @include arrow(down, #edf0f3, #c6cdd6, 10px);
+      }
+    }
+  }
+}

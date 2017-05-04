@@ -4,7 +4,7 @@ import FormField from './FormField';
 import events from './utils/events';
 import Input from './Input';
 
-export default class DropDown extends FormField {
+export default class Select extends FormField {
 
   static SKIN_PARTS = {
     ROOT: 'root',
@@ -16,13 +16,16 @@ export default class DropDown extends FormField {
     options: PropTypes.array.isRequired,
     value: PropTypes.string,
     allowBlank: PropTypes.bool,
+    placeholder: PropTypes.string,
+    isOpeningUpward: PropTypes.bool,
   });
 
   static defaultProps = {
     allowBlank: true,
+    isOpeningUpward: false,
   };
 
-  static metaProps = FormField.metaProps.concat(['options', 'isOpen', 'allowBlank']);
+  static metaProps = FormField.metaProps.concat(['options', 'allowBlank']);
 
   state = {
     isOpen: false,
@@ -82,9 +85,9 @@ export default class DropDown extends FormField {
     }
   };
 
-  handleSelect = (option, event) => {
+  handleClickOnOption = (option, event) => {
     if (this.props.onBlur) this.props.onBlur(event);
-    this.props.onChange(option, event);
+    if (this.props.onChange) this.props.onChange(option, event);
     this.close();
   };
 
@@ -106,11 +109,11 @@ export default class DropDown extends FormField {
   }
 
   _getRootSkinPart () {
-    return this.skinParts[DropDown.SKIN_PARTS.ROOT];
+    return this.skinParts[Select.SKIN_PARTS.ROOT];
   };
 
   _getInputSkinPart () {
-    return this.skinParts[DropDown.SKIN_PARTS.INPUT];
+    return this.skinParts[Select.SKIN_PARTS.INPUT];
   }
 
 }

@@ -1,46 +1,55 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { themr } from 'react-css-themr';
-import { DROP_DOWN } from './identifiers';
+import { SELECT } from './identifiers';
 import InputSkin from './InputSkin';
-import DropDown from '../../components/DropDown';
+import Select from '../../components/Select';
 
-class DropDownSkin extends Component {
+class SelectSkin extends Component {
 
   state = {
     isFirstOptionHovered: false,
   };
 
   render() {
-    const { component, theme, className, options, isOpen } = this.props;
+    const {
+      component, theme, className, options, isOpen,
+      placeholder, label, error, isOpeningUpward
+    } = this.props;
+    const { isFirstOptionHovered } = this.state;
     const selectedOption = component.getSelectedOption();
     const inputValue = selectedOption ? selectedOption.label : '';
     return (
       <div
         className={classnames([
           className,
-          theme.dropDown,
+          theme.select,
           isOpen ? theme.isOpen : null,
+          isOpeningUpward ? theme.openUpward : null,
         ])}
-        ref={(element) => component.registerSkinPart(DropDown.SKIN_PARTS.ROOT, element)}
+        ref={(element) => component.registerSkinPart(Select.SKIN_PARTS.ROOT, element)}
       >
         <InputSkin
-          className={theme.dropDownInput}
+          className={theme.selectInput}
+          label={label}
           value={inputValue}
           onClick={component.handleInputClick}
           component={component}
+          placeholder={placeholder}
+          error={error}
           readOnly
         />
         {isOpen && (
           <ul
             className={classnames([
               theme.options,
-              this.state.isFirstOptionHovered ? theme.firstOptionHovered : null,
+              isFirstOptionHovered ? theme.firstOptionHovered : null,
             ])}
-            ref={(element) => component.registerSkinPart(DropDown.SKIN_PARTS.OPTIONS, element)}>
-            {options.map((option, index) => {
+            ref={(element) => component.registerSkinPart(Select.SKIN_PARTS.OPTIONS, element)}>
+            {(isOpeningUpward ? options.slice().reverse() : options).map((option, index) => {
               // Observe hover state for first option to allow fine grained css styles (e.g css arrow)
-              const hoverProps = index !== 0 ? {} : {
+              const firstItemIndex = isOpeningUpward ? (options.length - 1) : 0;
+              const hoverProps = index !== firstItemIndex ? {} : {
                 onMouseOver: () => this.setState({ isFirstOptionHovered: true }),
                 onMouseOut: () => this.setState({ isFirstOptionHovered: false }),
               };
@@ -50,7 +59,7 @@ class DropDownSkin extends Component {
                   theme.option,
                   component.isSelectedOption(option) ? theme.selectedOption : null,
                 ])}
-                onClick={(event) => component.handleSelect(option.value, event)}
+                onClick={(event) => component.handleClickOnOption(option.value, event)}
                 {...hoverProps}
               >
                 {option.label}
@@ -63,4 +72,4 @@ class DropDownSkin extends Component {
   }
 };
 
-export default themr(DROP_DOWN, null, { withRef: true })(DropDownSkin);
+export default themr(SELECT, null, { withRef: true })(SelectSkin);
