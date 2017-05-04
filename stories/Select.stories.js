@@ -35,7 +35,7 @@ storiesOf('Select', module)
 
   // ====== Stories ======
 
-  .add('Countries - plain', () => (
+  .add('Countries - options', () => (
     <Select
       options={COUNTRIES}
       skin={<SimpleSelectSkin />}
@@ -59,7 +59,7 @@ storiesOf('Select', module)
     />
   ))
 
-  .add('Countries - pre-selected', () => (
+  .add('Countries - value', () => (
     <Select
       label="Countries"
       options={COUNTRIES}
