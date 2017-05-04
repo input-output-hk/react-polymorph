@@ -79,7 +79,7 @@ storiesOf('Select', module)
   ))
 
   .add('Countries - isOpeningUpward', () => (
-    <div style={{ marginTop: "200px" }}>
+    <div style={{ marginTop: "183px" }}>
       <Select
         label="Countries (opening upward)"
         options={COUNTRIES}
