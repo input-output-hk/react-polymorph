@@ -39,34 +39,32 @@ class SelectSkin extends Component {
           error={error}
           readOnly
         />
-        {isOpen && (
-          <ul
-            className={classnames([
-              theme.options,
-              isFirstOptionHovered ? theme.firstOptionHovered : null,
-            ])}
-            ref={(element) => component.registerSkinPart(Select.SKIN_PARTS.OPTIONS, element)}>
-            {(isOpeningUpward ? options.slice().reverse() : options).map((option, index) => {
-              // Observe hover state for first option to allow fine grained css styles (e.g css arrow)
-              const firstItemIndex = isOpeningUpward ? (options.length - 1) : 0;
-              const hoverProps = index !== firstItemIndex ? {} : {
-                onMouseOver: () => this.setState({ isFirstOptionHovered: true }),
-                onMouseOut: () => this.setState({ isFirstOptionHovered: false }),
-              };
-              return <li
-                key={index}
-                className={classnames([
-                  theme.option,
-                  component.isSelectedOption(option) ? theme.selectedOption : null,
-                ])}
-                onClick={(event) => component.handleClickOnOption(option.value, event)}
-                {...hoverProps}
-              >
-                {option.label}
-              </li>;
-            })}
-          </ul>
-        )}
+        <ul
+          className={classnames([
+            theme.options,
+            isFirstOptionHovered ? theme.firstOptionHovered : null,
+          ])}
+          ref={(element) => component.registerSkinPart(Select.SKIN_PARTS.OPTIONS, element)}>
+          {(isOpeningUpward ? options.slice().reverse() : options).map((option, index) => {
+            // Observe hover state for first option to allow fine grained css styles (e.g css arrow)
+            const firstItemIndex = isOpeningUpward ? (options.length - 1) : 0;
+            const hoverProps = index !== firstItemIndex ? {} : {
+              onMouseOver: () => this.setState({ isFirstOptionHovered: true }),
+              onMouseOut: () => this.setState({ isFirstOptionHovered: false }),
+            };
+            return <li
+              key={index}
+              className={classnames([
+                theme.option,
+                component.isSelectedOption(option) ? theme.selectedOption : null,
+              ])}
+              onClick={(event) => component.handleClickOnOption(option.value, event)}
+              {...hoverProps}
+            >
+              {option.label}
+            </li>;
+          })}
+        </ul>
       </div>
     );
   }
