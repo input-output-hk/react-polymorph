@@ -13,7 +13,7 @@
     position: absolute;
     bottom: 20px;
     left: calc(100% - 32px);
-    background: url('./assets/select-down-arrow.svg') no-repeat;
+    background: url('#{$simple-theme-path}assets/select-down-arrow.svg') no-repeat;
     width: 11px;
     height: 7px;
     -webkit-background-size: 11px;
@@ -22,10 +22,13 @@
 }
 
 .options {
+  z-index: 99;
   display: none; // only show when open
-  position: relative;
+  position: absolute;
+  top: calc(100% + 20px);
+  width: 100%;
   font-size: 16px;
-  font-family: $theme-font-light;
+  font-family: $simple-theme-font-light;
   border: 1px solid #c6cdd6;
   list-style: none;
   padding: 0;
@@ -57,7 +60,7 @@
       display: block;
     }
     .selectInput:after {
-      background-image: url('./assets/select-up-arrow.svg');
+      background-image: url('#{$simple-theme-path}assets/select-up-arrow.svg');
     }
   }
 
@@ -65,17 +68,16 @@
 
   &.openUpward {
     .selectInput:after {
-      background-image: url('./assets/select-up-arrow.svg');
+      background-image: url('#{$simple-theme-path}assets/select-up-arrow.svg');
     }
     &.isOpen {
       .selectInput:after {
-        background-image: url('./assets/select-down-arrow.svg');
+        background-image: url('#{$simple-theme-path}assets/select-down-arrow.svg');
       }
     }
     .options {
-      position: absolute;
-      width: 100%;
-      bottom: calc(100% - 27px);
+      top: inherit;
+      bottom: 65px;
       @include arrow(down, white, #c6cdd6, 10px);
       &.firstOptionHovered {
         @include arrow(down, #edf0f3, #c6cdd6, 10px);

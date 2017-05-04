@@ -16,7 +16,9 @@ export default themr(TEXT_AREA, null, { withRef: true })((props) => (
         props.disabled ? props.theme.disabled : null,
         props.error ? props.theme.errored : null,
       ])}
-      ref={textarea => props.component.registerSkinPart(textarea)}
+      ref={textarea => {
+        props.component.registerSkinPart(TextArea.SKIN_PARTS.TEXT_AREA, textarea);
+      }}
     >
     </textarea>
   } {...props} />

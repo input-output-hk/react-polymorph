@@ -2,22 +2,22 @@
 
 .root {
   box-sizing: border-box;
-  font-size: $theme-button-font-size;
-  font-family: $theme-font-light;
-  padding: $theme-button-padding;
-  color: $theme-button-label-color;
-  background-color: $theme-button-bg-color-normal;
+  font-size: $simple-theme-button-font-size;
+  font-family: $simple-theme-font-light;
+  padding: $simple-theme-button-padding;
+  color: $simple-theme-button-label-color;
+  background-color: $simple-theme-button-bg-color-normal;
   border: none;
-  border-radius: $theme-button-border-radius;
+  border-radius: $simple-theme-button-border-radius;
 
   &:not(.disabled) {
     &:hover {
-      background-color: $theme-button-bg-color-hover;
+      background-color: $simple-theme-button-bg-color-hover;
       cursor: pointer;
     }
 
     &:active {
-      background-color: $theme-button-bg-color-active
+      background-color: $simple-theme-button-bg-color-active
     }
   }
 
@@ -27,5 +27,5 @@
 }
 
 .disabled {
-  background-color: $theme-button-bg-color-disabled;
+  background-color: $simple-theme-button-bg-color-disabled;
 }
