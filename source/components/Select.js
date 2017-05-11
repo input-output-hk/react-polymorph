@@ -14,6 +14,7 @@ export default class Select extends FormField {
 
   static propTypes = Object.assign({}, FormField.propTypes, {
     options: PropTypes.array.isRequired,
+    optionRenderer: PropTypes.func,
     value: PropTypes.string,
     allowBlank: PropTypes.bool,
     placeholder: PropTypes.string,
