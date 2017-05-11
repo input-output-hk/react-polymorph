@@ -7,18 +7,15 @@ import Select from '../../components/Select';
 
 class SelectSkin extends Component {
 
-  state = {
-    isFirstOptionHovered: false,
-  };
-
   render() {
     const {
       component, theme, className, options, isOpen,
       placeholder, label, error, isOpeningUpward
     } = this.props;
-    const { isFirstOptionHovered } = this.state;
     const selectedOption = component.getSelectedOption();
     const inputValue = selectedOption ? selectedOption.label : '';
+    const highlightedOptionIndex = component.getHighlightedOptionIndex();
+    const isFirstOptionHighlighted = highlightedOptionIndex === 0;
     return (
       <div
         className={classnames([
@@ -42,32 +39,30 @@ class SelectSkin extends Component {
         <ul
           className={classnames([
             theme.options,
-            isFirstOptionHovered ? theme.firstOptionHovered : null,
+            isFirstOptionHighlighted ? theme.firstOptionHighlighted : null,
           ])}
           ref={(element) => component.registerSkinPart(Select.SKIN_PARTS.OPTIONS, element)}>
           {(isOpeningUpward ? options.slice().reverse() : options).map((option, index) => {
-            // Observe hover state for first option to allow fine grained css styles (e.g css arrow)
-            const firstItemIndex = isOpeningUpward ? (options.length - 1) : 0;
-            const hoverProps = index !== firstItemIndex ? {} : {
-              onMouseOver: () => this.setState({ isFirstOptionHovered: true }),
-              onMouseOut: () => this.setState({ isFirstOptionHovered: false }),
-            };
-            return <li
-              key={index}
-              className={classnames([
-                theme.option,
-                component.isSelectedOption(option) ? theme.selectedOption : null,
-              ])}
-              onClick={(event) => component.handleClickOnOption(option.value, event)}
-              {...hoverProps}
-            >
-              {option.label}
-            </li>;
+            return (
+              <li
+                key={index}
+                className={classnames([
+                  theme.option,
+                  component.isSelectedOption(option) ? theme.selectedOption : null,
+                  component.isHighlightedOption(index) ? theme.highlightedOption : null,
+                ])}
+                onClick={(event) => component.handleClickOnOption(option.value, event)}
+                onMouseEnter={() => component.setHighlightedOptionIndex(index)}
+              >
+                {option.label}
+              </li>
+            );
           })}
         </ul>
       </div>
     );
   }
+
 };
 
 export default themr(SELECT, null, { withRef: true })(SelectSkin);

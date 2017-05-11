@@ -29,6 +29,7 @@ export default class Select extends FormField {
 
   state = {
     isOpen: false,
+    highlightedOptionIndex: null,
   };
 
   // ========= COMPONENT LIFE CYCLE =========
@@ -64,7 +65,10 @@ export default class Select extends FormField {
     event.stopPropagation();
     event.preventDefault();
     this._getInputSkinPart().blur();
-    this.setState({ isOpen: !this.state.isOpen });
+    this.setState({
+      isOpen: !this.state.isOpen,
+      highlightedOptionIndex: this.getHighlightedOptionIndex(),
+    });
   };
 
   getSelectedOption = () => {
@@ -79,9 +83,43 @@ export default class Select extends FormField {
     return option.value === this.props.value;
   };
 
+  getHighlightedOptionIndex = () => {
+    // If nothing is higlighted, highlight selected option
+    // In case nothing is selected, highlight first option
+    const { options, isOpeningUpward } = this.props;
+    const currentIndex = this.state.highlightedOptionIndex;
+    let index = 0;
+    if (currentIndex !== null) {
+      index = currentIndex;
+    } else {
+      const selectedOption = this.getSelectedOption();
+      if (selectedOption) {
+        index = options.findIndex(option => option.value === selectedOption.value);
+      }
+    }
+    if (isOpeningUpward) {
+      const reverseIndex = options.length - 1 - index;
+      return reverseIndex;
+    }
+    return index;
+  };
+
+  setHighlightedOptionIndex = (optionIndex) => {
+    if (!this.isHighlightedOption(optionIndex)) {
+      this.setState({ highlightedOptionIndex: optionIndex });
+    }
+  };
+
+  isHighlightedOption = (optionIndex) => {
+    return this.state.highlightedOptionIndex === optionIndex;
+  };
+
   close = () => {
     if (this.state.isOpen) {
-      this.setState({ isOpen: false });
+      this.setState({
+        isOpen: false,
+        highlightedOptionIndex: null,
+      });
     }
   };
 
@@ -97,7 +135,44 @@ export default class Select extends FormField {
     const root = this._getRootSkinPart();
     const isDescendant = events.targetIsDescendant(event, ReactDOM.findDOMNode(root));
     if (this.state.isOpen && !isDescendant) {
-      this.setState({ isOpen: false });
+      this.setState({
+        isOpen: false,
+        highlightedOptionIndex: null,
+      });
+    }
+  };
+
+  _handleSelectionOnEnterKey = (event) => {
+    const { options, isOpeningUpward } = this.props;
+    const currentIndex = this.state.highlightedOptionIndex;
+    const reverseIndex = options.length - 1 - currentIndex;
+    const highlightedOption = options[isOpeningUpward ? reverseIndex : currentIndex].value;
+    this.handleClickOnOption(highlightedOption, event);
+  };
+
+  _handleHighlightMove = (direction) => {
+    const { options } = this.props;
+    const currentIndex = this.state.highlightedOptionIndex;
+    let newIndex = (direction === 'up') ? (currentIndex - 1) : (currentIndex + 1);
+    // Make sure new index is within options bounds
+    newIndex = Math.max(0, Math.min(newIndex, (options.length - 1)));
+    this.setHighlightedOptionIndex(newIndex);
+  };
+
+  _handleKeyDown = (event) => {
+    switch (event.keyCode) {
+      case 13: // Select currently highlighted option on Enter key
+        this._handleSelectionOnEnterKey(event);
+        break;
+      case 27: // Close on Escape key
+        this.close();
+        break;
+      case 38: // Move selection higlight 'up' on Arrow Up key
+        this._handleHighlightMove('up');
+        break;
+      case 40: // Move selection higlight 'down' on Arrow Down key
+        this._handleHighlightMove('down');
+        break;
     }
   };
 
@@ -105,12 +180,13 @@ export default class Select extends FormField {
     return {
       click: this._handleDocumentClick,
       touchend: this._handleDocumentClick,
+      keydown: this._handleKeyDown,
     };
   }
 
   _getRootSkinPart () {
     return this.skinParts[Select.SKIN_PARTS.ROOT];
-  };
+  }
 
   _getInputSkinPart () {
     return this.skinParts[Select.SKIN_PARTS.INPUT];

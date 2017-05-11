@@ -6,45 +6,61 @@
 }
 
 .selectInput {
-  cursor: pointer;
+  input {
+    cursor: pointer;
+    padding-right: 48px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
   &:after {
-    content: "";
-    position: absolute;
-    bottom: 20px;
-    left: calc(100% - 32px);
     background: url('#{$simple-theme-path}assets/select-down-arrow.svg') no-repeat;
-    width: 11px;
-    height: 7px;
     -webkit-background-size: 11px;
     background-size: 11px;
+    bottom: 20px;
+    content: '';
+    height: 7px;
+    left: calc(100% - 32px);
+    pointer-events: none;
+    position: absolute;
+    width: 11px;
   }
 }
 
 .options {
-  z-index: 99;
+  border: 1px solid #c6cdd6;
+  border-radius: 2px;
+  box-sizing: border-box;
   display: none; // only show when open
+  font-family: $simple-theme-font-light;
+  font-size: 16px;
+  list-style: none;
+  padding: 0;
   position: absolute;
   top: calc(100% + 20px);
   width: 100%;
-  font-size: 16px;
-  font-family: $simple-theme-font-light;
-  border: 1px solid #c6cdd6;
-  list-style: none;
-  padding: 0;
-  border-radius: 2px;
-
+  z-index: 99;
   @include arrow(up, white, #c6cdd6, 10px);
-  &.firstOptionHovered {
+
+  &.firstOptionHighlighted {
     @include arrow(up, #edf0f3, #c6cdd6, 10px);
   }
 }
 
 .option {
+  background-color: #fff;
+  cursor: pointer;
   padding: 14px 20px;
-  background-color: white;
-  &:hover {
-    cursor: pointer;
+
+  &.selectedOption {
+    font-family: $simple-theme-font-medium;
+  }
+
+  &.highlightedOption {
     background-color: #edf0f3;
   }
 }
@@ -59,6 +75,7 @@
     .options {
       display: block;
     }
+
     .selectInput:after {
       background-image: url('#{$simple-theme-path}assets/select-up-arrow.svg');
     }
@@ -70,16 +87,19 @@
     .selectInput:after {
       background-image: url('#{$simple-theme-path}assets/select-up-arrow.svg');
     }
+
     &.isOpen {
       .selectInput:after {
         background-image: url('#{$simple-theme-path}assets/select-down-arrow.svg');
       }
     }
+
     .options {
-      top: inherit;
       bottom: 65px;
+      top: inherit;
       @include arrow(down, white, #c6cdd6, 10px);
-      &.firstOptionHovered {
+
+      &.firstOptionHighlighted {
         @include arrow(down, #edf0f3, #c6cdd6, 10px);
       }
     }
