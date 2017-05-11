@@ -114,6 +114,17 @@ export default class Select extends FormField {
     return this.state.highlightedOptionIndex === optionIndex;
   };
 
+  focus = () => this.open();
+
+  open = () => {
+    if (!this.state.isOpen) {
+      this.setState({
+        isOpen: true,
+        highlightedOptionIndex: this.getHighlightedOptionIndex(),
+      });
+    }
+  };
+
   close = () => {
     if (this.state.isOpen) {
       this.setState({
