@@ -30,7 +30,6 @@
   "dependencies": {
     "lodash": "^4.17.2",
     "classnames": "^2.2.5",
-    "react-css-themr": "^2.0.0"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.35.3",
@@ -74,7 +73,8 @@
     "sass-loader": "^4.1.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.0"
+    "webpack": "^1.13.0",
+    "react-css-themr": "^2.0.0"
   },
   "scripts": {
     "components": "babel ./source/components --out-dir ./lib/components",
@@ -93,6 +93,7 @@
     "classnames": "^2.2.5",
     "react": "^0.14 || ~15.4.0",
     "react-addons-css-transition-group": "^0.14.0 || ~15.4.0",
-    "react-dom": "^0.14.0 || ~15.4.0"
+    "react-dom": "^0.14.0 || ~15.4.0",
+    "react-css-themr": "^2.0.0"
   }
 }
