@@ -84,6 +84,7 @@
     "build": "cross-env NODE_ENV=production npm run babel && npm run sass",
     "clean": "rimraf ./lib",
     "prebuild": "npm run clean",
+    "preinstall": "npm run prepublish",
     "prepublish": "npm run build",
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook"
