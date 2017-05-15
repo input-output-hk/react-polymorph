@@ -14,6 +14,7 @@ export default class Select extends FormField {
 
   static propTypes = Object.assign({}, FormField.propTypes, {
     options: PropTypes.array.isRequired,
+    optionRenderer: PropTypes.func,
     value: PropTypes.string,
     allowBlank: PropTypes.bool,
     placeholder: PropTypes.string,
@@ -112,6 +113,17 @@ export default class Select extends FormField {
 
   isHighlightedOption = (optionIndex) => {
     return this.state.highlightedOptionIndex === optionIndex;
+  };
+
+  focus = () => this.open();
+
+  open = () => {
+    if (!this.state.isOpen) {
+      this.setState({
+        isOpen: true,
+        highlightedOptionIndex: this.getHighlightedOptionIndex(),
+      });
+    }
   };
 
   close = () => {

@@ -48,6 +48,8 @@ export default class TextArea extends Input {
     this._handleAutoresize();
   }
 
+  focus = () => this.skinParts[TextArea.SKIN_PARTS.TEXT_AREA].focus();
+
   _handleAutoresize = () => {
     const element = this.skinParts[TextArea.SKIN_PARTS.TEXT_AREA];
     if (!element) return;

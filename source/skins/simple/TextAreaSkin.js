@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import { omit } from 'lodash';
 import { themr } from 'react-css-themr';
@@ -19,7 +19,6 @@ export default themr(TEXT_AREA, null, { withRef: true })((props) => (
       ref={textarea => {
         props.component.registerSkinPart(TextArea.SKIN_PARTS.TEXT_AREA, textarea);
       }}
-    >
-    </textarea>
+    />
   } {...props} />
 ));

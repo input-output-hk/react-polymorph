@@ -9,7 +9,7 @@ class SelectSkin extends Component {
 
   render() {
     const {
-      component, theme, className, options, isOpen,
+      component, theme, className, options, optionRenderer, isOpen,
       placeholder, label, error, isOpeningUpward
     } = this.props;
     const selectedOption = component.getSelectedOption();
@@ -54,7 +54,7 @@ class SelectSkin extends Component {
                 onClick={(event) => component.handleClickOnOption(option.value, event)}
                 onMouseEnter={() => component.setHighlightedOptionIndex(index)}
               >
-                {option.label}
+                {optionRenderer ? optionRenderer(option) : option.label}
               </li>
             );
           })}
