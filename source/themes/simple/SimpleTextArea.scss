@@ -1,33 +1,45 @@
-@import "config";
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$textarea-color: #5e6066;
+$textarea-placeholder-color: rgba(#5e6066, 0.5);
+$textarea-focus-outline: none;
+$textarea-font-size: 16px;
+$textarea-font-family: $theme-font-light, sans-serif;
+$textarea-border: 1px solid #5e6066;
+$textarea-padding: 14px 20px;
+$textarea-disabled-border-color: #cfcfcf;
+$textarea-disabled-bg-color: #fcfafa;
+$textarea-error-color: $theme-color-error;
 
 .textarea {
   box-sizing: border-box;
   width: 100%;
-  font-size: 16px;
-  font-family: $simple-theme-font-light;
-  border: 1px solid #5e6066;
-  padding: 14px 20px;
-  color: #5e6066;
+  font-size: $textarea-font-size;
+  font-family: $textarea-font-family;
+  border: $textarea-border;
+  padding: $textarea-padding;
+  color: $textarea-color;
 
   &:focus {
-    outline: none;
+    outline: $textarea-focus-outline;
   }
 
   &::-webkit-input-placeholder {
-    color: #5e6066;
-    opacity: 0.5;
+    color: $textarea-placeholder-color;
   }
 }
 
 .disabled {
   .textarea {
-    border-color: #cfcfcf;
-    background-color: #fcfafa;
+    border-color: $textarea-disabled-border-color;
+    background-color: $textarea-disabled-bg-color;
   }
 }
 
 .errored {
   .textarea {
-    border-color: #ea4c5b;
+    border-color: $textarea-error-color;
   }
 }
