@@ -53,7 +53,6 @@
     "babel-preset-react-optimize": "^1.0.1",
     "babel-preset-stage-0": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
-    "cpx": "^1.5.0",
     "cross-env": "^3.1.4",
     "css-loader": "^0.26.1",
     "eslint": "^3.12.2",
@@ -86,7 +85,7 @@
     "prebuild": "npm run clean",
     "preinstall": "npm run prepublish",
     "prepublish": "npm run build",
-    "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
+    "sass": "cp -R ./source/themes/ ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook"
   },
   "license": "Apache-2.0",
