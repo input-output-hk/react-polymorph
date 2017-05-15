@@ -29,7 +29,8 @@
   ],
   "dependencies": {
     "lodash": "^4.17.2",
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "react-css-themr": "^2.0.0"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.35.3",
@@ -52,6 +53,8 @@
     "babel-preset-react-optimize": "^1.0.1",
     "babel-preset-stage-0": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
+    "cpx": "^1.5.0",
+    "cross-env": "^3.1.4",
     "css-loader": "^0.26.1",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
@@ -68,22 +71,21 @@
     "react": "^15.4.0",
     "react-addons-css-transition-group": "^15.4.0",
     "react-dom": "^15.4.0",
+    "rimraf": "^2.6.1",
     "sass-loader": "^4.1.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.0",
-    "react-css-themr": "^2.0.0"
+    "webpack": "^1.13.0"
   },
   "scripts": {
     "components": "babel ./source/components --out-dir ./lib/components",
     "skins": "babel ./source/skins --out-dir ./lib/skins",
     "babel": "npm run components && npm run skins",
-    "build": "NODE_ENV=production npm run babel && npm run sass",
-    "clean": "rm -rf ./lib",
+    "build": "cross-env NODE_ENV=production npm run babel && npm run sass",
+    "clean": "rimraf ./lib",
     "prebuild": "npm run clean",
-    "preinstall": "npm run prepublish",
     "prepublish": "npm run build",
-    "sass": "cp -R ./source/themes/ ./lib/themes",
+    "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook"
   },
   "license": "Apache-2.0",
@@ -91,7 +93,6 @@
     "classnames": "^2.2.5",
     "react": "^0.14 || ~15.4.0",
     "react-addons-css-transition-group": "^0.14.0 || ~15.4.0",
-    "react-dom": "^0.14.0 || ~15.4.0",
-    "react-css-themr": "^2.0.0"
+    "react-dom": "^0.14.0 || ~15.4.0"
   }
 }
