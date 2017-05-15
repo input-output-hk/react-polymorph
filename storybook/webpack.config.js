@@ -2,6 +2,10 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.(?:png|svg)$/,
+        loader: 'url',
+      },
+      {
         test: /\.js$/,
         loader: 'babel',
         exclude: [/(node_modules)/, /react-css-themr/]

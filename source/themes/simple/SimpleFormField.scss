@@ -1,28 +1,37 @@
-@import "config";
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$form-field-label-font: $theme-font-medium !default;
+$form-field-label-font-size: 16px !default;
+$form-field-label-color: #5e6066 !default;
+$form-field-label-margin-bottom: 10px !default;
+$form-field-error-font: $theme-font-regular !default;
+$form-field-error-font-size: 14px !default;
+$form-field-margin: 0 0 10px 0 !default;
 
 .root {
   position: relative;
 }
 
 .label {
-  font-size: 16px;
-  font-family: $theme-font-medium;
-  color: #5e6066;
+  font-size: $form-field-label-font-size;
+  font-family: $form-field-label-font, sans-serif;
+  color: $form-field-label-color;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: $form-field-label-margin-bottom;
 }
 
 .error {
-  font-family: $theme-font-regular;
-  font-size: 14px;
-  color: #ea4c5b;
-  opacity: 0.5;
-  margin-bottom: 10px;
+  font-family: $form-field-error-font, sans-serif;
+  font-size: $form-field-error-font-size;
+  color: rgba($theme-color-error, 0.5);
+  margin: $form-field-margin;
   float: right;
 }
 
 .disabled {
   .label {
-    color: #b6b6b6;
+    color: $theme-color-disabled;
   }
 }

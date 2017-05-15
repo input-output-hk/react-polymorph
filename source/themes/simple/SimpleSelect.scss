@@ -1,0 +1,126 @@
+@import "theme";
+@import "mixins/arrow";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$select-input-padding: 0 0 0 48px !default;
+$select-down-arrow-url: url('#{$theme-assets-path}/select-down-arrow.svg') !default;
+$select-down-arrow-width: 11px !default;
+$select-down-arrow-height: 7px !default;
+$select-down-arrow-position-bottom: 20px !default;
+$select-down-arrow-position-left: calc(100% - 32px) !default;
+$select-options-border-color: #c6cdd6 !default;
+$select-options-border: 1px solid $select-options-border-color !default;
+$select-options-border-radius: 2px !default;
+$select-options-position-top: calc(100% + 20px) !default;
+$select-options-font-family: $theme-font-light, sans-serif !default;
+$select-options-font-size: 16px !default;
+$select-options-arrow-size: 10px !default;
+$select-option-bg-color: white !default;
+$select-option-highlight-color: #edf0f3 !default;
+$select-option-padding: 14px 20px !default;
+
+.select {
+  position: relative;
+}
+
+.selectInput {
+  input {
+    cursor: pointer;
+    padding-right: $select-input-padding;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: $select-down-arrow-position-left;
+    background: $select-down-arrow-url no-repeat;
+    width: $select-down-arrow-width;
+    height: $select-down-arrow-height;
+    -webkit-background-size: $select-down-arrow-width;
+    background-size: $select-down-arrow-width;
+    bottom: $select-down-arrow-position-bottom;
+    pointer-events: none;
+  }
+}
+
+.options {
+  border: $select-options-border;
+  border-radius: $select-options-border-radius;
+  box-sizing: border-box;
+  display: none; // only show when open
+  position: absolute;
+  top: $select-options-position-top;
+  width: 100%;
+  font-size: $select-options-font-size;
+  font-family: $select-options-font-family;
+  list-style: none;
+  padding: 0;
+  z-index: 99;
+  @include arrow(up, $select-option-bg-color, $select-options-border-color, $select-options-arrow-size);
+
+  &.firstOptionHighlighted {
+    @include arrow(up, $select-option-highlight-color, $select-options-border-color, $select-options-arrow-size);
+  }
+}
+
+.option {
+  background-color: $select-option-bg-color;
+  cursor: pointer;
+  padding: $select-option-padding;
+
+  &.selectedOption {
+    font-family: $theme-font-medium;
+  }
+
+  &.highlightedOption {
+    background-color: $select-option-highlight-color;
+  }
+}
+
+// ======= SPECIAL STATES =======
+
+.select {
+
+  // ==== STATE: isOpen ====
+
+  &.isOpen {
+    .options {
+      display: block;
+    }
+
+    .selectInput:after {
+      background-image: url('#{$theme-assets-path}/select-up-arrow.svg');
+    }
+  }
+
+  // ==== STATE: openUpward ====
+
+  &.openUpward {
+    .selectInput:after {
+      background-image: url('#{$theme-assets-path}/select-up-arrow.svg');
+    }
+
+    &.isOpen {
+      .selectInput:after {
+        background-image: url('#{$theme-assets-path}/select-down-arrow.svg');
+      }
+    }
+
+    .options {
+      bottom: 65px;
+      top: inherit;
+      @include arrow(down, $select-option-bg-color, $select-options-border-color, $select-options-arrow-size);
+
+      &.firstOptionHighlighted {
+        @include arrow(down, $select-option-highlight-color, $select-options-border-color, $select-options-arrow-size);
+      }
+    }
+  }
+}

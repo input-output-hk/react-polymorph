@@ -1,23 +1,37 @@
-@import "config";
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$button-width: 100% !default;
+$button-bg-color-normal: #243e62 !default;
+$button-bg-color-hover: #2f496e !default;
+$button-bg-color-active: #1e304a !default;
+$button-bg-color-disabled: rgba(5, 6, 6, 0.3) !default;
+$button-label-font: $theme-font-medium !default;
+$button-label-color: white !default;
+$button-font-size: 14px !default;
+$button-border-radius: 5px !default;
+$button-padding: 15px 20px !default;
 
 .root {
+  width: $button-width;
   box-sizing: border-box;
-  font-size: $theme-button-font-size;
-  font-family: $theme-font-light;
-  padding: $theme-button-padding;
-  color: $theme-button-label-color;
-  background-color: $theme-button-bg-color-normal;
+  font-size: $button-font-size;
+  font-family: $button-label-font, sans-serif;
+  padding: $button-padding;
+  color: $button-label-color;
+  background-color: $button-bg-color-normal;
   border: none;
-  border-radius: $theme-button-border-radius;
+  border-radius: $button-border-radius;
 
   &:not(.disabled) {
     &:hover {
-      background-color: $theme-button-bg-color-hover;
+      background-color: $button-bg-color-hover;
       cursor: pointer;
     }
 
     &:active {
-      background-color: $theme-button-bg-color-active
+      background-color: $button-bg-color-active;
     }
   }
 
@@ -27,5 +41,5 @@
 }
 
 .disabled {
-  background-color: $theme-button-bg-color-disabled;
+  background-color: $button-bg-color-disabled;
 }

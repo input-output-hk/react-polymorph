@@ -3,4 +3,5 @@ import SkinnableComponent from './SkinnableComponent';
 
 export default class Button extends SkinnableComponent {
   static propTypes = Object.assign({}, SkinnableComponent.propTypes, {});
+  static metaProps = SkinnableComponent.metaProps;
 }
