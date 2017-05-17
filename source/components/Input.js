@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { isFunction, isString, flow, pick } from 'lodash';
 import FormField from './FormField';
 
