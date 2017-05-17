@@ -13,7 +13,6 @@ export default themr(BUTTON, null, { withRef: true })((props) => (
       props.theme.root,
       props.disabled ? props.theme.disabled : null,
     ])}
-    ref={button => props.component.registerSkinPart(button)}
   >
     {props.label}
   </button>
