@@ -30,7 +30,8 @@
   "dependencies": {
     "lodash": "^4.17.2",
     "classnames": "^2.2.5",
-    "react-css-themr": "^2.0.0"
+    "react-css-themr": "^2.0.0",
+    "postinstall-build": "^5.0.0"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.35.3",
@@ -86,7 +87,8 @@
     "prebuild": "npm run clean",
     "prepublish": "npm run build",
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
-    "storybook": "start-storybook -p 6543 -c storybook"
+    "storybook": "start-storybook -p 6543 -c storybook",
+    "postinstall": "postinstall-build lib --only-as-dependency"
   },
   "license": "Apache-2.0",
   "peerDependencies": {
