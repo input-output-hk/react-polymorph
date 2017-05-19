@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { observable, action as mobxAction } from 'mobx';
-import SimpleThemeProvider from './support/SimpleThemeProvider';
 import PropsObserver from './support/PropsObserver';
 import Select from '../source/components/Select';
 import SimpleSelectSkin from '../source/skins/simple/SelectSkin';
@@ -36,13 +35,7 @@ storiesOf('Select', module)
         onChangeAction(value, event);
       })
     });
-    return (
-      <SimpleThemeProvider>
-        <PropsObserver propsForChildren={state}>
-          {story(state)}
-        </PropsObserver>
-      </SimpleThemeProvider>
-    );
+    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
   })
 
   // ====== Stories ======

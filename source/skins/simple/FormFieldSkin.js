@@ -2,8 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import { themr } from 'react-css-themr';
 import { FORM_FIELD } from './identifiers';
+import DefaultFormFieldTheme from '../../themes/simple/SimpleFormField.scss';
 
-export default themr(FORM_FIELD, null, { withRef: true })((props) => (
+export default themr(FORM_FIELD, DefaultFormFieldTheme, { withRef: true })((props) => (
   <div
     className={classnames([
       props.className,

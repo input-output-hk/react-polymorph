@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { observable, action as mobxAction } from 'mobx';
-import SimpleThemeProvider from './support/SimpleThemeProvider';
 import PropsObserver from './support/PropsObserver';
 import Button from '../source/components/Button';
 import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
@@ -17,13 +16,7 @@ storiesOf('Button', module)
         onChangeAction(value, event);
       })
     });
-    return (
-      <SimpleThemeProvider>
-        <PropsObserver propsForChildren={state}>
-          {story()}
-        </PropsObserver>
-      </SimpleThemeProvider>
-    );
+    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
   })
 
   // ====== Stories ======

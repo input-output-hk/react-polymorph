@@ -5,8 +5,9 @@ import { themr } from 'react-css-themr';
 import { INPUT } from './identifiers';
 import FormFieldSkin from './FormFieldSkin';
 import Input from '../../components/Input';
+import DefaultInputTheme from '../../themes/simple/SimpleInput.scss';
 
-export default themr(INPUT, null, { withRef: true })((props) => (
+export default themr(INPUT, DefaultInputTheme, { withRef: true })((props) => (
   <FormFieldSkin input={
     <input
       {...omit(props, Input.metaProps)}

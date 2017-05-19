@@ -4,6 +4,7 @@ import { themr } from 'react-css-themr';
 import { SELECT } from './identifiers';
 import InputSkin from './InputSkin';
 import Select from '../../components/Select';
+import DefaultSelectTheme from '../../themes/simple/SimpleSelect.scss';
 
 class SelectSkin extends Component {
 
@@ -65,4 +66,4 @@ class SelectSkin extends Component {
 
 };
 
-export default themr(SELECT, null, { withRef: true })(SelectSkin);
+export default themr(SELECT, DefaultSelectTheme, { withRef: true })(SelectSkin);
