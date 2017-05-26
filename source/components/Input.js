@@ -26,7 +26,7 @@ export default class Input extends FormField {
   onChange = (event) => {
     const { onChange, disabled } = this.props;
     if (disabled) return;
-    if(onChange) onChange(this._processValue(event.target.value), event);
+    if (onChange) onChange(this._processValue(event.target.value), event);
   };
 
   prepareSkinProps(props) {

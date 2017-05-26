@@ -39,3 +39,17 @@ $input-padding: 14px 20px !default;
 .errored {
   border-color: $theme-color-error;
 }
+
+.numericInputWrapper {
+  position: relative;
+}
+
+.rightLabel {
+  bottom: 46px;
+  color: $theme-color-light-grey;
+  font-family: $theme-font-light, sans-serif;
+  top: 16px;
+  position: absolute;
+  right: 20px;
+  text-transform: uppercase;
+}
