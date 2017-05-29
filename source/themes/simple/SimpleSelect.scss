@@ -85,6 +85,7 @@ $select-option-padding: 14px 20px !default;
 
   &.disabledOption {
     color: rgba(#5e6066, 0.5);
+    cursor: default;
   }
 }
 
