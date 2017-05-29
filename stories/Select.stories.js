@@ -24,6 +24,13 @@ const COUNTRIES_WITH_FLAGS = [
   { value: 'EN-en', label: 'USA', flag: flagUSA }
 ];
 
+const COUNTRIES_WITH_DISABLED_OPTIONS = [
+  { value: 'EN-gb', label: 'England' },
+  { value: 'ES-es', label: 'Spain' },
+  { value: 'TH-th', label: 'Thailand', isDisabled: true },
+  { value: 'EN-en', label: 'USA' }
+];
+
 storiesOf('Select', module)
 
   .addDecorator((story) => {
@@ -109,4 +116,13 @@ storiesOf('Select', module)
         isOpeningUpward
       />
     </div>
+  ))
+
+  .add('Countries - with disabled options', () => (
+    <Select
+      label="Countries (has disabled options)"
+      options={COUNTRIES_WITH_DISABLED_OPTIONS}
+      placeholder="Select your country …"
+      skin={<SimpleSelectSkin />}
+    />
   ));

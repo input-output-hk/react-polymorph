@@ -51,8 +51,9 @@ class SelectSkin extends Component {
                   theme.option,
                   component.isSelectedOption(option) ? theme.selectedOption : null,
                   component.isHighlightedOption(index) ? theme.highlightedOption : null,
+                  option.isDisabled ? theme.disabledOption : null,
                 ])}
-                onClick={(event) => component.handleClickOnOption(option.value, event)}
+                onClick={(event) => component.handleClickOnOption(option, event)}
                 onMouseEnter={() => component.setHighlightedOptionIndex(index)}
               >
                 {optionRenderer ? optionRenderer(option) : option.label}
