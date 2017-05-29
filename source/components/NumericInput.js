@@ -87,7 +87,6 @@ export default class NumericInput extends FormField {
     const regex = /^[0-9.,]+$/;
     let isValueRegular = regex.test(value);
     let handledValue;
-
     if (!isValueRegular && value !== '') {
       // input contains invalid value
       // e.g. 1,00AAbasdasd.asdasd123123
@@ -101,6 +100,11 @@ export default class NumericInput extends FormField {
       const splitedValue = value.split('.');
       if (splitedValue.length === 3) {
         // input value contains more than one dot
+        const splitedOldValue = this.state.oldValue.split('.');
+        if (splitedOldValue[0] <= splitedValue[0]) {
+          // dot is in decimal part
+          position = position - 1;
+        }
         handledValue = splitedValue[0] + '.' + splitedValue[1] + splitedValue[2];
       } else if (splitedValue.length === 2 && splitedValue[0] === '' && splitedValue[1] === '') {
         // special case when dot is inserted in an empty input
