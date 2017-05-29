@@ -101,7 +101,7 @@ export default class NumericInput extends FormField {
       if (splitedValue.length === 3) {
         // input value contains more than one dot
         const splitedOldValue = this.state.oldValue.split('.');
-        if (splitedOldValue[0] <= splitedValue[0]) {
+        if (splitedOldValue[0].length <= splitedValue[0].length) {
           // dot is in decimal part
           position = position - 1;
         }
