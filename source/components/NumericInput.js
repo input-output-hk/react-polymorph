@@ -28,6 +28,7 @@ export default class NumericInput extends FormField {
     maxBeforeDot: PropTypes.number, // max number of characters before dot
     maxAfterDot: PropTypes.number,  // max number of characters after dot
     maxValue: PropTypes.number,     // max allowed numeric value
+    minValue: PropTypes.number,     // min allowed numeric value
   });
 
   static defaultProps = {
@@ -35,7 +36,7 @@ export default class NumericInput extends FormField {
     error: '',
   };
 
-  static metaProps = FormField.metaProps.concat(['maxBeforeDot', 'maxAfterDot', 'maxValue']);
+  static metaProps = FormField.metaProps.concat(['maxBeforeDot', 'maxAfterDot', 'maxValue', 'minValue']);
 
   // ========= COMPONENT LIFE CYCLE =========
 
@@ -52,6 +53,7 @@ export default class NumericInput extends FormField {
       caretPosition = this.state.caretPosition;
     }
 
+    caretPosition = (caretPosition >= 0) ? caretPosition : 0;
     input.selectionEnd = caretPosition;
     input.selectionStart = caretPosition;
   }
@@ -127,8 +129,7 @@ export default class NumericInput extends FormField {
 
     const lastInsertedCharacter = value.substring(position - 1, position);
     if (lastInsertedCharacter === ',') {
-      // prevent comma within the decimal part
-      value = this.state.oldValue;
+      // prevent move caret position on hit ','
       position = position - 1;
     }
 
@@ -155,13 +156,15 @@ export default class NumericInput extends FormField {
     }
 
     // remove leading zero and update caret position
-    if (value.charAt(0) === '0' && beforeDot > 0) {
-      beforeDot = beforeDot.replace(/^0+/, '');
+    if (value.charAt(0) === '0' && (parseInt(beforeDot.replace(/,/g, '')) > 0)) {
+      beforeDot = parseInt(beforeDot.replace(/,/g, ''));
       if (position !== 2) {
         position = 0;
       } else {
         position = 1;
       }
+    } else if (parseInt(beforeDot.replace(/,/g, '')) === 0) {
+      beforeDot = parseInt(beforeDot.replace(/,/g, ''));
     }
 
     return {value, position, parts: {beforeDot, afterDot}}
@@ -170,7 +173,7 @@ export default class NumericInput extends FormField {
   _enforceMaxLengths(data) {
     if (!data) return;
 
-    const {maxBeforeDot, maxAfterDot, maxValue} = this.props;
+    const {maxBeforeDot, maxAfterDot, minValue, maxValue} = this.props;
     const value = data.value;
     let position = data.position;
     let beforeDot = data.parts.beforeDot;
@@ -205,9 +208,9 @@ export default class NumericInput extends FormField {
 
     const result = beforeDot + '.' + afterDot;
 
-    // check max value
-    const flatNumber = result.replace(/,/g, '').replace('.', '');
-    if (maxValue && flatNumber > maxValue || flatNumber < 1) {
+    // check min and max value
+    const resultWithoutSeparators = parseFloat(result.replace(/,/g, ''));
+    if ((maxValue && resultWithoutSeparators > maxValue) || (minValue && (resultWithoutSeparators < minValue))) {
       this.setState({error: 'Please enter a valid amount'});
     } else if (this.state.error !== '') {
       this.setState({error: null});

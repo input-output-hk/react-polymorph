@@ -78,7 +78,18 @@ storiesOf('NumericInput', module)
     <NumericInput
       label="Amount"
       placeholder="0.000000"
-      maxValue={300000000}
+      maxValue={30000}
+      onChange={mobxAction((value) => { state.value = value; })}
+      skin={<SimpleNumericInputSkin />}
+    />
+  ))
+
+  .add('Send amount - maxValue(30000) and minValue(1)', () => (
+    <NumericInput
+      label="Amount"
+      placeholder="0.000000"
+      maxValue={30000}
+      minValue={1}
       onChange={mobxAction((value) => { state.value = value; })}
       skin={<SimpleNumericInputSkin />}
     />
@@ -90,7 +101,8 @@ storiesOf('NumericInput', module)
       placeholder="0.000000"
       maxBeforeDot={12}
       maxAfterDot={6}
-      maxValue={45000000000000000}
+      maxValue={45000000000}
+      minValue={0.000001}
       onChange={mobxAction((value) => { state.value = value; })}
       skin={<SimpleNumericInputSkin />}
     />
