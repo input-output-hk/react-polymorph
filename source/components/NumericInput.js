@@ -9,10 +9,11 @@ export default class NumericInput extends FormField {
   constructor(props) {
     super(props);
     this.state = {
-      caretPosition: 0,
-      separatorsCounter: 0,
-      error: null,
-      oldValue: null,
+      caretPosition: 0,   // Current caret position
+      separatorsCount: 0, // Number of comma separators used for calculating caret position after separators are injected
+      error: null,        // Inner (Component) state error
+                          // e.g. if value > maxValue set error message
+      oldValue: null,     // Last recorded value before input change
     }
   }
 
@@ -24,31 +25,29 @@ export default class NumericInput extends FormField {
     error: PropTypes.string,
     value: PropTypes.string,
     placeholder: PropTypes.string,
-    maxLength: PropTypes.number,
-    maxBeforeDot: PropTypes.number,
-    maxAfterDot: PropTypes.number,
-    maxValue: PropTypes.number,
-    rightLabel: PropTypes.string,
+    maxBeforeDot: PropTypes.number, // max number of characters before dot
+    maxAfterDot: PropTypes.number,  // max number of characters after dot
+    maxValue: PropTypes.number,     // max allowed numeric value
   });
 
   static defaultProps = {
     value: '',
     error: '',
-    rightLabel: '',
   };
 
-  static metaProps = FormField.metaProps.concat(['rightLabel', 'maxBeforeDot', 'maxAfterDot', 'maxValue']);
+  static metaProps = FormField.metaProps.concat(['maxBeforeDot', 'maxAfterDot', 'maxValue']);
 
   // ========= COMPONENT LIFE CYCLE =========
 
   componentDidUpdate (prevProps, prevState) {
     const input = this.skinParts[NumericInput.SKIN_PARTS.INPUT];
 
+    // caret position calculation after separators injection
     let caretPosition;
-    if (this.state.separatorsCounter != prevState.separatorsCounter
-      && (this.state.separatorsCounter - prevState.separatorsCounter) <= 1
-      && (this.state.separatorsCounter - prevState.separatorsCounter) >= -1) {
-      caretPosition = this.state.caretPosition + (this.state.separatorsCounter - prevState.separatorsCounter);
+    if (this.state.separatorsCount != prevState.separatorsCount
+      && (this.state.separatorsCount - prevState.separatorsCount) <= 1
+      && (this.state.separatorsCount - prevState.separatorsCount) >= -1) {
+      caretPosition = this.state.caretPosition + (this.state.separatorsCount - prevState.separatorsCount);
     } else {
       caretPosition = this.state.caretPosition;
     }
@@ -104,8 +103,16 @@ export default class NumericInput extends FormField {
         if (splitedOldValue[0].length <= splitedValue[0].length) {
           // dot is in decimal part
           position = position - 1;
+          let beforeDot = splitedValue[0] + splitedValue[1];
+          handledValue = beforeDot + '.' + splitedValue[2];
+          beforeDot = beforeDot.replace(/,/g, '');
+          // prevent replace dot if length before dot is greater then max before dot length
+          if (beforeDot.length > this.props.maxBeforeDot) {
+            handledValue = this.state.oldValue;
+          }
+        } else {
+          handledValue = splitedValue[0] + '.' + splitedValue[1] + splitedValue[2];
         }
-        handledValue = splitedValue[0] + '.' + splitedValue[1] + splitedValue[2];
       } else if (splitedValue.length === 2 && splitedValue[0] === '' && splitedValue[1] === '') {
         // special case when dot is inserted in an empty input
         // - return 0.|00000
@@ -171,8 +178,13 @@ export default class NumericInput extends FormField {
 
     // preventing numbers with more than maxBeforeDot units
     // - return first maxBeforeDot numbers (with comma separators)
-    if (maxBeforeDot && beforeDot && beforeDot.length > maxBeforeDot) {
-      beforeDot = beforeDot.substring(0, maxBeforeDot);
+    if (maxBeforeDot && beforeDot) {
+      // max number of commas depending on max number of characters before dot
+      const numberOfCommas = ((maxBeforeDot % 3) > 0) ? parseInt(maxBeforeDot / 3) :  (parseInt(maxBeforeDot / 3) - 1);
+      const maxBeforeDotWithSeparator = maxBeforeDot + numberOfCommas;
+      if (beforeDot.length > maxBeforeDotWithSeparator) {
+        beforeDot = beforeDot.substring(0, maxBeforeDotWithSeparator);
+      }
     }
 
     // remove commas from decimal part (e.g. 123,23,2.002000 -> dot after 2.character reproduce 12.3,23,2)
@@ -212,7 +224,7 @@ export default class NumericInput extends FormField {
       const separatedValue = splitedValue[0].replace(/,/g, '').split('').reverse().join('')
                     .replace(/(\d{3}\B)/g, '$1,')
                     .split('').reverse().join('');
-      this.setState({separatorsCounter: (separatedValue.match(/,/g) || []).length});
+      this.setState({separatorsCount: (separatedValue.match(/,/g) || []).length});
       return separatedValue + '.' + splitedValue[1];
     }
   }

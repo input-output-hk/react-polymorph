@@ -54,19 +54,9 @@ storiesOf('NumericInput', module)
     );
   })
 
-  .add('Send amount - with right label', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      rightLabel="ADA"
-      skin={<SimpleNumericInputSkin />}
-    />
-  ))
-
   .add('Send amount - error', () => (
     <NumericInput
       label="Amount"
-      rightLabel="ADA"
       placeholder="0.000000"
       error="Please enter a valid amount"
       skin={<SimpleNumericInputSkin />}
@@ -76,7 +66,6 @@ storiesOf('NumericInput', module)
   .add('Send amount - beforeDot(3) and afterDot(4)', () => (
     <NumericInput
       label="Amount"
-      rightLabel="ADA"
       placeholder="0.0000"
       maxBeforeDot={3}
       maxAfterDot={4}
@@ -88,7 +77,6 @@ storiesOf('NumericInput', module)
   .add('Send amount - maxValue(30000)', () => (
     <NumericInput
       label="Amount"
-      rightLabel="ADA"
       placeholder="0.000000"
       maxValue={300000000}
       onChange={mobxAction((value) => { state.value = value; })}
@@ -99,9 +87,8 @@ storiesOf('NumericInput', module)
   .add('Send amount - onChange', () => (
     <NumericInput
       label="Amount"
-      rightLabel="ADA"
       placeholder="0.000000"
-      maxBeforeDot={15}
+      maxBeforeDot={12}
       maxAfterDot={6}
       maxValue={45000000000000000}
       onChange={mobxAction((value) => { state.value = value; })}

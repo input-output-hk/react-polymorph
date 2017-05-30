@@ -19,11 +19,6 @@ export default themr(INPUT, DefaultInputTheme, { withRef: true })((props) => (
         ])}
         ref={input => props.component.registerSkinPart(NumericInput.SKIN_PARTS.INPUT, input)}
       />
-      {props.rightLabel && (
-        <span className={props.theme.rightLabel}>
-          {props.rightLabel}
-        </span>
-      )}
     </div>
   } {...props} />
 ));
