@@ -14,7 +14,10 @@ export default class Select extends FormField {
   };
 
   static propTypes = Object.assign({}, FormField.propTypes, {
-    options: PropTypes.array.isRequired,
+    options: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      isDisabled: PropTypes.bool,
+    })).isRequired,
     optionRenderer: PropTypes.func,
     value: PropTypes.string,
     allowBlank: PropTypes.bool,
@@ -107,13 +110,19 @@ export default class Select extends FormField {
   };
 
   setHighlightedOptionIndex = (optionIndex) => {
-    if (!this.isHighlightedOption(optionIndex)) {
+    if (!this.isHighlightedOption(optionIndex) && this.isDisabledOption(optionIndex)) {
       this.setState({ highlightedOptionIndex: optionIndex });
     }
   };
 
   isHighlightedOption = (optionIndex) => {
     return this.state.highlightedOptionIndex === optionIndex;
+  };
+
+  isDisabledOption = (optionIndex) => {
+    const { options } = this.props;
+    const option = options[optionIndex];
+    return option && !option.isDisabled;
   };
 
   focus = () => this.open();
@@ -137,8 +146,9 @@ export default class Select extends FormField {
   };
 
   handleClickOnOption = (option, event) => {
+    if (option.isDisabled) return;
     if (this.props.onBlur) this.props.onBlur(event);
-    if (this.props.onChange) this.props.onChange(option, event);
+    if (this.props.onChange) this.props.onChange(option.value, event);
     this.close();
   };
 
@@ -159,20 +169,33 @@ export default class Select extends FormField {
     const { options, isOpeningUpward } = this.props;
     const currentIndex = this.state.highlightedOptionIndex;
     const reverseIndex = options.length - 1 - currentIndex;
-    const highlightedOption = options[isOpeningUpward ? reverseIndex : currentIndex].value;
+    const highlightedOption = options[isOpeningUpward ? reverseIndex : currentIndex];
     this.handleClickOnOption(highlightedOption, event);
   };
 
-  _handleHighlightMove = (direction) => {
+  _handleHighlightMove = (currentIndex, direction) => {
     const { options } = this.props;
-    const currentIndex = this.state.highlightedOptionIndex;
+    const lowerIndexBound = 0;
+    const upperIndexBound = options.length - 1;
     let newIndex = (direction === 'up') ? (currentIndex - 1) : (currentIndex + 1);
+
     // Make sure new index is within options bounds
-    newIndex = Math.max(0, Math.min(newIndex, (options.length - 1)));
-    this.setHighlightedOptionIndex(newIndex);
+    newIndex = Math.max(lowerIndexBound, Math.min(newIndex, upperIndexBound));
+
+    if (options[newIndex].isDisabled) {
+      // Try to jump over disabled options
+      const canMoveUp = newIndex > lowerIndexBound;
+      const canMoveDown = newIndex < upperIndexBound;
+      if ((direction === 'up' && canMoveUp) || (direction === 'down' && canMoveDown)) {
+        this._handleHighlightMove(newIndex, direction);
+      }
+    } else {
+      this.setHighlightedOptionIndex(newIndex);
+    }
   };
 
   _handleKeyDown = (event) => {
+    const highlightOptionIndex = this.state.highlightedOptionIndex;
     switch (event.keyCode) {
       case 13: // Select currently highlighted option on Enter key
         this._handleSelectionOnEnterKey(event);
@@ -181,10 +204,10 @@ export default class Select extends FormField {
         this.close();
         break;
       case 38: // Move selection higlight 'up' on Arrow Up key
-        this._handleHighlightMove('up');
+        this._handleHighlightMove(highlightOptionIndex, 'up');
         break;
       case 40: // Move selection higlight 'down' on Arrow Down key
-        this._handleHighlightMove('down');
+        this._handleHighlightMove(highlightOptionIndex, 'down');
         break;
     }
   };

@@ -82,6 +82,11 @@ $select-option-padding: 14px 20px !default;
   &.highlightedOption {
     background-color: $select-option-highlight-color;
   }
+
+  &.disabledOption {
+    color: rgba(#5e6066, 0.5);
+    cursor: default;
+  }
 }
 
 // ======= SPECIAL STATES =======
