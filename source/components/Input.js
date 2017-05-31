@@ -21,8 +21,6 @@ export default class Input extends FormField {
     value: '',
   });
 
-  static metaProps = FormField.metaProps;
-
   onChange = (event) => {
     const { onChange, disabled } = this.props;
     if (disabled) return;

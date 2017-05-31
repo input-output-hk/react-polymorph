@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isFunction, isString, flow, pick } from 'lodash';
+import { flow } from 'lodash';
 import Input from './Input';
 import FormField from './FormField';
 
@@ -35,8 +35,6 @@ export default class NumericInput extends FormField {
     value: '',
     error: '',
   };
-
-  static metaProps = FormField.metaProps.concat(['maxBeforeDot', 'maxAfterDot', 'maxValue', 'minValue']);
 
   // ========= COMPONENT LIFE CYCLE =========
 

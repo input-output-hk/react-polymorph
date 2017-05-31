@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import FormField from './FormField';
-import events from './utils/events';
+import events from '../utils/events';
 import Input from './Input';
 
 export default class Select extends FormField {
@@ -29,8 +29,6 @@ export default class Select extends FormField {
     allowBlank: true,
     isOpeningUpward: false,
   };
-
-  static metaProps = FormField.metaProps.concat(['options', 'allowBlank']);
 
   state = {
     isOpen: false,

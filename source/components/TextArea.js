@@ -17,8 +17,6 @@ export default class TextArea extends Input {
     autoResize: true,
   });
 
-  static metaProps = Input.metaProps.concat(['autoResize']);
-
   componentDidMount () {
     if (this.props.autoResize) {
       window.addEventListener('resize', this._handleAutoresize);

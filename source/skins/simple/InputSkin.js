@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
-import { omit } from 'lodash';
 import { themr } from 'react-css-themr';
 import { INPUT } from './identifiers';
+import { pickDOMProps } from '../../utils/props';
 import FormFieldSkin from './FormFieldSkin';
 import Input from '../../components/Input';
 import DefaultInputTheme from '../../themes/simple/SimpleInput.scss';
@@ -10,7 +10,7 @@ import DefaultInputTheme from '../../themes/simple/SimpleInput.scss';
 export default themr(INPUT, DefaultInputTheme, { withRef: true })((props) => (
   <FormFieldSkin input={
     <input
-      {...omit(props, Input.metaProps)}
+      {...pickDOMProps(props)}
       className={classnames([
         props.theme.input,
         props.disabled ? props.theme.disabled : null,

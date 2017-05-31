@@ -18,6 +18,4 @@ export default class FormField extends SkinnableComponent {
     disabled: false,
   };
 
-  static metaProps = SkinnableComponent.metaProps.concat(['error']);
-
 }

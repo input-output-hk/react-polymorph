@@ -1,6 +1,6 @@
 # react-polymorph
 
-React Polymorph is a simple UI framework for React, that separates logic, markup and theming of components. 
+React Polymorph is a UI framework for React, that separates logic, markup and theming of components. 
 It's powered by [CSS Modules](https://github.com/css-modules/css-modules) and harmoniously integrates with 
 your [webpack](http://webpack.github.io/) workflow, although you can use any other module bundler.
 
@@ -11,7 +11,7 @@ your [webpack](http://webpack.github.io/) workflow, although you can use any oth
 - You need multiple variations of a component with shared logic.
 - You need multiple, completely unique themes for your components. 
 
-## The Solution
+## How:
 
 Separate monolithic React components into:
 
@@ -19,38 +19,59 @@ Separate monolithic React components into:
 2. **Skin** (markup) - Only render the markup, delegate to component.
 3. **Theme** (styling) - Only concerned about styling your skin.
  
-### Simple Example
+### Basic Example
 
-You already use a textarea component but need an advanced version with rich text editing toolbar in some cases … 
-however you also want to re-use the auto-resizing logic that is provided by the react-polymorph `Textarea` component:
+You need standard `Input` components for text and a `NumericInput` for floating 
+point numbers. The only difference is the logic of the component, in both cases
+it is "just" an input field showing some text:
 
-`ExampleTextEditor.js`
+#### Standard Input
+
+The standard input is as simple as possible and does not much logic.
+
 ```javascript
-import TextArea from 'react-polymorph/lib/components/TextArea';
-import TextAreaSkin from 'react-polymorph/lib/skins/simple/TextAreaSkin';
-import MyRichTextAreaSkin from './components/MyRichTextAreaSkin';
+import React from 'react';
+import Input from 'react-polymorph/lib/components/Input';
+import InputSkin from 'react-polymorph/lib/skins/simple/InputSkin';
 
-export default (props) => (
-  <TextArea skin={props.canEditRichText ? MyRichTextAreaSkin : TextAreaSkin} />
+// Standard input component:
+const MyStandardInput = (props) => (
+  <Input 
+    skin={InputSkin}
+    label="Input with max. 5 Characters"
+    maxLength={5}
+  />
 );
 ```
 
-The `TextArea` component in this example only renders what is provided as `skin` property, it does not
-care about the details of its implementation. It handles the logic of auto-resizing the textarea without knowing
-anything about the markup of the provided skin. To make this possible, the skin has to register certain skin
-parts (elements) with the logic component:
+![Standard Input](./docs/images/react-polymorph-input-example.png)
 
-`MyRichTextAreaSkin.js`
+#### Numeric Input
+
+The numeric input however is heavily specialized in guiding the user to 
+enter correct floating point numbers.
+
 ```javascript
-import TextArea from 'react-polymorph/lib/components/TextArea';
-import RichTextEditingToolbar from './RichTextEditingToolbar';
+import React from 'react';
+import NumericInput from 'react-polymorph/lib/components/NumericInput';
+import InputSkin from 'react-polymorph/lib/skins/simple/InputSkin';
 
-export default (props) => (
-  <div>
-    <RichTextEditingToolbar />
-    <textarea ref={textarea => { props.component.registerSkinPart(TextArea.SKIN_PARTS.TEXT_AREA, textarea); }} />
-  </div>
+const MyNumericInput = (props) => (
+  <NumericInput
+    skin={InputSkin}
+    label="Amount"
+    placeholder="0.000000"
+    maxBeforeDot={5}
+    maxAfterDot={6}
+    maxValue={30000}
+    minValue={0.000001}
+  />
 );
 ```
+
+![Standard Input](./docs/images/react-polymorph-numeric-input-example.png)
+
+This is a simple example that shows how you can make/use specialized versions
+of basic components by composition - a core idea of `react-polymorph`!
 
 _more documentation coming soon …_

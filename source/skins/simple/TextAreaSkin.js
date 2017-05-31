@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { omit } from 'lodash';
+import { pickDOMProps } from '../../utils/props';
 import { themr } from 'react-css-themr';
 import { TEXT_AREA } from './identifiers';
 import FormFieldSkin from './FormFieldSkin';
@@ -10,7 +10,7 @@ import DefaultTextAreaTheme from '../../themes/simple/SimpleTextArea.scss';
 export default themr(TEXT_AREA, DefaultTextAreaTheme, { withRef: true })((props) => (
   <FormFieldSkin input={
     <textarea
-      {...omit(props, TextArea.metaProps)}
+      {...pickDOMProps(props)}
       className={classnames([
         props.className,
         props.theme.textarea,

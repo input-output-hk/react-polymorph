@@ -7,8 +7,6 @@ export default class SkinnableComponent extends Component {
     skin: PropTypes.element.isRequired,
   };
 
-  static metaProps = ['skin', 'theme', 'component'];
-
   skinParts = {};
 
   registerSkinPart = (id, element) => this.skinParts[id] = element;
