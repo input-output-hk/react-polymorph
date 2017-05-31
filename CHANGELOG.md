@@ -4,6 +4,10 @@ Changelog
 ## vNext
 ========
 
+### Chores
+
+- Reuse the normal `InputSkin` and `SimpleInput` theme for the `NumericInput` component.
+
 ## 0.2.0
 ========
 
