@@ -82,7 +82,8 @@
   "scripts": {
     "components": "babel ./source/components --out-dir ./lib/components",
     "skins": "babel ./source/skins --out-dir ./lib/skins",
-    "babel": "npm run components && npm run skins",
+    "utils": "babel ./source/utils --out-dir ./lib/utils",
+    "babel": "npm run components && npm run skins && npm run utils",
     "build": "cross-env NODE_ENV=production npm run babel && npm run sass",
     "clean": "rimraf ./lib",
     "prebuild": "npm run clean",

@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.2.4
+
+### Fixes
+
+- Fixed broken build step that was missing the new `utils` folder.
+
 ## 0.2.3
 
 ### Fixes
