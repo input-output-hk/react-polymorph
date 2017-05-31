@@ -3,7 +3,7 @@ import { storiesOf, action } from '@kadira/storybook';
 import { observable, action as mobxAction } from 'mobx';
 import PropsObserver from './support/PropsObserver';
 import NumericInput from '../source/components/NumericInput';
-import SimpleNumericInputSkin from '../source/skins/simple/NumericInputSkin';
+import SimpleInputSkin from '../source/skins/simple/InputSkin';
 
 storiesOf('NumericInput', module)
 
@@ -21,12 +21,12 @@ storiesOf('NumericInput', module)
 
   // ====== Stories ======
 
-  .add('Send amount - plain', () => <NumericInput skin={<SimpleNumericInputSkin />} /> )
+  .add('Send amount - plain', () => <NumericInput skin={<SimpleInputSkin />} /> )
 
   .add('Send amount - label', () => (
     <NumericInput
       label="Amount"
-      skin={<SimpleNumericInputSkin />}
+      skin={<SimpleInputSkin />}
     />
   ))
 
@@ -34,7 +34,7 @@ storiesOf('NumericInput', module)
     <NumericInput
       label="Amount"
       placeholder="0.000000"
-      skin={<SimpleNumericInputSkin />}
+      skin={<SimpleInputSkin />}
     />
   ))
 
@@ -47,7 +47,7 @@ storiesOf('NumericInput', module)
           label="Amount"
           onFocus={action('onFocus')}
           onBlur={action('onBlur')}
-          skin={<SimpleNumericInputSkin />}
+          skin={<SimpleInputSkin />}
         />
         <button onClick={() => input.focus()}>focus</button> | <button onClick={() => input.blur()}>blur</button>
       </div>
@@ -59,7 +59,7 @@ storiesOf('NumericInput', module)
       label="Amount"
       placeholder="0.000000"
       error="Please enter a valid amount"
-      skin={<SimpleNumericInputSkin />}
+      skin={<SimpleInputSkin />}
     />
   ))
 
@@ -70,7 +70,7 @@ storiesOf('NumericInput', module)
       maxBeforeDot={3}
       maxAfterDot={4}
       onChange={mobxAction((value) => { state.value = value; })}
-      skin={<SimpleNumericInputSkin />}
+      skin={<SimpleInputSkin />}
     />
   ))
 
@@ -80,7 +80,7 @@ storiesOf('NumericInput', module)
       placeholder="0.000000"
       maxValue={30000}
       onChange={mobxAction((value) => { state.value = value; })}
-      skin={<SimpleNumericInputSkin />}
+      skin={<SimpleInputSkin />}
     />
   ))
 
@@ -91,7 +91,7 @@ storiesOf('NumericInput', module)
       maxValue={30000}
       minValue={1}
       onChange={mobxAction((value) => { state.value = value; })}
-      skin={<SimpleNumericInputSkin />}
+      skin={<SimpleInputSkin />}
     />
   ))
 
@@ -104,6 +104,6 @@ storiesOf('NumericInput', module)
       maxValue={45000000000}
       minValue={0.000001}
       onChange={mobxAction((value) => { state.value = value; })}
-      skin={<SimpleNumericInputSkin />}
+      skin={<SimpleInputSkin />}
     />
   ))
