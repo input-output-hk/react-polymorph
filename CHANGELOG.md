@@ -5,7 +5,7 @@ Changelog
 
 ### Fixes
 
-- Fixed a bug in NumericInput where caret was reset on every re-render of the component.
+- Fixed a bug in NumericInput where caret was reset on every re-render of the component ([PR #6](https://github.com/CodeAdventure/react-polymorph/pull/6))
 
 ## 0.2.3
 
