@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## vNext
+
+### Fixes
+
+- Fixed a bug in NumericInput where caret was reset on every re-render of the component.
+
 ## 0.2.3
 
 ### Fixes
