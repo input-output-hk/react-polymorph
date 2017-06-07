@@ -36,7 +36,7 @@ export default class NumericInput extends FormField {
   // ========= COMPONENT LIFE CYCLE =========
 
   componentWillReceiveProps(nextProps) {
-    // return last input caret position (also track manualy changed caret position with arrows) on polling as new default position
+    // Set last input caret position on updates
     const input = this.skinParts[NumericInput.SKIN_PARTS.INPUT];
     this.setState({ caretPosition: input.selectionStart });
   }
