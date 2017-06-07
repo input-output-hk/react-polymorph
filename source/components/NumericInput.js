@@ -6,15 +6,12 @@ import FormField from './FormField';
 
 export default class NumericInput extends FormField {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      caretPosition: 0,   // Current caret position
-      separatorsCount: 0, // Number of comma separators used for calculating caret position after separators are injected
-      error: null,        // Inner (Component) state error
-                          // e.g. if value > maxValue set error message
-      oldValue: null,     // Last recorded value before input change
-    }
+  state = {
+    caretPosition: 0,   // Current caret position
+    separatorsCount: 0, // Number of comma separators used for calculating caret position after separators are injected
+    error: null,        // Inner (Component) state error
+                        // e.g. if value > maxValue set error message
+    oldValue: null,     // Last recorded value before input change
   }
 
   static SKIN_PARTS = {
@@ -37,6 +34,12 @@ export default class NumericInput extends FormField {
   };
 
   // ========= COMPONENT LIFE CYCLE =========
+
+  componentWillReceiveProps(nextProps) {
+    // Set last input caret position on updates
+    const input = this.skinParts[NumericInput.SKIN_PARTS.INPUT];
+    this.setState({ caretPosition: input.selectionStart });
+  }
 
   componentDidUpdate (prevProps, prevState) {
     const input = this.skinParts[NumericInput.SKIN_PARTS.INPUT];

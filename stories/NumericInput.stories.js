@@ -69,7 +69,6 @@ storiesOf('NumericInput', module)
       placeholder="0.0000"
       maxBeforeDot={3}
       maxAfterDot={4}
-      onChange={mobxAction((value) => { state.value = value; })}
       skin={<SimpleInputSkin />}
     />
   ))
@@ -79,7 +78,6 @@ storiesOf('NumericInput', module)
       label="Amount"
       placeholder="0.000000"
       maxValue={30000}
-      onChange={mobxAction((value) => { state.value = value; })}
       skin={<SimpleInputSkin />}
     />
   ))
@@ -90,7 +88,6 @@ storiesOf('NumericInput', module)
       placeholder="0.000000"
       maxValue={30000}
       minValue={1}
-      onChange={mobxAction((value) => { state.value = value; })}
       skin={<SimpleInputSkin />}
     />
   ))
@@ -103,7 +100,6 @@ storiesOf('NumericInput', module)
       maxAfterDot={6}
       maxValue={45000000000}
       minValue={0.000001}
-      onChange={mobxAction((value) => { state.value = value; })}
       skin={<SimpleInputSkin />}
     />
   ))
