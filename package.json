@@ -28,11 +28,7 @@
     "themes"
   ],
   "dependencies": {
-    "classnames": "^2.2.5",
-    "lodash": "^4.17.2",
-    "postinstall-build": "^5.0.0",
-    "prop-types": "^15.5.10",
-    "react-css-themr": "^2.0.0"
+    "postinstall-build": "^5.0.0"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.35.3",
@@ -97,6 +93,9 @@
     "classnames": "^2.2.5",
     "react": "^0.14 || ~15.4.0",
     "react-addons-css-transition-group": "^0.14.0 || ~15.4.0",
-    "react-dom": "^0.14.0 || ~15.4.0"
+    "react-dom": "^0.14.0 || ~15.4.0",
+    "prop-types": "^15.5.10",
+    "react-css-themr": "^2.0.0",
+    "lodash": "^4.17.2"
   }
 }
