@@ -7,6 +7,10 @@ Changelog
 
 - Fixed a bug in NumericInput where caret was reset on every re-render of the component.
 
+### Improvements
+
+- Added `.npmignore` file to remove source and dev files and folders from npm repo.
+
 ## 0.2.4
 
 ### Fixes
