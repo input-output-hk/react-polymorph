@@ -12,7 +12,7 @@ export default class NumericInput extends FormField {
     error: null,        // Inner (Component) state error
                         // e.g. if value > maxValue set error message
     oldValue: null,     // Last recorded value before input change
-  }
+  };
 
   static SKIN_PARTS = {
     INPUT: Input.SKIN_PARTS.INPUT,
@@ -89,11 +89,12 @@ export default class NumericInput extends FormField {
     const regex = /^[0-9.,]+$/;
     let isValueRegular = regex.test(value);
     let handledValue;
+    const lastValidValue = this.state.oldValue;
     if (!isValueRegular && value !== '') {
       // input contains invalid value
       // e.g. 1,00AAbasdasd.asdasd123123
       // - reject it and show last valid value
-      handledValue = this.state.oldValue;
+      handledValue = lastValidValue ? lastValidValue : '0.000000';
       position = position - 1;
     } else if (!this._isNumeric(value)) {
       // input contains comma separated number
@@ -102,7 +103,7 @@ export default class NumericInput extends FormField {
       const splitedValue = value.split('.');
       if (splitedValue.length === 3) {
         // input value contains more than one dot
-        const splitedOldValue = this.state.oldValue.split('.');
+        const splitedOldValue = lastValidValue.split('.');
         if (splitedOldValue[0].length <= splitedValue[0].length) {
           // dot is in decimal part
           position = position - 1;
@@ -111,7 +112,7 @@ export default class NumericInput extends FormField {
           beforeDot = beforeDot.replace(/,/g, '');
           // prevent replace dot if length before dot is greater then max before dot length
           if (beforeDot.length > this.props.maxBeforeDot) {
-            handledValue = this.state.oldValue;
+            handledValue = lastValidValue;
           }
         } else {
           handledValue = splitedValue[0] + '.' + splitedValue[1] + splitedValue[2];
@@ -124,7 +125,7 @@ export default class NumericInput extends FormField {
       } else if (value !== '') {
         // special case when user selects part of an input value and hits ',' key
         // - reject it and show last valid value
-        handledValue = this.state.oldValue;
+        handledValue = lastValidValue;
       }
     }
 

@@ -1,6 +1,13 @@
 Changelog
 =========
 
+## 0.2.6
+
+### Fixes
+
+- Fixed a bug in `NumericInput` when illegal chars have been entered but the
+old valid value was still `null`.
+
 ## 0.2.5
 
 ### Fixes
