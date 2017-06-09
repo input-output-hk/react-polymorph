@@ -43,6 +43,7 @@ export default class NumericInput extends FormField {
 
   componentDidUpdate (prevProps, prevState) {
     const input = this.skinParts[NumericInput.SKIN_PARTS.INPUT];
+    if (input !== document.activeElement) return;
 
     // caret position calculation after separators injection
     let caretPosition;
