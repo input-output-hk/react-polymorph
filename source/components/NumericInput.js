@@ -35,7 +35,7 @@ export default class NumericInput extends FormField {
 
   // ========= COMPONENT LIFE CYCLE =========
 
-  componentWillReceiveProps(nextProps) {
+  componentDidMount() {
     // Set last input caret position on updates
     const input = this.skinParts[NumericInput.SKIN_PARTS.INPUT];
     this.setState({ caretPosition: input.selectionStart });
@@ -62,7 +62,8 @@ export default class NumericInput extends FormField {
   onChange = (event) => {
     const { onChange, disabled } = this.props;
     if (disabled) return;
-    if (onChange) onChange(this._processValue(event.target.value, event.target.selectionStart, {}), event);
+    const processedValue = this._processValue(event.target.value, event.target.selectionStart, {});
+    if (onChange) onChange(processedValue, event);
   };
 
   prepareSkinProps(props) {
@@ -104,10 +105,10 @@ export default class NumericInput extends FormField {
       if (splitedValue.length === 3) {
         // input value contains more than one dot
         const splitedOldValue = lastValidValue.split('.');
-        if (splitedOldValue[0].length <= splitedValue[0].length) {
+        let beforeDot = splitedValue[0] + splitedValue[1];
+        if (splitedOldValue[0].length < beforeDot.length) {
           // dot is in decimal part
-          position = position - 1;
-          let beforeDot = splitedValue[0] + splitedValue[1];
+          position -= 1;
           handledValue = beforeDot + '.' + splitedValue[2];
           beforeDot = beforeDot.replace(/,/g, '');
           // prevent replace dot if length before dot is greater then max before dot length
@@ -116,6 +117,10 @@ export default class NumericInput extends FormField {
           }
         } else {
           handledValue = splitedValue[0] + '.' + splitedValue[1] + splitedValue[2];
+          // Second dot was entered after current one -> stay in same position (swallow dot)
+          if (position > beforeDot.length + 1) {
+            position -= 1;
+          }
         }
       } else if (splitedValue.length === 2 && splitedValue[0] === '' && splitedValue[1] === '') {
         // special case when dot is inserted in an empty input
@@ -135,7 +140,7 @@ export default class NumericInput extends FormField {
       position = position - 1;
     }
 
-    return !this._isNumeric(value) ? {value: handledValue, position} : {value, position: position};
+    return !this._isNumeric(value) ? { value: handledValue, position } : { value, position };
   }
 
   _parseToParts(data) {
@@ -223,13 +228,14 @@ export default class NumericInput extends FormField {
   }
 
   _separate(value, position) {
-    this.setState({oldValue: value});
+    this.setState({ oldValue: value });
     if (value) {
       const splitedValue = value.split('.');
       const separatedValue = splitedValue[0].replace(/,/g, '').split('').reverse().join('')
                     .replace(/(\d{3}\B)/g, '$1,')
                     .split('').reverse().join('');
-      this.setState({separatorsCount: (separatedValue.match(/,/g) || []).length});
+      const newSeparatorsCount = (separatedValue.match(/,/g) || []).length;
+      this.setState({ separatorsCount: newSeparatorsCount });
       return separatedValue + '.' + splitedValue[1];
     }
   }
