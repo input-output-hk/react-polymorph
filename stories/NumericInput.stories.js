@@ -102,4 +102,4 @@ storiesOf('NumericInput', module)
       minValue={0.000001}
       skin={<SimpleInputSkin />}
     />
-  ))
+  ));
