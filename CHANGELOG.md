@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 0.2.7
+
+### Fixes
+
+- fixed storybook webpack config
+- fixed caret position logic in numeric input
+- fixed selection stealing bug found in Daedalus
+
 ## 0.2.6
 
 ### Fixes
