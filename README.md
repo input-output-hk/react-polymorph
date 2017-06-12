@@ -1,7 +1,7 @@
-# react-polymorph
+# React Polymorph
 
 React Polymorph is a UI framework for React, that separates logic, markup and theming of components. 
-It's powered by [CSS Modules](https://github.com/css-modules/css-modules) and harmoniously integrates with 
+It's inspired by [react-toolbox](https://github.com/react-toolbox/react-toolbox/) (but more flexible), powered by [CSS Modules](https://github.com/css-modules/css-modules) and harmoniously integrates with 
 your [webpack](http://webpack.github.io/) workflow, although you can use any other module bundler.
 
 ## Why?
@@ -19,15 +19,59 @@ Separate monolithic React components into:
 2. **Skin** (markup) - Only render the markup, delegate to component.
 3. **Theme** (styling) - Only concerned about styling your skin.
  
-### Basic Example
 
-You need standard `Input` components for text and a `NumericInput` for floating 
-point numbers. The only difference is the logic of the component, in both cases
-it is "just" an input field showing some text:
+## Installation & Usage
+
+React Polymorph can be installed as an [npm package](https://www.npmjs.com/package/react-polymorph):
+
+`$ npm install --save react-polymorph`
+ 
+### Usage in Webpack Projects
+
+```bash
+npm install --save style-loader css-loader sass-loader
+```
+
+```js
+module: {
+  loaders: [
+    {
+      test: /\.scss$/,
+      loaders: [
+        'style?sourceMap',
+        'css?sourceMap&modules&localIdentName=[name]_[local]&importLoaders=1',
+        'sass?sourceMap'
+      ]
+    },
+    // your other loaders …
+  ]
+},
+```
+
+Now you can import and use components like this in your app:
+
+```javascript
+import React from 'react';
+import Input from 'react-polymorph/lib/components/Input';
+import InputSkin from 'react-polymorph/lib/skins/simple/InputSkin';
+
+// Basic input component:
+const MyInput = () => <Input skin={InputSkin} />;
+```
+
+Depending on the *skin* you apply to your component it will pick the associated
+theme (in this case it's the `simple` theme that is bundled with `react-polymorph`).
+However you can also completely customize the theme of components.
+ 
+### Components and Skins
+
+Imagine you need a standard text `Input` component for text and a `NumericInput` 
+for floating point numbers. The only difference is the logic of the component, 
+in both cases it is "just" an input field showing some text:
 
 #### Standard Input
 
-The standard input is as simple as possible and does not much logic.
+The standard input is as simple as possible and does not have much logic:
 
 ```javascript
 import React from 'react';
@@ -48,8 +92,8 @@ const MyStandardInput = (props) => (
 
 #### Numeric Input
 
-The numeric input however is heavily specialized in guiding the user to 
-enter correct floating point numbers.
+The numeric input however is specialized in guiding the user to 
+enter correct floating point numbers:
 
 ```javascript
 import React from 'react';
@@ -57,8 +101,8 @@ import NumericInput from 'react-polymorph/lib/components/NumericInput';
 import InputSkin from 'react-polymorph/lib/skins/simple/InputSkin';
 
 const MyNumericInput = (props) => (
-  <NumericInput
-    skin={InputSkin}
+  <NumericInput // notice the different logic component!
+    skin={InputSkin} // but the same skin!
     label="Amount"
     placeholder="0.000000"
     maxBeforeDot={5}
@@ -74,4 +118,77 @@ const MyNumericInput = (props) => (
 This is a simple example that shows how you can make/use specialized versions
 of basic components by composition - a core idea of `react-polymorph`!
 
-_more documentation coming soon …_
+### Customizing Component Skins
+
+Every component accepts a `theme` property intended to provide a [CSS Module import object](https://github.com/css-modules/css-modules) that will be used by the component to assign local classnames to its DOM nodes. Therefore, each one implements a documented **classname API**. So if you want to customize a component, you just need to provide a theme object with the appropriate classname mapping.  
+
+If the component already has a theme injected, the properties you pass will be merged with the injected theme. In this way, you can **add** classnames to the nodes of a specific component and use them to add or to override styles. For example, if you want to customize the `AppBar` to be purple:
+
+```js
+import React from 'react';
+import { Button } from 'react-polymorph/lib/components/Button';
+import { ButtonSkin } from 'react-polymorph/lib/skins/simple/ButtonSkin';
+import theme from './GreenButton.css';
+
+const GreenButton = (props) => (
+  <Button {...props} skin={ButtonSkin} theme={theme} />
+);
+
+export default GreenButton;
+```
+
+```css
+.root {
+  background-color: green;
+}
+```
+
+In this case we are **adding** styles to a specific instance of an `ButtonSkin` component that already has its default styles injected. If the component has no styles injected, you should provide a theme object implementing the full API. You are free to require the CSS Module you want but take into account that every classname is there for a reason. You can either provide a theme via prop or via context as described in the next section.
+
+### Customizing all instances of a Component Skin
+
+Install [react-css-themr](https://github.com/javivelasco/react-css-themr) with `npm install react-css-themr --save`
+
+Create a CSS Module theme style file for each component type, for example for `Button`:
+
+```css
+# /css/button.css
+
+.root {
+  text-transform: uppercase;
+}
+```
+
+Create a theme file that imports each component's custom theme style under the special theme key listed in that widgets's documentation, i.e.:
+
+```js
+# theme.js
+
+import { BUTTON } from 'react-polymorph/lib/skins/simple/identifiers';
+import MyCustomButtonTheme from './css/button.css';
+
+export default {
+  [BUTTON]: MyCustomButtonTheme
+};
+```
+
+Wrap your component tree with ThemeProvider at the desired level in your component hierarchy. You can maintain different themes, each importing differently styled css files \(i.e. `import AdminButton from './css/adminAreaButton.css'`\) and can provide each one at different points in the tree.
+
+```js
+import React from 'react';
+import { ThemeProvider } from 'react-css-themr';
+import theme from './theme';
+
+class App extends React.Component {
+  render() {
+    return (
+      <ThemeProvider theme={theme}>
+        <div>
+          ...
+        </div>
+      </ThemeProvider>
+    );
+  }
+}
+export default App;
+```
