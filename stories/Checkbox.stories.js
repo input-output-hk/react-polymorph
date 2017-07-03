@@ -10,7 +10,7 @@ storiesOf('Checkbox', module)
   .addDecorator((story) => {
     const onChangeAction = action('onChange');
     const state = observable({
-      checked: '',
+      checked: false,
       onChange: mobxAction((value, event) => {
         state.checked = value;
         onChangeAction(value, event);
