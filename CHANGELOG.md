@@ -7,6 +7,10 @@ Changelog
 
 - Updated simple theme styles
 
+### Features
+
+- Add checkbox component
+
 ## 0.2.7
 
 ### Fixes
