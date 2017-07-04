@@ -18,10 +18,10 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
 }
 
 %switch {
-  width: 50px !important;
+  border-radius: 3px !important;
   height: 23px !important;
   margin-top: 0 !important;
-  border-radius: 3px !important;
+  width: 50px !important;
 }
 
 .root {
@@ -49,23 +49,23 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
 }
 
 .switch {
-  position: relative;
   align-self: center;
   border-radius: 3px;
   box-sizing: border-box;
   flex-shrink: 0;
   height: $switch-track-height;
-  width: $switch-track-length;
+  position: relative;
   transition: background-color 200ms ease-in-out;
+  width: $switch-track-length;
 
   .thumb {
+    border-radius: 3px;
+    cursor: pointer;
+    height: $switch-track-height;
     position: absolute;
     top: 0;
-    width: $switch-track-height;
-    height: $switch-track-height;
-    cursor: pointer;
-    border-radius: 2px;
     transition: left 200ms ease-in-out;
+    width: $switch-track-height;
   }
 
   &.checked {
