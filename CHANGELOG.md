@@ -10,6 +10,7 @@ Changelog
 ### Features
 
 - Add checkbox component
+- Add switch component
 
 ## 0.2.7
 
