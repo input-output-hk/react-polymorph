@@ -6,6 +6,9 @@
 $select-input-bg-color: #fafbfc !default;
 $select-input-border-focus-color: #5e6066 !default;
 $select-input-padding: 0 0 0 48px !default;
+$select-arrow-color: #c6cdd6 !default;
+$select-arrow-focus-color: #5e6066 !default;
+$select-up-arrow-url: url('#{$theme-assets-path}/select-up-arrow.svg') !default;
 $select-down-arrow-url: url('#{$theme-assets-path}/select-down-arrow.svg') !default;
 $select-down-arrow-width: 11px !default;
 $select-down-arrow-height: 7px !default;
@@ -40,15 +43,17 @@ $select-option-padding: 14px 20px !default;
   }
 
   &:after {
-    background: $select-down-arrow-url no-repeat;
-    -webkit-background-size: $select-down-arrow-width;
-    background-size: $select-down-arrow-width;
+    background-color: $select-arrow-color;
     bottom: $select-down-arrow-position-bottom;
     content: "";
     pointer-events: none;
     position: absolute;
     left: $select-down-arrow-position-left;
     height: $select-down-arrow-height;
+    -webkit-mask: $select-down-arrow-url no-repeat;
+    mask: $select-down-arrow-url no-repeat;
+    -webkit-mask-size: $select-down-arrow-width;
+    mask-size: $select-down-arrow-width;
     width: $select-down-arrow-width;
   }
 }
@@ -108,7 +113,9 @@ $select-option-padding: 14px 20px !default;
     }
 
     .selectInput:after {
-      background-image: url('#{$theme-assets-path}/select-up-arrow.svg');
+      background-color: $select-arrow-focus-color;
+      -webkit-mask-image: $select-up-arrow-url;
+      mask-image: $select-up-arrow-url;
     }
   }
 
@@ -116,12 +123,14 @@ $select-option-padding: 14px 20px !default;
 
   &.openUpward {
     .selectInput:after {
-      background-image: url('#{$theme-assets-path}/select-up-arrow.svg');
+      -webkit-mask-image: $select-up-arrow-url;
+      mask-image: $select-up-arrow-url;
     }
 
     &.isOpen {
       .selectInput:after {
-        background-image: url('#{$theme-assets-path}/select-down-arrow.svg');
+        -webkit-mask-image: $select-down-arrow-url;
+        mask-image: $select-down-arrow-url;
       }
     }
 
