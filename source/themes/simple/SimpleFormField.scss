@@ -15,19 +15,19 @@ $form-field-margin: 0 0 10px 0 !default;
 }
 
 .label {
-  font-size: $form-field-label-font-size;
-  font-family: $form-field-label-font, sans-serif;
   color: $form-field-label-color;
   display: block;
+  font-family: $form-field-label-font, sans-serif;
+  font-size: $form-field-label-font-size;
   margin-bottom: $form-field-label-margin-bottom;
 }
 
 .error {
+  color: rgba($theme-color-error, 0.5);
+  float: right;
   font-family: $form-field-error-font, sans-serif;
   font-size: $form-field-error-font-size;
-  color: rgba($theme-color-error, 0.5);
   margin: $form-field-margin;
-  float: right;
 }
 
 .disabled {

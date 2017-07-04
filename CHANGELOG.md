@@ -1,7 +1,11 @@
 Changelog
 =========
 
-## vNext
+## vNEXT
+
+### Fixes
+
+- Updated simple theme styles
 
 ### Features
 

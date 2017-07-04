@@ -3,7 +3,12 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
+$select-input-bg-color: #fafbfc !default;
+$select-input-border-focus-color: #5e6066 !default;
 $select-input-padding: 0 0 0 48px !default;
+$select-arrow-color: #c6cdd6 !default;
+$select-arrow-focus-color: #5e6066 !default;
+$select-up-arrow-url: url('#{$theme-assets-path}/select-up-arrow.svg') !default;
 $select-down-arrow-url: url('#{$theme-assets-path}/select-down-arrow.svg') !default;
 $select-down-arrow-width: 11px !default;
 $select-down-arrow-height: 7px !default;
@@ -26,6 +31,7 @@ $select-option-padding: 14px 20px !default;
 
 .selectInput {
   input {
+    background-color: $select-input-bg-color;
     cursor: pointer;
     padding-right: $select-input-padding;
     -webkit-touch-callout: none;
@@ -37,16 +43,18 @@ $select-option-padding: 14px 20px !default;
   }
 
   &:after {
+    background-color: $select-arrow-color;
+    bottom: $select-down-arrow-position-bottom;
     content: "";
+    pointer-events: none;
     position: absolute;
     left: $select-down-arrow-position-left;
-    background: $select-down-arrow-url no-repeat;
-    width: $select-down-arrow-width;
     height: $select-down-arrow-height;
-    -webkit-background-size: $select-down-arrow-width;
-    background-size: $select-down-arrow-width;
-    bottom: $select-down-arrow-position-bottom;
-    pointer-events: none;
+    -webkit-mask: $select-down-arrow-url no-repeat;
+    mask: $select-down-arrow-url no-repeat;
+    -webkit-mask-size: $select-down-arrow-width;
+    mask-size: $select-down-arrow-width;
+    width: $select-down-arrow-width;
   }
 }
 
@@ -55,13 +63,13 @@ $select-option-padding: 14px 20px !default;
   border-radius: $select-options-border-radius;
   box-sizing: border-box;
   display: none; // only show when open
+  font-family: $select-options-font-family;
+  font-size: $select-options-font-size;
+  list-style: none;
+  padding: 0;
   position: absolute;
   top: $select-options-position-top;
   width: 100%;
-  font-size: $select-options-font-size;
-  font-family: $select-options-font-family;
-  list-style: none;
-  padding: 0;
   z-index: 99;
   @include arrow(up, $select-option-bg-color, $select-options-border-color, $select-options-arrow-size);
 
@@ -96,12 +104,18 @@ $select-option-padding: 14px 20px !default;
   // ==== STATE: isOpen ====
 
   &.isOpen {
+    input {
+      border-color: $select-input-border-focus-color;
+    }
+
     .options {
       display: block;
     }
 
     .selectInput:after {
-      background-image: url('#{$theme-assets-path}/select-up-arrow.svg');
+      background-color: $select-arrow-focus-color;
+      -webkit-mask-image: $select-up-arrow-url;
+      mask-image: $select-up-arrow-url;
     }
   }
 
@@ -109,12 +123,14 @@ $select-option-padding: 14px 20px !default;
 
   &.openUpward {
     .selectInput:after {
-      background-image: url('#{$theme-assets-path}/select-up-arrow.svg');
+      -webkit-mask-image: $select-up-arrow-url;
+      mask-image: $select-up-arrow-url;
     }
 
     &.isOpen {
       .selectInput:after {
-        background-image: url('#{$theme-assets-path}/select-down-arrow.svg');
+        -webkit-mask-image: $select-down-arrow-url;
+        mask-image: $select-down-arrow-url;
       }
     }
 
