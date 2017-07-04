@@ -1,0 +1,105 @@
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$switch-on-accent-color: #2f496e !default;
+$switch-off-accent-color: #b4bdca !default;
+$switch-thumb-accent-color: #ffffff !default;
+$switch-track-height: 23px !default;
+$switch-track-length: 50px !default;
+$switch-label-color: #5e6066 !default;
+$switch-label-disabled-color: $theme-color-light-grey !default;
+
+@mixin thumbBoxShadow ($color) {
+  box-shadow: -1.5px -1.5px 0 $color inset,
+  1.5px 1.5px 0 $color inset,
+  1.5px -1.5px 0 $color inset,
+  -1.5px 1.5px 0 $color inset !important;
+}
+
+%switch {
+  border-radius: 3px !important;
+  height: 23px !important;
+  margin-top: 0 !important;
+  width: 50px !important;
+}
+
+.root {
+  display: flex;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+  }
+  &.disabled {
+    &:hover, .label:hover, .switch .thumb {
+      cursor: default;
+    }
+    .label {
+      color: $switch-label-disabled-color;
+    }
+  }
+}
+
+.input {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+}
+
+.switch {
+  align-self: center;
+  border-radius: 3px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: $switch-track-height;
+  position: relative;
+  transition: background-color 200ms ease-in-out;
+  width: $switch-track-length;
+
+  .thumb {
+    border-radius: 3px;
+    cursor: pointer;
+    height: $switch-track-height;
+    position: absolute;
+    top: 0;
+    transition: left 200ms ease-in-out;
+    width: $switch-track-height;
+  }
+
+  &.checked {
+    @extend %switch;
+    background-color: $switch-on-accent-color !important;
+    .thumb {
+      left: 27px !important;
+      @include thumbBoxShadow($switch-on-accent-color);
+      background-color: $switch-thumb-accent-color !important;
+    }
+  }
+
+  &:not(.checked) {
+    @extend %switch;
+    background-color: $switch-off-accent-color !important;
+    .thumb {
+      left: 0 !important;
+      @include thumbBoxShadow($switch-off-accent-color);
+      background-color: $switch-thumb-accent-color !important;
+    }
+  }
+}
+
+.label {
+  color: $switch-label-color;
+  font-family: $theme-font-light;
+  font-size: 16px;
+  line-height: 1.38;
+  margin-left: 20px;
+  white-space: normal;
+  &:hover {
+    cursor: pointer;
+  }
+  strong {
+    font-family: $theme-font-bold;
+  }
+}
