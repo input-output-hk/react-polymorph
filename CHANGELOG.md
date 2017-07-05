@@ -6,6 +6,7 @@ Changelog
 ### Fixes
 
 - Updated simple theme styles
+- Prevent CSS-classes inheritance on TextAreaSkin textarea element
 
 ### Features
 
