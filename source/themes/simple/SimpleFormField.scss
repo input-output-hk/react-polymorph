@@ -8,7 +8,7 @@ $form-field-label-color: #5e6066 !default;
 $form-field-label-margin-bottom: 10px !default;
 $form-field-error-font: $theme-font-regular !default;
 $form-field-error-font-size: 14px !default;
-$form-field-margin: 0 0 10px 0 !default;
+$form-field-error-margin: 1.5px 0 11.5px 0 !default;
 
 .root {
   position: relative;
@@ -19,6 +19,7 @@ $form-field-margin: 0 0 10px 0 !default;
   display: block;
   font-family: $form-field-label-font, sans-serif;
   font-size: $form-field-label-font-size;
+  line-height: 1.38;
   margin-bottom: $form-field-label-margin-bottom;
 }
 
@@ -27,7 +28,8 @@ $form-field-margin: 0 0 10px 0 !default;
   float: right;
   font-family: $form-field-error-font, sans-serif;
   font-size: $form-field-error-font-size;
-  margin: $form-field-margin;
+  line-height: 1.36;
+  margin: $form-field-error-margin;
 }
 
 .disabled {
