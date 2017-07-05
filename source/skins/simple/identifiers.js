@@ -5,3 +5,4 @@ export const BUTTON = 'ReactPolymorphSimpleButton';
 export const SELECT = 'ReactPolymorphSimpleSelect';
 export const CHECKBOX = 'ReactPolymorphSimpleCheckbox';
 export const SWITCH = 'ReactPolymorphSimpleSwitch';
+export const MODAL = 'ReactPolymorphSimpleModal';
