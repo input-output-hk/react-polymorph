@@ -6,3 +6,4 @@ import './Select.stories';
 import './NumericInput.stories';
 import './Checkbox.stories';
 import './Switch.stories';
+import './Modal.stories';
