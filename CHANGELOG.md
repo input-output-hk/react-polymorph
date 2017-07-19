@@ -7,6 +7,7 @@ Changelog
 
 - Updated simple theme styles
 - Prevent CSS-classes inheritance on TextAreaSkin textarea element
+- Fixed caret positioning bug on NumericInput component re-render
 
 ### Features
 
