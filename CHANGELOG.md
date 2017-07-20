@@ -1,12 +1,18 @@
 Changelog
 =========
 
+## 0.3.1
+
+### Fixes
+
+- Fixed caret positioning bug on NumericInput component re-render
+
 ## 0.3.0
 
 ### Fixes
 
 - Updated simple theme styles
-- Prevented CSS-classes inheritance on TextAreaSkin textarea element
+- Prevent CSS-classes inheritance on TextAreaSkin textarea element
 
 ### Features
 
