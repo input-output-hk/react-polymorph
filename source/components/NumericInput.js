@@ -47,17 +47,19 @@ export default class NumericInput extends FormField {
 
     // caret position calculation after separators injection
     let caretPosition;
-    if (this.state.separatorsCount != prevState.separatorsCount
-      && (this.state.separatorsCount - prevState.separatorsCount) <= 1
-      && (this.state.separatorsCount - prevState.separatorsCount) >= -1) {
-      caretPosition = this.state.caretPosition + (this.state.separatorsCount - prevState.separatorsCount);
-    } else {
-      caretPosition = this.state.caretPosition;
+    // prevent unnecessary changes on re-rendering
+    if (this.state.oldValue != prevState.oldValue || this.state.caretPosition != prevState.caretPosition) {
+      if (this.state.separatorsCount != prevState.separatorsCount
+        && (this.state.separatorsCount - prevState.separatorsCount) <= 1
+        && (this.state.separatorsCount - prevState.separatorsCount) >= -1) {
+        caretPosition = this.state.caretPosition + (this.state.separatorsCount - prevState.separatorsCount);
+      } else {
+        caretPosition = this.state.caretPosition;
+      }
+      caretPosition = (caretPosition >= 0) ? caretPosition : 0;
+      input.selectionEnd = caretPosition;
+      input.selectionStart = caretPosition;
     }
-
-    caretPosition = (caretPosition >= 0) ? caretPosition : 0;
-    input.selectionEnd = caretPosition;
-    input.selectionStart = caretPosition;
   }
 
   onChange = (event) => {
