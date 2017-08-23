@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { observable, action as mobxAction } from 'mobx';
 import PropsObserver from './support/PropsObserver';
-import Toggler from '../source/components/Toggler';
+import Checkbox from '../source/components/Checkbox';
 import SimpleTogglerSkin from '../source/skins/simple/TogglerSkin';
 
 storiesOf('Toggler', module)
@@ -22,7 +22,7 @@ storiesOf('Toggler', module)
   // ====== Stories ======
 
   .add('plain', () => (
-    <Toggler
+    <Checkbox
       labelLeft="Included"
       labelRight="Excluded"
       skin={<SimpleTogglerSkin />}
@@ -32,7 +32,7 @@ storiesOf('Toggler', module)
   .add('in text', () => (
     <div>
       <span>Fees&nbsp;</span>
-      <Toggler
+      <Checkbox
         labelLeft="Included"
         labelRight="Excluded"
         skin={<SimpleTogglerSkin />}
@@ -42,7 +42,7 @@ storiesOf('Toggler', module)
   ))
 
   .add('disabled', () => (
-    <Toggler
+    <Checkbox
       disabled
       labelLeft="Included"
       labelRight="Excluded"
