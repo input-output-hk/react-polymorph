@@ -1,7 +1,13 @@
 Changelog
 =========
 
-## vNEXT
+## 0.3.2
+
+### Features
+
+- Add toggler component ([PR 14](https://github.com/input-output-hk/react-polymorph/pull/14))
+
+## 0.3.1
 
 ### Fixes
 
@@ -13,7 +19,6 @@ Changelog
 
 - Add checkbox component
 - Add switch component
-- Add toggler component ([PR 14](https://github.com/input-output-hk/react-polymorph/pull/14))
 
 ## 0.2.7
 
