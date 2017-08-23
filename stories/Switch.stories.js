@@ -25,12 +25,12 @@ storiesOf('Switch', module)
 
   .add('disabled', () => <Checkbox disabled skin={<SimpleSwitchSkin />} />)
 
-  .add('short label', () => <Checkbox label="My checkbox" skin={<SimpleSwitchSkin />} />)
+  .add('short label', () => <Checkbox label="My switch" skin={<SimpleSwitchSkin />} />)
 
   .add('disabled with label', () => (
     <Checkbox
       disabled
-      label="My checkbox"
+      label="My switch"
       skin={<SimpleSwitchSkin />}
     />
   ))
