@@ -14,7 +14,14 @@ export default themr(FORM_FIELD, DefaultFormFieldTheme, { withRef: true })((prop
     ])}
   >
     {props.error && <div className={props.theme.error}>{props.error}</div>}
-    {props.label && <label className={props.theme.label} onClick={props.component.focus ? props.component.focus : null}>{props.label}</label>}
+    {props.label && (
+      <label
+        className={props.theme.label}
+        onClick={props.component.focus ? props.component.focus : null}
+      >
+        {props.label}
+      </label>
+    )}
     {props.input}
   </div>
 ));

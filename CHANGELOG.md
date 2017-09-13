@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## Next Version
+
+### Fixes
+
+- Toggle dropdown on label clicks ([PR 15](https://github.com/input-output-hk/react-polymorph/pull/15))
+
 ## 0.3.2
 
 ### Features
