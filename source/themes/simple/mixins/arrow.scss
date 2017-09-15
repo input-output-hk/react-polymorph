@@ -13,7 +13,7 @@
   }
 
   &:after {
-    border-color: rgba($bg-color, 0);
+    border-color: transparent;
     @if $direction == up { border-bottom-color: $bg-color; }
     @if $direction == down { border-top-color: $bg-color; }
     border-width: $size - 1px;
@@ -21,7 +21,7 @@
   }
 
   &:before {
-    border-color: rgba($border-color, 0);
+    border-color: transparent;
     @if $direction == up { border-bottom-color: $border-color; }
     @if $direction == down { border-top-color: $border-color; }
     border-width: $size;

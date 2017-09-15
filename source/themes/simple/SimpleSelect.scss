@@ -21,7 +21,10 @@ $select-options-position-top: calc(100% + 20px) !default;
 $select-options-font-family: $theme-font-light, sans-serif !default;
 $select-options-font-size: 16px !default;
 $select-options-arrow-size: 10px !default;
-$select-option-bg-color: white !default;
+$select-options-shadow: none !default;
+$select-option-bg-color: #fafbfc !default;
+$select-option-font-color: #5e6066 !default;
+$select-option-font-color-disabled: rgba(#5e6066, 0.5) !default;
 $select-option-highlight-color: #edf0f3 !default;
 $select-option-padding: 14px 20px !default;
 
@@ -61,6 +64,7 @@ $select-option-padding: 14px 20px !default;
 .options {
   border: $select-options-border;
   border-radius: $select-options-border-radius;
+  box-shadow: $select-options-shadow;
   box-sizing: border-box;
   display: none; // only show when open
   font-family: $select-options-font-family;
@@ -80,6 +84,7 @@ $select-option-padding: 14px 20px !default;
 
 .option {
   background-color: $select-option-bg-color;
+  color: $select-option-font-color;
   cursor: pointer;
   padding: $select-option-padding;
 
@@ -92,7 +97,7 @@ $select-option-padding: 14px 20px !default;
   }
 
   &.disabledOption {
-    color: rgba(#5e6066, 0.5);
+    color: $select-option-font-color-disabled;
     cursor: default;
   }
 }
