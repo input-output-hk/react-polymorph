@@ -5,6 +5,16 @@ Changelog
 
 ### Fixes
 
+- Updated simple theme styled for SimpleSelect ([PR 16](https://github.com/input-output-hk/react-polymorph/pull/16))
+
+### 0.3.3
+
+- Toggle dropdown on label clicks ([PR 15](https://github.com/input-output-hk/react-polymorph/pull/15))
+
+## 0.3.2
+
+### Fixes
+
 - Toggle dropdown on label clicks ([PR 15](https://github.com/input-output-hk/react-polymorph/pull/15))
 
 ## 0.3.2
