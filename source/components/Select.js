@@ -123,8 +123,8 @@ export default class Select extends FormField {
     return option && !option.isDisabled;
   };
 
-  // Focus the component - toggle dropdown isOpen state
-  focus = () => this.setState({ isOpen: !this.state.isOpen });
+  // Focus the component - toggle dropdown
+  focus = () => this.state.isOpen ? this.close() : this.open();
 
   open = () => {
     if (!this.state.isOpen) {
