@@ -42,4 +42,11 @@ storiesOf('Checkbox', module)
              my money can be only recovered with the backup phrase which
              were written down in a secure place"
     />
+  ))
+
+  .add('html label', () => (
+    <Checkbox
+      skin={<SimpleCheckboxSkin />}
+      label={<div>Example for a <strong>bold</strong> word in an html label</div>}
+    />
   ));
