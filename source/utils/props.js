@@ -1,6 +1,7 @@
 import DOMProperty from 'react-dom/lib/DOMProperty';
 import EventPluginRegistry from 'react-dom/lib/EventPluginRegistry';
 import { pickBy } from 'lodash';
+import PropTypes from 'prop-types';
 
 const reactProps = {
   children: true,
@@ -22,3 +23,5 @@ export const pickDOMProps = (props) => pickBy(props, (_, key) => (
   reactProps.hasOwnProperty(key) && reactProps[key] ||
   EventPluginRegistry.registrationNameModules.hasOwnProperty(key)
 ));
+
+export const LabelProp = PropTypes.oneOfType([PropTypes.string, PropTypes.element]);
