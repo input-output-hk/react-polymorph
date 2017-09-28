@@ -12,6 +12,10 @@ $autocomplete-font-family: $theme-font-light, sans-serif !default;
 $autocomplete-min-height: 90px !default;
 $autocomplete-padding: 11px 20px !default;
 $autocomplete-placeholder-color: rgba(#5e6066, 0.5) !default;
+
+$autocomplete-selected-word-text-color: #fafbfc;
+$autocomplete-selected-word-box-background-color: #445b7c;
+
 $autocomplete-suggestions-list-arrow-size: 10px !default;
 $autocomplete-suggestions-list-border-color: #c6cdd6 !default;
 $autocomplete-suggestions-list-border: 1px solid $autocomplete-suggestions-list-border-color !default;
@@ -56,26 +60,24 @@ $autocomplete-suggestions-list-shadow: none !default;
     .selectedWords {
       border: none;
       font-family: $theme-font-thin;
-      font-size: 1em;
       line-height: 1;
       margin: 0;
       min-height: $autocomplete-suggestions-list-item-min-height;
 
       .selectedWordBox {
+        background: $autocomplete-selected-word-box-background-color;
+        border-radius: 5px;
         display: inline-block;
         margin-bottom: 12px;
         margin-right: 12px;
+        opacity: 0.5;
+        padding: 3px 9px;
         position: relative;
 
         .selectedWordValue {
-          background: #445b7c;
-          border-radius: 5px;
-          color: #fafbfc;
-          display: inline-block;
+          color: $autocomplete-selected-word-text-color;
           font-size: 16px;
           line-height: 1.38;
-          opacity: 0.5;
-          padding: 3px 9px;
 
           .selectedWordRemoveButton {
             margin-left: 10px;
@@ -89,7 +91,7 @@ $autocomplete-suggestions-list-shadow: none !default;
         background: transparent;
         border: 0;
         display: inline-block;
-        font-size: 0.9rem;
+        font-size: 14px;
         margin-left: 10px;
         min-height: $autocomplete-suggestions-list-item-min-height;
         outline: none;
