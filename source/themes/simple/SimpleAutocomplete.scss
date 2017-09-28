@@ -1,0 +1,135 @@
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$autocomplete-bg-color: #fafbfc !default;
+$autocomplete-border: 1px solid #c6cdd6 !default;
+$autocomplete-border-focus-color: #5e6066 !default;
+$autocomplete-error-color: $theme-color-error !default;
+$autocomplete-focus-outline: none !default;
+$autocomplete-font-size: 16px !default;
+$autocomplete-font-family: $theme-font-light, sans-serif !default;
+$autocomplete-min-height: 90px !default;
+$autocomplete-padding: 11px 20px !default;
+$autocomplete-placeholder-color: rgba(#5e6066, 0.5) !default;
+$autocomplete-suggestions-list-arrow-size: 10px !default;
+$autocomplete-suggestions-list-border-color: #c6cdd6 !default;
+$autocomplete-suggestions-list-border: 1px solid $autocomplete-suggestions-list-border-color !default;
+$autocomplete-suggestions-list-border-radius: 2px !default;
+$autocomplete-suggestions-list-font-family: $theme-font-light, sans-serif !default;
+$autocomplete-suggestions-list-font-size: 16px !default;
+$autocomplete-suggestions-list-item-bg-color: #fafbfc !default;
+$autocomplete-suggestions-list-item-font-color: #5e6066 !default;
+$autocomplete-suggestions-list-item-highlight-color: #edf0f3 !default;
+$autocomplete-suggestions-list-item-min-height: 36px;
+$autocomplete-suggestions-list-item-padding: 14px 20px !default;
+$autocomplete-suggestions-list-position-top: calc(100% + 20px) !default;
+$autocomplete-suggestions-list-shadow: none !default;
+
+.autocompleteWrapper {
+  .autocompleteContent {
+    background-color: $autocomplete-bg-color;
+    border: $autocomplete-border;
+    box-sizing: border-box;
+    display: block;
+    font-family: $autocomplete-font-family;
+    font-size: $autocomplete-font-size;
+    min-height: $autocomplete-min-height;
+    width: 100%;
+
+    &:hover {
+      cursor: text;
+    }
+
+    &.opened {
+      border-color: $autocomplete-border-focus-color !important;
+    }
+
+    &.errored {
+      border-color: $autocomplete-error-color;
+    }
+
+    &.hasSelectedWords {
+      padding: $autocomplete-padding;
+    }
+
+    .selectedWords {
+      border: none;
+      font-family: $theme-font-thin;
+      font-size: 1em;
+      line-height: 1;
+      margin: 0;
+      min-height: $autocomplete-suggestions-list-item-min-height;
+
+      .selectedWordBox {
+        display: inline-block;
+        margin-bottom: 12px;
+        margin-right: 12px;
+        position: relative;
+
+        .selectedWordValue {
+          background: #445b7c;
+          border-radius: 5px;
+          color: #fafbfc;
+          display: inline-block;
+          font-size: 16px;
+          line-height: 1.38;
+          opacity: 0.5;
+          padding: 3px 9px;
+
+          .selectedWordRemoveButton {
+            margin-left: 10px;
+            font-size: 16px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      input {
+        background: transparent;
+        border: 0;
+        display: inline-block;
+        font-size: 0.9rem;
+        margin-left: 10px;
+        min-height: $autocomplete-suggestions-list-item-min-height;
+        outline: none;
+        width: 33%;
+
+        &::-webkit-input-placeholder {
+          color: $autocomplete-placeholder-color;
+        }
+      }
+    }
+  }
+
+  .suggestionsList {
+    border: $autocomplete-suggestions-list-border;
+    border-radius: $autocomplete-suggestions-list-border-radius;
+    box-shadow: $autocomplete-suggestions-list-shadow;
+    box-sizing: border-box;
+    display: none; // only show when open
+    font-family: $autocomplete-suggestions-list-font-family;
+    font-size: $autocomplete-suggestions-list-font-size;
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    top: $autocomplete-suggestions-list-position-top;
+    width: 100%;
+    z-index: 99;
+
+    &.opened {
+      display: block;
+    }
+
+    .suggestionsListItem {
+      background-color: $autocomplete-suggestions-list-item-bg-color;
+      color: $autocomplete-suggestions-list-item-font-color;
+      cursor: pointer;
+      padding: $autocomplete-suggestions-list-item-padding;
+
+      &.highlighted {
+        background-color: $autocomplete-suggestions-list-item-highlight-color;
+      }
+    }
+  }
+}

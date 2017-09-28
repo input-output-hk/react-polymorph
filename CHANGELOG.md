@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.3.6
+
+### Features
+
+- Autocomplete input control ([PR 18](https://github.com/input-output-hk/react-polymorph/pull/18))
+
 ## 0.3.5
 
 ### Features
