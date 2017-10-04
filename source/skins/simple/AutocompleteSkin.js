@@ -12,7 +12,12 @@ export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })(
       <span className={props.theme.selectedWordBox} key={index}>
         <span className={props.theme.selectedWordValue}>
           {selectedWord}
-          <span className={props.theme.selectedWordRemoveButton} onClick={props.component.removeWord.bind(null, selectedWord)}>x</span>
+          <span
+            className={props.theme.selectedWordRemoveButton}
+            onClick={props.component.removeWord.bind(null, selectedWord)}
+          >
+            &times;
+          </span>
         </span>
       </span>
     );
