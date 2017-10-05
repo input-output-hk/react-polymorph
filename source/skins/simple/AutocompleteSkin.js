@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import classnames from 'classnames';
 import { themr } from 'react-css-themr';
 import { AUTOCOMPLETE } from './identifiers';
@@ -7,6 +8,9 @@ import Autocomplete from '../../components/Autocomplete';
 import DefaultAutocompleteTheme from '../../themes/simple/SimpleAutocomplete.scss';
 
 export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })((props) => {
+  const filteredAndLimitedSuggestions = _.slice(props.filteredWords, 0, props.maxVisibleSuggestions);
+  const isFirstOptionHighlighted = props.highlightedOptionIndex === 0;
+
   let selectedWords = props.selectedWords && props.selectedWords.map((selectedWord, index) => {
     return (
       <span className={props.theme.selectedWordBox} key={index}>
@@ -14,7 +18,7 @@ export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })(
           {selectedWord}
           <span
             className={props.theme.selectedWordRemoveButton}
-            onClick={props.component.removeWord.bind(null, selectedWord)}
+            onClick={props.component.removeWord.bind(null, index)}
           >
             &times;
           </span>
@@ -24,7 +28,8 @@ export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })(
   });
 
   // show placeholder only if no maximum selections declared or maximum not reached
-  let placeholder = (!props.maxSelections || (props.selectedWords.length < props.maxSelections)) ? props.placeholder : '';
+  const canMoreWordsBeSelected = props.selectedWords.length < props.maxSelections;
+  let placeholder = (!props.maxSelections || canMoreWordsBeSelected) ? props.placeholder : '';
 
   // selected words and input for enter new one
   const autocompleteContent = (
@@ -43,8 +48,12 @@ export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })(
   );
 
   return (
+    <div ref={(element) => props.component.registerSkinPart(Autocomplete.SKIN_PARTS.ROOT, element)}>
     <FormFieldSkin input={
-      <div className={props.theme.autocompleteWrapper} onClick={props.component.handleAutocompleteClick}>
+      <div
+        className={props.theme.autocompleteWrapper}
+        onClick={props.component.handleAutocompleteClick}
+      >
         <div
           className={classnames([
             props.theme.autocompleteContent,
@@ -63,9 +72,10 @@ export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })(
             className={classnames([
               props.theme.suggestionsList,
               props.isSuggestionsOpened ? props.theme.opened : null,
+              isFirstOptionHighlighted ? props.theme.firstOptionHighlighted : null,
             ])}
           >
-            {props.filteredWords.length ? props.filteredWords.map((option, index) => {
+            {props.filteredWords.length ? filteredAndLimitedSuggestions.map((option, index) => {
               return (
                 <li
                   key={index}
@@ -87,5 +97,6 @@ export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })(
       </div>
 
     } {...props} />
+    </div>
   );
 });

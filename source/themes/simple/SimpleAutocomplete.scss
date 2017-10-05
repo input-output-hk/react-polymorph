@@ -1,4 +1,5 @@
 @import "theme";
+@import "mixins/arrow";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -120,6 +121,12 @@ $autocomplete-suggestions-list-shadow: none !default;
     top: $autocomplete-suggestions-list-position-top;
     width: 100%;
     z-index: 99;
+
+    @include arrow(up, $autocomplete-suggestions-list-item-bg-color, $autocomplete-suggestions-list-border-color, $autocomplete-suggestions-list-arrow-size);
+
+    &.firstOptionHighlighted {
+      @include arrow(up, $autocomplete-suggestions-list-item-highlight-color, $autocomplete-suggestions-list-border-color, $autocomplete-suggestions-list-arrow-size);
+    }
 
     &.opened {
       display: block;

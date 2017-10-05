@@ -5,9 +5,12 @@ import FormField from './FormField';
 import ReactDOM from 'react-dom';
 import events from '../utils/events';
 
+const INVALID_CHARS = /[^a-zA-Z0-9]/g; // only allow letters and numbers
+
 export default class Autocomplete extends FormField {
 
   static SKIN_PARTS = {
+    ROOT: 'root',
     INPUT: 'input',
     AUTOCOMPLETE: 'autocomplete',
   };
@@ -17,24 +20,31 @@ export default class Autocomplete extends FormField {
     maxSelections: PropTypes.number,
     placeholder: PropTypes.string,
     suggestedWords: PropTypes.array,
+    sortAlphabetically: PropTypes.bool,
+    multipleSameSelections: PropTypes.bool,
+    maxVisibleSuggestions: PropTypes.number,
   });
+
+  static defaultProps = {
+    maxVisibleSuggestions: 10, // max number of visible suggested words
+    multipleSameSelections: true, // if true then same word can be selected multiple times
+    sortAlphabetically: true, // suggested words are sorted alphabetically by default
+  }
 
   state = {
     selectedWords: [],
-    invalidCharacters: /[^a-zA-Z0-9]/g, // only allow letters and numbers
-    filteredWords: this.props.suggestedWords || [],
+    filteredWords: (this.props.sortAlphabetically && this.props.suggestedWords) ? this.props.suggestedWords.sort() : (this.props.suggestedWords || []),
     isSuggestionsOpened: false,
     highlightedOptionIndex: 0,
   };
 
-  componentWillUpdate (nextProps, nextState) {
-    if (!this.state.isOpen && nextState.isOpen) {
-      events.addEventsToDocument(this._getDocumentEvents());
-    }
-  }
 
   componentDidMount() {
     events.addEventsToDocument(this._getDocumentEvents());
+  }
+
+  componentWillUnmount () {
+    events.removeEventsFromDocument(this._getDocumentEvents());
   }
 
   prepareSkinProps (props) {
@@ -44,8 +54,11 @@ export default class Autocomplete extends FormField {
       isSuggestionsOpened: this.state.isSuggestionsOpened,
       highlightedOptionIndex: this.state.highlightedOptionIndex,
       maxSelections: this.props.maxSelections,
+      maxVisibleSuggestions: this.props.maxVisibleSuggestions,
     });
   }
+
+  focus = () => this.handleAutocompleteClick();
 
   openSuggestions = () => {
     this.setState({ isSuggestionsOpened: true, highlightedOptionIndex: 0 });
@@ -68,7 +81,7 @@ export default class Autocomplete extends FormField {
     const root = this._getRootSkinPart();
     const isDescendant = events.targetIsDescendant(event, ReactDOM.findDOMNode(root));
     if (this.state.isSuggestionsOpened && !isDescendant) {
-      this.setState({ isSuggestionsOpened: false, highlightedOptionIndex: 0 });
+      this.closeSuggestions();
     }
   };
 
@@ -79,7 +92,7 @@ export default class Autocomplete extends FormField {
     switch (event.keyCode) {
       case 8: // Delte on backspace
         if (!event.target.value && selectedWords.length) {
-          this.removeWord(selectedWords[selectedWords.length - 1], event);
+          this.removeWord(selectedWords.length - 1, event); // remove last
         }
         break;
       case 9: // Select currently highlighted option on 'Tab' key
@@ -123,8 +136,8 @@ export default class Autocomplete extends FormField {
   clearInvalidChars = (event) => {
     let value = event.target.value;
 
-    if (this.state.invalidCharacters.test(value)) {
-      event.target.value = value.replace(this.state.invalidCharacters, '');
+    if (INVALID_CHARS.test(value)) {
+      event.target.value = value.replace(INVALID_CHARS, '');
       return;
     }
 
@@ -139,7 +152,9 @@ export default class Autocomplete extends FormField {
   };
 
   updateSelectedWords = (event) => {
-    if (!this.props.maxSelections || (this.state.selectedWords.length < this.props.maxSelections && this.state.filteredWords && this.state.filteredWords.length > 0)) {
+    const canMoreWordsBeSelected = this.state.selectedWords.length < this.props.maxSelections;
+
+    if (!this.props.maxSelections || (canMoreWordsBeSelected && this.state.filteredWords && this.state.filteredWords.length > 0)) {
       let value = this.state.filteredWords[this.state.highlightedOptionIndex];
 
       if (!value) {
@@ -147,7 +162,9 @@ export default class Autocomplete extends FormField {
       }
 
       let word = value.trim();
-      if (word && this.state.selectedWords.indexOf(word) < 0 && this.state.isSuggestionsOpened) {
+      const wordCanBeSelected = this.state.selectedWords.indexOf(word) < 0 && !this.props.multipleSameSelections || this.props.multipleSameSelections;
+
+      if (word && wordCanBeSelected && this.state.isSuggestionsOpened) {
         const selectedWords = _.concat(this.state.selectedWords, word)
 
         this.selectionChanged(selectedWords, event);
@@ -159,12 +176,13 @@ export default class Autocomplete extends FormField {
       }
     }
 
-    event.target.value = '';
+    const input = this._getInputSkinPart();
+    input.value = '';
   };
 
-  removeWord = (word, event) => {
-    let index = this.state.selectedWords.indexOf(word);
-    const selectedWords = _.without(this.state.selectedWords, word);
+  removeWord = (index, event) => {
+    const selectedWords = this.state.selectedWords;
+    _.pullAt(selectedWords, index);
     this.selectionChanged(selectedWords, event);
     this.setState({ selectedWords });
   };
@@ -174,7 +192,7 @@ export default class Autocomplete extends FormField {
   }
 
   _getRootSkinPart () {
-    return this.skinParts[Autocomplete.SKIN_PARTS.AUTOCOMPLETE];
+    return this.skinParts[Autocomplete.SKIN_PARTS.ROOT];
   }
 
   _getInputSkinPart () {

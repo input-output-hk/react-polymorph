@@ -50,7 +50,20 @@ storiesOf('Autocomplete', module)
     />
   ))
 
-  .add('Enter mnemonics (9-word mnemonic)', () => (
+  .add('Enter mnemonics (9-word mnemonic) - not sorted', () => (
+    <Autocomplete
+      label="Recovery phrase"
+      placeholder="Enter recovery phrase"
+      suggestedWords = {SUGGESTED_WORDS}
+      placeholder="Enter mnemonic..."
+      sortAlphabetically={false}
+      multipleSameSelections={false}
+      maxSelections={9}
+      skin={<SimpleAutocompleteSkin />}
+    />
+  ))
+
+  .add('Enter mnemonics (9-word mnemonic) - sorted with multiple same selections', () => (
     <Autocomplete
       label="Recovery phrase"
       placeholder="Enter recovery phrase"
@@ -61,13 +74,14 @@ storiesOf('Autocomplete', module)
     />
   ))
 
-  .add('Enter mnemonics - (12-word mnemonic)', () => (
+  .add('Enter mnemonics - (12-word mnemonic) with 5 visible suggestions', () => (
     <Autocomplete
       label="Recovery phrase"
       placeholder="Enter recovery phrase"
       suggestedWords = {SUGGESTED_WORDS}
       placeholder="Enter mnemonic..."
       maxSelections={12}
+      maxVisibleSuggestions={5}
       skin={<SimpleAutocompleteSkin />}
     />
   ))
