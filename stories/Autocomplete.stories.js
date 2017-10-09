@@ -85,3 +85,16 @@ storiesOf('Autocomplete', module)
       skin={<SimpleAutocompleteSkin />}
     />
   ))
+
+  .add('Enter mnemonics - (12-word mnemonic) with 5 visible suggestions and regex that allows only letters', () => (
+    <Autocomplete
+      label="Recovery phrase"
+      placeholder="Enter recovery phrase"
+      suggestedWords = {SUGGESTED_WORDS}
+      placeholder="Enter mnemonic..."
+      maxSelections={12}
+      maxVisibleSuggestions={5}
+      invalidCharsRegex= {/[^a-zA-Z]/g}
+      skin={<SimpleAutocompleteSkin />}
+    />
+  ))

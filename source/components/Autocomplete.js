@@ -5,8 +5,6 @@ import FormField from './FormField';
 import ReactDOM from 'react-dom';
 import events from '../utils/events';
 
-const INVALID_CHARS = /[^a-zA-Z0-9]/g; // only allow letters and numbers
-
 export default class Autocomplete extends FormField {
 
   static SKIN_PARTS = {
@@ -23,12 +21,14 @@ export default class Autocomplete extends FormField {
     sortAlphabetically: PropTypes.bool,
     multipleSameSelections: PropTypes.bool,
     maxVisibleSuggestions: PropTypes.number,
+    invalidCharsRegex: PropTypes.instanceOf(RegExp),
   });
 
   static defaultProps = {
     maxVisibleSuggestions: 10, // max number of visible suggested words
     multipleSameSelections: true, // if true then same word can be selected multiple times
     sortAlphabetically: true, // suggested words are sorted alphabetically by default
+    invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
   }
 
   state = {
@@ -136,8 +136,8 @@ export default class Autocomplete extends FormField {
   clearInvalidChars = (event) => {
     let value = event.target.value;
 
-    if (INVALID_CHARS.test(value)) {
-      event.target.value = value.replace(INVALID_CHARS, '');
+    if (this.props.invalidCharsRegex.test(value)) {
+      event.target.value = value.replace(this.props.invalidCharsRegex, '');
       return;
     }
 
@@ -153,8 +153,9 @@ export default class Autocomplete extends FormField {
 
   updateSelectedWords = (event) => {
     const canMoreWordsBeSelected = this.state.selectedWords.length < this.props.maxSelections;
+    const areFilteredWordsAvailable = this.state.filteredWords && this.state.filteredWords.length > 0;
 
-    if (!this.props.maxSelections || (canMoreWordsBeSelected && this.state.filteredWords && this.state.filteredWords.length > 0)) {
+    if (!this.props.maxSelections || (canMoreWordsBeSelected && areFilteredWordsAvailable)) {
       let value = this.state.filteredWords[this.state.highlightedOptionIndex];
 
       if (!value) {
