@@ -29,7 +29,7 @@ export default class Autocomplete extends FormField {
     multipleSameSelections: true, // if true then same word can be selected multiple times
     sortAlphabetically: true, // suggested words are sorted alphabetically by default
     invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
-  }
+  };
 
   state = {
     selectedWords: [],
@@ -37,7 +37,6 @@ export default class Autocomplete extends FormField {
     isSuggestionsOpened: false,
     highlightedOptionIndex: 0,
   };
-
 
   componentDidMount() {
     events.addEventsToDocument(this._getDocumentEvents());
@@ -87,7 +86,6 @@ export default class Autocomplete extends FormField {
 
   onKeyDown = (event) => {
     const { selectedWords } = this.state;
-    let keyPressed = event.which;
 
     switch (event.keyCode) {
       case 8: // Delte on backspace
@@ -190,7 +188,7 @@ export default class Autocomplete extends FormField {
 
   selectionChanged = (selectedWords, event) => {
     if (this.props.onChange) this.props.onChange(selectedWords, event);
-  }
+  };
 
   _getRootSkinPart () {
     return this.skinParts[Autocomplete.SKIN_PARTS.ROOT];
