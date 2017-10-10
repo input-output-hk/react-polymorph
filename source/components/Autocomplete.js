@@ -10,7 +10,7 @@ export default class Autocomplete extends FormField {
   static SKIN_PARTS = {
     ROOT: 'root',
     INPUT: 'input',
-    AUTOCOMPLETE: 'autocomplete',
+    SUGGESTIONS: 'suggestions',
   };
 
   static propTypes = Object.assign({}, FormField.propTypes, {

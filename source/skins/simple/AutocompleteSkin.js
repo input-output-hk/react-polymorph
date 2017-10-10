@@ -62,7 +62,7 @@ export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })(
             props.error ? props.theme.errored : null,
           ])}
           ref={element => {
-            props.component.registerSkinPart(Autocomplete.SKIN_PARTS.AUTOCOMPLETE, element);
+            props.component.registerSkinPart(Autocomplete.SKIN_PARTS.SUGGESTIONS, element);
           }}
         >
           {autocompleteContent}
