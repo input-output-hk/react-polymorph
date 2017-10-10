@@ -1,0 +1,146 @@
+@import "theme";
+@import "mixins/arrow";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$autocomplete-bg-color: #fafbfc !default;
+$autocomplete-border: 1px solid #c6cdd6 !default;
+$autocomplete-border-focus-color: #5e6066 !default;
+$autocomplete-error-color: $theme-color-error !default;
+$autocomplete-focus-outline: none !default;
+$autocomplete-font-size: 16px !default;
+$autocomplete-font-family: $theme-font-light, sans-serif !default;
+$autocomplete-min-height: 90px !default;
+$autocomplete-padding: 14px 20px !default;
+$autocomplete-search-color: #5e6066 !default;
+$autocomplete-placeholder-color: rgba(#5e6066, 0.5) !default;
+
+$autocomplete-selected-word-text-color: #fafbfc !default;
+$autocomplete-selected-word-box-background-color: #445b7c !default;
+
+$autocomplete-suggestions-list-arrow-size: 10px !default;
+$autocomplete-suggestions-list-border-color: #c6cdd6 !default;
+$autocomplete-suggestions-list-border: 1px solid $autocomplete-suggestions-list-border-color !default;
+$autocomplete-suggestions-list-border-radius: 2px !default;
+$autocomplete-suggestions-list-font-family: $theme-font-light, sans-serif !default;
+$autocomplete-suggestions-list-font-size: 16px !default;
+$autocomplete-suggestions-list-item-bg-color: #fafbfc !default;
+$autocomplete-suggestions-list-item-font-color: #5e6066 !default;
+$autocomplete-suggestions-list-item-highlight-color: #edf0f3 !default;
+$autocomplete-suggestions-list-item-min-height: 28px;
+$autocomplete-suggestions-list-item-padding: 14px 20px !default;
+$autocomplete-suggestions-list-position-top: calc(100% + 20px) !default;
+$autocomplete-suggestions-list-shadow: none !default;
+
+.autocompleteWrapper {
+  .autocompleteContent {
+    background-color: $autocomplete-bg-color;
+    border: $autocomplete-border;
+    box-sizing: border-box;
+    font-family: $autocomplete-font-family;
+    font-size: $autocomplete-font-size;
+    min-height: $autocomplete-min-height;
+    padding: $autocomplete-padding;
+    width: 100%;
+
+    &:hover {
+      cursor: text;
+    }
+
+    &.opened {
+      border-color: $autocomplete-border-focus-color !important;
+    }
+
+    &.errored {
+      border-color: $autocomplete-error-color;
+    }
+
+    &.hasSelectedWords {}
+
+    .selectedWords {
+      display: flex;
+      flex-wrap: wrap;
+      font-family: $theme-font-thin;
+      min-height: $autocomplete-suggestions-list-item-min-height;
+
+      .selectedWordBox {
+        background: $autocomplete-selected-word-box-background-color;
+        border-radius: 5px;
+        box-sizing: border-box;
+        display: flex;
+        height: 28px;
+        margin-bottom: 12px;
+        margin-right: 12px;
+        opacity: 0.5;
+        padding: 3px 9px;
+        position: relative;
+
+        .selectedWordValue {
+          color: $autocomplete-selected-word-text-color;
+          font-size: 16px;
+          line-height: 1.38;
+
+          .selectedWordRemoveButton {
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 8px;
+          }
+        }
+      }
+
+      input {
+        background: transparent;
+        border: 0;
+        color: $autocomplete-search-color;
+        display: block;
+        flex: 1;
+        font-size: $autocomplete-font-size;
+        height: $autocomplete-suggestions-list-item-min-height;
+        max-width: 100%;
+        outline: none;
+        padding: 0;
+
+        &::-webkit-input-placeholder {
+          color: $autocomplete-placeholder-color;
+        }
+      }
+    }
+  }
+
+  .suggestionsList {
+    border: $autocomplete-suggestions-list-border;
+    border-radius: $autocomplete-suggestions-list-border-radius;
+    box-shadow: $autocomplete-suggestions-list-shadow;
+    box-sizing: border-box;
+    display: none; // only show when open
+    font-family: $autocomplete-suggestions-list-font-family;
+    font-size: $autocomplete-suggestions-list-font-size;
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    top: $autocomplete-suggestions-list-position-top;
+    width: 100%;
+    z-index: 99;
+
+    @include arrow(up, $autocomplete-suggestions-list-item-bg-color, $autocomplete-suggestions-list-border-color, $autocomplete-suggestions-list-arrow-size);
+
+    &.firstOptionHighlighted {
+      @include arrow(up, $autocomplete-suggestions-list-item-highlight-color, $autocomplete-suggestions-list-border-color, $autocomplete-suggestions-list-arrow-size);
+    }
+
+    &.opened {
+      display: block;
+    }
+
+    .suggestionsListItem {
+      background-color: $autocomplete-suggestions-list-item-bg-color;
+      color: $autocomplete-suggestions-list-item-font-color;
+      cursor: pointer;
+      padding: $autocomplete-suggestions-list-item-padding;
+
+      &.highlighted {
+        background-color: $autocomplete-suggestions-list-item-highlight-color;
+      }
+    }
+  }
+}

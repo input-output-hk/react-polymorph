@@ -8,3 +8,4 @@ import './Checkbox.stories';
 import './Switch.stories';
 import './Toggler.stories';
 import './Modal.stories';
+import './Autocomplete.stories';
