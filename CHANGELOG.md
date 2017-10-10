@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## vNext
+
+### Features
+
+- Expose raw component skins ([PR 19](https://github.com/input-output-hk/react-polymorph/pull/19)) 
+
 ## 0.4.0
 
 ### Features
