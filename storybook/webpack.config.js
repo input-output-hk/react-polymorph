@@ -28,9 +28,17 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader?sourceMap',
-          'css-loader?sourceMap&modules&localIdentName=[name]_[local]&importLoaders=1',
-          'sass-loader?sourceMap',
+          { loader: 'style-loader', options: { sourceMap: true }},
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: true,
+              localIdentName: '[name]_[local]',
+              importLoaders: true,
+            }
+          },
+          { loader: 'sass-loader', options: { sourceMap: true }},
         ]
       }
     ]
