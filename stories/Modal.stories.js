@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 import { observable, action as mobxAction } from 'mobx';
 import PropsObserver from './support/PropsObserver';
 import Modal from '../source/components/Modal';

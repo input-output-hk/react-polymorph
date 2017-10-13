@@ -1,6 +1,13 @@
 Changelog
 =========
 
+## vNext
+
+### Features
+
+- Update storybook to latest version ([PR 20](https://github.com/input-output-hk/react-polymorph/pull/20))
+- Also support React 16 ([PR 20](https://github.com/input-output-hk/react-polymorph/pull/20))
+
 ## 0.4.1
 
 ### Fixes
