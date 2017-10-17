@@ -1,5 +1,6 @@
 import React from 'react';
-import { storiesOf, action } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import { observable, action as mobxAction } from 'mobx';
 import PropsObserver from './support/PropsObserver';
 import Autocomplete from '../source/components/Autocomplete';
@@ -58,8 +59,8 @@ storiesOf('Autocomplete', module)
   .add('Enter mnemonics (9-word mnemonic) - not sorted', () => (
     <Autocomplete
       label="Recovery phrase"
-      placeholder="Enter recovery phrase"
       suggestedWords = {OPTIONS}
+      placeholder="Enter mnemonic..."
       sortAlphabetically={false}
       multipleSameSelections={false}
       maxSelections={9}
@@ -70,8 +71,8 @@ storiesOf('Autocomplete', module)
   .add('Enter mnemonics (9-word mnemonic) - sorted with multiple same selections', () => (
     <Autocomplete
       label="Recovery phrase"
-      placeholder="Enter recovery phrase"
       suggestedWords = {OPTIONS}
+      placeholder="Enter mnemonic..."
       maxSelections={9}
       skin={<SimpleAutocompleteSkin />}
     />
@@ -80,8 +81,8 @@ storiesOf('Autocomplete', module)
   .add('Enter mnemonics - (12-word mnemonic) with 5 visible suggestions', () => (
     <Autocomplete
       label="Recovery phrase"
-      placeholder="Enter recovery phrase"
       suggestedWords = {OPTIONS}
+      placeholder="Enter mnemonic..."
       maxSelections={12}
       maxVisibleSuggestions={5}
       skin={<SimpleAutocompleteSkin />}
@@ -91,8 +92,8 @@ storiesOf('Autocomplete', module)
   .add('Enter mnemonics - (12-word mnemonic) with 5 visible suggestions and regex that allows only letters', () => (
     <Autocomplete
       label="Recovery phrase"
-      placeholder="Enter recovery phrase"
       suggestedWords = {OPTIONS}
+      placeholder="Enter mnemonic..."
       maxSelections={12}
       maxVisibleSuggestions={5}
       invalidCharsRegex= {/[^a-zA-Z]/g}

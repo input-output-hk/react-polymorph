@@ -1,7 +1,20 @@
 Changelog
 =========
 
-## vNEXT
+## vNext
+
+### Features
+
+- Update storybook to latest version ([PR 20](https://github.com/input-output-hk/react-polymorph/pull/20))
+- Also support React 16 ([PR 20](https://github.com/input-output-hk/react-polymorph/pull/20))
+
+## 0.4.1
+
+### Fixes
+
+- Expose raw component skins ([PR 19](https://github.com/input-output-hk/react-polymorph/pull/19)) 
+
+## 0.4.0
 
 ### Features
 
