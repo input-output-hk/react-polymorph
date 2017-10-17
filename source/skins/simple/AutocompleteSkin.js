@@ -9,7 +9,7 @@ import DefaultAutocompleteTheme from '../../themes/simple/SimpleAutocomplete.scs
 
 export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })((props) => {
   const filteredAndLimitedSuggestions = _.slice(props.filteredWords, 0, props.maxVisibleSuggestions);
-  const isFirstOptionHighlighted = props.highlightedOptionIndex === 0;
+  const isFirstOptionHighlighted = props.highlightedOptionIndex === 0 && filteredAndLimitedSuggestions.length;
 
   let selectedWords = props.selectedWords && props.selectedWords.map((selectedWord, index) => {
     return (
@@ -49,54 +49,59 @@ export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme, { withRef: true })(
 
   return (
     <div ref={(element) => props.component.registerSkinPart(Autocomplete.SKIN_PARTS.ROOT, element)}>
-    <FormFieldSkin input={
-      <div
-        className={props.theme.autocompleteWrapper}
-        onClick={props.component.handleAutocompleteClick}
-      >
+      <FormFieldSkin input={
         <div
-          className={classnames([
-            props.theme.autocompleteContent,
-            props.isSuggestionsOpened ? props.theme.opened : null,
-            props.selectedWords.length ? props.theme.hasSelectedWords : null,
-            props.error ? props.theme.errored : null,
-          ])}
-          ref={element => {
-            props.component.registerSkinPart(Autocomplete.SKIN_PARTS.SUGGESTIONS, element);
-          }}
+          className={props.theme.autocompleteWrapper}
+          onClick={props.component.handleAutocompleteClick}
         >
-          {autocompleteContent}
-        </div>
-        {props.suggestedWords &&
-          <ul
+          <div
             className={classnames([
-              props.theme.suggestionsList,
+              props.theme.autocompleteContent,
               props.isSuggestionsOpened ? props.theme.opened : null,
-              isFirstOptionHighlighted ? props.theme.firstOptionHighlighted : null,
+              props.selectedWords.length ? props.theme.hasSelectedWords : null,
+              props.error ? props.theme.errored : null,
             ])}
+            ref={element => {
+              props.component.registerSkinPart(Autocomplete.SKIN_PARTS.SUGGESTIONS, element);
+            }}
           >
-            {props.filteredWords.length ? filteredAndLimitedSuggestions.map((option, index) => {
-              return (
-                <li
-                  key={index}
-                  className={classnames([
-                    props.theme.suggestionsListItem,
-                    index === props.highlightedOptionIndex ? props.theme.highlighted : null,
-                  ])}
-                  onMouseEnter={() => props.component.setHighlightedOptionIndex(index)}
-                  onClick={(event) => props.component.updateSelectedWords(event)}
-                >
-                  {option}
-                </li>
-              );
-            }) :
-            <li className={props.theme.suggestionsListItem}>No matching results</li>
+            {autocompleteContent}
+          </div>
+          {props.suggestedWords &&
+            <ul
+              className={classnames([
+                props.theme.suggestionsList,
+                props.isSuggestionsOpened ? props.theme.opened : null,
+                isFirstOptionHighlighted ? props.theme.firstOptionHighlighted : null,
+              ])}
+              style={props.dropdownParams && {
+                top: props.dropdownParams.positionY,
+                left: props.dropdownParams.positionX,
+                width: props.dropdownParams.width,
+              }}
+            >
+              {props.filteredWords.length ? filteredAndLimitedSuggestions.map((option, index) => {
+                return (
+                  <li
+                    key={index}
+                    className={classnames([
+                      props.theme.suggestionsListItem,
+                      index === props.highlightedOptionIndex ? props.theme.highlighted : null,
+                    ])}
+                    onMouseEnter={() => props.component.setHighlightedOptionIndex(index)}
+                    onClick={(event) => props.component.updateSelectedWords(event)}
+                  >
+                    {option}
+                  </li>
+                );
+              }) :
+              <li className={props.theme.suggestionsListItem}>No matching results</li>
+            }
+            </ul>
           }
-          </ul>
-        }
-      </div>
+        </div>
 
-    } {...props} />
+      } {...props} />
     </div>
   );
 });

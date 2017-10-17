@@ -36,14 +36,17 @@ export default class Autocomplete extends FormField {
     filteredWords: (this.props.sortAlphabetically && this.props.suggestedWords) ? this.props.suggestedWords.sort() : (this.props.suggestedWords || []),
     isSuggestionsOpened: false,
     highlightedOptionIndex: 0,
+    dropdownParams: null,
   };
 
   componentDidMount() {
     events.addEventsToDocument(this._getDocumentEvents());
+    window.addEventListener("resize", this.handleWindowResize);
   }
 
   componentWillUnmount () {
     events.removeEventsFromDocument(this._getDocumentEvents());
+    window.removeEventListener("resize", this.handleWindowResize);
   }
 
   prepareSkinProps (props) {
@@ -54,13 +57,30 @@ export default class Autocomplete extends FormField {
       highlightedOptionIndex: this.state.highlightedOptionIndex,
       maxSelections: this.props.maxSelections,
       maxVisibleSuggestions: this.props.maxVisibleSuggestions,
+      dropdownParams: this.state.dropdownParams,
     });
   }
 
   focus = () => this.handleAutocompleteClick();
 
+  handleWindowResize = () => {
+    if (this.state.isSuggestionsOpened) {
+      this.setState({ isSuggestionsOpened: false, dropdownParams: null });
+    }
+  };
+
   openSuggestions = () => {
-    this.setState({ isSuggestionsOpened: true, highlightedOptionIndex: 0 });
+    const root = this._getRootSkinPart();
+    const rootElement = ReactDOM.findDOMNode(root);
+    const rootElementParams = rootElement.getBoundingClientRect();
+
+    const dropdownParams = {
+      width: rootElementParams.width,
+      positionX: rootElementParams.left,
+      positionY: rootElementParams.y + rootElementParams.height + 20,
+    };
+
+    this.setState({ isSuggestionsOpened: true, highlightedOptionIndex: 0, dropdownParams });
   };
 
   closeSuggestions = () => {
@@ -104,24 +124,32 @@ export default class Autocomplete extends FormField {
         this.closeSuggestions();
         break;
       case 38: // Move selection higlight 'up' on Arrow Up key
-        this._handleHighlightMove('up');
+        this._handleHighlightMove(event, 'up');
         break;
       case 40: // Move selection higlight 'down' on Arrow Down key
-        this._handleHighlightMove('down');
+        this._handleHighlightMove(event, 'down');
         break;
       default:
         this.openSuggestions();
     }
   };
 
-  _handleHighlightMove = (direction) => {
+  _handleHighlightMove = (event, direction) => {
+    event.preventDefault();
+
+    const { maxVisibleSuggestions } = this.props;
+    const { filteredWords, highlightedOptionIndex } = this.state;
+
     let position;
     if (direction === 'up') {
-      position = this.state.highlightedOptionIndex - 1;
+      position = highlightedOptionIndex - 1;
     } else if (direction === 'down') {
-      position = this.state.highlightedOptionIndex + 1;
+      position = highlightedOptionIndex + 1;
     }
-    if (position >= 0 && position < this.state.filteredWords.length) {
+
+    const maxPosition = (maxVisibleSuggestions < filteredWords.length) ? maxVisibleSuggestions : filteredWords.length;
+
+    if (position >= 0 && position < maxPosition) {
       this.setState({ highlightedOptionIndex: position, isSuggestionsOpened: true });
     }
   };

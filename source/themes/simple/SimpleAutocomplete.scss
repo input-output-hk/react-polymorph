@@ -9,14 +9,16 @@ $autocomplete-border-focus-color: #5e6066 !default;
 $autocomplete-error-color: $theme-color-error !default;
 $autocomplete-focus-outline: none !default;
 $autocomplete-font-size: 16px !default;
-$autocomplete-font-family: $theme-font-light, sans-serif !default;
+$autocomplete-input-font-family: $theme-font-light, sans-serif !default;
 $autocomplete-min-height: 90px !default;
 $autocomplete-padding: 14px 20px !default;
+$autocomplete-placeholder-font-family: $theme-font-light, sans-serif !default;
 $autocomplete-search-color: #5e6066 !default;
+$autocomplete-selected-words-font-family: $theme-font-light, sans-serif !default;
 $autocomplete-placeholder-color: rgba(#5e6066, 0.5) !default;
 
 $autocomplete-selected-word-text-color: #fafbfc !default;
-$autocomplete-selected-word-box-background-color: #445b7c !default;
+$autocomplete-selected-word-box-background-color: rgba(68, 91, 124, 0.5) !default;
 
 $autocomplete-suggestions-list-arrow-size: 10px !default;
 $autocomplete-suggestions-list-border-color: #c6cdd6 !default;
@@ -37,7 +39,6 @@ $autocomplete-suggestions-list-shadow: none !default;
     background-color: $autocomplete-bg-color;
     border: $autocomplete-border;
     box-sizing: border-box;
-    font-family: $autocomplete-font-family;
     font-size: $autocomplete-font-size;
     min-height: $autocomplete-min-height;
     padding: $autocomplete-padding;
@@ -60,7 +61,7 @@ $autocomplete-suggestions-list-shadow: none !default;
     .selectedWords {
       display: flex;
       flex-wrap: wrap;
-      font-family: $theme-font-thin;
+      font-family: $autocomplete-selected-words-font-family;
       min-height: $autocomplete-suggestions-list-item-min-height;
 
       .selectedWordBox {
@@ -69,9 +70,7 @@ $autocomplete-suggestions-list-shadow: none !default;
         box-sizing: border-box;
         display: flex;
         height: 28px;
-        margin-bottom: 12px;
-        margin-right: 12px;
-        opacity: 0.5;
+        margin: 4px 12px 4px 0;
         padding: 3px 9px;
         position: relative;
 
@@ -94,14 +93,17 @@ $autocomplete-suggestions-list-shadow: none !default;
         color: $autocomplete-search-color;
         display: block;
         flex: 1;
+        font-family: $autocomplete-input-font-family;
         font-size: $autocomplete-font-size;
         height: $autocomplete-suggestions-list-item-min-height;
+        margin: auto 6px;
         max-width: 100%;
         outline: none;
         padding: 0;
 
         &::-webkit-input-placeholder {
           color: $autocomplete-placeholder-color;
+          font-family: $autocomplete-placeholder-font-family;
         }
       }
     }
@@ -117,7 +119,7 @@ $autocomplete-suggestions-list-shadow: none !default;
     font-size: $autocomplete-suggestions-list-font-size;
     list-style: none;
     padding: 0;
-    position: absolute;
+    position: fixed;
     top: $autocomplete-suggestions-list-position-top;
     width: 100%;
     z-index: 99;
