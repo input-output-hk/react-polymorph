@@ -40,13 +40,23 @@ export default class Autocomplete extends FormField {
   };
 
   componentDidMount() {
+    const node = this._getRootSkinPart();
+    const parentNode = node.parentNode;
+
     events.addEventsToDocument(this._getDocumentEvents());
-    window.addEventListener("resize", this.handleWindowResize);
+    window.addEventListener('resize', this.closeSuggestions);
+
+    // handle scroll e.g in modal - by default scroll handler is only on document
+    parentNode.addEventListener('scroll', this.closeSuggestions);
   }
 
   componentWillUnmount () {
+    const node = this._getRootSkinPart();
+    const parentNode = node.parentNode;
+
     events.removeEventsFromDocument(this._getDocumentEvents());
-    window.removeEventListener("resize", this.handleWindowResize);
+    window.removeEventListener('resize', this.closeSuggestions);
+    parentNode.removeEventListener('scroll', this.closeSuggestions);
   }
 
   prepareSkinProps (props) {
@@ -63,16 +73,9 @@ export default class Autocomplete extends FormField {
 
   focus = () => this.handleAutocompleteClick();
 
-  handleWindowResize = () => {
-    if (this.state.isSuggestionsOpened) {
-      this.setState({ isSuggestionsOpened: false, dropdownParams: null });
-    }
-  };
-
   openSuggestions = () => {
     const root = this._getRootSkinPart();
-    const rootElement = ReactDOM.findDOMNode(root);
-    const rootElementParams = rootElement.getBoundingClientRect();
+    const rootElementParams = root.getBoundingClientRect();
 
     const dropdownParams = {
       width: rootElementParams.width,
@@ -84,7 +87,7 @@ export default class Autocomplete extends FormField {
   };
 
   closeSuggestions = () => {
-    this.setState({ isSuggestionsOpened: false, highlightedOptionIndex: 0 });
+    this.setState({ isSuggestionsOpened: false, highlightedOptionIndex: 0, dropdownParams: null });
   };
 
   handleAutocompleteClick = () => {
@@ -228,8 +231,8 @@ export default class Autocomplete extends FormField {
 
   _getDocumentEvents () {
     return {
-      click: this._handleDocumentClick
+      click: this._handleDocumentClick,
+      scroll: this.closeSuggestions,
     };
   }
-
 }
