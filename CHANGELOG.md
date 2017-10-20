@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## vNext
+
+### Fixes
+
+- Fix autocomplete input issues ([PR 21](https://github.com/input-output-hk/react-polymorph/pull/21))
+
 ## 0.5.0
 
 ### Features
