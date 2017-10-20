@@ -5,6 +5,11 @@ import { observable, action as mobxAction } from 'mobx';
 import PropsObserver from './support/PropsObserver';
 import Autocomplete from '../source/components/Autocomplete';
 import SimpleAutocompleteSkin from '../source/skins/simple/AutocompleteSkin';
+import Modal from '../source/components/Modal';
+import Button from '../source/components/Button';
+import SimpleModalSkin from '../source/skins/simple/ModalSkin';
+import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
+import styles from './Autocomplete.stories.scss';
 
 const OPTIONS = ['home', 'cat', 'dog', 'fish', 'hide', 'hover', 'duck', 'category', 'join', 'paper', 'box', 'tab'];
 
@@ -94,4 +99,36 @@ storiesOf('Autocomplete', module)
       invalidCharsRegex= {/[^a-zA-Z]/g}
       skin={<SimpleAutocompleteSkin />}
     />
+  ))
+
+  .add('Enter mnemonics in Modal', () => (
+    <Modal
+      isOpen
+      triggerCloseOnOverlayClick={false}
+      skin={<SimpleModalSkin />}
+    >
+      <div className={styles.dialogWrapper}>
+        <div className={styles.title}>
+          <h1>Autocomplete in Modal</h1>
+        </div>
+        <div className={styles.content}>
+          <Autocomplete
+            label="Recovery phrase"
+            placeholder="Enter recovery phrase"
+            options = {OPTIONS}
+            maxSelections={12}
+            maxVisibleOptions={5}
+            invalidCharsRegex= {/[^a-zA-Z]/g}
+            skin={<SimpleAutocompleteSkin />}
+          />
+        </div>
+        <div className={styles.actions}>
+          <Button
+            className='primary'
+            label='Submit'
+            skin={<SimpleButtonSkin />}
+          />
+        </div>
+      </div>
+    </Modal>
   ))

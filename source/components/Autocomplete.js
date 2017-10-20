@@ -39,7 +39,7 @@ export default class Autocomplete extends FormField {
     return Object.assign({}, super.prepareSkinProps(props), {
       selectedOptions,
       filteredOptions,
-      isOpen
+      isOpen,
     });
   }
 
