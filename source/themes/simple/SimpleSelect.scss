@@ -14,19 +14,6 @@ $select-down-arrow-width: 11px !default;
 $select-down-arrow-height: 7px !default;
 $select-down-arrow-position-bottom: 20px !default;
 $select-down-arrow-position-left: calc(100% - 32px) !default;
-$select-options-border-color: #c6cdd6 !default;
-$select-options-border: 1px solid $select-options-border-color !default;
-$select-options-border-radius: 2px !default;
-$select-options-position-top: calc(100% + 20px) !default;
-$select-options-font-family: $theme-font-light, sans-serif !default;
-$select-options-font-size: 16px !default;
-$select-options-arrow-size: 10px !default;
-$select-options-shadow: none !default;
-$select-option-bg-color: #fafbfc !default;
-$select-option-font-color: #5e6066 !default;
-$select-option-font-color-disabled: rgba(#5e6066, 0.5) !default;
-$select-option-highlight-color: #edf0f3 !default;
-$select-option-padding: 14px 20px !default;
 
 .select {
   position: relative;
@@ -61,60 +48,14 @@ $select-option-padding: 14px 20px !default;
   }
 }
 
-.options {
-  border: $select-options-border;
-  border-radius: $select-options-border-radius;
-  box-shadow: $select-options-shadow;
-  box-sizing: border-box;
-  display: none; // only show when open
-  font-family: $select-options-font-family;
-  font-size: $select-options-font-size;
-  list-style: none;
-  padding: 0;
-  position: absolute;
-  top: $select-options-position-top;
-  width: 100%;
-  z-index: 99;
-  @include arrow(up, $select-option-bg-color, $select-options-border-color, $select-options-arrow-size);
-
-  &.firstOptionHighlighted {
-    @include arrow(up, $select-option-highlight-color, $select-options-border-color, $select-options-arrow-size);
-  }
-}
-
-.option {
-  background-color: $select-option-bg-color;
-  color: $select-option-font-color;
-  cursor: pointer;
-  padding: $select-option-padding;
-
-  &.selectedOption {
-    font-family: $theme-font-medium;
-  }
-
-  &.highlightedOption {
-    background-color: $select-option-highlight-color;
-  }
-
-  &.disabledOption {
-    color: $select-option-font-color-disabled;
-    cursor: default;
-  }
-}
-
 // ======= SPECIAL STATES =======
 
 .select {
-
   // ==== STATE: isOpen ====
 
   &.isOpen {
     input {
       border-color: $select-input-border-focus-color;
-    }
-
-    .options {
-      display: block;
     }
 
     .selectInput:after {
@@ -136,16 +77,6 @@ $select-option-padding: 14px 20px !default;
       .selectInput:after {
         -webkit-mask-image: $select-down-arrow-url;
         mask-image: $select-down-arrow-url;
-      }
-    }
-
-    .options {
-      bottom: 65px;
-      top: inherit;
-      @include arrow(down, $select-option-bg-color, $select-options-border-color, $select-options-arrow-size);
-
-      &.firstOptionHighlighted {
-        @include arrow(down, $select-option-highlight-color, $select-options-border-color, $select-options-arrow-size);
       }
     }
   }

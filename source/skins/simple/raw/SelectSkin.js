@@ -4,6 +4,8 @@ import { themr } from 'react-css-themr';
 import { SELECT } from '../identifiers';
 import RawInputSkin from './InputSkin';
 import Select from '../../../components/Select';
+import Options from '../../../components/Options';
+import SimpleOptionsSkin from '../../../skins/simple/OptionsSkin';
 
 export const selectSkinFactory = (InputSkin) => (
 
@@ -12,12 +14,11 @@ export const selectSkinFactory = (InputSkin) => (
     render() {
       const {
         component, theme, className, options, optionRenderer, isOpen,
-        placeholder, label, error, isOpeningUpward
+        placeholder, label, error, isOpeningUpward, onChange,
       } = this.props;
       const selectedOption = component.getSelectedOption();
       const inputValue = selectedOption ? selectedOption.label : '';
-      const highlightedOptionIndex = component.getHighlightedOptionIndex();
-      const isFirstOptionHighlighted = highlightedOptionIndex === 0;
+
       return (
         <div
           className={classnames([
@@ -38,30 +39,17 @@ export const selectSkinFactory = (InputSkin) => (
             error={error}
             readOnly
           />
-          <ul
-            className={classnames([
-              theme.options,
-              isFirstOptionHighlighted ? theme.firstOptionHighlighted : null,
-            ])}
-            ref={(element) => component.registerSkinPart(Select.SKIN_PARTS.OPTIONS, element)}>
-            {(isOpeningUpward ? options.slice().reverse() : options).map((option, index) => {
-              return (
-                <li
-                  key={index}
-                  className={classnames([
-                    theme.option,
-                    component.isSelectedOption(option) ? theme.selectedOption : null,
-                    component.isHighlightedOption(index) ? theme.highlightedOption : null,
-                    option.isDisabled ? theme.disabledOption : null,
-                  ])}
-                  onClick={(event) => component.handleClickOnOption(option, event)}
-                  onMouseEnter={() => component.setHighlightedOptionIndex(index)}
-                >
-                  {optionRenderer ? optionRenderer(option) : option.label}
-                </li>
-              );
-            })}
-          </ul>
+          <Options
+            isOpen={isOpen}
+            options={options}
+            skin={<SimpleOptionsSkin />}
+            isOpeningUpward={isOpeningUpward}
+            onChange={component.handleChange}
+            optionRenderer={optionRenderer}
+            onClose={component.onCloseOptions}
+            selectedOptionValue={inputValue}
+            noResults={!options.length}
+          />
         </div>
       );
     }

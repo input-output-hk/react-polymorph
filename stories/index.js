@@ -9,3 +9,4 @@ import './Switch.stories';
 import './Toggler.stories';
 import './Modal.stories';
 import './Autocomplete.stories';
+import './Options.stories';

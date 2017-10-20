@@ -8,3 +8,4 @@ export const SWITCH = 'ReactPolymorphSimpleSwitch';
 export const TOGGLER = 'ReactPolymorphSimpleToggler';
 export const MODAL = 'ReactPolymorphSimpleModal';
 export const AUTOCOMPLETE = 'ReactPolymorphSimpleAutocomplete';
+export const OPTIONS = 'ReactPolymorphSimpleOptions';

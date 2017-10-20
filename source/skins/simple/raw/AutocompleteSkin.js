@@ -5,6 +5,8 @@ import { themr } from 'react-css-themr';
 import { AUTOCOMPLETE } from '../identifiers';
 import RawFormFieldSkin from './FormFieldSkin';
 import Autocomplete from '../../../components/Autocomplete';
+import Options from '../../../components/Options';
+import SimpleOptionsSkin from '../../../skins/simple/OptionsSkin';
 
 /**
  * The raw skin for the Autocomplete component.
@@ -19,17 +21,17 @@ import Autocomplete from '../../../components/Autocomplete';
 
 export const autocompleteSkinFactory = (FormFieldSkin) => (
   (props) => {
-    const filteredAndLimitedSuggestions = _.slice(props.filteredWords, 0, props.maxVisibleSuggestions);
+    const filteredAndLimitedOptions = _.slice(props.filteredOptions, 0, props.maxVisibleOptions);
     const isFirstOptionHighlighted = props.highlightedOptionIndex === 0;
 
-    let selectedWords = props.selectedWords && props.selectedWords.map((selectedWord, index) => {
+    let selectedOptions = props.selectedOptions && props.selectedOptions.map((selectedOption, index) => {
       return (
         <span className={props.theme.selectedWordBox} key={index}>
         <span className={props.theme.selectedWordValue}>
-          {selectedWord}
+          {selectedOption}
           <span
             className={props.theme.selectedWordRemoveButton}
-            onClick={props.component.removeWord.bind(null, index)}
+            onClick={props.component.removeOption.bind(null, index)}
           >
             &times;
           </span>
@@ -39,13 +41,13 @@ export const autocompleteSkinFactory = (FormFieldSkin) => (
     });
 
     // show placeholder only if no maximum selections declared or maximum not reached
-    const canMoreWordsBeSelected = props.selectedWords.length < props.maxSelections;
-    let placeholder = (!props.maxSelections || canMoreWordsBeSelected) ? props.placeholder : '';
+    const canMoreOptionsBeSelected = props.selectedOptions.length < props.maxSelections;
+    let placeholder = (!props.maxSelections || canMoreOptionsBeSelected) ? props.placeholder : '';
 
     // selected words and input for enter new one
     const autocompleteContent = (
       <div className={props.theme.selectedWords}>
-        {selectedWords}
+        {selectedOptions}
         <input
           className={props.theme.selectWords}
           onKeyDown={props.component.onKeyDown}
@@ -68,8 +70,8 @@ export const autocompleteSkinFactory = (FormFieldSkin) => (
             <div
               className={classnames([
                 props.theme.autocompleteContent,
-                props.isSuggestionsOpened ? props.theme.opened : null,
-                props.selectedWords.length ? props.theme.hasSelectedWords : null,
+                props.isOpen ? props.theme.opened : null,
+                props.selectedOptions.length ? props.theme.hasSelectedWords : null,
                 props.error ? props.theme.errored : null,
               ])}
               ref={element => {
@@ -78,33 +80,17 @@ export const autocompleteSkinFactory = (FormFieldSkin) => (
             >
               {autocompleteContent}
             </div>
-            {props.suggestedWords &&
-            <ul
-              className={classnames([
-                props.theme.suggestionsList,
-                props.isSuggestionsOpened ? props.theme.opened : null,
-                isFirstOptionHighlighted ? props.theme.firstOptionHighlighted : null,
-              ])}
-            >
-              {props.filteredWords.length ? filteredAndLimitedSuggestions.map((option, index) => {
-                  return (
-                    <li
-                      key={index}
-                      className={classnames([
-                        props.theme.suggestionsListItem,
-                        index === props.highlightedOptionIndex ? props.theme.highlighted : null,
-                      ])}
-                      onMouseEnter={() => props.component.setHighlightedOptionIndex(index)}
-                      onClick={(event) => props.component.updateSelectedWords(event)}
-                    >
-                      {option}
-                    </li>
-                  );
-                }) :
-                <li className={props.theme.suggestionsListItem}>No matching results</li>
-              }
-            </ul>
-            }
+
+            <Options
+              isOpen={props.isOpen}
+              options={filteredAndLimitedOptions}
+              skin={<SimpleOptionsSkin />}
+              onChange={props.component.handleChange}
+              onClose={props.component.closeOptions}
+              resetOnClose
+              noResults={!props.filteredOptions.length}
+            />
+
           </div>
 
         } {...props} />
