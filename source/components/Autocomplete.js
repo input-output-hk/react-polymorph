@@ -36,14 +36,27 @@ export default class Autocomplete extends FormField {
     filteredWords: (this.props.sortAlphabetically && this.props.suggestedWords) ? this.props.suggestedWords.sort() : (this.props.suggestedWords || []),
     isSuggestionsOpened: false,
     highlightedOptionIndex: 0,
+    dropdownParams: null,
   };
 
   componentDidMount() {
+    const node = this._getRootSkinPart();
+    const parentNode = node.parentNode;
+
     events.addEventsToDocument(this._getDocumentEvents());
+    window.addEventListener('resize', this.closeSuggestions);
+
+    // handle scroll e.g in modal - by default scroll handler is only on document
+    parentNode.addEventListener('scroll', this.closeSuggestions);
   }
 
   componentWillUnmount () {
+    const node = this._getRootSkinPart();
+    const parentNode = node.parentNode;
+
     events.removeEventsFromDocument(this._getDocumentEvents());
+    window.removeEventListener('resize', this.closeSuggestions);
+    parentNode.removeEventListener('scroll', this.closeSuggestions);
   }
 
   prepareSkinProps (props) {
@@ -54,17 +67,27 @@ export default class Autocomplete extends FormField {
       highlightedOptionIndex: this.state.highlightedOptionIndex,
       maxSelections: this.props.maxSelections,
       maxVisibleSuggestions: this.props.maxVisibleSuggestions,
+      dropdownParams: this.state.dropdownParams,
     });
   }
 
   focus = () => this.handleAutocompleteClick();
 
   openSuggestions = () => {
-    this.setState({ isSuggestionsOpened: true, highlightedOptionIndex: 0 });
+    const root = this._getRootSkinPart();
+    const rootElementParams = root.getBoundingClientRect();
+
+    const dropdownParams = {
+      width: rootElementParams.width,
+      positionX: rootElementParams.left,
+      positionY: rootElementParams.y + rootElementParams.height + 20,
+    };
+
+    this.setState({ isSuggestionsOpened: true, highlightedOptionIndex: 0, dropdownParams });
   };
 
   closeSuggestions = () => {
-    this.setState({ isSuggestionsOpened: false, highlightedOptionIndex: 0 });
+    this.setState({ isSuggestionsOpened: false, highlightedOptionIndex: 0, dropdownParams: null });
   };
 
   handleAutocompleteClick = () => {
@@ -104,24 +127,32 @@ export default class Autocomplete extends FormField {
         this.closeSuggestions();
         break;
       case 38: // Move selection higlight 'up' on Arrow Up key
-        this._handleHighlightMove('up');
+        this._handleHighlightMove(event, 'up');
         break;
       case 40: // Move selection higlight 'down' on Arrow Down key
-        this._handleHighlightMove('down');
+        this._handleHighlightMove(event, 'down');
         break;
       default:
         this.openSuggestions();
     }
   };
 
-  _handleHighlightMove = (direction) => {
+  _handleHighlightMove = (event, direction) => {
+    event.preventDefault();
+
+    const { maxVisibleSuggestions } = this.props;
+    const { filteredWords, highlightedOptionIndex } = this.state;
+
     let position;
     if (direction === 'up') {
-      position = this.state.highlightedOptionIndex - 1;
+      position = highlightedOptionIndex - 1;
     } else if (direction === 'down') {
-      position = this.state.highlightedOptionIndex + 1;
+      position = highlightedOptionIndex + 1;
     }
-    if (position >= 0 && position < this.state.filteredWords.length) {
+
+    const maxPosition = (maxVisibleSuggestions < filteredWords.length) ? maxVisibleSuggestions : filteredWords.length;
+
+    if (position >= 0 && position < maxPosition) {
       this.setState({ highlightedOptionIndex: position, isSuggestionsOpened: true });
     }
   };
@@ -200,8 +231,8 @@ export default class Autocomplete extends FormField {
 
   _getDocumentEvents () {
     return {
-      click: this._handleDocumentClick
+      click: this._handleDocumentClick,
+      scroll: this.closeSuggestions,
     };
   }
-
 }

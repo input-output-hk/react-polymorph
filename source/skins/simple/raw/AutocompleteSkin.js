@@ -20,7 +20,7 @@ import Autocomplete from '../../../components/Autocomplete';
 export const autocompleteSkinFactory = (FormFieldSkin) => (
   (props) => {
     const filteredAndLimitedSuggestions = _.slice(props.filteredWords, 0, props.maxVisibleSuggestions);
-    const isFirstOptionHighlighted = props.highlightedOptionIndex === 0;
+    const isFirstOptionHighlighted = props.highlightedOptionIndex === 0 && filteredAndLimitedSuggestions.length;
 
     let selectedWords = props.selectedWords && props.selectedWords.map((selectedWord, index) => {
       return (
@@ -85,6 +85,11 @@ export const autocompleteSkinFactory = (FormFieldSkin) => (
                 props.isSuggestionsOpened ? props.theme.opened : null,
                 isFirstOptionHighlighted ? props.theme.firstOptionHighlighted : null,
               ])}
+              style={props.dropdownParams && {
+                top: props.dropdownParams.positionY,
+                left: props.dropdownParams.positionX,
+                width: props.dropdownParams.width,
+              }}
             >
               {props.filteredWords.length ? filteredAndLimitedSuggestions.map((option, index) => {
                   return (

@@ -5,8 +5,13 @@ import { observable, action as mobxAction } from 'mobx';
 import PropsObserver from './support/PropsObserver';
 import Autocomplete from '../source/components/Autocomplete';
 import SimpleAutocompleteSkin from '../source/skins/simple/AutocompleteSkin';
+import Modal from '../source/components/Modal';
+import Button from '../source/components/Button';
+import SimpleModalSkin from '../source/skins/simple/ModalSkin';
+import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
+import styles from './Autocomplete.stories.scss';
 
-const SUGGESTED_WORDS = ['home', 'cat', 'dog', 'fish', 'hide', 'hover', 'duck', 'category', 'join', 'paper', 'box', 'tab'];
+const OPTIONS = ['home', 'cat', 'dog', 'fish', 'hide', 'hover', 'duck', 'category', 'join', 'paper', 'box', 'tab'];
 
 storiesOf('Autocomplete', module)
 
@@ -54,7 +59,7 @@ storiesOf('Autocomplete', module)
   .add('Enter mnemonics (9-word mnemonic) - not sorted', () => (
     <Autocomplete
       label="Recovery phrase"
-      suggestedWords = {SUGGESTED_WORDS}
+      suggestedWords = {OPTIONS}
       placeholder="Enter mnemonic..."
       sortAlphabetically={false}
       multipleSameSelections={false}
@@ -66,7 +71,7 @@ storiesOf('Autocomplete', module)
   .add('Enter mnemonics (9-word mnemonic) - sorted with multiple same selections', () => (
     <Autocomplete
       label="Recovery phrase"
-      suggestedWords = {SUGGESTED_WORDS}
+      suggestedWords = {OPTIONS}
       placeholder="Enter mnemonic..."
       maxSelections={9}
       skin={<SimpleAutocompleteSkin />}
@@ -76,7 +81,7 @@ storiesOf('Autocomplete', module)
   .add('Enter mnemonics - (12-word mnemonic) with 5 visible suggestions', () => (
     <Autocomplete
       label="Recovery phrase"
-      suggestedWords = {SUGGESTED_WORDS}
+      suggestedWords = {OPTIONS}
       placeholder="Enter mnemonic..."
       maxSelections={12}
       maxVisibleSuggestions={5}
@@ -87,11 +92,43 @@ storiesOf('Autocomplete', module)
   .add('Enter mnemonics - (12-word mnemonic) with 5 visible suggestions and regex that allows only letters', () => (
     <Autocomplete
       label="Recovery phrase"
-      suggestedWords = {SUGGESTED_WORDS}
+      suggestedWords = {OPTIONS}
       placeholder="Enter mnemonic..."
       maxSelections={12}
       maxVisibleSuggestions={5}
       invalidCharsRegex= {/[^a-zA-Z]/g}
       skin={<SimpleAutocompleteSkin />}
     />
+  ))
+
+  .add('Enter mnemonics in Modal', () => (
+    <Modal
+      isOpen
+      triggerCloseOnOverlayClick={false}
+      skin={<SimpleModalSkin />}
+    >
+      <div className={styles.dialogWrapper}>
+        <div className={styles.title}>
+          <h1>Autocomplete in Modal</h1>
+        </div>
+        <div className={styles.content}>
+          <Autocomplete
+            label="Recovery phrase"
+            placeholder="Enter recovery phrase"
+            suggestedWords = {OPTIONS}
+            maxSelections={12}
+            maxVisibleSuggestions={5}
+            invalidCharsRegex= {/[^a-zA-Z]/g}
+            skin={<SimpleAutocompleteSkin />}
+          />
+        </div>
+        <div className={styles.actions}>
+          <Button
+            className='primary'
+            label='Submit'
+            skin={<SimpleButtonSkin />}
+          />
+        </div>
+      </div>
+    </Modal>
   ))
