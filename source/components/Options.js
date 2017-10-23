@@ -48,11 +48,7 @@ export default class Options extends SkinnableComponent {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (prevState.isOpen && !this.state.isOpen) {
-      this.handleScrollEventListener('remove');
-      events.removeEventsFromDocument(this._getDocumentEvents());
-      window.removeEventListener("resize", this._handleWindowResize);
-    }
+    (prevState.isOpen && !this.state.isOpen) && this.removeAllEventListeners();
 
     if (this.props.isOpen !== prevProps.isOpen ) {
       const rootNode = this._getRootSkinPart();
@@ -77,11 +73,7 @@ export default class Options extends SkinnableComponent {
   }
 
   componentWillUnmount () {
-    if (this.state.isOpen) {
-      events.removeEventsFromDocument(this._getDocumentEvents());
-      window.removeEventListener("resize", this._handleWindowResize);
-      this.handleScrollEventListener('remove');
-    }
+    this.state.isOpen && this.removeAllEventListeners();
   }
 
   prepareSkinProps (props) {
@@ -91,6 +83,12 @@ export default class Options extends SkinnableComponent {
       position: this.state.position,
     });
   };
+
+  removeAllEventListeners () {
+    events.removeEventsFromDocument(this._getDocumentEvents());
+    window.removeEventListener("resize", this._handleWindowResize);
+    this.handleScrollEventListener('remove');
+  }
 
   updateComponentsStates = (isOpen, position) => {
     this.setState({ isOpen, position });
@@ -224,6 +222,8 @@ export default class Options extends SkinnableComponent {
         event.preventDefault(); // prevent caret move
         this._handleHighlightMove(highlightOptionIndex, 'down');
         break;
+      default:
+        this.props.resetOnClose && this.setHighlightedOptionIndex(0);
     }
   };
 
