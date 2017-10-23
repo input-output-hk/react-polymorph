@@ -55,7 +55,7 @@ export default class Select extends FormField {
   handleChange = (option, event) => {
     if (this.props.onChange) this.props.onChange(option.value, event);
     this.toggleOptions();
-  }
+  };
 
   getSelectedOption = () => {
     const { options, value, allowBlank } = this.props;

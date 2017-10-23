@@ -14,7 +14,7 @@ export const selectSkinFactory = (InputSkin) => (
     render() {
       const {
         component, theme, className, options, optionRenderer, isOpen,
-        placeholder, label, error, isOpeningUpward, onChange,
+        placeholder, label, error, isOpeningUpward,
       } = this.props;
       const selectedOption = component.getSelectedOption();
       const inputValue = selectedOption ? selectedOption.label : '';

@@ -38,7 +38,8 @@ export default class Options extends SkinnableComponent {
   }
 
   componentWillUpdate (nextProps, nextState) {
-    // update isOpen state when parent component force open / close options (e.g. click on Input in Select component)
+    // update isOpen state when parent component force open / close options
+    // (e.g. click on Input in Select component)
     if (!this.state.isOpen && nextState.isOpen) {
       window.addEventListener("resize", this._handleWindowResize);
       this.handleScrollEventListener('add');
@@ -96,10 +97,7 @@ export default class Options extends SkinnableComponent {
   };
 
   getFirstScrollableParent = (node) => {
-    if (node == null) {
-      return null;
-    }
-
+    if (node == null) return null;
     if (node.scrollHeight > node.clientHeight) {
       return node;
     } else {
@@ -117,7 +115,7 @@ export default class Options extends SkinnableComponent {
         scrollableNode.addEventListener('scroll', this._handleScroll);
       }
     }
-  }
+  };
 
   open = () => {
     this.setState({
@@ -143,13 +141,9 @@ export default class Options extends SkinnableComponent {
     if (currentIndex !== null) {
       index = currentIndex;
     } else if (this.props.selectedOptionValue) {
-      const optionValue = typeof option === 'object' ? option.value : option;
       index = options.findIndex(option => option.value === this.props.selectedOptionValue);
     }
-    if (isOpeningUpward) {
-      const reverseIndex = options.length - 1 - index;
-      return reverseIndex;
-    }
+    if (isOpeningUpward) return options.length - 1 - index;
     return index;
   };
 
@@ -241,13 +235,9 @@ export default class Options extends SkinnableComponent {
     }
   };
 
-  _handleWindowResize = () => {
-    if (this.state.isOpen) this.close();
-  };
+  _handleWindowResize = () => this.state.isOpen && this.close();
 
-  _handleScroll = () => {
-    if (this.state.isOpen) this.close();
-  }
+  _handleScroll = () => this.state.isOpen && this.close();
 
   _getDocumentEvents () {
     return {

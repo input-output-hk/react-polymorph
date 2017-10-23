@@ -65,9 +65,9 @@ export default class Autocomplete extends FormField {
   onKeyDown = (event) => {
     const { selectedOptions } = this.state;
 
-    //Delte on backspace
+    // Delete on backspace
     if (event.keyCode === 8 && !event.target.value && selectedOptions.length) {
-      // remove last selected option
+      // Remove last selected option
       this.removeOption(selectedOptions.length - 1, event);
     } else {
       this.openOptions();
@@ -95,25 +95,19 @@ export default class Autocomplete extends FormField {
 
   handleChange = (option, event) => {
     this.updateSelectedOptions(event, option);
-  }
+  };
 
   updateSelectedOptions = (event, selectedOption = null) => {
     const canMoreOptionsBeSelected = this.state.selectedOptions.length < this.props.maxSelections;
     const areFilteredOptionsAvailable = this.state.filteredOptions && this.state.filteredOptions.length > 0;
 
     if (!this.props.maxSelections || (canMoreOptionsBeSelected && areFilteredOptionsAvailable)) {
-      let value = selectedOption;
-
-      if (!selectedOption) {
-        return;
-      }
-
+      if (!selectedOption) return;
       let option = selectedOption.trim();
       const optionCanBeSelected = this.state.selectedOptions.indexOf(option) < 0 && !this.props.multipleSameSelections || this.props.multipleSameSelections;
 
       if (option && optionCanBeSelected && this.state.isOpen) {
-        const selectedOptions = _.concat(this.state.selectedOptions, option)
-
+        const selectedOptions = _.concat(this.state.selectedOptions, option);
         this.selectionChanged(selectedOptions, event);
         this.setState({ selectedOptions, isOpen: false });
       }
