@@ -108,15 +108,14 @@ storiesOf('Select', module)
   ))
 
   .add('Countries - isOpeningUpward', () => (
-    <div style={{ marginTop: 183 }}>
-      <Select
-        label="Countries (opening upward)"
-        options={COUNTRIES}
-        placeholder="Select your country …"
-        skin={<SimpleSelectSkin />}
-        isOpeningUpward
-      />
-    </div>
+    <Select
+      className={styles.customMargin}
+      label="Countries (opening upward)"
+      options={COUNTRIES}
+      placeholder="Select your country …"
+      skin={<SimpleSelectSkin />}
+      isOpeningUpward
+    />
   ))
 
   .add('Countries - with disabled options', () => (

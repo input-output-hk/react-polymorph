@@ -1,5 +1,4 @@
 @import "theme";
-@import "mixins/arrow";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -14,25 +13,13 @@ $autocomplete-min-height: 90px !default;
 $autocomplete-padding: 14px 20px !default;
 $autocomplete-placeholder-font-family: $theme-font-light, sans-serif !default;
 $autocomplete-search-color: #5e6066 !default;
-$autocomplete-selected-words-font-family: $theme-font-light, sans-serif !default;
 $autocomplete-placeholder-color: rgba(#5e6066, 0.5) !default;
 
+$autocomplete-selected-words-font-family: $theme-font-light, sans-serif !default;
+$autocomplete-selected-word-box-min-height: 28px !default;
 $autocomplete-selected-word-text-color: #fafbfc !default;
 $autocomplete-selected-word-box-background-color: rgba(68, 91, 124, 0.5) !default;
 
-$autocomplete-suggestions-list-arrow-size: 10px !default;
-$autocomplete-suggestions-list-border-color: #c6cdd6 !default;
-$autocomplete-suggestions-list-border: 1px solid $autocomplete-suggestions-list-border-color !default;
-$autocomplete-suggestions-list-border-radius: 2px !default;
-$autocomplete-suggestions-list-font-family: $theme-font-light, sans-serif !default;
-$autocomplete-suggestions-list-font-size: 16px !default;
-$autocomplete-suggestions-list-item-bg-color: #fafbfc !default;
-$autocomplete-suggestions-list-item-font-color: #5e6066 !default;
-$autocomplete-suggestions-list-item-highlight-color: #edf0f3 !default;
-$autocomplete-suggestions-list-item-min-height: 28px;
-$autocomplete-suggestions-list-item-padding: 14px 20px !default;
-$autocomplete-suggestions-list-position-top: calc(100% + 20px) !default;
-$autocomplete-suggestions-list-shadow: none !default;
 
 .autocompleteWrapper {
   .autocompleteContent {
@@ -61,8 +48,8 @@ $autocomplete-suggestions-list-shadow: none !default;
     .selectedWords {
       display: flex;
       flex-wrap: wrap;
+      min-height: $autocomplete-selected-word-box-min-height;
       font-family: $autocomplete-selected-words-font-family;
-      min-height: $autocomplete-suggestions-list-item-min-height;
 
       .selectedWordBox {
         background: $autocomplete-selected-word-box-background-color;
@@ -95,7 +82,7 @@ $autocomplete-suggestions-list-shadow: none !default;
         flex: 1;
         font-family: $autocomplete-input-font-family;
         font-size: $autocomplete-font-size;
-        height: $autocomplete-suggestions-list-item-min-height;
+        height: $autocomplete-selected-word-box-min-height;
         margin: auto 6px;
         max-width: 100%;
         outline: none;
@@ -105,43 +92,6 @@ $autocomplete-suggestions-list-shadow: none !default;
           color: $autocomplete-placeholder-color;
           font-family: $autocomplete-placeholder-font-family;
         }
-      }
-    }
-  }
-
-  .suggestionsList {
-    border: $autocomplete-suggestions-list-border;
-    border-radius: $autocomplete-suggestions-list-border-radius;
-    box-shadow: $autocomplete-suggestions-list-shadow;
-    box-sizing: border-box;
-    display: none; // only show when open
-    font-family: $autocomplete-suggestions-list-font-family;
-    font-size: $autocomplete-suggestions-list-font-size;
-    list-style: none;
-    padding: 0;
-    position: fixed;
-    top: $autocomplete-suggestions-list-position-top;
-    width: 100%;
-    z-index: 99;
-
-    @include arrow(up, $autocomplete-suggestions-list-item-bg-color, $autocomplete-suggestions-list-border-color, $autocomplete-suggestions-list-arrow-size);
-
-    &.firstOptionHighlighted {
-      @include arrow(up, $autocomplete-suggestions-list-item-highlight-color, $autocomplete-suggestions-list-border-color, $autocomplete-suggestions-list-arrow-size);
-    }
-
-    &.opened {
-      display: block;
-    }
-
-    .suggestionsListItem {
-      background-color: $autocomplete-suggestions-list-item-bg-color;
-      color: $autocomplete-suggestions-list-item-font-color;
-      cursor: pointer;
-      padding: $autocomplete-suggestions-list-item-padding;
-
-      &.highlighted {
-        background-color: $autocomplete-suggestions-list-item-highlight-color;
       }
     }
   }

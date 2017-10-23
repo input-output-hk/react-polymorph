@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## vNext
+
+### Features
+
+- Extract Options component ([PR 22](https://github.com/input-output-hk/react-polymorph/pull/22))
+
 ## 0.5.1
 
 ### Fixes
@@ -18,7 +24,7 @@ Changelog
 
 ### Fixes
 
-- Expose raw component skins ([PR 19](https://github.com/input-output-hk/react-polymorph/pull/19)) 
+- Expose raw component skins ([PR 19](https://github.com/input-output-hk/react-polymorph/pull/19))
 
 ## 0.4.0
 

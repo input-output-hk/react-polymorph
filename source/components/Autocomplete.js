@@ -2,163 +2,76 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import FormField from './FormField';
-import ReactDOM from 'react-dom';
-import events from '../utils/events';
 
 export default class Autocomplete extends FormField {
 
   static SKIN_PARTS = {
     ROOT: 'root',
     INPUT: 'input',
-    SUGGESTIONS: 'suggestions',
   };
 
   static propTypes = Object.assign({}, FormField.propTypes, {
     error: PropTypes.string,
     maxSelections: PropTypes.number,
     placeholder: PropTypes.string,
-    suggestedWords: PropTypes.array,
+    options: PropTypes.array,
     sortAlphabetically: PropTypes.bool,
     multipleSameSelections: PropTypes.bool,
-    maxVisibleSuggestions: PropTypes.number,
+    maxVisibleOptions: PropTypes.number,
     invalidCharsRegex: PropTypes.instanceOf(RegExp),
   });
 
   static defaultProps = {
-    maxVisibleSuggestions: 10, // max number of visible suggested words
+    maxVisibleOptions: 10, // max number of visible options
     multipleSameSelections: true, // if true then same word can be selected multiple times
-    sortAlphabetically: true, // suggested words are sorted alphabetically by default
+    sortAlphabetically: true, // options are sorted alphabetically by default
     invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
   };
 
   state = {
-    selectedWords: [],
-    filteredWords: (this.props.sortAlphabetically && this.props.suggestedWords) ? this.props.suggestedWords.sort() : (this.props.suggestedWords || []),
-    isSuggestionsOpened: false,
-    highlightedOptionIndex: 0,
-    dropdownParams: null,
+    selectedOptions: [],
+    filteredOptions: (this.props.sortAlphabetically && this.props.options) ? this.props.options.sort() : (this.props.options || []),
+    isOpen: false,
   };
 
-  componentDidMount() {
-    const node = this._getRootSkinPart();
-    const parentNode = node.parentNode;
-
-    events.addEventsToDocument(this._getDocumentEvents());
-    window.addEventListener('resize', this.closeSuggestions);
-
-    // handle scroll e.g in modal - by default scroll handler is only on document
-    parentNode.addEventListener('scroll', this.closeSuggestions);
-  }
-
-  componentWillUnmount () {
-    const node = this._getRootSkinPart();
-    const parentNode = node.parentNode;
-
-    events.removeEventsFromDocument(this._getDocumentEvents());
-    window.removeEventListener('resize', this.closeSuggestions);
-    parentNode.removeEventListener('scroll', this.closeSuggestions);
-  }
-
   prepareSkinProps (props) {
+    const { selectedOptions, filteredOptions, isOpen } = this.state;
     return Object.assign({}, super.prepareSkinProps(props), {
-      selectedWords: this.state.selectedWords,
-      filteredWords: this.state.filteredWords,
-      isSuggestionsOpened: this.state.isSuggestionsOpened,
-      highlightedOptionIndex: this.state.highlightedOptionIndex,
-      maxSelections: this.props.maxSelections,
-      maxVisibleSuggestions: this.props.maxVisibleSuggestions,
-      dropdownParams: this.state.dropdownParams,
+      selectedOptions,
+      filteredOptions,
+      isOpen,
     });
   }
 
   focus = () => this.handleAutocompleteClick();
 
-  openSuggestions = () => {
-    const root = this._getRootSkinPart();
-    const rootElementParams = root.getBoundingClientRect();
-
-    const dropdownParams = {
-      width: rootElementParams.width,
-      positionX: rootElementParams.left,
-      positionY: rootElementParams.y + rootElementParams.height + 20,
-    };
-
-    this.setState({ isSuggestionsOpened: true, highlightedOptionIndex: 0, dropdownParams });
+  openOptions = () => {
+    this.setState({ isOpen: true });
   };
 
-  closeSuggestions = () => {
-    this.setState({ isSuggestionsOpened: false, highlightedOptionIndex: 0, dropdownParams: null });
+  closeOptions = () => {
+    this.setState({ isOpen: false });
   };
 
   handleAutocompleteClick = () => {
     this._getInputSkinPart().focus();
-    if (!this.state.isSuggestionsOpened) {
-      this.openSuggestions();
+    if (!this.state.isOpen) {
+      this.openOptions();
     } else {
-      this.closeSuggestions();
-    }
-  };
-
-  _handleDocumentClick = (event) => {
-    const root = this._getRootSkinPart();
-    const isDescendant = events.targetIsDescendant(event, ReactDOM.findDOMNode(root));
-    if (this.state.isSuggestionsOpened && !isDescendant) {
-      this.closeSuggestions();
+      this.closeOptions();
     }
   };
 
   onKeyDown = (event) => {
-    const { selectedWords } = this.state;
+    const { selectedOptions } = this.state;
 
-    switch (event.keyCode) {
-      case 8: // Delte on backspace
-        if (!event.target.value && selectedWords.length) {
-          this.removeWord(selectedWords.length - 1, event); // remove last
-        }
-        break;
-      case 9: // Select currently highlighted option on 'Tab' key
-        event.preventDefault();
-        this.updateSelectedWords(event);
-        break;
-      case 13: // Select currently highlighted option on 'Enter' key
-        this.updateSelectedWords(event);
-        break;
-      case 27: // Close on 'Escape' key
-        this.closeSuggestions();
-        break;
-      case 38: // Move selection higlight 'up' on Arrow Up key
-        this._handleHighlightMove(event, 'up');
-        break;
-      case 40: // Move selection higlight 'down' on Arrow Down key
-        this._handleHighlightMove(event, 'down');
-        break;
-      default:
-        this.openSuggestions();
+    // Delete on backspace
+    if (event.keyCode === 8 && !event.target.value && selectedOptions.length) {
+      // Remove last selected option
+      this.removeOption(selectedOptions.length - 1, event);
+    } else {
+      this.openOptions();
     }
-  };
-
-  _handleHighlightMove = (event, direction) => {
-    event.preventDefault();
-
-    const { maxVisibleSuggestions } = this.props;
-    const { filteredWords, highlightedOptionIndex } = this.state;
-
-    let position;
-    if (direction === 'up') {
-      position = highlightedOptionIndex - 1;
-    } else if (direction === 'down') {
-      position = highlightedOptionIndex + 1;
-    }
-
-    const maxPosition = (maxVisibleSuggestions < filteredWords.length) ? maxVisibleSuggestions : filteredWords.length;
-
-    if (position >= 0 && position < maxPosition) {
-      this.setState({ highlightedOptionIndex: position, isSuggestionsOpened: true });
-    }
-  };
-
-  setHighlightedOptionIndex = (index) => {
-    this.setState({ highlightedOptionIndex: index });
   };
 
   // onKeyUp handler
@@ -170,39 +83,33 @@ export default class Autocomplete extends FormField {
       return;
     }
 
-    const filteredWords = [];
-    _.some(this.props.suggestedWords, function (suggestedWord) {
-      if (_.startsWith(suggestedWord, value)) {
-        filteredWords.push(suggestedWord);
+    const filteredOptions = [];
+    _.some(this.props.options, function (option) {
+      if (_.startsWith(option, value)) {
+        filteredOptions.push(option);
       }
     });
 
-    this.setState({ filteredWords: (value !== '') ? filteredWords : this.props.suggestedWords });
+    this.setState({ filteredOptions: (value !== '') ? filteredOptions : this.props.options });
   };
 
-  updateSelectedWords = (event) => {
-    const canMoreWordsBeSelected = this.state.selectedWords.length < this.props.maxSelections;
-    const areFilteredWordsAvailable = this.state.filteredWords && this.state.filteredWords.length > 0;
+  handleChange = (option, event) => {
+    this.updateSelectedOptions(event, option);
+  };
 
-    if (!this.props.maxSelections || (canMoreWordsBeSelected && areFilteredWordsAvailable)) {
-      let value = this.state.filteredWords[this.state.highlightedOptionIndex];
+  updateSelectedOptions = (event, selectedOption = null) => {
+    const canMoreOptionsBeSelected = this.state.selectedOptions.length < this.props.maxSelections;
+    const areFilteredOptionsAvailable = this.state.filteredOptions && this.state.filteredOptions.length > 0;
 
-      if (!value) {
-        return;
-      }
+    if (!this.props.maxSelections || (canMoreOptionsBeSelected && areFilteredOptionsAvailable)) {
+      if (!selectedOption) return;
+      let option = selectedOption.trim();
+      const optionCanBeSelected = this.state.selectedOptions.indexOf(option) < 0 && !this.props.multipleSameSelections || this.props.multipleSameSelections;
 
-      let word = value.trim();
-      const wordCanBeSelected = this.state.selectedWords.indexOf(word) < 0 && !this.props.multipleSameSelections || this.props.multipleSameSelections;
-
-      if (word && wordCanBeSelected && this.state.isSuggestionsOpened) {
-        const selectedWords = _.concat(this.state.selectedWords, word)
-
-        this.selectionChanged(selectedWords, event);
-        this.setState({
-          selectedWords: selectedWords,
-          highlightedOptionIndex: 0,
-          isSuggestionsOpened: false
-        });
+      if (option && optionCanBeSelected && this.state.isOpen) {
+        const selectedOptions = _.concat(this.state.selectedOptions, option);
+        this.selectionChanged(selectedOptions, event);
+        this.setState({ selectedOptions, isOpen: false });
       }
     }
 
@@ -210,29 +117,18 @@ export default class Autocomplete extends FormField {
     input.value = '';
   };
 
-  removeWord = (index, event) => {
-    const selectedWords = this.state.selectedWords;
-    _.pullAt(selectedWords, index);
-    this.selectionChanged(selectedWords, event);
-    this.setState({ selectedWords });
+  removeOption = (index, event) => {
+    const selectedOptions = this.state.selectedOptions;
+    _.pullAt(selectedOptions, index);
+    this.selectionChanged(selectedOptions, event);
+    this.setState({ selectedOptions });
   };
 
-  selectionChanged = (selectedWords, event) => {
-    if (this.props.onChange) this.props.onChange(selectedWords, event);
+  selectionChanged = (selectedOptions, event) => {
+    if (this.props.onChange) this.props.onChange(selectedOptions, event);
   };
-
-  _getRootSkinPart () {
-    return this.skinParts[Autocomplete.SKIN_PARTS.ROOT];
-  }
 
   _getInputSkinPart () {
     return this.skinParts[Autocomplete.SKIN_PARTS.INPUT];
-  }
-
-  _getDocumentEvents () {
-    return {
-      click: this._handleDocumentClick,
-      scroll: this.closeSuggestions,
-    };
   }
 }

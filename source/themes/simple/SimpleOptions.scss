@@ -1,0 +1,79 @@
+@import "theme";
+@import "mixins/arrow";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$options-border-color: #c6cdd6 !default;
+$options-border: 1px solid $options-border-color !default;
+$options-border-radius: 2px !default;
+$options-font-family: $theme-font-light, sans-serif !default;
+$options-font-size: 16px !default;
+$options-arrow-size: 10px !default;
+$options-shadow: none !default;
+$option-bg-color: #fafbfc !default;
+$option-font-color: #5e6066 !default;
+$option-font-color-disabled: rgba(#5e6066, 0.5) !default;
+$option-highlight-color: #edf0f3 !default;
+$option-padding: 14px 20px !default;
+
+.options {
+  border: $options-border;
+  border-radius: $options-border-radius;
+  box-shadow: $options-shadow;
+  box-sizing: border-box;
+  display: none; // only show when open
+  font-family: $options-font-family;
+  font-size: $options-font-size;
+  list-style: none;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+
+  &.isOpen {
+    display: block;
+  }
+
+  @include arrow(up, $option-bg-color, $options-border-color, $options-arrow-size);
+
+  &.firstOptionHighlighted {
+    @include arrow(up, $option-highlight-color, $options-border-color, $options-arrow-size);
+  }
+}
+
+.option {
+  background-color: $option-bg-color;
+  color: $option-font-color;
+  cursor: pointer;
+  padding: $option-padding;
+
+  &.selectedOption {
+    font-family: $theme-font-medium;
+  }
+
+  &.highlightedOption {
+    background-color: $option-highlight-color;
+  }
+
+  &.disabledOption {
+    color: $option-font-color-disabled;
+    cursor: default;
+  }
+}
+
+.openUpward {
+  &.options {
+    top: inherit;
+    @include arrow(down, $option-bg-color, $options-border-color, $options-arrow-size);
+
+    &.firstOptionHighlighted {
+      @include arrow(down, $option-highlight-color, $options-border-color, $options-arrow-size);
+    }
+  }
+}
+
+
+
+
+
+
