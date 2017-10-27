@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## vNEXT
+## 0.5.3
 
 ### Chores
 
