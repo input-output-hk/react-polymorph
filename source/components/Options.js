@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import SkinnableComponent from './SkinnableComponent';
 import events from '../utils/events';
+import { LabelProp } from '../utils/props';
 
 export default class Options extends SkinnableComponent {
 
@@ -17,12 +18,14 @@ export default class Options extends SkinnableComponent {
     optionRenderer: PropTypes.func,
     selectedOptionValue: PropTypes.string,
     noResults: PropTypes.bool,
+    noResultsMessage: LabelProp,
   });
 
   static defaultProps = {
     isOpen: false,
     isOpeningUpward: false,
     resetOnClose: false,
+    noResultsMessage: 'No results',
   };
 
   state = {
@@ -32,7 +35,7 @@ export default class Options extends SkinnableComponent {
   };
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.isOpen !== nextProps.isOpen ) {
+    if (this.props.isOpen !== nextProps.isOpen) {
       this.updateComponentsStates(nextProps.isOpen, null);
     }
   }
@@ -41,7 +44,7 @@ export default class Options extends SkinnableComponent {
     // update isOpen state when parent component force open / close options
     // (e.g. click on Input in Select component)
     if (!this.state.isOpen && nextState.isOpen) {
-      window.addEventListener("resize", this._handleWindowResize);
+      window.addEventListener('resize', this._handleWindowResize);
       this.handleScrollEventListener('add');
       events.addEventsToDocument(this._getDocumentEvents());
     }
@@ -86,7 +89,7 @@ export default class Options extends SkinnableComponent {
 
   removeAllEventListeners () {
     events.removeEventsFromDocument(this._getDocumentEvents());
-    window.removeEventListener("resize", this._handleWindowResize);
+    window.removeEventListener('resize', this._handleWindowResize);
     this.handleScrollEventListener('remove');
   }
 
@@ -173,31 +176,40 @@ export default class Options extends SkinnableComponent {
   // ========= PRIVATE HELPERS =========
 
   _handleSelectionOnEnterKey = (event) => {
-    const { options, isOpeningUpward } = this.props;
-    const currentIndex = this.state.highlightedOptionIndex;
-    const reverseIndex = options.length - 1 - currentIndex;
-    const highlightedOption = options[isOpeningUpward ? reverseIndex : currentIndex];
-    this.handleClickOnOption(highlightedOption, event);
+    const { options } = this.props;
+    if (options.length) {
+      const { isOpeningUpward } = this.props;
+      const currentIndex = this.state.highlightedOptionIndex;
+      const reverseIndex = options.length - 1 - currentIndex;
+      const highlightedOption = options[isOpeningUpward ? reverseIndex : currentIndex];
+      this.handleClickOnOption(highlightedOption, event);
+    } else {
+      event.preventDefault();
+    }
   };
 
   _handleHighlightMove = (currentIndex, direction) => {
     const { options } = this.props;
-    const lowerIndexBound = 0;
-    const upperIndexBound = options.length - 1;
-    let newIndex = (direction === 'up') ? (currentIndex - 1) : (currentIndex + 1);
+    if (options.length) {
+      const lowerIndexBound = 0;
+      const upperIndexBound = options.length - 1;
+      let newIndex = (direction === 'up') ? (currentIndex - 1) : (currentIndex + 1);
 
-    // Make sure new index is within options bounds
-    newIndex = Math.max(lowerIndexBound, Math.min(newIndex, upperIndexBound));
+      // Make sure new index is within options bounds
+      newIndex = Math.max(lowerIndexBound, Math.min(newIndex, upperIndexBound));
 
-    if (options[newIndex].isDisabled) {
-      // Try to jump over disabled options
-      const canMoveUp = newIndex > lowerIndexBound;
-      const canMoveDown = newIndex < upperIndexBound;
-      if ((direction === 'up' && canMoveUp) || (direction === 'down' && canMoveDown)) {
-        this._handleHighlightMove(newIndex, direction);
+      if (options[newIndex].isDisabled) {
+        // Try to jump over disabled options
+        const canMoveUp = newIndex > lowerIndexBound;
+        const canMoveDown = newIndex < upperIndexBound;
+        if ((direction === 'up' && canMoveUp) || (direction === 'down' && canMoveDown)) {
+          this._handleHighlightMove(newIndex, direction);
+        }
+      } else {
+        this.setHighlightedOptionIndex(newIndex);
       }
     } else {
-      this.setHighlightedOptionIndex(newIndex);
+      event.preventDefault();
     }
   };
 
@@ -251,4 +263,5 @@ export default class Options extends SkinnableComponent {
   _getRootSkinPart () {
     return this.skinParts[Options.SKIN_PARTS.OPTIONS];
   }
+
 }

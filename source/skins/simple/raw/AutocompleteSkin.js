@@ -89,6 +89,7 @@ export const autocompleteSkinFactory = (FormFieldSkin) => (
               onClose={props.component.closeOptions}
               resetOnClose
               noResults={!props.filteredOptions.length}
+              noResultsMessage={props.noResultsMessage}
             />
 
           </div>

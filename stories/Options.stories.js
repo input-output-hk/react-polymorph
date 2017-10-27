@@ -17,7 +17,7 @@ const OPTIONS_COLLECTION = [
 
 const MNEMONIC_WORDS = ['home', 'cat', 'dog', 'fish', 'hide', 'hover', 'duck', 'category', 'join', 'paper', 'box', 'tab'];
 
-storiesOf('Options (throug Select and Autocomplete)', module)
+storiesOf('Options (through Select and Autocomplete)', module)
 
 .addDecorator((story) => {
   const onChangeAction = action('onChange');

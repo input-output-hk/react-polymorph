@@ -45,7 +45,7 @@ export default class Input extends FormField {
   }
 
   _enforceStringValue(value) {
-    if (!isString(value)) throw "Values passed to Input::onChange must be strings";
+    if (!isString(value)) throw 'Values passed to Input::onChange must be strings';
     return value;
   }
 
@@ -54,4 +54,5 @@ export default class Input extends FormField {
     const isTooLong = maxLength != null && value.length > maxLength;
     return isTooLong ? value.substring(0, maxLength) : value;
   }
+
 }

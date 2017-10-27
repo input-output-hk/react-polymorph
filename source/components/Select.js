@@ -74,4 +74,5 @@ export default class Select extends FormField {
   _getInputSkinPart () {
     return this.skinParts[Select.SKIN_PARTS.INPUT];
   }
+
 }

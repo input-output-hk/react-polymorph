@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SkinnableComponent from './SkinnableComponent';
-import { LabelProp } from "../utils/props";
+import { LabelProp } from '../utils/props';
 
 export default class FormField extends SkinnableComponent {
 
