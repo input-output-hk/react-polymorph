@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## vNEXT
+
+### Chores
+
+- Add noResultsMessage property to Options component, Code cleanup and standardization ([PR 22](https://github.com/input-output-hk/react-polymorph/pull/23))
+
 ## 0.5.2
 
 ### Features

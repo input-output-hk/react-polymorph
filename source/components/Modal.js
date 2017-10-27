@@ -12,7 +12,7 @@ export default class Modal extends SkinnableComponent {
 
   static defaultProps = {
     isActive: false,
-    contentLabel: "Modal Dialog",
+    contentLabel: 'Modal Dialog',
     triggerCloseOnOverlayClick: true,
   };
 }

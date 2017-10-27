@@ -247,4 +247,5 @@ export default class NumericInput extends FormField {
     const replacedValue = value.replace(/,/g, '');
     return !isNaN(parseFloat(replacedValue)) && isFinite(replacedValue);
   }
+
 }
