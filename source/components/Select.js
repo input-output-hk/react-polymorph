@@ -30,7 +30,7 @@ export default class Select extends FormField {
     isOpen: false,
   };
 
-  prepareSkinProps (props) {
+  prepareSkinProps(props) {
     return Object.assign({}, super.prepareSkinProps(props), {
       isOpen: this.state.isOpen,
     });
@@ -71,7 +71,7 @@ export default class Select extends FormField {
 
   // ========= PRIVATE HELPERS =========
 
-  _getInputSkinPart () {
+  _getInputSkinPart() {
     return this.skinParts[Select.SKIN_PARTS.INPUT];
   }
 

@@ -1,4 +1,9 @@
 @import "../source/themes/simple/theme";
+
+.customMargin {
+  margin-top: 230px;
+}
+
 :global {
   .SimpleModal_overlay {
     z-index: 100;

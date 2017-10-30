@@ -22,7 +22,7 @@ export default themr(OPTIONS)((props) => {
         isOpeningUpward ? theme.openUpward : null,
       ])}
       style={props.position && {
-        top: props.position.positionY,
+        [isOpeningUpward ? 'bottom' : 'top']: props.position.positionY,
         left: props.position.positionX,
         width: props.position.width,
       }}

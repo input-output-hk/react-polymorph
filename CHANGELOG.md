@@ -1,11 +1,17 @@
 Changelog
 =========
 
+## vNEXT
+
+### Fixes
+
+- Fix `isOpeningUpwards` feature on Select and Autocomplete Options component ([PR 24](https://github.com/input-output-hk/react-polymorph/pull/24))
+
 ## 0.5.3
 
 ### Chores
 
-- Add noResultsMessage property to Options component, Code cleanup and standardization ([PR 22](https://github.com/input-output-hk/react-polymorph/pull/23))
+- Add noResultsMessage property to Options component, Code cleanup and standardization ([PR 23](https://github.com/input-output-hk/react-polymorph/pull/23))
 
 ## 0.5.2
 
