@@ -17,18 +17,18 @@ export default class TextArea extends Input {
     autoResize: true,
   });
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.autoResize) {
       window.addEventListener('resize', this._handleAutoresize);
       this._handleAutoresize();
     }
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     if (this.props.autoResize) this._handleAutoresize();
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (!this.props.autoResize && nextProps.autoResize) {
       window.addEventListener('resize', this._handleAutoresize);
     } else if (this.props.autoResize && !nextProps.autoResize) {
@@ -36,7 +36,7 @@ export default class TextArea extends Input {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.props.autoResize) {
       window.removeEventListener('resize', this._handleAutoresize);
     }

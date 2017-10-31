@@ -34,13 +34,13 @@ export default class Options extends SkinnableComponent {
     position: null,
   };
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (this.props.isOpen !== nextProps.isOpen) {
       this.updateComponentsStates(nextProps.isOpen, null);
     }
   }
 
-  componentWillUpdate (nextProps, nextState) {
+  componentWillUpdate(nextProps, nextState) {
     // update isOpen state when parent component force open / close options
     // (e.g. click on Input in Select component)
     if (!this.state.isOpen && nextState.isOpen) {
@@ -50,18 +50,17 @@ export default class Options extends SkinnableComponent {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    (prevState.isOpen && !this.state.isOpen) && this.removeAllEventListeners();
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.isOpen && !this.state.isOpen) this.removeAllEventListeners();
 
-    if (this.props.isOpen !== prevProps.isOpen ) {
+    if (this.props.isOpen !== prevProps.isOpen) {
       const rootNode = this._getRootSkinPart();
-      const parentNode = this._getRootSkinPart().parentNode;
-      const rootNodeParams = rootNode.getBoundingClientRect();
+      const parentNode = rootNode.parentNode;
       const parentNodeParams = parentNode.getBoundingClientRect();
 
       let positionY;
       if (this.props.isOpeningUpward) {
-        positionY = parentNodeParams.bottom - parentNodeParams.height - rootNodeParams.height + 20;
+        positionY = window.innerHeight - parentNodeParams.top - 14;
       } else {
         positionY = parentNodeParams.bottom + 20;
       }
@@ -75,11 +74,11 @@ export default class Options extends SkinnableComponent {
     }
   }
 
-  componentWillUnmount () {
-    this.state.isOpen && this.removeAllEventListeners();
+  componentWillUnmount() {
+    if (this.state.isOpen) this.removeAllEventListeners();
   }
 
-  prepareSkinProps (props) {
+  prepareSkinProps(props) {
     return Object.assign({}, super.prepareSkinProps(props), {
       isOpen: this.state.isOpen,
       highlightedOptionIndex: this.state.highlightedOptionIndex,
@@ -87,7 +86,7 @@ export default class Options extends SkinnableComponent {
     });
   };
 
-  removeAllEventListeners () {
+  removeAllEventListeners() {
     events.removeEventsFromDocument(this._getDocumentEvents());
     window.removeEventListener('resize', this._handleWindowResize);
     this.handleScrollEventListener('remove');
@@ -251,7 +250,7 @@ export default class Options extends SkinnableComponent {
 
   _handleScroll = () => this.state.isOpen && this.close();
 
-  _getDocumentEvents () {
+  _getDocumentEvents() {
     return {
       keydown: this._handleKeyDown,
       click: this._handleDocumentClick,
@@ -260,7 +259,7 @@ export default class Options extends SkinnableComponent {
     };
   }
 
-  _getRootSkinPart () {
+  _getRootSkinPart() {
     return this.skinParts[Options.SKIN_PARTS.OPTIONS];
   }
 

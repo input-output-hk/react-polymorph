@@ -34,7 +34,7 @@ export default class Autocomplete extends FormField {
     isOpen: false,
   };
 
-  prepareSkinProps (props) {
+  prepareSkinProps(props) {
     const { selectedOptions, filteredOptions, isOpen } = this.state;
     return Object.assign({}, super.prepareSkinProps(props), {
       selectedOptions,
@@ -128,7 +128,7 @@ export default class Autocomplete extends FormField {
     if (this.props.onChange) this.props.onChange(selectedOptions, event);
   };
 
-  _getInputSkinPart () {
+  _getInputSkinPart() {
     return this.skinParts[Autocomplete.SKIN_PARTS.INPUT];
   }
 }

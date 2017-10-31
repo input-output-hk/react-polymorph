@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import SkinnableComponent from './SkinnableComponent';
 
 export default class Modal extends SkinnableComponent {
+
   static propTypes = Object.assign({}, SkinnableComponent.propTypes, {
     isActive: PropTypes.bool,
     contentLabel: PropTypes.string,
@@ -15,4 +16,5 @@ export default class Modal extends SkinnableComponent {
     contentLabel: 'Modal Dialog',
     triggerCloseOnOverlayClick: true,
   };
+
 }
