@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import FormField from './FormField';
+import { StringOrElement } from '../utils/props';
 
 export default class Autocomplete extends FormField {
 
@@ -11,7 +12,7 @@ export default class Autocomplete extends FormField {
   };
 
   static propTypes = Object.assign({}, FormField.propTypes, {
-    error: PropTypes.string,
+    error: StringOrElement,
     maxSelections: PropTypes.number,
     placeholder: PropTypes.string,
     options: PropTypes.array,
