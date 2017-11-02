@@ -12,7 +12,7 @@ export default class FormField extends SkinnableComponent {
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     disabled: PropTypes.bool,
-    error: PropTypes.string,
+    error: StringOrElement,
   });
 
   static defaultProps = {
