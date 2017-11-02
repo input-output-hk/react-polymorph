@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import SkinnableComponent from './SkinnableComponent';
 import events from '../utils/events';
-import { LabelProp } from '../utils/props';
+import { StringOrElement } from '../utils/props';
 
 export default class Options extends SkinnableComponent {
 
@@ -18,7 +18,7 @@ export default class Options extends SkinnableComponent {
     optionRenderer: PropTypes.func,
     selectedOptionValue: PropTypes.string,
     noResults: PropTypes.bool,
-    noResultsMessage: LabelProp,
+    noResultsMessage: StringOrElement,
   });
 
   static defaultProps = {

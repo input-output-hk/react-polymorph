@@ -3,4 +3,4 @@ import filterReactDomProps from 'filter-react-dom-props';
 
 export const pickDOMProps = filterReactDomProps;
 
-export const LabelProp = PropTypes.oneOfType([PropTypes.string, PropTypes.element]);
+export const StringOrElement = PropTypes.oneOfType([PropTypes.string, PropTypes.element]);
