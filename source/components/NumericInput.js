@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { flow } from 'lodash';
 import Input from './Input';
 import FormField from './FormField';
+import { StringOrElement } from '../utils/props';
 
 export default class NumericInput extends FormField {
 
@@ -19,7 +20,7 @@ export default class NumericInput extends FormField {
   };
 
   static propTypes = Object.assign({}, FormField.propTypes, {
-    error: PropTypes.string,
+    error: StringOrElement,
     value: PropTypes.string,
     placeholder: PropTypes.string,
     maxBeforeDot: PropTypes.number, // max number of characters before dot
