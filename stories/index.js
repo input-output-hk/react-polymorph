@@ -2,6 +2,7 @@ import './index.scss';
 import './Input.stories';
 import './TextArea.stories';
 import './Button.stories';
+import './Bubble.stories';
 import './Select.stories';
 import './NumericInput.stories';
 import './Checkbox.stories';

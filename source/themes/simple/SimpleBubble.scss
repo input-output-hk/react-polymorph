@@ -1,0 +1,14 @@
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$button-width: 100% !default;
+$button-bg-color-normal: #243e62 !default;
+$button-bg-color-hover: #2f496e !default;
+$button-bg-color-active: #1e304a !default;
+$button-bg-color-disabled: #b9c2cc !default;
+$button-label-font: $theme-font-medium !default;
+$button-label-color: #fff !default;
+$button-font-size: 14px !default;
+$button-border-radius: 5px !default;
+$button-padding: 15px 20px !default;
