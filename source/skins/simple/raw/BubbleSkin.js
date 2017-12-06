@@ -6,6 +6,7 @@ import { BUBBLE } from '../identifiers';
 
 export default themr(BUBBLE)((props) => (
   <div
+    {...pickDOMProps(props)}
     className={classnames([
       props.className,
       props.theme.root,
