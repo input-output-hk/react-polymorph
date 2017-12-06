@@ -1,14 +1,12 @@
-.customOption {
-  img {
-    margin-right: 12px;
-  }
-
-  span {
-    line-height: 24px;
-    vertical-align: top;
-  }
+.container {
+  position: relative;
+  border: 1px solid grey;
+  width: 100px;
+  height: 100px;
+  margin: 75px auto 0;
 }
 
-.customMargin {
-  margin-top: 183px;
+.customBubble > div {
+  white-space: nowrap;
+  right: 0;
 }

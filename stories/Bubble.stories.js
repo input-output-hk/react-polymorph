@@ -4,7 +4,6 @@ import { action } from '@storybook/addon-actions';
 import { observable, action as mobxAction } from 'mobx';
 import PropsObserver from './support/PropsObserver';
 import Bubble from '../source/components/Bubble';
-import RawBubble from '../source/skins/simple/raw/ButtonSkin'
 import SimpleBubbleSkin from '../source/skins/simple/BubbleSkin';
 import styles from './Bubble.stories.scss';
 
@@ -25,13 +24,41 @@ storiesOf('Bubble', module)
   // ====== Stories ======
 
   .add('plain', () => (
-    <Bubble />
+    <div className={styles.container}>
+      <Bubble skin={<SimpleBubbleSkin />} >
+        plain bubble
+      </Bubble>
+    </div>
   ))
 
-//  .add('isOpeningUpward', () => (
-//    <Bubble isOpeningUpward />
-//  ))
-//
-//  .add('isTransparent={false}', () => (
-//    <Bubble isTransparent={false} />
-//  ));
+  .add('isOpeningUpward', () => (
+    <div className={styles.container}>
+      <Bubble isOpeningUpward skin={<SimpleBubbleSkin />} >
+        isOpeningUpward bubble
+      </Bubble>
+    </div>
+  ))
+
+  .add('isTransparent={false}', () => (
+    <div className={styles.container}>
+      <Bubble isTransparent={false} skin={<SimpleBubbleSkin />} >
+        solid bubble
+      </Bubble>
+    </div>
+  ))
+
+  .add('custom class', () => (
+    <div className={styles.container}>
+      <Bubble className={styles.customBubble} skin={<SimpleBubbleSkin />} >
+        this bubble is right aligned;
+      </Bubble>
+    </div>
+  ))
+
+  .add('content-light', () => (
+    <div className={styles.container}>
+      <Bubble skin={<SimpleBubbleSkin/>} >
+        tiny
+      </Bubble>
+    </div>
+  ));
