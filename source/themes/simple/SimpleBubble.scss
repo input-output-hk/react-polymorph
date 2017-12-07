@@ -65,14 +65,14 @@ $bubble-shadow: none !default;
     background-color: $bubble-bg-color-transparent;
     color: $bubble-font-color-transparent;
     border: $bubble-border-transparent;
-    margin-top: $bubble-border-width-transparent / -2; // Make sure arrow overlaps any borders
+    margin-top: -$bubble-border-width-transparent; // Make sure arrow overlaps any borders
   }
 
   &:not(.transparent) .bubble {
     background-color: $bubble-bg-color;
     color: $bubble-font-color;
     border: $bubble-border;
-    margin-top: $bubble-border-width / -2; // Make sure arrow overlaps any borders
+    margin-top: -$bubble-border-width; // Make sure arrow overlaps any borders
   }
 
   // ==== ARROW ====
