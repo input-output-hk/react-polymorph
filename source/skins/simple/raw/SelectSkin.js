@@ -38,18 +38,19 @@ export const selectSkinFactory = (InputSkin) => (
             placeholder={placeholder}
             error={error}
             readOnly
-          />
-          <Options
-            isOpen={isOpen}
-            options={options}
-            skin={<SimpleOptionsSkin />}
-            isOpeningUpward={isOpeningUpward}
-            onChange={component.handleChange}
-            optionRenderer={optionRenderer}
-            onClose={component.onCloseOptions}
-            selectedOptionValue={inputValue}
-            noResults={!options.length}
-          />
+          >
+            <Options
+              isOpen={isOpen}
+              options={options}
+              skin={<SimpleOptionsSkin />}
+              isOpeningUpward={isOpeningUpward}
+              onChange={component.handleChange}
+              optionRenderer={optionRenderer}
+              onClose={component.onCloseOptions}
+              selectedOptionValue={inputValue}
+              noResults={!options.length}
+            />
+          </InputSkin>
         </div>
       );
     }

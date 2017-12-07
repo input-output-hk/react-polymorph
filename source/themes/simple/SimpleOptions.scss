@@ -17,28 +17,32 @@ $option-highlight-color: #edf0f3 !default;
 $option-padding: 14px 20px !default;
 
 .options {
-  border: $options-border;
-  border-radius: $options-border-radius;
-  box-shadow: $options-shadow;
-  box-sizing: border-box;
   display: none; // only show when open
-  font-family: $options-font-family;
-  font-size: $options-font-size;
-  list-style: none;
-  padding: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 99;
+
+  & > div {
+    padding: 0;
+  }
 
   &.isOpen {
     display: block;
   }
 
-  @include arrow(up, $option-bg-color, $options-border-color, $options-arrow-size);
+  & > span {
+    @include arrow(up, $option-bg-color, $options-border-color, $options-arrow-size);
+  }
 
-  &.firstOptionHighlighted {
+  &.firstOptionHighlighted > span {
+    height: inherit;
     @include arrow(up, $option-highlight-color, $options-border-color, $options-arrow-size);
   }
+}
+
+.ul {
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  font-family: $options-font-family;
+  font-size: $options-font-size;
 }
 
 .option {

@@ -21,6 +21,9 @@ export default themr(FORM_FIELD)((props) => (
         {props.label}
       </label>
     )}
-    {props.input}
+    <div className={props.theme.inputWrapper}>
+      {props.input}
+      {props.children}
+    </div>
   </div>
 ));

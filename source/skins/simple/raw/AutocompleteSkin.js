@@ -80,19 +80,19 @@ export const autocompleteSkinFactory = (FormFieldSkin) => (
             >
               {autocompleteContent}
             </div>
+            <Options
+              isOpen={props.isOpen}
+              options={filteredAndLimitedOptions}
+              skin={<SimpleOptionsSkin />}
+              isOpeningUpward={props.isOpeningUpward}
+              onChange={props.component.handleChange}
+              onClose={props.component.closeOptions}
+              resetOnClose
+              noResults={!props.filteredOptions.length}
+              noResultsMessage={props.noResultsMessage}
+            />
           </div>
         } {...props} />
-        <Options
-          isOpen={props.isOpen}
-          options={filteredAndLimitedOptions}
-          skin={<SimpleOptionsSkin />}
-          isOpeningUpward={props.isOpeningUpward}
-          onChange={props.component.handleChange}
-          onClose={props.component.closeOptions}
-          resetOnClose
-          noResults={!props.filteredOptions.length}
-          noResultsMessage={props.noResultsMessage}
-        />
       </div>
     );
   }

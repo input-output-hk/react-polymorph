@@ -39,7 +39,7 @@ export default class Autocomplete extends FormField {
     const { selectedOptions, filteredOptions, isOpen } = this.state;
     return Object.assign({}, super.prepareSkinProps(props), {
       selectedOptions,
-      filteredOptions,
+      filteredOptions: filteredOptions || [],
       isOpen,
     });
   }
