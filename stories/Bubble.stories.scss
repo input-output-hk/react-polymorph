@@ -6,7 +6,7 @@
   margin: 75px auto 0;
 }
 
-.customBubble > div {
+.customBubble [data-bubble-container] {
   white-space: nowrap;
   right: 0;
 }

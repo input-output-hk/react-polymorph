@@ -27,11 +27,11 @@ $option-padding: 14px 20px !default;
     display: block;
   }
 
-  & > span {
+  & [data-bubble-arrow] {
     @include arrow(up, $option-bg-color, $options-border-color, $options-arrow-size);
   }
 
-  &.firstOptionHighlighted > span {
+  &.firstOptionHighlighted [data-bubble-arrow] {
     height: inherit;
     @include arrow(up, $option-highlight-color, $options-border-color, $options-arrow-size);
   }
@@ -69,11 +69,11 @@ $option-padding: 14px 20px !default;
   &.options {
     top: inherit;
 
-    > span {
+    [data-bubble-arrow] {
       @include arrow(down, $option-bg-color, $options-border-color, $options-arrow-size);
     }
 
-    &.firstOptionHighlighted > span {
+    &.firstOptionHighlighted [data-bubble-arrow] {
       @include arrow(down, $option-highlight-color, $options-border-color, $options-arrow-size);
     }
   }
