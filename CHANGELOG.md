@@ -1,6 +1,17 @@
 Changelog
 =========
 
+## 0.5.6
+
+### Features
+
+- Add Bubble component
+- Use Bubble component in Options component
+
+### Fixes
+
+- Fix bug causing crash when hitting backspace in an Autocomplete component
+
 ## 0.5.5
 
 ### Fixes
