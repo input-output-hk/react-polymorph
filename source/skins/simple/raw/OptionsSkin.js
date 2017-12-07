@@ -21,6 +21,7 @@ export default themr(OPTIONS)((props) => {
       className={classnames([
         theme.options,
         isOpen ? theme.isOpen : null,
+        isOpeningUpward ? theme.openUpward : null,
         (isFirstOptionHighlighted && !noResults) ? theme.firstOptionHighlighted : null,
       ])}
       ref={(element) => component.registerSkinPart(Options.SKIN_PARTS.OPTIONS, element)}

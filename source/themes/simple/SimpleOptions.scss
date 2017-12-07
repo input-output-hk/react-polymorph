@@ -68,16 +68,14 @@ $option-padding: 14px 20px !default;
 .openUpward {
   &.options {
     top: inherit;
-    @include arrow(down, $option-bg-color, $options-border-color, $options-arrow-size);
 
-    &.firstOptionHighlighted {
+    > span {
+      @include arrow(down, $option-bg-color, $options-border-color, $options-arrow-size);
+    }
+
+    &.firstOptionHighlighted > span {
       @include arrow(down, $option-highlight-color, $options-border-color, $options-arrow-size);
     }
   }
 }
-
-
-
-
-
 
