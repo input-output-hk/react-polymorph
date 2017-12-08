@@ -5,12 +5,12 @@ Changelog
 
 ### Features
 
-- Add Bubble component
-- Use Bubble component in Options component
+- Add Bubble component [PR 31](https://github.com/input-output-hk/react-polymorph/pull/31)
+- Use Bubble component in Options component [PR 31](https://github.com/input-output-hk/react-polymorph/pull/31)
 
 ### Fixes
 
-- Fix bug causing crash when hitting backspace in an Autocomplete component
+- Fix bug causing crash when hitting backspace in an Autocomplete component [PR 31](https://github.com/input-output-hk/react-polymorph/pull/31)
 
 ## 0.5.5
 
