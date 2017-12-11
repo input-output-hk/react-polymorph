@@ -1,0 +1,12 @@
+.container {
+  position: relative;
+  border: 1px solid grey;
+  width: 100px;
+  height: 100px;
+  margin: 75px auto 0;
+}
+
+.customBubble > div {
+  white-space: nowrap;
+  right: 0;
+}

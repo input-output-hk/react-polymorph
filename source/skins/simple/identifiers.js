@@ -2,6 +2,7 @@ export const FORM_FIELD = 'ReactPolymorphSimpleFormField';
 export const INPUT = 'ReactPolymorphSimpleInput';
 export const TEXT_AREA = 'ReactPolymorphSimpleTextArea';
 export const BUTTON = 'ReactPolymorphSimpleButton';
+export const BUBBLE = 'ReactPolymorphSimpleBubble';
 export const SELECT = 'ReactPolymorphSimpleSelect';
 export const CHECKBOX = 'ReactPolymorphSimpleCheckbox';
 export const SWITCH = 'ReactPolymorphSimpleSwitch';

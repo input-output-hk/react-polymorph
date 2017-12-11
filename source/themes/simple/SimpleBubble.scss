@@ -1,0 +1,114 @@
+@import "theme";
+@import "mixins/arrow";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+// GENERAL
+$bubble-bg-color: #fafbfc !default;
+$bubble-bg-color-transparent: rgba(94, 96, 102, 0.9) !default;
+$bubble-border-radius: 4px !default;
+$bubble-border-width: 1px !default;
+$bubble-border-width-transparent: 0px !default;
+$bubble-border-color: #c6cdd6 !default;
+$bubble-border-color-transparent: transparent !default;
+$bubble-border: $bubble-border-width solid $bubble-border-color !default;
+$bubble-border-transparent: $bubble-border-width-transparent solid $bubble-border-color-transparent !default;
+$bubble-box-shadow: 0 1.5px 5px 0 rgba(0, 0, 0, 0.18) !default;
+$bubble-padding: 6px 12px !default;
+$bubble-font-color: #5e6066 !default;
+$bubble-font-color-transparent: white !default;
+$bubble-distance: calc(100% + 14px) !default;
+
+// ARROW
+$bubble-arrow-size: 10px !default;
+$bubble-shadow: none !default;
+
+.root {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.bubble {
+  border-radius: $bubble-border-radius;
+  box-shadow: $bubble-box-shadow;
+  padding: $bubble-padding;
+  position: absolute;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+// ======= SPECIAL STATES =======
+.root {
+
+  // ==== STATE: openUpward ====
+
+  &.openUpward {
+    bottom: $bubble-distance;
+
+    .bubble {
+      bottom: 0;
+    }
+  }
+
+  &:not(.openUpward) {
+    top: $bubble-distance;
+
+    .bubble {
+      top: 0;
+    }
+  }
+
+  // ==== STATE: isTransparent ===
+
+  &.transparent .bubble {
+    background-color: $bubble-bg-color-transparent;
+    color: $bubble-font-color-transparent;
+    border: $bubble-border-transparent;
+  }
+
+  &:not(.transparent) .bubble {
+    background-color: $bubble-bg-color;
+    color: $bubble-font-color;
+    border: $bubble-border;
+  }
+
+  // ==== ARROW ====
+  // The arrow is referred to as span so that the component doesn't have a high
+  // specificity internally, allowing it to be overwritten externally
+
+  &.transparent span {
+    @include arrow(up, $bubble-bg-color-transparent, $bubble-border-color-transparent, $bubble-arrow-size);
+  }
+
+  &.transparent.openUpward span {
+    @include arrow(down, $bubble-bg-color-transparent, $bubble-border-color-transparent, $bubble-arrow-size);
+  }
+
+  &:not(.transparent) span {
+    @include arrow(up, $bubble-bg-color, $bubble-border-color, $bubble-arrow-size);
+  }
+
+  &:not(.transparent).openUpward span {
+    @include arrow(down, $bubble-bg-color, $bubble-border-color, $bubble-arrow-size);
+  }
+
+
+  // Make sure the arrow overlaps any borders on the bubble
+  &.transparent.openUpward .bubble {
+    margin-bottom: -$bubble-border-width-transparent;
+  }
+
+  &.transparent:not(.openUpward) .bubble {
+    margin-top: -$bubble-border-width-transparent;
+  }
+
+  &:not(.transparent).openUpward .bubble {
+    margin-bottom: -$bubble-border-width;
+  }
+
+  &:not(.transparent):not(.openUpward) .bubble {
+    margin-top: -$bubble-border-width;
+  }
+
+}

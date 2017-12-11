@@ -31,12 +31,11 @@ export default class Options extends SkinnableComponent {
   state = {
     isOpen: this.props.isOpen,
     highlightedOptionIndex: 0,
-    position: null,
   };
 
   componentWillReceiveProps(nextProps) {
     if (this.props.isOpen !== nextProps.isOpen) {
-      this.updateComponentsStates(nextProps.isOpen, null);
+      this.setState({isOpen: nextProps.isOpen});
     }
   }
 
@@ -52,26 +51,6 @@ export default class Options extends SkinnableComponent {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.isOpen && !this.state.isOpen) this.removeAllEventListeners();
-
-    if (this.props.isOpen !== prevProps.isOpen) {
-      const rootNode = this._getRootSkinPart();
-      const parentNode = rootNode.parentNode;
-      const parentNodeParams = parentNode.getBoundingClientRect();
-
-      let positionY;
-      if (this.props.isOpeningUpward) {
-        positionY = window.innerHeight - parentNodeParams.top - 14;
-      } else {
-        positionY = parentNodeParams.bottom + 20;
-      }
-
-      const position = {
-        width: parentNodeParams.width,
-        positionX: parentNodeParams.left,
-        positionY,
-      };
-      this.updateComponentsStates(this.props.isOpen, position);
-    }
   }
 
   componentWillUnmount() {
@@ -82,7 +61,6 @@ export default class Options extends SkinnableComponent {
     return Object.assign({}, super.prepareSkinProps(props), {
       isOpen: this.state.isOpen,
       highlightedOptionIndex: this.state.highlightedOptionIndex,
-      position: this.state.position,
     });
   };
 
@@ -91,10 +69,6 @@ export default class Options extends SkinnableComponent {
     window.removeEventListener('resize', this._handleWindowResize);
     this.handleScrollEventListener('remove');
   }
-
-  updateComponentsStates = (isOpen, position) => {
-    this.setState({ isOpen, position });
-  };
 
   getFirstScrollableParent = (node) => {
     if (node == null) return null;
@@ -127,7 +101,6 @@ export default class Options extends SkinnableComponent {
   close = () => {
     if (this.props.onClose) this.props.onClose();
     this.setState({
-      position: null,
       highlightedOptionIndex: this.props.resetOnClose ? 0 : this.state.highlightedOptionIndex,
     });
   };
