@@ -306,6 +306,47 @@ const MyAutocomplete = (props) => (
 
 ![Standard Input](./docs/images/react-polymorph-autocomplete-example.png)
 
+#### Bubble
+
+The bubble component will open up an absolutely positioned speech bubble.  This is position in respect to it's closest relatively positioned parent.
+
+```javascrip
+import React from 'react';
+import Bubble from 'react-polymorph/lib/components/Bubble';
+import BubbleSkin from 'react-polymorph/lib/skins/BubbleSkin';
+
+const MyBubble = (props) => (
+  <div className={{position: 'relative'}}>
+    <Bubble skin={BubbleSkin} >
+      plain bubble
+    </Bubble>
+  </div>
+);
+```
+
+![Standard Input](./docs/images/react-polymorph-bubble-example.png)
+
+#### Tooltip
+
+The tooltip opens a bubble relative to it's children, containing text or html to display.
+
+```javascript
+import React from 'react';
+import Tooltip from 'react-polymorph/lib/components/Tooltip';
+import TooltipSkin from 'react-polymorph/lib/skins/TooltipSkin';
+
+const MyTooltip = (props) => (
+  <Tooltip
+    tip='Description of the child element'
+    skin={TooltipSkin}
+  >
+    hover over me
+  </Tooltip>
+);
+```
+
+![Standard Input](./docs/images/react-polymorph-tooltip-example.png)
+
 ### Customizing Component Skins
 
 Every component accepts a `theme` property intended to provide a [CSS Module import object](https://github.com/css-modules/css-modules) that will be used by the component to assign local classnames to its DOM nodes. Therefore, each one implements a documented **classname API**. So if you want to customize a component, you just need to provide a theme object with the appropriate classname mapping.
