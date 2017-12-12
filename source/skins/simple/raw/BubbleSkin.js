@@ -14,9 +14,9 @@ export default themr(BUBBLE)((props) => (
       props.isTransparent ? props.theme.transparent : null,
     ])}
   >
-    <div className={props.theme.bubble} >
+    <div className={props.theme.bubble} data-bubble-container >
       {props.children}
     </div>
-    <span className={props.theme.arrow} />
+    <span className={props.theme.arrow} data-bubble-arrow />
   </div>
 ));

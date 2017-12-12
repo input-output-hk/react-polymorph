@@ -74,22 +74,22 @@ $bubble-shadow: none !default;
   }
 
   // ==== ARROW ====
-  // The arrow is referred to as span so that the component doesn't have a high
+  // The arrow is referred to as [data-bubble-arrow] so that the component doesn't have a high
   // specificity internally, allowing it to be overwritten externally
 
-  &.transparent span {
+  &.transparent [data-bubble-arrow] {
     @include arrow(up, $bubble-bg-color-transparent, $bubble-border-color-transparent, $bubble-arrow-size);
   }
 
-  &.transparent.openUpward span {
+  &.transparent.openUpward [data-bubble-arrow] {
     @include arrow(down, $bubble-bg-color-transparent, $bubble-border-color-transparent, $bubble-arrow-size);
   }
 
-  &:not(.transparent) span {
+  &:not(.transparent) [data-bubble-arrow] {
     @include arrow(up, $bubble-bg-color, $bubble-border-color, $bubble-arrow-size);
   }
 
-  &:not(.transparent).openUpward span {
+  &:not(.transparent).openUpward [data-bubble-arrow] {
     @include arrow(down, $bubble-bg-color, $bubble-border-color, $bubble-arrow-size);
   }
 
