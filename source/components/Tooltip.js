@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SkinnableComponent from './SkinnableComponent';
+import {StringOrElement} from '../utils/props';
 
 export default class Tooltip extends SkinnableComponent {
 
@@ -8,10 +9,7 @@ export default class Tooltip extends SkinnableComponent {
     isAligningRight: PropTypes.bool,
     isOpeningUpwards: PropTypes.bool,
     isBounded: PropTypes.bool,
-    tip: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.element,
-    ]),
+    tip: StringOrElement,
   });
 
   static defaultProps = {

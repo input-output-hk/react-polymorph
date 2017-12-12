@@ -6,5 +6,5 @@ import { autocompleteSkinFactory } from './raw/AutocompleteSkin';
 import FormFieldSkin from './FormFieldSkin';
 
 export default themr(AUTOCOMPLETE, DefaultAutocompleteTheme)(
-  autocompleteSkinFactory(FormFieldSkin)
+  autocompleteSkinFactory(FormFieldSkin),
 );
