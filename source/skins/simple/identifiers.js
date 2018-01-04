@@ -6,6 +6,7 @@ export const FORM_FIELD = 'ReactPolymorphSimpleFormField';
 export const INPUT = 'ReactPolymorphSimpleInput';
 export const MODAL = 'ReactPolymorphSimpleModal';
 export const OPTIONS = 'ReactPolymorphSimpleOptions';
+export const RADIO = 'ReactPolymorphSimpleRadio';
 export const SELECT = 'ReactPolymorphSimpleSelect';
 export const SWITCH = 'ReactPolymorphSimpleSwitch';
 export const TEXT_AREA = 'ReactPolymorphSimpleTextArea';
