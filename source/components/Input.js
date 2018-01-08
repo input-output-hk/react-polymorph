@@ -1,51 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { isFunction, isString, flow, pick } from 'lodash';
-import FormField from './FormField';
+import { isString, flow } from 'lodash';
 
-export default class Input extends FormField {
+// import the composeTheme utility function
+import composeTheme from '../utils/composeTheme.js';
 
-  static SKIN_PARTS = {
-    INPUT: 'input'
-  };
+// import the Input component's theme API
+import { inputThemeAPI } from '../themes/API/input.js';
 
-  static propTypes = Object.assign({}, FormField.propTypes, {
+export default class Input extends Component {
+  static propTypes = {
+    autoFocus: PropTypes.bool,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
     value: PropTypes.string,
     placeholder: PropTypes.string,
     maxLength: PropTypes.number,
     onKeyPress: PropTypes.func,
     readOnly: PropTypes.bool,
-  });
+    skin: PropTypes.func.isRequired,
+    theme: PropTypes.object,
+    themeOverrides: PropTypes.object,
+    themeAPI: PropTypes.object
+  };
 
-  static defaultProps = Object.assign({}, FormField.defaultProps, {
+  static defaultProps = {
+    autoFocus: false,
     value: '',
-  });
+    theme: {},
+    themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
+    themeAPI: { ...inputThemeAPI }
+  };
 
-  onChange = (event) => {
+  componentDidMount() {
+    if (this.props.autoFocus) {
+      this._focus();
+    }
+  }
+
+  onChange = event => {
     const { onChange, disabled } = this.props;
     if (disabled) return;
     if (onChange) onChange(this._processValue(event.target.value), event);
   };
 
-  prepareSkinProps(props) {
-    return Object.assign({}, super.prepareSkinProps(props), {
-      onChange: this.onChange,
-    });
-  }
-
-  focus = () => this.skinParts[Input.SKIN_PARTS.INPUT].focus();
-
-  blur = () => this.skinParts[Input.SKIN_PARTS.INPUT].blur();
+  _focus = () => this.inputElement.focus();
 
   _processValue(value) {
-    return flow([
-      this._enforceStringValue,
-      this._enforceMaxLength
-    ]).call(this, value);
+    return flow([this._enforceStringValue, this._enforceMaxLength]).call(
+      this,
+      value
+    );
   }
 
   _enforceStringValue(value) {
-    if (!isString(value)) throw 'Values passed to Input::onChange must be strings';
+    if (!isString(value))
+      throw 'Values passed to Input::onChange must be strings';
     return value;
   }
 
@@ -55,4 +66,26 @@ export default class Input extends FormField {
     return isTooLong ? value.substring(0, maxLength) : value;
   }
 
+  render() {
+    // destructuring the props here ensures that variable names
+    // do not overwrite each other, only pass on the "...rest" of the props
+
+    const {
+      skin: InputSkin,
+      theme,
+      themeOverrides,
+      themeAPI,
+      ...rest
+    } = this.props;
+
+    const composedTheme = composeTheme(theme, themeOverrides, themeAPI);
+
+    return (
+      <InputSkin
+        inputRef={el => (this.inputElement = el)}
+        theme={composedTheme}
+        {...rest}
+      />
+    );
+  }
 }

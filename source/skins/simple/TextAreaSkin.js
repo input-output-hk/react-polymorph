@@ -1,8 +1,15 @@
 import React from 'react';
-import { themr } from 'react-css-themr';
-import { TEXT_AREA } from './identifiers';
-import DefaultTextAreaTheme from '../../themes/simple/SimpleTextArea.scss';
-import { textAreaSkinFactory } from './raw/TextAreaSkin';
-import FormFieldSkin from './FormFieldSkin';
+import classnames from 'classnames';
+import { pickDOMProps } from '../../utils/props';
 
-export default themr(TEXT_AREA, DefaultTextAreaTheme)(textAreaSkinFactory(FormFieldSkin));
+export default props => (
+  <textarea
+    ref={props.textareaRef}
+    {...pickDOMProps(props)}
+    className={classnames([
+      props.theme.textarea,
+      props.disabled ? props.theme.disabled : null,
+      props.error ? props.theme.errored : null
+    ])}
+  />
+);

@@ -1,8 +1,15 @@
 import React from 'react';
-import { themr } from 'react-css-themr';
-import { INPUT } from './identifiers';
-import DefaultInputTheme from '../../themes/simple/SimpleInput.scss';
-import { inputSkinFactory } from './raw/InputSkin';
-import FormFieldSkin from './FormFieldSkin';
+import classnames from 'classnames';
+import { pickDOMProps } from '../../utils/props';
 
-export default themr(INPUT, DefaultInputTheme)(inputSkinFactory(FormFieldSkin));
+export default props => (
+  <input
+    ref={props.inputRef}
+    {...pickDOMProps(props)}
+    className={classnames([
+      props.theme.input,
+      props.disabled ? props.theme.disabled : null,
+      props.error ? props.theme.errored : null
+    ])}
+  />
+);
