@@ -2,9 +2,10 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$radio-size: 23px !default;
+$radio-size: 30px !default;
 $radio-color: white !default;
 $radio-border-color: #294B70 !default;
+$radio-border-width: 1px !default;
 
 $radio-border-disabled-color: $theme-color-disabled !default;
 $radio-label-color: #5e6066 !default;
@@ -12,6 +13,8 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
 
 .root {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   position: relative;
   &:hover {
     cursor: pointer;
@@ -34,9 +37,10 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
   width: 0;
 }
 
-.bubble {
+.circle {
   align-self: center;
-  border: 1px solid $radio-border-color;
+  border: $radio-border-width solid $radio-border-color;
+  margin-top: -$radio-border-width;
   border-radius: $radio-size;
   box-sizing: border-box;
   flex-shrink: 0;
@@ -68,6 +72,8 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
   line-height: 1.38;
   margin-left: 20px;
   white-space: normal;
+  display: inline-block;
+  vertical-align: middle;
   &:hover {
     cursor: pointer;
   }

@@ -5,6 +5,9 @@ import { observable, action as mobxAction } from 'mobx';
 import PropsObserver from './support/PropsObserver';
 import Radio from '../source/components/Radio';
 import SimpleRadioSkin from '../source/skins/simple/RadioSkin';
+import styles from './Radio.stories.scss';
+
+console.log('styles', styles)
 
 storiesOf('Radio', module)
 
@@ -26,7 +29,20 @@ storiesOf('Radio', module)
 
   .add('disabled', () => <Radio disabled skin={<SimpleRadioSkin />} />)
 
-  .add('short label', () => <Radio label="My radio" skin={<SimpleRadioSkin />} />)
+  .add('short label', () => (
+    <Radio
+      label="My radio"
+      skin={<SimpleRadioSkin />}
+    />
+  ))
+
+  .add('custom className', () => (
+    <Radio
+      label="My radio"
+      skin={<SimpleRadioSkin />}
+      className={styles.padding}
+    />
+  ))
 
   .add('disabled with label', () => (
     <Radio

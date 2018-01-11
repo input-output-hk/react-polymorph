@@ -24,7 +24,7 @@ export default themr(RADIO)((props) => (
       type="radio"
     />
     <div className={classnames([
-      props.theme.bubble,
+      props.theme.circle,
       props.selected ? props.theme.selected : null,
     ])} />
     {props.label ? (<label className={props.theme.label}>{props.label}</label>) : null}

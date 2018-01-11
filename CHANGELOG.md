@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## vNext
+
+### Features
+
+- Add Radio component [PR 34](https://github.com/input-output-hk/react-polymorph/pull/34)
+
 ## 0.6.0
 
 ### Features

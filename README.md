@@ -347,6 +347,25 @@ const MyTooltip = (props) => (
 
 ![Standard Input](./docs/images/react-polymorph-tooltip-example.png)
 
+#### Radio
+
+The radio is as simple as possible and does not have much logic:
+
+```javascript
+import React from 'react';
+import Radio from 'react-polymorph/lib/components/Radio';
+import RadioSkin from 'react-polymorph/lib/skins/RadioSkin';
+
+const MyRadio = (props) => (
+  <Radio
+    label="My radio"
+    skin={SimpleRadioSkin }
+  />
+);
+```
+
+![Standard Input](./docs/images/react-polymorph-radio-example.png)
+
 ### Customizing Component Skins
 
 Every component accepts a `theme` property intended to provide a [CSS Module import object](https://github.com/css-modules/css-modules) that will be used by the component to assign local classnames to its DOM nodes. Therefore, each one implements a documented **classname API**. So if you want to customize a component, you just need to provide a theme object with the appropriate classname mapping.
