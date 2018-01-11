@@ -7,8 +7,6 @@ import Radio from '../source/components/Radio';
 import SimpleRadioSkin from '../source/skins/simple/RadioSkin';
 import styles from './Radio.stories.scss';
 
-console.log('styles', styles)
-
 storiesOf('Radio', module)
 
   .addDecorator((story) => {
