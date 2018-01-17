@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isString, flow } from 'lodash';
+import { StringOrElement } from '../utils/props';
 
 // import the composeTheme utility function
 import composeTheme from '../utils/composeTheme.js';
@@ -9,14 +10,18 @@ import composeTheme from '../utils/composeTheme.js';
 import { inputThemeAPI } from '../themes/API/input.js';
 
 export default class Input extends Component {
+  state = { error: '' };
+
   static propTypes = {
     autoFocus: PropTypes.bool,
+    error: StringOrElement,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     value: PropTypes.string,
     placeholder: PropTypes.string,
     maxLength: PropTypes.number,
+    minLength: PropTypes.number,
     onKeyPress: PropTypes.func,
     readOnly: PropTypes.bool,
     skin: PropTypes.func.isRequired,
@@ -27,6 +32,8 @@ export default class Input extends Component {
 
   static defaultProps = {
     autoFocus: false,
+    error: '',
+    readOnly: false,
     value: '',
     theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
@@ -42,16 +49,29 @@ export default class Input extends Component {
   onChange = event => {
     const { onChange, disabled } = this.props;
     if (disabled) return;
+
     if (onChange) onChange(this._processValue(event.target.value), event);
+  };
+
+  _setError = error => {
+    const { setError } = this.props;
+
+    // checks for setError func from FormField component
+    // if this Input instance is being used within the render function
+    // of a FormField instance, the error field within FormField's local state
+    // will be set
+    if (setError) setError(error);
+    this.setState({ error });
   };
 
   _focus = () => this.inputElement.focus();
 
   _processValue(value) {
-    return flow([this._enforceStringValue, this._enforceMaxLength]).call(
-      this,
-      value
-    );
+    return flow([
+      this._enforceStringValue,
+      this._enforceMaxLength,
+      this._enforceMinLength
+    ]).call(this, value);
   }
 
   _enforceStringValue(value) {
@@ -66,6 +86,19 @@ export default class Input extends Component {
     return isTooLong ? value.substring(0, maxLength) : value;
   }
 
+  _enforceMinLength = value => {
+    const { minLength } = this.props;
+    const isTooShort = minLength != null && value.length < minLength;
+
+    if (isTooShort) {
+      this._setError(`Please enter a valid input`);
+    } else if (this.state.error !== '') {
+      this._setError(null);
+    }
+
+    return value;
+  };
+
   render() {
     // destructuring the props here ensures that variable names
     // do not overwrite each other, only pass on the "...rest" of the props
@@ -75,6 +108,8 @@ export default class Input extends Component {
       theme,
       themeOverrides,
       themeAPI,
+      onChange,
+      error,
       ...rest
     } = this.props;
 
@@ -82,6 +117,8 @@ export default class Input extends Component {
 
     return (
       <InputSkin
+        error={error || this.state.error}
+        onChange={this.onChange}
         inputRef={el => (this.inputElement = el)}
         theme={composedTheme}
         {...rest}

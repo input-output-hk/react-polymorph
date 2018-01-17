@@ -9,6 +9,8 @@ import composeTheme from '../utils/composeTheme.js';
 import { formFieldThemeAPI } from '../themes/API/formField.js';
 
 export default class FormField extends Component {
+  state = { error: '' };
+
   static propTypes = {
     render: PropTypes.func.isRequired,
     skin: PropTypes.func.isRequired,
@@ -27,6 +29,8 @@ export default class FormField extends Component {
     themeAPI: { ...formFieldThemeAPI }
   };
 
+  _setError = error => this.setState({ error });
+
   render() {
     // destructuring the props here ensures that variable names
     // do not overwrite each other, only pass on the "...rest" of the props
@@ -36,11 +40,19 @@ export default class FormField extends Component {
       theme,
       themeOverrides,
       themeAPI,
+      error,
       ...rest
     } = this.props;
 
     const composedTheme = composeTheme(theme, themeOverrides, themeAPI);
 
-    return <FormFieldSkin theme={composedTheme} {...rest} />;
+    return (
+      <FormFieldSkin
+        error={error || this.state.error}
+        setError={this._setError}
+        theme={composedTheme}
+        {...rest}
+      />
+    );
   }
 }

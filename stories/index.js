@@ -4,7 +4,7 @@ import './TextArea.stories';
 import './Button.stories';
 // import './Bubble.stories';
 // import './Select.stories';
-// import './NumericInput.stories';
+import './NumericInput.stories';
 import './Checkbox.stories';
 // import './Switch.stories';
 // import './Toggler.stories';

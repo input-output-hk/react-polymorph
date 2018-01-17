@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
+import { withState } from '@dump247/storybook-state';
 
 import FormField from '../source/components/FormField';
 import SimpleFormFieldSkin from '../source/skins/simple/FormFieldSkin';
@@ -13,132 +12,181 @@ import SimpleInputSkin from '../source/skins/simple/InputSkin';
 import simpleInput from '../source/themes/simple/SimpleInput.scss';
 
 storiesOf('Input', module)
-  .addDecorator(story => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      value: '',
-      onChange: mobxAction(event => {
-        event.persist();
-        state.value = event.target.value;
-        onChangeAction(state.value, event);
-      })
-    });
-
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
-  })
-
   // ====== Stories ======
 
-  .add('plain', () => <Input skin={SimpleInputSkin} theme={simpleInput} />)
+  .add(
+    'Plain',
+    withState({ value: '' }, store => (
+      <Input
+        {...store.state}
+        onChange={(value, event) => store.set({ value })}
+        theme={simpleInput}
+        skin={SimpleInputSkin}
+      />
+    ))
+  )
 
-  .add('label', () => (
-    <FormField
-      label="Some label"
-      skin={SimpleFormFieldSkin}
-      theme={simpleFormField}
-      render={props => (
-        <Input {...props} skin={SimpleInputSkin} theme={simpleInput} />
-      )}
-    />
-  ))
+  .add(
+    'label',
+    withState({ value: '' }, store => (
+      <FormField
+        label="Some label"
+        theme={simpleFormField}
+        skin={SimpleFormFieldSkin}
+        render={props => (
+          <Input
+            {...props}
+            value={store.state.value}
+            onChange={(value, event) => store.set({ value })}
+            theme={simpleInput}
+            skin={SimpleInputSkin}
+          />
+        )}
+      />
+    ))
+  )
 
-  .add('placeholder', () => (
-    <Input placeholder="Username" skin={SimpleInputSkin} theme={simpleInput} />
-  ))
+  .add(
+    'placeholder',
+    withState({ value: '' }, store => (
+      <Input
+        value={store.state.value}
+        placeholder="user name"
+        onChange={(value, event) => store.set({ value })}
+        theme={simpleInput}
+        skin={SimpleInputSkin}
+      />
+    ))
+  )
 
-  .add('auto focus', () => (
-    <Input
-      autoFocus
-      placeholder="Username"
-      skin={SimpleInputSkin}
-      theme={simpleInput}
-    />
-  ))
+  .add(
+    'autoFocus',
+    withState({ value: '' }, store => (
+      <Input
+        autoFocus
+        value={store.state.value}
+        placeholder="autoFocus"
+        onChange={(value, event) => store.set({ value })}
+        theme={simpleInput}
+        skin={SimpleInputSkin}
+      />
+    ))
+  )
 
   .add('disabled', () => (
     <FormField
+      disabled
       label="Disabled Input"
       skin={SimpleFormFieldSkin}
       theme={simpleFormField}
       render={props => (
         <Input
-          disabled
-          placeholder="disabled"
-          skin={SimpleInputSkin}
+          {...props}
+          placeholder="user name"
           theme={simpleInput}
+          skin={SimpleInputSkin}
         />
       )}
     />
   ))
 
-  .add('error', () => (
-    <div>
+  .add(
+    'error',
+    withState({ value: '' }, store => (
       <FormField
-        label="With label"
+        label="With Label"
         error="Something went wrong"
         skin={SimpleFormFieldSkin}
         theme={simpleFormField}
-        render={props => <Input skin={SimpleInputSkin} theme={simpleInput} />}
+        render={props => (
+          <Input
+            {...props}
+            value={store.state.value}
+            onChange={(value, event) => store.set({ value })}
+            skin={SimpleInputSkin}
+            theme={simpleInput}
+          />
+        )}
       />
+    ))
+  )
 
+  .add(
+    'minLength(8)',
+    withState({ value: '' }, store => (
       <FormField
-        error="Requires at least 8 characters"
+        label="Input with min. 5 Characters"
         skin={SimpleFormFieldSkin}
         theme={simpleFormField}
         render={props => (
-          <Input value="Franz" skin={SimpleInputSkin} theme={simpleInput} />
+          <Input
+            {...props}
+            value={store.state.value}
+            placeholder="min length"
+            minLength={8}
+            onChange={(value, event) => store.set({ value })}
+            skin={SimpleInputSkin}
+            theme={simpleInput}
+          />
         )}
       />
-    </div>
-  ))
+    ))
+  )
 
-  .add('type=password', () => {
-    return (
-      <Input
-        value="secret"
-        type="password"
-        skin={SimpleInputSkin}
-        theme={simpleInput}
+  .add(
+    'maxLength(5)',
+    withState({ value: '' }, store => (
+      <FormField
+        label="Input with max. 5 Characters"
+        skin={SimpleFormFieldSkin}
+        theme={simpleFormField}
+        render={props => (
+          <Input
+            {...props}
+            value={store.state.value}
+            placeholder="max length"
+            maxLength={5}
+            onChange={(value, event) => store.set({ value })}
+            skin={SimpleInputSkin}
+            theme={simpleInput}
+          />
+        )}
       />
-    );
-  })
+    ))
+  )
 
-  .add('focus / blur', () => {
-    const onFocus = () => console.log('focused');
+  .add(
+    'type=password',
+    withState({ value: '' }, store => (
+      <Input
+        value={store.state.value}
+        type="password"
+        placeholder="password"
+        onChange={(value, event) => store.set({ value })}
+        theme={simpleInput}
+        skin={SimpleInputSkin}
+      />
+    ))
+  )
 
-    const onBlur = () => console.log('blurred');
+  .add(
+    'focus / blur',
+    withState({ value: '', focused: false, blurred: false }, store => (
+      <Input
+        value={store.state.value}
+        placeholder="focus / blur"
+        onChange={value => store.set({ value })}
+        onFocus={() => store.set({ focused: true })}
+        onBlur={() => store.set({ blurred: true })}
+        theme={simpleInput}
+        skin={SimpleInputSkin}
+      />
+    ))
+  )
 
-    return (
-      <div>
-        <Input
-          placeholder="click me"
-          onFocus={onFocus}
-          onBlur={onBlur}
-          skin={SimpleInputSkin}
-          theme={simpleInput}
-        />
-      </div>
-    );
-  })
-
-  .add('maxLength(5)', () => (
-    <FormField
-      label="Input with max. 5 Characters"
-      skin={SimpleFormFieldSkin}
-      theme={simpleFormField}
-      render={props => (
-        <Input
-          {...props}
-          maxLength={5}
-          skin={SimpleInputSkin}
-          theme={simpleInput}
-        />
-      )}
-    />
-  ))
-
-  .add('onChange / onKeyPress', () => {
-    return (
+  .add(
+    'onKeyPress',
+    withState({ value: '' }, store => (
       <FormField
         label="Type to see events logged"
         skin={SimpleFormFieldSkin}
@@ -146,11 +194,15 @@ storiesOf('Input', module)
         render={props => (
           <Input
             {...props}
+            value={store.state.value}
+            placeholder="max length"
+            maxLength={5}
             onKeyPress={action('onKeyPress')}
+            onChange={(value, event) => store.set({ value })}
             skin={SimpleInputSkin}
             theme={simpleInput}
           />
         )}
       />
-    );
-  });
+    ))
+  );

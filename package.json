@@ -1,6 +1,7 @@
 {
   "name": "react-polymorph",
-  "description": "React components with highly customizable logic, markup and styles.",
+  "description":
+    "React components with highly customizable logic, markup and styles.",
   "version": "0.6.0",
   "author": {
     "name": "Dominik Guzei",
@@ -20,13 +21,7 @@
   "bugs": {
     "url": "https://github.com/CodeAdventure/react-polymorph/issues"
   },
-  "keywords": [
-    "react",
-    "components",
-    "customizable",
-    "skins",
-    "themes"
-  ],
+  "keywords": ["react", "components", "customizable", "skins", "themes"],
   "dependencies": {
     "filter-react-dom-props": "0.0.2",
     "postinstall-build": "^5.0.0",
@@ -41,6 +36,7 @@
     "lodash": "^4"
   },
   "devDependencies": {
+    "@dump247/storybook-state": "^1.2.1",
     "@storybook/addon-actions": "^3.2.12",
     "@storybook/react": "3.2.12",
     "babel-cli": "6.26.0",
@@ -84,7 +80,8 @@
     "webpack": "2.6.1"
   },
   "scripts": {
-    "js": "babel source -d lib -s --no-babelrc --presets=env,react --plugins=transform-object-rest-spread,transform-flow-strip-types,transform-decorators-legacy,transform-class-properties,lodash",
+    "js":
+      "babel source -d lib -s --no-babelrc --presets=env,react --plugins=transform-object-rest-spread,transform-flow-strip-types,transform-decorators-legacy,transform-class-properties,lodash",
     "build": "cross-env npm run clean && npm run js && npm run sass",
     "clean": "rimraf ./lib",
     "prebuild": "npm run clean",
