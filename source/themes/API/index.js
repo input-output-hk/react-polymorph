@@ -5,6 +5,7 @@ import { textAreaThemeAPI } from './textArea';
 import { buttonThemeAPI } from './button';
 import { toolTipThemeAPI } from './toolTip';
 import { bubbleThemeAPI } from './bubble';
+import { selectThemeAPI } from './select';
 
 // the remaining theme api's will be filled in
 // once all components have been ported over to this pattern
@@ -20,5 +21,5 @@ export const rootThemeAPI = {
   modal: {},
   numericInput: {},
   options: {},
-  select: {}
+  select: { ...selectThemeAPI }
 };
