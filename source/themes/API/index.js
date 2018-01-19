@@ -6,6 +6,7 @@ import { buttonThemeAPI } from './button';
 import { toolTipThemeAPI } from './toolTip';
 import { bubbleThemeAPI } from './bubble';
 import { selectThemeAPI } from './select';
+import { autocompleteThemeAPI } from './autocomplete';
 
 // the remaining theme api's will be filled in
 // once all components have been ported over to this pattern
@@ -17,7 +18,7 @@ export const rootThemeAPI = {
   button: { ...buttonThemeAPI },
   toolTip: { ...toolTipThemeAPI },
   bubble: { ...bubbleThemeAPI },
-  autoComplete: {},
+  autoComplete: { ...autocompleteThemeAPI },
   modal: {},
   numericInput: {},
   options: {},
