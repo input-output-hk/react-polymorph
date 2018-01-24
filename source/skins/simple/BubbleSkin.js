@@ -1,7 +1,20 @@
 import React from 'react';
-import { themr } from 'react-css-themr';
-import { BUBBLE } from './identifiers';
-import DefaultBubbleTheme from '../../themes/simple/SimpleBubble.scss';
-import BubbleSkin from './raw/BubbleSkin';
+import classnames from 'classnames';
+import { pickDOMProps } from '../../utils/props';
 
-export default themr(BUBBLE, DefaultBubbleTheme)(BubbleSkin);
+export default props => (
+  <div
+    {...pickDOMProps(props)}
+    className={classnames([
+      props.className,
+      props.theme.root,
+      props.isOpeningUpward ? props.theme.openUpward : null,
+      props.isTransparent ? props.theme.transparent : null
+    ])}
+  >
+    <div className={props.theme.bubble} data-bubble-container>
+      {props.children}
+    </div>
+    <span className={props.theme.arrow} data-bubble-arrow />
+  </div>
+);
