@@ -6,7 +6,7 @@ import { AUTOCOMPLETE } from '../identifiers';
 import RawFormFieldSkin from './FormFieldSkin';
 import Autocomplete from '../../../components/Autocomplete';
 import Options from '../../../components/Options';
-import SimpleOptionsSkin from '../../../skins/simple/OptionsSkin';
+import RawSimpleOptionsSkin from './OptionsSkin';
 
 /**
  * The raw skin for the Autocomplete component.
@@ -16,10 +16,11 @@ import SimpleOptionsSkin from '../../../skins/simple/OptionsSkin';
  * is needed to provide components with a default skin (see one level up).
  *
  * @param FormFieldSkin
+ * @param SimpleOptionsSkin
  * @returns {Component}
  */
 
-export const autocompleteSkinFactory = (FormFieldSkin) => (
+export const autocompleteSkinFactory = (FormFieldSkin, SimpleOptionsSkin) => (
   (props) => {
     const filteredAndLimitedOptions = _.slice(props.filteredOptions, 0, props.maxVisibleOptions);
     const isFirstOptionHighlighted = props.highlightedOptionIndex === 0;
@@ -101,4 +102,4 @@ export const autocompleteSkinFactory = (FormFieldSkin) => (
 /**
  * Export the raw version of this component which does not include any styles.
  */
-export default themr(AUTOCOMPLETE)(autocompleteSkinFactory(RawFormFieldSkin));
+export default themr(AUTOCOMPLETE)(autocompleteSkinFactory(RawFormFieldSkin, RawSimpleOptionsSkin));
