@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { StringOrElement } from '../utils/props';
+import { bool, func, object } from 'prop-types';
 
-import composeTheme from '../utils/composeTheme';
-
-// import the Modal component's theme API
+// Modal's theme API
 import { MODAL_THEME_API } from '../themes/API';
+
+// internal utiltity functions
+import composeTheme from '../utils/composeTheme';
+import { StringOrElement } from '../utils/props';
 
 class Modal extends Component {
   static propTypes = {
-    isActive: PropTypes.bool,
+    isActive: bool,
     contentLabel: StringOrElement,
-    onClose: PropTypes.func,
-    triggerCloseOnOverlayClick: PropTypes.bool,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    onClose: func,
+    triggerCloseOnOverlayClick: bool,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -26,6 +27,10 @@ class Modal extends Component {
     theme: {},
     themeOverrides: {},
     themeAPI: { ...MODAL_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -56,9 +61,5 @@ class Modal extends Component {
     return <ModalSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
-
-Modal.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default Modal;

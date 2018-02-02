@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object, string, number } from 'prop-types';
+
+// external libraries
 import { isString, flow } from 'lodash';
 
 // import utility functions
@@ -11,22 +13,22 @@ import { TEXTAREA_THEME_API } from '../themes/API';
 
 class TextArea extends Component {
   static propTypes = {
-    onRef: PropTypes.func,
-    autoFocus: PropTypes.bool,
-    value: PropTypes.string,
+    onRef: func,
+    autoFocus: bool,
+    value: string,
     error: StringOrElement,
-    placeholder: PropTypes.string,
-    maxLength: PropTypes.number,
-    minLength: PropTypes.number,
-    autoResize: PropTypes.bool,
-    rows: PropTypes.number,
-    onFocus: PropTypes.func,
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    placeholder: string,
+    maxLength: number,
+    minLength: number,
+    autoResize: bool,
+    rows: number,
+    onFocus: func,
+    onChange: func,
+    onBlur: func,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -37,6 +39,10 @@ class TextArea extends Component {
     theme: {}, // theme will now be passed along via the ThemeProvider
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
     themeAPI: { ...TEXTAREA_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -179,9 +185,5 @@ class TextArea extends Component {
     );
   }
 }
-
-TextArea.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default TextArea;

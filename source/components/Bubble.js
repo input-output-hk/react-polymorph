@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object } from 'prop-types';
 
-// import utility functions
-import composeTheme from '../utils/composeTheme.js';
-
-// import the Bubble component's theme API
+// Bubble theme API
 import { BUBBLE_THEME_API } from '../themes/API';
+
+// internal utility functions
+import composeTheme from '../utils/composeTheme';
+import { StringOrElement } from '../utils/props';
 
 class Bubble extends Component {
   static propTypes = {
-    isOpeningUpwards: PropTypes.bool,
-    isTransparent: PropTypes.bool,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    isOpeningUpwards: bool,
+    isTransparent: bool,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -22,6 +23,10 @@ class Bubble extends Component {
     theme: {},
     themeOverrides: {},
     themeAPI: { ...BUBBLE_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -52,9 +57,5 @@ class Bubble extends Component {
     return <BubbleSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
-
-Bubble.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default Bubble;

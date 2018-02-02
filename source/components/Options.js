@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object, array, string } from 'prop-types';
 import ReactDOM from 'react-dom';
-import events from '../utils/events';
-import { StringOrElement } from '../utils/props';
-import composeTheme from '../utils/composeTheme.js';
 
-// import the Options component's theme API
+// Options theme API
 import { OPTIONS_THEME_API } from '../themes/API';
+
+// internal utility functions
+import composeTheme from '../utils/composeTheme.js';
+import { StringOrElement } from '../utils/props';
+import events from '../utils/events';
 
 class Options extends Component {
   static propTypes = {
-    isOpen: PropTypes.bool,
-    isOpeningUpward: PropTypes.bool,
-    resetOnClose: PropTypes.bool, // reset highlighted option on options close (e.g. in autocomplete)
-    optionRenderer: PropTypes.func,
-    selectedOptionValue: PropTypes.string,
-    noResults: PropTypes.bool,
+    isOpen: bool,
+    isOpeningUpward: bool,
+    resetOnClose: bool, // reset highlighted option on options close (e.g. in autocomplete)
+    selectedOptionValue: string,
+    noResults: bool,
     noResultsMessage: StringOrElement,
-    onChange: PropTypes.func,
-    onClose: PropTypes.func,
-    options: PropTypes.array,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    onChange: func,
+    onClose: func,
+    options: array,
+    optionRenderer: func,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -34,6 +36,10 @@ class Options extends Component {
     theme: {},
     themeOverrides: {},
     themeAPI: { ...OPTIONS_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -93,7 +99,6 @@ class Options extends Component {
     }
   };
 
-  // ref related
   handleScrollEventListener = action => {
     const rootNode = this.optionsElement;
     const scrollableNode = this.getFirstScrollableParent(rootNode);
@@ -239,7 +244,6 @@ class Options extends Component {
     }
   };
 
-  // ref related
   _handleDocumentClick = event => {
     const root = this.optionsElement;
     const isDescendant = events.targetIsDescendant(
@@ -293,8 +297,8 @@ class Options extends Component {
   }
 }
 
-Options.contextTypes = {
-  theme: PropTypes.object
-};
+// Options.contextTypes = {
+//   theme: PropTypes.object
+// };
 
 export default Options;

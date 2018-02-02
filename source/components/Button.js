@@ -1,32 +1,36 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object } from 'prop-types';
+
+// external libraries
 import _ from 'lodash';
 
-// import utils
-import { StringOrElement } from '../utils/props';
-
-// import the composeTheme utility function
-import composeTheme from '../utils/composeTheme';
-
-// import the Button component's theme API
+// Button theme API
 import { BUTTON_THEME_API } from '../themes/API';
+
+// internal utility functions
+import composeTheme from '../utils/composeTheme';
+import { StringOrElement } from '../utils/props';
 
 class Button extends Component {
   static propTypes = {
     label: StringOrElement,
-    disabled: PropTypes.bool,
-    onClick: PropTypes.func,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    disabled: bool,
+    onClick: func,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
     disabled: false,
-    theme: { button: {} },
+    theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
     themeAPI: { ...BUTTON_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -57,9 +61,5 @@ class Button extends Component {
     return <ButtonSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
-
-Button.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default Button;

@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object } from 'prop-types';
+
+// Checkbox theme API
+import { CHECKBOX_THEME_API } from '../themes/API';
 
 // import utility functions
 import { StringOrElement } from '../utils/props.js';
 import composeTheme from '../utils/composeTheme.js';
 
-// import the Checkbox component's theme API
-import { CHECKBOX_THEME_API } from '../themes/API';
-
 class Checkbox extends Component {
   static propTypes = {
-    checked: PropTypes.bool,
+    checked: bool,
     label: StringOrElement,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    onChange: func,
+    onFocus: func,
+    onBlur: func,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -27,6 +27,10 @@ class Checkbox extends Component {
     theme: {},
     themeOverrides: {},
     themeAPI: { ...CHECKBOX_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -57,9 +61,5 @@ class Checkbox extends Component {
     return <CheckboxSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
-
-Checkbox.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default Checkbox;

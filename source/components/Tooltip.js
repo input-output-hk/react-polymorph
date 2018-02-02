@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object } from 'prop-types';
 
 // import utility functions
 import { StringOrElement } from '../utils/props';
@@ -10,14 +10,14 @@ import { TOOLTIP_THEME_API } from '../themes/API';
 
 class Tooltip extends Component {
   static propTypes = {
-    isAligningRight: PropTypes.bool,
-    isOpeningUpwards: PropTypes.bool,
-    isBounded: PropTypes.bool,
+    isAligningRight: bool,
+    isOpeningUpwards: bool,
+    isBounded: bool,
     tip: StringOrElement,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -25,6 +25,10 @@ class Tooltip extends Component {
     theme: { button: {} },
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
     themeAPI: { ...TOOLTIP_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -55,9 +59,5 @@ class Tooltip extends Component {
     return <TooltipSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
-
-Tooltip.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default Tooltip;

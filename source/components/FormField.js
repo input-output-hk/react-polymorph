@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object } from 'prop-types';
+
+// FormField's theme API
+import { FORMFIELD_THEME_API } from '../themes/API';
 
 // import utility functions
-import { StringOrElement } from '../utils/props.js';
 import composeTheme from '../utils/composeTheme.js';
-
-// import the FormField component's theme API
-import { FORMFIELD_THEME_API } from '../themes/API';
+import { StringOrElement } from '../utils/props.js';
 
 class FormField extends Component {
   static propTypes = {
     label: StringOrElement,
-    disabled: PropTypes.bool,
+    disabled: bool,
     error: StringOrElement,
-    render: PropTypes.func.isRequired,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    render: func.isRequired,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -25,6 +25,10 @@ class FormField extends Component {
     theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
     themeAPI: { ...FORMFIELD_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -79,9 +83,5 @@ class FormField extends Component {
     );
   }
 }
-
-FormField.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default FormField;

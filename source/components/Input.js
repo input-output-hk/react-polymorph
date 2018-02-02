@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object, number, string } from 'prop-types';
 
 // external libraries
 import { isString, flow } from 'lodash';
 
-// theme API
+// Input's theme API
 import { INPUT_THEME_API } from '../themes/API';
 
 // internal utility functions
@@ -13,22 +13,22 @@ import { StringOrElement } from '../utils/props';
 
 class Input extends Component {
   static propTypes = {
-    onRef: PropTypes.func,
-    autoFocus: PropTypes.bool,
+    onRef: func,
+    autoFocus: bool,
     error: StringOrElement,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    value: PropTypes.string,
-    placeholder: PropTypes.string,
-    maxLength: PropTypes.number,
-    minLength: PropTypes.number,
-    onKeyPress: PropTypes.func,
-    readOnly: PropTypes.bool,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    onChange: func,
+    onFocus: func,
+    onBlur: func,
+    value: string,
+    placeholder: string,
+    maxLength: number,
+    minLength: number,
+    onKeyPress: func,
+    readOnly: bool,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -40,6 +40,10 @@ class Input extends Component {
     theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
     themeAPI: { ...INPUT_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -147,9 +151,5 @@ class Input extends Component {
     );
   }
 }
-
-Input.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default Input;

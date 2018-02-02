@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import PropTypes from 'prop-types';
+import { object, string, element } from 'prop-types';
 
 // utility function for composing a component's theme object
 // with any themeOverrides
@@ -12,9 +12,25 @@ import composeTheme from '../utils/composeTheme.js';
 import ROOT_THEME_API from '../themes/API';
 
 class ThemeProvider extends Component {
+  static propTypes = {
+    theme: object,
+    themeOverrides: object,
+    children: element
+  };
+
+  static defaultProps = {
+    theme: { ...ROOT_THEME_API },
+    themeOverrides: {}
+  };
+
+  static childContextTypes = {
+    theme: object
+  };
+
   constructor(props) {
     super(props);
-    const { children, theme, themeOverrides } = props;
+
+    const { theme, themeOverrides } = props;
 
     this.state = {
       composedTheme: this.composeLibraryTheme(
@@ -25,12 +41,20 @@ class ThemeProvider extends Component {
     };
   }
 
+  getChildContext() {
+    const { composedTheme } = this.state;
+
+    return {
+      theme: { ...composedTheme }
+    };
+  }
+
   // prevents performance issues associated with frequently rerendering all
   // children of ThemeProvider by checking to see if the passed theme and/or
   // themeOverrides props have changed before a rerender
 
   componentWillReceiveProps(nextProps) {
-    const { children, theme, themeOverrides } = nextProps;
+    const { theme, themeOverrides } = nextProps;
 
     const changedProps = _.pickBy(
       { theme, themeOverrides },
@@ -90,34 +114,11 @@ class ThemeProvider extends Component {
     }
   };
 
-  getChildContext() {
-    const { composedTheme } = this.state;
-
-    return {
-      theme: { ...composedTheme }
-    };
-  }
-
   // all children of ThemeProvider HOC are passed the theme object
   // composed with any custom config via this.props.themeOverrides
   render() {
     return <div>{this.props.children}</div>;
   }
 }
-
-ThemeProvider.childContextTypes = {
-  theme: PropTypes.object
-};
-
-ThemeProvider.defaultProps = {
-  theme: { ...ROOT_THEME_API },
-  themeOverrides: {}
-};
-
-ThemeProvider.propTypes = {
-  theme: PropTypes.object,
-  themeOverrides: PropTypes.object,
-  children: PropTypes.element
-};
 
 export default ThemeProvider;

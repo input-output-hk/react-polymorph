@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object, arrayOf, shape, string } from 'prop-types';
 
 // import the composeTheme utility function
 import composeTheme from '../utils/composeTheme.js';
@@ -9,24 +9,24 @@ import { SELECT_THEME_API } from '../themes/API';
 
 class Select extends Component {
   static propTypes = {
-    value: PropTypes.string,
-    allowBlank: PropTypes.bool,
-    placeholder: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        isDisabled: PropTypes.bool
+    value: string,
+    allowBlank: bool,
+    placeholder: string,
+    autoFocus: bool,
+    onChange: func,
+    onFocus: func,
+    onBlur: func,
+    options: arrayOf(
+      shape({
+        value: string.isRequired,
+        isDisabled: bool
       })
     ).isRequired,
-    isOpeningUpward: PropTypes.bool,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    isOpeningUpward: bool,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -36,6 +36,10 @@ class Select extends Component {
     theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
     themeAPI: { ...SELECT_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -116,9 +120,5 @@ class Select extends Component {
     );
   }
 }
-
-Select.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default Select;

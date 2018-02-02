@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object } from 'prop-types';
 
 // import utility functions
 import composeTheme from '../utils/composeTheme.js';
@@ -10,15 +10,15 @@ import { RADIO_THEME_API } from '../themes/API';
 
 class Radio extends Component {
   static propTypes = {
-    selected: PropTypes.bool,
+    selected: bool,
     label: StringOrElement,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    onChange: func,
+    onFocus: func,
+    onBlur: func,
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -27,6 +27,10 @@ class Radio extends Component {
     theme: {},
     themeOverrides: {},
     themeAPI: { ...RADIO_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -57,9 +61,5 @@ class Radio extends Component {
     return <RadioSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
-
-Radio.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default Radio;

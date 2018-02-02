@@ -1,31 +1,41 @@
 import React, { Component } from 'react';
+import {
+  bool,
+  func,
+  object,
+  number,
+  array,
+  string,
+  instanceOf
+} from 'prop-types';
+
+// external libraries
 import _ from 'lodash';
-import PropTypes from 'prop-types';
-import { StringOrElement } from '../utils/props';
 
-// import the composeTheme utility function
-import composeTheme from '../utils/composeTheme';
-
-// import the Autocomplete component's theme API
+// Autocomplete theme API
 import { AUTOCOMPLETE_THEME_API } from '../themes/API';
+
+// internal utility functions
+import composeTheme from '../utils/composeTheme';
+import { StringOrElement } from '../utils/props';
 
 class Autocomplete extends Component {
   static propTypes = {
     label: StringOrElement,
     error: StringOrElement,
-    onChange: PropTypes.func,
-    maxSelections: PropTypes.number,
-    placeholder: PropTypes.string,
-    options: PropTypes.array,
-    isOpeningUpward: PropTypes.bool,
-    sortAlphabetically: PropTypes.bool,
-    multipleSameSelections: PropTypes.bool,
-    maxVisibleOptions: PropTypes.number,
-    invalidCharsRegex: PropTypes.instanceOf(RegExp),
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    onChange: func,
+    maxSelections: number,
+    placeholder: string,
+    options: array,
+    isOpeningUpward: bool,
+    sortAlphabetically: bool,
+    multipleSameSelections: bool,
+    maxVisibleOptions: number,
+    invalidCharsRegex: instanceOf(RegExp),
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -39,6 +49,10 @@ class Autocomplete extends Component {
     sortAlphabetically: true, // options are sorted alphabetically by default
     invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
     isOpeningUpward: false
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -64,7 +78,33 @@ class Autocomplete extends Component {
     };
   }
 
-  _setError = error => this.setState({ error });
+  _filterOptions = value => {
+    let filteredOptions = [];
+
+    if (value !== '') {
+      _.some(this.props.options, function(option) {
+        if (_.startsWith(option, value)) {
+          filteredOptions.push(option);
+        }
+      });
+    } else {
+      filteredOptions = this.props.options;
+    }
+
+    return filteredOptions;
+  };
+
+  _filterInvalidChars = value => {
+    let filteredValue = '';
+
+    if (this.props.invalidCharsRegex.test(value)) {
+      filteredValue = value.replace(this.props.invalidCharsRegex, '');
+    } else {
+      filteredValue = value;
+    }
+
+    return filteredValue;
+  };
 
   focus = () => this.handleAutocompleteClick();
 
@@ -85,65 +125,38 @@ class Autocomplete extends Component {
     }
   };
 
-  _filterOptions = value => {
-    let filteredOptions = [];
-
-    if (value !== '') {
-      _.some(this.props.options, function(option) {
-        if (_.startsWith(option, value)) {
-          filteredOptions.push(option);
-        }
-      });
-    } else {
-      filteredOptions = this.props.options;
+  // checks for backspace in order to delete the last selected option
+  onKeyDown = event => {
+    if (
+      event.keyCode === 8 &&
+      !event.target.value &&
+      this.state.selectedOptions.length
+    ) {
+      // Remove last selected option
+      this.removeOption(this.state.selectedOptions.length - 1, event);
     }
-
-    return filteredOptions;
+    return;
   };
 
-  _handleBackspace = event => {
-    const { selectedOptions } = this.state;
-
-    // Remove last selected option
-    this.removeOption(selectedOptions.length - 1, event);
-  };
-
-  _filterInvalidChars = value => {
-    let filteredValue = '';
-
-    if (this.props.invalidCharsRegex.test(value)) {
-      filteredValue = value.replace(this.props.invalidCharsRegex, '');
-    } else {
-      filteredValue = value;
-    }
-
-    return filteredValue;
-  };
-
+  // onChange handler for input element in AutocompleteSkin
   handleInputChange = event => {
-    const { keyCode } = event;
     const value = event.target.value;
-    const { selectedOptions } = this.state;
 
-    // check for backspace to delete selected option
-    if (keyCode === 8 && !value && selectedOptions.length) {
-      return this._handleBackspace(event);
-    } else {
-      // filter out invalid characters
-      const filteredValue = this._filterInvalidChars(event.target.value);
+    // filter out invalid characters
+    const filteredValue = this._filterInvalidChars(event.target.value);
 
-      // filter options
-      const filteredOptions = this._filterOptions(filteredValue);
+    // filter options
+    const filteredOptions = this._filterOptions(filteredValue);
 
-      // open options, update filteredOptions, and update inputValue
-      this.setState({
-        isOpen: true,
-        inputValue: filteredValue,
-        filteredOptions
-      });
-    }
+    // open options, update filteredOptions, and update inputValue
+    this.setState({
+      isOpen: true,
+      inputValue: filteredValue,
+      filteredOptions
+    });
   };
 
+  // passed to Options onChange handler in AutocompleteSkin
   handleChange = (option, event) => {
     this.updateSelectedOptions(event, option);
   };
@@ -208,7 +221,7 @@ class Autocomplete extends Component {
         isOpen={this.state.isOpen}
         theme={this.state.composedTheme}
         handleInputChange={this.handleInputChange}
-        error={error || this.state.error} //may need to add set error handler in the skin
+        error={error || this.state.error}
         rootRef={el => (this.rootElement = el)}
         inputRef={el => (this.inputElement = el)}
         suggestionsRef={el => (this.suggestionsElement = el)}
@@ -216,14 +229,11 @@ class Autocomplete extends Component {
         closeOptions={this.closeOptions}
         handleAutocompleteClick={this.handleAutocompleteClick}
         removeOption={this.removeOption}
+        onKeyDown={this.onKeyDown}
         {...rest}
       />
     );
   }
 }
-
-Autocomplete.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default Autocomplete;

@@ -62,6 +62,7 @@ export default props => {
         placeholder={placeholder}
         value={props.inputValue}
         onChange={props.handleInputChange}
+        onKeyDown={props.onKeyDown}
       />
     </div>
   );

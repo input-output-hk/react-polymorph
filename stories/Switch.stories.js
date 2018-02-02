@@ -20,7 +20,7 @@ import { SWITCH_THEME_API } from '../source/themes/API';
 storiesOf('Switch', module)
   .addDecorator(story => {
     const SimpleTheme = {
-      checkbox: { ...{ SimpleSwitchTheme } }
+      checkbox: { ...SimpleSwitchTheme }
     };
 
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;

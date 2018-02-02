@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { func, object, number, string } from 'prop-types';
+
+// external libraries
 import { flow } from 'lodash';
 
-// import utility functions
+// Input's theme API
+import { INPUT_THEME_API } from '../themes/API';
+
+// internal utility functions
 import composeTheme from '../utils/composeTheme.js';
 import { StringOrElement } from '../utils/props';
 
-// import the Input component's theme API
-import { INPUT_THEME_API } from '../themes/API';
-
 class NumericInput extends Component {
   static propTypes = {
-    onRef: PropTypes.func,
-    onChange: PropTypes.func,
+    onRef: func,
+    onChange: func,
     error: StringOrElement,
-    value: PropTypes.string,
-    placeholder: PropTypes.string,
-    maxBeforeDot: PropTypes.number, // max number of characters before dot
-    maxAfterDot: PropTypes.number, // max number of characters after dot
-    maxValue: PropTypes.number, // max allowed numeric value
-    minValue: PropTypes.number, // min allowed numeric value
-    skin: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    themeOverrides: PropTypes.object,
-    themeAPI: PropTypes.object
+    value: string,
+    placeholder: string,
+    maxBeforeDot: number, // max number of characters before dot
+    maxAfterDot: number, // max number of characters after dot
+    maxValue: number, // max allowed numeric value
+    minValue: number, // min allowed numeric value
+    skin: func.isRequired,
+    theme: object,
+    themeOverrides: object,
+    themeAPI: object
   };
 
   static defaultProps = {
@@ -33,6 +35,10 @@ class NumericInput extends Component {
     theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
     themeAPI: { ...INPUT_THEME_API }
+  };
+
+  static contextTypes = {
+    theme: object
   };
 
   constructor(props, context) {
@@ -334,9 +340,5 @@ class NumericInput extends Component {
     );
   }
 }
-
-NumericInput.contextTypes = {
-  theme: PropTypes.object
-};
 
 export default NumericInput;
