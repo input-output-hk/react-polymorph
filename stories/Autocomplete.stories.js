@@ -1,16 +1,28 @@
 import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
+// components
 import ThemeProvider from '../source/components/ThemeProvider';
-
 import Autocomplete from '../source/components/Autocomplete';
+import Modal from '../source/components/Modal';
+import Button from '../source/components/Button';
+
+// skins
 import SimpleAutocompleteSkin from '../source/skins/simple/AutocompleteSkin';
-import simpleAutocomplete from '../source/themes/simple/SimpleAutocomplete.scss';
-// import Modal from '../source/components/Modal';
-// import Button from '../source/components/Button';
-// import SimpleModalSkin from '../source/skins/simple/ModalSkin';
-// import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
+import SimpleModalSkin from '../source/skins/simple/ModalSkin';
+import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
+
+// themes
+import {
+  SimpleAutocompleteTheme,
+  SimpleModalTheme,
+  SimpleButtonTheme
+} from '../source/themes/simple';
+
+// custom styles
 import styles from './Autocomplete.stories.scss';
 
 const OPTIONS = [
@@ -30,11 +42,16 @@ const OPTIONS = [
 
 storiesOf('Autocomplete', module)
   .addDecorator(story => {
-    const simpleAutocompleteTheme = { autocomplete: { ...simpleAutocomplete } };
+    // we could import the entire SimpleTheme default object above
+    // but composing our own SimpleTheme object here cuts back on unused
+    // imports that are unrelated to the components used in the stories below
+    const SimpleTheme = {
+      autocomplete: { ...SimpleAutocompleteTheme },
+      modal: { ...SimpleModalTheme },
+      button: { ...SimpleButtonTheme }
+    };
 
-    return (
-      <ThemeProvider theme={simpleAutocompleteTheme}>{story()}</ThemeProvider>
-    );
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
   // ====== Stories ======
@@ -140,36 +157,41 @@ storiesOf('Autocomplete', module)
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
-  );
+  )
 
-// .add('Enter mnemonics in Modal', () => (
-//   <Modal
-//     isOpen
-//     triggerCloseOnOverlayClick={false}
-//     skin={<SimpleModalSkin />}
-//   >
-//     <div className={styles.dialogWrapper}>
-//       <div className={styles.title}>
-//         <h1>Autocomplete in Modal</h1>
-//       </div>
-//       <div className={styles.content}>
-//         <Autocomplete
-//           label="Recovery phrase"
-//           placeholder="Enter recovery phrase"
-//           options={OPTIONS}
-//           maxSelections={12}
-//           maxVisibleOptions={5}
-//           invalidCharsRegex= {/[^a-zA-Z]/g}
-//           skin={<SimpleAutocompleteSkin />}
-//         />
-//       </div>
-//       <div className={styles.actions}>
-//         <Button
-//           className='primary'
-//           label='Submit'
-//           skin={<SimpleButtonSkin />}
-//         />
-//       </div>
-//     </div>
-//   </Modal>
-// ))
+  .add(
+    'Enter mnemonics in Modal',
+    withState({ isOpen: true, selectedOpts: [] }, store => (
+      <Modal
+        isOpen={store.state.isOpen}
+        triggerCloseOnOverlayClick={false}
+        skin={SimpleModalSkin}
+      >
+        <div className={styles.dialogWrapper}>
+          <div className={styles.title}>
+            <h1>Autocomplete in Modal</h1>
+          </div>
+          <div className={styles.content}>
+            <Autocomplete
+              label="Recovery phrase"
+              placeholder="Enter recovery phrase"
+              options={OPTIONS}
+              maxSelections={12}
+              maxVisibleOptions={5}
+              invalidCharsRegex={/[^a-zA-Z]/g}
+              skin={SimpleAutocompleteSkin}
+              onChange={selectedOpts => store.set({ selectedOpts })}
+            />
+          </div>
+          <div className={styles.actions}>
+            <Button
+              onClick={() => store.set({ isOpen: false })}
+              className="primary"
+              label="Submit"
+              skin={SimpleButtonSkin}
+            />
+          </div>
+        </div>
+      </Modal>
+    ))
+  );

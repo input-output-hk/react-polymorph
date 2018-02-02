@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 // import utils
-import { StringOrElement } from '../utils/props.js';
+import { StringOrElement } from '../utils/props';
 
 // import the composeTheme utility function
-import composeTheme from '../utils/composeTheme.js';
+import composeTheme from '../utils/composeTheme';
 
 // import the Button component's theme API
-import { buttonThemeAPI } from '../themes/API/button.js';
+import { BUTTON_THEME_API } from '../themes/API';
 
 class Button extends Component {
   static propTypes = {
@@ -26,18 +26,22 @@ class Button extends Component {
     disabled: false,
     theme: { button: {} },
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...buttonThemeAPI }
+    themeAPI: { ...BUTTON_THEME_API }
   };
 
   constructor(props, context) {
     super(props);
 
     const { themeOverrides, themeAPI } = props;
-    const theme = context && context.theme ? context.theme : props.theme;
+
+    const theme =
+      context && context.theme && context.theme.button
+        ? context.theme.button
+        : props.theme;
 
     // if themeOverrides isn't provided, composeTheme returns theme immediately
     this.state = {
-      composedTheme: composeTheme(theme.button, themeOverrides, themeAPI)
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
     };
   }
 

@@ -1,4 +1,4 @@
-export const inputThemeAPI = {
+export default {
   input: '',
   disabled: '',
   errored: ''

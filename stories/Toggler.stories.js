@@ -1,52 +1,74 @@
 import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
+import { withState } from '@dump247/storybook-state';
+
+// components
+import ThemeProvider from '../source/components/ThemeProvider';
 import Checkbox from '../source/components/Checkbox';
+
+// skins
 import SimpleTogglerSkin from '../source/skins/simple/TogglerSkin';
 
-storiesOf('Toggler', module)
+// themes
+import { SimpleTogglerTheme } from '../source/themes/simple';
 
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      checked: false,
-      onChange: mobxAction((value, event) => {
-        state.checked = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
+// theme API
+import { TOGGLER_THEME_API } from '../source/themes/API';
+
+storiesOf('Toggler', module)
+  .addDecorator(story => {
+    const SimpleTheme = { checkbox: { ...SimpleTogglerTheme } };
+
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
   // ====== Stories ======
 
-  .add('plain', () => (
-    <Checkbox
-      labelLeft="Included"
-      labelRight="Excluded"
-      skin={<SimpleTogglerSkin />}
-    />
-  ))
-
-  .add('in text', () => (
-    <div>
-      <span>Fees&nbsp;</span>
+  .add(
+    'plain',
+    withState({ checked: false }, store => (
       <Checkbox
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        themeAPI={TOGGLER_THEME_API}
         labelLeft="Included"
         labelRight="Excluded"
-        skin={<SimpleTogglerSkin />}
+        skin={SimpleTogglerSkin}
       />
-      <span>&nbsp;from the amount</span>
-    </div>
-  ))
+    ))
+  )
 
-  .add('disabled', () => (
-    <Checkbox
-      disabled
-      labelLeft="Included"
-      labelRight="Excluded"
-      skin={<SimpleTogglerSkin />}
-    />
-  ));
+  .add(
+    'in text',
+    withState({ checked: false }, store => (
+      <div>
+        <span>Fees&nbsp;</span>
+        <Checkbox
+          checked={store.state.checked}
+          onChange={() => store.set({ checked: !store.state.checked })}
+          themeAPI={TOGGLER_THEME_API}
+          labelLeft="Included"
+          labelRight="Excluded"
+          skin={SimpleTogglerSkin}
+        />
+        <span>&nbsp;from the amount</span>
+      </div>
+    ))
+  )
+
+  .add(
+    'disabled',
+    withState({ checked: false }, store => (
+      <Checkbox
+        disabled
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        labelLeft="Included"
+        labelRight="Excluded"
+        themeAPI={TOGGLER_THEME_API}
+        skin={SimpleTogglerSkin}
+      />
+    ))
+  );

@@ -1,4 +1,4 @@
-export const modalThemeAPI = {
+export default {
   overlay: '',
   modal: ''
 };

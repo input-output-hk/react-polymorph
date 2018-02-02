@@ -1,4 +1,4 @@
-export const buttonThemeAPI = {
+export default {
   root: '',
   disabled: ''
 };

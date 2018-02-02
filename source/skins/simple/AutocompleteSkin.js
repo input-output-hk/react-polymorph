@@ -1,16 +1,21 @@
 import React from 'react';
+
+// external libraries
 import _ from 'lodash';
 import classnames from 'classnames';
 
+// components
 import FormField from '../../components/FormField';
-import SimpleFormFieldSkin from '../../skins/simple/FormFieldSkin';
-import simpleFormField from '../../themes/simple/SimpleFormField.scss';
-
 import Options from '../../components/Options';
-import SimpleOptionsSkin from '../../skins/simple/OptionsSkin';
-import simpleOptions from '../../themes/simple/SimpleOptions.scss';
 
-const AutocompleteSkin = props => {
+// skins
+import SimpleFormFieldSkin from '../../skins/simple/FormFieldSkin';
+import SimpleOptionsSkin from '../../skins/simple/OptionsSkin';
+
+// themes
+import { SimpleFormFieldTheme, SimpleOptionsTheme } from '../../themes/simple';
+
+export default props => {
   const { label, error } = props;
   const formfieldProps = { label, error };
 
@@ -62,12 +67,12 @@ const AutocompleteSkin = props => {
   );
 
   return (
-    <div ref={props.rootRef}>
+    <div className={props.className} ref={props.rootRef}>
       <FormField
         error={props.error}
         label={props.label}
         skin={SimpleFormFieldSkin}
-        theme={simpleFormField}
+        theme={SimpleFormFieldTheme}
         render={() => {
           return (
             <div
@@ -97,7 +102,7 @@ const AutocompleteSkin = props => {
                 resetOnClose
                 noResults={!props.filteredOptions.length}
                 noResultsMessage={props.noResultsMessage}
-                theme={simpleOptions}
+                theme={SimpleOptionsTheme}
                 skin={SimpleOptionsSkin}
               />
             </div>
@@ -108,5 +113,3 @@ const AutocompleteSkin = props => {
     </div>
   );
 };
-
-export default AutocompleteSkin;

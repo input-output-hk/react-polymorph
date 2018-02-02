@@ -1,17 +1,34 @@
 import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withState } from '@dump247/storybook-state';
 
-import FormField from '../source/components/FormField';
-import SimpleFormFieldSkin from '../source/skins/simple/FormFieldSkin';
-import simpleFormField from '../source/themes/simple/SimpleFormField.scss';
-
+// components
+import ThemeProvider from '../source/components/ThemeProvider';
 import TextArea from '../source/components/TextArea';
+import FormField from '../source/components/FormField';
+
+// skins
 import SimpleTextAreaSkin from '../source/skins/simple/TextAreaSkin';
-import simpleTextArea from '../source/themes/simple/SimpleTextArea.scss';
+import SimpleFormFieldSkin from '../source/skins/simple/FormFieldSkin';
+
+// themes
+import {
+  SimpleTextAreaTheme,
+  SimpleFormFieldTheme
+} from '../source/themes/simple';
 
 storiesOf('TextArea', module)
+  .addDecorator(story => {
+    const SimpleTheme = {
+      textarea: { ...SimpleTextAreaTheme },
+      formfield: { ...SimpleFormFieldTheme }
+    };
+
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
+  })
   // ====== Stories ======
 
   .add(
@@ -21,7 +38,6 @@ storiesOf('TextArea', module)
         value={store.state.value}
         onChange={(value, event) => store.set({ value })}
         skin={SimpleTextAreaSkin}
-        theme={simpleTextArea}
       />
     ))
   )
@@ -32,14 +48,12 @@ storiesOf('TextArea', module)
       <FormField
         label="Your Comment"
         skin={SimpleFormFieldSkin}
-        theme={simpleFormField}
         render={props => (
           <TextArea
             {...props}
             value={store.state.value}
             onChange={(value, event) => store.set({ value })}
             skin={SimpleTextAreaSkin}
-            theme={simpleTextArea}
           />
         )}
       />
@@ -54,7 +68,6 @@ storiesOf('TextArea', module)
         onChange={(value, event) => store.set({ value })}
         placeholder="Your Comment"
         skin={SimpleTextAreaSkin}
-        theme={simpleTextArea}
       />
     ))
   )
@@ -68,7 +81,6 @@ storiesOf('TextArea', module)
         value={store.state.value}
         onChange={(value, event) => store.set({ value })}
         skin={SimpleTextAreaSkin}
-        theme={simpleTextArea}
       />
     ))
   )
@@ -82,7 +94,6 @@ storiesOf('TextArea', module)
         maxLength={5}
         onChange={(value, event) => store.set({ value })}
         skin={SimpleTextAreaSkin}
-        theme={simpleTextArea}
       />
     ))
   )
@@ -94,14 +105,12 @@ storiesOf('TextArea', module)
         label="With label"
         error="Something went wrong"
         skin={SimpleFormFieldSkin}
-        theme={simpleFormField}
         render={props => (
           <TextArea
             {...props}
             value={store.state.value}
             onChange={(value, event) => store.set({ value })}
             skin={SimpleTextAreaSkin}
-            theme={simpleTextArea}
           />
         )}
       />
@@ -114,7 +123,6 @@ storiesOf('TextArea', module)
       <FormField
         label="Textarea with fixed amount of rows to start with"
         skin={SimpleFormFieldSkin}
-        theme={simpleFormField}
         render={props => (
           <TextArea
             {...props}
@@ -123,7 +131,6 @@ storiesOf('TextArea', module)
             placeholder="Your description here"
             rows={5}
             skin={SimpleTextAreaSkin}
-            theme={simpleTextArea}
           />
         )}
       />
@@ -136,7 +143,6 @@ storiesOf('TextArea', module)
       <FormField
         label="Textarea without auto resizing"
         skin={SimpleFormFieldSkin}
-        theme={simpleFormField}
         render={props => (
           <TextArea
             {...props}
@@ -145,7 +151,6 @@ storiesOf('TextArea', module)
             placeholder="Your description here"
             autoResize={false}
             skin={SimpleTextAreaSkin}
-            theme={simpleTextArea}
           />
         )}
       />

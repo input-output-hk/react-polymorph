@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isString, flow } from 'lodash';
+
+// import utility functions
+import composeTheme from '../utils/composeTheme.js';
 import { StringOrElement } from '../utils/props';
 
 // import the Input component's constant theme API
-import { textAreaThemeAPI } from '../themes/API/textArea.js';
+import { TEXTAREA_THEME_API } from '../themes/API';
 
-// import the composeTheme utility function
-import composeTheme from '../utils/composeTheme.js';
-
-export default class TextArea extends Component {
-  state = { error: '' };
-
+class TextArea extends Component {
   static propTypes = {
+    onRef: PropTypes.func,
     autoFocus: PropTypes.bool,
     value: PropTypes.string,
     error: StringOrElement,
@@ -31,23 +30,47 @@ export default class TextArea extends Component {
   };
 
   static defaultProps = {
+    onRef: () => {},
     value: '',
     autoFocus: false,
     autoResize: true,
     theme: {}, // theme will now be passed along via the ThemeProvider
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...textAreaThemeAPI }
+    themeAPI: { ...TEXTAREA_THEME_API }
   };
 
+  constructor(props, context) {
+    super(props);
+
+    const { themeOverrides, themeAPI } = props;
+
+    const theme =
+      context && context.theme && context.theme.textarea
+        ? context.theme.textarea
+        : props.theme;
+
+    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    this.state = {
+      error: '',
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+    };
+  }
+
   componentDidMount() {
-    if (this.props.autoResize) {
+    const { autoResize, autoFocus, onRef } = this.props;
+
+    if (autoResize) {
       window.addEventListener('resize', this._handleAutoresize);
       this._handleAutoresize();
     }
 
-    if (this.props.autoFocus) {
-      this._focus();
+    if (autoFocus) {
+      this.focus();
     }
+
+    // if TextArea is rendered by FormField, onRef allows FormField to call
+    // TextArea's focus method when someone clicks on FormField's label
+    onRef(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,7 +91,7 @@ export default class TextArea extends Component {
     }
   }
 
-  _focus = () => this.textareaElement.focus();
+  focus = () => this.textareaElement.focus();
 
   onChange = event => {
     const { onChange, disabled } = this.props;
@@ -145,16 +168,20 @@ export default class TextArea extends Component {
       ...rest
     } = this.props;
 
-    const composedTheme = composeTheme(theme, themeOverrides, themeAPI);
-
     return (
       <TextAreaSkin
         error={error || this.state.error}
         onChange={this.onChange}
         textareaRef={el => (this.textareaElement = el)}
-        theme={composedTheme}
+        theme={this.state.composedTheme}
         {...rest}
       />
     );
   }
 }
+
+TextArea.contextTypes = {
+  theme: PropTypes.object
+};
+
+export default TextArea;

@@ -12,23 +12,23 @@ export default props => (
       props.className,
       props.theme.root,
       props.disabled ? props.theme.disabled : null,
-      props.checked ? props.theme.checked : null
+      props.selected ? props.theme.selected : null
     ])}
     onClick={event => {
       if (!props.disabled && props.onChange) {
-        props.onChange(!props.checked, event);
+        props.onChange(!props.selected, event);
       }
     }}
   >
     <input
       {...pickDOMProps(props)}
       className={props.theme.input}
-      type="checkbox"
+      type="radio"
     />
     <div
       className={classnames([
-        props.theme.check,
-        props.checked ? props.theme.checked : null
+        props.theme.circle,
+        props.selected ? props.theme.selected : null
       ])}
     />
     {props.label ? (

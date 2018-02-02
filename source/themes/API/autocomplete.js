@@ -1,4 +1,4 @@
-export const autocompleteThemeAPI = {
+export default {
   autocompleteWrapper: '',
   autocompleteContent: '',
   selectedWords: '',

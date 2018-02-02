@@ -1,16 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
+// components
+import ThemeProvider from '../source/components/ThemeProvider';
 import FormField from '../source/components/FormField';
-import SimpleFormFieldSkin from '../source/skins/simple/FormFieldSkin';
-import simpleFormField from '../source/themes/simple/SimpleFormField.scss';
-
 import NumericInput from '../source/components/NumericInput';
+
+// skins
+import SimpleFormFieldSkin from '../source/skins/simple/FormFieldSkin';
 import SimpleInputSkin from '../source/skins/simple/InputSkin';
-import simpleInput from '../source/themes/simple/SimpleInput.scss';
+
+// themes
+import {
+  SimpleFormFieldTheme,
+  SimpleInputTheme
+} from '../source/themes/simple';
 
 storiesOf('NumericInput', module)
+  .addDecorator(story => {
+    const SimpleTheme = {
+      formfield: { ...SimpleFormFieldTheme },
+      input: { ...SimpleInputTheme }
+    };
+
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
+  })
   // ====== Stories ======
 
   .add(
@@ -19,7 +36,6 @@ storiesOf('NumericInput', module)
       <NumericInput
         value={store.state.value}
         onChange={value => store.set({ value })}
-        theme={simpleInput}
         skin={SimpleInputSkin}
       />
     ))
@@ -30,13 +46,12 @@ storiesOf('NumericInput', module)
     withState({ value: '' }, store => (
       <FormField
         label="Some label"
-        theme={simpleFormField}
         skin={SimpleFormFieldSkin}
         render={props => (
           <NumericInput
+            {...props}
             value={store.state.value}
             onChange={value => store.set({ value })}
-            theme={simpleInput}
             skin={SimpleInputSkin}
           />
         )}
@@ -50,7 +65,6 @@ storiesOf('NumericInput', module)
         value={store.state.value}
         placeholder="18.000000"
         onChange={value => store.set({ value })}
-        theme={simpleInput}
         skin={SimpleInputSkin}
       />
     ))
@@ -65,7 +79,6 @@ storiesOf('NumericInput', module)
         onChange={value => store.set({ value })}
         onFocus={() => store.set({ focused: true })}
         onBlur={() => store.set({ blurred: true })}
-        theme={simpleInput}
         skin={SimpleInputSkin}
       />
     ))
@@ -77,7 +90,6 @@ storiesOf('NumericInput', module)
       <FormField
         label="Amount"
         error="Please enter a valid amount"
-        theme={simpleFormField}
         skin={SimpleFormFieldSkin}
         render={props => (
           <NumericInput
@@ -85,7 +97,6 @@ storiesOf('NumericInput', module)
             value={store.state.value}
             placeholder="0.000000"
             onChange={value => store.set({ value })}
-            theme={simpleInput}
             skin={SimpleInputSkin}
           />
         )}
@@ -102,7 +113,6 @@ storiesOf('NumericInput', module)
         maxBeforeDot={3}
         maxAfterDot={4}
         onChange={value => store.set({ value })}
-        theme={simpleInput}
         skin={SimpleInputSkin}
       />
     ))
@@ -113,7 +123,6 @@ storiesOf('NumericInput', module)
     withState({ value: '' }, store => (
       <FormField
         label="Amount"
-        theme={simpleFormField}
         skin={SimpleFormFieldSkin}
         render={props => (
           <NumericInput
@@ -122,7 +131,6 @@ storiesOf('NumericInput', module)
             placeholder="0.000000"
             maxValue={30000}
             onChange={value => store.set({ value })}
-            theme={simpleInput}
             skin={SimpleInputSkin}
           />
         )}
@@ -135,7 +143,6 @@ storiesOf('NumericInput', module)
     withState({ value: '' }, store => (
       <FormField
         label="Amount"
-        theme={simpleFormField}
         skin={SimpleFormFieldSkin}
         render={props => (
           <NumericInput
@@ -145,7 +152,6 @@ storiesOf('NumericInput', module)
             maxValue={30000}
             minValue={1}
             onChange={value => store.set({ value })}
-            theme={simpleInput}
             skin={SimpleInputSkin}
           />
         )}
@@ -158,7 +164,6 @@ storiesOf('NumericInput', module)
     withState({ value: '' }, store => (
       <FormField
         label="Amount"
-        theme={simpleFormField}
         skin={SimpleFormFieldSkin}
         render={props => (
           <NumericInput
@@ -170,7 +175,6 @@ storiesOf('NumericInput', module)
             maxValue={45000000000}
             minValue={0.000001}
             onChange={value => store.set({ value })}
-            theme={simpleInput}
             skin={SimpleInputSkin}
           />
         )}

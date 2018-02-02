@@ -1,10 +1,33 @@
 import React from 'react';
-import { themr } from 'react-css-themr';
-import { TOOLTIP } from './identifiers';
-import DefaultTooltipTheme from '../../themes/simple/SimpleTooltip.scss';
-import { tooltipSkinFactory } from './raw/TooltipSkin';
-import BubbleSkin from './BubbleSkin';
 
-export default themr(TOOLTIP, DefaultTooltipTheme)(
-  tooltipSkinFactory(BubbleSkin),
+// external libraries
+import classnames from 'classnames';
+
+// skins
+import SimpleBubbleSkin from './BubbleSkin';
+
+// themes
+import { SimpleBubbleTheme } from '../../themes/simple';
+
+// internal utility functions
+import { pickDOMProps } from '../../utils/props';
+
+export default props => (
+  <span
+    {...pickDOMProps(props)}
+    className={classnames([props.className, props.theme.root])}
+  >
+    <SimpleBubbleSkin
+      theme={SimpleBubbleTheme}
+      isOpeningUpward={props.isOpeningUpward}
+      className={classnames([
+        props.theme.bubble,
+        props.isAligningRight ? props.theme.alignRight : props.theme.alignLeft,
+        props.isBounded ? null : props.theme.nowrap
+      ])}
+    >
+      {props.tip}
+    </SimpleBubbleSkin>
+    {props.children}
+  </span>
 );

@@ -1,0 +1,83 @@
+@import 'theme';
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$radio-size: 30px !default;
+$radio-color: white !default;
+$radio-border-color: #294b70 !default;
+$radio-border-width: 1px !default;
+
+$radio-border-disabled-color: $theme-color-disabled !default;
+$radio-label-color: #5e6066 !default;
+$radio-label-disabled-color: $theme-color-light-grey !default;
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+  }
+  &.disabled {
+    &:hover,
+    .label:hover {
+      cursor: default;
+    }
+    .label {
+      color: $radio-label-disabled-color;
+    }
+  }
+}
+
+.input {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+}
+
+.circle {
+  align-self: center;
+  border: $radio-border-width solid $radio-border-color;
+  margin-top: -$radio-border-width;
+  border-radius: $radio-size;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: $radio-size;
+  width: $radio-size;
+
+  &.selected {
+    background-color: $radio-border-color;
+    border-width: 0;
+    position: relative;
+    &:after {
+      background-color: $radio-color;
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      height: 30%;
+      width: 30%;
+      left: 35%;
+      top: 35%;
+    }
+  }
+}
+
+.label {
+  color: $radio-label-color;
+  font-family: $theme-font-light;
+  font-size: 16px;
+  line-height: 1.38;
+  margin-left: 20px;
+  white-space: normal;
+  display: inline-block;
+  vertical-align: middle;
+  &:hover {
+    cursor: pointer;
+  }
+  strong {
+    font-weight: 800;
+  }
+}

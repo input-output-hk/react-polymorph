@@ -6,17 +6,15 @@ import { StringOrElement } from '../utils/props.js';
 import composeTheme from '../utils/composeTheme.js';
 
 // import the FormField component's theme API
-import { formFieldThemeAPI } from '../themes/API/formField.js';
+import { FORMFIELD_THEME_API } from '../themes/API';
 
-export default class FormField extends Component {
-  state = { error: '' };
-
+class FormField extends Component {
   static propTypes = {
-    render: PropTypes.func.isRequired,
-    skin: PropTypes.func.isRequired,
     label: StringOrElement,
     disabled: PropTypes.bool,
     error: StringOrElement,
+    render: PropTypes.func.isRequired,
+    skin: PropTypes.func.isRequired,
     theme: PropTypes.object,
     themeOverrides: PropTypes.object,
     themeAPI: PropTypes.object
@@ -26,10 +24,35 @@ export default class FormField extends Component {
     disabled: false,
     theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...formFieldThemeAPI }
+    themeAPI: { ...FORMFIELD_THEME_API }
   };
 
-  _setError = error => this.setState({ error });
+  constructor(props, context) {
+    super(props);
+
+    const { themeOverrides, themeAPI } = props;
+
+    const theme =
+      context && context.theme && context.theme.formfield
+        ? context.theme.formfield
+        : props.theme;
+
+    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    this.state = {
+      error: '',
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+    };
+  }
+
+  setError = error => this.setState({ error });
+
+  focusChild = () => {
+    if (this.child && this.child.focus !== undefined) {
+      this.child.focus();
+    }
+  };
+
+  onRef = ref => (this.child = ref);
 
   render() {
     // destructuring the props here ensures that variable names
@@ -44,15 +67,21 @@ export default class FormField extends Component {
       ...rest
     } = this.props;
 
-    const composedTheme = composeTheme(theme, themeOverrides, themeAPI);
-
     return (
       <FormFieldSkin
         error={error || this.state.error}
-        setError={this._setError}
-        theme={composedTheme}
+        setError={this.setError}
+        theme={this.state.composedTheme}
+        focusChild={this.focusChild}
+        onRef={this.onRef}
         {...rest}
       />
     );
   }
 }
+
+FormField.contextTypes = {
+  theme: PropTypes.object
+};
+
+export default FormField;

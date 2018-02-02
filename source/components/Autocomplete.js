@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { StringOrElement } from '../utils/props';
 
 // import the composeTheme utility function
-import composeTheme from '../utils/composeTheme.js';
+import composeTheme from '../utils/composeTheme';
 
 // import the Autocomplete component's theme API
-import { autocompleteThemeAPI } from '../themes/API/autocomplete.js';
+import { AUTOCOMPLETE_THEME_API } from '../themes/API';
 
 class Autocomplete extends Component {
   static propTypes = {
@@ -33,7 +33,7 @@ class Autocomplete extends Component {
     options: [],
     theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...autocompleteThemeAPI },
+    themeAPI: { ...AUTOCOMPLETE_THEME_API },
     maxVisibleOptions: 10, // max number of visible options
     multipleSameSelections: true, // if true then same word can be selected multiple times
     sortAlphabetically: true, // options are sorted alphabetically by default
@@ -45,9 +45,12 @@ class Autocomplete extends Component {
     super(props);
 
     const { themeOverrides, themeAPI } = props;
-    const theme = context && context.theme ? context.theme : props.theme;
 
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme =
+      context && context.theme && context.theme.autocomplete
+        ? context.theme.autocomplete
+        : props.theme;
+
     this.state = {
       inputValue: '',
       error: '',
@@ -57,7 +60,7 @@ class Autocomplete extends Component {
           ? this.props.options.sort()
           : this.props.options || [],
       isOpen: false,
-      composedTheme: composeTheme(theme.autocomplete, themeOverrides, themeAPI)
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
     };
   }
 

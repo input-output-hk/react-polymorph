@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+// import utility functions
 import composeTheme from '../utils/composeTheme.js';
 
 // import the Bubble component's theme API
-import { bubbleThemeAPI } from '../themes/API/bubble.js';
+import { BUBBLE_THEME_API } from '../themes/API';
 
 class Bubble extends Component {
   static propTypes = {
@@ -19,18 +21,22 @@ class Bubble extends Component {
     isTransparent: true,
     theme: {},
     themeOverrides: {},
-    themeAPI: { ...bubbleThemeAPI }
+    themeAPI: { ...BUBBLE_THEME_API }
   };
 
   constructor(props, context) {
     super(props);
 
     const { themeOverrides, themeAPI } = props;
-    const theme = context && context.theme ? context.theme : props.theme;
+
+    const theme =
+      context && context.theme && context.theme.bubble
+        ? context.theme.bubble
+        : props.theme;
 
     // if themeOverrides isn't provided, composeTheme returns theme immediately
     this.state = {
-      composedTheme: composeTheme(theme.bubble, themeOverrides, themeAPI)
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
     };
   }
 

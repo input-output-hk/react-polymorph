@@ -1,7 +1,6 @@
-export const toolTipThemeAPI = {
+export default {
   root: '',
   bubble: '',
   alignRight: '',
-  nowrap: '',
-  hover: ''
+  nowrap: ''
 };

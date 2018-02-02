@@ -1,8 +1,6 @@
 export default {
   root: '',
   input: '',
-  check: '',
-  checked: '',
-  disabled: '',
+  toggler: '',
   label: ''
 };

@@ -1,21 +1,26 @@
 import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
 
+// components
 import ThemeProvider from '../source/components/ThemeProvider';
-
 import Button from '../source/components/Button';
+
+// skins
 import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
-import simpleButton from '../source/themes/simple/SimpleButton.scss';
+
+// themes
+import { SimpleButtonTheme } from '../source/themes/simple';
+
+// custom styles
 import customButton from './styles/customButton.scss';
 
 storiesOf('Button', module)
   .addDecorator(story => {
-    const simpleButtonTheme = { button: { ...simpleButton } };
+    const SimpleTheme = { button: { ...SimpleButtonTheme } };
 
-    return <ThemeProvider theme={simpleButtonTheme}>{story()}</ThemeProvider>;
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
   // ====== Stories ======

@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import SkinnableComponent from './SkinnableComponent';
 import events from '../utils/events';
 import { StringOrElement } from '../utils/props';
+import composeTheme from '../utils/composeTheme.js';
 
-export default class Options extends SkinnableComponent {
+// import the Options component's theme API
+import { OPTIONS_THEME_API } from '../themes/API';
 
-  static SKIN_PARTS = {
-    OPTIONS: 'options',
-  };
-
-  static propTypes = Object.assign({}, SkinnableComponent.propTypes, {
+class Options extends Component {
+  static propTypes = {
     isOpen: PropTypes.bool,
     isOpeningUpward: PropTypes.bool,
     resetOnClose: PropTypes.bool, // reset highlighted option on options close (e.g. in autocomplete)
@@ -19,23 +17,46 @@ export default class Options extends SkinnableComponent {
     selectedOptionValue: PropTypes.string,
     noResults: PropTypes.bool,
     noResultsMessage: StringOrElement,
-  });
+    onChange: PropTypes.func,
+    onClose: PropTypes.func,
+    options: PropTypes.array,
+    skin: PropTypes.func.isRequired,
+    theme: PropTypes.object,
+    themeOverrides: PropTypes.object,
+    themeAPI: PropTypes.object
+  };
 
   static defaultProps = {
     isOpen: false,
     isOpeningUpward: false,
     resetOnClose: false,
     noResultsMessage: 'No results',
+    theme: {},
+    themeOverrides: {},
+    themeAPI: { ...OPTIONS_THEME_API }
   };
 
-  state = {
-    isOpen: this.props.isOpen,
-    highlightedOptionIndex: 0,
-  };
+  constructor(props, context) {
+    super(props);
+
+    const { themeOverrides, themeAPI } = props;
+
+    const theme =
+      context && context.theme && context.theme.options
+        ? context.theme.options
+        : props.theme;
+
+    // if themeOverrides isn't provided, composeTheme returns theme obj immediately
+    this.state = {
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI),
+      isOpen: this.props.isOpen,
+      highlightedOptionIndex: 0
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.isOpen !== nextProps.isOpen) {
-      this.setState({isOpen: nextProps.isOpen});
+      this.setState({ isOpen: nextProps.isOpen });
     }
   }
 
@@ -57,20 +78,13 @@ export default class Options extends SkinnableComponent {
     if (this.state.isOpen) this.removeAllEventListeners();
   }
 
-  prepareSkinProps(props) {
-    return Object.assign({}, super.prepareSkinProps(props), {
-      isOpen: this.state.isOpen,
-      highlightedOptionIndex: this.state.highlightedOptionIndex,
-    });
-  };
-
   removeAllEventListeners() {
     events.removeEventsFromDocument(this._getDocumentEvents());
     window.removeEventListener('resize', this._handleWindowResize);
     this.handleScrollEventListener('remove');
   }
 
-  getFirstScrollableParent = (node) => {
+  getFirstScrollableParent = node => {
     if (node == null) return null;
     if (node.scrollHeight > node.clientHeight) {
       return node;
@@ -79,8 +93,9 @@ export default class Options extends SkinnableComponent {
     }
   };
 
-  handleScrollEventListener = (action) => {
-    const rootNode = this._getRootSkinPart();
+  // ref related
+  handleScrollEventListener = action => {
+    const rootNode = this.optionsElement;
     const scrollableNode = this.getFirstScrollableParent(rootNode);
     if (scrollableNode) {
       if (action === 'add') {
@@ -94,14 +109,18 @@ export default class Options extends SkinnableComponent {
   open = () => {
     this.setState({
       isOpen: true,
-      highlightedOptionIndex: this.props.resetOnClose ? 0 : this.state.highlightedOptionIndex,
+      highlightedOptionIndex: this.props.resetOnClose
+        ? 0
+        : this.state.highlightedOptionIndex
     });
   };
 
   close = () => {
     if (this.props.onClose) this.props.onClose();
     this.setState({
-      highlightedOptionIndex: this.props.resetOnClose ? 0 : this.state.highlightedOptionIndex,
+      highlightedOptionIndex: this.props.resetOnClose
+        ? 0
+        : this.state.highlightedOptionIndex
     });
   };
 
@@ -114,23 +133,28 @@ export default class Options extends SkinnableComponent {
     if (currentIndex !== null) {
       index = currentIndex;
     } else if (this.props.selectedOptionValue) {
-      index = options.findIndex(option => option.value === this.props.selectedOptionValue);
+      index = options.findIndex(
+        option => option.value === this.props.selectedOptionValue
+      );
     }
     if (isOpeningUpward) return options.length - 1 - index;
     return index;
   };
 
-  setHighlightedOptionIndex = (optionIndex) => {
-    if (!this.isHighlightedOption(optionIndex) && this.isDisabledOption(optionIndex)) {
+  setHighlightedOptionIndex = optionIndex => {
+    if (
+      !this.isHighlightedOption(optionIndex) &&
+      this.isDisabledOption(optionIndex)
+    ) {
       this.setState({ highlightedOptionIndex: optionIndex });
     }
   };
 
-  isHighlightedOption = (optionIndex) => {
+  isHighlightedOption = optionIndex => {
     return this.state.highlightedOptionIndex === optionIndex;
   };
 
-  isDisabledOption = (optionIndex) => {
+  isDisabledOption = optionIndex => {
     const { options } = this.props;
     const option = options[optionIndex];
     return option && !option.isDisabled;
@@ -147,13 +171,14 @@ export default class Options extends SkinnableComponent {
 
   // ========= PRIVATE HELPERS =========
 
-  _handleSelectionOnEnterKey = (event) => {
+  _handleSelectionOnEnterKey = event => {
     const { options } = this.props;
     if (options.length) {
       const { isOpeningUpward } = this.props;
       const currentIndex = this.state.highlightedOptionIndex;
       const reverseIndex = options.length - 1 - currentIndex;
-      const highlightedOption = options[isOpeningUpward ? reverseIndex : currentIndex];
+      const highlightedOption =
+        options[isOpeningUpward ? reverseIndex : currentIndex];
       this.handleClickOnOption(highlightedOption, event);
     } else {
       event.preventDefault();
@@ -165,7 +190,7 @@ export default class Options extends SkinnableComponent {
     if (options.length) {
       const lowerIndexBound = 0;
       const upperIndexBound = options.length - 1;
-      let newIndex = (direction === 'up') ? (currentIndex - 1) : (currentIndex + 1);
+      let newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
 
       // Make sure new index is within options bounds
       newIndex = Math.max(lowerIndexBound, Math.min(newIndex, upperIndexBound));
@@ -174,7 +199,10 @@ export default class Options extends SkinnableComponent {
         // Try to jump over disabled options
         const canMoveUp = newIndex > lowerIndexBound;
         const canMoveDown = newIndex < upperIndexBound;
-        if ((direction === 'up' && canMoveUp) || (direction === 'down' && canMoveDown)) {
+        if (
+          (direction === 'up' && canMoveUp) ||
+          (direction === 'down' && canMoveDown)
+        ) {
           this._handleHighlightMove(newIndex, direction);
         }
       } else {
@@ -185,11 +213,11 @@ export default class Options extends SkinnableComponent {
     }
   };
 
-  _handleKeyDown = (event) => {
+  _handleKeyDown = event => {
     const highlightOptionIndex = this.state.highlightedOptionIndex;
     switch (event.keyCode) {
       case 9: // Select currently highlighted option on Tab key
-      event.preventDefault();
+        event.preventDefault();
         this._handleSelectionOnEnterKey(event);
         break;
       case 13: // Select currently highlighted option on Enter key
@@ -211,9 +239,14 @@ export default class Options extends SkinnableComponent {
     }
   };
 
-  _handleDocumentClick = (event) => {
-    const root = this._getRootSkinPart();
-    const isDescendant = events.targetIsDescendant(event, ReactDOM.findDOMNode(root));
+  // ref related
+  _handleDocumentClick = event => {
+    const root = this.optionsElement;
+    const isDescendant = events.targetIsDescendant(
+      event,
+      ReactDOM.findDOMNode(root)
+    );
+
     if (this.state.isOpen && !isDescendant) {
       this.close();
     }
@@ -228,12 +261,40 @@ export default class Options extends SkinnableComponent {
       keydown: this._handleKeyDown,
       click: this._handleDocumentClick,
       touchend: this._handleDocumentClick,
-      scroll: this._handleScroll,
+      scroll: this._handleScroll
     };
   }
 
-  _getRootSkinPart() {
-    return this.skinParts[Options.SKIN_PARTS.OPTIONS];
-  }
+  render() {
+    const {
+      skin: OptionsSkin,
+      theme,
+      themeOverrides,
+      themeAPI,
+      onChange,
+      ...rest
+    } = this.props;
 
+    const { composedTheme, isOpen, highlightedOptionIndex } = this.state;
+
+    return (
+      <OptionsSkin
+        optionsRef={el => (this.optionsElement = el)}
+        theme={composedTheme}
+        isOpen={isOpen}
+        highlightedOptionIndex={highlightedOptionIndex}
+        getHighlightedOptionIndex={this.getHighlightedOptionIndex}
+        isHighlightedOption={this.isHighlightedOption}
+        handleClickOnOption={this.handleClickOnOption}
+        setHighlightedOptionIndex={this.setHighlightedOptionIndex}
+        {...rest}
+      />
+    );
+  }
 }
+
+Options.contextTypes = {
+  theme: PropTypes.object
+};
+
+export default Options;

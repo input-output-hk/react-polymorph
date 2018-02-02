@@ -1,4 +1,6 @@
 import React from 'react';
+
+// external libraries
 import classnames from 'classnames';
 
 export default props => (
@@ -12,10 +14,7 @@ export default props => (
   >
     {props.error && <div className={props.theme.error}>{props.error}</div>}
     {props.label && (
-      <label
-        className={props.theme.label}
-        // onClick={this.input ? this.input.focus() : null}
-      >
+      <label className={props.theme.label} onClick={props.focusChild}>
         {props.label}
       </label>
     )}

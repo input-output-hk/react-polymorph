@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+// external libraries
 import { isString, flow } from 'lodash';
+
+// theme API
+import { INPUT_THEME_API } from '../themes/API';
+
+// internal utility functions
+import composeTheme from '../utils/composeTheme.js';
 import { StringOrElement } from '../utils/props';
 
-// import the composeTheme utility function
-import composeTheme from '../utils/composeTheme.js';
-
-// import the Input component's theme API
-import { inputThemeAPI } from '../themes/API/input.js';
-
-export default class Input extends Component {
-  state = { error: '' };
-
+class Input extends Component {
   static propTypes = {
+    onRef: PropTypes.func,
     autoFocus: PropTypes.bool,
     error: StringOrElement,
     onChange: PropTypes.func,
@@ -31,19 +32,41 @@ export default class Input extends Component {
   };
 
   static defaultProps = {
+    onRef: () => {},
     autoFocus: false,
     error: '',
     readOnly: false,
     value: '',
     theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...inputThemeAPI }
+    themeAPI: { ...INPUT_THEME_API }
   };
 
+  constructor(props, context) {
+    super(props);
+
+    const { themeOverrides, themeAPI } = props;
+
+    const theme =
+      context && context.theme && context.theme.input
+        ? context.theme.input
+        : props.theme;
+
+    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    this.state = {
+      error: '',
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+    };
+  }
+
   componentDidMount() {
-    if (this.props.autoFocus) {
-      this._focus();
-    }
+    const { onRef, autoFocus } = this.props;
+
+    if (autoFocus) this.focus();
+
+    // if Input is rendered by FormField, onRef allows FormField to call
+    // Input's focus method when someone clicks on FormField's label
+    onRef(this);
   }
 
   onChange = event => {
@@ -64,7 +87,7 @@ export default class Input extends Component {
     this.setState({ error });
   };
 
-  _focus = () => this.inputElement.focus();
+  focus = () => this.inputElement.focus();
 
   _processValue(value) {
     return flow([
@@ -113,16 +136,20 @@ export default class Input extends Component {
       ...rest
     } = this.props;
 
-    const composedTheme = composeTheme(theme, themeOverrides, themeAPI);
-
     return (
       <InputSkin
         error={error || this.state.error}
         onChange={this.onChange}
         inputRef={el => (this.inputElement = el)}
-        theme={composedTheme}
+        theme={this.state.composedTheme}
         {...rest}
       />
     );
   }
 }
+
+Input.contextTypes = {
+  theme: PropTypes.object
+};
+
+export default Input;

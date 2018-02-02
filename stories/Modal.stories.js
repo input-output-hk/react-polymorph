@@ -1,25 +1,29 @@
 import React from 'react';
 
+// storybook
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
+// components
 import ThemeProvider from '../source/components/ThemeProvider';
-
 import Modal from '../source/components/Modal';
-import SimpleModalSkin from '../source/skins/simple/ModalSkin';
-import simpleModal from '../source/themes/simple/SimpleModal.scss';
-
 import Button from '../source/components/Button';
-import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
-import simpleButton from '../source/themes/simple/SimpleButton.scss';
 
+// skins
+import SimpleModalSkin from '../source/skins/simple/ModalSkin';
+import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
+
+// themes
+import { SimpleModalTheme, SimpleButtonTheme } from '../source/themes/simple';
+
+// custom styles
 import styles from './Modal.stories.scss';
 
 storiesOf('Modal', module)
   .addDecorator(story => {
     const SimpleTheme = {
-      modal: { ...simpleModal },
-      button: { ...simpleButton }
+      modal: { ...SimpleModalTheme },
+      button: { ...SimpleButtonTheme }
     };
 
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;

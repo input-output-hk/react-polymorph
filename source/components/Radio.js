@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // import utility functions
-import { StringOrElement } from '../utils/props.js';
 import composeTheme from '../utils/composeTheme.js';
+import { StringOrElement } from '../utils/props';
 
-// import the Checkbox component's theme API
-import { CHECKBOX_THEME_API } from '../themes/API';
+// import the Radio component's theme API
+import { RADIO_THEME_API } from '../themes/API';
 
-class Checkbox extends Component {
+class Radio extends Component {
   static propTypes = {
-    checked: PropTypes.bool,
+    selected: PropTypes.bool,
     label: StringOrElement,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -26,7 +26,7 @@ class Checkbox extends Component {
     disabled: false,
     theme: {},
     themeOverrides: {},
-    themeAPI: { ...CHECKBOX_THEME_API }
+    themeAPI: { ...RADIO_THEME_API }
   };
 
   constructor(props, context) {
@@ -35,11 +35,11 @@ class Checkbox extends Component {
     const { themeOverrides, themeAPI } = props;
 
     const theme =
-      context && context.theme && context.theme.checkbox
-        ? context.theme.checkbox
+      context && context.theme && context.theme.radio
+        ? context.theme.radio
         : props.theme;
 
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    // if themeOverrides isn't provided, composeTheme returns theme obj immediately
     this.state = {
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)
     };
@@ -47,19 +47,19 @@ class Checkbox extends Component {
 
   render() {
     const {
-      skin: CheckboxSkin,
+      skin: RadioSkin,
       theme,
       themeOverrides,
       themeAPI,
       ...rest
     } = this.props;
 
-    return <CheckboxSkin theme={this.state.composedTheme} {...rest} />;
+    return <RadioSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
 
-Checkbox.contextTypes = {
+Radio.contextTypes = {
   theme: PropTypes.object
 };
 
-export default Checkbox;
+export default Radio;

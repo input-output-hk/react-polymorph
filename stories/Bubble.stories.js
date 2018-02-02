@@ -1,22 +1,27 @@
 import React from 'react';
 
+// storybook
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { withState } from '@dump247/storybook-state';
 
+// components
 import ThemeProvider from '../source/components/ThemeProvider';
-
 import Bubble from '../source/components/Bubble';
-import SimpleBubbleSkin from '../source/skins/simple/BubbleSkin';
-import simpleBubble from '../source/themes/simple/SimpleBubble.scss';
 
+// skins
+import SimpleBubbleSkin from '../source/skins/simple/BubbleSkin';
+
+// themes
+import { SimpleBubbleTheme } from '../source/themes/simple';
+
+// custom styles
 import styles from './Bubble.stories.scss';
 
 storiesOf('Bubble', module)
   .addDecorator(story => {
-    const simpleBubbleTheme = { bubble: { ...simpleBubble } };
+    const SimpleTheme = { bubble: { ...SimpleBubbleTheme } };
 
-    return <ThemeProvider theme={simpleBubbleTheme}>{story()}</ThemeProvider>;
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
   // ====== Stories ======

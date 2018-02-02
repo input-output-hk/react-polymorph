@@ -1,27 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { flow } from 'lodash';
+
+// import utility functions
+import composeTheme from '../utils/composeTheme.js';
 import { StringOrElement } from '../utils/props';
 
-// import the composeTheme utility function
-import composeTheme from '../utils/composeTheme.js';
-
-// import the composeFunctions utility function
-import composeFunctions from '../utils/composeFunctions.js';
-
 // import the Input component's theme API
-import { inputThemeAPI } from '../themes/API/input.js';
+import { INPUT_THEME_API } from '../themes/API';
 
-export default class NumericInput extends Component {
-  state = {
-    caretPosition: 0, // Current caret position
-    separatorsCount: 0, // Number of comma separators used for calculating caret position after separators are injected
-    error: null, // Inner (Component) state error
-    // e.g. if value > maxValue set error message
-    oldValue: null // Last recorded value before input change
-  };
-
+class NumericInput extends Component {
   static propTypes = {
+    onRef: PropTypes.func,
     onChange: PropTypes.func,
     error: StringOrElement,
     value: PropTypes.string,
@@ -37,16 +27,41 @@ export default class NumericInput extends Component {
   };
 
   static defaultProps = {
+    onRef: () => {},
     value: '',
     error: '',
     theme: {},
     themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...inputThemeAPI }
+    themeAPI: { ...INPUT_THEME_API }
   };
+
+  constructor(props, context) {
+    super(props);
+
+    const { themeOverrides, themeAPI } = props;
+
+    const theme =
+      context && context.theme && context.theme.input
+        ? context.theme.input
+        : props.theme;
+
+    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    this.state = {
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI),
+      caretPosition: 0, // Current caret position
+      separatorsCount: 0, // Number of comma separators used for calculating caret position after separators are injected
+      error: null, // Inner (Component) state error // e.g. if value > maxValue set error message
+      oldValue: null // Last recorded value before input change
+    };
+  }
 
   // ========= COMPONENT LIFE CYCLE =========
 
   componentDidMount() {
+    // if NumericInput is rendered by FormField, onRef allows FormField to call
+    // NumericInput's focus method when someone clicks on FormField's label
+    this.props.onRef(this);
+
     // Set last input caret position on updates
     this.setState({ caretPosition: this.inputElement.selectionStart });
   }
@@ -308,16 +323,20 @@ export default class NumericInput extends Component {
       ...rest
     } = this.props;
 
-    const composedTheme = composeTheme(theme, themeOverrides, themeAPI);
-
     return (
       <InputSkin
         error={error || this.state.error}
         inputRef={el => (this.inputElement = el)}
         onChange={this.onChange}
-        theme={composedTheme}
+        theme={this.state.composedTheme}
         {...rest}
       />
     );
   }
 }
+
+NumericInput.contextTypes = {
+  theme: PropTypes.object
+};
+
+export default NumericInput;

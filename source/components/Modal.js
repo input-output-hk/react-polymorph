@@ -5,7 +5,7 @@ import { StringOrElement } from '../utils/props';
 import composeTheme from '../utils/composeTheme';
 
 // import the Modal component's theme API
-import { modalThemeAPI } from '../themes/API/modal';
+import { MODAL_THEME_API } from '../themes/API';
 
 class Modal extends Component {
   static propTypes = {
@@ -25,17 +25,18 @@ class Modal extends Component {
     triggerCloseOnOverlayClick: true,
     theme: {},
     themeOverrides: {},
-    themeAPI: { ...modalThemeAPI }
+    themeAPI: { ...MODAL_THEME_API }
   };
 
   constructor(props, context) {
     super(props);
 
-    let { themeOverrides, themeAPI, theme } = props;
+    const { themeOverrides, themeAPI } = props;
 
-    if (context && context.theme && context.theme.modal) {
-      theme = context.theme.modal;
-    }
+    const theme =
+      context && context.theme && context.theme.modal
+        ? context.theme.modal
+        : props.theme;
 
     // if themeOverrides isn't provided, composeTheme returns theme immediately
     this.state = {

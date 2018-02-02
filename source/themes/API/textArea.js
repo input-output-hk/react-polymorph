@@ -1,4 +1,4 @@
-export const textAreaThemeAPI = {
+export default {
   textarea: '',
   disabled: '',
   errored: ''

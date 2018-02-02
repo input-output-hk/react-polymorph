@@ -1,4 +1,4 @@
-export const bubbleThemeAPI = {
+export default {
   root: '',
   bubble: ''
 };
