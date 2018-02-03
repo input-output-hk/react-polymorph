@@ -5,8 +5,7 @@ import { bool, func, object } from 'prop-types';
 import { FORMFIELD_THEME_API } from '../themes/API';
 
 // import utility functions
-import composeTheme from '../utils/composeTheme.js';
-import { StringOrElement } from '../utils/props.js';
+import { StringOrElement, composeTheme } from '../utils';
 
 class FormField extends Component {
   static propTypes = {

@@ -10,7 +10,7 @@ import _ from 'lodash';
 import ROOT_THEME_API from '../themes/API';
 
 // internal utility functions
-import composeTheme from '../utils/composeTheme.js';
+import { composeTheme } from '../utils';
 
 class ThemeProvider extends Component {
   static propTypes = {

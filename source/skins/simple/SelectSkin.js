@@ -14,7 +14,7 @@ import SimpleOptionsSkin from '../../skins/simple/OptionsSkin';
 import { SimpleInputTheme, SimpleOptionsTheme } from '../../themes/simple';
 
 // internal utility functions
-import { pickDOMProps } from '../../utils/props';
+import { pickDOMProps } from '../../utils';
 
 export default props => {
   const selectedOption = props.getSelectedOption();

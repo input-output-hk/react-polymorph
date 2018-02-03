@@ -8,8 +8,7 @@ import { isString, flow } from 'lodash';
 import { TEXTAREA_THEME_API } from '../themes/API';
 
 // import utility functions
-import composeTheme from '../utils/composeTheme.js';
-import { StringOrElement } from '../utils/props';
+import { StringOrElement, composeTheme } from '../utils';
 
 class TextArea extends Component {
   static propTypes = {

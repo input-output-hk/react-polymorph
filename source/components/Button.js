@@ -8,8 +8,7 @@ import _ from 'lodash';
 import { BUTTON_THEME_API } from '../themes/API';
 
 // internal utility functions
-import composeTheme from '../utils/composeTheme';
-import { StringOrElement } from '../utils/props';
+import { StringOrElement, composeTheme } from '../utils';
 
 class Button extends Component {
   static propTypes = {

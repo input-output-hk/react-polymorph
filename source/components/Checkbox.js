@@ -5,8 +5,7 @@ import { bool, func, object } from 'prop-types';
 import { CHECKBOX_THEME_API } from '../themes/API';
 
 // import utility functions
-import { StringOrElement } from '../utils/props.js';
-import composeTheme from '../utils/composeTheme.js';
+import { StringOrElement, composeTheme } from '../utils';
 
 class Checkbox extends Component {
   static propTypes = {

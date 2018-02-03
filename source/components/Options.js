@@ -6,9 +6,13 @@ import ReactDOM from 'react-dom';
 import { OPTIONS_THEME_API } from '../themes/API';
 
 // internal utility functions
-import composeTheme from '../utils/composeTheme.js';
-import { StringOrElement } from '../utils/props';
-import events from '../utils/events';
+import {
+  StringOrElement,
+  composeTheme,
+  addEventsToDocument,
+  removeEventsFromDocument,
+  targetIsDescendant
+} from '../utils';
 
 class Options extends Component {
   static propTypes = {
@@ -72,7 +76,7 @@ class Options extends Component {
     if (!this.state.isOpen && nextState.isOpen) {
       window.addEventListener('resize', this._handleWindowResize);
       this.handleScrollEventListener('add');
-      events.addEventsToDocument(this._getDocumentEvents());
+      addEventsToDocument(this._getDocumentEvents());
     }
   }
 
@@ -85,7 +89,7 @@ class Options extends Component {
   }
 
   removeAllEventListeners() {
-    events.removeEventsFromDocument(this._getDocumentEvents());
+    removeEventsFromDocument(this._getDocumentEvents());
     window.removeEventListener('resize', this._handleWindowResize);
     this.handleScrollEventListener('remove');
   }
@@ -246,7 +250,7 @@ class Options extends Component {
 
   _handleDocumentClick = event => {
     const root = this.optionsElement;
-    const isDescendant = events.targetIsDescendant(
+    const isDescendant = targetIsDescendant(
       event,
       ReactDOM.findDOMNode(root)
     );

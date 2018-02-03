@@ -5,7 +5,7 @@ import { bool, func, object, arrayOf, shape, string } from 'prop-types';
 import { SELECT_THEME_API } from '../themes/API';
 
 // import the composeTheme utility function
-import composeTheme from '../utils/composeTheme.js';
+import { StringOrElement, composeTheme } from '../utils';
 
 class Select extends Component {
   static propTypes = {

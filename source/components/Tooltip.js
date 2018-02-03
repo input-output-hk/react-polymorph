@@ -5,8 +5,7 @@ import { bool, func, object } from 'prop-types';
 import { TOOLTIP_THEME_API } from '../themes/API';
 
 // import utility functions
-import { StringOrElement } from '../utils/props';
-import composeTheme from '../utils/composeTheme';
+import { StringOrElement, composeTheme } from '../utils';
 
 class Tooltip extends Component {
   static propTypes = {

@@ -10,7 +10,7 @@ import SimpleBubbleSkin from './BubbleSkin';
 import { SimpleBubbleTheme } from '../../themes/simple';
 
 // internal utility functions
-import { pickDOMProps } from '../../utils/props';
+import { pickDOMProps } from '../../utils';
 
 export default props => (
   <span

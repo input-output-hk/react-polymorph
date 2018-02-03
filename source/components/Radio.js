@@ -5,8 +5,7 @@ import { bool, func, object } from 'prop-types';
 import { RADIO_THEME_API } from '../themes/API';
 
 // import utility functions
-import composeTheme from '../utils/composeTheme.js';
-import { StringOrElement } from '../utils/props';
+import { StringOrElement, composeTheme } from '../utils';
 
 class Radio extends Component {
   static propTypes = {

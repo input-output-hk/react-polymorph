@@ -8,8 +8,7 @@ import { flow } from 'lodash';
 import { INPUT_THEME_API } from '../themes/API';
 
 // internal utility functions
-import composeTheme from '../utils/composeTheme.js';
-import { StringOrElement } from '../utils/props';
+import { StringOrElement, composeTheme } from '../utils';
 
 class NumericInput extends Component {
   static propTypes = {

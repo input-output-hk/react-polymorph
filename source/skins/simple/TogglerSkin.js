@@ -4,7 +4,7 @@ import React from 'react';
 import classnames from 'classnames';
 
 // import utility functions
-import { pickDOMProps } from '../../utils/props';
+import { pickDOMProps } from '../../utils';
 
 export default props => (
   <div

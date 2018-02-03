@@ -5,8 +5,7 @@ import { bool, func, object } from 'prop-types';
 import { MODAL_THEME_API } from '../themes/API';
 
 // internal utiltity functions
-import composeTheme from '../utils/composeTheme';
-import { StringOrElement } from '../utils/props';
+import { StringOrElement, composeTheme } from '../utils';
 
 class Modal extends Component {
   static propTypes = {

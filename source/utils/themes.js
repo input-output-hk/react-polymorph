@@ -6,7 +6,7 @@ import _ from 'lodash';
 // for composing a custom theme with a built in theme (such as the Simple theme)
 
 // composeTheme utility function
-export default (theme = {}, themeOverrides = {}, themeAPI = {}) => {
+const composeTheme = (theme = {}, themeOverrides = {}, themeAPI = {}) => {
   // check to see if themeOverrides is an empty object
   // if it is, return the theme
   // if it is not, compose themeOverrides and theme
@@ -30,3 +30,5 @@ export default (theme = {}, themeOverrides = {}, themeAPI = {}) => {
     return composedTheme;
   }
 };
+
+export default { composeTheme };

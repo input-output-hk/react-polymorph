@@ -16,8 +16,8 @@ import _ from 'lodash';
 import { AUTOCOMPLETE_THEME_API } from '../themes/API';
 
 // internal utility functions
-import composeTheme from '../utils/composeTheme';
-import { StringOrElement } from '../utils/props';
+// import composeTheme from '../utils/composeTheme';
+import { StringOrElement, composeTheme } from '../utils';
 
 class Autocomplete extends Component {
   static propTypes = {

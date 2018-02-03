@@ -5,8 +5,7 @@ import { bool, func, object } from 'prop-types';
 import { BUBBLE_THEME_API } from '../themes/API';
 
 // internal utility functions
-import composeTheme from '../utils/composeTheme';
-import { StringOrElement } from '../utils/props';
+import { StringOrElement, composeTheme } from '../utils';
 
 class Bubble extends Component {
   static propTypes = {
