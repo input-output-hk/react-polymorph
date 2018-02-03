@@ -316,9 +316,7 @@ class NumericInput extends Component {
   }
 
   render() {
-    // destructuring the props here ensures that variable names
-    // do not overwrite each other, only pass on the "...rest" of the props
-
+    // destructuring props ensures only the "...rest" get passed down
     const {
       skin: InputSkin,
       theme,

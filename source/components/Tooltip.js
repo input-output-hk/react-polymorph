@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { bool, func, object } from 'prop-types';
 
+// import the Tooltip component's theme API
+import { TOOLTIP_THEME_API } from '../themes/API';
+
 // import utility functions
 import { StringOrElement } from '../utils/props';
 import composeTheme from '../utils/composeTheme';
-
-// import the Tooltip component's theme API
-import { TOOLTIP_THEME_API } from '../themes/API';
 
 class Tooltip extends Component {
   static propTypes = {
@@ -48,6 +48,7 @@ class Tooltip extends Component {
   }
 
   render() {
+    // destructuring props ensures only the "...rest" get passed down
     const {
       skin: TooltipSkin,
       theme,

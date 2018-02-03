@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { bool, func, object } from 'prop-types';
 
+// import the Radio component's theme API
+import { RADIO_THEME_API } from '../themes/API';
+
 // import utility functions
 import composeTheme from '../utils/composeTheme.js';
 import { StringOrElement } from '../utils/props';
-
-// import the Radio component's theme API
-import { RADIO_THEME_API } from '../themes/API';
 
 class Radio extends Component {
   static propTypes = {
@@ -50,6 +50,7 @@ class Radio extends Component {
   }
 
   render() {
+    // destructuring props ensures only the "...rest" get passed down
     const {
       skin: RadioSkin,
       theme,

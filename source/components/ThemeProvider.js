@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { object, string, element } from 'prop-types';
 
-// utility function for composing a component's theme object
-// with any themeOverrides
-import composeTheme from '../utils/composeTheme.js';
+// external libraries
+import _ from 'lodash';
 
 // import the Root Theme API object which specifies the shape
 // of a theme for every component in this library, used in composeLibraryTheme
 // this is the default export from /themes/API/index.js
 import ROOT_THEME_API from '../themes/API';
+
+// internal utility functions
+import composeTheme from '../utils/composeTheme.js';
 
 class ThemeProvider extends Component {
   static propTypes = {
@@ -49,10 +50,8 @@ class ThemeProvider extends Component {
     };
   }
 
-  // prevents performance issues associated with frequently rerendering all
-  // children of ThemeProvider by checking to see if the passed theme and/or
-  // themeOverrides props have changed before a rerender
-
+  // prevents frequent rerenders of ThemeProvider's children by
+  // checking if theme and/or themeOverrides props have changed
   componentWillReceiveProps(nextProps) {
     const { theme, themeOverrides } = nextProps;
 
@@ -84,20 +83,18 @@ class ThemeProvider extends Component {
   //   formField: { root: '', label: '', error: '' },
   //   ... and so on, creating a complete theme for the library,
   //  }
-
-  composeLibraryTheme = (theme, themeOverrides, rootThemeAPI) => {
+  composeLibraryTheme = (theme, themeOverrides, ROOT_THEME_API) => {
     if (_.isEmpty(themeOverrides)) {
       return theme;
     } else {
-      let composedTheme = { ...rootThemeAPI };
+      let composedTheme = { ...ROOT_THEME_API };
 
-      for (const componentName in rootThemeAPI) {
+      for (const componentName in ROOT_THEME_API) {
         if (theme.hasOwnProperty(componentName)) {
           composedTheme[componentName] = theme[componentName];
         } else {
-          // delete property from composedTheme because it will remain empty
-          // only the non-empty props that this.props.theme contains should be returned
-
+          // delete property from composedTheme obj because it will remain empty
+          // only non-empty keys in this.props.theme should be returned
           delete composedTheme[componentName];
         }
 
@@ -105,7 +102,7 @@ class ThemeProvider extends Component {
           composedTheme[componentName] = composeTheme(
             theme[componentName],
             themeOverrides[componentName],
-            rootThemeAPI[componentName]
+            ROOT_THEME_API[componentName]
           );
         }
       }
@@ -115,7 +112,7 @@ class ThemeProvider extends Component {
   };
 
   // all children of ThemeProvider HOC are passed the theme object
-  // composed with any custom config via this.props.themeOverrides
+  // composed with any custom styles -> (this.props.themeOverrides)
   render() {
     return <div>{this.props.children}</div>;
   }

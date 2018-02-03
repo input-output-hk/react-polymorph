@@ -4,12 +4,12 @@ import { bool, func, object, string, number } from 'prop-types';
 // external libraries
 import { isString, flow } from 'lodash';
 
+// import the Input component's constant theme API
+import { TEXTAREA_THEME_API } from '../themes/API';
+
 // import utility functions
 import composeTheme from '../utils/composeTheme.js';
 import { StringOrElement } from '../utils/props';
-
-// import the Input component's constant theme API
-import { TEXTAREA_THEME_API } from '../themes/API';
 
 class TextArea extends Component {
   static propTypes = {
@@ -161,9 +161,7 @@ class TextArea extends Component {
   };
 
   render() {
-    // destructuring the props here ensures that variable names
-    // do not overwrite each other, only pass on the "...rest" of the props
-
+    // destructuring props ensures only the "...rest" get passed down
     const {
       skin: TextAreaSkin,
       theme,

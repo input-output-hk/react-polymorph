@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { bool, func, object, arrayOf, shape, string } from 'prop-types';
 
-// import the composeTheme utility function
-import composeTheme from '../utils/composeTheme.js';
-
 // import the Select component's theme API
 import { SELECT_THEME_API } from '../themes/API';
+
+// import the composeTheme utility function
+import composeTheme from '../utils/composeTheme.js';
 
 class Select extends Component {
   static propTypes = {
@@ -95,9 +95,7 @@ class Select extends Component {
   };
 
   render() {
-    // destructuring the props here ensures that variable names
-    // do not overwrite each other, only pass on the "...rest" of the props
-
+    // destructuring props ensures only the "...rest" get passed down
     const {
       skin: SelectSkin,
       theme,

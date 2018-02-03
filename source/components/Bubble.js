@@ -46,6 +46,7 @@ class Bubble extends Component {
   }
 
   render() {
+    // destructuring props ensures only the "...rest" get passed down
     const {
       skin: BubbleSkin,
       theme,

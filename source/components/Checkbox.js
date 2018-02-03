@@ -50,6 +50,7 @@ class Checkbox extends Component {
   }
 
   render() {
+    // destructuring props ensures only the "...rest" get passed down
     const {
       skin: CheckboxSkin,
       theme,
