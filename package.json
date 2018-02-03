@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/CodeAdventure/react-polymorph/issues"
   },
-  "keywords": ["react", "components", "customizable", "skins", "themes"],
+  "keywords": ["react", "components", "composable", "customizable", "skins", "themes"],
   "dependencies": {
     "filter-react-dom-props": "0.0.2",
     "postinstall-build": "^5.0.0",
@@ -32,7 +32,6 @@
     "react-dom": "^15 || ^16",
     "classnames": "^2",
     "prop-types": "^15",
-    "react-css-themr": "^2",
     "lodash": "^4"
   },
   "devDependencies": {
@@ -71,7 +70,6 @@
     "nodemon": "1.12.1",
     "prop-types": "15.6.0",
     "react": "16.0.0",
-    "react-css-themr": "2.1.2",
     "react-dom": "16.0.0",
     "rimraf": "2.6.2",
     "sass-loader": "6.0.6",
