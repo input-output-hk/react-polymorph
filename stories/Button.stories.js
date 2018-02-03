@@ -13,8 +13,8 @@ import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
 // themes
 import { SimpleButtonTheme } from '../source/themes/simple';
 
-// custom styles
-import customButton from './styles/customButton.scss';
+// custom styles & themeOverrides
+import themeOverrides from './styles/customButton.scss';
 
 storiesOf('Button', module)
   .addDecorator(story => {
@@ -36,7 +36,7 @@ storiesOf('Button', module)
   .add('composed theme', () => (
     <Button
       label="Button label"
-      themeOverrides={customButton}
+      themeOverrides={themeOverrides}
       skin={SimpleButtonSkin}
     />
   ));

@@ -14,8 +14,9 @@ import SimpleBubbleSkin from '../source/skins/simple/BubbleSkin';
 // themes
 import { SimpleBubbleTheme } from '../source/themes/simple';
 
-// custom styles
+// custom styles & theme overrides
 import styles from './Bubble.stories.scss';
+import themeOverrides from './styles/customBubble.scss';
 
 storiesOf('Bubble', module)
   .addDecorator(story => {
@@ -59,5 +60,11 @@ storiesOf('Bubble', module)
   .add('content-light', () => (
     <div className={styles.container}>
       <Bubble skin={SimpleBubbleSkin}>tiny</Bubble>
+    </div>
+  ))
+
+  .add('composed theme', () => (
+    <div className={styles.container}>
+      <Bubble themeOverrides={themeOverrides} skin={SimpleBubbleSkin}>tiny</Bubble>
     </div>
   ));

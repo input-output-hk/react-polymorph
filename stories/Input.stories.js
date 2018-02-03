@@ -20,6 +20,9 @@ import {
   SimpleInputTheme
 } from '../source/themes/simple';
 
+// themeOverrides
+import themeOverrides from './styles/customInput.scss';
+
 storiesOf('Input', module)
   .addDecorator(story => {
     const SimpleTheme = {
@@ -195,6 +198,26 @@ storiesOf('Input', module)
             placeholder="max length"
             maxLength={5}
             onKeyPress={action('onKeyPress')}
+            onChange={(value, event) => store.set({ value })}
+            skin={SimpleInputSkin}
+          />
+        )}
+      />
+    ))
+  )
+
+  .add(
+    'composed theme',
+    withState({ value: '' }, store => (
+      <FormField
+        label="Input with a composed theme"
+        skin={SimpleFormFieldSkin}
+        render={props => (
+          <Input
+            {...props}
+            themeOverrides={themeOverrides}
+            value={store.state.value}
+            placeholder="type here..."
             onChange={(value, event) => store.set({ value })}
             skin={SimpleInputSkin}
           />

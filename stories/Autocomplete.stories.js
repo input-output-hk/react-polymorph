@@ -24,7 +24,7 @@ import {
 
 // custom styles & theme overrides
 import styles from './Autocomplete.stories.scss';
-import customAutocomplete from './styles/customAutocomplete.scss';
+import themeOverrides from './styles/customAutocomplete.scss';
 
 
 const OPTIONS = [
@@ -202,7 +202,7 @@ storiesOf('Autocomplete', module)
     'composed theme',
     withState({ selectedOpts: [] }, store => (
       <Autocomplete
-        themeOverrides={customAutocomplete}
+        themeOverrides={themeOverrides}
         label="Recovery phrase"
         options={OPTIONS}
         placeholder="Enter mnemonic..."

@@ -20,6 +20,9 @@ import {
   SimpleFormFieldTheme
 } from '../source/themes/simple';
 
+// themeOverrides
+import themeOverrides from './styles/customTextarea.scss';
+
 storiesOf('TextArea', module)
   .addDecorator(story => {
     const SimpleTheme = {
@@ -153,6 +156,19 @@ storiesOf('TextArea', module)
             skin={SimpleTextAreaSkin}
           />
         )}
+      />
+    ))
+  )
+
+  .add(
+    'composed theme',
+    withState({ value: '' }, store => (
+      <TextArea
+        themeOverrides={themeOverrides}
+        value={store.state.value}
+        onChange={(value, event) => store.set({ value })}
+        placeholder="type here..."
+        skin={SimpleTextAreaSkin}
       />
     ))
   );
