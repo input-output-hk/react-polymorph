@@ -22,8 +22,10 @@ import {
   SimpleButtonTheme
 } from '../source/themes/simple';
 
-// custom styles
+// custom styles & theme overrides
 import styles from './Autocomplete.stories.scss';
+import customAutocomplete from './styles/customAutocomplete.scss';
+
 
 const OPTIONS = [
   'home',
@@ -194,4 +196,21 @@ storiesOf('Autocomplete', module)
         </div>
       </Modal>
     ))
-  );
+  )
+
+  .add(
+    'composed theme',
+    withState({ selectedOpts: [] }, store => (
+      <Autocomplete
+        themeOverrides={customAutocomplete}
+        label="Recovery phrase"
+        options={OPTIONS}
+        placeholder="Enter mnemonic..."
+        maxSelections={12}
+        maxVisibleOptions={5}
+        invalidCharsRegex={/[^a-zA-Z]/g}
+        skin={SimpleAutocompleteSkin}
+        onChange={selectedOpts => store.set({ selectedOpts })}
+      />
+    ))
+  )

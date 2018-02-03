@@ -58,7 +58,6 @@ export default props => {
       {selectedOptions}
       <input
         ref={props.inputRef}
-        className={props.theme.selectWords}
         placeholder={placeholder}
         value={props.inputValue}
         onChange={props.handleInputChange}
