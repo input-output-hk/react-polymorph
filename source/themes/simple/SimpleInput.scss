@@ -13,6 +13,7 @@ $input-border: 1px solid #c6cdd6 !default;
 $input-border-radius: 2px !default;
 $input-border-focus-color: #5e6066 !default;
 $input-padding: 14px 20px !default;
+$input-errored-border: $theme-color-error;
 
 .input {
   background-color: $input-bg-color;
@@ -43,5 +44,5 @@ $input-padding: 14px 20px !default;
 }
 
 .errored {
-  border-color: $theme-color-error;
+  border: $input-errored-border;
 }
