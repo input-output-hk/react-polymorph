@@ -1,11 +1,12 @@
 @import "theme";
+@import "SimpleInput";
 @import "mixins/arrow";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$select-input-bg-color: #fafbfc !default;
-$select-input-border-focus-color: #5e6066 !default;
-$select-input-padding: 0 0 0 48px !default;
+$select-input-bg-color: $input-bg-color !default;
+$select-input-border-focus-color: $input-border-focus-color !default;
+$select-input-padding: $input-padding !default;
 $select-arrow-color: #c6cdd6 !default;
 $select-arrow-focus-color: #5e6066 !default;
 $select-up-arrow-url: url('#{$theme-assets-path}/select-up-arrow.svg') !default;

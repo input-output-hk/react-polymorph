@@ -7,6 +7,10 @@ Changelog
 
 - Add Radio component [PR 34](https://github.com/input-output-hk/react-polymorph/pull/34)
 
+### Fixes
+
+- Fix broken theming setup for `InputSkin`, `BubbleSkin` and `SelectSkin` [PR 36](https://github.com/input-output-hk/react-polymorph/pull/36)
+
 ## 0.6.0
 
 ### Features

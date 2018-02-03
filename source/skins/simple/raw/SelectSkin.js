@@ -5,9 +5,9 @@ import { SELECT } from '../identifiers';
 import RawInputSkin from './InputSkin';
 import Select from '../../../components/Select';
 import Options from '../../../components/Options';
-import SimpleOptionsSkin from '../../../skins/simple/OptionsSkin';
+import RawSimpleOptionsSkin from './OptionsSkin';
 
-export const selectSkinFactory = (InputSkin) => (
+export const selectSkinFactory = (InputSkin, OptionsSkin) => (
 
   class SelectSkin extends Component {
 
@@ -42,7 +42,7 @@ export const selectSkinFactory = (InputSkin) => (
             <Options
               isOpen={isOpen}
               options={options}
-              skin={<SimpleOptionsSkin />}
+              skin={<OptionsSkin />}
               isOpeningUpward={isOpeningUpward}
               onChange={component.handleChange}
               optionRenderer={optionRenderer}
@@ -58,4 +58,4 @@ export const selectSkinFactory = (InputSkin) => (
   }
 );
 
-export default themr(SELECT)(selectSkinFactory(RawInputSkin));
+export default themr(SELECT)(selectSkinFactory(RawInputSkin, RawSimpleOptionsSkin));
