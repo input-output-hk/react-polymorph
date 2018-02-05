@@ -31,9 +31,14 @@ $option-padding: 14px 20px !default;
     @include arrow(up, $option-bg-color, $options-border-color, $options-arrow-size);
   }
 
-  &.firstOptionHighlighted [data-bubble-arrow] {
-    height: inherit;
-    @include arrow(up, $option-highlight-color, $options-border-color, $options-arrow-size);
+  &.firstOptionHighlighted {
+    &:not(.openUpward) [data-bubble-arrow] {
+      @include arrow(up, $option-highlight-color !important, $options-border-color, $options-arrow-size);
+    }
+    &.openUpward [data-bubble-arrow] {
+      height: inherit;
+      @include arrow(down, $option-highlight-color !important, $options-border-color, $options-arrow-size);
+    }
   }
 }
 
