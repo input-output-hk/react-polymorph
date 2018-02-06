@@ -16,8 +16,9 @@ import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
 // themes
 import { SimpleModalTheme, SimpleButtonTheme } from '../source/themes/simple';
 
-// custom styles
+// custom styles & themeOverrides
 import styles from './Modal.stories.scss';
+import themeOverrides from './styles/customModal.scss';
 
 storiesOf('Modal', module)
   .addDecorator(story => {
@@ -70,6 +71,21 @@ storiesOf('Modal', module)
             skin={SimpleButtonSkin}
           />
         </div>
+      </Modal>
+    ))
+  )
+
+  .add(
+    'composed theme',
+    withState({ isOpen: true }, store => (
+      <Modal
+        themeOverrides={themeOverrides}
+        isOpen={store.state.isOpen}
+        triggerCloseOnOverlayClick
+        onClose={() => store.set({ isOpen: !store.state.isOpen })}
+        skin={SimpleModalSkin}
+      >
+        <h1 className={styles.modalTitle}>Click outside of modal to cancel</h1>
       </Modal>
     ))
   );
