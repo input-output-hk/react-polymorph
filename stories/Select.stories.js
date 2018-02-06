@@ -19,8 +19,9 @@ import {
   SimpleFormFieldTheme
 } from '../source/themes/simple';
 
-// custom styles
+// custom styles & themeOverrides
 import styles from './Select.stories.scss';
+import themeOverrides from './styles/customSelect.scss';
 
 // images
 import flagEngland from './images/gb.png';
@@ -187,6 +188,21 @@ storiesOf('Select', module)
         onChange={value => store.set({ value })}
         label="Countries (has disabled options)"
         options={COUNTRIES_WITH_DISABLED_OPTIONS}
+        placeholder="Select your country …"
+        skin={SimpleSelectSkin}
+      />
+    ))
+  )
+
+  .add(
+    'composed theme',
+    withState({ value: '' }, store => (
+      <Select
+        themeOverrides={themeOverrides}
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        label="Select with a composed theme"
+        options={COUNTRIES}
         placeholder="Select your country …"
         skin={SimpleSelectSkin}
       />

@@ -61,13 +61,13 @@ $toggler-height: 25px !default;
     white-space: nowrap;
 
     &.checked {
-      background-color: $toggler-label-on-background !important;
-      color: $toggler-label-on-color !important;
+      background-color: $toggler-label-on-background;
+      color: $toggler-label-on-color;
     }
 
     &:not(.checked) {
-      background-color: transparent !important;
-      color: $toggler-label-off-color !important;
+      background-color: transparent;
+      color: $toggler-label-off-color;
     }
   }
 }

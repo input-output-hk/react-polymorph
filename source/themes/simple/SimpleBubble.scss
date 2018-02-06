@@ -13,7 +13,7 @@ $bubble-border-color: #c6cdd6 !default;
 $bubble-border-color-transparent: transparent !default;
 $bubble-border: $bubble-border-width solid $bubble-border-color !default;
 $bubble-border-transparent: $bubble-border-width-transparent solid
-  $bubble-border-color-transparent !default;
+$bubble-border-color-transparent !default;
 $bubble-box-shadow: 0 1.5px 5px 0 rgba(0, 0, 0, 0.18) !default;
 $bubble-padding: 6px 12px !default;
 $bubble-font-color: #5e6066 !default;
@@ -28,6 +28,7 @@ $bubble-shadow: none !default;
   position: absolute;
   left: 0;
   right: 0;
+  z-index: 1;
 
   // ==== STATE: openUpward ====
 

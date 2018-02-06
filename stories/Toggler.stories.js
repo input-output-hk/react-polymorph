@@ -17,6 +17,8 @@ import { SimpleTogglerTheme } from '../source/themes/simple';
 // theme API
 import { TOGGLER_THEME_API } from '../source/themes/API';
 
+import themeOverrides from './styles/customToggler.scss';
+
 storiesOf('Toggler', module)
   .addDecorator(story => {
     const SimpleTheme = { checkbox: { ...SimpleTogglerTheme } };
@@ -68,6 +70,21 @@ storiesOf('Toggler', module)
         labelLeft="Included"
         labelRight="Excluded"
         themeAPI={TOGGLER_THEME_API}
+        skin={SimpleTogglerSkin}
+      />
+    ))
+  )
+
+  .add(
+    'composed theme',
+    withState({ checked: false }, store => (
+      <Checkbox
+        themeOverrides={themeOverrides}
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        themeAPI={TOGGLER_THEME_API}
+        labelLeft="Included"
+        labelRight="Excluded"
         skin={SimpleTogglerSkin}
       />
     ))

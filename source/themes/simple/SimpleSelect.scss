@@ -1,11 +1,12 @@
 @import "theme";
+@import "SimpleInput";
 @import "mixins/arrow";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$select-input-bg-color: #fafbfc !default;
-$select-input-border-focus-color: #5e6066 !default;
-$select-input-padding: 0 0 0 48px !default;
+$select-input-bg-color: $input-bg-color !default;
+$select-input-border-focus-color: $input-border-focus-color !default;
+$select-input-padding: $input-padding !default;
 $select-arrow-color: #c6cdd6 !default;
 $select-arrow-focus-color: #5e6066 !default;
 $select-up-arrow-url: url('#{$theme-assets-path}/select-up-arrow.svg') !default;
@@ -17,6 +18,34 @@ $select-down-arrow-position-left: calc(100% - 32px) !default;
 
 .select {
   position: relative;
+
+  // ==== STATE: isOpen ====
+  &.isOpen {
+    input {
+      border-color: $select-input-border-focus-color;
+    }
+
+    .selectInput:after {
+      background-color: $select-arrow-focus-color;
+      -webkit-mask-image: $select-up-arrow-url;
+      mask-image: $select-up-arrow-url;
+    }
+  }
+
+  // ==== STATE: openUpward ====
+  &.openUpward {
+    .selectInput:after {
+      -webkit-mask-image: $select-up-arrow-url;
+      mask-image: $select-up-arrow-url;
+    }
+
+    &.isOpen {
+      .selectInput:after {
+        -webkit-mask-image: $select-down-arrow-url;
+        mask-image: $select-down-arrow-url;
+      }
+    }
+  }
 }
 
 .selectInput {
@@ -45,39 +74,5 @@ $select-down-arrow-position-left: calc(100% - 32px) !default;
     -webkit-mask-size: $select-down-arrow-width;
     mask-size: $select-down-arrow-width;
     width: $select-down-arrow-width;
-  }
-}
-
-// ======= SPECIAL STATES =======
-
-.select {
-  // ==== STATE: isOpen ====
-
-  &.isOpen {
-    input {
-      border-color: $select-input-border-focus-color;
-    }
-
-    .selectInput:after {
-      background-color: $select-arrow-focus-color;
-      -webkit-mask-image: $select-up-arrow-url;
-      mask-image: $select-up-arrow-url;
-    }
-  }
-
-  // ==== STATE: openUpward ====
-
-  &.openUpward {
-    .selectInput:after {
-      -webkit-mask-image: $select-up-arrow-url;
-      mask-image: $select-up-arrow-url;
-    }
-
-    &.isOpen {
-      .selectInput:after {
-        -webkit-mask-image: $select-down-arrow-url;
-        mask-image: $select-down-arrow-url;
-      }
-    }
   }
 }

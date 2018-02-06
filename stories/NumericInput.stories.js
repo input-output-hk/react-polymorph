@@ -19,6 +19,9 @@ import {
   SimpleInputTheme
 } from '../source/themes/simple';
 
+// themeOverrides
+import themeOverrides from './styles/customInput.scss';
+
 storiesOf('NumericInput', module)
   .addDecorator(story => {
     const SimpleTheme = {
@@ -178,6 +181,19 @@ storiesOf('NumericInput', module)
             skin={SimpleInputSkin}
           />
         )}
+      />
+    ))
+  )
+
+  .add(
+    'composed theme',
+    withState({ value: '' }, store => (
+      <NumericInput
+        themeOverrides={themeOverrides}
+        value={store.state.value}
+        placeholder="0.000000"
+        onChange={value => store.set({ value })}
+        skin={SimpleInputSkin}
       />
     ))
   );
