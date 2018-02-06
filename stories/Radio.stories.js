@@ -14,8 +14,9 @@ import SimpleRadioSkin from '../source/skins/simple/RadioSkin';
 // themes
 import { SimpleRadioTheme } from '../source/themes/simple';
 
-// custom styles
+// custom styles & themeOverrides
 import styles from './Radio.stories.scss';
+import themeOverrides from './styles/customRadio.scss';
 
 storiesOf('Radio', module)
   .addDecorator(story => {
@@ -118,6 +119,21 @@ storiesOf('Radio', module)
               Example for a <strong>bold</strong> word in an html label
             </div>
           }
+        />
+      </div>
+    ))
+  )
+
+  .add(
+    'composed theme',
+    withState({ selected: false }, store => (
+      <div className={styles.container}>
+        <Radio
+          themeOverrides={themeOverrides}
+          label="Radio with a composed theme"
+          selected={store.state.selected}
+          onChange={() => store.set({ selected: !store.state.selected })}
+          skin={SimpleRadioSkin}
         />
       </div>
     ))

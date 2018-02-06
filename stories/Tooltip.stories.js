@@ -13,8 +13,9 @@ import SimpleTooltipSkin from '../source/skins/simple/TooltipSkin';
 // themes
 import { SimpleTooltipTheme } from '../source/themes/simple';
 
-// custom styles
+// custom styles & themeOverrides
 import styles from './Tooltip.stories.scss';
+import themeOverrides from './styles/customTooltip.scss';
 
 storiesOf('Tooltip', module)
   .addDecorator(story => {
@@ -97,4 +98,23 @@ storiesOf('Tooltip', module)
         hover over me
       </Tooltip>
     </div>
-  ));
+  ))
+
+  .add('composed theme', () => {
+
+    const yep = themeOverrides;
+
+    debugger;
+
+    return (
+      <div className={styles.container}>
+        <Tooltip
+          themeOverrides={themeOverrides}
+          skin={SimpleTooltipSkin}
+          tip="plain tooltip, with a composed theme"
+        >
+          hover over me
+        </Tooltip>
+      </div>
+    );
+  })
