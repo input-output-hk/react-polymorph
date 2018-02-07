@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "author": {
     "name": "Dominik Guzei",
     "url": "https://github.com/DominikGuzei"
@@ -11,14 +11,19 @@
       "name": "Dominik Guzei",
       "email": "dominik.guzei@gmail.com",
       "url": "http://www.linkedin.com/in/dominik-guzei"
+    },
+    {
+      "name": "Marcus Hurney",
+      "email": "marcushurney@gmail.com",
+      "url": "https://www.linkedin.com/in/marcus-hurney"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CodeAdventure/react-polymorph.git"
+    "url": "git+https://github.com/input-output-hk/react-polymorph.git"
   },
   "bugs": {
-    "url": "https://github.com/CodeAdventure/react-polymorph/issues"
+    "url": "https://github.com/input-output-hk/react-polymorph/issues"
   },
   "keywords": ["react", "components", "composable", "customizable", "skins", "themes"],
   "dependencies": {
