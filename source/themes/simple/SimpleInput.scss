@@ -44,5 +44,5 @@ $input-errored-border: $theme-color-error;
 }
 
 .errored {
-  border: $input-errored-border;
+  border: 1px solid $theme-color-error;
 }
