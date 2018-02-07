@@ -1,28 +1,6 @@
 Changelog
 =========
 
-## 0.6.2
-
-### Chores
-- Refactors library to use render prop architecture.
-- Removes raw folder
-- Removes skin parts
-- Manages refs by passing them from parent to child
-- Removes inheritance architecture
-
-## Features
-- Adds ThemeProvider HOC for applying a theme to all its child components without needing to explicitly declare it as a prop on each child.
-
-- Adds themeOverrides as a prop on ThemeProvider and on all components within the library. It allows custom styles written by a user to be composed with a component's base theme. This allows a user to tweak just one aspect of a class definition in the theme without having to rewrite the entire definition. The user's custom css/scss are composed with the theme's scss. themeOverrides can be passed into ThemeProvider to apply custom styles to all child components or passed directly to a component for a single instance of these custom styles. ThemeProvider makes use of css-modules for composing two theme objects together.
-
-- Adds concept of theme API for each component. This is a JS object which exposes the shape of a component's theme. Each property on the theme API object is a class name on an element within the component's skin and a class definition within the component's theme.
-
-- Adds ThemeProvider to all component stories.
-
-- Adds a composed theme story to all component stories to exemplify the relationship between ThemeProvider and themeOverrides.
-
-- Adds autofocus prop to all input components.
-
 ## 0.6.1
 
 ### Features
