@@ -12,28 +12,28 @@ import { StringOrElement, composeTheme } from '../utils';
 
 class NumericInput extends Component {
   static propTypes = {
-    onRef: func,
-    onChange: func,
     error: StringOrElement,
-    value: string,
-    placeholder: string,
-    maxBeforeDot: number, // max number of characters before dot
+    onChange: func,
     maxAfterDot: number, // max number of characters after dot
+    maxBeforeDot: number, // max number of characters before dot
     maxValue: number, // max allowed numeric value
     minValue: number, // min allowed numeric value
+    onRef: func,
+    placeholder: string,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
+    value: string
   };
 
   static defaultProps = {
-    onRef: () => {},
-    value: '',
     error: '',
+    onRef: () => {},
     theme: {},
-    themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...INPUT_THEME_API }
+    themeAPI: { ...INPUT_THEME_API },
+    themeOverrides: {},
+    value: ''
   };
 
   static contextTypes = {

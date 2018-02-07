@@ -21,34 +21,34 @@ import { StringOrElement, composeTheme } from '../utils';
 
 class Autocomplete extends Component {
   static propTypes = {
-    label: StringOrElement,
     error: StringOrElement,
-    onChange: func,
-    maxSelections: number,
-    placeholder: string,
-    options: array,
-    isOpeningUpward: bool,
-    sortAlphabetically: bool,
-    multipleSameSelections: bool,
-    maxVisibleOptions: number,
     invalidCharsRegex: instanceOf(RegExp),
+    isOpeningUpward: bool,
+    label: StringOrElement,
+    maxSelections: number,
+    maxVisibleOptions: number,
+    multipleSameSelections: bool,
+    onChange: func,
+    options: array,
+    placeholder: string,
     skin: func.isRequired,
+    sortAlphabetically: bool,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
   static defaultProps = {
     error: null,
-    options: [],
-    theme: {},
-    themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...AUTOCOMPLETE_THEME_API },
+    invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
+    isOpeningUpward: false,
     maxVisibleOptions: 10, // max number of visible options
     multipleSameSelections: true, // if true then same word can be selected multiple times
+    options: [],
     sortAlphabetically: true, // options are sorted alphabetically by default
-    invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
-    isOpeningUpward: false
+    theme: {},
+    themeAPI: { ...AUTOCOMPLETE_THEME_API },
+    themeOverrides: {}
   };
 
   static contextTypes = {

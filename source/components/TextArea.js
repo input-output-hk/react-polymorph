@@ -12,32 +12,32 @@ import { StringOrElement, composeTheme } from '../utils';
 
 class TextArea extends Component {
   static propTypes = {
-    onRef: func,
     autoFocus: bool,
-    value: string,
+    autoResize: bool,
     error: StringOrElement,
-    placeholder: string,
     maxLength: number,
     minLength: number,
-    autoResize: bool,
-    rows: number,
-    onFocus: func,
-    onChange: func,
     onBlur: func,
+    onChange: func,
+    onFocus: func,
+    onRef: func,
+    placeholder: string,
+    rows: number,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
+    value: string
   };
 
   static defaultProps = {
-    onRef: () => {},
-    value: '',
     autoFocus: false,
     autoResize: true,
-    theme: {}, // theme will now be passed along via the ThemeProvider
-    themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...TEXTAREA_THEME_API }
+    onRef: () => {},
+    theme: {},
+    themeAPI: { ...TEXTAREA_THEME_API },
+    themeOverrides: {},
+    value: ''
   };
 
   static contextTypes = {

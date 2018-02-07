@@ -9,21 +9,21 @@ import { StringOrElement, composeTheme } from '../utils';
 
 class FormField extends Component {
   static propTypes = {
-    label: StringOrElement,
     disabled: bool,
     error: StringOrElement,
+    label: StringOrElement,
     render: func.isRequired,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
   static defaultProps = {
     disabled: false,
     theme: {},
-    themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...FORMFIELD_THEME_API }
+    themeAPI: { ...FORMFIELD_THEME_API },
+    themeOverrides: {}
   };
 
   static contextTypes = {

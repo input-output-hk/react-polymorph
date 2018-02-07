@@ -14,9 +14,9 @@ import { composeTheme } from '../utils';
 
 class ThemeProvider extends Component {
   static propTypes = {
+    children: element,
     theme: object,
-    themeOverrides: object,
-    children: element
+    themeOverrides: object // custom css/scss from user that adheres to library level theme API
   };
 
   static defaultProps = {

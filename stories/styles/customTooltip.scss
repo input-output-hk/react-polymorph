@@ -1,15 +1,8 @@
-// these styles are being overwritten by
-// the simple bubble theme, see TooltipSkin.js
-
 .root {
   &:hover {
     .bubble {
       color: rgba(10, 145, 48, 0.8);
-      transition: all 0.4s ease-in-out;
+      box-shadow: 0 1.5px 5px 0 rgba(10, 145, 48, 0.8);
     }
-  }
-
-  .bubble {
-    transition: all 0.4s ease-in-out;
   }
 }

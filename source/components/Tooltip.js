@@ -10,20 +10,20 @@ import { StringOrElement, composeTheme } from '../utils';
 class Tooltip extends Component {
   static propTypes = {
     isAligningRight: bool,
-    isOpeningUpwards: bool,
     isBounded: bool,
-    tip: StringOrElement,
+    isOpeningUpwards: bool,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
+    themeAPI: object,
+    tip: StringOrElement,
   };
 
   static defaultProps = {
     isOpeningUpward: true,
     theme: { button: {} },
-    themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...TOOLTIP_THEME_API }
+    themeAPI: { ...TOOLTIP_THEME_API },
+    themeOverrides: {}
   };
 
   static contextTypes = {

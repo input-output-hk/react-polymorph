@@ -12,20 +12,20 @@ import { StringOrElement, composeTheme } from '../utils';
 
 class Button extends Component {
   static propTypes = {
-    label: StringOrElement,
     disabled: bool,
+    label: StringOrElement,
     onClick: func,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
   static defaultProps = {
     disabled: false,
     theme: {},
-    themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...BUTTON_THEME_API }
+    themeAPI: { ...BUTTON_THEME_API },
+    themeOverrides: {}
   };
 
   static contextTypes = {

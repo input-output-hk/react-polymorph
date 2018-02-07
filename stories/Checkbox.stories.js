@@ -19,8 +19,6 @@ import customStyles from './Checkbox.stories.scss';
 
 storiesOf('Checkbox', module)
   .addDecorator(story => {
-    const yo = SimpleCheckboxTheme;
-
     const SimpleTheme = { checkbox: { ...SimpleCheckboxTheme } };
 
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;

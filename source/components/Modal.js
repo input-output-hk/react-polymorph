@@ -9,23 +9,23 @@ import { StringOrElement, composeTheme } from '../utils';
 
 class Modal extends Component {
   static propTypes = {
-    isActive: bool,
     contentLabel: StringOrElement,
+    isActive: bool,
     onClose: func,
-    triggerCloseOnOverlayClick: bool,
     skin: func.isRequired,
+    triggerCloseOnOverlayClick: bool,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
   static defaultProps = {
-    isActive: false,
     contentLabel: 'Modal Dialog',
+    isActive: false,
     triggerCloseOnOverlayClick: true,
     theme: {},
-    themeOverrides: {},
-    themeAPI: { ...MODAL_THEME_API }
+    themeAPI: { ...MODAL_THEME_API },
+    themeOverrides: {}
   };
 
   static contextTypes = {

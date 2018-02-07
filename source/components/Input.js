@@ -12,33 +12,33 @@ import { StringOrElement, composeTheme } from '../utils';
 
 class Input extends Component {
   static propTypes = {
-    onRef: func,
     autoFocus: bool,
     error: StringOrElement,
+    onBlur: func,
     onChange: func,
     onFocus: func,
-    onBlur: func,
-    value: string,
-    placeholder: string,
+    onRef: func,
     maxLength: number,
     minLength: number,
     onKeyPress: func,
+    placeholder: string,
     readOnly: bool,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
+    value: string
   };
 
   static defaultProps = {
-    onRef: () => {},
     autoFocus: false,
     error: '',
+    onRef: () => {},
     readOnly: false,
-    value: '',
     theme: {},
-    themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...INPUT_THEME_API }
+    themeAPI: { ...INPUT_THEME_API },
+    themeOverrides: {},
+    value: ''
   };
 
   static contextTypes = {

@@ -9,23 +9,24 @@ import { StringOrElement, composeTheme } from '../utils';
 
 class Radio extends Component {
   static propTypes = {
-    selected: bool,
+    disabled: bool,
     label: StringOrElement,
+    onBlur: func,
     onChange: func,
     onFocus: func,
-    onBlur: func,
+    selected: bool,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
   static defaultProps = {
-    checked: false,
     disabled: false,
+    selected: false,
     theme: {},
-    themeOverrides: {},
-    themeAPI: { ...RADIO_THEME_API }
+    themeAPI: { ...RADIO_THEME_API },
+    themeOverrides: {}
   };
 
   static contextTypes = {

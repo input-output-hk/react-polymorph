@@ -12,20 +12,20 @@ class Checkbox extends Component {
     checked: bool,
     label: StringOrElement,
     onChange: func,
-    onFocus: func,
     onBlur: func,
+    onFocus: func,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
   static defaultProps = {
     checked: false,
     disabled: false,
     theme: {},
-    themeOverrides: {},
-    themeAPI: { ...CHECKBOX_THEME_API }
+    themeAPI: { ...CHECKBOX_THEME_API },
+    themeOverrides: {}
   };
 
   static contextTypes = {

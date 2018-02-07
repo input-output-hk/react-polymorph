@@ -100,21 +100,14 @@ storiesOf('Tooltip', module)
     </div>
   ))
 
-  .add('composed theme', () => {
-
-    const yep = themeOverrides;
-
-    debugger;
-
-    return (
-      <div className={styles.container}>
-        <Tooltip
-          themeOverrides={themeOverrides}
-          skin={SimpleTooltipSkin}
-          tip="plain tooltip, with a composed theme"
-        >
-          hover over me
-        </Tooltip>
-      </div>
-    );
-  })
+  .add('composed theme', () => (
+    <div className={styles.container}>
+      <Tooltip
+        themeOverrides={themeOverrides}
+        skin={SimpleTooltipSkin}
+        tip="plain tooltip, with a composed theme"
+      >
+        hover over me
+      </Tooltip>
+    </div>
+  ));

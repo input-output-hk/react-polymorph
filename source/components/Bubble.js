@@ -13,15 +13,15 @@ class Bubble extends Component {
     isTransparent: bool,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
   static defaultProps = {
     isTransparent: true,
     theme: {},
-    themeOverrides: {},
-    themeAPI: { ...BUBBLE_THEME_API }
+    themeAPI: { ...BUBBLE_THEME_API },
+    themeOverrides: {}
   };
 
   static contextTypes = {

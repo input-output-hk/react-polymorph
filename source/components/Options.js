@@ -18,28 +18,28 @@ class Options extends Component {
   static propTypes = {
     isOpen: bool,
     isOpeningUpward: bool,
-    resetOnClose: bool, // reset highlighted option on options close (e.g. in autocomplete)
-    selectedOptionValue: string,
     noResults: bool,
     noResultsMessage: StringOrElement,
     onChange: func,
     onClose: func,
     options: array,
     optionRenderer: func,
+    resetOnClose: bool, // reset highlighted option on options close (e.g. in autocomplete)
+    selectedOptionValue: string,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
   static defaultProps = {
     isOpen: false,
     isOpeningUpward: false,
-    resetOnClose: false,
     noResultsMessage: 'No results',
+    resetOnClose: false,
     theme: {},
-    themeOverrides: {},
-    themeAPI: { ...OPTIONS_THEME_API }
+    themeAPI: { ...OPTIONS_THEME_API },
+    themeOverrides: {}
   };
 
   static contextTypes = {

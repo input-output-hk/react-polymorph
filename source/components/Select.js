@@ -9,33 +9,34 @@ import { StringOrElement, composeTheme } from '../utils';
 
 class Select extends Component {
   static propTypes = {
-    value: string,
     allowBlank: bool,
-    placeholder: string,
     autoFocus: bool,
+    isOpeningUpward: bool,
+    onBlur: func,
     onChange: func,
     onFocus: func,
-    onBlur: func,
     options: arrayOf(
       shape({
+        isDisabled: bool,
         value: string.isRequired,
-        isDisabled: bool
       })
     ).isRequired,
-    isOpeningUpward: bool,
+    placeholder: string,
     skin: func.isRequired,
     theme: object,
-    themeOverrides: object,
-    themeAPI: object
+    themeAPI: object,
+    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
+    value: string
   };
 
   static defaultProps = {
-    isOpeningUpward: false,
-    autoFocus: false,
     allowBlank: true,
+    autoFocus: false,
+    isOpeningUpward: false,
     theme: {},
-    themeOverrides: {}, // custom css/scss from user that adheres to React Polymorph theme API
-    themeAPI: { ...SELECT_THEME_API }
+    themeOverrides: {},
+    themeAPI: { ...SELECT_THEME_API },
+    value: ''
   };
 
   static contextTypes = {
