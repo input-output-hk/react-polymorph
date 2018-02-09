@@ -4,9 +4,8 @@ import { object, string, element } from 'prop-types';
 // external libraries
 import _ from 'lodash';
 
-// import the Root Theme API object which specifies the shape
-// of a theme for every component in this library, used in composeLibraryTheme
-// this is the default export from /themes/API/index.js
+// imports the Root Theme API object which specifies the shape
+// of a complete theme for every component in this library, used in this.composeLibraryTheme
 import ROOT_THEME_API from '../themes/API';
 
 // internal utility functions
@@ -16,7 +15,7 @@ class ThemeProvider extends Component {
   static propTypes = {
     children: element,
     theme: object,
-    themeOverrides: object // custom css/scss from user that adheres to library level theme API
+    themeOverrides: object // custom css/scss from user that adheres to shape of ROOT_THEME_API
   };
 
   static defaultProps = {
@@ -112,7 +111,7 @@ class ThemeProvider extends Component {
   };
 
   // all children of ThemeProvider HOC are passed the theme object
-  // composed with any custom styles -> (this.props.themeOverrides)
+  // composed with custom styles passed via this.props.themeOverrides
   render() {
     return <div>{this.props.children}</div>;
   }

@@ -3,25 +3,31 @@ Changelog
 
 ## 0.7.0
 
+[PR 39](https://github.com/input-output-hk/react-polymorph/pull/39)
+
 ### Chores
+
 - Refactors library to use render prop architecture.
-- Removes raw folder
+- Removes source/skins/simple/raw directory and the raw pattern from the library
 - Removes skin parts
 - Manages refs by passing them from parent to child
 - Removes inheritance architecture
 
 ## Features
-- Adds ThemeProvider HOC for applying a theme to all its child components without needing to explicitly declare it as a prop on each child.
 
-- Adds themeOverrides as a prop on ThemeProvider and on all components within the library. It allows custom styles written by a user to be composed with a component's base theme. This allows a user to tweak just one aspect of a class definition in the theme without having to rewrite the entire definition. The user's custom css/scss are composed with the theme's scss. themeOverrides can be passed into ThemeProvider to apply custom styles to all child components or passed directly to a component for a single instance of these custom styles. ThemeProvider makes use of css-modules for composing two theme objects together.
+- Implements a theme API for each component. This is a plain object which exposes the shape of a component's theme. Each property on the theme API object is a class name on an element within the component's skin and a class definition within the component's theme.
 
-- Adds concept of theme API for each component. This is a JS object which exposes the shape of a component's theme. Each property on the theme API object is a class name on an element within the component's skin and a class definition within the component's theme.
+- Adds ThemeProvider HOC for applying a theme to all its nested react-polymorph children. ThemeProvider exonerates the user from explicitly declaring theme as a prop on every instantiated component. A complete theme, an object containing full theme definitions for every component in the library, may also be passed to ThemeProvider. The complete theme object may be deconstructed to contain only the necessary theme definitions used by the components nested within a particular instance of ThemeProvider, yet deconstruction is not required.
 
-- Adds ThemeProvider to all component stories.
+- Adds themeOverrides as an optional prop on ThemeProvider and on all components within the library. themeOverrides composes the user's custom css/scss with the component's base theme. This automatic composition saves the user from the tedium of manually piecing together custom styles with those of the component's theme that the user wishes to retain, yet themeOverrides is flexible enough to restyle a component's theme in a nontrivial way. themeOverrides may be passed directly to one instance of a component or passed to all instances nested within ThemeProvider via context. This composition of styles relies on css-modules.
 
-- Adds a composed theme story to all component stories to exemplify the relationship between ThemeProvider and themeOverrides.
+- Adds ThemeProvider to all stories.
 
-- Adds autofocus prop to all input components.
+- Adds a composed theme story to most component stories to exemplify the relationship between ThemeProvider and themeOverrides.
+
+- Adds autofocus prop to all applicable input based components.
+
+- Adds index file to source/utils, source/themes/API, source/themes/simple for the use of named and default exports. Makes it easier for the user to import a full theme object for ThemeProvider, or simply one component's theme.
 
 ## 0.6.1
 

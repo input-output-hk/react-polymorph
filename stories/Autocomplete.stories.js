@@ -213,4 +213,4 @@ storiesOf('Autocomplete', module)
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
-  )
+  );
