@@ -1,24 +1,23 @@
-import React from 'react';
+import React from "react";
 
 // external libraries
-import classnames from 'classnames';
+import classnames from "classnames";
 
 // components
-import Options from '../../components/Options';
+import { Options } from "../../components";
 
 // skins
-import SimpleInputSkin from './InputSkin';
-import SimpleOptionsSkin from '../../skins/simple/OptionsSkin';
+import { InputSkin, OptionsSkin } from "./";
 
 // themes
-import { SimpleInputTheme, SimpleOptionsTheme } from '../../themes/simple';
+import { InputTheme, OptionsTheme } from "../../themes/simple";
 
 // internal utility functions
-import { pickDOMProps } from '../../utils';
+import { pickDOMProps } from "../../utils";
 
 export default props => {
   const selectedOption = props.getSelectedOption();
-  const inputValue = selectedOption ? selectedOption.label : '';
+  const inputValue = selectedOption ? selectedOption.label : "";
 
   return (
     <div
@@ -29,10 +28,10 @@ export default props => {
         props.isOpeningUpward ? props.theme.openUpward : null
       ])}
     >
-      <SimpleInputSkin
+      <InputSkin
         inputRef={props.inputRef}
         className={props.theme.selectInput}
-        theme={SimpleInputTheme}
+        theme={InputTheme}
         label={props.label}
         value={inputValue}
         onClick={props.handleInputClick}
@@ -41,8 +40,8 @@ export default props => {
         readOnly
       />
       <Options
-        skin={SimpleOptionsSkin}
-        theme={SimpleOptionsTheme}
+        skin={OptionsSkin}
+        theme={OptionsTheme}
         isOpen={props.isOpen}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}

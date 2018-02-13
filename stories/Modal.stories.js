@@ -1,30 +1,27 @@
-import React from 'react';
+import React from "react";
 
 // storybook
-import { storiesOf } from '@storybook/react';
-import { withState } from '@dump247/storybook-state';
+import { storiesOf } from "@storybook/react";
+import { withState } from "@dump247/storybook-state";
 
 // components
-import ThemeProvider from '../source/components/ThemeProvider';
-import Modal from '../source/components/Modal';
-import Button from '../source/components/Button';
+import { ThemeProvider, Modal, Button } from "../source/components";
 
 // skins
-import SimpleModalSkin from '../source/skins/simple/ModalSkin';
-import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
+import { ModalSkin, ButtonSkin } from "../source/skins/simple";
 
 // themes
-import { SimpleModalTheme, SimpleButtonTheme } from '../source/themes/simple';
+import { ModalTheme, ButtonTheme } from "../source/themes/simple";
 
 // custom styles & themeOverrides
-import styles from './Modal.stories.scss';
-import themeOverrides from './styles/customModal.scss';
+import styles from "./Modal.stories.scss";
+import themeOverrides from "./styles/customModal.scss";
 
-storiesOf('Modal', module)
+storiesOf("Modal", module)
   .addDecorator(story => {
     const SimpleTheme = {
-      modal: { ...SimpleModalTheme },
-      button: { ...SimpleButtonTheme }
+      modal: { ...ModalTheme },
+      button: { ...ButtonTheme }
     };
 
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
@@ -33,13 +30,13 @@ storiesOf('Modal', module)
   // ====== Stories ======
 
   .add(
-    'cancelable via overlay',
+    "cancelable via overlay",
     withState({ isOpen: true }, store => (
       <Modal
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}
-        skin={SimpleModalSkin}
+        skin={ModalSkin}
       >
         <h1 className={styles.modalTitle}>Click outside of modal to cancel</h1>
       </Modal>
@@ -47,12 +44,12 @@ storiesOf('Modal', module)
   )
 
   .add(
-    'cancelable via buttons',
+    "cancelable via buttons",
     withState({ isOpen: true }, store => (
       <Modal
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick={false}
-        skin={SimpleModalSkin}
+        skin={ModalSkin}
       >
         <h1 className={styles.modalTitle}>
           Are you sure you want to delete this thing?
@@ -62,13 +59,13 @@ storiesOf('Modal', module)
             className={styles.cancelButton}
             label="Cancel"
             onClick={() => store.set({ isOpen: !store.state.isOpen })}
-            skin={SimpleButtonSkin}
+            skin={ButtonSkin}
           />
           <Button
             className={styles.deleteButton}
             label="Delete"
             onClick={() => store.set({ isOpen: !store.state.isOpen })}
-            skin={SimpleButtonSkin}
+            skin={ButtonSkin}
           />
         </div>
       </Modal>
@@ -76,14 +73,14 @@ storiesOf('Modal', module)
   )
 
   .add(
-    'composed theme',
+    "composed theme",
     withState({ isOpen: true }, store => (
       <Modal
         themeOverrides={themeOverrides}
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}
-        skin={SimpleModalSkin}
+        skin={ModalSkin}
       >
         <h1 className={styles.modalTitle}>Click outside of modal to cancel</h1>
       </Modal>

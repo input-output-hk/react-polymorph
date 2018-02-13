@@ -1,33 +1,27 @@
-import React from 'react';
+import React from "react";
 
 // storybook
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { withState } from '@dump247/storybook-state';
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { withState } from "@dump247/storybook-state";
 
 // components
-import ThemeProvider from '../source/components/ThemeProvider';
-import TextArea from '../source/components/TextArea';
-import FormField from '../source/components/FormField';
+import { ThemeProvider, TextArea, FormField } from "../source/components";
 
 // skins
-import SimpleTextAreaSkin from '../source/skins/simple/TextAreaSkin';
-import SimpleFormFieldSkin from '../source/skins/simple/FormFieldSkin';
+import { TextAreaSkin, FormFieldSkin } from "../source/skins/simple";
 
 // themes
-import {
-  SimpleTextAreaTheme,
-  SimpleFormFieldTheme
-} from '../source/themes/simple';
+import { TextAreaTheme, FormFieldTheme } from "../source/themes/simple";
 
 // themeOverrides
-import themeOverrides from './styles/customTextarea.scss';
+import themeOverrides from "./styles/customTextarea.scss";
 
-storiesOf('TextArea', module)
+storiesOf("TextArea", module)
   .addDecorator(story => {
     const SimpleTheme = {
-      textarea: { ...SimpleTextAreaTheme },
-      formfield: { ...SimpleFormFieldTheme }
+      textarea: { ...TextAreaTheme },
+      formfield: { ...FormFieldTheme }
     };
 
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
@@ -35,28 +29,28 @@ storiesOf('TextArea', module)
   // ====== Stories ======
 
   .add(
-    'plain',
-    withState({ value: '' }, store => (
+    "plain",
+    withState({ value: "" }, store => (
       <TextArea
         value={store.state.value}
         onChange={(value, event) => store.set({ value })}
-        skin={SimpleTextAreaSkin}
+        skin={TextAreaSkin}
       />
     ))
   )
 
   .add(
-    'label',
-    withState({ value: '' }, store => (
+    "label",
+    withState({ value: "" }, store => (
       <FormField
         label="Your Comment"
-        skin={SimpleFormFieldSkin}
+        skin={FormFieldSkin}
         render={props => (
           <TextArea
             {...props}
             value={store.state.value}
             onChange={(value, event) => store.set({ value })}
-            skin={SimpleTextAreaSkin}
+            skin={TextAreaSkin}
           />
         )}
       />
@@ -64,56 +58,56 @@ storiesOf('TextArea', module)
   )
 
   .add(
-    'placeholder',
-    withState({ value: '' }, store => (
+    "placeholder",
+    withState({ value: "" }, store => (
       <TextArea
         value={store.state.value}
         onChange={(value, event) => store.set({ value })}
         placeholder="Your Comment"
-        skin={SimpleTextAreaSkin}
+        skin={TextAreaSkin}
       />
     ))
   )
 
   .add(
-    'autoFocus',
-    withState({ value: '' }, store => (
+    "autoFocus",
+    withState({ value: "" }, store => (
       <TextArea
         autoFocus
         placeholder="autoFocus"
         value={store.state.value}
         onChange={(value, event) => store.set({ value })}
-        skin={SimpleTextAreaSkin}
+        skin={TextAreaSkin}
       />
     ))
   )
 
   .add(
-    'maxLength(5)',
-    withState({ value: '' }, store => (
+    "maxLength(5)",
+    withState({ value: "" }, store => (
       <TextArea
         error="bad error"
         value={store.state.value}
         maxLength={5}
         onChange={(value, event) => store.set({ value })}
-        skin={SimpleTextAreaSkin}
+        skin={TextAreaSkin}
       />
     ))
   )
 
   .add(
-    'error',
-    withState({ value: '' }, store => (
+    "error",
+    withState({ value: "" }, store => (
       <FormField
         label="With label"
         error="Something went wrong"
-        skin={SimpleFormFieldSkin}
+        skin={FormFieldSkin}
         render={props => (
           <TextArea
             {...props}
             value={store.state.value}
             onChange={(value, event) => store.set({ value })}
-            skin={SimpleTextAreaSkin}
+            skin={TextAreaSkin}
           />
         )}
       />
@@ -121,11 +115,11 @@ storiesOf('TextArea', module)
   )
 
   .add(
-    'rows={5}',
-    withState({ value: '' }, store => (
+    "rows={5}",
+    withState({ value: "" }, store => (
       <FormField
         label="Textarea with fixed amount of rows to start with"
-        skin={SimpleFormFieldSkin}
+        skin={FormFieldSkin}
         render={props => (
           <TextArea
             {...props}
@@ -133,7 +127,7 @@ storiesOf('TextArea', module)
             onChange={(value, event) => store.set({ value })}
             placeholder="Your description here"
             rows={5}
-            skin={SimpleTextAreaSkin}
+            skin={TextAreaSkin}
           />
         )}
       />
@@ -141,11 +135,11 @@ storiesOf('TextArea', module)
   )
 
   .add(
-    'autoResize={false}',
-    withState({ value: '' }, store => (
+    "autoResize={false}",
+    withState({ value: "" }, store => (
       <FormField
         label="Textarea without auto resizing"
-        skin={SimpleFormFieldSkin}
+        skin={FormFieldSkin}
         render={props => (
           <TextArea
             {...props}
@@ -153,7 +147,7 @@ storiesOf('TextArea', module)
             onChange={(value, event) => store.set({ value })}
             placeholder="Your description here"
             autoResize={false}
-            skin={SimpleTextAreaSkin}
+            skin={TextAreaSkin}
           />
         )}
       />
@@ -161,14 +155,14 @@ storiesOf('TextArea', module)
   )
 
   .add(
-    'composed theme',
-    withState({ value: '' }, store => (
+    "composed theme",
+    withState({ value: "" }, store => (
       <TextArea
         themeOverrides={themeOverrides}
         value={store.state.value}
         onChange={(value, event) => store.set({ value })}
         placeholder="type here..."
-        skin={SimpleTextAreaSkin}
+        skin={TextAreaSkin}
       />
     ))
   );

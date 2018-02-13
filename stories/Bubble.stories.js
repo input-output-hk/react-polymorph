@@ -1,70 +1,71 @@
-import React from 'react';
+import React from "react";
 
 // storybook
-import { storiesOf } from '@storybook/react';
-import { withState } from '@dump247/storybook-state';
+import { storiesOf } from "@storybook/react";
+import { withState } from "@dump247/storybook-state";
 
 // components
-import ThemeProvider from '../source/components/ThemeProvider';
-import Bubble from '../source/components/Bubble';
+import { ThemeProvider, Bubble } from "../source/components";
 
 // skins
-import SimpleBubbleSkin from '../source/skins/simple/BubbleSkin';
+import { BubbleSkin } from "../source/skins/simple";
 
 // themes
-import { SimpleBubbleTheme } from '../source/themes/simple';
+import { BubbleTheme } from "../source/themes/simple";
 
 // custom styles & theme overrides
-import styles from './Bubble.stories.scss';
-import themeOverrides from './styles/customBubble.scss';
+import styles from "./Bubble.stories.scss";
+import themeOverrides from "./styles/customBubble.scss";
 
-storiesOf('Bubble', module)
+storiesOf("Bubble", module)
   .addDecorator(story => {
-    const SimpleTheme = { bubble: { ...SimpleBubbleTheme } };
+    const SimpleTheme = { bubble: { ...BubbleTheme } };
 
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
   // ====== Stories ======
 
-  .add('plain', () => (
+  .add("plain", () => (
     <div className={styles.container}>
-      <Bubble skin={SimpleBubbleSkin}>plain bubble</Bubble>
+      <Bubble skin={BubbleSkin}>plain bubble</Bubble>
     </div>
   ))
 
-  .add('isOpeningUpward', () => (
+  .add("isOpeningUpward", () => (
     <div className={styles.container}>
-      <Bubble isOpeningUpward skin={SimpleBubbleSkin}>
+      <Bubble isOpeningUpward skin={BubbleSkin}>
         isOpeningUpward bubble
       </Bubble>
     </div>
   ))
 
-  .add('isTransparent={false}', () => (
+  .add("isTransparent={false}", () => (
     <div className={styles.container}>
-      <Bubble isTransparent={false} skin={SimpleBubbleSkin}>
+      <Bubble isTransparent={false} skin={BubbleSkin}>
         solid bubble
       </Bubble>
     </div>
   ))
 
-  .add('custom class', () => (
+  .add("custom class", () => (
     <div className={styles.container}>
-      <Bubble className={styles.customBubble} skin={SimpleBubbleSkin}>
+      <Bubble className={styles.customBubble} skin={BubbleSkin}>
         this bubble is right aligned;
       </Bubble>
     </div>
   ))
 
-  .add('content-light', () => (
+  .add("content-light", () => (
     <div className={styles.container}>
-      <Bubble skin={SimpleBubbleSkin}>tiny</Bubble>
+      <Bubble skin={BubbleSkin}>tiny</Bubble>
     </div>
   ))
 
-  .add('composed theme', () => (
+  .add("composed theme", () => (
     <div className={styles.container}>
-      <Bubble themeOverrides={themeOverrides} skin={SimpleBubbleSkin}>tiny</Bubble>
+      <Bubble themeOverrides={themeOverrides} skin={BubbleSkin}>
+        tiny
+      </Bubble>
     </div>
   ));

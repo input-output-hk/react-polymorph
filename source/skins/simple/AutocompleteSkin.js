@@ -1,19 +1,17 @@
-import React from 'react';
+import React from "react";
 
 // external libraries
-import _ from 'lodash';
-import classnames from 'classnames';
+import _ from "lodash";
+import classnames from "classnames";
 
 // components
-import FormField from '../../components/FormField';
-import Options from '../../components/Options';
+import { FormField, Options } from "../../components";
 
 // skins
-import SimpleFormFieldSkin from '../../skins/simple/FormFieldSkin';
-import SimpleOptionsSkin from '../../skins/simple/OptionsSkin';
+import { FormFieldSkin, OptionsSkin } from "./";
 
 // themes
-import { SimpleFormFieldTheme, SimpleOptionsTheme } from '../../themes/simple';
+import { FormFieldTheme, OptionsTheme } from "../../themes/simple";
 
 export default props => {
   const { label, error } = props;
@@ -32,7 +30,7 @@ export default props => {
     props.selectedOptions.length < props.maxSelections;
 
   let placeholder =
-    !props.maxSelections || canMoreOptionsBeSelected ? props.placeholder : '';
+    !props.maxSelections || canMoreOptionsBeSelected ? props.placeholder : "";
 
   let selectedOptions =
     props.selectedOptions &&
@@ -71,8 +69,8 @@ export default props => {
       <FormField
         error={props.error}
         label={props.label}
-        skin={SimpleFormFieldSkin}
-        theme={SimpleFormFieldTheme}
+        skin={FormFieldSkin}
+        theme={FormFieldTheme}
         render={() => {
           return (
             <div
@@ -102,8 +100,8 @@ export default props => {
                 resetOnClose
                 noResults={!props.filteredOptions.length}
                 noResultsMessage={props.noResultsMessage}
-                theme={SimpleOptionsTheme}
-                skin={SimpleOptionsSkin}
+                theme={OptionsTheme}
+                skin={OptionsSkin}
               />
             </div>
           );

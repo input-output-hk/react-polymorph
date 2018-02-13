@@ -1,27 +1,26 @@
-import React from 'react';
+import React from "react";
 
 // storybook
-import { storiesOf } from '@storybook/react';
-import { withState } from '@dump247/storybook-state';
+import { storiesOf } from "@storybook/react";
+import { withState } from "@dump247/storybook-state";
 
 // components
-import ThemeProvider from '../source/components/ThemeProvider';
-import Checkbox from '../source/components/Checkbox';
+import { ThemeProvider, Checkbox } from "../source/components";
 
 // skins
-import SimpleTogglerSkin from '../source/skins/simple/TogglerSkin';
+import { TogglerSkin } from "../source/skins/simple";
 
 // themes
-import { SimpleTogglerTheme } from '../source/themes/simple';
+import { TogglerTheme } from "../source/themes/simple";
 
 // theme API
-import { TOGGLER_THEME_API } from '../source/themes/API';
+import { TOGGLER_THEME_API } from "../source/themes/API";
 
-import themeOverrides from './styles/customToggler.scss';
+import themeOverrides from "./styles/customToggler.scss";
 
-storiesOf('Toggler', module)
+storiesOf("Toggler", module)
   .addDecorator(story => {
-    const SimpleTheme = { checkbox: { ...SimpleTogglerTheme } };
+    const SimpleTheme = { checkbox: { ...TogglerTheme } };
 
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
@@ -29,7 +28,7 @@ storiesOf('Toggler', module)
   // ====== Stories ======
 
   .add(
-    'plain',
+    "plain",
     withState({ checked: false }, store => (
       <Checkbox
         checked={store.state.checked}
@@ -37,13 +36,13 @@ storiesOf('Toggler', module)
         themeAPI={TOGGLER_THEME_API}
         labelLeft="Included"
         labelRight="Excluded"
-        skin={SimpleTogglerSkin}
+        skin={TogglerSkin}
       />
     ))
   )
 
   .add(
-    'in text',
+    "in text",
     withState({ checked: false }, store => (
       <div>
         <span>Fees&nbsp;</span>
@@ -53,7 +52,7 @@ storiesOf('Toggler', module)
           themeAPI={TOGGLER_THEME_API}
           labelLeft="Included"
           labelRight="Excluded"
-          skin={SimpleTogglerSkin}
+          skin={TogglerSkin}
         />
         <span>&nbsp;from the amount</span>
       </div>
@@ -61,7 +60,7 @@ storiesOf('Toggler', module)
   )
 
   .add(
-    'disabled',
+    "disabled",
     withState({ checked: false }, store => (
       <Checkbox
         disabled
@@ -70,13 +69,13 @@ storiesOf('Toggler', module)
         labelLeft="Included"
         labelRight="Excluded"
         themeAPI={TOGGLER_THEME_API}
-        skin={SimpleTogglerSkin}
+        skin={TogglerSkin}
       />
     ))
   )
 
   .add(
-    'composed theme',
+    "composed theme",
     withState({ checked: false }, store => (
       <Checkbox
         themeOverrides={themeOverrides}
@@ -85,7 +84,7 @@ storiesOf('Toggler', module)
         themeAPI={TOGGLER_THEME_API}
         labelLeft="Included"
         labelRight="Excluded"
-        skin={SimpleTogglerSkin}
+        skin={TogglerSkin}
       />
     ))
   );

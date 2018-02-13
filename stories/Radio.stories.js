@@ -1,26 +1,25 @@
-import React from 'react';
+import React from "react";
 
 // storybook
-import { storiesOf } from '@storybook/react';
-import { withState } from '@dump247/storybook-state';
+import { storiesOf } from "@storybook/react";
+import { withState } from "@dump247/storybook-state";
 
 // components
-import ThemeProvider from '../source/components/ThemeProvider';
-import Radio from '../source/components/Radio';
+import { ThemeProvider, Radio } from "../source/components";
 
 // skins
-import SimpleRadioSkin from '../source/skins/simple/RadioSkin';
+import { RadioSkin } from "../source/skins/simple";
 
 // themes
-import { SimpleRadioTheme } from '../source/themes/simple';
+import { RadioTheme } from "../source/themes/simple";
 
 // custom styles & themeOverrides
-import styles from './Radio.stories.scss';
-import themeOverrides from './styles/customRadio.scss';
+import styles from "./Radio.stories.scss";
+import themeOverrides from "./styles/customRadio.scss";
 
-storiesOf('Radio', module)
+storiesOf("Radio", module)
   .addDecorator(story => {
-    const SimpleTheme = { radio: { ...SimpleRadioTheme } };
+    const SimpleTheme = { radio: { ...RadioTheme } };
 
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
@@ -28,55 +27,55 @@ storiesOf('Radio', module)
   // ====== Stories ======
 
   .add(
-    'plain',
+    "plain",
     withState({ selected: false }, store => (
       <div className={styles.container}>
         <Radio
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={SimpleRadioSkin}
+          skin={RadioSkin}
         />
       </div>
     ))
   )
 
   .add(
-    'disabled',
+    "disabled",
     withState({ selected: false }, store => (
       <div className={styles.container}>
-        <Radio disabled skin={SimpleRadioSkin} />
+        <Radio disabled skin={RadioSkin} />
       </div>
     ))
   )
 
   .add(
-    'short label',
+    "short label",
     withState({ selected: false }, store => (
       <div className={styles.container}>
         <Radio
           label="My radio"
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={SimpleRadioSkin}
+          skin={RadioSkin}
         />
       </div>
     ))
   )
 
   .add(
-    'custom className',
+    "custom className",
     withState({ selected: false }, store => (
       <Radio
         className={styles.padding}
         selected={store.state.selected}
         onChange={() => store.set({ selected: !store.state.selected })}
-        skin={SimpleRadioSkin}
+        skin={RadioSkin}
       />
     ))
   )
 
   .add(
-    'disabled with label',
+    "disabled with label",
     withState({ selected: false }, store => (
       <div className={styles.container}>
         <Radio
@@ -84,14 +83,14 @@ storiesOf('Radio', module)
           label="My radio"
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={SimpleRadioSkin}
+          skin={RadioSkin}
         />
       </div>
     ))
   )
 
   .add(
-    'long label',
+    "long label",
     withState({ selected: false }, store => (
       <div className={styles.container}>
         <Radio
@@ -100,20 +99,20 @@ storiesOf('Radio', module)
                  were written down in a secure place"
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={SimpleRadioSkin}
+          skin={RadioSkin}
         />
       </div>
     ))
   )
 
   .add(
-    'html label',
+    "html label",
     withState({ selected: false }, store => (
       <div className={styles.container}>
         <Radio
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={SimpleRadioSkin}
+          skin={RadioSkin}
           label={
             <div>
               Example for a <strong>bold</strong> word in an html label
@@ -125,7 +124,7 @@ storiesOf('Radio', module)
   )
 
   .add(
-    'composed theme',
+    "composed theme",
     withState({ selected: false }, store => (
       <div className={styles.container}>
         <Radio
@@ -133,7 +132,7 @@ storiesOf('Radio', module)
           label="Radio with a composed theme"
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={SimpleRadioSkin}
+          skin={RadioSkin}
         />
       </div>
     ))

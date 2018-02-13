@@ -1,26 +1,25 @@
-import React from 'react';
+import React from "react";
 
 // storybook
-import { storiesOf } from '@storybook/react';
-import { withState } from '@dump247/storybook-state';
+import { storiesOf } from "@storybook/react";
+import { withState } from "@dump247/storybook-state";
 
 // components
-import ThemeProvider from '../source/components/ThemeProvider';
-import Checkbox from '../source/components/Checkbox';
+import { ThemeProvider, Checkbox } from "../source/components";
 
 // skins
-import SimpleSwitchSkin from '../source/skins/simple/SwitchSkin';
+import { SwitchSkin } from "../source/skins/simple";
 
 // themes
-import { SimpleSwitchTheme } from '../source/themes/simple';
+import { SwitchTheme } from "../source/themes/simple";
 
 // theme API
-import { SWITCH_THEME_API } from '../source/themes/API';
+import { SWITCH_THEME_API } from "../source/themes/API";
 
-storiesOf('Switch', module)
+storiesOf("Switch", module)
   .addDecorator(story => {
     const SimpleTheme = {
-      checkbox: { ...SimpleSwitchTheme }
+      checkbox: { ...SwitchTheme }
     };
 
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
@@ -29,39 +28,39 @@ storiesOf('Switch', module)
   // ====== Stories ======
 
   .add(
-    'plain',
+    "plain",
     withState({ checked: false }, store => (
       <Checkbox
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
         themeAPI={SWITCH_THEME_API}
-        skin={SimpleSwitchSkin}
+        skin={SwitchSkin}
       />
     ))
   )
 
   .add(
-    'disabled',
+    "disabled",
     withState({ checked: false }, store => (
-      <Checkbox disabled themeAPI={SWITCH_THEME_API} skin={SimpleSwitchSkin} />
+      <Checkbox disabled themeAPI={SWITCH_THEME_API} skin={SwitchSkin} />
     ))
   )
 
   .add(
-    'short label',
+    "short label",
     withState({ checked: false }, store => (
       <Checkbox
         label="My switch"
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
         themeAPI={SWITCH_THEME_API}
-        skin={SimpleSwitchSkin}
+        skin={SwitchSkin}
       />
     ))
   )
 
   .add(
-    'disabled with label',
+    "disabled with label",
     withState({ checked: false }, store => (
       <Checkbox
         disabled
@@ -69,13 +68,13 @@ storiesOf('Switch', module)
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
         themeAPI={SWITCH_THEME_API}
-        skin={SimpleSwitchSkin}
+        skin={SwitchSkin}
       />
     ))
   )
 
   .add(
-    'long label',
+    "long label",
     withState({ checked: false }, store => (
       <Checkbox
         label="I understand that if this application is moved to another device or deleted,
@@ -84,7 +83,7 @@ storiesOf('Switch', module)
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
         themeAPI={SWITCH_THEME_API}
-        skin={SimpleSwitchSkin}
+        skin={SwitchSkin}
       />
     ))
   );

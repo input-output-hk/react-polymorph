@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
 // external libraries
-import classnames from 'classnames';
+import classnames from "classnames";
 
 // components
-import Bubble from '../../components/Bubble';
+import { Bubble } from "../../components";
 
 // skins
-import BubbleSkin from './BubbleSkin';
+import { BubbleSkin } from "./";
 
 // themes
-import { SimpleBubbleTheme } from '../../themes/simple';
+import { BubbleTheme } from "../../themes/simple";
 
 export default props => {
   const {
@@ -45,7 +45,7 @@ export default props => {
       ref={optionsRef}
       isTransparent={false}
       skin={BubbleSkin}
-      theme={SimpleBubbleTheme}
+      theme={BubbleTheme}
       isOpeningUpward={isOpeningUpward}
     >
       <ul className={theme.ul}>
@@ -63,7 +63,7 @@ export default props => {
             >
               {optionRenderer
                 ? optionRenderer(option)
-                : typeof option === 'object' ? option.label : option}
+                : typeof option === "object" ? option.label : option}
             </li>
           ))
         ) : (
