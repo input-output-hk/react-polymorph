@@ -24,7 +24,7 @@ $autocomplete-selected-word-box-background-color: rgba(68, 91, 124, 0.5) !defaul
   .autocompleteContent {
     background-color: $autocomplete-bg-color;
     border: $autocomplete-border;
-    border-radius: $tautocomplete-border-radius;
+    border-radius: $autocomplete-border-radius;
     box-sizing: border-box;
     font-size: $autocomplete-font-size;
     min-height: $autocomplete-min-height;
