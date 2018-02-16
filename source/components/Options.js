@@ -201,7 +201,7 @@ export default class Options extends SkinnableComponent {
 
   _removeAllEventListeners() {
     events.removeEventsFromDocument(this._getDocumentEvents());
-    window.removeEventListener('resize', this._updatePosition);
+    window.removeEventListener('resize', this._handleWindowResize);
   }
 
   _getDocumentEvents() {
