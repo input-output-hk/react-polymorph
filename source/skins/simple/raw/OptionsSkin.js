@@ -29,6 +29,8 @@ export const optionsSkinFactory = (BubbleSkin) => (
         isTransparent={false}
         skin={<BubbleSkin />}
         isOpeningUpward={isOpeningUpward}
+        isHidden={!isOpen}
+        isFloating
       >
         <ul className={theme.ul}>
           {!noResults ? sortedOptions.map((option, index) => (
