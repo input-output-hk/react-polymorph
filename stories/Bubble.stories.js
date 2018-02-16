@@ -61,4 +61,25 @@ storiesOf('Bubble', module)
         tiny
       </Bubble>
     </div>
+  ))
+  .add('isHidden', () => (
+    <div className={styles.container}>
+      There should be no bubble shown!
+      <Bubble isHidden skin={<SimpleBubbleSkin/>} >
+        should not be visible!
+      </Bubble>
+    </div>
+  ))
+  .add('isFloating', () => (
+    <div className={styles.scrollContainer}>
+      <div className={styles.scrollContent}>
+        <Bubble isFloating skin={<SimpleBubbleSkin/>} >
+          floating above scroll content
+        </Bubble>
+      </div>
+      <p>
+        Here is some text that should break<br/>
+        and trigger scroll bars<br/>
+      </p>
+    </div>
   ));

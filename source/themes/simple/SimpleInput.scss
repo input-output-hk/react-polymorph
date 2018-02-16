@@ -36,13 +36,13 @@ $input-errored-border: $theme-color-error;
   &::-webkit-input-placeholder {
     color: $input-placeholder-color;
   }
+
+  &.errored {
+    border: 1px solid $input-errored-border;
+  }
 }
 
 .disabled {
   background-color: $input-disabled-bg-color;
   border-color: $input-disabled-color;
-}
-
-.errored {
-  border: $input-errored-border;
 }
