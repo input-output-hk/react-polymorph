@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "author": {
     "name": "Dominik Guzei",
     "url": "https://github.com/DominikGuzei"
@@ -10,7 +10,12 @@
     {
       "name": "Dominik Guzei",
       "email": "dominik.guzei@gmail.com",
-      "url": "http://www.linkedin.com/in/dominik-guzei"
+      "url": "https://www.linkedin.com/in/dominik-guzei"
+    },
+    {
+      "name": "Nikola Glumac",
+      "email": "niglumac@gmail.com",
+      "url": "https://www.linkedin.com/in/nikolaglumac"
     }
   ],
   "repository": {
