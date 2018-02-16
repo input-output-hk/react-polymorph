@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { pickDOMProps } from '../../../utils/props';
 import { themr } from 'react-css-themr';
 import { TOOLTIP } from '../identifiers';
+import Bubble from '../../../components/Bubble';
 import RawBubbleSkin from './BubbleSkin';
 
 /**
@@ -25,7 +26,8 @@ export const tooltipSkinFactory = (BubbleSkin) => (
         props.theme.root,
       ])}
     >
-      <BubbleSkin
+      <Bubble
+        skin={<BubbleSkin />}
         isOpeningUpward={props.isOpeningUpward}
         className={classnames([
           props.theme.bubble,
@@ -34,7 +36,7 @@ export const tooltipSkinFactory = (BubbleSkin) => (
         ])}
       >
         {props.tip}
-      </BubbleSkin>
+      </Bubble>
       {props.children}
     </span>
   )
