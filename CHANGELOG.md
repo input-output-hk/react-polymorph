@@ -3,6 +3,8 @@ Changelog
 
 ## vNext
 
+## 0.6.3
+
 ### Fixes
 
 - Fix Options component window resize event handling, Add `border-radius` CSS property to Textarea component [PR 44](https://github.com/input-output-hk/react-polymorph/pull/44)
