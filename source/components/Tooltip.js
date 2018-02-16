@@ -7,7 +7,7 @@ export default class Tooltip extends SkinnableComponent {
 
   static propTypes = Object.assign({}, SkinnableComponent.propTypes, {
     isAligningRight: PropTypes.bool,
-    isOpeningUpwards: PropTypes.bool,
+    isOpeningUpward: PropTypes.bool,
     isBounded: PropTypes.bool,
     tip: StringOrElement,
   });

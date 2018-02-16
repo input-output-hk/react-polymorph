@@ -33,28 +33,27 @@ export default class Options extends SkinnableComponent {
     highlightedOptionIndex: 0,
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.isOpen !== nextProps.isOpen) {
-      this.setState({isOpen: nextProps.isOpen});
-    }
-  }
-
   componentWillUpdate(nextProps, nextState) {
     // update isOpen state when parent component force open / close options
     // (e.g. click on Input in Select component)
     if (!this.state.isOpen && nextState.isOpen) {
       window.addEventListener('resize', this._handleWindowResize);
-      this.handleScrollEventListener('add');
       events.addEventsToDocument(this._getDocumentEvents());
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.isOpen && !this.state.isOpen) this.removeAllEventListeners();
+    if (prevState.isOpen && !this.state.isOpen) this._removeAllEventListeners();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.isOpen !== nextProps.isOpen) {
+      this.setState({ isOpen: nextProps.isOpen });
+    }
   }
 
   componentWillUnmount() {
-    if (this.state.isOpen) this.removeAllEventListeners();
+    this._removeAllEventListeners();
   }
 
   prepareSkinProps(props) {
@@ -62,33 +61,6 @@ export default class Options extends SkinnableComponent {
       isOpen: this.state.isOpen,
       highlightedOptionIndex: this.state.highlightedOptionIndex,
     });
-  };
-
-  removeAllEventListeners() {
-    events.removeEventsFromDocument(this._getDocumentEvents());
-    window.removeEventListener('resize', this._handleWindowResize);
-    this.handleScrollEventListener('remove');
-  }
-
-  getFirstScrollableParent = (node) => {
-    if (node == null) return null;
-    if (node.scrollHeight > node.clientHeight) {
-      return node;
-    } else {
-      return this.getFirstScrollableParent(node.parentNode);
-    }
-  };
-
-  handleScrollEventListener = (action) => {
-    const rootNode = this._getRootSkinPart();
-    const scrollableNode = this.getFirstScrollableParent(rootNode);
-    if (scrollableNode) {
-      if (action === 'add') {
-        scrollableNode.addEventListener('scroll', this._handleScroll);
-      } else if (action === 'remove') {
-        scrollableNode.addEventListener('scroll', this._handleScroll);
-      }
-    }
   };
 
   open = () => {
@@ -223,6 +195,15 @@ export default class Options extends SkinnableComponent {
 
   _handleScroll = () => this.state.isOpen && this.close();
 
+  _getRootSkinPart() {
+    return this.skinParts[Options.SKIN_PARTS.OPTIONS];
+  }
+
+  _removeAllEventListeners() {
+    events.removeEventsFromDocument(this._getDocumentEvents());
+    window.removeEventListener('resize', this._updatePosition);
+  }
+
   _getDocumentEvents() {
     return {
       keydown: this._handleKeyDown,
@@ -230,10 +211,6 @@ export default class Options extends SkinnableComponent {
       touchend: this._handleDocumentClick,
       scroll: this._handleScroll,
     };
-  }
-
-  _getRootSkinPart() {
-    return this.skinParts[Options.SKIN_PARTS.OPTIONS];
   }
 
 }

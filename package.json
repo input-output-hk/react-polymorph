@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "author": {
     "name": "Dominik Guzei",
     "url": "https://github.com/DominikGuzei"
@@ -29,8 +29,8 @@
   ],
   "dependencies": {
     "filter-react-dom-props": "0.0.2",
-    "postinstall-build": "^5.0.0",
-    "react-modal": "^2.2.1"
+    "postinstall-build": "5.0.0",
+    "react-modal": "3.1.12"
   },
   "peerDependencies": {
     "react": "^15 || ^16",
@@ -41,8 +41,8 @@
     "lodash": "^4"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.2.12",
-    "@storybook/react": "3.2.12",
+    "@storybook/addon-actions": "3.2.12",
+    "@storybook/react": "3.3.12",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.0",
@@ -54,18 +54,18 @@
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.6.0",
     "babel-preset-react": "6.24.1",
-    "classnames": "^2.2.5",
-    "cpx": "^1.5.0",
-    "cross-env": "^3.1.4",
-    "css-loader": "^0.26.1",
-    "eslint": "^3.12.2",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0",
+    "classnames": "2.2.5",
+    "cpx": "1.5.0",
+    "cross-env": "3.1.4",
+    "css-loader": "0.26.1",
+    "eslint": "3.12.2",
+    "eslint-config-airbnb": "13.0.0",
+    "eslint-loader": "1.6.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-react": "6.8.0",
     "express": "4.16.2",
-    "extract-text-webpack-plugin": "3.0.1",
+    "extract-text-webpack-plugin": "2.1.2",
     "file-loader": "1.1.5",
     "lodash": "4.17.4",
     "mobx": "3.3.1",
@@ -87,7 +87,7 @@
     "build": "cross-env npm run clean && npm run js && npm run sass",
     "clean": "rimraf ./lib",
     "prebuild": "npm run clean",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook",
     "postinstall": "postinstall-build lib --only-as-dependency",

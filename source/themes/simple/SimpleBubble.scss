@@ -42,6 +42,23 @@ $bubble-shadow: none !default;
 // ======= SPECIAL STATES =======
 .root {
 
+  // ==== STATE: isHidden ====
+
+  &.isHidden {
+    display: none;
+  }
+
+  // ==== STATE: isFloating ====
+
+  &.isFloating {
+    overflow: visible;
+    width: 100%;
+    position: fixed;
+    z-index: 99;
+    left: inherit;
+    right: inherit;
+  }
+
   // ==== STATE: openUpward ====
 
   &.openUpward {

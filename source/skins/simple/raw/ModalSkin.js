@@ -11,6 +11,7 @@ export default themr(MODAL)((props) => (
     shouldCloseOnOverlayClick={props.triggerCloseOnOverlayClick}
     className={props.theme.modal}
     overlayClassName={props.theme.overlay}
+    ariaHideApp={false}
   >
     {props.children}
   </ReactModal>

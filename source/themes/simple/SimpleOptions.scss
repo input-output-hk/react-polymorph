@@ -17,14 +17,8 @@ $option-highlight-color: #edf0f3 !default;
 $option-padding: 14px 20px !default;
 
 .options {
-  display: none; // only show when open
-
   & > div {
     padding: 0;
-  }
-
-  &.isOpen {
-    display: block;
   }
 
   & [data-bubble-arrow] {

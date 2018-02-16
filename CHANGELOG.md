@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## vNext
+
+## 0.6.2
+
+### Fixes
+
+- Fixes dependencies to be React 16 compatible [PR 41](https://github.com/input-output-hk/react-polymorph/pull/41)
+- Fixes broken options positioning logic that was accidentially removed when bubble was introduced 
+  [PR 42](https://github.com/input-output-hk/react-polymorph/pull/42)
+
 ## 0.6.1
 
 ### Features
