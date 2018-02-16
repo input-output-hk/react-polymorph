@@ -3,6 +3,10 @@ Changelog
 
 ## vNext
 
+### Fixes
+
+- Add `border-radius` CSS property to Autocomplete component [PR 45](https://github.com/input-output-hk/react-polymorph/pull/45)
+
 ## 0.6.3
 
 ### Fixes
