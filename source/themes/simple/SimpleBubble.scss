@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins/arrow";
+@import 'theme';
+@import 'mixins/arrow';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -12,7 +12,8 @@ $bubble-border-width-transparent: 0px !default;
 $bubble-border-color: #c6cdd6 !default;
 $bubble-border-color-transparent: transparent !default;
 $bubble-border: $bubble-border-width solid $bubble-border-color !default;
-$bubble-border-transparent: $bubble-border-width-transparent solid $bubble-border-color-transparent !default;
+$bubble-border-transparent: $bubble-border-width-transparent solid
+$bubble-border-color-transparent !default;
 $bubble-box-shadow: 0 1.5px 5px 0 rgba(0, 0, 0, 0.18) !default;
 $bubble-padding: 6px 12px !default;
 $bubble-font-color: #5e6066 !default;
@@ -28,19 +29,6 @@ $bubble-shadow: none !default;
   left: 0;
   right: 0;
   z-index: 1;
-}
-
-.bubble {
-  border-radius: $bubble-border-radius;
-  box-shadow: $bubble-box-shadow;
-  padding: $bubble-padding;
-  position: absolute;
-  min-width: 100%;
-  box-sizing: border-box;
-}
-
-// ======= SPECIAL STATES =======
-.root {
 
   // ==== STATE: isHidden ====
 
@@ -111,7 +99,6 @@ $bubble-shadow: none !default;
     @include arrow(down, $bubble-bg-color, $bubble-border-color, $bubble-arrow-size);
   }
 
-
   // Make sure the arrow overlaps any borders on the bubble
   &.transparent.openUpward .bubble {
     margin-bottom: -$bubble-border-width-transparent;
@@ -128,5 +115,13 @@ $bubble-shadow: none !default;
   &:not(.transparent):not(.openUpward) .bubble {
     margin-top: -$bubble-border-width;
   }
+}
 
+.bubble {
+  border-radius: $bubble-border-radius;
+  box-shadow: $bubble-box-shadow;
+  padding: $bubble-padding;
+  position: absolute;
+  min-width: 100%;
+  box-sizing: border-box;
 }

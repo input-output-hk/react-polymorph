@@ -48,6 +48,16 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
   width: 0;
 }
 
+.thumb {
+  border-radius: 3px;
+  cursor: pointer;
+  height: $switch-track-height;
+  position: absolute;
+  top: 0;
+  transition: left 200ms ease-in-out;
+  width: $switch-track-height;
+}
+
 .switch {
   align-self: center;
   border-radius: 3px;
@@ -57,16 +67,6 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
   position: relative;
   transition: background-color 200ms ease-in-out;
   width: $switch-track-length;
-
-  .thumb {
-    border-radius: 3px;
-    cursor: pointer;
-    height: $switch-track-height;
-    position: absolute;
-    top: 0;
-    transition: left 200ms ease-in-out;
-    width: $switch-track-height;
-  }
 
   &.checked {
     @extend %switch;

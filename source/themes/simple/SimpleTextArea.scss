@@ -1,4 +1,4 @@
-@import "theme";
+@import 'theme';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -41,14 +41,10 @@ $textarea-error-color: $theme-color-error !default;
 }
 
 .disabled {
-  .textarea {
-    background-color: $textarea-disabled-bg-color;
-    border-color: $textarea-disabled-border-color;
-  }
+  background-color: $textarea-disabled-bg-color;
+  border-color: $textarea-disabled-border-color;
 }
 
 .errored {
-  .textarea {
-    border-color: $textarea-error-color;
-  }
+  border-color: $textarea-error-color;
 }

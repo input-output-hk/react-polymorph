@@ -1,0 +1,23 @@
+.select {
+  width: 60%;
+  transition: all 0.4s ease-in-out;
+
+  &.isOpen {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 50%;
+    transition: all 0.4s ease-in-out;
+
+    input {
+      border-color: rgba(10, 145, 48, 0.8);
+      border-radius: 5px;
+    }
+  }
+
+  input {
+    &:hover {
+      border-color: rgba(10, 145, 48, 0.8);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}

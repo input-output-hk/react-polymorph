@@ -54,6 +54,8 @@ export default {
   }
 };
 
+// constants and helper functions /////////
+
 const TRANSITIONS = {
   'transition': 'transitionend',
   'OTransition': 'oTransitionEnd',

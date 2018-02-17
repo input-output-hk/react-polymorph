@@ -1,53 +1,106 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
-import Checkbox from '../source/components/Checkbox';
-import SimpleCheckboxSkin from '../source/skins/simple/CheckboxSkin';
+import React from "react";
 
-storiesOf('Checkbox', module)
+// storybook
+import { storiesOf } from "@storybook/react";
+import { withState } from "@dump247/storybook-state";
 
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      checked: false,
-      onChange: mobxAction((value, event) => {
-        state.checked = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
+// components
+import { ThemeProvider, Checkbox } from "../source/components";
+
+// skins
+import { CheckboxSkin } from "../source/skins/simple";
+
+// themes
+import { CheckboxTheme } from "../source/themes/simple";
+
+// custom styles
+import customStyles from "./Checkbox.stories.scss";
+
+storiesOf("Checkbox", module)
+  .addDecorator(story => {
+    const SimpleTheme = { checkbox: { ...CheckboxTheme } };
+
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
   // ====== Stories ======
 
-  .add('plain', () => <Checkbox skin={<SimpleCheckboxSkin />} />)
+  .add(
+    "plain",
+    withState({ checked: false }, store => (
+      <Checkbox
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        skin={CheckboxSkin}
+      />
+    ))
+  )
 
-  .add('disabled', () => <Checkbox disabled skin={<SimpleCheckboxSkin />} />)
+  .add(
+    "disabled",
+    withState({ checked: false }, store => (
+      <Checkbox disabled skin={CheckboxSkin} />
+    ))
+  )
 
-  .add('short label', () => <Checkbox label="My checkbox" skin={<SimpleCheckboxSkin />} />)
+  .add(
+    "short label",
+    withState({ checked: false }, store => (
+      <Checkbox
+        label="My checkbox"
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        skin={CheckboxSkin}
+      />
+    ))
+  )
 
-  .add('disabled with label', () => (
-    <Checkbox
-      disabled
-      label="My checkbox"
-      skin={<SimpleCheckboxSkin />}
-    />
-  ))
+  .add(
+    "disabled with label",
+    withState({ checked: false }, store => (
+      <Checkbox disabled label="My checkbox" skin={CheckboxSkin} />
+    ))
+  )
 
-  .add('long label', () => (
-    <Checkbox
-      skin={<SimpleCheckboxSkin />}
-      label="I understand that if this application is moved to another device or deleted,
+  .add(
+    "long label",
+    withState({ checked: false }, store => (
+      <Checkbox
+        label="I understand that if this application is moved to another device or deleted,
              my money can be only recovered with the backup phrase which
              were written down in a secure place"
-    />
-  ))
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        skin={CheckboxSkin}
+      />
+    ))
+  )
 
-  .add('html label', () => (
-    <Checkbox
-      skin={<SimpleCheckboxSkin />}
-      label={<div>Example for a <strong>bold</strong> word in an html label</div>}
-    />
-  ));
+  .add(
+    "html label",
+    withState({ checked: false }, store => (
+      <Checkbox
+        label={
+          <div>
+            Example for a <strong>bold</strong> word in an html label
+          </div>
+        }
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        skin={CheckboxSkin}
+      />
+    ))
+  )
+
+  .add(
+    "composed theme",
+    withState({ checked: false }, store => (
+      <Checkbox
+        themeOverrides={customStyles}
+        label="check here"
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        skin={CheckboxSkin}
+      />
+    ))
+  );

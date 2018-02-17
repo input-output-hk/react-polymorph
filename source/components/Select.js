@@ -1,60 +1,90 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import FormField from './FormField';
-import Input from './Input';
+import React, { Component } from 'react';
+import { bool, func, object, arrayOf, shape, string } from 'prop-types';
 
-export default class Select extends FormField {
+// import the Select component's theme API
+import { SELECT_THEME_API } from '../themes/API';
 
-  static SKIN_PARTS = {
-    ROOT: 'root',
-    INPUT: Input.SKIN_PARTS.INPUT,
+// import the composeTheme utility function
+import { StringOrElement, composeTheme } from '../utils';
+
+class Select extends Component {
+  static propTypes = {
+    allowBlank: bool,
+    autoFocus: bool,
+    isOpeningUpward: bool,
+    onBlur: func,
+    onChange: func,
+    onFocus: func,
+    options: arrayOf(
+      shape({
+        isDisabled: bool,
+        value: string.isRequired,
+      })
+    ).isRequired,
+    placeholder: string,
+    skin: func.isRequired,
+    theme: object,
+    themeAPI: object,
+    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
+    value: string
   };
-
-  // Handle props used strictly for Select parent element which is in this case Input.
-  // Other props (Options props) are same for different parent elements and must be handled on one place - Options
-  static propTypes = Object.assign({}, FormField.propTypes, {
-    options: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      isDisabled: PropTypes.bool,
-    })).isRequired,
-    value: PropTypes.string,
-    allowBlank: PropTypes.bool,
-    placeholder: PropTypes.string,
-  });
 
   static defaultProps = {
     allowBlank: true,
+    autoFocus: false,
+    isOpeningUpward: false,
+    theme: {},
+    themeOverrides: {},
+    themeAPI: { ...SELECT_THEME_API },
+    value: ''
   };
 
-  state = {
-    isOpen: false,
+  static contextTypes = {
+    theme: object
   };
 
-  prepareSkinProps(props) {
-    return Object.assign({}, super.prepareSkinProps(props), {
-      isOpen: this.state.isOpen,
-    });
+  constructor(props, context) {
+    super(props);
+
+    const { themeOverrides, themeAPI } = props;
+
+    const theme =
+      context && context.theme && context.theme.select
+        ? context.theme.select
+        : props.theme;
+
+    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    this.state = {
+      isOpen: false,
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.autoFocus) {
+      return this.focus();
+    }
   }
 
   // ========= PUBLIC SKIN API =========
 
   // Focus the component - toggle dropdown
-  focus = () => this.toggleOptions();
+  focus = () => this.toggleOpen();
 
-  onCloseOptions = () => {
-    this.setState({ isOpen: false });
+  toggleOpen = () => {
+    this.setState({ isOpen: !this.state.isOpen });
   };
 
-  handleInputClick = (event) => {
+  handleInputClick = event => {
     event.stopPropagation();
     event.preventDefault();
-    this._getInputSkinPart().blur();
-    this.toggleOptions();
+    this.inputElement.blur();
+    this.toggleOpen();
   };
 
   handleChange = (option, event) => {
     if (this.props.onChange) this.props.onChange(option.value, event);
-    this.toggleOptions();
+    this.toggleOpen();
   };
 
   getSelectedOption = () => {
@@ -65,14 +95,29 @@ export default class Select extends FormField {
     if (!allowBlank) return options[0];
   };
 
-  toggleOptions = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
+  render() {
+    // destructuring props ensures only the "...rest" get passed down
+    const {
+      skin: SelectSkin,
+      theme,
+      themeOverrides,
+      themeAPI,
+      ...rest
+    } = this.props;
 
-  // ========= PRIVATE HELPERS =========
-
-  _getInputSkinPart() {
-    return this.skinParts[Select.SKIN_PARTS.INPUT];
+    return (
+      <SelectSkin
+        isOpen={this.state.isOpen}
+        inputRef={el => (this.inputElement = el)}
+        theme={this.state.composedTheme}
+        getSelectedOption={this.getSelectedOption}
+        handleInputClick={this.handleInputClick}
+        handleChange={this.handleChange}
+        toggleOpen={this.toggleOpen}
+        {...rest}
+      />
+    );
   }
-
 }
+
+export default Select;

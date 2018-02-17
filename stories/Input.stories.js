@@ -1,85 +1,221 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
-import Input from '../source/components/Input';
-import SimpleInputSkin from '../source/skins/simple/InputSkin';
+import React from "react";
 
-storiesOf('Input', module)
+// storybook
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { withState } from "@dump247/storybook-state";
 
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      value: '',
-      onChange: mobxAction((value, event) => {
-        state.value = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
+// components
+import { ThemeProvider, FormField, Input } from "../source/components";
+
+// skins
+import { FormFieldSkin, InputSkin } from "../source/skins/simple";
+
+// themes
+import { FormFieldTheme, InputTheme } from "../source/themes/simple";
+
+// themeOverrides
+import themeOverrides from "./styles/customInput.scss";
+
+storiesOf("Input", module)
+  .addDecorator(story => {
+    const SimpleTheme = {
+      formfield: { ...FormFieldTheme },
+      input: { ...InputTheme }
+    };
+
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
-
   // ====== Stories ======
 
-  .add('plain', () => <Input skin={<SimpleInputSkin />} />)
-
-  .add('label', () => <Input label="Some label" skin={<SimpleInputSkin />} />)
-
-  .add('placeholder', () => <Input placeholder="Username" skin={<SimpleInputSkin />} />)
-
-  .add('disabled', () => (
-    <Input
-      label="Disabled Input"
-      placeholder="disabled"
-      disabled
-      skin={<SimpleInputSkin />}
-    />
-  ))
-
-  .add('error', () => (
-    <div>
-      <Input label="With label" error="Something went wrong" skin={<SimpleInputSkin />} />
-      <Input value="Franz" error="Requires at least 8 characters" skin={<SimpleInputSkin />} />
-    </div>
-  ))
-
-  .add('type=password', () => {
-    return (
-      <Input value="secret" type="password" skin={<SimpleInputSkin />} />
-    );
-  })
-
-  .add('focus / blur', () => {
-    let input;
-    return (
-      <div>
-        <Input
-          ref={(ref) => input = ref}
-          skin={<SimpleInputSkin />}
-          onFocus={action('onFocus')}
-          onBlur={action('onBlur')}
-        />
-        <button onClick={() => input.focus()}>focus</button> | <button onClick={() => input.blur()}>blur</button>
-      </div>
-    );
-  })
-
-  .add('maxLength(5)', () => (
-    <Input
-      label="Input with max. 5 Characters"
-      onChange={mobxAction((value) => { state.value = value; })}
-      maxLength={5}
-      skin={<SimpleInputSkin />}
-    />
-  ))
-
-  .add('onChange / onKeyPress', () => {
-    return (
+  .add(
+    "Plain",
+    withState({ value: "" }, store => (
       <Input
-        label="Type to see events logged"
-        onKeyPress={action('onKeyPress')}
-        skin={<SimpleInputSkin />}
+        {...store.state}
+        onChange={(value, event) => store.set({ value })}
+        skin={InputSkin}
       />
-    );
-  });
+    ))
+  )
+
+  .add(
+    "label",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Some label"
+        skin={FormFieldSkin}
+        render={props => (
+          <Input
+            {...props}
+            value={store.state.value}
+            onChange={(value, event) => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
+
+  .add(
+    "placeholder",
+    withState({ value: "" }, store => (
+      <Input
+        value={store.state.value}
+        placeholder="user name"
+        onChange={(value, event) => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add(
+    "autoFocus",
+    withState({ value: "" }, store => (
+      <Input
+        autoFocus
+        value={store.state.value}
+        placeholder="autoFocus"
+        onChange={(value, event) => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add("disabled", () => (
+    <FormField
+      disabled
+      label="Disabled Input"
+      skin={FormFieldSkin}
+      render={props => (
+        <Input {...props} placeholder="user name" skin={InputSkin} />
+      )}
+    />
+  ))
+
+  .add(
+    "error",
+    withState({ value: "" }, store => (
+      <FormField
+        label="With Label"
+        error="Something went wrong"
+        skin={FormFieldSkin}
+        render={props => (
+          <Input
+            {...props}
+            value={store.state.value}
+            onChange={(value, event) => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
+
+  .add(
+    "minLength(8)",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Input with min. 5 Characters"
+        skin={FormFieldSkin}
+        render={props => (
+          <Input
+            {...props}
+            value={store.state.value}
+            placeholder="min length"
+            minLength={8}
+            onChange={(value, event) => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
+
+  .add(
+    "maxLength(5)",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Input with max. 5 Characters"
+        skin={FormFieldSkin}
+        render={props => (
+          <Input
+            {...props}
+            value={store.state.value}
+            placeholder="max length"
+            maxLength={5}
+            onChange={(value, event) => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
+
+  .add(
+    "type=password",
+    withState({ value: "" }, store => (
+      <Input
+        value={store.state.value}
+        type="password"
+        placeholder="password"
+        onChange={(value, event) => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add(
+    "focus / blur",
+    withState({ value: "", focused: false, blurred: false }, store => (
+      <Input
+        value={store.state.value}
+        placeholder="focus / blur"
+        onChange={value => store.set({ value })}
+        onFocus={() => store.set({ focused: true })}
+        onBlur={() => store.set({ blurred: true })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add(
+    "onKeyPress",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Type to see events logged"
+        skin={FormFieldSkin}
+        render={props => (
+          <Input
+            {...props}
+            value={store.state.value}
+            placeholder="max length"
+            maxLength={5}
+            onKeyPress={action("onKeyPress")}
+            onChange={(value, event) => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
+
+  .add(
+    "composed theme",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Input with a composed theme"
+        skin={FormFieldSkin}
+        render={props => (
+          <Input
+            {...props}
+            themeOverrides={themeOverrides}
+            value={store.state.value}
+            placeholder="type here..."
+            onChange={(value, event) => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  );

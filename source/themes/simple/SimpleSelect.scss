@@ -18,6 +18,34 @@ $select-down-arrow-position-left: calc(100% - 32px) !default;
 
 .select {
   position: relative;
+
+  // ==== STATE: isOpen ====
+  &.isOpen {
+    input {
+      border-color: $select-input-border-focus-color;
+    }
+
+    .selectInput:after {
+      background-color: $select-arrow-focus-color;
+      -webkit-mask-image: $select-up-arrow-url;
+      mask-image: $select-up-arrow-url;
+    }
+  }
+
+  // ==== STATE: openUpward ====
+  &.openUpward {
+    .selectInput:after {
+      -webkit-mask-image: $select-up-arrow-url;
+      mask-image: $select-up-arrow-url;
+    }
+
+    &.isOpen {
+      .selectInput:after {
+        -webkit-mask-image: $select-down-arrow-url;
+        mask-image: $select-down-arrow-url;
+      }
+    }
+  }
 }
 
 .selectInput {
@@ -46,39 +74,5 @@ $select-down-arrow-position-left: calc(100% - 32px) !default;
     -webkit-mask-size: $select-down-arrow-width;
     mask-size: $select-down-arrow-width;
     width: $select-down-arrow-width;
-  }
-}
-
-// ======= SPECIAL STATES =======
-
-.select {
-  // ==== STATE: isOpen ====
-
-  &.isOpen {
-    input {
-      border-color: $select-input-border-focus-color;
-    }
-
-    .selectInput:after {
-      background-color: $select-arrow-focus-color;
-      -webkit-mask-image: $select-up-arrow-url;
-      mask-image: $select-up-arrow-url;
-    }
-  }
-
-  // ==== STATE: openUpward ====
-
-  &.openUpward {
-    .selectInput:after {
-      -webkit-mask-image: $select-up-arrow-url;
-      mask-image: $select-up-arrow-url;
-    }
-
-    &.isOpen {
-      .selectInput:after {
-        -webkit-mask-image: $select-down-arrow-url;
-        mask-image: $select-down-arrow-url;
-      }
-    }
   }
 }
