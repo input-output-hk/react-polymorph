@@ -3,10 +3,24 @@ Changelog
 
 ## vNext
 
+## 0.6.4
+
+### Fixes
+
+- Add `border-radius` CSS property to Autocomplete component [PR 45](https://github.com/input-output-hk/react-polymorph/pull/45)
+
+## 0.6.3
+
+### Fixes
+
+- Fix Options component window resize event handling, Add `border-radius` CSS property to Textarea component [PR 44](https://github.com/input-output-hk/react-polymorph/pull/44)
+
+## 0.6.2
+
 ### Fixes
 
 - Fixes dependencies to be React 16 compatible [PR 41](https://github.com/input-output-hk/react-polymorph/pull/41)
-- Fixes broken options positioning logic that was accidentially removed when bubble was introduced 
+- Fixes broken options positioning logic that was accidentially removed when bubble was introduced
   [PR 42](https://github.com/input-output-hk/react-polymorph/pull/42)
 
 ## 0.6.1
