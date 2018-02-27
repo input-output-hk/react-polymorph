@@ -3,5 +3,7 @@ export default {
   input: '',
   switch: '',
   thumb: '',
-  label: ''
+  label: '',
+  disabled: '',
+  checked: ''
 };
