@@ -5,7 +5,7 @@ export default {
   selectedWordBox: '',
   selectedWordValue: '',
   selectedWordRemoveButton: '',
-  errored: '',
+  hasSelectedWords: '',
   opened: '',
-  hasSelectedWords: ''
+  errored: ''
 };
