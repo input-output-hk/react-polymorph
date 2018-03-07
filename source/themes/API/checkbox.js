@@ -1,8 +1,8 @@
 export default {
   root: '',
+  disabled: '',
+  checked: '',
   input: '',
   check: '',
-  checked: '',
-  disabled: '',
   label: ''
 };
