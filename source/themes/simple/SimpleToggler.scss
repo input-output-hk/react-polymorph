@@ -11,23 +11,25 @@ $toggler-height: 25px !default;
 
 .root {
   display: inline-block;
+
   &:hover {
     cursor: pointer;
   }
-  &.disabled {
-    &:hover,
-    .label:hover,
-    .toggler .thumb {
-      cursor: default;
-    }
+}
 
-    .toggler {
-      background-color: $toggler-background-disabled;
+.disabled {
+  .root,
+  .toggler,
+  .label {
+    cursor: default;
+  }
 
-      .label.checked {
-        color: $toggler-background-disabled;
-      }
-    }
+  .toggler {
+    background-color: $toggler-background-disabled;
+  }
+
+  .label.checked {
+    color: $toggler-background-disabled;
   }
 }
 
@@ -53,7 +55,6 @@ $toggler-height: 25px !default;
 
 .label {
   border-radius: 3px;
-  cursor: pointer;
   flex: 50%;
   font-family: $theme-font-regular;
   font-size: 14px;
