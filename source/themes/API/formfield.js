@@ -1,7 +1,7 @@
 export default {
   root: '',
-  label: '',
-  error: '',
   disabled: '',
+  error: '',
+  label: '',
   inputWrapper: ''
 };
