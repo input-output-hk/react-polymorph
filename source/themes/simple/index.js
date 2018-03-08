@@ -1,22 +1,21 @@
-// css modules will turn all of these imports into objects
-import Autocomplete from "./SimpleAutocomplete.scss";
-import Bubble from "./SimpleBubble.scss";
-import Button from "./SimpleButton.scss";
-import Checkbox from "./SimpleCheckbox.scss";
-import FormField from "./SimpleFormField.scss";
-import Input from "./SimpleInput.scss";
-import Modal from "./SimpleModal.scss";
-import Options from "./SimpleOptions.scss";
-import Radio from "./SimpleRadio.scss";
-import Select from "./SimpleSelect.scss";
-import Switch from "./SimpleSwitch.scss";
-import TextArea from "./SimpleTextArea.scss";
-import Toggler from "./SimpleToggler.scss";
-import Tooltip from "./SimpleTooltip.scss";
+// css modules plugin converts all imports below into plain objects
+import Autocomplete from './SimpleAutocomplete.scss';
+import Bubble from './SimpleBubble.scss';
+import Button from './SimpleButton.scss';
+import Checkbox from './SimpleCheckbox.scss';
+import FormField from './SimpleFormField.scss';
+import Input from './SimpleInput.scss';
+import Modal from './SimpleModal.scss';
+import Options from './SimpleOptions.scss';
+import Radio from './SimpleRadio.scss';
+import Select from './SimpleSelect.scss';
+import Switch from './SimpleSwitch.scss';
+import TextArea from './SimpleTextArea.scss';
+import Toggler from './SimpleToggler.scss';
+import Tooltip from './SimpleTooltip.scss';
 
-// this pattern allows users to import the entire default SimpleTheme object
-// or individual component theme objects as a named export
-
+// named exports allow user to import a single theme object per component
+// instead of importing and destructuring the entire SimpleTheme obj
 export const AutocompleteTheme = Autocomplete;
 export const BubbleTheme = Bubble;
 export const ButtonTheme = Button;
@@ -32,8 +31,10 @@ export const TextAreaTheme = TextArea;
 export const TogglerTheme = Toggler;
 export const TooltipTheme = Tooltip;
 
-// the entire SimpleTheme is exported as one composed object
-// great for ThemeProvider
+// SimpleTheme is a plain object serving as the default export.
+// Each key is named after a component and each key's value
+// is the component's corresponding theme. The user can
+// pass this entire obj directly to ThemeProvider via the "theme" prop
 export default {
   autocomplete: { ...AutocompleteTheme },
   bubble: { ...BubbleTheme },
