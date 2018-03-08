@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 
 // storybook
-import { storiesOf } from "@storybook/react";
-import { withState } from "@dump247/storybook-state";
+import { storiesOf } from '@storybook/react';
+import { withState } from '@dump247/storybook-state';
 
 // components
-import { ThemeProvider, Checkbox } from "../source/components";
+import { ThemeProvider, Checkbox } from '../source/components';
 
 // skins
-import { CheckboxSkin } from "../source/skins/simple";
+import { CheckboxSkin } from '../source/skins/simple';
 
 // themes
-import { CheckboxTheme } from "../source/themes/simple";
+import { CheckboxTheme } from '../source/themes/simple';
 
 // custom styles
-import customStyles from "./Checkbox.stories.scss";
+import themeOverrides from './styles/customCheckbox.scss';
 
-storiesOf("Checkbox", module)
+storiesOf('Checkbox', module)
   .addDecorator(story => {
     const SimpleTheme = { checkbox: { ...CheckboxTheme } };
 
@@ -26,7 +26,7 @@ storiesOf("Checkbox", module)
   // ====== Stories ======
 
   .add(
-    "plain",
+    'plain',
     withState({ checked: false }, store => (
       <Checkbox
         checked={store.state.checked}
@@ -37,14 +37,14 @@ storiesOf("Checkbox", module)
   )
 
   .add(
-    "disabled",
+    'disabled',
     withState({ checked: false }, store => (
       <Checkbox disabled skin={CheckboxSkin} />
     ))
   )
 
   .add(
-    "short label",
+    'short label',
     withState({ checked: false }, store => (
       <Checkbox
         label="My checkbox"
@@ -56,14 +56,14 @@ storiesOf("Checkbox", module)
   )
 
   .add(
-    "disabled with label",
+    'disabled with label',
     withState({ checked: false }, store => (
       <Checkbox disabled label="My checkbox" skin={CheckboxSkin} />
     ))
   )
 
   .add(
-    "long label",
+    'long label',
     withState({ checked: false }, store => (
       <Checkbox
         label="I understand that if this application is moved to another device or deleted,
@@ -77,7 +77,7 @@ storiesOf("Checkbox", module)
   )
 
   .add(
-    "html label",
+    'html label',
     withState({ checked: false }, store => (
       <Checkbox
         label={
@@ -93,10 +93,10 @@ storiesOf("Checkbox", module)
   )
 
   .add(
-    "composed theme",
+    'composed theme',
     withState({ checked: false }, store => (
       <Checkbox
-        themeOverrides={customStyles}
+        themeOverrides={themeOverrides}
         label="check here"
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
