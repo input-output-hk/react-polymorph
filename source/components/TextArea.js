@@ -1,31 +1,81 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Input from './Input';
+import React, { Component } from 'react';
+import { bool, func, object, string, number } from 'prop-types';
 
-export default class TextArea extends Input {
+// external libraries
+import { isString, flow } from 'lodash';
 
-  static SKIN_PARTS = {
-    TEXT_AREA: 'textarea',
+// import the Input component's constant theme API
+import { TEXTAREA_THEME_API } from '../themes/API';
+
+// import utility functions
+import { StringOrElement, composeTheme } from '../utils';
+
+class TextArea extends Component {
+  static propTypes = {
+    autoFocus: bool,
+    autoResize: bool,
+    error: StringOrElement,
+    maxLength: number,
+    minLength: number,
+    onBlur: func,
+    onChange: func,
+    onFocus: func,
+    onRef: func,
+    placeholder: string,
+    rows: number,
+    skin: func.isRequired,
+    theme: object,
+    themeAPI: object,
+    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
+    value: string
   };
 
-  static propTypes = Object.assign({}, Input.propTypes, {
-    autoResize: PropTypes.bool,
-    rows: PropTypes.number,
-  });
-
-  static defaultProps = Object.assign({}, Input.defaultProps, {
+  static defaultProps = {
+    autoFocus: false,
     autoResize: true,
-  });
+    onRef: () => {},
+    theme: {},
+    themeAPI: { ...TEXTAREA_THEME_API },
+    themeOverrides: {},
+    value: ''
+  };
+
+  static contextTypes = {
+    theme: object
+  };
+
+  constructor(props, context) {
+    super(props);
+
+    const { themeOverrides, themeAPI } = props;
+
+    const theme =
+      context && context.theme && context.theme.textarea
+        ? context.theme.textarea
+        : props.theme;
+
+    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    this.state = {
+      error: '',
+      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+    };
+  }
 
   componentDidMount() {
-    if (this.props.autoResize) {
+    const { autoResize, autoFocus, onRef } = this.props;
+
+    if (autoResize) {
       window.addEventListener('resize', this._handleAutoresize);
       this._handleAutoresize();
     }
-  }
 
-  componentDidUpdate() {
-    if (this.props.autoResize) this._handleAutoresize();
+    if (autoFocus) {
+      this.focus();
+    }
+
+    // if TextArea is rendered by FormField, onRef allows FormField to call
+    // TextArea's focus method when someone clicks on FormField's label
+    onRef(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,32 +86,101 @@ export default class TextArea extends Input {
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.autoResize) this._handleAutoresize();
+  }
+
   componentWillUnmount() {
     if (this.props.autoResize) {
       window.removeEventListener('resize', this._handleAutoresize);
     }
   }
 
-  registerSkinPart(element) {
-    super.registerSkinPart(element);
-    this._handleAutoresize();
-  }
+  focus = () => this.textareaElement.focus();
 
-  focus = () => this.skinParts[TextArea.SKIN_PARTS.TEXT_AREA].focus();
+  onChange = event => {
+    const { onChange, disabled } = this.props;
+    if (disabled) return;
 
-  _handleAutoresize = () => {
-    const element = this.skinParts[TextArea.SKIN_PARTS.TEXT_AREA];
-    if (!element) return;
-
-    // compute the height difference between inner height and outer height
-    const style = getComputedStyle(element, null);
-    const heightOffset = style.boxSizing === 'content-box'
-      ? -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom))
-      : parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
-
-    // resize the input to its content size
-    element.style.height = 'auto';
-    element.style.height = `${element.scrollHeight + heightOffset}px`;
+    if (onChange) onChange(this._processValue(event.target.value), event);
   };
 
+  _setError = error => this.setState({ error });
+
+  _processValue(value) {
+    return flow([
+      this._enforceStringValue,
+      this._enforceMaxLength,
+      this._enforceMinLength
+    ]).call(this, value);
+  }
+
+  _enforceStringValue(value) {
+    if (!isString(value))
+      throw 'Values passed to Input::onChange must be strings';
+    return value;
+  }
+
+  _enforceMaxLength(value) {
+    const { maxLength } = this.props;
+    const isTooLong = maxLength != null && value.length > maxLength;
+    return isTooLong ? value.substring(0, maxLength) : value;
+  }
+
+  _enforceMinLength = value => {
+    const { minLength } = this.props;
+    const isTooShort = minLength != null && value.length < minLength;
+
+    if (isTooShort) {
+      this._setError(`Please enter a valid input`);
+    } else if (this.state.error !== '') {
+      this._setError(null);
+    }
+
+    return value;
+  };
+
+  _handleAutoresize = () => {
+    const { textareaElement } = this;
+
+    if (!textareaElement) return;
+
+    // compute the height difference between inner height and outer height
+    const style = getComputedStyle(textareaElement, null);
+    const heightOffset =
+      style.boxSizing === 'content-box'
+        ? -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom))
+        : parseFloat(style.borderTopWidth) +
+          parseFloat(style.borderBottomWidth);
+
+    // resize the input to its content size
+    textareaElement.style.height = 'auto';
+    textareaElement.style.height = `${textareaElement.scrollHeight +
+      heightOffset}px`;
+  };
+
+  render() {
+    // destructuring props ensures only the "...rest" get passed down
+    const {
+      skin: TextAreaSkin,
+      theme,
+      themeOverrides,
+      themeAPI,
+      onChange,
+      error,
+      ...rest
+    } = this.props;
+
+    return (
+      <TextAreaSkin
+        error={error || this.state.error}
+        onChange={this.onChange}
+        textareaRef={el => (this.textareaElement = el)}
+        theme={this.state.composedTheme}
+        {...rest}
+      />
+    );
+  }
 }
+
+export default TextArea;

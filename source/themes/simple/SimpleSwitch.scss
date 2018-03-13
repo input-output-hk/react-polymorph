@@ -1,4 +1,4 @@
-@import "theme";
+@import 'theme';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -11,17 +11,15 @@ $switch-label-color: #5e6066 !default;
 $switch-label-disabled-color: $theme-color-light-grey !default;
 
 @mixin thumbBoxShadow ($color) {
-  box-shadow: -1.5px -1.5px 0 $color inset,
-  1.5px 1.5px 0 $color inset,
-  1.5px -1.5px 0 $color inset,
-  -1.5px 1.5px 0 $color inset !important;
+  box-shadow: -1.5px -1.5px 0 $color inset, 1.5px 1.5px 0 $color inset,
+    1.5px -1.5px 0 $color inset, -1.5px 1.5px 0 $color inset;
 }
 
 %switch {
-  border-radius: 3px !important;
-  height: 23px !important;
-  margin-top: 0 !important;
-  width: 50px !important;
+  border-radius: 3px;
+  height: 23px;
+  margin-top: 0;
+  width: 50px;
 }
 
 .root {
@@ -30,22 +28,19 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
   &:hover {
     cursor: pointer;
   }
-  &.disabled {
-    &:hover, .label:hover, .switch .thumb {
-      cursor: default;
-    }
-    .label {
-      color: $switch-label-disabled-color;
-    }
-  }
 }
 
-.input {
-  height: 0;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  width: 0;
+.disabled {
+  .root:hover,
+  .label:hover,
+  .switch,
+  .thumb {
+    cursor: default;
+  }
+
+  .label {
+    color: $switch-label-disabled-color;
+  }
 }
 
 .switch {
@@ -58,35 +53,45 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
   transition: background-color 200ms ease-in-out;
   width: $switch-track-length;
 
-  .thumb {
-    border-radius: 3px;
-    cursor: pointer;
-    height: $switch-track-height;
-    position: absolute;
-    top: 0;
-    transition: left 200ms ease-in-out;
-    width: $switch-track-height;
-  }
-
-  &.checked {
-    @extend %switch;
-    background-color: $switch-on-accent-color !important;
-    .thumb {
-      left: 27px !important;
-      @include thumbBoxShadow($switch-on-accent-color);
-      background-color: $switch-thumb-accent-color !important;
-    }
-  }
-
   &:not(.checked) {
     @extend %switch;
-    background-color: $switch-off-accent-color !important;
+    background-color: $switch-off-accent-color;
     .thumb {
-      left: 0 !important;
+      left: 0;
       @include thumbBoxShadow($switch-off-accent-color);
-      background-color: $switch-thumb-accent-color !important;
+      background-color: $switch-thumb-accent-color;
     }
   }
+}
+
+.checked {
+  .switch {
+    @extend %switch;
+    background-color: $switch-on-accent-color;
+    .thumb {
+      left: 27px;
+      @include thumbBoxShadow($switch-on-accent-color);
+      background-color: $switch-thumb-accent-color;
+    }
+  }
+}
+
+.input {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+}
+
+.thumb {
+  border-radius: 3px;
+  cursor: pointer;
+  height: $switch-track-height;
+  position: absolute;
+  top: 0;
+  transition: left 200ms ease-in-out;
+  width: $switch-track-height;
 }
 
 .label {

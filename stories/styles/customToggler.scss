@@ -1,0 +1,22 @@
+.toggler {
+  height: 100px;
+  width: 300px;
+  background-color: green;
+
+  .label {
+    font-size: 18px;
+
+    &.checked {
+      padding-top: 28px;
+      font-size: 25px;
+      background-color: #fafbfc;
+      color: green;
+    }
+
+    &:not(.checked) {
+      padding-top: 33px;
+      background-color: transparent;
+      color: #fafbfc;
+    }
+  }
+}

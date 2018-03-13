@@ -1,128 +1,204 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
-import Select from '../source/components/Select';
-import SimpleSelectSkin from '../source/skins/simple/SelectSkin';
-import flagEngland from './images/gb.png';
-import flagSpain from './images/es.png';
-import flagThailand from './images/th.png';
-import flagUSA from './images/us.png';
-import styles from './Select.stories.scss';
+import React from "react";
 
+// storybook
+import { storiesOf } from "@storybook/react";
+import { withState } from "@dump247/storybook-state";
+
+// components
+import { ThemeProvider, FormField, Select } from "../source/components";
+
+// skins
+import { SelectSkin, FormFieldSkin } from "../source/skins/simple";
+
+// themes
+import { SelectTheme, FormFieldTheme } from "../source/themes/simple";
+
+// custom styles & themeOverrides
+import styles from "./Select.stories.scss";
+import themeOverrides from "./styles/customSelect.scss";
+
+// images
+import flagEngland from "./images/gb.png";
+import flagSpain from "./images/es.png";
+import flagThailand from "./images/th.png";
+import flagUSA from "./images/us.png";
+
+// constants
 const COUNTRIES = [
-  { value: 'EN-gb', label: 'England' },
-  { value: 'ES-es', label: 'Spain'},
-  { value: 'TH-th', label: 'Thailand' },
-  { value: 'EN-en', label: 'USA'}
+  { value: "EN-gb", label: "England" },
+  { value: "ES-es", label: "Spain" },
+  { value: "TH-th", label: "Thailand" },
+  { value: "EN-en", label: "USA" }
 ];
 
 const COUNTRIES_WITH_FLAGS = [
-  { value: 'EN-gb', label: 'England', flag: flagEngland },
-  { value: 'ES-es', label: 'Spain', flag: flagSpain },
-  { value: 'TH-th', label: 'Thailand', flag: flagThailand },
-  { value: 'EN-en', label: 'USA', flag: flagUSA }
+  { value: "EN-gb", label: "England", flag: flagEngland },
+  { value: "ES-es", label: "Spain", flag: flagSpain },
+  { value: "TH-th", label: "Thailand", flag: flagThailand },
+  { value: "EN-en", label: "USA", flag: flagUSA }
 ];
 
 const COUNTRIES_WITH_DISABLED_OPTIONS = [
-  { value: 'EN-gb', label: 'England' },
-  { value: 'ES-es', label: 'Spain' },
-  { value: 'TH-th', label: 'Thailand', isDisabled: true },
-  { value: 'EN-en', label: 'USA' }
+  { value: "EN-gb", label: "England" },
+  { value: "ES-es", label: "Spain" },
+  { value: "TH-th", label: "Thailand", isDisabled: true },
+  { value: "EN-en", label: "USA" }
 ];
 
-storiesOf('Select', module)
+storiesOf("Select", module)
+  .addDecorator(story => {
+    const SimpleTheme = {
+      select: { ...SelectTheme },
+      formfield: { ...FormFieldTheme }
+    };
 
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      value: null,
-      onChange: mobxAction((value, event) => {
-        state.value = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
   // ====== Stories ======
 
-  .add('Countries - options', () => (
-    <Select
-      options={COUNTRIES}
-      skin={<SimpleSelectSkin />}
-    />
-  ))
+  .add(
+    "Countries - options",
+    withState({ value: "" }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES}
+        skin={SelectSkin}
+      />
+    ))
+  )
 
-  .add('Countries - label', () => (
-    <Select
-      label="Countries"
-      options={COUNTRIES}
-      skin={<SimpleSelectSkin />}
-    />
-  ))
+  .add(
+    "Countries - label",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Some label"
+        skin={FormFieldSkin}
+        render={props => (
+          <Select
+            value={store.state.value}
+            onChange={value => store.set({ value })}
+            label="Countries"
+            options={COUNTRIES}
+            skin={SelectSkin}
+          />
+        )}
+      />
+    ))
+  )
 
-  .add('Countries - placeholder', () => (
-    <Select
-      label="Countries"
-      options={COUNTRIES}
-      placeholder="Select your country …"
-      skin={<SimpleSelectSkin />}
-    />
-  ))
+  .add(
+    "Countries - placeholder",
+    withState({ value: "" }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES}
+        placeholder="Select your country …"
+        skin={SelectSkin}
+      />
+    ))
+  )
 
-  .add('Countries - value', () => (
-    <Select
-      label="Countries"
-      options={COUNTRIES}
-      value={COUNTRIES[0].value}
-      skin={<SimpleSelectSkin />}
-    />
-  ))
+  .add(
+    "Countries - value",
+    withState({ value: COUNTRIES[0].value }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES}
+        skin={SelectSkin}
+      />
+    ))
+  )
 
-  .add('Countries - error', () => (
-    <Select
-      label="Countries"
-      options={COUNTRIES}
-      value={COUNTRIES[0].value}
-      error="You picked the wrong country"
-      skin={<SimpleSelectSkin />}
-    />
-  ))
+  .add(
+    "Countries - error",
+    withState({ value: COUNTRIES[0].value }, store => (
+      <FormField
+        label="Countries"
+        error="You picked the wrong country"
+        skin={FormFieldSkin}
+        render={props => (
+          <Select
+            {...props}
+            value={store.state.value}
+            onChange={value => store.set({ value })}
+            options={COUNTRIES}
+            skin={SelectSkin}
+          />
+        )}
+      />
+    ))
+  )
 
-  .add('Countries - custom options template', () => (
-    <Select
-      label="Countries"
-      options={COUNTRIES_WITH_FLAGS}
-      optionRenderer={(option) => {
-        return (
-          <div className={styles.customOption}>
-            <img src={option.flag} />
-            <span>{option.label}</span>
-          </div>
-        );
-      }}
-      skin={<SimpleSelectSkin />}
-    />
-  ))
+  .add(
+    "Countries - custom options template",
+    withState({ value: "" }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES_WITH_FLAGS}
+        optionRenderer={option => {
+          return (
+            <div className={styles.customOption}>
+              <img src={option.flag} />
+              <span>{option.label}</span>
+            </div>
+          );
+        }}
+        skin={SelectSkin}
+      />
+    ))
+  )
 
-  .add('Countries - isOpeningUpward', () => (
-    <Select
-      className={styles.customMargin}
-      label="Countries (opening upward)"
-      options={COUNTRIES}
-      placeholder="Select your country …"
-      skin={<SimpleSelectSkin />}
-      isOpeningUpward
-    />
-  ))
+  .add(
+    "Countries - isOpeningUpward",
+    withState({ value: "" }, store => (
+      <FormField
+        className={styles.customMargin}
+        label="Countries (opening upward)"
+        skin={FormFieldSkin}
+        render={props => (
+          <Select
+            value={store.state.value}
+            onChange={value => store.set({ value })}
+            options={COUNTRIES}
+            placeholder="Select your country …"
+            skin={SelectSkin}
+            isOpeningUpward
+          />
+        )}
+      />
+    ))
+  )
 
-  .add('Countries - with disabled options', () => (
-    <Select
-      label="Countries (has disabled options)"
-      options={COUNTRIES_WITH_DISABLED_OPTIONS}
-      placeholder="Select your country …"
-      skin={<SimpleSelectSkin />}
-    />
-  ));
+  .add(
+    "Countries - with disabled options",
+    withState({ value: "" }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        label="Countries (has disabled options)"
+        options={COUNTRIES_WITH_DISABLED_OPTIONS}
+        placeholder="Select your country …"
+        skin={SelectSkin}
+      />
+    ))
+  )
+
+  .add(
+    "composed theme",
+    withState({ value: "" }, store => (
+      <Select
+        themeOverrides={themeOverrides}
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        label="Select with a composed theme"
+        options={COUNTRIES}
+        placeholder="Select your country …"
+        skin={SelectSkin}
+      />
+    ))
+  );

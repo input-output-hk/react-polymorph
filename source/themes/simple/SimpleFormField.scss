@@ -1,4 +1,4 @@
-@import "theme";
+@import 'theme';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -12,6 +12,12 @@ $form-field-error-margin: 1.5px 0 11.5px 0 !default;
 
 .root {
   position: relative;
+}
+
+.disabled {
+  .label {
+    color: $theme-color-disabled;
+  }
 }
 
 .label {
@@ -30,12 +36,6 @@ $form-field-error-margin: 1.5px 0 11.5px 0 !default;
   font-size: $form-field-error-font-size;
   line-height: 1.36;
   margin: $form-field-error-margin;
-}
-
-.disabled {
-  .label {
-    color: $theme-color-disabled;
-  }
 }
 
 .inputWrapper {

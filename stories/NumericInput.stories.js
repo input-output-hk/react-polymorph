@@ -1,106 +1,193 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
-import NumericInput from '../source/components/NumericInput';
-import SimpleInputSkin from '../source/skins/simple/InputSkin';
+import React from "react";
 
-storiesOf('NumericInput', module)
+// storybook
+import { storiesOf } from "@storybook/react";
+import { withState } from "@dump247/storybook-state";
 
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      value: '',
-      onChange: mobxAction((value, event) => {
-        state.value = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
+// components
+import { ThemeProvider, FormField, NumericInput } from "../source/components";
+
+// skins
+import { FormFieldSkin, InputSkin } from "../source/skins/simple";
+
+// themes
+import { FormFieldTheme, InputTheme } from "../source/themes/simple";
+
+// themeOverrides
+import themeOverrides from "./styles/customInput.scss";
+
+storiesOf("NumericInput", module)
+  .addDecorator(story => {
+    const SimpleTheme = {
+      formfield: { ...FormFieldTheme },
+      input: { ...InputTheme }
+    };
+
+    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
-
   // ====== Stories ======
 
-  .add('Send amount - plain', () => <NumericInput skin={<SimpleInputSkin />} /> )
+  .add(
+    "Plain",
+    withState({ value: "" }, store => (
+      <NumericInput
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - label', () => (
-    <NumericInput
-      label="Amount"
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add(
+    "Send amount - label",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Some label"
+        skin={FormFieldSkin}
+        render={props => (
+          <NumericInput
+            {...props}
+            value={store.state.value}
+            onChange={value => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
+  .add(
+    "Send amount - placeholder",
+    withState({ value: "" }, store => (
+      <NumericInput
+        value={store.state.value}
+        placeholder="18.000000"
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - placeholder', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add(
+    "Send amount - focus / blur",
+    withState({ value: "", focused: false, blurred: false }, store => (
+      <NumericInput
+        value={store.state.value}
+        placeholder="focus / blur"
+        onChange={value => store.set({ value })}
+        onFocus={() => store.set({ focused: true })}
+        onBlur={() => store.set({ blurred: true })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - focus / blur', () => {
-    let input;
-    return (
-      <div>
-        <NumericInput
-          ref={(ref) => input = ref}
-          label="Amount"
-          onFocus={action('onFocus')}
-          onBlur={action('onBlur')}
-          skin={<SimpleInputSkin />}
-        />
-        <button onClick={() => input.focus()}>focus</button> | <button onClick={() => input.blur()}>blur</button>
-      </div>
-    );
-  })
+  .add(
+    "Send amount - error",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Amount"
+        error="Please enter a valid amount"
+        skin={FormFieldSkin}
+        render={props => (
+          <NumericInput
+            {...props}
+            value={store.state.value}
+            placeholder="0.000000"
+            onChange={value => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
 
-  .add('Send amount - error', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      error="Please enter a valid amount"
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add(
+    "Send amount - beforeDot(3) and afterDot(4)",
+    withState({ value: "" }, store => (
+      <NumericInput
+        value={store.state.value}
+        placeholder="0.0000"
+        maxBeforeDot={3}
+        maxAfterDot={4}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - beforeDot(3) and afterDot(4)', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.0000"
-      maxBeforeDot={3}
-      maxAfterDot={4}
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add(
+    "Send amount - maxValue(30000)",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Amount"
+        skin={FormFieldSkin}
+        render={props => (
+          <NumericInput
+            {...props}
+            value={store.state.value}
+            placeholder="0.000000"
+            maxValue={30000}
+            onChange={value => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
 
-  .add('Send amount - maxValue(30000)', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      maxValue={30000}
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add(
+    "Send amount - maxValue(30000) and minValue(1)",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Amount"
+        skin={FormFieldSkin}
+        render={props => (
+          <NumericInput
+            {...props}
+            value={store.state.value}
+            placeholder="0.000000"
+            maxValue={30000}
+            minValue={1}
+            onChange={value => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
 
-  .add('Send amount - maxValue(30000) and minValue(1)', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      maxValue={30000}
-      minValue={1}
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add(
+    "Send amount - onChange",
+    withState({ value: "" }, store => (
+      <FormField
+        label="Amount"
+        skin={FormFieldSkin}
+        render={props => (
+          <NumericInput
+            {...props}
+            value={store.state.value}
+            placeholder="0.000000"
+            maxBeforeDot={12}
+            maxAfterDot={6}
+            maxValue={45000000000}
+            minValue={0.000001}
+            onChange={value => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
 
-  .add('Send amount - onChange', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      maxBeforeDot={12}
-      maxAfterDot={6}
-      maxValue={45000000000}
-      minValue={0.000001}
-      skin={<SimpleInputSkin />}
-    />
-  ));
+  .add(
+    "composed theme",
+    withState({ value: "" }, store => (
+      <NumericInput
+        themeOverrides={themeOverrides}
+        value={store.state.value}
+        placeholder="0.000000"
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  );

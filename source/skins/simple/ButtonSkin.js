@@ -1,7 +1,20 @@
 import React from 'react';
-import { themr } from 'react-css-themr';
-import { BUTTON } from './identifiers';
-import DefaultButtonTheme from '../../themes/simple/SimpleButton.scss';
-import ButtonSkin from './raw/ButtonSkin';
 
-export default themr(BUTTON, DefaultButtonTheme)(ButtonSkin);
+// external libraries
+import classnames from 'classnames';
+
+// internal utility functions
+import { pickDOMProps } from '../../utils';
+
+export default props => (
+  <button
+    {...pickDOMProps(props)}
+    className={classnames([
+      props.className,
+      props.theme.root,
+      props.disabled ? props.theme.disabled : null
+    ])}
+  >
+    {props.label}
+  </button>
+);

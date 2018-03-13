@@ -1,4 +1,4 @@
-@import "theme";
+@import 'theme';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -12,18 +12,40 @@ $checkbox-checked-bg-color: $checkbox-border-color !default;
 .root {
   display: flex;
   position: relative;
-  &:hover {
-    cursor: pointer;
+}
+
+.disabled {
+  .label:hover {
+    cursor: default;
   }
-  &.disabled {
-    &:hover, .label:hover {
+
+  .check {
+    border: 1px solid $checkbox-border-disabled-color;
+    &:hover {
       cursor: default;
     }
-    .check {
-      border: 1px solid $checkbox-border-disabled-color;
-    }
-    .label {
-      color: $checkbox-label-disabled-color;
+  }
+
+  .label {
+    color: $checkbox-label-disabled-color;
+  }
+}
+
+.checked {
+  .check {
+    background-color: $checkbox-checked-bg-color;
+    position: relative;
+    &:after {
+      border-color: #fff;
+      border-style: solid;
+      border-width: 0 2px 2px 0;
+      content: '';
+      height: 12px;
+      left: 8px;
+      position: absolute;
+      top: 2px;
+      transform: rotate(45deg);
+      width: 4px;
     }
   }
 }
@@ -45,21 +67,8 @@ $checkbox-checked-bg-color: $checkbox-border-color !default;
   height: $checkbox-size;
   width: $checkbox-size;
 
-  &.checked {
-    background-color: $checkbox-checked-bg-color;
-    position: relative;
-    &:after {
-      border-color: #fff;
-      border-style: solid;
-      border-width: 0 2px 2px 0;
-      content: "";
-      height: 12px;
-      left: 8px;
-      position: absolute;
-      top: 2px;
-      transform: rotate(45deg);
-      width: 4px;
-    }
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -74,6 +83,6 @@ $checkbox-checked-bg-color: $checkbox-border-color !default;
     cursor: pointer;
   }
   strong {
-    font-family: $theme-font-bold;
+    font-weight: bold;
   }
 }

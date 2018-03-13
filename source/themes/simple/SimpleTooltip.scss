@@ -9,6 +9,13 @@ $tooltip-font-family: $theme-font-light, sans-serif !default;
 
 .root {
   position: relative;
+
+  // ======= SPECIAL STATES =======
+  &:hover {
+    .bubble {
+      display: block;
+    }
+  }
 }
 
 .bubble {
@@ -27,12 +34,4 @@ $tooltip-font-family: $theme-font-light, sans-serif !default;
 
 .nowrap {
   white-space: nowrap;
-}
-
-
-// ======= SPECIAL STATES =======
-.root {
-  &:hover .bubble {
-    display: block;
-  }
 }
