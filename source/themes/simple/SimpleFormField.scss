@@ -14,12 +14,6 @@ $form-field-error-margin: 1.5px 0 11.5px 0 !default;
   position: relative;
 }
 
-.disabled {
-  .label {
-    color: $theme-color-disabled;
-  }
-}
-
 .label {
   color: $form-field-label-color;
   display: block;
@@ -41,3 +35,13 @@ $form-field-error-margin: 1.5px 0 11.5px 0 !default;
 .inputWrapper {
   position: relative;
 }
+
+// BEGIN SPECIAL STATES ---------- //
+
+.disabled {
+  .label {
+    color: $theme-color-disabled;
+  }
+}
+
+// END SPECIAL STATES ---------- //

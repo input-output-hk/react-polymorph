@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins/arrow";
+@import 'theme';
+@import 'mixins/arrow';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -64,6 +64,8 @@ $option-padding: 14px 20px !default;
   }
 }
 
+// BEGIN SPECIAL STATES ---------- //
+
 .openUpward {
   &.options {
     top: inherit;
@@ -77,3 +79,5 @@ $option-padding: 14px 20px !default;
     }
   }
 }
+
+// END SPECIAL STATES ---------- //
