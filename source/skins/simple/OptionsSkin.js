@@ -9,9 +9,6 @@ import { Bubble } from '../../components';
 // skins
 import { BubbleSkin } from './';
 
-// themes
-import { BubbleTheme } from '../../themes/simple';
-
 export default props => {
   const {
     theme,
@@ -45,7 +42,6 @@ export default props => {
       ref={optionsRef}
       isTransparent={false}
       skin={BubbleSkin}
-      theme={BubbleTheme}
       isOpeningUpward={isOpeningUpward}
       isHidden={!isOpen}
       isFloating

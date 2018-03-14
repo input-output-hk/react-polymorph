@@ -33,7 +33,7 @@ class Select extends Component {
     allowBlank: true,
     autoFocus: false,
     isOpeningUpward: false,
-    theme: {},
+    theme: null,
     themeOverrides: {},
     themeAPI: { ...SELECT_THEME_API },
     value: ''
@@ -47,12 +47,13 @@ class Select extends Component {
     super(props);
 
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.select
-        ? context.theme.select
-        : props.theme;
-
+    const hasContextTheme = context && context.theme && context.theme.select;
+    const hasPropsTheme = props.theme != null;
+    console.log(props.theme);
+    if (!hasPropsTheme && !hasContextTheme) {
+      throw 'theme for Select component is missing';
+    }
+    const theme = hasPropsTheme ? props.theme : context.theme.select;
     // if themeOverrides isn't provided, composeTheme returns theme immediately
     this.state = {
       isOpen: false,

@@ -11,7 +11,7 @@ import { ThemeProvider, FormField, Select } from "../source/components";
 import { SelectSkin, FormFieldSkin } from "../source/skins/simple";
 
 // themes
-import { SelectTheme, FormFieldTheme } from "../source/themes/simple";
+import SimpleTheme from "../source/themes/simple";
 
 // custom styles & themeOverrides
 import styles from "./Select.stories.scss";
@@ -47,11 +47,6 @@ const COUNTRIES_WITH_DISABLED_OPTIONS = [
 
 storiesOf("Select", module)
   .addDecorator(story => {
-    const SimpleTheme = {
-      select: { ...SelectTheme },
-      formfield: { ...FormFieldTheme }
-    };
-
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
