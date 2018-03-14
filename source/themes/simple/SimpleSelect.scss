@@ -15,6 +15,7 @@ $select-down-arrow-width: 11px !default;
 $select-down-arrow-height: 7px !default;
 $select-down-arrow-position-bottom: 20px !default;
 $select-down-arrow-position-left: calc(100% - 32px) !default;
+$select-down-arrow-rtl-position-left: 15px !default;
 
 .select {
   position: relative;
@@ -48,7 +49,7 @@ $select-down-arrow-position-left: calc(100% - 32px) !default;
   input {
     background-color: $select-input-bg-color;
     cursor: pointer;
-    padding-right: $select-input-padding;
+    padding: $select-input-padding;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -67,5 +68,12 @@ $select-down-arrow-position-left: calc(100% - 32px) !default;
     left: $select-down-arrow-position-left;
     height: $select-down-arrow-height;
     width: $select-down-arrow-width;
+  }
+}
+
+// right-to-left languages support
+body[dir="rtl"] {
+  .selectInput:after {
+    left: $select-down-arrow-rtl-position-left;
   }
 }
