@@ -54,7 +54,7 @@
     "@dump247/storybook-state": "1.2.1",
     "@storybook/addon-actions": "3.2.12",
     "@storybook/react": "3.3.12",
-    "babel-cli": "6.26.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.0",
     "babel-loader": "7.1.2",
@@ -94,7 +94,7 @@
     "webpack": "2.6.1"
   },
   "scripts": {
-    "js": "babel source -d lib -s --no-babelrc --presets=env,react --plugins=transform-object-rest-spread,transform-flow-strip-types,transform-decorators-legacy,transform-class-properties,lodash",
+    "js": "babel source -d lib -s",
     "build": "cross-env npm run clean && npm run js && npm run sass",
     "clean": "rimraf ./lib",
     "prebuild": "npm run clean",
@@ -103,6 +103,19 @@
     "storybook": "start-storybook -p 6543 -c storybook",
     "postinstall": "postinstall-build lib --only-as-dependency",
     "watch": "nodemon npm run js && npm run sass"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-flow-strip-types",
+      "transform-decorators-legacy",
+      "transform-class-properties",
+      "lodash"
+    ]
   },
   "license": "Apache-2.0"
 }
