@@ -5,7 +5,7 @@ import { bool, func, object, arrayOf, shape, string } from 'prop-types';
 import { SELECT_THEME_API } from '../themes/API';
 
 // import the composeTheme utility function
-import { StringOrElement, composeTheme } from '../utils';
+import { pickTheme, composeTheme } from '../utils';
 
 class Select extends Component {
   static propTypes = {
@@ -45,16 +45,8 @@ class Select extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-    const hasContextTheme = context && context.theme && context.theme.select;
-    const hasPropsTheme = props.theme != null;
-    console.log(props.theme);
-    if (!hasPropsTheme && !hasContextTheme) {
-      throw 'theme for Select component is missing';
-    }
-    const theme = hasPropsTheme ? props.theme : context.theme.select;
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(props, context);
     this.state = {
       isOpen: false,
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)

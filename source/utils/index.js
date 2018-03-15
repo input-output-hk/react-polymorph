@@ -6,7 +6,7 @@ import eventUtils from './events';
 export const { pickDOMProps, StringOrElement } = propsUtils;
 
 // named exports for theme utility functions
-export const { composeTheme } = themeUtils;
+export const { pickTheme, composeTheme } = themeUtils;
 
 // named exports for event utility functions
 export const {
@@ -26,6 +26,7 @@ export const {
 export default {
   pickDOMProps,
   StringOrElement,
+  pickTheme,
   composeTheme,
   getMousePosition,
   getTouchPosition,

@@ -1,5 +1,14 @@
 import _ from 'lodash';
 
+const pickTheme = (props, context) => {
+  const hasContextTheme = context && context.theme && context.theme.select;
+  const hasPropsTheme = props.theme != null;
+  if (!hasPropsTheme && !hasContextTheme) {
+    throw 'Theme is missing';
+  }
+  return hasPropsTheme ? props.theme : context.theme.select;
+};
+
 // Every component has a Theme API which is a plain object exposing
 // the correct shape of a theme for its corresponding skin.
 // composeTheme is a reusable utility function for composing custom styles passed
@@ -30,4 +39,7 @@ const composeTheme = (theme = {}, themeOverrides = {}, themeAPI = {}) => {
   }
 };
 
-export default { composeTheme };
+export default {
+  pickTheme,
+  composeTheme
+};
