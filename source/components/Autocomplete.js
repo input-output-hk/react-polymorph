@@ -16,6 +16,7 @@ export default class Autocomplete extends FormField {
     maxSelections: PropTypes.number,
     placeholder: PropTypes.string,
     options: PropTypes.array,
+    selectedOptions: PropTypes.array,
     sortAlphabetically: PropTypes.bool,
     multipleSameSelections: PropTypes.bool,
     maxVisibleOptions: PropTypes.number,
@@ -30,7 +31,7 @@ export default class Autocomplete extends FormField {
   };
 
   state = {
-    selectedOptions: [],
+    selectedOptions: this.props.selectedOptions || [],
     filteredOptions: (this.props.sortAlphabetically && this.props.options) ? this.props.options.sort() : (this.props.options || []),
     isOpen: false,
   };
@@ -43,6 +44,8 @@ export default class Autocomplete extends FormField {
       isOpen,
     });
   }
+
+  clear = () => this.removeOptions();
 
   focus = () => this.handleAutocompleteClick();
 
@@ -123,6 +126,13 @@ export default class Autocomplete extends FormField {
     _.pullAt(selectedOptions, index);
     this.selectionChanged(selectedOptions, event);
     this.setState({ selectedOptions });
+  };
+
+  removeOptions = () => {
+    this.selectionChanged([]);
+    this.setState({ selectedOptions: [] });
+    const input = this._getInputSkinPart();
+    input.value = '';
   };
 
   selectionChanged = (selectedOptions, event) => {
