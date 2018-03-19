@@ -10,9 +10,6 @@ import { FormField, Options } from "../../components";
 // skins
 import { FormFieldSkin, OptionsSkin } from "./";
 
-// themes
-import { FormFieldTheme, OptionsTheme } from "../../themes/simple";
-
 export default props => {
   const { label, error } = props;
   const formfieldProps = { label, error };
@@ -70,7 +67,6 @@ export default props => {
         error={props.error}
         label={props.label}
         skin={FormFieldSkin}
-        theme={FormFieldTheme}
         render={() => {
           return (
             <div
@@ -100,7 +96,6 @@ export default props => {
                 resetOnClose
                 noResults={!props.filteredOptions.length}
                 noResultsMessage={props.noResultsMessage}
-                theme={OptionsTheme}
                 skin={OptionsSkin}
               />
             </div>

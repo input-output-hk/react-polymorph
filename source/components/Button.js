@@ -5,7 +5,7 @@ import { bool, func, object } from 'prop-types';
 import _ from 'lodash';
 
 // Button theme API
-import { BUTTON_THEME_API } from '../themes/API';
+import { BUTTON_THEME_API, IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
 import { StringOrElement, composeTheme, pickTheme } from '../utils';
@@ -23,7 +23,7 @@ class Button extends Component {
 
   static defaultProps = {
     disabled: false,
-    theme: {},
+    theme: null,
     themeAPI: { ...BUTTON_THEME_API },
     themeOverrides: {}
   };
@@ -35,7 +35,7 @@ class Button extends Component {
   constructor(props, context) {
     super(props);
     const { themeOverrides, themeAPI } = props;
-    const theme = pickTheme(props, context);
+    const theme = pickTheme(IDENTIFIERS.BUTTON, props, context);
     this.state = {
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)
     };

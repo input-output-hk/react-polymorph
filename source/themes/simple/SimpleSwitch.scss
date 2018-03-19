@@ -17,9 +17,9 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
 
 %switch {
   border-radius: 3px;
-  height: 23px;
+  height: $switch-track-height;
   margin-top: 0;
-  width: 50px;
+  width: $switch-track-length;
 }
 
 .root {
@@ -69,7 +69,7 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
     @extend %switch;
     background-color: $switch-on-accent-color;
     .thumb {
-      left: 27px;
+      left: $switch-track-length - $switch-track-height;
       @include thumbBoxShadow($switch-on-accent-color);
       background-color: $switch-thumb-accent-color;
     }
@@ -98,7 +98,7 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
   color: $switch-label-color;
   font-family: $theme-font-light;
   font-size: 16px;
-  line-height: 1.38;
+  line-height: $switch-track-height;
   margin-left: 20px;
   white-space: normal;
   &:hover {

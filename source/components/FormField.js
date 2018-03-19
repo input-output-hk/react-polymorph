@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { bool, func, object } from 'prop-types';
 
 // FormField's theme API
-import { FORMFIELD_THEME_API } from '../themes/API';
+import { FORMFIELD_THEME_API, IDENTIFIERS } from '../themes/API';
 
 // import utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, pickTheme } from '../utils';
 
 class FormField extends Component {
   static propTypes = {
@@ -21,7 +21,7 @@ class FormField extends Component {
 
   static defaultProps = {
     disabled: false,
-    theme: {},
+    theme: null,
     themeAPI: { ...FORMFIELD_THEME_API },
     themeOverrides: {}
   };
@@ -32,15 +32,8 @@ class FormField extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.formfield
-        ? context.theme.formfield
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(IDENTIFIERS.FORM_FIELD, props, context);
     this.state = {
       error: '',
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)

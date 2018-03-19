@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { bool, func, object } from 'prop-types';
 
 // import the Radio component's theme API
-import { RADIO_THEME_API } from '../themes/API';
+import { IDENTIFIERS, RADIO_THEME_API } from '../themes/API';
 
 // import utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, pickTheme } from '../utils';
 
 class Radio extends Component {
   static propTypes = {
@@ -24,7 +24,7 @@ class Radio extends Component {
   static defaultProps = {
     disabled: false,
     selected: false,
-    theme: {},
+    theme: null,
     themeAPI: { ...RADIO_THEME_API },
     themeOverrides: {}
   };
@@ -35,15 +35,8 @@ class Radio extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.radio
-        ? context.theme.radio
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme obj immediately
+    const theme = pickTheme(IDENTIFIERS.RADIO, props, context);
     this.state = {
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)
     };

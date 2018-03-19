@@ -24,7 +24,7 @@ $options-bubble-arrow: true !default;
   }
 
   @if $options-bubble-arrow == true {
-    & [data-bubble-arrow] {
+    [data-bubble-arrow] {
       @include arrow(up, $option-bg-color, $options-border-color, $options-arrow-size);
     }
 
@@ -36,6 +36,10 @@ $options-bubble-arrow: true !default;
         height: inherit;
         @include arrow(down, $option-highlight-color !important, $options-border-color, $options-arrow-size);
       }
+    }
+  } @else {
+    [data-bubble-arrow] {
+      display: none !important;
     }
   }
 }

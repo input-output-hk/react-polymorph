@@ -5,10 +5,10 @@ import { bool, func, object, string, number } from 'prop-types';
 import { isString, flow } from 'lodash';
 
 // import the Input component's constant theme API
-import { TEXTAREA_THEME_API } from '../themes/API';
+import { IDENTIFIERS, TEXTAREA_THEME_API } from '../themes/API';
 
 // import utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, pickTheme } from '../utils';
 
 class TextArea extends Component {
   static propTypes = {
@@ -34,7 +34,7 @@ class TextArea extends Component {
     autoFocus: false,
     autoResize: true,
     onRef: () => {},
-    theme: {},
+    theme: null,
     themeAPI: { ...TEXTAREA_THEME_API },
     themeOverrides: {},
     value: ''
@@ -46,15 +46,8 @@ class TextArea extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.textarea
-        ? context.theme.textarea
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(IDENTIFIERS.TEXT_AREA, props, context);
     this.state = {
       error: '',
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)

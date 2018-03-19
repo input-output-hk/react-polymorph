@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
-const pickTheme = (props, context) => {
-  const hasContextTheme = context && context.theme && context.theme.select;
+const pickTheme = (name, props, context) => {
+  const hasContextTheme = context && context.theme && context.theme[name];
   const hasPropsTheme = props.theme != null;
   if (!hasPropsTheme && !hasContextTheme) {
     throw 'Theme is missing';
   }
-  return hasPropsTheme ? props.theme : context.theme.select;
+  return hasPropsTheme ? props.theme : context.theme[name];
 };
 
 // Every component has a Theme API which is a plain object exposing

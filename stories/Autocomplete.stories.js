@@ -20,15 +20,12 @@ import {
 } from '../source/skins/simple';
 
 // themes
-import {
-  AutocompleteTheme,
-  ModalTheme,
-  ButtonTheme
-} from '../source/themes/simple';
+import SimpleTheme from '../source/themes/simple';
+import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.scss';
 
 // custom styles & theme overrides
 import styles from './Autocomplete.stories.scss';
-import themeOverrides from './styles/customAutocomplete.scss';
+import themeOverrides from './theme-overrides/customAutocomplete.scss';
 
 const OPTIONS = [
   'home',
@@ -47,15 +44,6 @@ const OPTIONS = [
 
 storiesOf('Autocomplete', module)
   .addDecorator(story => {
-    // we could import the entire SimpleTheme default object above
-    // but composing our own SimpleTheme object here cuts back on unused
-    // imports that are unrelated to the components used in the stories below
-    const SimpleTheme = {
-      autocomplete: { ...AutocompleteTheme },
-      modal: { ...ModalTheme },
-      button: { ...ButtonTheme }
-    };
-
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
@@ -201,9 +189,7 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add(
-    'composed theme',
-    withState({ selectedOpts: [] }, store => (
+  .add('composed theme', withState({ selectedOpts: [] }, store => (
       <Autocomplete
         themeOverrides={themeOverrides}
         label="Recovery phrase"
@@ -216,4 +202,20 @@ storiesOf('Autocomplete', module)
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
-  );
+  )
+
+  .add('custom theme', withState({ selectedOpts: [] }, store => (
+      <Autocomplete
+        theme={CustomAutocompleteTheme}
+        label="Custom Autocomplete theme"
+        options={OPTIONS}
+        placeholder="Enter mnemonic..."
+        maxSelections={12}
+        maxVisibleOptions={5}
+        invalidCharsRegex={/[^a-zA-Z]/g}
+        skin={AutocompleteSkin}
+        onChange={selectedOpts => store.set({ selectedOpts })}
+      />
+    ))
+  )
+;

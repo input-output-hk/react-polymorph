@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { bool, func, object } from 'prop-types';
 
 // Modal's theme API
-import { MODAL_THEME_API } from '../themes/API';
+import { IDENTIFIERS, MODAL_THEME_API } from '../themes/API';
 
 // internal utiltity functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, pickTheme } from '../utils';
 
 class Modal extends Component {
   static propTypes = {
@@ -23,7 +23,7 @@ class Modal extends Component {
     contentLabel: 'Modal Dialog',
     isActive: false,
     triggerCloseOnOverlayClick: true,
-    theme: {},
+    theme: null,
     themeAPI: { ...MODAL_THEME_API },
     themeOverrides: {}
   };
@@ -34,15 +34,8 @@ class Modal extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.modal
-        ? context.theme.modal
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(IDENTIFIERS.MODAL, props, context);
     this.state = {
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)
     };

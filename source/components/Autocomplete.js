@@ -13,10 +13,10 @@ import {
 import _ from 'lodash';
 
 // Autocomplete theme API
-import { AUTOCOMPLETE_THEME_API } from '../themes/API';
+import { AUTOCOMPLETE_THEME_API, IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, pickTheme } from '../utils';
 
 class Autocomplete extends Component {
   static propTypes = {
@@ -45,7 +45,7 @@ class Autocomplete extends Component {
     multipleSameSelections: true, // if true then same word can be selected multiple times
     options: [],
     sortAlphabetically: true, // options are sorted alphabetically by default
-    theme: {},
+    theme: null,
     themeAPI: { ...AUTOCOMPLETE_THEME_API },
     themeOverrides: {}
   };
@@ -56,14 +56,8 @@ class Autocomplete extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.autocomplete
-        ? context.theme.autocomplete
-        : props.theme;
-
+    const theme = pickTheme(IDENTIFIERS.AUTOCOMPLETE, props, context);
     this.state = {
       inputValue: '',
       error: '',

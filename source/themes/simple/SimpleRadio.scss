@@ -45,7 +45,7 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
   color: $radio-label-color;
   font-family: $theme-font-light;
   font-size: 16px;
-  line-height: 1.38;
+  line-height: $radio-size;
   margin-left: 20px;
   white-space: normal;
   display: inline-block;

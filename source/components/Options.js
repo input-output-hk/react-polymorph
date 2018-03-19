@@ -3,7 +3,7 @@ import { bool, func, object, array, string } from 'prop-types';
 import ReactDOM from 'react-dom';
 
 // Options theme API
-import { OPTIONS_THEME_API } from '../themes/API';
+import { IDENTIFIERS, OPTIONS_THEME_API } from '../themes/API';
 
 // internal utility functions
 import {
@@ -11,7 +11,7 @@ import {
   composeTheme,
   addEventsToDocument,
   removeEventsFromDocument,
-  targetIsDescendant
+  targetIsDescendant, pickTheme
 } from '../utils';
 
 class Options extends Component {
@@ -37,7 +37,7 @@ class Options extends Component {
     isOpeningUpward: false,
     noResultsMessage: 'No results',
     resetOnClose: false,
-    theme: {},
+    theme: null,
     themeAPI: { ...OPTIONS_THEME_API },
     themeOverrides: {}
   };
@@ -48,15 +48,8 @@ class Options extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.options
-        ? context.theme.options
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme obj immediately
+    const theme = pickTheme(IDENTIFIERS.OPTIONS, props, context);
     this.state = {
       composedTheme: composeTheme(theme, themeOverrides, themeAPI),
       isOpen: this.props.isOpen,
@@ -81,12 +74,6 @@ class Options extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.isOpen && !this.state.isOpen) this._removeAllEventListeners();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.isOpen !== nextProps.isOpen) {
-      this.setState({ isOpen: nextProps.isOpen });
-    }
   }
 
   componentWillUnmount() {

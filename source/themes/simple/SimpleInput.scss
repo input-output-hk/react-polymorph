@@ -4,6 +4,7 @@
 
 $input-width: 100% !default;
 $input-font-size: 16px !default;
+$input-font-family: $theme-font-light, sans-serif !default;
 $input-color: #5e6066 !default;
 $input-placeholder-color: rgba(#5e6066, 0.5) !default;
 $input-disabled-color: #cfcfcf !default;
@@ -21,7 +22,7 @@ $input-errored-border: $theme-color-error;
   border-radius: $input-border-radius;
   box-sizing: border-box;
   color: $input-color;
-  font-family: $theme-font-light, sans-serif;
+  font-family: $input-font-family;
   font-size: $input-font-size;
   padding: $input-padding;
   width: $input-width;

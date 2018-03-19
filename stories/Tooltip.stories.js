@@ -10,16 +10,16 @@ import { ThemeProvider, Tooltip } from '../source/components';
 import { TooltipSkin } from '../source/skins/simple';
 
 // themes
-import { TooltipTheme } from '../source/themes/simple';
+import SimpleTheme from '../source/themes/simple';
+import CustomBubbleTheme from './theme-customizations/Bubble.custom.scss';
 
 // custom styles & themeOverrides
 import styles from './Tooltip.stories.scss';
-import themeOverrides from './styles/customTooltip.scss';
+import themeOverrides from './theme-overrides/customTooltip.scss';
 
 storiesOf('Tooltip', module)
-  .addDecorator(story => {
-    const SimpleTheme = { tooltip: { ...TooltipTheme } };
 
+  .addDecorator(story => {
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
@@ -103,4 +103,21 @@ storiesOf('Tooltip', module)
         hover over me
       </Tooltip>
     </div>
+  ))
+
+  .add('custom theme', () => (
+    <ThemeProvider theme={{
+      ...SimpleTheme,
+      bubble: CustomBubbleTheme,
+    }}>
+      <div className={styles.container}>
+        <Tooltip
+          skin={TooltipSkin}
+          isTransparent={false}
+          tip="plain tooltip, with a custom theme"
+        >
+          hover over me
+        </Tooltip>
+      </div>
+    </ThemeProvider>
   ));

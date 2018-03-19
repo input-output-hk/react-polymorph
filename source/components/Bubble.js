@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { bool, func, object } from 'prop-types';
-import { addEventsToDocument, removeEventsFromDocument } from '../utils';
+import { addEventsToDocument, pickTheme, removeEventsFromDocument } from '../utils';
 
 // Bubble theme API
-import { BUBBLE_THEME_API } from '../themes/API';
+import { BUBBLE_THEME_API, IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
 import { StringOrElement, composeTheme } from '../utils';
@@ -25,7 +25,7 @@ class Bubble extends Component {
     isFloating: false,
     isOpeningUpward: false,
     isTransparent: true,
-    theme: {},
+    theme: null,
     themeAPI: { ...BUBBLE_THEME_API },
     themeOverrides: {}
   };
@@ -36,15 +36,8 @@ class Bubble extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.bubble
-        ? context.theme.bubble
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(IDENTIFIERS.BUBBLE, props, context);
     this.state = {
       position: null,
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)

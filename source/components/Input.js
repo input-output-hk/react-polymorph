@@ -5,10 +5,10 @@ import { bool, func, object, number, string } from 'prop-types';
 import { isString, flow } from 'lodash';
 
 // Input's theme API
-import { INPUT_THEME_API } from '../themes/API';
+import { IDENTIFIERS, INPUT_THEME_API } from '../themes/API';
 
 // internal utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, pickTheme } from '../utils';
 
 class Input extends Component {
   static propTypes = {
@@ -35,7 +35,7 @@ class Input extends Component {
     error: '',
     onRef: () => {},
     readOnly: false,
-    theme: {},
+    theme: null,
     themeAPI: { ...INPUT_THEME_API },
     themeOverrides: {},
     value: ''
@@ -47,15 +47,8 @@ class Input extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.input
-        ? context.theme.input
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(IDENTIFIERS.INPUT, props, context);
     this.state = {
       error: '',
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)

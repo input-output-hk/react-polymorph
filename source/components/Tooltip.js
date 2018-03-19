@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { bool, func, object } from 'prop-types';
 
 // import the Tooltip component's theme API
-import { TOOLTIP_THEME_API } from '../themes/API';
+import { IDENTIFIERS, TOOLTIP_THEME_API } from '../themes/API';
 
 // import utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, pickTheme } from '../utils';
 
 class Tooltip extends Component {
   static propTypes = {
@@ -23,7 +23,7 @@ class Tooltip extends Component {
   static defaultProps = {
     isOpeningUpward: true,
     isTransparent: true,
-    theme: { button: {} },
+    theme: null,
     themeAPI: { ...TOOLTIP_THEME_API },
     themeOverrides: {}
   };
@@ -34,15 +34,8 @@ class Tooltip extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.tooltip
-        ? context.theme.tooltip
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(IDENTIFIERS.TOOLTIP, props, context);
     this.state = {
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)
     };

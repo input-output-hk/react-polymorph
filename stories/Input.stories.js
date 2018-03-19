@@ -12,25 +12,19 @@ import { ThemeProvider, FormField, Input } from '../source/components';
 import { FormFieldSkin, InputSkin } from '../source/skins/simple';
 
 // themes
-import { FormFieldTheme, InputTheme } from '../source/themes/simple';
+import SimpleTheme from '../source/themes/simple';
+import CustomInputTheme from './theme-customizations/Input.custom.scss';
 
 // themeOverrides
-import themeOverrides from './styles/customInput.scss';
+import themeOverrides from './theme-overrides/customInput.scss';
 
 storiesOf('Input', module)
   .addDecorator(story => {
-    const SimpleTheme = {
-      formfield: { ...FormFieldTheme },
-      input: { ...InputTheme }
-    };
-
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
   // ====== Stories ======
 
-  .add(
-    'Plain',
-    withState({ value: '' }, store => (
+  .add('Plain', withState({ value: '' }, store => (
       <Input
         {...store.state}
         onChange={(value, event) => store.set({ value })}
@@ -39,9 +33,7 @@ storiesOf('Input', module)
     ))
   )
 
-  .add(
-    'label',
-    withState({ value: '' }, store => (
+  .add('label', withState({ value: '' }, store => (
       <FormField
         label="Some label"
         skin={FormFieldSkin}
@@ -57,9 +49,7 @@ storiesOf('Input', module)
     ))
   )
 
-  .add(
-    'placeholder',
-    withState({ value: '' }, store => (
+  .add('placeholder', withState({ value: '' }, store => (
       <Input
         value={store.state.value}
         placeholder="user name"
@@ -69,9 +59,7 @@ storiesOf('Input', module)
     ))
   )
 
-  .add(
-    'autoFocus',
-    withState({ value: '' }, store => (
+  .add('autoFocus', withState({ value: '' }, store => (
       <Input
         autoFocus
         value={store.state.value}
@@ -93,9 +81,7 @@ storiesOf('Input', module)
     />
   ))
 
-  .add(
-    'error',
-    withState({ value: '' }, store => (
+  .add('error', withState({ value: '' }, store => (
       <FormField
         label="With Label"
         error="Something went wrong"
@@ -112,9 +98,7 @@ storiesOf('Input', module)
     ))
   )
 
-  .add(
-    'minLength(8)',
-    withState({ value: '' }, store => (
+  .add('minLength(8)', withState({ value: '' }, store => (
       <FormField
         label="Input with min. 5 Characters"
         skin={FormFieldSkin}
@@ -132,9 +116,7 @@ storiesOf('Input', module)
     ))
   )
 
-  .add(
-    'maxLength(5)',
-    withState({ value: '' }, store => (
+  .add('maxLength(5)', withState({ value: '' }, store => (
       <FormField
         label="Input with max. 5 Characters"
         skin={FormFieldSkin}
@@ -152,9 +134,7 @@ storiesOf('Input', module)
     ))
   )
 
-  .add(
-    'type=password',
-    withState({ value: '' }, store => (
+  .add('type=password', withState({ value: '' }, store => (
       <Input
         value={store.state.value}
         type="password"
@@ -165,9 +145,7 @@ storiesOf('Input', module)
     ))
   )
 
-  .add(
-    'focus / blur',
-    withState({ value: '', focused: false, blurred: false }, store => (
+  .add('focus / blur', withState({ value: '', focused: false, blurred: false }, store => (
       <Input
         value={store.state.value}
         placeholder="focus / blur"
@@ -179,9 +157,7 @@ storiesOf('Input', module)
     ))
   )
 
-  .add(
-    'onKeyPress',
-    withState({ value: '' }, store => (
+  .add('onKeyPress', withState({ value: '' }, store => (
       <FormField
         label="Type to see events logged"
         skin={FormFieldSkin}
@@ -200,16 +176,32 @@ storiesOf('Input', module)
     ))
   )
 
-  .add(
-    'composed theme',
-    withState({ value: '' }, store => (
+  .add('composed theme', withState({ value: '' }, store => (
       <FormField
-        label="Input w/ composed theme"
+        label="Composed theme"
         skin={FormFieldSkin}
         render={props => (
           <Input
             {...props}
             themeOverrides={themeOverrides}
+            value={store.state.value}
+            placeholder="type here..."
+            onChange={(value, event) => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
+
+  .add('custom theme', withState({ value: '' }, store => (
+      <FormField
+        label="Custom theme"
+        skin={FormFieldSkin}
+        render={props => (
+          <Input
+            {...props}
+            theme={CustomInputTheme}
             value={store.state.value}
             placeholder="type here..."
             onChange={(value, event) => store.set({ value })}

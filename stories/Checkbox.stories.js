@@ -11,23 +11,20 @@ import { ThemeProvider, Checkbox } from '../source/components';
 import { CheckboxSkin } from '../source/skins/simple';
 
 // themes
-import { CheckboxTheme } from '../source/themes/simple';
+import SimpleTheme from '../source/themes/simple';
+import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
 
 // custom styles
-import themeOverrides from './styles/customCheckbox.scss';
+import themeOverrides from './theme-overrides/customCheckbox.scss';
 
 storiesOf('Checkbox', module)
   .addDecorator(story => {
-    const SimpleTheme = { checkbox: { ...CheckboxTheme } };
-
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
   // ====== Stories ======
 
-  .add(
-    'plain',
-    withState({ checked: false }, store => (
+  .add('plain', withState({ checked: false }, store => (
       <Checkbox
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
@@ -36,16 +33,12 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add(
-    'disabled',
-    withState({ checked: false }, store => (
+  .add('disabled', withState({ checked: false }, store => (
       <Checkbox disabled skin={CheckboxSkin} />
     ))
   )
 
-  .add(
-    'short label',
-    withState({ checked: false }, store => (
+  .add('short label', withState({ checked: false }, store => (
       <Checkbox
         label="My checkbox"
         checked={store.state.checked}
@@ -55,16 +48,12 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add(
-    'disabled with label',
-    withState({ checked: false }, store => (
+  .add('disabled with label', withState({ checked: false }, store => (
       <Checkbox disabled label="My checkbox" skin={CheckboxSkin} />
     ))
   )
 
-  .add(
-    'long label',
-    withState({ checked: false }, store => (
+  .add('long label', withState({ checked: false }, store => (
       <Checkbox
         label="I understand that if this application is moved to another device or deleted,
              my money can be only recovered with the backup phrase which
@@ -76,9 +65,7 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add(
-    'html label',
-    withState({ checked: false }, store => (
+  .add('html label', withState({ checked: false }, store => (
       <Checkbox
         label={
           <div>
@@ -92,11 +79,20 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add(
-    'composed theme',
-    withState({ checked: false }, store => (
+  .add('composed theme', withState({ checked: false }, store => (
       <Checkbox
         themeOverrides={themeOverrides}
+        label="check here"
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        skin={CheckboxSkin}
+      />
+    ))
+  )
+
+  .add('custom theme', withState({ checked: true }, store => (
+      <Checkbox
+        theme={CustomCheckboxTheme}
         label="check here"
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}

@@ -4,9 +4,12 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
+$select-input-color: $input-color !default;
+$select-input-placeholder-color: $input-placeholder-color !default;
 $select-input-bg-color: $input-bg-color !default;
 $select-input-border-focus-color: $input-border-focus-color !default;
 $select-input-padding: $input-padding !default;
+$select-input-border: $input-border !default;
 $select-up-arrow-url: url('#{$theme-assets-path}/select-up-arrow.svg') !default;
 $select-up-arrow-focus-url: url('#{$theme-assets-path}/select-up-arrow-focus.svg') !default;
 $select-down-arrow-url: url('#{$theme-assets-path}/select-down-arrow.svg') !default;
@@ -23,7 +26,9 @@ $select-down-arrow-rtl-position-left: 15px !default;
 
 .selectInput {
   input {
+    color: $select-input-color;
     background-color: $select-input-bg-color;
+    border: $select-input-border;
     cursor: pointer;
     padding: $select-input-padding;
     -webkit-touch-callout: none;
@@ -32,6 +37,10 @@ $select-down-arrow-rtl-position-left: 15px !default;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    &::-webkit-input-placeholder {
+      color: $select-input-placeholder-color;
+    }
   }
 
   &:after {

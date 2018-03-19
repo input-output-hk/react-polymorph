@@ -28,19 +28,36 @@ export const OPTIONS_THEME_API = OPTIONS;
 export const MODAL_THEME_API = MODAL;
 export const RADIO_THEME_API = RADIO;
 
+export const IDENTIFIERS = {
+  FORM_FIELD: 'formfield',
+  INPUT: 'input',
+  CHECKBOX: 'checkbox',
+  TOGGLER: 'toggler',
+  SWITCH: 'switch',
+  TEXT_AREA: 'textarea',
+  BUTTON: 'button',
+  TOOLTIP: 'tooltip',
+  BUBBLE: 'bubble',
+  SELECT: 'select',
+  AUTOCOMPLETE: 'autocomplete',
+  OPTIONS: 'options',
+  MODAL: 'modal',
+  RADIO: 'radio',
+};
+
 export default {
-  formfield: { ...FORMFIELD_THEME_API },
-  input: { ...INPUT_THEME_API },
-  checkbox: { ...CHECKBOX_THEME_API },
-  toggler: { ...TOGGLER_THEME_API },
-  switch: { ...SWITCH_THEME_API },
-  textarea: { ...TEXTAREA_THEME_API },
-  button: { ...BUTTON_THEME_API },
-  tooltip: { ...TOOLTIP_THEME_API },
-  bubble: { ...BUBBLE_THEME_API },
-  select: { ...SELECT_THEME_API },
-  autocomplete: { ...AUTOCOMPLETE_THEME_API },
-  options: { ...OPTIONS_THEME_API },
-  modal: { ...MODAL_THEME_API },
-  radio: { ...RADIO_THEME_API }
+  [IDENTIFIERS.FORM_FIELD]: { ...FORMFIELD_THEME_API },
+  [IDENTIFIERS.INPUT]: { ...INPUT_THEME_API },
+  [IDENTIFIERS.CHECKBOX]: { ...CHECKBOX_THEME_API },
+  [IDENTIFIERS.TOGGLER]: { ...TOGGLER_THEME_API },
+  [IDENTIFIERS.SWITCH]: { ...SWITCH_THEME_API },
+  [IDENTIFIERS.TEXT_AREA]: { ...TEXTAREA_THEME_API },
+  [IDENTIFIERS.BUTTON]: { ...BUTTON_THEME_API },
+  [IDENTIFIERS.TOOLTIP]: { ...TOOLTIP_THEME_API },
+  [IDENTIFIERS.BUBBLE]: { ...BUBBLE_THEME_API },
+  [IDENTIFIERS.SELECT]: { ...SELECT_THEME_API },
+  [IDENTIFIERS.AUTOCOMPLETE]: { ...AUTOCOMPLETE_THEME_API },
+  [IDENTIFIERS.OPTIONS]: { ...OPTIONS_THEME_API },
+  [IDENTIFIERS.MODAL]: { ...MODAL_THEME_API },
+  [IDENTIFIERS.RADIO]: { ...RADIO_THEME_API }
 };

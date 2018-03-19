@@ -10,15 +10,14 @@ import { ThemeProvider, Button } from "../source/components";
 import { ButtonSkin } from "../source/skins/simple";
 
 // themes
-import { ButtonTheme } from "../source/themes/simple";
+import SimpleTheme from "../source/themes/simple";
+import CustomButtonTheme from "./theme-customizations/Button.custom.scss";
 
 // custom styles & themeOverrides
-import themeOverrides from "./styles/customButton.scss";
+import themeOverrides from "./theme-overrides/customButton.scss";
 
 storiesOf("Button", module)
   .addDecorator(story => {
-    const SimpleTheme = { button: { ...ButtonTheme } };
-
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
@@ -30,12 +29,18 @@ storiesOf("Button", module)
     <Button disabled label="Button label" skin={ButtonSkin} />
   ))
 
-  // the user can pass themeOverrides to ThemeProvider and have all buttons
-  // reflect a custom theme or pass it directly to one instance of Button
   .add("composed theme", () => (
     <Button
-      label="Button label"
+      label="Composed theme"
       themeOverrides={themeOverrides}
+      skin={ButtonSkin}
+    />
+  ))
+
+  .add("custom theme", () => (
+    <Button
+      label="Custom theme"
+      theme={CustomButtonTheme}
       skin={ButtonSkin}
     />
   ));

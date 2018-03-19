@@ -11,27 +11,21 @@ import { ThemeProvider, Modal, Button } from "../source/components";
 import { ModalSkin, ButtonSkin } from "../source/skins/simple";
 
 // themes
-import { ModalTheme, ButtonTheme } from "../source/themes/simple";
+import SimpleTheme from "../source/themes/simple";
+import CustomModalTheme from "./theme-customizations/Modal.custom.scss";
 
 // custom styles & themeOverrides
 import styles from "./Modal.stories.scss";
-import themeOverrides from "./styles/customModal.scss";
+import themeOverrides from "./theme-overrides/customModal.scss";
 
 storiesOf("Modal", module)
   .addDecorator(story => {
-    const SimpleTheme = {
-      modal: { ...ModalTheme },
-      button: { ...ButtonTheme }
-    };
-
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
   // ====== Stories ======
 
-  .add(
-    "cancelable via overlay",
-    withState({ isOpen: true }, store => (
+  .add('cancelable via overlay', withState({ isOpen: true }, store => (
       <Modal
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
@@ -43,9 +37,7 @@ storiesOf("Modal", module)
     ))
   )
 
-  .add(
-    "cancelable via buttons",
-    withState({ isOpen: true }, store => (
+  .add('cancelable via buttons', withState({ isOpen: true }, store => (
       <Modal
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick={false}
@@ -72,11 +64,22 @@ storiesOf("Modal", module)
     ))
   )
 
-  .add(
-    "composed theme",
-    withState({ isOpen: true }, store => (
+  .add('composed theme', withState({ isOpen: true }, store => (
       <Modal
         themeOverrides={themeOverrides}
+        isOpen={store.state.isOpen}
+        triggerCloseOnOverlayClick
+        onClose={() => store.set({ isOpen: !store.state.isOpen })}
+        skin={ModalSkin}
+      >
+        <h1 className={styles.modalTitle}>Click outside of modal to cancel</h1>
+      </Modal>
+    ))
+  )
+
+  .add('custom theme', withState({ isOpen: true }, store => (
+      <Modal
+        theme={CustomModalTheme}
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}

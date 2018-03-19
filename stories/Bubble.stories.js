@@ -11,16 +11,15 @@ import { ThemeProvider, Bubble } from '../source/components';
 import { BubbleSkin } from '../source/skins/simple';
 
 // themes
-import { BubbleTheme } from '../source/themes/simple';
+import SimpleTheme from '../source/themes/simple';
+import BubbleCustomTheme from './theme-customizations/Bubble.custom.scss';
 
 // custom styles & theme overrides
 import styles from './Bubble.stories.scss';
-import themeOverrides from './styles/customBubble.scss';
+import customBubbleOverrides from './theme-overrides/customBubble.scss';
 
 storiesOf('Bubble', module)
   .addDecorator(story => {
-    const SimpleTheme = { bubble: { ...BubbleTheme } };
-
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
 
@@ -56,19 +55,6 @@ storiesOf('Bubble', module)
     </div>
   ))
 
-  .add('content-light', () => (
-    <div className={styles.container}>
-      <Bubble skin={BubbleSkin}>tiny</Bubble>
-    </div>
-  ))
-
-  .add('composed theme', () => (
-    <div className={styles.container}>
-      <Bubble themeOverrides={themeOverrides} skin={BubbleSkin}>
-        tiny
-      </Bubble>
-    </div>
-  ))
   .add('isHidden', () => (
     <div className={styles.container}>
       There should be no bubble shown!
@@ -77,6 +63,7 @@ storiesOf('Bubble', module)
       </Bubble>
     </div>
   ))
+
   .add('isFloating', () => (
     <div className={styles.scrollContainer}>
       <div className={styles.scrollContent}>
@@ -88,5 +75,21 @@ storiesOf('Bubble', module)
         Here is some text that should break<br />
         and trigger scroll bars<br />
       </p>
+    </div>
+  ))
+
+  .add('composed theme', () => (
+    <div className={styles.container}>
+      <Bubble themeOverrides={customBubbleOverrides} skin={BubbleSkin}>
+        theme overrides
+      </Bubble>
+    </div>
+  ))
+
+  .add('custom theme', () => (
+    <div className={styles.container}>
+      <Bubble isTransparent={false} theme={BubbleCustomTheme} skin={BubbleSkin}>
+        custom theme
+      </Bubble>
     </div>
   ));

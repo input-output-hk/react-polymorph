@@ -5,10 +5,10 @@ import { func, object, number, string } from 'prop-types';
 import { flow } from 'lodash';
 
 // Input's theme API
-import { INPUT_THEME_API } from '../themes/API';
+import { IDENTIFIERS, INPUT_THEME_API } from '../themes/API';
 
 // internal utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, pickTheme } from '../utils';
 
 class NumericInput extends Component {
   static propTypes = {
@@ -30,7 +30,7 @@ class NumericInput extends Component {
   static defaultProps = {
     error: '',
     onRef: () => {},
-    theme: {},
+    theme: null,
     themeAPI: { ...INPUT_THEME_API },
     themeOverrides: {},
     value: ''
@@ -44,13 +44,7 @@ class NumericInput extends Component {
     super(props);
 
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.input
-        ? context.theme.input
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(IDENTIFIERS.INPUT, props, context);
     this.state = {
       composedTheme: composeTheme(theme, themeOverrides, themeAPI),
       caretPosition: 0, // Current caret position
@@ -78,11 +72,11 @@ class NumericInput extends Component {
     let caretPosition;
     // prevent unnecessary changes on re-rendering
     if (
-      this.state.oldValue != prevState.oldValue ||
-      this.state.caretPosition != prevState.caretPosition
+      this.state.oldValue !== prevState.oldValue ||
+      this.state.caretPosition !== prevState.caretPosition
     ) {
       if (
-        this.state.separatorsCount != prevState.separatorsCount &&
+        this.state.separatorsCount !== prevState.separatorsCount &&
         this.state.separatorsCount - prevState.separatorsCount <= 1 &&
         this.state.separatorsCount - prevState.separatorsCount >= -1
       ) {
