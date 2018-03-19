@@ -4,21 +4,14 @@ import React from "react";
 import classnames from "classnames";
 
 // components
-import { Options } from "../../components";
+import { Options, Input } from "../../components";
 
 // skins
 import { InputSkin, OptionsSkin } from "./";
 
-// themes
-import { InputTheme, OptionsTheme } from "../../themes/simple";
-
-// internal utility functions
-import { pickDOMProps } from "../../utils";
-
 export default props => {
   const selectedOption = props.getSelectedOption();
   const inputValue = selectedOption ? selectedOption.label : "";
-
   return (
     <div
       className={classnames([
@@ -28,20 +21,20 @@ export default props => {
         props.isOpeningUpward ? props.theme.openUpward : null
       ])}
     >
-      <InputSkin
-        inputRef={props.inputRef}
-        className={props.theme.selectInput}
-        theme={InputTheme}
-        label={props.label}
-        value={inputValue}
-        onClick={props.handleInputClick}
-        placeholder={props.placeholder}
-        error={props.error}
-        readOnly
-      />
+      <div className={props.theme.selectInput}>
+        <Input
+          skin={InputSkin}
+          inputRef={props.inputRef}
+          label={props.label}
+          value={inputValue}
+          onClick={props.handleInputClick}
+          placeholder={props.placeholder}
+          error={props.error}
+          readOnly
+        />
+      </div>
       <Options
         skin={OptionsSkin}
-        theme={OptionsTheme}
         isOpen={props.isOpen}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}

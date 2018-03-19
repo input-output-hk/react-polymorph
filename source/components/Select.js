@@ -5,7 +5,7 @@ import { bool, func, object, arrayOf, shape, string } from 'prop-types';
 import { SELECT_THEME_API } from '../themes/API';
 
 // import the composeTheme utility function
-import { StringOrElement, composeTheme } from '../utils';
+import { pickTheme, composeTheme } from '../utils';
 
 class Select extends Component {
   static propTypes = {
@@ -33,7 +33,7 @@ class Select extends Component {
     allowBlank: true,
     autoFocus: false,
     isOpeningUpward: false,
-    theme: {},
+    theme: null,
     themeOverrides: {},
     themeAPI: { ...SELECT_THEME_API },
     value: ''
@@ -45,15 +45,8 @@ class Select extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.select
-        ? context.theme.select
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(props, context);
     this.state = {
       isOpen: false,
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)

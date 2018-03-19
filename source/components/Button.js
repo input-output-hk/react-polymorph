@@ -8,7 +8,7 @@ import _ from 'lodash';
 import { BUTTON_THEME_API } from '../themes/API';
 
 // internal utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, pickTheme } from '../utils';
 
 class Button extends Component {
   static propTypes = {
@@ -34,15 +34,8 @@ class Button extends Component {
 
   constructor(props, context) {
     super(props);
-
     const { themeOverrides, themeAPI } = props;
-
-    const theme =
-      context && context.theme && context.theme.button
-        ? context.theme.button
-        : props.theme;
-
-    // if themeOverrides isn't provided, composeTheme returns theme immediately
+    const theme = pickTheme(props, context);
     this.state = {
       composedTheme: composeTheme(theme, themeOverrides, themeAPI)
     };
