@@ -14,42 +14,6 @@ $checkbox-checked-bg-color: $checkbox-border-color !default;
   position: relative;
 }
 
-.disabled {
-  .label:hover {
-    cursor: default;
-  }
-
-  .check {
-    border: 1px solid $checkbox-border-disabled-color;
-    &:hover {
-      cursor: default;
-    }
-  }
-
-  .label {
-    color: $checkbox-label-disabled-color;
-  }
-}
-
-.checked {
-  .check {
-    background-color: $checkbox-checked-bg-color;
-    position: relative;
-    &:after {
-      border-color: #fff;
-      border-style: solid;
-      border-width: 0 2px 2px 0;
-      content: '';
-      height: 12px;
-      left: 8px;
-      position: absolute;
-      top: 2px;
-      transform: rotate(45deg);
-      width: 4px;
-    }
-  }
-}
-
 .input {
   height: 0;
   opacity: 0;
@@ -86,3 +50,43 @@ $checkbox-checked-bg-color: $checkbox-border-color !default;
     font-weight: bold;
   }
 }
+
+// BEGIN SPECIAL STATES ---------- //
+
+.disabled {
+  .label:hover {
+    cursor: default;
+  }
+
+  .check {
+    border: 1px solid $checkbox-border-disabled-color;
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  .label {
+    color: $checkbox-label-disabled-color;
+  }
+}
+
+.checked {
+  .check {
+    background-color: $checkbox-checked-bg-color;
+    position: relative;
+    &:after {
+      border-color: #fff;
+      border-style: solid;
+      border-width: 0 2px 2px 0;
+      content: '';
+      height: 12px;
+      left: 8px;
+      position: absolute;
+      top: 2px;
+      transform: rotate(45deg);
+      width: 4px;
+    }
+  }
+}
+
+// END SPECIAL STATES ---------- //

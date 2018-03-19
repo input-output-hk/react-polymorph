@@ -18,19 +18,24 @@ $toggler-height: 25px !default;
 }
 
 .disabled {
-  .root,
-  .toggler,
-  .label {
+  .root:hover,
+  .label:hover,
+  .toggler:hover {
     cursor: default;
   }
 
   .toggler {
     background-color: $toggler-background-disabled;
-  }
 
-  .label.checked {
-    color: $toggler-background-disabled;
+    .label.checked {
+      color: $toggler-background-disabled;
+    }
   }
+}
+
+.checked {
+  background-color: $toggler-label-on-background;
+  color: $toggler-label-on-color;
 }
 
 .input {
@@ -63,11 +68,6 @@ $toggler-height: 25px !default;
   text-align: center;
   transition: background-color 200ms ease-in-out;
   white-space: nowrap;
-
-  &.checked {
-    background-color: $toggler-label-on-background;
-    color: $toggler-label-on-color;
-  }
 
   &:not(.checked) {
     background-color: transparent;

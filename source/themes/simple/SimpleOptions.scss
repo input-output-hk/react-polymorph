@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins/arrow";
+@import 'theme';
+@import 'mixins/arrow';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -68,6 +68,7 @@ $options-bubble-arrow: true !default;
   }
 }
 
+// BEGIN SPECIAL STATES ---------- //
 @if $options-bubble-arrow == true {
   .openUpward {
     &.options {
@@ -83,3 +84,5 @@ $options-bubble-arrow: true !default;
     }
   }
 }
+
+// END SPECIAL STATES ---------- //

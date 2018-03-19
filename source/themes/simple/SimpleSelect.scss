@@ -1,6 +1,6 @@
-@import "theme";
-@import "SimpleInput";
-@import "mixins/arrow";
+@import 'theme';
+@import 'SimpleInput';
+@import 'mixins/arrow';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -19,30 +19,6 @@ $select-down-arrow-rtl-position-left: 15px !default;
 
 .select {
   position: relative;
-
-  // ==== STATE: isOpen ====
-  &.isOpen {
-    input {
-      border-color: $select-input-border-focus-color;
-    }
-
-    .selectInput:after {
-      background-image: $select-up-arrow-focus-url;
-    }
-  }
-
-  // ==== STATE: openUpward ====
-  &.openUpward {
-    .selectInput:after {
-      background-image: $select-up-arrow-url;
-    }
-
-    &.isOpen {
-      .selectInput:after {
-        background-image: $select-down-arrow-focus-url;
-      }
-    }
-  }
 }
 
 .selectInput {
@@ -62,7 +38,7 @@ $select-down-arrow-rtl-position-left: 15px !default;
     background: $select-down-arrow-url;
     background-size: $select-down-arrow-width $select-down-arrow-height;
     bottom: $select-down-arrow-position-bottom;
-    content: "";
+    content: '';
     pointer-events: none;
     position: absolute;
     left: $select-down-arrow-position-left;
@@ -70,6 +46,33 @@ $select-down-arrow-rtl-position-left: 15px !default;
     width: $select-down-arrow-width;
   }
 }
+
+// BEGIN SPECIAL STATES ---------- //
+
+// ==== STATE: isOpen ====
+.isOpen {
+  input {
+    border-color: $select-input-border-focus-color;
+  }
+
+  .selectInput:after {
+    background-image: $select-up-arrow-focus-url;
+  }
+}
+
+// ==== STATE: openUpward ====
+.openUpward {
+  .selectInput:after {
+    background-image: $select-up-arrow-url;
+  }
+
+  &.isOpen {
+    .selectInput:after {
+      background-image: $select-down-arrow-focus-url;
+    }
+  }
+}
+// END SPECIAL STATES ---------- //
 
 // right-to-left languages support
 body[dir="rtl"] {
