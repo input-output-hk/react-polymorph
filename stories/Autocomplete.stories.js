@@ -114,6 +114,23 @@ storiesOf('Autocomplete', module)
     />
   ))
 
+  .add('Pre-entered mnemonics - Clear value on click', () => {
+    let autocomplete;
+    return (
+      <div>
+        <Autocomplete
+          ref={(ref) => autocomplete = ref}
+          label="Recovery phrase"
+          options={OPTIONS}
+          placeholder="Enter mnemonic..."
+          selectedOptions={['box', 'cat', 'dog']}
+          skin={<SimpleAutocompleteSkin />}
+        />
+        <button onClick={() => autocomplete.clear()}>clear</button>
+      </div>
+    );
+  })
+
   .add('Enter mnemonics in Modal', () => (
     <Modal
       isOpen
