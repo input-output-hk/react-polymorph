@@ -74,9 +74,7 @@ storiesOf('Autocomplete', module)
     />
   ))
 
-  .add(
-    'Enter mnemonics (9-word mnemonic) - not sorted',
-    withState({ selectedOpts: [] }, store => (
+  .add('Enter mnemonics (9-word mnemonic) - not sorted', withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
         options={OPTIONS}
@@ -90,9 +88,7 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add(
-    'Enter mnemonics (9-word mnemonic) - sorted with multiple same selections',
-    withState({ selectedOpts: [] }, store => (
+  .add('Enter mnemonics (9-word mnemonic) - sorted with multiple same selections', withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
         options={OPTIONS}
@@ -104,8 +100,7 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add(
-    'Enter mnemonics - (12-word mnemonic) with 5 visible suggestions',
+  .add('Enter mnemonics - (12-word mnemonic) 5 suggestions',
     withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
@@ -119,8 +114,7 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add(
-    'Enter mnemonics - (12-word mnemonic) with 5 visible suggestions - isOpeningUpward',
+  .add('Enter mnemonics - (12-word mnemonic) 5 suggestions - isOpeningUpward',
     withState({ selectedOpts: [] }, store => (
       <Autocomplete
         className={styles.customMargin}
@@ -136,8 +130,7 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add(
-    'Enter mnemonics - (12-word mnemonic) with 5 visible suggestions and regex that allows only letters',
+  .add('Enter mnemonics - (12-word mnemonic) 5 suggestions and regex that allows only letters',
     withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
@@ -152,9 +145,7 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add(
-    'Enter mnemonics in Modal',
-    withState({ isOpen: true, selectedOpts: [] }, store => (
+  .add('Enter mnemonics in Modal', withState({ isOpen: true, selectedOpts: [] }, store => (
       <Modal
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick={false}
@@ -188,6 +179,22 @@ storiesOf('Autocomplete', module)
       </Modal>
     ))
   )
+
+  .add('Clear value on click', () => {
+    let autocomplete;
+    return (
+      <div>
+        <Autocomplete
+          ref={(ref) => autocomplete = ref}
+          label="Recovery phrase"
+          options={OPTIONS}
+          placeholder="Enter mnemonic..."
+          skin={AutocompleteSkin}
+        />
+        <button onClick={() => autocomplete.clear()}>clear</button>
+      </div>
+    );
+  })
 
   .add('composed theme', withState({ selectedOpts: [] }, store => (
       <Autocomplete

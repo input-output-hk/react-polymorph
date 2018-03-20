@@ -29,11 +29,12 @@ class Autocomplete extends Component {
     multipleSameSelections: bool,
     onChange: func,
     options: array,
+    selectedOptions: array,
     placeholder: string,
     skin: func.isRequired,
     sortAlphabetically: bool,
     theme: object,
-    themeId: String,
+    themeId: string,
     themeOverrides: object
   };
 
@@ -46,7 +47,7 @@ class Autocomplete extends Component {
     options: [],
     sortAlphabetically: true, // options are sorted alphabetically by default
     theme: null,
-    themeIdentifier: IDENTIFIERS.AUTOCOMPLETE,
+    themeId: IDENTIFIERS.AUTOCOMPLETE,
     themeOverrides: {}
   };
 
@@ -56,45 +57,19 @@ class Autocomplete extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, sortAlphabetically, options } = props;
+    const { themeOverrides, sortAlphabetically, options, selectedOptions } = props;
     const theme = props.theme || context.theme;
     this.state = {
       inputValue: '',
       error: '',
-      selectedOptions: [],
+      selectedOptions: selectedOptions || [],
       filteredOptions: sortAlphabetically && options ? options.sort() : options || [],
       isOpen: false,
       composedTheme: composeTheme(theme, themeOverrides, THEME_API)
     };
   }
 
-  _filterOptions = value => {
-    let filteredOptions = [];
-
-    if (value !== '') {
-      _.some(this.props.options, function(option) {
-        if (_.startsWith(option, value)) {
-          filteredOptions.push(option);
-        }
-      });
-    } else {
-      filteredOptions = this.props.options;
-    }
-
-    return filteredOptions;
-  };
-
-  _filterInvalidChars = value => {
-    let filteredValue = '';
-
-    if (this.props.invalidCharsRegex.test(value)) {
-      filteredValue = value.replace(this.props.invalidCharsRegex, '');
-    } else {
-      filteredValue = value;
-    }
-
-    return filteredValue;
-  };
+  clear = () => this._removeOptions();
 
   focus = () => this.handleAutocompleteClick();
 
@@ -125,7 +100,6 @@ class Autocomplete extends Component {
       // Remove last selected option
       this.removeOption(this.state.selectedOptions.length - 1, event);
     }
-    return;
   };
 
   // onChange handler for input element in AutocompleteSkin
@@ -195,7 +169,6 @@ class Autocomplete extends Component {
       skin: AutocompleteSkin,
       theme,
       themeOverrides,
-      themeAPI,
       onChange,
       error,
       ...rest
@@ -222,6 +195,41 @@ class Autocomplete extends Component {
       />
     );
   }
+
+  // ======== PRIVATE METHOD ==========
+
+  _removeOptions = () => {
+    this.selectionChanged([]);
+    this.setState({ selectedOptions: [], inputValue: '' });
+  };
+
+  _filterOptions = value => {
+    let filteredOptions = [];
+
+    if (value !== '') {
+      _.some(this.props.options, function(option) {
+        if (_.startsWith(option, value)) {
+          filteredOptions.push(option);
+        }
+      });
+    } else {
+      filteredOptions = this.props.options;
+    }
+
+    return filteredOptions;
+  };
+
+  _filterInvalidChars = value => {
+    let filteredValue = '';
+
+    if (this.props.invalidCharsRegex.test(value)) {
+      filteredValue = value.replace(this.props.invalidCharsRegex, '');
+    } else {
+      filteredValue = value;
+    }
+
+    return filteredValue;
+  };
 }
 
 export default Autocomplete;

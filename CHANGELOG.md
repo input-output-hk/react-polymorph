@@ -1,8 +1,9 @@
 # Changelog
 
-## 0.7.0
+## vNext
 
-[PR 39](https://github.com/input-output-hk/react-polymorph/pull/39)
+Major breaking changes due to large refactoring of component architecture:
+[PR 47](https://github.com/input-output-hk/react-polymorph/pull/47)
 
 ### Chores
 
@@ -13,6 +14,8 @@
 * Removes inheritance architecture
 
 ## Features
+
+* Add Autocomplete clear feature [PR 49](https://github.com/input-output-hk/react-polymorph/pull/49)
 
 * Implements a theme API for each component. This is a plain object which exposes the shape of a component's theme. Each property on the theme API object corresponds with a class name assigned to an element within the component's skin and a class definition within the component's theme.
 
@@ -27,8 +30,6 @@
 * Adds autofocus prop to all applicable input based components.
 
 * Adds index file to source/utils, source/themes/API, source/themes/simple, source/skins/simple, and source/components for the use of named and default exports. Makes it easier for the user to import a full theme object for ThemeProvider, or simply one component's theme. Also makes it easier to import multiple skins and components on one line.
-
-## vNext
 
 ## 0.6.4
 

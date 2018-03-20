@@ -11,7 +11,7 @@ import { FormField, Options } from "../../components";
 import { FormFieldSkin, OptionsSkin } from "./";
 
 export default props => {
-  const { label, error } = props;
+  const { label, error, theme, themeId } = props;
   const formfieldProps = { label, error };
 
   const filteredAndLimitedOptions = _.slice(
@@ -33,11 +33,11 @@ export default props => {
     props.selectedOptions &&
     props.selectedOptions.map((selectedOption, index) => {
       return (
-        <span className={props.theme.selectedWordBox} key={index}>
-          <span className={props.theme.selectedWordValue}>
+        <span className={theme[themeId].selectedWordBox} key={index}>
+          <span className={theme[themeId].selectedWordValue}>
             {selectedOption}
             <span
-              className={props.theme.selectedWordRemoveButton}
+              className={theme[themeId].selectedWordRemoveButton}
               onClick={props.removeOption.bind(null, index)}
             >
               &times;
@@ -49,7 +49,7 @@ export default props => {
 
   // selected words and input for enter new one
   const autocompleteContent = (
-    <div className={props.theme.selectedWords}>
+    <div className={theme[themeId].selectedWords}>
       {selectedOptions}
       <input
         ref={props.inputRef}
@@ -67,20 +67,21 @@ export default props => {
         error={props.error}
         label={props.label}
         skin={FormFieldSkin}
+        theme={theme}
         render={() => {
           return (
             <div
-              className={props.theme.autocompleteWrapper}
+              className={theme[themeId].autocompleteWrapper}
               onClick={props.handleAutocompleteClick}
             >
               <div
                 className={classnames([
-                  props.theme.autocompleteContent,
-                  props.isOpen ? props.theme.opened : null,
+                  theme[themeId].autocompleteContent,
+                  props.isOpen ? theme[themeId].opened : null,
                   props.selectedOptions.length
-                    ? props.theme.hasSelectedWords
+                    ? theme[themeId].hasSelectedWords
                     : null,
-                  props.error ? props.theme.errored : null
+                  props.error ? theme[themeId].errored : null
                 ])}
                 ref={props.suggestionsRef}
               >
@@ -97,6 +98,7 @@ export default props => {
                 noResults={!props.filteredOptions.length}
                 noResultsMessage={props.noResultsMessage}
                 skin={OptionsSkin}
+                theme={theme}
               />
             </div>
           );

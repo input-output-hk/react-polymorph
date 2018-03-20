@@ -8,7 +8,6 @@ import { pickDOMProps } from '../../utils';
 
 export default props => {
   const { theme, themeId } = props;
-  console.log(theme[themeId]);
   return (
     <div
       ref={props.rootRef}
