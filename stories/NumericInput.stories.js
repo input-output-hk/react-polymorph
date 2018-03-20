@@ -16,6 +16,7 @@ import CustomInputTheme from './theme-customizations/Input.custom.scss';
 
 // themeOverrides
 import themeOverrides from './theme-overrides/customInput.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('NumericInput', module)
   .addDecorator(story => {
@@ -158,9 +159,9 @@ storiesOf('NumericInput', module)
     ))
   )
 
-  .add('composed theme', withState({ value: '' }, store => (
+  .add('theme overrides', withState({ value: '' }, store => (
       <NumericInput
-        themeOverrides={themeOverrides}
+        themeOverrides={{ [IDENTIFIERS.INPUT]: themeOverrides }}
         value={store.state.value}
         placeholder='0.000000'
         onChange={value => store.set({ value })}
@@ -171,7 +172,7 @@ storiesOf('NumericInput', module)
 
   .add('custom theme', withState({ value: '' }, store => (
       <NumericInput
-        theme={CustomInputTheme}
+        theme={{ [IDENTIFIERS.INPUT]: CustomInputTheme }}
         value={store.state.value}
         placeholder='0.000000'
         onChange={value => store.set({ value })}

@@ -6,29 +6,33 @@ import classnames from 'classnames';
 // internal utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => (
-  <div
-    ref={props.rootRef}
-    {...pickDOMProps(props)}
-    className={classnames([
-      props.className,
-      props.theme.root,
-      props.isOpeningUpward ? props.theme.openUpward : null,
-      props.isTransparent ? props.theme.transparent : null,
-      props.isFloating ? props.theme.isFloating : null,
-      props.isHidden ? props.theme.isHidden : null
-    ])}
-    style={
-      props.position && {
-        [props.isOpeningUpward ? 'bottom' : 'top']: props.position.positionY,
-        left: props.position.positionX,
-        width: props.position.width
+export default props => {
+  const { theme, themeId } = props;
+  console.log(theme[themeId]);
+  return (
+    <div
+      ref={props.rootRef}
+      {...pickDOMProps(props)}
+      className={classnames([
+        props.className,
+        theme[themeId].root,
+        props.isOpeningUpward ? theme[themeId].openUpward : null,
+        props.isTransparent ? theme[themeId].transparent : null,
+        props.isFloating ? theme[themeId].isFloating : null,
+        props.isHidden ? theme[themeId].isHidden : null
+      ])}
+      style={
+        props.position && {
+          [props.isOpeningUpward ? 'bottom' : 'top']: props.position.positionY,
+          left: props.position.positionX,
+          width: props.position.width
+        }
       }
-    }
-  >
-    <div className={props.theme.bubble} data-bubble-container>
-      {props.children}
+    >
+      <div className={theme[themeId].bubble} data-bubble-container>
+        {props.children}
+      </div>
+      <span className={theme[themeId].arrow} data-bubble-arrow />
     </div>
-    <span className={props.theme.arrow} data-bubble-arrow />
-  </div>
-);
+  );
+};

@@ -10,9 +10,9 @@ export default props => (
   <div
     className={classnames([
       props.className,
-      props.theme.root,
-      props.disabled ? props.theme.disabled : null,
-      props.checked ? props.theme.checked : null
+      props.theme[props.themeId].root,
+      props.disabled ? props.theme[props.themeId].disabled : null,
+      props.checked ? props.theme[props.themeId].checked : null
     ])}
     onClick={event => {
       if (!props.disabled && props.onChange) {
@@ -22,17 +22,17 @@ export default props => (
   >
     <input
       {...pickDOMProps(props)}
-      className={props.theme.input}
+      className={props.theme[props.themeId].input}
       type='checkbox'
     />
     <div
       className={classnames([
-        props.theme.check,
-        props.checked ? props.theme.checked : null
+        props.theme[props.themeId].check,
+        props.checked ? props.theme[props.themeId].checked : null
       ])}
     />
     {props.label ? (
-      <label className={props.theme.label}>{props.label}</label>
+      <label className={props.theme[props.themeId].label}>{props.label}</label>
     ) : null}
   </div>
 );

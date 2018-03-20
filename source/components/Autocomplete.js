@@ -13,7 +13,7 @@ import {
 import _ from 'lodash';
 
 // Autocomplete theme API
-import { AUTOCOMPLETE_THEME_API, IDENTIFIERS } from '../themes/API';
+import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
 import { StringOrElement, composeTheme, pickTheme } from '../utils';
@@ -33,8 +33,8 @@ class Autocomplete extends Component {
     skin: func.isRequired,
     sortAlphabetically: bool,
     theme: object,
-    themeAPI: object,
-    themeOverrides: object // custom css/scss from user that adheres to component's theme API
+    themeId: String,
+    themeOverrides: object
   };
 
   static defaultProps = {
@@ -46,7 +46,7 @@ class Autocomplete extends Component {
     options: [],
     sortAlphabetically: true, // options are sorted alphabetically by default
     theme: null,
-    themeAPI: { ...AUTOCOMPLETE_THEME_API },
+    themeIdentifier: IDENTIFIERS.AUTOCOMPLETE,
     themeOverrides: {}
   };
 
@@ -56,18 +56,15 @@ class Autocomplete extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, themeAPI } = props;
-    const theme = pickTheme(IDENTIFIERS.AUTOCOMPLETE, props, context);
+    const { themeOverrides, sortAlphabetically, options } = props;
+    const theme = props.theme || context.theme;
     this.state = {
       inputValue: '',
       error: '',
       selectedOptions: [],
-      filteredOptions:
-        this.props.sortAlphabetically && this.props.options
-          ? this.props.options.sort()
-          : this.props.options || [],
+      filteredOptions: sortAlphabetically && options ? options.sort() : options || [],
       isOpen: false,
-      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+      composedTheme: composeTheme(theme, themeOverrides, THEME_API)
     };
   }
 

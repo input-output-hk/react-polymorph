@@ -30,7 +30,7 @@ storiesOf('Toggler', module)
       <Checkbox
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
-        themeIdentifier={IDENTIFIERS.TOGGLER}
+        themeId={IDENTIFIERS.TOGGLER}
         labelLeft='Included'
         labelRight='Excluded'
         skin={TogglerSkin}
@@ -44,7 +44,7 @@ storiesOf('Toggler', module)
         <Checkbox
           checked={store.state.checked}
           onChange={() => store.set({ checked: !store.state.checked })}
-          themeIdentifier={IDENTIFIERS.TOGGLER}
+          themeId={IDENTIFIERS.TOGGLER}
           labelLeft='Included'
           labelRight='Excluded'
           skin={TogglerSkin}
@@ -61,18 +61,18 @@ storiesOf('Toggler', module)
         onChange={() => store.set({ checked: !store.state.checked })}
         labelLeft='Included'
         labelRight='Excluded'
-        themeIdentifier={IDENTIFIERS.TOGGLER}
+        themeId={IDENTIFIERS.TOGGLER}
         skin={TogglerSkin}
       />
     ))
   )
 
-  .add('composed theme', withState({ checked: false }, store => (
+  .add('theme overrides', withState({ checked: false }, store => (
       <Checkbox
-        themeOverrides={themeOverrides}
+        themeOverrides={{ [IDENTIFIERS.TOGGLER]: themeOverrides }}
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
-        themeIdentifier={IDENTIFIERS.TOGGLER}
+        themeId={IDENTIFIERS.TOGGLER}
         labelLeft='Included'
         labelRight='Excluded'
         skin={TogglerSkin}
@@ -82,10 +82,10 @@ storiesOf('Toggler', module)
 
   .add('custom theme', withState({ checked: false }, store => (
       <Checkbox
-        theme={CustomTogglerTheme}
+        theme={{ [IDENTIFIERS.TOGGLER]: CustomTogglerTheme }}
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
-        themeIdentifier={IDENTIFIERS.TOGGLER}
+        themeId={IDENTIFIERS.TOGGLER}
         labelLeft='Included'
         labelRight='Excluded'
         skin={TogglerSkin}

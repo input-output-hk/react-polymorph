@@ -17,6 +17,7 @@ import CustomRadioTheme from './theme-customizations/Radio.custom.scss';
 // custom styles & themeOverrides
 import styles from './Radio.stories.scss';
 import themeOverrides from './theme-overrides/customRadio.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Radio', module)
 
@@ -109,10 +110,10 @@ storiesOf('Radio', module)
     ))
   )
 
-  .add('composed theme', withState({ selected: false }, store => (
+  .add('theme overrides', withState({ selected: false }, store => (
       <div className={styles.container}>
         <Radio
-          themeOverrides={themeOverrides}
+          themeOverrides={{ [IDENTIFIERS.RADIO]: themeOverrides }}
           label='Radio with a composed theme'
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
@@ -125,7 +126,7 @@ storiesOf('Radio', module)
   .add('custom theme', withState({ selected: false }, store => (
       <div className={styles.container}>
         <Radio
-          theme={CustomRadioTheme}
+          theme={{ [IDENTIFIERS.RADIO]: CustomRadioTheme }}
           label='Radio with a custom theme'
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}

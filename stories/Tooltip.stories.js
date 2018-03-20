@@ -15,7 +15,8 @@ import CustomBubbleTheme from './theme-customizations/Bubble.custom.scss';
 
 // custom styles & themeOverrides
 import styles from './Tooltip.stories.scss';
-import themeOverrides from './theme-overrides/customTooltip.scss';
+import themeOverrides from './theme-overrides/customTooltipBubble.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Tooltip', module)
 
@@ -92,13 +93,14 @@ storiesOf('Tooltip', module)
     </div>
   ))
 
-  .add('composed theme', () => (
+  .add('theme overrides', () => (
     <div className={styles.container}>
       <Tooltip
-        themeOverrides={themeOverrides}
+        themeOverrides={{ [IDENTIFIERS.BUBBLE]: themeOverrides }}
+        isOpeningUpward={true}
         skin={TooltipSkin}
         isTransparent={false}
-        tip="plain tooltip, with a composed theme"
+        tip="plain tooltip, with theme overrides"
       >
         hover over me
       </Tooltip>
@@ -106,18 +108,14 @@ storiesOf('Tooltip', module)
   ))
 
   .add('custom theme', () => (
-    <ThemeProvider theme={{
-      ...SimpleTheme,
-      bubble: CustomBubbleTheme,
-    }}>
-      <div className={styles.container}>
-        <Tooltip
-          skin={TooltipSkin}
-          isTransparent={false}
-          tip="plain tooltip, with a custom theme"
-        >
-          hover over me
-        </Tooltip>
-      </div>
-    </ThemeProvider>
+    <div className={styles.container}>
+      <Tooltip
+        theme={{ ...SimpleTheme, [IDENTIFIERS.BUBBLE]: CustomBubbleTheme }}
+        skin={TooltipSkin}
+        isTransparent={false}
+        tip="plain tooltip, with a custom theme"
+      >
+        hover over me
+      </Tooltip>
+    </div>
   ));

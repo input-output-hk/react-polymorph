@@ -17,8 +17,10 @@ import BubbleCustomTheme from './theme-customizations/Bubble.custom.scss';
 // custom styles & theme overrides
 import styles from './Bubble.stories.scss';
 import customBubbleOverrides from './theme-overrides/customBubble.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Bubble', module)
+
   .addDecorator(story => {
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
@@ -78,9 +80,12 @@ storiesOf('Bubble', module)
     </div>
   ))
 
-  .add('composed theme', () => (
+  .add('theme overrides', () => (
     <div className={styles.container}>
-      <Bubble themeOverrides={customBubbleOverrides} skin={BubbleSkin}>
+      <Bubble
+        themeOverrides={{ [IDENTIFIERS.BUBBLE]: customBubbleOverrides }}
+        skin={BubbleSkin}
+      >
         theme overrides
       </Bubble>
     </div>
@@ -88,7 +93,11 @@ storiesOf('Bubble', module)
 
   .add('custom theme', () => (
     <div className={styles.container}>
-      <Bubble isTransparent={false} theme={BubbleCustomTheme} skin={BubbleSkin}>
+      <Bubble
+        isTransparent={false}
+        theme={{ [IDENTIFIERS.BUBBLE]: BubbleCustomTheme }}
+        skin={BubbleSkin}
+      >
         custom theme
       </Bubble>
     </div>

@@ -1,45 +1,46 @@
-import _ from 'lodash';
+import { isEmpty, cloneDeep } from 'lodash';
 
-const pickTheme = (name, props, context) => {
-  const hasContextTheme = context && context.theme && context.theme[name];
-  const hasPropsTheme = props.theme != null;
-  if (!hasPropsTheme && !hasContextTheme) {
-    throw 'Theme is missing';
-  }
-  return hasPropsTheme ? props.theme : context.theme[name];
+const appendToProperty = (dest, name, value) => {
+  dest[name] === '' ? dest[name] = value : dest[name] += ' ' + value;
 };
 
-// Every component has a Theme API which is a plain object exposing
-// the correct shape of a theme for its corresponding skin.
-// composeTheme is a reusable utility function for composing custom styles passed
-// via themeOverrides with a predefined theme in the library such as Simple Theme.
-
-const composeTheme = (theme = {}, themeOverrides = {}, themeAPI = {}) => {
-  // check to see if themeOverrides is an empty object
-  // if it is, return the theme
-  // if it is not, compose themeOverrides and theme
-
-  if (_.isEmpty(themeOverrides)) {
-    return theme;
-  } else {
-    let composedTheme = { ...themeAPI };
-
-    for (const property in themeAPI) {
-      if (theme.hasOwnProperty(property)) {
-        composedTheme[property] += theme[property];
+const composeComponentStyles = (componentStyles, componentTheme) => {
+  if (!componentTheme) return;
+  for (const property in componentStyles) {
+    if (componentStyles.hasOwnProperty(property)) {
+      if (componentTheme.hasOwnProperty(property)) {
+        appendToProperty(componentStyles, property, componentTheme[property]);
       }
-
-      if (themeOverrides.hasOwnProperty(property)) {
-        composedTheme[property] += ' ' + themeOverrides[property];
-      }
-
-      composedTheme[property].trim();
     }
-    return composedTheme;
   }
+};
+
+/**
+ * Composes a base theme with the given overrides, which should
+ * be provided in the same schema, defined by the theme API param.
+ *
+ * @param theme - The base theme to be composed with overrides
+ * @param themeOverrides - The custom overrides for the base theme
+ * @param themeAPI - The theme API schema that should be used for composition
+ * @returns {{}} - The composed theme
+ */
+
+export const composeTheme = (theme = {}, themeOverrides = {}, themeAPI = {}) => {
+  // Return theme if there are no overrides provided
+  if (isEmpty(themeOverrides)) return theme;
+
+  let composedTheme = cloneDeep(themeAPI);
+
+  for (const componentId in themeAPI) {
+    if (composedTheme.hasOwnProperty(componentId)) {
+      const componentStyles = composedTheme[componentId];
+      composeComponentStyles(componentStyles, theme[componentId]);
+      composeComponentStyles(componentStyles, themeOverrides[componentId]);
+    }
+  }
+  return composedTheme;
 };
 
 export default {
-  pickTheme,
   composeTheme
 };

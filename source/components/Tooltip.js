@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { bool, func, object } from 'prop-types';
+import { bool, func, object, string } from 'prop-types';
 
 // import the Tooltip component's theme API
-import { IDENTIFIERS, TOOLTIP_THEME_API } from '../themes/API';
+import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // import utility functions
 import { StringOrElement, composeTheme, pickTheme } from '../utils';
@@ -16,7 +16,7 @@ class Tooltip extends Component {
     skin: func.isRequired,
     theme: object,
     themeOverrides: object, // custom css/scss from user that adheres to component's theme API
-    themeAPI: object,
+    themeId: string,
     tip: StringOrElement
   };
 
@@ -24,7 +24,7 @@ class Tooltip extends Component {
     isOpeningUpward: true,
     isTransparent: true,
     theme: null,
-    themeAPI: { ...TOOLTIP_THEME_API },
+    themeId: IDENTIFIERS.TOOLTIP,
     themeOverrides: {}
   };
 
@@ -34,10 +34,8 @@ class Tooltip extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, themeAPI } = props;
-    const theme = pickTheme(IDENTIFIERS.TOOLTIP, props, context);
     this.state = {
-      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API)
     };
   }
 
@@ -47,7 +45,6 @@ class Tooltip extends Component {
       skin: TooltipSkin,
       theme,
       themeOverrides,
-      themeAPI,
       ...rest
     } = this.props;
 

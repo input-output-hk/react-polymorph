@@ -1,5 +1,5 @@
 import './index.scss';
-import './Autocomplete.stories';
+// import './Autocomplete.stories';
 import './Bubble.stories';
 import './Button.stories';
 import './Checkbox.stories';
@@ -13,4 +13,4 @@ import './Switch.stories';
 import './TextArea.stories';
 import './Toggler.stories';
 import './Tooltip.stories';
-import './Radio.stories';
+// import './Radio.stories';

@@ -5,7 +5,7 @@ import { func, object, number, string } from 'prop-types';
 import { flow } from 'lodash';
 
 // Input's theme API
-import { IDENTIFIERS, INPUT_THEME_API } from '../themes/API';
+import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
 import { StringOrElement, composeTheme, pickTheme } from '../utils';
@@ -22,7 +22,7 @@ class NumericInput extends Component {
     placeholder: string,
     skin: func.isRequired,
     theme: object,
-    themeAPI: object,
+    themeId: string,
     themeOverrides: object, // custom css/scss from user that adheres to component's theme API
     value: string
   };
@@ -31,7 +31,7 @@ class NumericInput extends Component {
     error: '',
     onRef: () => {},
     theme: null,
-    themeAPI: { ...INPUT_THEME_API },
+    themeId: IDENTIFIERS.INPUT,
     themeOverrides: {},
     value: ''
   };
@@ -42,11 +42,8 @@ class NumericInput extends Component {
 
   constructor(props, context) {
     super(props);
-
-    const { themeOverrides, themeAPI } = props;
-    const theme = pickTheme(IDENTIFIERS.INPUT, props, context);
     this.state = {
-      composedTheme: composeTheme(theme, themeOverrides, themeAPI),
+      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
       caretPosition: 0, // Current caret position
       separatorsCount: 0, // Number of comma separators used for calculating caret position after separators are injected
       error: null, // Inner (Component) state error // e.g. if value > maxValue set error message
@@ -314,7 +311,6 @@ class NumericInput extends Component {
       skin: InputSkin,
       theme,
       themeOverrides,
-      themeAPI,
       onChange,
       error,
       ...rest

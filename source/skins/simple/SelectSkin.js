@@ -12,18 +12,20 @@ import { InputSkin, OptionsSkin } from "./";
 export default props => {
   const selectedOption = props.getSelectedOption();
   const inputValue = selectedOption ? selectedOption.label : "";
+  const { theme, themeId } = props;
   return (
     <div
       className={classnames([
         props.className,
-        props.theme.select,
-        props.isOpen ? props.theme.isOpen : null,
-        props.isOpeningUpward ? props.theme.openUpward : null
+        theme[themeId].select,
+        props.isOpen ? theme[themeId].isOpen : null,
+        props.isOpeningUpward ? theme[themeId].openUpward : null
       ])}
     >
-      <div className={props.theme.selectInput}>
+      <div className={theme[themeId].selectInput}>
         <Input
           skin={InputSkin}
+          theme={theme}
           inputRef={props.inputRef}
           label={props.label}
           value={inputValue}
@@ -35,6 +37,7 @@ export default props => {
       </div>
       <Options
         skin={OptionsSkin}
+        theme={theme}
         isOpen={props.isOpen}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}

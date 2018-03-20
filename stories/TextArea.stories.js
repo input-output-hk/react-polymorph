@@ -17,6 +17,7 @@ import CustomTextAreaTheme from './theme-customizations/TextArea.custom.scss';
 
 // themeOverrides
 import themeOverrides from './theme-overrides/customTextarea.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('TextArea', module)
   .addDecorator(story => {
@@ -134,9 +135,9 @@ storiesOf('TextArea', module)
     ))
   )
 
-  .add('composed theme', withState({ value: '' }, store => (
+  .add('theme overrides', withState({ value: '' }, store => (
       <TextArea
-        themeOverrides={themeOverrides}
+        themeOverrides={{ [IDENTIFIERS.TEXT_AREA]: themeOverrides }}
         value={store.state.value}
         onChange={(value, event) => store.set({ value })}
         placeholder='type here...'
@@ -147,7 +148,7 @@ storiesOf('TextArea', module)
 
   .add('custom theme', withState({ value: '' }, store => (
       <TextArea
-        theme={CustomTextAreaTheme}
+        theme={{ [IDENTIFIERS.TEXT_AREA]: CustomTextAreaTheme }}
         value={store.state.value}
         onChange={(value, event) => store.set({ value })}
         placeholder='type here...'

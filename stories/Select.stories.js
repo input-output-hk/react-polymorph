@@ -22,6 +22,7 @@ import flagEngland from './images/gb.png';
 import flagSpain from './images/es.png';
 import flagThailand from './images/th.png';
 import flagUSA from './images/us.png';
+import { IDENTIFIERS } from '../source/themes/API';
 
 // constants
 const COUNTRIES = [
@@ -169,7 +170,7 @@ storiesOf('Select', module)
 
   .add('custom theme', withState({ value: '' }, store => (
       <Select
-        theme={CustomSelectTheme}
+        theme={{ ...SimpleTheme, [IDENTIFIERS.SELECT]: CustomSelectTheme }}
         value={store.state.value}
         onChange={value => store.set({ value })}
         label='Countries (has disabled options)'

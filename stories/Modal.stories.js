@@ -17,6 +17,7 @@ import CustomModalTheme from "./theme-customizations/Modal.custom.scss";
 // custom styles & themeOverrides
 import styles from "./Modal.stories.scss";
 import themeOverrides from "./theme-overrides/customModal.scss";
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf("Modal", module)
   .addDecorator(story => {
@@ -64,9 +65,9 @@ storiesOf("Modal", module)
     ))
   )
 
-  .add('composed theme', withState({ isOpen: true }, store => (
+  .add('theme overrides', withState({ isOpen: true }, store => (
       <Modal
-        themeOverrides={themeOverrides}
+        themeOverrides={{ [IDENTIFIERS.MODAL]: themeOverrides }}
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}
@@ -79,7 +80,7 @@ storiesOf("Modal", module)
 
   .add('custom theme', withState({ isOpen: true }, store => (
       <Modal
-        theme={CustomModalTheme}
+        theme={{ [IDENTIFIERS.MODAL]: CustomModalTheme }}
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}

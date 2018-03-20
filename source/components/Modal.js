@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { bool, func, object } from 'prop-types';
+import { string, bool, func, object } from 'prop-types';
 
 // Modal's theme API
-import { IDENTIFIERS, MODAL_THEME_API } from '../themes/API';
+import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // internal utiltity functions
 import { StringOrElement, composeTheme, pickTheme } from '../utils';
@@ -15,7 +15,7 @@ class Modal extends Component {
     skin: func.isRequired,
     triggerCloseOnOverlayClick: bool,
     theme: object,
-    themeAPI: object,
+    themeId: string,
     themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
@@ -24,7 +24,7 @@ class Modal extends Component {
     isActive: false,
     triggerCloseOnOverlayClick: true,
     theme: null,
-    themeAPI: { ...MODAL_THEME_API },
+    themeId: IDENTIFIERS.MODAL,
     themeOverrides: {}
   };
 
@@ -34,10 +34,8 @@ class Modal extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, themeAPI } = props;
-    const theme = pickTheme(IDENTIFIERS.MODAL, props, context);
     this.state = {
-      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
     };
   }
 
@@ -47,7 +45,6 @@ class Modal extends Component {
       skin: ModalSkin,
       theme,
       themeOverrides,
-      themeAPI,
       ...rest
     } = this.props;
 

@@ -5,7 +5,7 @@ import { bool, func, object, number, string } from 'prop-types';
 import { isString, flow } from 'lodash';
 
 // Input's theme API
-import { IDENTIFIERS, INPUT_THEME_API } from '../themes/API';
+import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
 import { StringOrElement, composeTheme, pickTheme } from '../utils';
@@ -25,7 +25,7 @@ class Input extends Component {
     readOnly: bool,
     skin: func.isRequired,
     theme: object,
-    themeAPI: object,
+    themeId: string,
     themeOverrides: object, // custom css/scss from user that adheres to component's theme API
     value: string
   };
@@ -36,7 +36,7 @@ class Input extends Component {
     onRef: () => {},
     readOnly: false,
     theme: null,
-    themeAPI: { ...INPUT_THEME_API },
+    themeId: IDENTIFIERS.INPUT,
     themeOverrides: {},
     value: ''
   };
@@ -47,11 +47,9 @@ class Input extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, themeAPI } = props;
-    const theme = pickTheme(IDENTIFIERS.INPUT, props, context);
     this.state = {
       error: '',
-      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
     };
   }
 
@@ -124,7 +122,6 @@ class Input extends Component {
       skin: InputSkin,
       theme,
       themeOverrides,
-      themeAPI,
       onChange,
       error,
       ...rest

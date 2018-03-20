@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { bool, func, object } from 'prop-types';
+import { bool, func, object, string } from 'prop-types';
 
 // import the Radio component's theme API
-import { IDENTIFIERS, RADIO_THEME_API } from '../themes/API';
+import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // import utility functions
 import { StringOrElement, composeTheme, pickTheme } from '../utils';
@@ -17,7 +17,7 @@ class Radio extends Component {
     selected: bool,
     skin: func.isRequired,
     theme: object,
-    themeAPI: object,
+    themeId: string,
     themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
@@ -25,7 +25,7 @@ class Radio extends Component {
     disabled: false,
     selected: false,
     theme: null,
-    themeAPI: { ...RADIO_THEME_API },
+    themeId: IDENTIFIERS.RADIO,
     themeOverrides: {}
   };
 
@@ -35,10 +35,8 @@ class Radio extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, themeAPI } = props;
-    const theme = pickTheme(IDENTIFIERS.RADIO, props, context);
     this.state = {
-      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
     };
   }
 
@@ -48,7 +46,6 @@ class Radio extends Component {
       skin: RadioSkin,
       theme,
       themeOverrides,
-      themeAPI,
       ...rest
     } = this.props;
 

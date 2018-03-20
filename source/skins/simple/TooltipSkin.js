@@ -13,19 +13,21 @@ import { BubbleSkin } from './';
 import { pickDOMProps } from '../../utils';
 
 export default props => {
+  const { theme, themeId } = props;
   return (
     <span
       {...pickDOMProps(props)}
-      className={classnames([props.className, props.theme.root])}
+      className={classnames([props.className, theme[themeId].root])}
     >
       <Bubble
         className={classnames([
-          props.theme.bubble,
+          theme[themeId].bubble,
           props.isAligningRight
-            ? props.theme.alignRight
-            : props.theme.alignLeft,
-          props.isBounded ? null : props.theme.nowrap
+            ? theme[themeId].alignRight
+            : theme[themeId].alignLeft,
+          props.isBounded ? null : theme[themeId].nowrap
         ])}
+        theme={theme}
         isOpeningUpward={props.isOpeningUpward}
         skin={BubbleSkin}
         isTransparent={props.isTransparent}

@@ -11,8 +11,8 @@ export default props => (
     {...pickDOMProps(props)}
     className={classnames([
       props.className,
-      props.theme.root,
-      props.disabled ? props.theme.disabled : null
+      props.theme[props.themeId].root,
+      props.disabled ? props.theme[props.themeId].disabled : null
     ])}
   >
     {props.label}

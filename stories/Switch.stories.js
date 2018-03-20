@@ -15,12 +15,13 @@ import SimpleTheme from '../source/themes/simple';
 import CustomSwitchTheme from './theme-customizations/Switch.custom.scss';
 
 // theme API
-import { SWITCH_THEME_API } from '../source/themes/API';
+import { IDENTIFIERS, SWITCH_THEME_API } from '../source/themes/API';
 
 // theme overrides
 import themeOverrides from './theme-overrides/customSwitch.scss';
 
 storiesOf('Switch', module)
+
   .addDecorator(story => {
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
@@ -31,14 +32,14 @@ storiesOf('Switch', module)
       <Checkbox
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
-        themeAPI={SWITCH_THEME_API}
+        themeId={IDENTIFIERS.SWITCH}
         skin={SwitchSkin}
       />
     ))
   )
 
   .add('disabled', withState({ checked: false }, store => (
-      <Checkbox disabled themeAPI={SWITCH_THEME_API} skin={SwitchSkin} />
+      <Checkbox disabled themeId={IDENTIFIERS.SWITCH} skin={SwitchSkin} />
     ))
   )
 
@@ -47,7 +48,7 @@ storiesOf('Switch', module)
         label="My switch"
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
-        themeAPI={SWITCH_THEME_API}
+        themeId={IDENTIFIERS.SWITCH}
         skin={SwitchSkin}
       />
     ))
@@ -59,7 +60,7 @@ storiesOf('Switch', module)
         label="My switch"
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
-        themeAPI={SWITCH_THEME_API}
+        themeId={IDENTIFIERS.SWITCH}
         skin={SwitchSkin}
       />
     ))
@@ -72,20 +73,20 @@ storiesOf('Switch', module)
                were written down in a secure place"
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
-        themeAPI={SWITCH_THEME_API}
+        themeId={IDENTIFIERS.SWITCH}
         skin={SwitchSkin}
       />
     ))
   )
 
-  .add('composed theme', withState({ checked: false }, store => (
+  .add('theme overrides', withState({ checked: false }, store => (
       <div style={{ margin: '15px' }}>
         <Checkbox
-          themeOverrides={themeOverrides}
-          label="custom switch"
+          themeId={IDENTIFIERS.SWITCH}
+          themeOverrides={{ [IDENTIFIERS.SWITCH]: themeOverrides }}
+          label="theme override"
           checked={store.state.checked}
           onChange={() => store.set({ checked: !store.state.checked })}
-          themeAPI={SWITCH_THEME_API}
           skin={SwitchSkin}
         />
       </div>
@@ -95,11 +96,11 @@ storiesOf('Switch', module)
   .add('custom theme', withState({ checked: false }, store => (
       <div style={{ margin: '15px' }}>
         <Checkbox
-          theme={CustomSwitchTheme}
-          label="custom switch"
+          themeId={IDENTIFIERS.SWITCH}
+          theme={{ [IDENTIFIERS.SWITCH]: CustomSwitchTheme }}
+          label="custom theme"
           checked={store.state.checked}
           onChange={() => store.set({ checked: !store.state.checked })}
-          themeAPI={SWITCH_THEME_API}
           skin={SwitchSkin}
         />
       </div>

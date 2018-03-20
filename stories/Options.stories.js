@@ -13,6 +13,7 @@ import { AutocompleteSkin, OptionsSkin, SelectSkin } from '../source/skins/simpl
 // themes
 import SimpleTheme from '../source/themes/simple';
 import CustomOptionsTheme from './theme-customizations/Options.custom.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 // constants
 const OPTIONS_COLLECTION = [
@@ -35,7 +36,7 @@ storiesOf('Options', module)
 
   // ====== Stories ======
 
-  .add('Options - combined with Input to construct Select', withState({ value: '' }, store => (
+  .add('combined with Input to construct Select', withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -45,7 +46,7 @@ storiesOf('Options', module)
     ))
   )
 
-  .add('Options - combined with Input to construct Autocomplete', withState({ selectedOpts: [] }, store => (
+  .add('combined with Input to construct Autocomplete', withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label='Recovery phrase'
         options={MNEMONIC_WORDS}
@@ -59,13 +60,13 @@ storiesOf('Options', module)
     ))
   )
 
-  .add('Options - custom theme', withState({ value: '' }, store => (
+  .add('custom theme', withState({ value: '' }, store => (
       <Options
+        theme={{ [IDENTIFIERS.OPTIONS]: CustomOptionsTheme }}
         isOpen={true}
         options={OPTIONS_COLLECTION}
         isOpeningUpward={false}
         noResults={false}
-        theme={CustomOptionsTheme}
         skin={OptionsSkin}
       />
     ))

@@ -11,9 +11,9 @@ export default props => (
     ref={props.inputRef}
     {...pickDOMProps(props)}
     className={classnames([
-      props.theme.input,
-      props.disabled ? props.theme.disabled : null,
-      props.error ? props.theme.errored : null
+      props.theme[props.themeId].input,
+      props.disabled ? props.theme[props.themeId].disabled : null,
+      props.error ? props.theme[props.themeId].errored : null
     ])}
     readOnly={props.readOnly}
   />

@@ -13,6 +13,7 @@ import {
   removeEventsFromDocument,
   targetIsDescendant, pickTheme
 } from '../utils';
+import THEME_API from '../themes/API';
 
 class Options extends Component {
   static propTypes = {
@@ -28,7 +29,7 @@ class Options extends Component {
     selectedOptionValue: string,
     skin: func.isRequired,
     theme: object,
-    themeAPI: object,
+    themeId: string,
     themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
@@ -38,7 +39,7 @@ class Options extends Component {
     noResultsMessage: 'No results',
     resetOnClose: false,
     theme: null,
-    themeAPI: { ...OPTIONS_THEME_API },
+    themeId: IDENTIFIERS.OPTIONS,
     themeOverrides: {}
   };
 
@@ -48,11 +49,9 @@ class Options extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, themeAPI } = props;
-    const theme = pickTheme(IDENTIFIERS.OPTIONS, props, context);
     this.state = {
-      composedTheme: composeTheme(theme, themeOverrides, themeAPI),
-      isOpen: this.props.isOpen,
+      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
+      isOpen: props.isOpen,
       highlightedOptionIndex: 0
     };
   }
@@ -250,7 +249,6 @@ class Options extends Component {
       skin: OptionsSkin,
       theme,
       themeOverrides,
-      themeAPI,
       onChange,
       ...rest
     } = this.props;

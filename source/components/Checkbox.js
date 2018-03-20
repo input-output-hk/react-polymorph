@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { bool, func, object } from 'prop-types';
+import { string, bool, func, object } from 'prop-types';
 
 // Checkbox theme API
-import THEME_APIS, { IDENTIFIERS } from '../themes/API';
+import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // import utility functions
 import { StringOrElement, composeTheme, pickTheme } from '../utils';
@@ -16,7 +16,7 @@ class Checkbox extends Component {
     onFocus: func,
     skin: func.isRequired,
     theme: object,
-    themeIdentifier: String,
+    themeId: string,
     themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
 
@@ -24,7 +24,7 @@ class Checkbox extends Component {
     checked: false,
     disabled: false,
     theme: null,
-    themeIdentifier: IDENTIFIERS.CHECKBOX,
+    themeId: IDENTIFIERS.CHECKBOX,
     themeOverrides: {}
   };
 
@@ -34,10 +34,8 @@ class Checkbox extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, themeIdentifier } = props;
-    const theme = pickTheme(themeIdentifier, props, context);
     this.state = {
-      composedTheme: composeTheme(theme, themeOverrides, THEME_APIS[themeIdentifier])
+      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API)
     };
   }
 
@@ -47,7 +45,6 @@ class Checkbox extends Component {
       skin: CheckboxSkin,
       theme,
       themeOverrides,
-      themeAPI,
       ...rest
     } = this.props;
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bool, func, object, arrayOf, shape, string } from 'prop-types';
 
 // import the Select component's theme API
-import { IDENTIFIERS, SELECT_THEME_API } from '../themes/API';
+import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // import the composeTheme utility function
 import { pickTheme, composeTheme } from '../utils';
@@ -24,7 +24,7 @@ class Select extends Component {
     placeholder: string,
     skin: func.isRequired,
     theme: object,
-    themeAPI: object,
+    themeId: string,
     themeOverrides: object, // custom css/scss from user that adheres to component's theme API
     value: string
   };
@@ -35,7 +35,7 @@ class Select extends Component {
     isOpeningUpward: false,
     theme: null,
     themeOverrides: {},
-    themeAPI: { ...SELECT_THEME_API },
+    themeId: IDENTIFIERS.SELECT,
     value: ''
   };
 
@@ -45,11 +45,9 @@ class Select extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, themeAPI } = props;
-    const theme = pickTheme(IDENTIFIERS.SELECT, props, context);
     this.state = {
       isOpen: false,
-      composedTheme: composeTheme(theme, themeOverrides, themeAPI)
+      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API)
     };
   }
 
@@ -94,7 +92,6 @@ class Select extends Component {
       skin: SelectSkin,
       theme,
       themeOverrides,
-      themeAPI,
       ...rest
     } = this.props;
 

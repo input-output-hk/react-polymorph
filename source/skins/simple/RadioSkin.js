@@ -6,33 +6,36 @@ import classnames from 'classnames';
 // internal utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => (
-  <div
-    className={classnames([
-      props.className,
-      props.theme.root,
-      props.disabled ? props.theme.disabled : null,
-      props.selected ? props.theme.selected : null
-    ])}
-    onClick={event => {
-      if (!props.disabled && props.onChange) {
-        props.onChange(!props.selected, event);
-      }
-    }}
-  >
-    <input
-      {...pickDOMProps(props)}
-      className={props.theme.input}
-      type="radio"
-    />
+export default props => {
+  const { theme, themeId, className, disabled, selected, onChange, label } = props;
+  return (
     <div
       className={classnames([
-        props.theme.circle,
-        props.selected ? props.theme.selected : null
+        className,
+        theme[themeId].root,
+        disabled ? theme[themeId].disabled : null,
+        selected ? theme[themeId].selected : null
       ])}
-    />
-    {props.label ? (
-      <label className={props.theme.label}>{props.label}</label>
-    ) : null}
-  </div>
-);
+      onClick={event => {
+        if (!disabled && onChange) {
+          onChange(!selected, event);
+        }
+      }}
+    >
+      <input
+        {...pickDOMProps(props)}
+        className={theme[themeId].input}
+        type="radio"
+      />
+      <div
+        className={classnames([
+          theme[themeId].circle,
+          selected ? theme[themeId].selected : null
+        ])}
+      />
+      {label ? (
+        <label className={theme[themeId].label}>{label}</label>
+      ) : null}
+    </div>
+  )
+};

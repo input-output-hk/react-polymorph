@@ -16,6 +16,7 @@ import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
 
 // custom styles
 import themeOverrides from './theme-overrides/customCheckbox.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Checkbox', module)
   .addDecorator(story => {
@@ -79,9 +80,9 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add('composed theme', withState({ checked: false }, store => (
+  .add('theme overrides', withState({ checked: false }, store => (
       <Checkbox
-        themeOverrides={themeOverrides}
+        themeOverrides={{ [IDENTIFIERS.CHECKBOX]: themeOverrides }}
         label="check here"
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
@@ -92,7 +93,7 @@ storiesOf('Checkbox', module)
 
   .add('custom theme', withState({ checked: true }, store => (
       <Checkbox
-        theme={CustomCheckboxTheme}
+        theme={{ [IDENTIFIERS.CHECKBOX]: CustomCheckboxTheme }}
         label="check here"
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}

@@ -12,6 +12,7 @@ import { BubbleSkin } from './';
 export default props => {
   const {
     theme,
+    themeId,
     options,
     optionRenderer,
     isOpeningUpward,
@@ -32,11 +33,11 @@ export default props => {
   return (
     <Bubble
       className={classnames([
-        theme.options,
-        isOpen ? theme.isOpen : null,
-        isOpeningUpward ? theme.openUpward : null,
+        theme[themeId].options,
+        isOpen ? theme[themeId].isOpen : null,
+        isOpeningUpward ? theme[themeId].openUpward : null,
         isFirstOptionHighlighted && !noResults
-          ? theme.firstOptionHighlighted
+          ? theme[themeId].firstOptionHighlighted
           : null
       ])}
       ref={optionsRef}
@@ -46,15 +47,15 @@ export default props => {
       isHidden={!isOpen}
       isFloating
     >
-      <ul className={theme.ul}>
+      <ul className={theme[themeId].ul}>
         {!noResults ? (
           sortedOptions.map((option, index) => (
             <li
               key={index}
               className={classnames([
-                theme.option,
-                isHighlightedOption(index) ? theme.highlightedOption : null,
-                option.isDisabled ? theme.disabledOption : null
+                theme[themeId].option,
+                isHighlightedOption(index) ? theme[themeId].highlightedOption : null,
+                option.isDisabled ? theme[themeId].disabledOption : null
               ])}
               onClick={event => handleClickOnOption(option, event)}
               onMouseEnter={() => setHighlightedOptionIndex(index)}
@@ -65,7 +66,7 @@ export default props => {
             </li>
           ))
         ) : (
-          <li className={theme.option}>{noResultsMessage}</li>
+          <li className={theme[themeId].option}>{noResultsMessage}</li>
         )}
       </ul>
     </Bubble>

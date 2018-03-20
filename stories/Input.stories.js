@@ -17,8 +17,10 @@ import CustomInputTheme from './theme-customizations/Input.custom.scss';
 
 // themeOverrides
 import themeOverrides from './theme-overrides/customInput.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Input', module)
+
   .addDecorator(story => {
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
@@ -176,14 +178,14 @@ storiesOf('Input', module)
     ))
   )
 
-  .add('composed theme', withState({ value: '' }, store => (
+  .add('theme overrides', withState({ value: '' }, store => (
       <FormField
-        label="Composed theme"
+        label="Theme overrides"
         skin={FormFieldSkin}
         render={props => (
           <Input
             {...props}
-            themeOverrides={themeOverrides}
+            themeOverrides={{ [IDENTIFIERS.INPUT]: themeOverrides }}
             value={store.state.value}
             placeholder="type here..."
             onChange={(value, event) => store.set({ value })}
@@ -201,7 +203,7 @@ storiesOf('Input', module)
         render={props => (
           <Input
             {...props}
-            theme={CustomInputTheme}
+            theme={{ [IDENTIFIERS.INPUT]: CustomInputTheme }}
             value={store.state.value}
             placeholder="type here..."
             onChange={(value, event) => store.set({ value })}

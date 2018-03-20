@@ -30,55 +30,6 @@ $bubble-shadow: none !default;
   right: 0;
   z-index: 1;
 
-  // ==== STATE: isHidden ====
-
-  &.isHidden {
-    display: none;
-  }
-
-  // ==== STATE: isFloating ====
-
-  &.isFloating {
-    overflow: visible;
-    width: 100%;
-    position: fixed;
-    z-index: 99;
-    left: inherit;
-    right: inherit;
-  }
-
-  // ==== STATE: openUpward ====
-
-  &.openUpward {
-    bottom: $bubble-distance;
-
-    .bubble {
-      bottom: 0;
-    }
-  }
-
-  &:not(.openUpward) {
-    top: $bubble-distance;
-
-    .bubble {
-      top: 0;
-    }
-  }
-
-  // ==== STATE: isTransparent ===
-
-  &.transparent .bubble {
-    background-color: $bubble-bg-color-transparent;
-    color: $bubble-font-color-transparent;
-    border: $bubble-border-transparent;
-  }
-
-  &:not(.transparent) .bubble {
-    background-color: $bubble-bg-color;
-    color: $bubble-font-color;
-    border: $bubble-border;
-  }
-
   // ==== ARROW ====
   // The arrow is referred to as [data-bubble-arrow] so that the component doesn't have a high
   // specificity internally, allowing it to be overwritten externally
@@ -125,4 +76,53 @@ $bubble-shadow: none !default;
   position: absolute;
   min-width: 100%;
   box-sizing: border-box;
+}
+
+// ==== STATE: isTransparent ===
+
+.transparent .bubble {
+  background-color: $bubble-bg-color-transparent;
+  color: $bubble-font-color-transparent;
+  border: $bubble-border-transparent;
+}
+
+.root:not(.transparent) .bubble {
+  background-color: $bubble-bg-color;
+  color: $bubble-font-color;
+  border: $bubble-border;
+}
+
+// ==== STATE: openUpward ====
+
+.openUpward {
+  bottom: $bubble-distance;
+
+  .bubble {
+    bottom: 0;
+  }
+}
+
+.root:not(.openUpward) {
+  top: $bubble-distance;
+
+  .bubble {
+    top: 0;
+  }
+}
+
+// ==== STATE: isHidden ====
+
+.isHidden {
+  display: none;
+}
+
+// ==== STATE: isFloating ====
+
+.isFloating {
+  overflow: visible;
+  width: 100%;
+  position: fixed;
+  z-index: 99;
+  left: inherit;
+  right: inherit;
 }

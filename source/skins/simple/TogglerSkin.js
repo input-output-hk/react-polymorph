@@ -6,42 +6,45 @@ import classnames from 'classnames';
 // import utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => (
-  <div
-    className={classnames([
-      props.className,
-      props.theme.root,
-      props.disabled ? props.theme.disabled : null
-    ])}
-    onClick={event => {
-      if (!props.disabled && props.onChange) {
-        props.onChange(!props.checked, event);
-      }
-    }}
-  >
-    <input
-      {...pickDOMProps(props)}
-      className={props.theme.input}
-      readOnly
-      type="checkbox"
-    />
-    <div className={props.theme.toggler}>
-      <span
-        className={classnames([
-          props.theme.label,
-          props.checked ? props.theme.checked : null
-        ])}
-      >
-        {props.labelLeft}
-      </span>
-      <span
-        className={classnames([
-          props.theme.label,
-          props.checked ? null : props.theme.checked
-        ])}
-      >
-        {props.labelRight}
-      </span>
+export default props => {
+  const { theme, themeId } = props;
+  return (
+    <div
+      className={classnames([
+        props.className,
+        theme[themeId].root,
+        props.disabled ? theme[themeId].disabled : null
+      ])}
+      onClick={event => {
+        if (!props.disabled && props.onChange) {
+          props.onChange(!props.checked, event);
+        }
+      }}
+    >
+      <input
+        {...pickDOMProps(props)}
+        className={theme[themeId].input}
+        readOnly
+        type="checkbox"
+      />
+      <div className={theme[themeId].toggler}>
+        <span
+          className={classnames([
+            theme[themeId].label,
+            props.checked ? theme[themeId].checked : null
+          ])}
+        >
+          {props.labelLeft}
+        </span>
+        <span
+          className={classnames([
+            theme[themeId].label,
+            props.checked ? null : theme[themeId].checked
+          ])}
+        >
+          {props.labelRight}
+        </span>
+      </div>
     </div>
-  </div>
-);
+  );
+}

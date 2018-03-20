@@ -15,8 +15,10 @@ import CustomButtonTheme from "./theme-customizations/Button.custom.scss";
 
 // custom styles & themeOverrides
 import themeOverrides from "./theme-overrides/customButton.scss";
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf("Button", module)
+
   .addDecorator(story => {
     return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
   })
@@ -29,10 +31,10 @@ storiesOf("Button", module)
     <Button disabled label="Button label" skin={ButtonSkin} />
   ))
 
-  .add("composed theme", () => (
+  .add("theme overrides", () => (
     <Button
       label="Composed theme"
-      themeOverrides={themeOverrides}
+      themeOverrides={{ [IDENTIFIERS.BUTTON]: themeOverrides }}
       skin={ButtonSkin}
     />
   ))
@@ -40,7 +42,7 @@ storiesOf("Button", module)
   .add("custom theme", () => (
     <Button
       label="Custom theme"
-      theme={CustomButtonTheme}
+      theme={{ [IDENTIFIERS.BUTTON]: CustomButtonTheme }}
       skin={ButtonSkin}
     />
   ));
