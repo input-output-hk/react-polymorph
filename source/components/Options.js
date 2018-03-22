@@ -49,8 +49,11 @@ class Options extends Component {
 
   constructor(props, context) {
     super(props);
+
+    const theme = props.theme && props.theme[props.themeId] ? props.theme : null;
+
     this.state = {
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
+      composedTheme: composeTheme(theme || context.theme, props.themeOverrides, THEME_API),
       isOpen: props.isOpen,
       highlightedOptionIndex: 0
     };
