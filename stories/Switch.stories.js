@@ -14,11 +14,9 @@ import { SwitchSkin } from '../source/skins/simple';
 import SimpleTheme from '../source/themes/simple';
 import CustomSwitchTheme from './theme-customizations/Switch.custom.scss';
 
-// theme API
-import { IDENTIFIERS, SWITCH_THEME_API } from '../source/themes/API';
-
-// theme overrides
+// custom styles & theme overrides
 import themeOverrides from './theme-overrides/customSwitch.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Switch', module)
 

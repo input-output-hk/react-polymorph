@@ -26,6 +26,8 @@ import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.
 // custom styles & theme overrides
 import styles from './Autocomplete.stories.scss';
 import themeOverrides from './theme-overrides/customAutocomplete.scss';
+
+// constants
 import { IDENTIFIERS } from '../source/themes/API';
 
 const OPTIONS = [

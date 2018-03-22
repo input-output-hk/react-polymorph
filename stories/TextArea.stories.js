@@ -15,7 +15,7 @@ import { TextAreaSkin, FormFieldSkin } from '../source/skins/simple';
 import SimpleTheme from '../source/themes/simple';
 import CustomTextAreaTheme from './theme-customizations/TextArea.custom.scss';
 
-// themeOverrides
+// theme overrides and identifiers
 import themeOverrides from './theme-overrides/customTextarea.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 

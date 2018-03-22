@@ -14,10 +14,9 @@ import { TogglerSkin } from '../source/skins/simple';
 import SimpleTheme from '../source/themes/simple';
 import CustomTogglerTheme from './theme-customizations/Toggler.custom.scss';
 
-// theme API
-import { IDENTIFIERS } from '../source/themes/API';
-
+// theme overrides and identifiers
 import themeOverrides from './theme-overrides/customToggler.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Toggler', module)
   .addDecorator(story => {

@@ -13,7 +13,7 @@ import { TooltipSkin } from '../source/skins/simple';
 import SimpleTheme from '../source/themes/simple';
 import CustomBubbleTheme from './theme-customizations/Bubble.custom.scss';
 
-// custom styles & themeOverrides
+// custom styles & theme overrides
 import styles from './Tooltip.stories.scss';
 import themeOverrides from './theme-overrides/customTooltipBubble.scss';
 import { IDENTIFIERS } from '../source/themes/API';
