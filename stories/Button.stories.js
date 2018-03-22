@@ -33,7 +33,7 @@ storiesOf("Button", module)
 
   .add("theme overrides", () => (
     <Button
-      label="Composed theme"
+      label="theme overrides"
       themeOverrides={{ [IDENTIFIERS.BUTTON]: themeOverrides }}
       skin={ButtonSkin}
     />
