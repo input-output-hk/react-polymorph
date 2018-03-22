@@ -3,7 +3,7 @@ import { bool, func, object, array, string } from 'prop-types';
 import ReactDOM from 'react-dom';
 
 // Options theme API
-import { IDENTIFIERS, OPTIONS_THEME_API } from '../themes/API';
+import { IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
 import {
@@ -11,7 +11,7 @@ import {
   composeTheme,
   addEventsToDocument,
   removeEventsFromDocument,
-  targetIsDescendant, pickTheme
+  targetIsDescendant
 } from '../utils';
 import THEME_API from '../themes/API';
 

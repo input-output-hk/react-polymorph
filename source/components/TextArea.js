@@ -8,7 +8,7 @@ import { isString, flow } from 'lodash';
 import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // import utility functions
-import { StringOrElement, composeTheme, pickTheme } from '../utils';
+import { StringOrElement, composeTheme } from '../utils';
 
 class TextArea extends Component {
   static propTypes = {

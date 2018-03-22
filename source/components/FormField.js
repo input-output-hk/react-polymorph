@@ -5,7 +5,7 @@ import { string, bool, func, object } from 'prop-types';
 import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // import utility functions
-import { StringOrElement, composeTheme, pickTheme } from '../utils';
+import { StringOrElement, composeTheme } from '../utils';
 
 class FormField extends Component {
   static propTypes = {
@@ -34,7 +34,7 @@ class FormField extends Component {
     super(props);
 
     const theme = props.theme && props.theme[props.themeId] ? props.theme : null;
-    
+
     this.state = {
       error: '',
       composedTheme: composeTheme(theme || context.theme, props.themeOverrides, THEME_API),
