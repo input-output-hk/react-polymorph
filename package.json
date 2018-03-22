@@ -95,7 +95,7 @@
   },
   "scripts": {
     "js": "babel source -d lib -s",
-    "build": "cross-env npm run clean && npm run js && npm run sass",
+    "build": "cross-env npm run clean && npm run sass && npm run js",
     "clean": "rimraf ./lib",
     "prebuild": "npm run clean",
     "prepublishOnly": "npm run build",
@@ -111,8 +111,6 @@
     ],
     "plugins": [
       "transform-object-rest-spread",
-      "transform-flow-strip-types",
-      "transform-decorators-legacy",
       "transform-class-properties",
       "lodash"
     ]
