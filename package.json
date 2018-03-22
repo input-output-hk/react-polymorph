@@ -101,7 +101,7 @@
     "prepublishOnly": "npm run build",
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook",
-    "postinstall": "postinstall-build lib --only-as-dependency",
+    "postinstall": "postinstall-build lib --only-as-dependency --avoid-prune",
     "watch": "nodemon npm run js && npm run sass"
   },
   "babel": {
