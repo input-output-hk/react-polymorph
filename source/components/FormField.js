@@ -32,9 +32,12 @@ class FormField extends Component {
 
   constructor(props, context) {
     super(props);
+
+    const theme = props.theme && props.theme[props.themeId] ? props.theme : null;
+    
     this.state = {
       error: '',
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
+      composedTheme: composeTheme(theme || context.theme, props.themeOverrides, THEME_API),
     };
   }
 
