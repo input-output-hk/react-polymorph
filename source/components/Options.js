@@ -3,7 +3,7 @@ import { bool, func, object, array, string } from 'prop-types';
 import ReactDOM from 'react-dom';
 
 // Options theme API
-import { IDENTIFIERS, OPTIONS_THEME_API } from '../themes/API';
+import { IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
 import {
@@ -11,7 +11,7 @@ import {
   composeTheme,
   addEventsToDocument,
   removeEventsFromDocument,
-  targetIsDescendant, pickTheme
+  targetIsDescendant
 } from '../utils';
 import THEME_API from '../themes/API';
 
@@ -49,8 +49,11 @@ class Options extends Component {
 
   constructor(props, context) {
     super(props);
+
+    const theme = props.theme && props.theme[props.themeId] ? props.theme : null;
+
     this.state = {
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
+      composedTheme: composeTheme(theme || context.theme, props.themeOverrides, THEME_API),
       isOpen: props.isOpen,
       highlightedOptionIndex: 0
     };

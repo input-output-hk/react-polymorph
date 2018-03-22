@@ -4,7 +4,7 @@ import { string, bool, func, object } from 'prop-types';
 import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
-import { StringOrElement, composeTheme, pickTheme } from '../utils';
+import { StringOrElement, composeTheme } from '../utils';
 
 class Button extends Component {
   static propTypes = {

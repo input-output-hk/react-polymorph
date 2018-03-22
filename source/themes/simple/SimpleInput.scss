@@ -27,6 +27,10 @@ $input-errored-border: $theme-color-error;
   padding: $input-padding;
   width: $input-width;
 
+  &.errored {
+    border-color: $input-errored-border;
+  }
+
   &:focus {
     border-color: $input-border-focus-color;
     outline: none;
@@ -41,9 +45,7 @@ $input-errored-border: $theme-color-error;
 
 // BEGIN SPECIAL STATES ---------- //
 
-.errored {
-  border: 1px solid $input-errored-border;
-}
+.errored {}
 
 .disabled {
   background-color: $input-disabled-bg-color;

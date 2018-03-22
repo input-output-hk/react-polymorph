@@ -16,9 +16,13 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
   flex-direction: row;
   align-items: center;
   position: relative;
-
   &:hover {
     cursor: pointer;
+  }
+  &.disabled {
+    &:hover, .label:hover {
+      cursor: default;
+    }
   }
 }
 
@@ -61,11 +65,6 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
 // BEGIN SPECIAL STATES ---------- //
 
 .disabled {
-  .root:hover,
-  .label:hover {
-    cursor: default;
-  }
-
   .label {
     color: $radio-label-disabled-color;
   }
