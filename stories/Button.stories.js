@@ -13,7 +13,7 @@ import { ButtonSkin } from "../source/skins/simple";
 import SimpleTheme from "../source/themes/simple";
 import CustomButtonTheme from "./theme-customizations/Button.custom.scss";
 
-// custom styles & themeOverrides
+// theme overrides and identifiers
 import themeOverrides from "./theme-overrides/customButton.scss";
 import { IDENTIFIERS } from '../source/themes/API';
 
@@ -33,7 +33,7 @@ storiesOf("Button", module)
 
   .add("theme overrides", () => (
     <Button
-      label="Composed theme"
+      label="theme overrides"
       themeOverrides={{ [IDENTIFIERS.BUTTON]: themeOverrides }}
       skin={ButtonSkin}
     />

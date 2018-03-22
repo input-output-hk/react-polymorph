@@ -8,7 +8,7 @@ import { flow } from 'lodash';
 import THEME_API, { IDENTIFIERS } from '../themes/API';
 
 // internal utility functions
-import { StringOrElement, composeTheme, pickTheme } from '../utils';
+import { StringOrElement, composeTheme } from '../utils';
 
 class NumericInput extends Component {
   static propTypes = {

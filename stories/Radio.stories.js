@@ -14,7 +14,7 @@ import { RadioSkin } from '../source/skins/simple';
 import SimpleTheme from '../source/themes/simple';
 import CustomRadioTheme from './theme-customizations/Radio.custom.scss';
 
-// custom styles & themeOverrides
+// custom styles & theme overrides
 import styles from './Radio.stories.scss';
 import themeOverrides from './theme-overrides/customRadio.scss';
 import { IDENTIFIERS } from '../source/themes/API';

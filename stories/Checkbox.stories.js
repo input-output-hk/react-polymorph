@@ -14,7 +14,7 @@ import { CheckboxSkin } from '../source/skins/simple';
 import SimpleTheme from '../source/themes/simple';
 import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
 
-// custom styles
+// custom styles & theme overrides
 import themeOverrides from './theme-overrides/customCheckbox.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 

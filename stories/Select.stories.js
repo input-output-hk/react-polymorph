@@ -22,9 +22,10 @@ import flagEngland from './images/gb.png';
 import flagSpain from './images/es.png';
 import flagThailand from './images/th.png';
 import flagUSA from './images/us.png';
-import { IDENTIFIERS } from '../source/themes/API';
 
 // constants
+import { IDENTIFIERS } from '../source/themes/API';
+
 const COUNTRIES = [
   { value: 'EN-gb', label: 'England' },
   { value: 'ES-es', label: 'Spain' },

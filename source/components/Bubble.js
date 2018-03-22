@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { string, bool, func, object } from 'prop-types';
-import { addEventsToDocument, pickTheme, removeEventsFromDocument } from '../utils';
+import { addEventsToDocument, removeEventsFromDocument } from '../utils';
 
 // Bubble theme API
 import THEME_API, { IDENTIFIERS } from '../themes/API';
