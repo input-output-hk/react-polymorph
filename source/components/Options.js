@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bool, func, object, array, string } from 'prop-types';
 import ReactDOM from 'react-dom';
+import classnames from 'classnames';
 
 // Options theme API
 import { IDENTIFIERS } from '../themes/API';
@@ -11,12 +12,14 @@ import {
   composeTheme,
   addEventsToDocument,
   removeEventsFromDocument,
-  targetIsDescendant
+  targetIsDescendant,
+  callAll
 } from '../utils';
 import THEME_API from '../themes/API';
 
 class Options extends Component {
   static propTypes = {
+    children: func, // added this
     isOpen: bool,
     isOpeningUpward: bool,
     noResults: bool,
@@ -50,10 +53,15 @@ class Options extends Component {
   constructor(props, context) {
     super(props);
 
-    const theme = props.theme && props.theme[props.themeId] ? props.theme : null;
+    const theme =
+      props.theme && props.theme[props.themeId] ? props.theme : null;
 
     this.state = {
-      composedTheme: composeTheme(theme || context.theme, props.themeOverrides, THEME_API),
+      composedTheme: composeTheme(
+        theme || context.theme,
+        props.themeOverrides,
+        THEME_API
+      ),
       isOpen: props.isOpen,
       highlightedOptionIndex: 0
     };
@@ -145,6 +153,27 @@ class Options extends Component {
     this.close();
   };
 
+  getOptionProps = ({ onClick, onMouseEnter, option, index, ...rest } = {}) => {
+    const { theme, themeId } = this.props;
+    const {
+      isHighlightedOption,
+      handleClickOnOption,
+      setHighlightedOptionIndex
+    } = this;
+
+    return {
+      className: classnames([
+        theme[themeId].option,
+        isHighlightedOption(index) ? theme[themeId].highlightedOption : null,
+        option.isDisabled ? theme[themeId].disabledOption : null
+      ]),
+      onClick: event => callAll(onClick, handleClickOnOption)(option, event),
+      onMouseEnter: () =>
+        callAll(onMouseEnter, setHighlightedOptionIndex)(index),
+      ...rest
+    };
+  };
+
   // ========= PRIVATE HELPERS =========
 
   _handleSelectionOnEnterKey = event => {
@@ -190,6 +219,7 @@ class Options extends Component {
   };
 
   _handleKeyDown = event => {
+    debugger;
     const highlightOptionIndex = this.state.highlightedOptionIndex;
     switch (event.keyCode) {
       case 9: // Select currently highlighted option on Tab key
@@ -268,6 +298,7 @@ class Options extends Component {
         isHighlightedOption={this.isHighlightedOption}
         handleClickOnOption={this.handleClickOnOption}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}
+        getOptionProps={this.getOptionProps}
         {...rest}
       />
     );

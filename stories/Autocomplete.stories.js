@@ -77,7 +77,9 @@ storiesOf('Autocomplete', module)
     />
   ))
 
-  .add('Enter mnemonics (9-word mnemonic) - not sorted', withState({ selectedOpts: [] }, store => (
+  .add(
+    'Enter mnemonics (9-word mnemonic) - not sorted',
+    withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
         options={OPTIONS}
@@ -91,7 +93,43 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add('Enter mnemonics (9-word mnemonic) - sorted with multiple same selections', withState({ selectedOpts: [] }, store => (
+  .add(
+    'Enter mnemonics (9-word mnemonic) - render prop',
+    withState({ selectedOpts: [] }, store => (
+      <Autocomplete
+        label="Recovery phrase"
+        options={OPTIONS}
+        placeholder="Enter mnemonic..."
+        sortAlphabetically={false}
+        multipleSameSelections={false}
+        maxSelections={9}
+        skin={AutocompleteSkin}
+        onChange={selectedOpts => store.set({ selectedOpts })}
+        render={({ Options }) => (
+          <Options>
+            {({ sortedOptions, getOptionProps }) =>
+              sortedOptions.map((option, index) => (
+                <li
+                  key={index}
+                  {...getOptionProps({
+                    onClick: (option, e) => console.log('Custom click handler'),
+                    option,
+                    index
+                  })}
+                >
+                  {option}
+                </li>
+              ))
+            }
+          </Options>
+        )}
+      />
+    ))
+  )
+
+  .add(
+    'Enter mnemonics (9-word mnemonic) - sorted with multiple same selections',
+    withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
         options={OPTIONS}
@@ -103,7 +141,8 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add('Enter mnemonics - (12-word mnemonic) 5 suggestions',
+  .add(
+    'Enter mnemonics - (12-word mnemonic) 5 suggestions',
     withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
@@ -117,7 +156,8 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add('Enter mnemonics - (12-word mnemonic) 5 suggestions - isOpeningUpward',
+  .add(
+    'Enter mnemonics - (12-word mnemonic) 5 suggestions - isOpeningUpward',
     withState({ selectedOpts: [] }, store => (
       <Autocomplete
         className={styles.customMargin}
@@ -133,7 +173,8 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add('Enter mnemonics - (12-word mnemonic) 5 suggestions and regex that allows only letters',
+  .add(
+    'Enter mnemonics - (12-word mnemonic) 5 suggestions and regex that allows only letters',
     withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
@@ -148,7 +189,9 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add('Enter mnemonics in Modal', withState({ isOpen: true, selectedOpts: [] }, store => (
+  .add(
+    'Enter mnemonics in Modal',
+    withState({ isOpen: true, selectedOpts: [] }, store => (
       <Modal
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick={false}
@@ -188,7 +231,7 @@ storiesOf('Autocomplete', module)
     return (
       <div>
         <Autocomplete
-          ref={(ref) => autocomplete = ref}
+          ref={ref => (autocomplete = ref)}
           label="Recovery phrase"
           options={OPTIONS}
           placeholder="Enter mnemonic..."
@@ -199,7 +242,9 @@ storiesOf('Autocomplete', module)
     );
   })
 
-  .add('composed theme', withState({ selectedOpts: [] }, store => (
+  .add(
+    'composed theme',
+    withState({ selectedOpts: [] }, store => (
       <Autocomplete
         themeOverrides={{ [IDENTIFIERS.AUTOCOMPLETE]: themeOverrides }}
         label="Recovery phrase"
@@ -214,7 +259,9 @@ storiesOf('Autocomplete', module)
     ))
   )
 
-  .add('custom theme', withState({ selectedOpts: [] }, store => (
+  .add(
+    'custom theme',
+    withState({ selectedOpts: [] }, store => (
       <Autocomplete
         theme={{ [IDENTIFIERS.AUTOCOMPLETE]: CustomAutocompleteTheme }}
         label="Custom Autocomplete theme"
@@ -227,5 +274,4 @@ storiesOf('Autocomplete', module)
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
-  )
-;
+  );

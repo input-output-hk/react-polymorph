@@ -6,9 +6,12 @@ import filterReactDomProps from 'filter-react-dom-props';
 const pickDOMProps = filterReactDomProps;
 
 // ensures that a prop passed to a component is either a string or element
-const StringOrElement = oneOfType([ string, element ]);
+const StringOrElement = oneOfType([string, element]);
+
+const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args));
 
 export default {
   pickDOMProps,
-  StringOrElement
+  StringOrElement,
+  callAll
 };

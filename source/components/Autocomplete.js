@@ -31,6 +31,7 @@ class Autocomplete extends Component {
     options: array,
     selectedOptions: array,
     placeholder: string,
+    render: func,
     skin: func.isRequired,
     sortAlphabetically: bool,
     theme: object,
@@ -57,13 +58,19 @@ class Autocomplete extends Component {
 
   constructor(props, context) {
     super(props);
-    const { themeOverrides, sortAlphabetically, options, selectedOptions } = props;
+    const {
+      themeOverrides,
+      sortAlphabetically,
+      options,
+      selectedOptions
+    } = props;
     const theme = props.theme || context.theme;
     this.state = {
       inputValue: '',
       error: '',
       selectedOptions: selectedOptions || [],
-      filteredOptions: sortAlphabetically && options ? options.sort() : options || [],
+      filteredOptions:
+        sortAlphabetically && options ? options.sort() : options || [],
       isOpen: false,
       composedTheme: composeTheme(theme, themeOverrides, THEME_API)
     };

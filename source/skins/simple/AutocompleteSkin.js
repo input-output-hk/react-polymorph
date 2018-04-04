@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
 // external libraries
-import _ from "lodash";
-import classnames from "classnames";
+import _ from 'lodash';
+import classnames from 'classnames';
 
 // components
-import { FormField, Options } from "../../components";
+import { FormField, Options as OptionsComponent } from '../../components';
 
 // skins
-import { FormFieldSkin, OptionsSkin } from "./";
+import { FormFieldSkin, OptionsSkin } from './';
 
 export default props => {
   const { label, error, theme, themeId } = props;
@@ -27,7 +27,7 @@ export default props => {
     props.selectedOptions.length < props.maxSelections;
 
   let placeholder =
-    !props.maxSelections || canMoreOptionsBeSelected ? props.placeholder : "";
+    !props.maxSelections || canMoreOptionsBeSelected ? props.placeholder : '';
 
   let selectedOptions =
     props.selectedOptions &&
@@ -61,6 +61,22 @@ export default props => {
     </div>
   );
 
+  const Options = userProps => (
+    <OptionsComponent
+      isOpen={props.isOpen}
+      options={filteredAndLimitedOptions}
+      isOpeningUpward={props.isOpeningUpward}
+      onChange={props.handleChange}
+      onClose={props.closeOptions}
+      resetOnClose
+      noResults={!props.filteredOptions.length}
+      noResultsMessage={props.noResultsMessage}
+      skin={OptionsSkin}
+      theme={theme}
+      {...userProps}
+    />
+  );
+
   return (
     <div className={props.className} ref={props.rootRef}>
       <FormField
@@ -88,18 +104,11 @@ export default props => {
                 {autocompleteContent}
               </div>
 
-              <Options
-                isOpen={props.isOpen}
-                options={filteredAndLimitedOptions}
-                isOpeningUpward={props.isOpeningUpward}
-                onChange={props.handleChange}
-                onClose={props.closeOptions}
-                resetOnClose
-                noResults={!props.filteredOptions.length}
-                noResultsMessage={props.noResultsMessage}
-                skin={OptionsSkin}
-                theme={theme}
-              />
+              {/*
+                If user passes a render func, call it with Options as a param,
+                otherwise render Options directly
+              */}
+              {props.render ? props.render({ Options }) : <Options />}
             </div>
           );
         }}
