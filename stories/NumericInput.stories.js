@@ -14,7 +14,7 @@ import { FormFieldSkin, InputSkin } from '../source/skins/simple';
 import SimpleTheme from '../source/themes/simple';
 import CustomInputTheme from './theme-customizations/Input.custom.scss';
 
-// themeOverrides
+// theme overrides and identifiers
 import themeOverrides from './theme-overrides/customInput.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 

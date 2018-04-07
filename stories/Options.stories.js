@@ -13,9 +13,10 @@ import { AutocompleteSkin, OptionsSkin, SelectSkin } from '../source/skins/simpl
 // themes
 import SimpleTheme from '../source/themes/simple';
 import CustomOptionsTheme from './theme-customizations/Options.custom.scss';
-import { IDENTIFIERS } from '../source/themes/API';
 
 // constants
+import { IDENTIFIERS } from '../source/themes/API';
+
 const OPTIONS_COLLECTION = [
   { value: 'EN-gb', label: 'England' },
   { value: 'ES-es', label: 'Spain' },
