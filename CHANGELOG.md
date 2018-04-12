@@ -15,6 +15,16 @@ Major breaking changes due to large refactoring of component architecture:
 
 ## Features
 
+* Implements React's new context API available in react & react-dom v16.3.0^
+
+* Implements new ref forwarding API for use with Autocomplete's clear feature.
+
+* New context API allows for setting the default theme of every component to SimpleTheme (see withTheme.js)
+
+* Adds renderSelections & renderOptions (render prop architecture) to Autocomplete for delegating custom rendering to the user while still giving the user access to the the component's logic and styles. (think "writing a custom skin on the fly")
+
+* Adds render prop to Options component
+
 * Add Autocomplete clear feature [PR 49](https://github.com/input-output-hk/react-polymorph/pull/49)
 
 * Implements a theme API for each component. This is a plain object which exposes the shape of a component's theme. Each property on the theme API object corresponds with a class name assigned to an element within the component's skin and a class definition within the component's theme.
