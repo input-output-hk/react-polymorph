@@ -21,7 +21,7 @@ Major breaking changes due to large refactoring of component architecture:
 
 * New context API allows for setting the default theme of every component to SimpleTheme (see withTheme.js)
 
-* Adds renderSelections & renderOptions (render prop architecture) to Autocomplete for delegating custom rendering to the user while still giving the user access to the the component's logic and styles. (think "writing a custom skin on the fly")
+* Adds renderSelections & renderOptions (render prop architecture) to Autocomplete for delegating custom rendering to the user while still giving the user access to the the component's logic and styles. (think "writing a custom skin on the fly", see Autocomplete stories).
 
 * Adds render prop to Options component
 
@@ -32,8 +32,6 @@ Major breaking changes due to large refactoring of component architecture:
 * Adds ThemeProvider HOC for applying a theme to all its nested react-polymorph children. ThemeProvider exonerates the user from explicitly declaring theme as a prop on every instantiated component. A complete theme, an object containing full theme definitions for every component in the library, may also be passed to ThemeProvider. The complete theme object may be deconstructed to contain only the necessary theme definitions used by the components nested within a particular instance of ThemeProvider, yet deconstruction is not required.
 
 * Adds themeOverrides as an optional prop on ThemeProvider and on all components within the library. themeOverrides composes the user's custom css/scss with the component's base theme. This automatic composition saves the user from the tedium of manually piecing together custom styles with those of the component's theme that the user wishes to retain, yet themeOverrides is flexible enough to restyle a component's theme in a nontrivial way. themeOverrides may be passed directly to one instance of a component or passed to all instances nested within ThemeProvider via context. This composition of styles relies on css-modules.
-
-* Adds ThemeProvider to all stories.
 
 * Adds a composed theme story to most component stories to exemplify the relationship between ThemeProvider and themeOverrides.
 
