@@ -1,30 +1,25 @@
-import React, { Component } from 'react';
-import { object, string, element } from 'prop-types';
+import React, { Component } from "react";
+import { ThemeContext } from "../themes/ThemeContext";
+import { object, string, element } from "prop-types";
 
 // external libraries
-import _ from 'lodash';
+import _ from "lodash";
 
 // imports the Root Theme API object which specifies the shape
 // of a complete theme for every component in this library, used in this.composeLibraryTheme
-import ROOT_THEME_API from '../themes/API';
+import ROOT_THEME_API from "../themes/API";
 
 // internal utility functions
-import { composeTheme } from '../utils';
+import { composeTheme } from "../utils";
 
 class ThemeProvider extends Component {
   static propTypes = {
-    children: element,
     theme: object,
     themeOverrides: object // custom css/scss from user that adheres to shape of ROOT_THEME_API
   };
 
   static defaultProps = {
-    theme: { ...ROOT_THEME_API },
     themeOverrides: {}
-  };
-
-  static childContextTypes = {
-    theme: object
   };
 
   constructor(props) {
@@ -33,42 +28,27 @@ class ThemeProvider extends Component {
     const { theme, themeOverrides } = props;
 
     this.state = {
-      composedTheme: this.composeLibraryTheme(
-        theme,
-        themeOverrides,
-        ROOT_THEME_API
-      )
+      theme: this.composeLibraryTheme(theme, themeOverrides, ROOT_THEME_API),
+      ROOT_THEME_API
     };
   }
 
-  getChildContext() {
-    const { composedTheme } = this.state;
-
-    return {
-      theme: { ...composedTheme }
-    };
-  }
-
-  // prevents frequent rerenders of ThemeProvider's children by
-  // checking if theme and/or themeOverrides props have changed
-  componentWillReceiveProps(nextProps) {
-    const { theme, themeOverrides } = nextProps;
-
-    const changedProps = _.pickBy(
-      { theme, themeOverrides },
-      (value, key) => this.props[key] !== value
-    );
-
-    if (Object.keys(changedProps).length > 0) {
-      this.setState({
-        composedTheme: this.composeLibraryTheme(
-          theme,
-          themeOverrides,
-          ROOT_THEME_API
-        )
-      });
-    }
-  }
+  // // prevents frequent rerenders of ThemeProvider's children by
+  // // checking if theme and/or themeOverrides props have changed
+  // componentWillReceiveProps(nextProps) {
+  //   const { theme, themeOverrides } = nextProps;
+  //
+  //   const changedProps = _.pickBy(
+  //     { theme, themeOverrides },
+  //     (value, key) => this.props[key] !== value
+  //   );
+  //
+  //   if (Object.keys(changedProps).length > 0) {
+  //     this.setState({
+  //       composedTheme: this.composeLibraryTheme(theme, themeOverrides, ROOT_THEME_API)
+  //     });
+  //   }
+  // }
 
   // composeLibraryTheme returns a single obj containing theme definitions
   // for every component in the library.
@@ -110,10 +90,12 @@ class ThemeProvider extends Component {
     }
   };
 
-  // all children of ThemeProvider HOC are passed the theme object
-  // composed with custom styles passed via this.props.themeOverrides
   render() {
-    return <div>{this.props.children}</div>;
+    return (
+      <ThemeContext.Provider value={this.state}>
+        {this.props.children}
+      </ThemeContext.Provider>
+    );
   }
 }
 
