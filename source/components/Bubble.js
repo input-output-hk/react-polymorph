@@ -1,21 +1,31 @@
-import React, { Component } from 'react';
-import { string, bool, func, object } from 'prop-types';
-import { addEventsToDocument, removeEventsFromDocument } from '../utils';
-
-// Bubble theme API
-import THEME_API, { IDENTIFIERS } from '../themes/API';
+import React, { Component } from "react";
+import { string, bool, func, object, shape } from "prop-types";
+import { withTheme } from "../themes/withTheme";
 
 // internal utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import {
+  addEventsToDocument,
+  removeEventsFromDocument,
+  StringOrElement,
+  composeTheme,
+  addThemeId
+} from "../utils";
+
+// import constants
+import { IDENTIFIERS } from "../themes/API";
 
 class Bubble extends Component {
   static propTypes = {
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
     isHidden: bool,
     isFloating: bool,
     isOpeningUpward: bool,
     isTransparent: bool,
     skin: func.isRequired,
-    theme: object,
+    theme: object, // takes precedence over theme in context
     themeId: string,
     themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
@@ -30,15 +40,18 @@ class Bubble extends Component {
     themeOverrides: {}
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+
     this.state = {
-      position: null,
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API)
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      position: null
     };
   }
 
@@ -54,9 +67,9 @@ class Bubble extends Component {
     const { isFloating } = this.props;
     // Add listeners when the bubble
     if (isFloating && !nextProps.isHidden && !this._hasEventListeners) {
-      this._handleScrollEventListener('add');
+      this._handleScrollEventListener("add");
       addEventsToDocument(this._getDocumentEvents());
-      window.addEventListener('resize', this._updatePosition);
+      window.addEventListener("resize", this._updatePosition);
       this._hasEventListeners = true;
     }
   }
@@ -80,10 +93,10 @@ class Bubble extends Component {
     const rootNode = this.rootElement;
     const scrollableNode = this._getFirstScrollableParent(rootNode);
     if (scrollableNode) {
-      if (action === 'add') {
-        scrollableNode.addEventListener('scroll', this._updatePosition);
-      } else if (action === 'remove') {
-        scrollableNode.removeEventListener('scroll', this._updatePosition);
+      if (action === "add") {
+        scrollableNode.addEventListener("scroll", this._updatePosition);
+      } else if (action === "remove") {
+        scrollableNode.removeEventListener("scroll", this._updatePosition);
       }
     }
   };
@@ -91,8 +104,8 @@ class Bubble extends Component {
   _removeAllEventListeners() {
     if (this._hasEventListeners) {
       removeEventsFromDocument(this._getDocumentEvents());
-      this._handleScrollEventListener('remove');
-      window.removeEventListener('resize', this._updatePosition);
+      this._handleScrollEventListener("remove");
+      window.removeEventListener("resize", this._updatePosition);
       this._hasEventListeners = false;
     }
   }
@@ -136,12 +149,7 @@ class Bubble extends Component {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin: BubbleSkin,
-      theme,
-      themeOverrides,
-      ...rest
-    } = this.props;
+    const { skin: BubbleSkin, theme, themeOverrides, ...rest } = this.props;
 
     return (
       <BubbleSkin
@@ -154,4 +162,4 @@ class Bubble extends Component {
   }
 }
 
-export default Bubble;
+export default withTheme(Bubble);
