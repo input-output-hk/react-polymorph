@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { bool, func, object, array, string } from 'prop-types';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { bool, func, object, array, string, shape } from "prop-types";
+import { withTheme } from "../themes/withTheme";
 
-// Options theme API
-import { IDENTIFIERS } from '../themes/API';
+// external libraries
+import classnames from "classnames";
 
 // internal utility functions
 import {
@@ -11,12 +12,21 @@ import {
   composeTheme,
   addEventsToDocument,
   removeEventsFromDocument,
-  targetIsDescendant
-} from '../utils';
-import THEME_API from '../themes/API';
+  targetIsDescendant,
+  composeFunctions,
+  addThemeId
+} from "../utils";
+
+// import constants
+import { IDENTIFIERS } from "../themes/API";
 
 class Options extends Component {
   static propTypes = {
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
+    inputValue: string,
     isOpen: bool,
     isOpeningUpward: bool,
     noResults: bool,
@@ -25,9 +35,11 @@ class Options extends Component {
     onClose: func,
     options: array,
     optionRenderer: func,
+    render: func,
     resetOnClose: bool, // reset highlighted option on options close (e.g. in autocomplete)
     selectedOptionValue: string,
     skin: func.isRequired,
+    selectedOptions: array,
     theme: object,
     themeId: string,
     themeOverrides: object // custom css/scss from user that adheres to component's theme API
@@ -36,25 +48,25 @@ class Options extends Component {
   static defaultProps = {
     isOpen: false,
     isOpeningUpward: false,
-    noResultsMessage: 'No results',
+    noResultsMessage: "No results",
     resetOnClose: false,
     theme: null,
     themeId: IDENTIFIERS.OPTIONS,
     themeOverrides: {}
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
 
-    const theme = props.theme && props.theme[props.themeId] ? props.theme : null;
+    const { context, themeId, theme, themeOverrides, isOpen } = props;
 
     this.state = {
-      composedTheme: composeTheme(theme || context.theme, props.themeOverrides, THEME_API),
-      isOpen: props.isOpen,
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      isOpen,
       highlightedOptionIndex: 0
     };
   }
@@ -69,7 +81,7 @@ class Options extends Component {
     // update isOpen state when parent component force open / close options
     // (e.g. click on Input in Select component)
     if (!this.state.isOpen && nextState.isOpen) {
-      window.addEventListener('resize', this._handleWindowResize);
+      window.addEventListener("resize", this._handleWindowResize);
       addEventsToDocument(this._getDocumentEvents());
     }
   }
@@ -145,6 +157,37 @@ class Options extends Component {
     this.close();
   };
 
+  // returns an object containing props, theme, and method handlers
+  // associated with rendering this.props.options, the user can call
+  // this in the body of the renderOptions function
+  getOptionProps = ({ onClick, onMouseEnter, ...rest } = {}) => {
+    const { isOpen, themeId, options, selectedOptions } = this.props;
+    const { composedTheme } = this.state;
+    const {
+      isHighlightedOption,
+      isDisabledOption,
+      handleClickOnOption,
+      setHighlightedOptionIndex
+    } = this;
+
+    return {
+      options,
+      selectedOptions,
+      isOpen,
+      isHighlightedOption,
+      isDisabledOption,
+      theme: composedTheme[themeId],
+      onClick: (option, event) =>
+        // the user's custom onClick event handler is composed with
+        // the internal functionality of Options (this.handleClickOnOption)
+        composeFunctions(onClick, handleClickOnOption)(option, event),
+      onMouseEnter: (index, event) =>
+        // user's custom onMouseEnter is composed with this.setHighlightedOptionIndex
+        composeFunctions(onMouseEnter, setHighlightedOptionIndex)(index, event),
+      ...rest
+    };
+  };
+
   // ========= PRIVATE HELPERS =========
 
   _handleSelectionOnEnterKey = event => {
@@ -166,7 +209,7 @@ class Options extends Component {
     if (options.length) {
       const lowerIndexBound = 0;
       const upperIndexBound = options.length - 1;
-      let newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+      let newIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
 
       // Make sure new index is within options bounds
       newIndex = Math.max(lowerIndexBound, Math.min(newIndex, upperIndexBound));
@@ -176,8 +219,8 @@ class Options extends Component {
         const canMoveUp = newIndex > lowerIndexBound;
         const canMoveDown = newIndex < upperIndexBound;
         if (
-          (direction === 'up' && canMoveUp) ||
-          (direction === 'down' && canMoveDown)
+          (direction === "up" && canMoveUp) ||
+          (direction === "down" && canMoveDown)
         ) {
           this._handleHighlightMove(newIndex, direction);
         }
@@ -204,11 +247,11 @@ class Options extends Component {
         break;
       case 38: // Move selection higlight 'up' on Arrow Up key
         event.preventDefault(); // prevent caret move
-        this._handleHighlightMove(highlightOptionIndex, 'up');
+        this._handleHighlightMove(highlightOptionIndex, "up");
         break;
       case 40: // Move selection higlight 'down' on Arrow Down key
         event.preventDefault(); // prevent caret move
-        this._handleHighlightMove(highlightOptionIndex, 'down');
+        this._handleHighlightMove(highlightOptionIndex, "down");
         break;
       default:
         this.props.resetOnClose && this.setHighlightedOptionIndex(0);
@@ -234,7 +277,7 @@ class Options extends Component {
 
   _removeAllEventListeners() {
     removeEventsFromDocument(this._getDocumentEvents());
-    window.removeEventListener('resize', this._handleWindowResize);
+    window.removeEventListener("resize", this._handleWindowResize);
   }
 
   _getDocumentEvents() {
@@ -268,10 +311,11 @@ class Options extends Component {
         isHighlightedOption={this.isHighlightedOption}
         handleClickOnOption={this.handleClickOnOption}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}
+        getOptionProps={this.getOptionProps}
         {...rest}
       />
     );
   }
 }
 
-export default Options;
+export default withTheme(Options);

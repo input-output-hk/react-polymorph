@@ -5,7 +5,7 @@ import { storiesOf } from "@storybook/react";
 import { withState } from "@dump247/storybook-state";
 
 // components
-import { ThemeProvider, Modal, Button } from "../source/components";
+import { Modal, Button } from "../source/components";
 
 // skins
 import { ModalSkin, ButtonSkin } from "../source/skins/simple";
@@ -17,16 +17,14 @@ import CustomModalTheme from "./theme-customizations/Modal.custom.scss";
 // custom styles & theme overrides
 import styles from "./Modal.stories.scss";
 import themeOverrides from "./theme-overrides/customModal.scss";
-import { IDENTIFIERS } from '../source/themes/API';
+import { IDENTIFIERS } from "../source/themes/API";
 
 storiesOf("Modal", module)
-  .addDecorator(story => {
-    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
-  })
-
   // ====== Stories ======
 
-  .add('cancelable via overlay', withState({ isOpen: true }, store => (
+  .add(
+    "cancelable via overlay",
+    withState({ isOpen: true }, store => (
       <Modal
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
@@ -38,7 +36,9 @@ storiesOf("Modal", module)
     ))
   )
 
-  .add('cancelable via buttons', withState({ isOpen: true }, store => (
+  .add(
+    "cancelable via buttons",
+    withState({ isOpen: true }, store => (
       <Modal
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick={false}
@@ -65,9 +65,11 @@ storiesOf("Modal", module)
     ))
   )
 
-  .add('theme overrides', withState({ isOpen: true }, store => (
+  .add(
+    "theme overrides",
+    withState({ isOpen: true }, store => (
       <Modal
-        themeOverrides={{ [IDENTIFIERS.MODAL]: themeOverrides }}
+        themeOverrides={themeOverrides}
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}
@@ -78,9 +80,11 @@ storiesOf("Modal", module)
     ))
   )
 
-  .add('custom theme', withState({ isOpen: true }, store => (
+  .add(
+    "custom theme",
+    withState({ isOpen: true }, store => (
       <Modal
-        theme={{ [IDENTIFIERS.MODAL]: CustomModalTheme }}
+        theme={CustomModalTheme}
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}

@@ -29,28 +29,36 @@ export default props => {
   let placeholder =
     !props.maxSelections || canMoreOptionsBeSelected ? props.placeholder : "";
 
-  let selectedOptions =
-    props.selectedOptions &&
-    props.selectedOptions.map((selectedOption, index) => {
-      return (
-        <span className={theme[themeId].selectedWordBox} key={index}>
-          <span className={theme[themeId].selectedWordValue}>
-            {selectedOption}
-            <span
-              className={theme[themeId].selectedWordRemoveButton}
-              onClick={props.removeOption.bind(null, index)}
-            >
-              &times;
+  const renderSelectedOptions = () => {
+    // check if the user passed a renderSelections function
+    if (props.selectedOptions && props.renderSelections) {
+      // call custom renderSelections function
+      return props.renderSelections(props.getSelectionProps);
+    } else if (props.selectedOptions && !props.renderSelections) {
+      // render default skin
+      return props.selectedOptions.map((selectedOption, index) => {
+        return (
+          <span className={theme[themeId].selectedWordBox} key={index}>
+            <span className={theme[themeId].selectedWordValue}>
+              {selectedOption}
+              <span
+                className={theme[themeId].selectedWordRemoveButton}
+                onClick={props.removeOption.bind(null, index)}
+              >
+                &times;
+              </span>
             </span>
           </span>
-        </span>
-      );
-    });
+        );
+      });
+    }
+    return null;
+  };
 
-  // selected words and input for enter new one
+  // selected words and input for entering a new one
   const autocompleteContent = (
     <div className={theme[themeId].selectedWords}>
-      {selectedOptions}
+      {renderSelectedOptions()}
       <input
         ref={props.inputRef}
         placeholder={placeholder}
@@ -67,42 +75,40 @@ export default props => {
         error={props.error}
         label={props.label}
         skin={FormFieldSkin}
-        theme={theme}
-        render={() => {
-          return (
+        render={() => (
+          <div
+            className={theme[themeId].autocompleteWrapper}
+            onClick={props.handleAutocompleteClick}
+          >
             <div
-              className={theme[themeId].autocompleteWrapper}
-              onClick={props.handleAutocompleteClick}
+              className={classnames([
+                theme[themeId].autocompleteContent,
+                props.isOpen ? theme[themeId].opened : null,
+                props.selectedOptions.length
+                  ? theme[themeId].hasSelectedWords
+                  : null,
+                props.error ? theme[themeId].errored : null
+              ])}
+              ref={props.suggestionsRef}
             >
-              <div
-                className={classnames([
-                  theme[themeId].autocompleteContent,
-                  props.isOpen ? theme[themeId].opened : null,
-                  props.selectedOptions.length
-                    ? theme[themeId].hasSelectedWords
-                    : null,
-                  props.error ? theme[themeId].errored : null
-                ])}
-                ref={props.suggestionsRef}
-              >
-                {autocompleteContent}
-              </div>
-
-              <Options
-                isOpen={props.isOpen}
-                options={filteredAndLimitedOptions}
-                isOpeningUpward={props.isOpeningUpward}
-                onChange={props.handleChange}
-                onClose={props.closeOptions}
-                resetOnClose
-                noResults={!props.filteredOptions.length}
-                noResultsMessage={props.noResultsMessage}
-                skin={OptionsSkin}
-                theme={theme}
-              />
+              {autocompleteContent}
             </div>
-          );
-        }}
+
+            <Options
+              isOpen={props.isOpen}
+              isOpeningUpward={props.isOpeningUpward}
+              noResults={!props.filteredOptions.length}
+              noResultsMessage={props.noResultsMessage}
+              onChange={props.handleChange}
+              onClose={props.closeOptions}
+              options={filteredAndLimitedOptions}
+              resetOnClose
+              selectedOptions={props.selectedOptions}
+              skin={OptionsSkin}
+              render={props.renderOptions}
+            />
+          </div>
+        )}
         {...formfieldProps}
       />
     </div>

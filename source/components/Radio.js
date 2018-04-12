@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
-import { bool, func, object, string } from 'prop-types';
-
-// import the Radio component's theme API
-import THEME_API, { IDENTIFIERS } from '../themes/API';
+import React, { Component } from "react";
+import { bool, func, object, string, shape } from "prop-types";
+import { withTheme } from "../themes/withTheme";
 
 // import utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, addThemeId } from "../utils";
+
+// import constants
+import { IDENTIFIERS } from "../themes/API";
 
 class Radio extends Component {
   static propTypes = {
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
     disabled: bool,
     label: StringOrElement,
     onBlur: func,
@@ -29,28 +34,26 @@ class Radio extends Component {
     themeOverrides: {}
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+
     this.state = {
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      )
     };
   }
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin: RadioSkin,
-      theme,
-      themeOverrides,
-      ...rest
-    } = this.props;
+    const { skin: RadioSkin, theme, themeOverrides, ...rest } = this.props;
 
     return <RadioSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
 
-export default Radio;
+export default withTheme(Radio);

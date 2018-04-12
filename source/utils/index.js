@@ -1,12 +1,12 @@
-import propsUtils from './props';
-import themeUtils from './themes';
-import eventUtils from './events';
+import propsUtils from "./props";
+import themeUtils from "./themes";
+import eventUtils from "./events";
 
 // named exports for props utility functions
-export const { pickDOMProps, StringOrElement } = propsUtils;
+export const { pickDOMProps, StringOrElement, composeFunctions } = propsUtils;
 
 // named exports for theme utility functions
-export const { composeTheme } = themeUtils;
+export const { composeTheme, addThemeId } = themeUtils;
 
 // named exports for event utility functions
 export const {
@@ -20,13 +20,13 @@ export const {
   removeEventListenerOnTransitionEnded
 } = eventUtils;
 
-
 // exports default object containing all utility functions
 // in the instance of wanting all of them imported at once
 export default {
   pickDOMProps,
   StringOrElement,
   composeTheme,
+  addThemeId,
   getMousePosition,
   getTouchPosition,
   pauseEvent,
@@ -34,5 +34,6 @@ export default {
   removeEventsFromDocument,
   targetIsDescendant,
   addEventListenerOnTransitionEnded,
-  removeEventListenerOnTransitionEnded
+  removeEventListenerOnTransitionEnded,
+  composeFunctions
 };

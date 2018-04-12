@@ -1,16 +1,21 @@
-import React, { Component } from 'react';
-import { bool, func, object, arrayOf, shape, string } from 'prop-types';
+import React, { Component } from "react";
+import { bool, func, object, arrayOf, shape, string } from "prop-types";
+import { withTheme } from "../themes/withTheme";
 
-// import the Select component's theme API
-import THEME_API, { IDENTIFIERS } from '../themes/API';
+// import internal utility functions
+import { composeTheme, addThemeId } from "../utils";
 
-// import the composeTheme utility function
-import { composeTheme } from '../utils';
+// import constants
+import { IDENTIFIERS } from "../themes/API";
 
 class Select extends Component {
   static propTypes = {
     allowBlank: bool,
     autoFocus: bool,
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
     isOpeningUpward: bool,
     onBlur: func,
     onChange: func,
@@ -18,7 +23,7 @@ class Select extends Component {
     options: arrayOf(
       shape({
         isDisabled: bool,
-        value: string.isRequired,
+        value: string.isRequired
       })
     ).isRequired,
     placeholder: string,
@@ -36,18 +41,21 @@ class Select extends Component {
     theme: null,
     themeOverrides: {},
     themeId: IDENTIFIERS.SELECT,
-    value: ''
+    value: ""
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+
     this.state = {
-      isOpen: false,
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API)
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      isOpen: false
     };
   }
 
@@ -88,12 +96,7 @@ class Select extends Component {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin: SelectSkin,
-      theme,
-      themeOverrides,
-      ...rest
-    } = this.props;
+    const { skin: SelectSkin, theme, themeOverrides, ...rest } = this.props;
 
     return (
       <SelectSkin
@@ -110,4 +113,4 @@ class Select extends Component {
   }
 }
 
-export default Select;
+export default withTheme(Select);

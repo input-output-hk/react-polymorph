@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   bool,
   func,
@@ -6,20 +6,30 @@ import {
   number,
   array,
   string,
-  instanceOf
-} from 'prop-types';
+  instanceOf,
+  shape
+} from "prop-types";
+import { withTheme } from "../themes/withTheme";
 
 // external libraries
-import _ from 'lodash';
-
-// Autocomplete theme API
-import THEME_API, { IDENTIFIERS } from '../themes/API';
+import _ from "lodash";
 
 // internal utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import {
+  StringOrElement,
+  composeTheme,
+  composeFunctions,
+  addThemeId
+} from "../utils";
+
+import { IDENTIFIERS } from "../themes/API";
 
 class Autocomplete extends Component {
   static propTypes = {
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
     error: StringOrElement,
     invalidCharsRegex: instanceOf(RegExp),
     isOpeningUpward: bool,
@@ -31,6 +41,9 @@ class Autocomplete extends Component {
     options: array,
     selectedOptions: array,
     placeholder: string,
+    render: func,
+    renderSelections: func,
+    renderOptions: func,
     skin: func.isRequired,
     sortAlphabetically: bool,
     theme: object,
@@ -51,21 +64,31 @@ class Autocomplete extends Component {
     themeOverrides: {}
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
-    const { themeOverrides, sortAlphabetically, options, selectedOptions } = props;
-    const theme = props.theme || context.theme;
+
+    const {
+      context,
+      themeId,
+      theme,
+      themeOverrides,
+      sortAlphabetically,
+      options,
+      selectedOptions
+    } = props;
+
     this.state = {
-      inputValue: '',
-      error: '',
+      inputValue: "",
+      error: "",
       selectedOptions: selectedOptions || [],
-      filteredOptions: sortAlphabetically && options ? options.sort() : options || [],
+      filteredOptions:
+        sortAlphabetically && options ? options.sort() : options || [],
       isOpen: false,
-      composedTheme: composeTheme(theme, themeOverrides, THEME_API)
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      )
     };
   }
 
@@ -149,7 +172,7 @@ class Autocomplete extends Component {
       }
     }
 
-    this.setState({ inputValue: '' });
+    this.setState({ inputValue: "" });
   };
 
   removeOption = (index, event) => {
@@ -161,6 +184,24 @@ class Autocomplete extends Component {
 
   selectionChanged = (selectedOptions, event) => {
     if (this.props.onChange) this.props.onChange(selectedOptions, event);
+  };
+
+  // returns an object containing props, theme, and method handlers
+  // associated with rendering this.state.selectedOptions, the user can call
+  // this in the body of the renderSelections function
+  getSelectionProps = ({ removeSelection }) => {
+    const { themeId } = this.props;
+    const { inputValue, isOpen, selectedOptions, composedTheme } = this.state;
+    return {
+      inputValue,
+      isOpen,
+      selectedOptions,
+      theme: composedTheme[themeId],
+      removeSelection: (index, event) =>
+        // the user's custom removeSelection event handler is composed with
+        // the internal functionality of Autocomplete (this.removeOption)
+        composeFunctions(removeSelection, this.removeOption)(index, event)
+    };
   };
 
   render() {
@@ -191,6 +232,7 @@ class Autocomplete extends Component {
         handleAutocompleteClick={this.handleAutocompleteClick}
         removeOption={this.removeOption}
         onKeyDown={this.onKeyDown}
+        getSelectionProps={this.getSelectionProps}
         {...rest}
       />
     );
@@ -200,13 +242,13 @@ class Autocomplete extends Component {
 
   _removeOptions = () => {
     this.selectionChanged([]);
-    this.setState({ selectedOptions: [], inputValue: '' });
+    this.setState({ selectedOptions: [], inputValue: "" });
   };
 
   _filterOptions = value => {
     let filteredOptions = [];
 
-    if (value !== '') {
+    if (value !== "") {
       _.some(this.props.options, function(option) {
         if (_.startsWith(option, value)) {
           filteredOptions.push(option);
@@ -220,10 +262,10 @@ class Autocomplete extends Component {
   };
 
   _filterInvalidChars = value => {
-    let filteredValue = '';
+    let filteredValue = "";
 
     if (this.props.invalidCharsRegex.test(value)) {
-      filteredValue = value.replace(this.props.invalidCharsRegex, '');
+      filteredValue = value.replace(this.props.invalidCharsRegex, "");
     } else {
       filteredValue = value;
     }
@@ -232,4 +274,4 @@ class Autocomplete extends Component {
   };
 }
 
-export default Autocomplete;
+export default withTheme(Autocomplete);
