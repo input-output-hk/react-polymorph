@@ -49,16 +49,16 @@ $checkbox-checked-bg-color: $checkbox-border-color !default;
     background-color: $checkbox-checked-bg-color;
     position: relative;
     &:after {
-      border-color: #fff;
       border-style: solid;
       border-width: 0 2px 2px 0;
       content: "";
       height: 12px;
-      left: 8px;
+      width: 4px;
       position: absolute;
+      left: 8px;
       top: 2px;
       transform: rotate(45deg);
-      width: 4px;
+      border-color: #fff;
     }
   }
 }

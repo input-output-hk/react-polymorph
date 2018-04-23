@@ -17,6 +17,7 @@ export const selectSkinFactory = (InputSkin, OptionsSkin) => (
         placeholder, label, error, isOpeningUpward,
       } = this.props;
       const selectedOption = component.getSelectedOption();
+      const selectedValue = selectedOption ? selectedOption.value : null;
       const inputValue = selectedOption ? selectedOption.label : '';
 
       return (
@@ -47,7 +48,7 @@ export const selectSkinFactory = (InputSkin, OptionsSkin) => (
               onChange={component.handleChange}
               optionRenderer={optionRenderer}
               onClose={component.onCloseOptions}
-              selectedOptionValue={inputValue}
+              selectedOptionValue={selectedValue}
               noResults={!options.length}
             />
           </InputSkin>

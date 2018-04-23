@@ -98,6 +98,12 @@ export default class Options extends SkinnableComponent {
     }
   };
 
+  isSelectedOption = (optionIndex) => {
+    const { options } = this.props;
+    const option = options[optionIndex];
+    return option && this.props.selectedOptionValue === option.value;
+  };
+
   isHighlightedOption = (optionIndex) => {
     return this.state.highlightedOptionIndex === optionIndex;
   };
