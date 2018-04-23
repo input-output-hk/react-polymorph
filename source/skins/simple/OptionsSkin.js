@@ -21,6 +21,7 @@ export default props => {
     noResultsMessage,
     getHighlightedOptionIndex,
     isHighlightedOption,
+    isSelectedOption,
     handleClickOnOption,
     setHighlightedOptionIndex,
     optionsRef
@@ -55,6 +56,7 @@ export default props => {
               className={classnames([
                 theme[themeId].option,
                 isHighlightedOption(index) ? theme[themeId].highlightedOption : null,
+                isSelectedOption(index) ? theme[themeId].selectedOption : null,
                 option.isDisabled ? theme[themeId].disabledOption : null
               ])}
               onClick={event => handleClickOnOption(option, event)}

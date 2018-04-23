@@ -126,6 +126,13 @@ class Options extends Component {
     }
   };
 
+  isSelectedOption = (optionIndex) => {
+    const { options, isOpeningUpward } = this.props;
+    const index = isOpeningUpward ? options.length - 1 - optionIndex : optionIndex;
+    const option = options[index];
+    return option && this.props.selectedOptionValue === option.value;
+  };
+
   isHighlightedOption = optionIndex => {
     return this.state.highlightedOptionIndex === optionIndex;
   };
@@ -265,6 +272,7 @@ class Options extends Component {
         isOpen={isOpen}
         highlightedOptionIndex={highlightedOptionIndex}
         getHighlightedOptionIndex={this.getHighlightedOptionIndex}
+        isSelectedOption={this.isSelectedOption}
         isHighlightedOption={this.isHighlightedOption}
         handleClickOnOption={this.handleClickOnOption}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}

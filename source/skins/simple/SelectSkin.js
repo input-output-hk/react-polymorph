@@ -11,6 +11,7 @@ import { InputSkin, OptionsSkin } from "./";
 
 export default props => {
   const selectedOption = props.getSelectedOption();
+  const selectedValue = selectedOption ? selectedOption.value : null;
   const inputValue = selectedOption ? selectedOption.label : "";
   const { theme, themeId } = props;
   return (
@@ -44,7 +45,7 @@ export default props => {
         onChange={props.handleChange}
         optionRenderer={props.optionRenderer}
         onClose={props.toggleOpen}
-        selectedOptionValue={inputValue}
+        selectedOptionValue={selectedValue}
         noResults={!props.options.length}
       />
     </div>
