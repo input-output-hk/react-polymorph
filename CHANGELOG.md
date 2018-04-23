@@ -1,7 +1,11 @@
 Changelog
 =========
 
-## vNext
+## 0.6.5
+
+### Features
+
+- Add Autocomplete clear feature [PR 49](https://github.com/input-output-hk/react-polymorph/pull/49)
 
 ## 0.6.4
 
