@@ -99,8 +99,9 @@ export default class Options extends SkinnableComponent {
   };
 
   isSelectedOption = (optionIndex) => {
-    const { options } = this.props;
-    const option = options[optionIndex];
+    const { options, isOpeningUpward } = this.props;
+    const index = isOpeningUpward ? options.length - 1 - optionIndex : optionIndex;
+    const option = options[index];
     return option && this.props.selectedOptionValue === option.value;
   };
 
