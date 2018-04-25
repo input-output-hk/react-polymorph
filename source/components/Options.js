@@ -1,14 +1,12 @@
+// @flow
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { bool, func, object, array, string, any, shape } from 'prop-types';
-import { withTheme } from '../themes/withTheme';
 
-// external libraries
-import classnames from 'classnames';
+// $FlowFixMe
+import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent } from 'react';
 
 // internal utility functions
+import { withTheme } from '../themes/withTheme';
 import {
-  StringOrElement,
   composeTheme,
   addEventsToDocument,
   removeEventsFromDocument,
@@ -20,30 +18,39 @@ import {
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Options extends Component {
-  static propTypes = {
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    inputValue: string,
-    isOpen: bool,
-    isOpeningUpward: bool,
-    noResults: bool,
-    noResultsMessage: StringOrElement,
-    onChange: func,
-    onClose: func,
-    options: array,
-    optionRenderer: func,
-    render: func,
-    resetOnClose: bool, // reset highlighted option on options close (e.g. in autocomplete)
-    selectedOption: any,
-    skin: func.isRequired,
-    selectedOptions: array,
-    theme: object,
-    themeId: string,
-    themeOverrides: object // custom css/scss from user that adheres to component's theme API
-  };
+type Props = {
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  inputValue: string,
+  isOpen: boolean,
+  isOpeningUpward: boolean,
+  noResults: boolean,
+  noResultsMessage: string | Element,
+  onBlur: Function,
+  onChange: Function,
+  onClose: Function,
+  options: Array<any>,
+  optionRenderer: Function,
+  render: Function,
+  resetOnClose: boolean,
+  selectedOption: any,
+  skin: ComponentType<any>,
+  selectedOptions: Array<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object
+};
+
+type State = {
+  composedTheme: Object,
+  isOpen: boolean,
+  highlightedOptionIndex: number
+};
+
+class Options extends Component<Props, State> {
+  optionsElement: ?Element;
 
   static defaultProps = {
     isOpen: false,
@@ -55,7 +62,7 @@ class Options extends Component {
     themeOverrides: {}
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     const { context, themeId, theme, themeOverrides, isOpen } = props;
@@ -118,18 +125,16 @@ class Options extends Component {
     const { options, isOpeningUpward } = this.props;
     const currentIndex = this.state.highlightedOptionIndex;
     let index = 0;
+
     if (currentIndex !== null) {
       index = currentIndex;
-    } else if (this.props.selectedOptionValue) {
-      index = options.findIndex(
-        option => option.value === this.props.selectedOptionValue
-      );
     }
+
     if (isOpeningUpward) return options.length - 1 - index;
     return index;
   };
 
-  setHighlightedOptionIndex = optionIndex => {
+  setHighlightedOptionIndex = (optionIndex: number) => {
     if (
       !this.isHighlightedOption(optionIndex) &&
       this.isDisabledOption(optionIndex)
@@ -138,24 +143,22 @@ class Options extends Component {
     }
   };
 
-  isSelectedOption = optionIndex => {
+  isSelectedOption = (optionIndex: number) => {
     const { options, isOpeningUpward } = this.props;
     const index = isOpeningUpward ? options.length - 1 - optionIndex : optionIndex;
     const option = options[index];
     return option && this.props.selectedOption === option;
   };
 
-  isHighlightedOption = optionIndex => {
-    return this.state.highlightedOptionIndex === optionIndex;
-  };
+  isHighlightedOption = (optionIndex: number) => this.state.highlightedOptionIndex === optionIndex;
 
-  isDisabledOption = optionIndex => {
+  isDisabledOption = (optionIndex: number) => {
     const { options } = this.props;
     const option = options[optionIndex];
     return option && !option.isDisabled;
   };
 
-  handleClickOnOption = (option, event) => {
+  handleClickOnOption = (option: ?Object, event: SyntheticEvent<>) => {
     if (option) {
       if (option.isDisabled) return;
       if (this.props.onChange) this.props.onChange(option, event);
@@ -167,7 +170,11 @@ class Options extends Component {
   // returns an object containing props, theme, and method handlers
   // associated with rendering this.props.options, the user can call
   // this in the body of the renderOptions function
-  getOptionProps = ({ onClick, onMouseEnter, ...rest } = {}) => {
+  getOptionProps = ({
+    onClick,
+    onMouseEnter,
+    ...rest
+  }: { onClick: Function, onMouseEnter: Function } = {}) => {
     const { isOpen, themeId, options, selectedOptions } = this.props;
     const { composedTheme } = this.state;
     const {
@@ -184,11 +191,11 @@ class Options extends Component {
       isHighlightedOption,
       isDisabledOption,
       theme: composedTheme[themeId],
-      onClick: (option, event) =>
+      onClick: (option: ?Object, event: SyntheticEvent<>) =>
         // the user's custom onClick event handler is composed with
         // the internal functionality of Options (this.handleClickOnOption)
         composeFunctions(onClick, handleClickOnOption)(option, event),
-      onMouseEnter: (index, event) =>
+      onMouseEnter: (index: number, event: SyntheticMouseEvent<>) =>
         // user's custom onMouseEnter is composed with this.setHighlightedOptionIndex
         composeFunctions(onMouseEnter, setHighlightedOptionIndex)(index, event),
       ...rest
@@ -197,7 +204,7 @@ class Options extends Component {
 
   // ========= PRIVATE HELPERS =========
 
-  _handleSelectionOnEnterKey = event => {
+  _handleSelectionOnEnterKey = (event: SyntheticKeyboardEvent<>) => {
     const { options } = this.props;
     if (options.length) {
       const { isOpeningUpward } = this.props;
@@ -211,7 +218,7 @@ class Options extends Component {
     }
   };
 
-  _handleHighlightMove = (currentIndex, direction) => {
+  _handleHighlightMove = (currentIndex: number, direction: string) => {
     const { options } = this.props;
     if (options.length) {
       const lowerIndexBound = 0;
@@ -234,12 +241,10 @@ class Options extends Component {
       } else {
         this.setHighlightedOptionIndex(newIndex);
       }
-    } else {
-      event.preventDefault();
     }
   };
 
-  _handleKeyDown = event => {
+  _handleKeyDown = (event: SyntheticKeyboardEvent<>) => {
     const highlightOptionIndex = this.state.highlightedOptionIndex;
     switch (event.keyCode) {
       case 9: // Tab key: selects currently highlighted option
@@ -268,9 +273,8 @@ class Options extends Component {
     }
   };
 
-  _handleDocumentClick = event => {
-    const root = this.optionsElement;
-    const isDescendant = targetIsDescendant(event, ReactDOM.findDOMNode(root));
+  _handleDocumentClick = (event: SyntheticMouseEvent<>) => {
+    const isDescendant = targetIsDescendant(event, this.optionsElement);
 
     if (this.state.isOpen && !isDescendant) {
       this.close();
@@ -280,10 +284,6 @@ class Options extends Component {
   _handleWindowResize = () => this.state.isOpen && this.close();
 
   _handleScroll = () => this.state.isOpen && this.close();
-
-  _getRootSkinPart() {
-    return this.skinParts[Options.SKIN_PARTS.OPTIONS];
-  }
 
   _removeAllEventListeners() {
     removeEventsFromDocument(this._getDocumentEvents());
