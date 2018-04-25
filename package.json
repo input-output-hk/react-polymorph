@@ -1,7 +1,6 @@
 {
   "name": "react-polymorph",
-  "description":
-    "React components with highly customizable logic, markup and styles.",
+  "description": "React components with highly customizable logic, markup and styles.",
   "version": "0.6.5",
   "author": {
     "name": "Dominik Guzei",
@@ -86,7 +85,6 @@
     "node-sass": "4.5.3",
     "nodemon": "1.12.1",
     "prettier-eslint": "^8.8.1",
-    "prop-types": "15.6.0",
     "react": "16.3.1",
     "react-dom": "16.3.1",
     "rimraf": "2.6.2",
@@ -109,7 +107,11 @@
     "flow-coverage": "flow coverage"
   },
   "babel": {
-    "presets": ["env", "react", "flow"],
+    "presets": [
+      "env",
+      "react",
+      "flow"
+    ],
     "plugins": [
       "transform-object-rest-spread",
       "transform-class-properties",
