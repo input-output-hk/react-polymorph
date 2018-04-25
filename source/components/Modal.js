@@ -1,29 +1,34 @@
+// @flow
 import React, { Component } from 'react';
-import { string, bool, func, object, shape } from 'prop-types';
+import type { ComponentType } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // internal utiltity functions
-import { StringOrElement, composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Modal extends Component {
-  static propTypes = {
-    contentLabel: StringOrElement,
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    isActive: bool,
-    onClose: func,
-    skin: func.isRequired,
-    triggerCloseOnOverlayClick: bool,
-    theme: object,
-    themeId: string,
-    themeOverrides: object // custom css/scss from user that adheres to component's theme API
-  };
+type Props = {
+  contentLabel: string | Element,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  isActive: boolean,
+  onClose: Function,
+  skin: ComponentType<any>,
+  triggerCloseOnOverlayClick: boolean,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object
+};
 
+type State = {
+  composedTheme: Object
+};
+
+class Modal extends Component<Props, State> {
   static defaultProps = {
     contentLabel: 'Modal Dialog',
     isActive: false,
@@ -33,7 +38,7 @@ class Modal extends Component {
     themeOverrides: {}
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
