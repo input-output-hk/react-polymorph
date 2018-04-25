@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 // external libraries
-import ReactModal from 'react-modal';
+import ReactModal from "react-modal";
 
 export default props => (
   <ReactModal

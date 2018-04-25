@@ -1,13 +1,21 @@
-import React from 'react';
+import React from "react";
 
 // external libraries
-import classnames from 'classnames';
+import classnames from "classnames";
 
 // internal utility functions
-import { pickDOMProps } from '../../utils';
+import { pickDOMProps } from "../../utils";
 
 export default props => {
-  const { theme, themeId, className, disabled, selected, onChange, label } = props;
+  const {
+    theme,
+    themeId,
+    className,
+    disabled,
+    selected,
+    onChange,
+    label
+  } = props;
   return (
     <div
       className={classnames([
@@ -33,7 +41,7 @@ export default props => {
           selected ? theme[themeId].selected : null
         ])}
       />
-      {label ? (<label className={theme[themeId].label}>{label}</label>) : null}
+      {label ? <label className={theme[themeId].label}>{label}</label> : null}
     </div>
   );
 };
