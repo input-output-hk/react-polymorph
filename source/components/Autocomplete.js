@@ -1,13 +1,12 @@
 // @flow
-import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import React, { Component } from "react";
+import { withTheme } from "../themes/withTheme";
 
 // external libraries
 import _ from 'lodash';
 
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, composeFunctions, addThemeId } from '../utils';
+import { composeTheme, composeFunctions, addThemeId } from "../utils";
 
 import { IDENTIFIERS } from '../themes/API';
 
