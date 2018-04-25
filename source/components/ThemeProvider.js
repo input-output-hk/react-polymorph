@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import type { Node } from 'react';
+import { ThemeContext } from '../themes/ThemeContext';
 
 // external libraries
 import _ from 'lodash';
@@ -44,6 +45,18 @@ class ThemeProvider extends Component<Props, State> {
   // in order to update state before rendering
   componentWillReceiveProps(nextProps: Props) {
     const { theme, themeOverrides } = nextProps;
+
+    const changedProps = _.pickBy(
+      { theme, themeOverrides },
+      (value, key) => this.props[key] !== value
+    );
+
+    if (Object.keys(changedProps).length > 0) {
+      this.setState({
+        theme: this.composeLibraryTheme(theme, themeOverrides, ROOT_THEME_API)
+      });
+    }
+  }
 
     const changedProps = _.pickBy(
       { theme, themeOverrides },
