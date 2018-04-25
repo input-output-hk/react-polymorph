@@ -77,7 +77,9 @@ storiesOf('Input', module)
       disabled
       label="Disabled Input"
       skin={FormFieldSkin}
-      render={props => <Input {...props} placeholder="user name" skin={InputSkin} />}
+      render={props => (
+        <Input {...props} placeholder="user name" skin={InputSkin} />
+      )}
     />
   ))
 

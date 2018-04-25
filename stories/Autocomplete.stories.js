@@ -269,7 +269,9 @@ storiesOf('Autocomplete', module)
                 key={index}
                 className={classnames([
                   theme.option,
-                  isHighlightedOption(index) ? themeOverrides.customHighlight : null,
+                  isHighlightedOption(index)
+                    ? themeOverrides.customHighlight
+                    : null,
                   option.isDisabled ? theme.disabledOption : null
                 ])}
                 onMouseEnter={onMouseEnter.bind(null, index)}

@@ -8,11 +8,11 @@ $bubble-border-color: none;
 $bubble-border-color-transparent: transparent;
 $bubble-border: $bubble-border-width solid $bubble-border-color;
 $bubble-border-transparent: $bubble-border-width-transparent solid
-$bubble-border-color-transparent;
+  $bubble-border-color-transparent;
 $bubble-box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.18);
 $bubble-padding: 6px;
 $bubble-font-color: #ebf0ff;
 $bubble-font-color-transparent: white;
 $bubble-distance: calc(100% + 14px);
 
-@import '../../source/themes/simple/SimpleBubble';
+@import "../../source/themes/simple/SimpleBubble";

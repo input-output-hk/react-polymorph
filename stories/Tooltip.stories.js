@@ -54,7 +54,11 @@ storiesOf('Tooltip', module)
 
   .add('isBounded', () => (
     <div className={styles.container}>
-      <Tooltip isBounded skin={TooltipSkin} tip="Help, I am stuck in this small box">
+      <Tooltip
+        isBounded
+        skin={TooltipSkin}
+        tip="Help, I am stuck in this small box"
+      >
         hover over me
       </Tooltip>
     </div>
@@ -87,7 +91,10 @@ storiesOf('Tooltip', module)
   .add('theme overrides', () => (
     <div className={styles.container}>
       <Tooltip
-        themeOverrides={{ ...SimpleTheme, [IDENTIFIERS.BUBBLE]: themeOverrides }}
+        themeOverrides={{
+          ...SimpleTheme,
+          [IDENTIFIERS.BUBBLE]: themeOverrides
+        }}
         isOpeningUpward={true}
         skin={TooltipSkin}
         isTransparent={false}
