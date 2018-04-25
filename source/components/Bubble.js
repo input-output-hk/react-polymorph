@@ -1,12 +1,12 @@
+// @flow
 import React, { Component } from 'react';
-import { string, bool, func, object, shape } from 'prop-types';
-import { withTheme } from '../themes/withTheme';
+import type { ComponentType } from 'react';
 
 // internal utility functions
+import { withTheme } from '../themes/withTheme';
 import {
   addEventsToDocument,
   removeEventsFromDocument,
-  StringOrElement,
   composeTheme,
   addThemeId
 } from '../utils';
@@ -14,21 +14,28 @@ import {
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Bubble extends Component {
-  static propTypes = {
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    isHidden: bool,
-    isFloating: bool,
-    isOpeningUpward: bool,
-    isTransparent: bool,
-    skin: func.isRequired,
-    theme: object, // takes precedence over theme in context
-    themeId: string,
-    themeOverrides: object // custom css/scss from user that adheres to component's theme API
-  };
+type Props = {
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  isHidden: boolean,
+  isFloating: boolean,
+  isOpeningUpward: boolean,
+  isTransparent: boolean,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object // custom css/scss from user that adheres to component's theme API
+};
+
+type State = {
+  composedTheme: Object,
+  position: ?Object
+};
+
+class Bubble extends Component<Props, State> {
+  rootElement: ?Element;
 
   static defaultProps = {
     isHidden: false,
@@ -40,7 +47,7 @@ class Bubble extends Component {
     themeOverrides: {}
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
@@ -89,7 +96,7 @@ class Bubble extends Component {
 
   // =========== PRIVATE HELPERS ==============
 
-  _handleScrollEventListener = action => {
+  _handleScrollEventListener = (action: string) => {
     const rootNode = this.rootElement;
     const scrollableNode = this._getFirstScrollableParent(rootNode);
     if (scrollableNode) {
@@ -110,34 +117,37 @@ class Bubble extends Component {
     }
   }
 
-  _getFirstScrollableParent = node => {
+  _getFirstScrollableParent = (node: ?Element) => {
     if (node == null) return null;
     if (node === this.rootElement || node.scrollHeight <= node.clientHeight) {
-      return this._getFirstScrollableParent(node.parentNode);
-    } else {
-      return node;
+      return this._getFirstScrollableParent(node.parentElement);
     }
+    return node;
   };
 
   _updatePosition = () => {
     const { isOpeningUpward } = this.props;
     const rootNode = this.rootElement;
-    const parentNode = rootNode.parentNode;
-    const parentNodeParams = parentNode.getBoundingClientRect();
+    const parentNode = rootNode ? rootNode.parentElement : null;
+    const parentNodeParams = parentNode
+      ? parentNode.getBoundingClientRect()
+      : null;
 
-    let positionY;
-    if (isOpeningUpward) {
-      positionY = window.innerHeight - parentNodeParams.top + 20;
-    } else {
-      positionY = parentNodeParams.bottom + 20;
+    if (parentNodeParams !== null) {
+      let positionY;
+      if (isOpeningUpward) {
+        positionY = window.innerHeight - parentNodeParams.top + 20;
+      } else {
+        positionY = parentNodeParams.bottom + 20;
+      }
+
+      const position = {
+        width: parentNodeParams.width,
+        positionX: parentNodeParams.left,
+        positionY
+      };
+      this.setState({ position });
     }
-
-    const position = {
-      width: parentNodeParams.width,
-      positionX: parentNodeParams.left,
-      positionY
-    };
-    this.setState({ position });
   };
 
   _getDocumentEvents() {
