@@ -1,30 +1,35 @@
+// @flow
 import React, { Component } from 'react';
-import { bool, func, object, string, shape } from 'prop-types';
+import type { ComponentType } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import utility functions
-import { StringOrElement, composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Tooltip extends Component {
-  static propTypes = {
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    isAligningRight: bool,
-    isBounded: bool,
-    isOpeningUpward: bool,
-    isTransparent: bool,
-    skin: func.isRequired,
-    theme: object,
-    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
-    themeId: string,
-    tip: StringOrElement
-  };
+type Props = {
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  isAligningRight: boolean,
+  isBounded: boolean,
+  isOpeningUpward: boolean,
+  isTransparent: boolean,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeOverrides: Object, // custom css/scss from user that adheres to component's theme API
+  themeId: string,
+  tip: string | Element
+};
 
+type State = {
+  composedTheme: Object
+};
+
+class Tooltip extends Component<Props, State> {
   static defaultProps = {
     isOpeningUpward: true,
     isTransparent: true,
@@ -33,7 +38,7 @@ class Tooltip extends Component {
     themeOverrides: {}
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
