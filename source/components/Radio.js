@@ -1,31 +1,36 @@
+// @flow
 import React, { Component } from 'react';
-import { bool, func, object, string, shape } from 'prop-types';
+import type { ComponentType } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import utility functions
-import { StringOrElement, composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Radio extends Component {
-  static propTypes = {
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    disabled: bool,
-    label: StringOrElement,
-    onBlur: func,
-    onChange: func,
-    onFocus: func,
-    selected: bool,
-    skin: func.isRequired,
-    theme: object,
-    themeId: string,
-    themeOverrides: object // custom css/scss from user that adheres to component's theme API
-  };
+type Props = {
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  disabled: boolean,
+  label: string | Element,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  selected: boolean,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object
+};
 
+type State = {
+  composedTheme: Object
+};
+
+class Radio extends Component<Props, State> {
   static defaultProps = {
     disabled: false,
     selected: false,
@@ -34,7 +39,7 @@ class Radio extends Component {
     themeOverrides: {}
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
