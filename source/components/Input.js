@@ -1,39 +1,47 @@
+// @flow
 import React, { Component } from 'react';
-import { bool, func, object, number, string, shape } from 'prop-types';
-import { withTheme } from '../themes/withTheme';
-
-// external libraries
+import type { ComponentType } from 'react';
 import { isString, flow } from 'lodash';
 
 // internal utility functions
-import { StringOrElement, composeTheme, addThemeId } from '../utils';
+import { withTheme } from '../themes/withTheme';
+import { composeTheme, addThemeId } from '../utils';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Input extends Component {
-  static propTypes = {
-    autoFocus: bool,
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    error: StringOrElement,
-    onBlur: func,
-    onChange: func,
-    onFocus: func,
-    onRef: func,
-    maxLength: number,
-    minLength: number,
-    onKeyPress: func,
-    placeholder: string,
-    readOnly: bool,
-    skin: func.isRequired,
-    theme: object,
-    themeId: string,
-    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
-    value: string
-  };
+type Props = {
+  autoFocus: boolean,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  disabled: boolean,
+  error: string | Element,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  onRef: Function,
+  maxLength: number,
+  minLength: number,
+  onKeyPress: Function,
+  placeholder: string,
+  readOnly: boolean,
+  setError: Function,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object,
+  value: string
+};
+
+type State = {
+  error: string,
+  composedTheme: Object
+};
+
+class Input extends Component<Props, State> {
+  inputElement: HTMLInputElement;
 
   static defaultProps = {
     autoFocus: false,
@@ -46,12 +54,10 @@ class Input extends Component {
     value: ''
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
-    const test1 = addThemeId(theme || context.theme, themeId);
-    const test2 = addThemeId(themeOverrides, themeId);
 
     this.state = {
       composedTheme: composeTheme(
@@ -73,14 +79,16 @@ class Input extends Component {
     onRef(this);
   }
 
-  onChange = event => {
+  onChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
     const { onChange, disabled } = this.props;
     if (disabled) return;
 
     if (onChange) onChange(this._processValue(event.target.value), event);
   };
 
-  _setError = error => {
+  focus = () => this.inputElement.focus();
+
+  _setError = (error: string) => {
     const { setError } = this.props;
 
     // checks for setError func from FormField component
@@ -91,9 +99,7 @@ class Input extends Component {
     this.setState({ error });
   };
 
-  focus = () => this.inputElement.focus();
-
-  _processValue(value) {
+  _processValue(value: string) {
     return flow([
       this._enforceStringValue,
       this._enforceMaxLength,
@@ -102,28 +108,30 @@ class Input extends Component {
   }
 
   _enforceStringValue(value) {
-    if (!isString(value)) throw 'Values passed to Input::onChange must be strings';
+    if (!isString(value)) {
+      throw new Error('Values passed to Input::onChange must be strings');
+    }
     return value;
   }
 
-  _enforceMaxLength(value) {
+  _enforceMaxLength(value: string) {
     const { maxLength } = this.props;
     const isTooLong = maxLength != null && value.length > maxLength;
     return isTooLong ? value.substring(0, maxLength) : value;
   }
 
-  _enforceMinLength = value => {
+  _enforceMinLength(value: string) {
     const { minLength } = this.props;
     const isTooShort = minLength != null && value.length < minLength;
 
     if (isTooShort) {
-      this._setError(`Please enter a valid input`);
+      this._setError('Please enter a valid input');
     } else if (this.state.error !== '') {
-      this._setError(null);
+      this._setError('');
     }
 
     return value;
-  };
+  }
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
