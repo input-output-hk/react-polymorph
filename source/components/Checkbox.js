@@ -1,30 +1,35 @@
+// @flow
 import React, { Component } from 'react';
-import { string, bool, func, object, shape } from 'prop-types';
+import type { ComponentType } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import utility functions
-import { StringOrElement, composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Checkbox extends Component {
-  static propTypes = {
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    checked: bool,
-    label: StringOrElement,
-    onChange: func,
-    onBlur: func,
-    onFocus: func,
-    skin: func.isRequired,
-    theme: object,
-    themeId: string,
-    themeOverrides: object // custom css/scss from user that adheres to component's theme API
-  };
+type Props = {
+  checked: boolean,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  label: string | Element,
+  onChange: Function,
+  onBlur: Function,
+  onFocus: Function,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object
+};
 
+type State = {
+  composedTheme: Object
+};
+
+class Checkbox extends Component<Props, State> {
   static defaultProps = {
     checked: false,
     disabled: false,
@@ -33,7 +38,7 @@ class Checkbox extends Component {
     themeOverrides: {}
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
