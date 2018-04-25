@@ -1,5 +1,5 @@
 export default {
-  textarea: '',
-  disabled: '',
-  errored: ''
+  textarea: "",
+  disabled: "",
+  errored: ""
 };

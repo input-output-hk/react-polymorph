@@ -1,9 +1,9 @@
 export default {
-  root: '',
-  input: '',
-  switch: '',
-  thumb: '',
-  label: '',
-  disabled: '',
-  checked: ''
+  root: "",
+  input: "",
+  switch: "",
+  thumb: "",
+  label: "",
+  disabled: "",
+  checked: ""
 };

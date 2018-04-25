@@ -1,9 +1,9 @@
 export default {
-  select: '',
-  selectInput: '',
-  input: '',
-  isOpen: '',
-  openUpward: '',
-  errored: '',
-  disabled: ''
+  select: "",
+  selectInput: "",
+  input: "",
+  isOpen: "",
+  openUpward: "",
+  errored: "",
+  disabled: ""
 };
