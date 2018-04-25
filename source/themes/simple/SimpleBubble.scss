@@ -1,5 +1,5 @@
-@import 'theme';
-@import 'mixins/arrow';
+@import "theme";
+@import "mixins/arrow";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -53,7 +53,12 @@ $bubble-shadow: none !default;
     }
 
     &:not(.transparent) [data-bubble-arrow] {
-      @include arrow(up, $bubble-bg-color, $bubble-border-color, $bubble-arrow-size);
+      @include arrow(
+        up,
+        $bubble-bg-color,
+        $bubble-border-color,
+        $bubble-arrow-size
+      );
     }
 
     &:not(.transparent).openUpward [data-bubble-arrow] {

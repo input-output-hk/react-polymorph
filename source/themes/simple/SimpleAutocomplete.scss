@@ -1,4 +1,4 @@
-@import 'theme';
+@import "theme";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -18,9 +18,15 @@ $autocomplete-placeholder-color: rgba(#5e6066, 0.5) !default;
 $autocomplete-selected-words-font-family: $theme-font-light, sans-serif !default;
 $autocomplete-selected-word-box-min-height: 28px !default;
 $autocomplete-selected-word-text-color: #fafbfc !default;
-$autocomplete-selected-word-box-background-color: rgba(68, 91, 124, 0.5) !default;
+$autocomplete-selected-word-box-background-color: rgba(
+  68,
+  91,
+  124,
+  0.5
+) !default;
 
-.autocompleteWrapper {}
+.autocompleteWrapper {
+}
 
 .autocompleteContent {
   background-color: $autocomplete-bg-color;
@@ -89,7 +95,8 @@ $autocomplete-selected-word-box-background-color: rgba(68, 91, 124, 0.5) !defaul
 
 // BEGIN SPECIAL STATES ---------- //
 
-.hasSelectedWords {}
+.hasSelectedWords {
+}
 
 .opened {
   border-color: $autocomplete-border-focus-color;

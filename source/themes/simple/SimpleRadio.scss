@@ -1,4 +1,4 @@
-@import 'theme';
+@import "theme";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -78,7 +78,7 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
     position: relative;
     &:after {
       background-color: $radio-color;
-      content: '';
+      content: "";
       position: absolute;
       border-radius: 50%;
       height: 30%;

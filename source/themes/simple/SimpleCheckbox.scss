@@ -1,4 +1,4 @@
-@import 'theme';
+@import "theme";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -86,7 +86,7 @@ $checkbox-check-height: $checkbox-size / 2 !default;
       border-color: #fff;
       border-style: solid;
       border-width: 0 $checkbox-check-thickness $checkbox-check-thickness 0;
-      content: '';
+      content: "";
       width: $checkbox-check-width;
       height: $checkbox-check-height;
       transform: rotate(45deg);

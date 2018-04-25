@@ -1,6 +1,6 @@
-@import 'theme';
-@import 'SimpleInput';
-@import 'mixins/arrow';
+@import "theme";
+@import "SimpleInput";
+@import "mixins/arrow";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -10,10 +10,10 @@ $select-input-bg-color: $input-bg-color !default;
 $select-input-border-focus-color: $input-border-focus-color !default;
 $select-input-padding: $input-padding !default;
 $select-input-border: $input-border !default;
-$select-up-arrow-url: url('#{$theme-assets-path}/select-up-arrow.svg') !default;
-$select-up-arrow-focus-url: url('#{$theme-assets-path}/select-up-arrow-focus.svg') !default;
-$select-down-arrow-url: url('#{$theme-assets-path}/select-down-arrow.svg') !default;
-$select-down-arrow-focus-url: url('#{$theme-assets-path}/select-down-arrow-focus.svg') !default;
+$select-up-arrow-url: url("#{$theme-assets-path}/select-up-arrow.svg") !default;
+$select-up-arrow-focus-url: url("#{$theme-assets-path}/select-up-arrow-focus.svg") !default;
+$select-down-arrow-url: url("#{$theme-assets-path}/select-down-arrow.svg") !default;
+$select-down-arrow-focus-url: url("#{$theme-assets-path}/select-down-arrow-focus.svg") !default;
 $select-down-arrow-width: 11px !default;
 $select-down-arrow-height: 7px !default;
 $select-down-arrow-position-bottom: 20px !default;
@@ -47,7 +47,7 @@ $select-down-arrow-rtl-position-left: 15px !default;
     background: $select-down-arrow-url;
     background-size: $select-down-arrow-width $select-down-arrow-height;
     bottom: $select-down-arrow-position-bottom;
-    content: '';
+    content: "";
     pointer-events: none;
     position: absolute;
     left: $select-down-arrow-position-left;
