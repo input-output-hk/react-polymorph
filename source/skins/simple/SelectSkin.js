@@ -44,7 +44,7 @@ export default props => {
         onChange={props.handleChange}
         optionRenderer={props.optionRenderer}
         onClose={props.toggleOpen}
-        selectedOptionValue={inputValue}
+        selectedOption={selectedOption}
         noResults={!props.options.length}
       />
     </div>

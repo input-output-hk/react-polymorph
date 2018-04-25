@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bool, func, object, array, string } from 'prop-types';
+import { bool, func, object, array, string, any } from 'prop-types';
 import ReactDOM from 'react-dom';
 
 // Options theme API
@@ -26,7 +26,7 @@ class Options extends Component {
     options: array,
     optionRenderer: func,
     resetOnClose: bool, // reset highlighted option on options close (e.g. in autocomplete)
-    selectedOptionValue: string,
+    selectedOption: any,
     skin: func.isRequired,
     theme: object,
     themeId: string,
@@ -124,6 +124,13 @@ class Options extends Component {
     ) {
       this.setState({ highlightedOptionIndex: optionIndex });
     }
+  };
+
+  isSelectedOption = (optionIndex) => {
+    const { options, isOpeningUpward } = this.props;
+    const index = isOpeningUpward ? options.length - 1 - optionIndex : optionIndex;
+    const option = options[index];
+    return option && this.props.selectedOption === option;
   };
 
   isHighlightedOption = optionIndex => {
@@ -265,6 +272,7 @@ class Options extends Component {
         isOpen={isOpen}
         highlightedOptionIndex={highlightedOptionIndex}
         getHighlightedOptionIndex={this.getHighlightedOptionIndex}
+        isSelectedOption={this.isSelectedOption}
         isHighlightedOption={this.isHighlightedOption}
         handleClickOnOption={this.handleClickOnOption}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}

@@ -14,6 +14,7 @@ $option-bg-color: #fafbfc !default;
 $option-font-color: #5e6066 !default;
 $option-font-color-disabled: rgba(#5e6066, 0.5) !default;
 $option-highlight-color: #edf0f3 !default;
+$option-checkmark-color: #5e6066 !default;
 $option-padding: 14px 20px !default;
 // Bubble arrow
 $options-bubble-arrow: true !default;
@@ -59,7 +60,18 @@ $options-bubble-arrow: true !default;
   padding: $option-padding;
 
   &.selectedOption {
-    font-family: $theme-font-medium;
+    display: flex;
+    &:after {
+      align-self: center;
+      border-color: $option-checkmark-color;
+      border-style: solid;
+      border-width: 0 2px 2px 0;
+      content: "";
+      height: 9px;
+      margin: 0 2px 3px auto;
+      transform: rotate(45deg);
+      width: 5px;
+    }
   }
 
   &.highlightedOption {

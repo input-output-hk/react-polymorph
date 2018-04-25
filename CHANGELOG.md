@@ -15,6 +15,8 @@ Major breaking changes due to large refactoring of component architecture:
 
 ## Features
 
+* Add checkmark for selected option [PR 54](https://github.com/input-output-hk/react-polymorph/pull/54)
+
 * Add Autocomplete clear feature [PR 49](https://github.com/input-output-hk/react-polymorph/pull/49)
 
 * Implements a theme API for each component. This is a plain object which exposes the shape of a component's theme. Each property on the theme API object corresponds with a class name assigned to an element within the component's skin and a class definition within the component's theme.
