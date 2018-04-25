@@ -14,7 +14,7 @@ $option-bg-color: #fafbfc !default;
 $option-font-color: #5e6066 !default;
 $option-font-color-disabled: rgba(#5e6066, 0.5) !default;
 $option-highlight-color: #edf0f3 !default;
-$option-checkmark-color: #5E6066 !default;
+$option-checkmark-color: #5e6066 !default;
 $option-padding: 14px 20px !default;
 
 .options {
@@ -53,19 +53,17 @@ $option-padding: 14px 20px !default;
 
   &.selectedOption {
     display: flex;
+
     &:after {
       align-self: center;
-      margin-left: auto;
-      margin-right: 2px;
-      position: relative;
-      bottom: 2px;
+      border-color: $option-checkmark-color;
       border-style: solid;
       border-width: 0 2px 2px 0;
       content: "";
-      width: 5px;
       height: 9px;
+      margin: 0 2px 3px auto;
       transform: rotate(45deg);
-      border-color: $option-checkmark-color;
+      width: 5px;
     }
   }
 
