@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## vNEXT
+
+### Features
+
+- Add checkmark for selected option [PR 54](https://github.com/input-output-hk/react-polymorph/pull/54)
+
 ## 0.6.5
 
 ### Features

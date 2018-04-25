@@ -16,7 +16,7 @@ export default class Options extends SkinnableComponent {
     isOpeningUpward: PropTypes.bool,
     resetOnClose: PropTypes.bool, // reset highlighted option on options close (e.g. in autocomplete)
     optionRenderer: PropTypes.func,
-    selectedOptionValue: PropTypes.string,
+    selectedOption: PropTypes.any,
     noResults: PropTypes.bool,
     noResultsMessage: StringOrElement,
   });
@@ -96,6 +96,13 @@ export default class Options extends SkinnableComponent {
     if (!this.isHighlightedOption(optionIndex) && this.isDisabledOption(optionIndex)) {
       this.setState({ highlightedOptionIndex: optionIndex });
     }
+  };
+
+  isSelectedOption = (optionIndex) => {
+    const { options, isOpeningUpward } = this.props;
+    const index = isOpeningUpward ? options.length - 1 - optionIndex : optionIndex;
+    const option = options[index];
+    return option && this.props.selectedOption === option;
   };
 
   isHighlightedOption = (optionIndex) => {

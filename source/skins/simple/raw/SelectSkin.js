@@ -47,7 +47,7 @@ export const selectSkinFactory = (InputSkin, OptionsSkin) => (
               onChange={component.handleChange}
               optionRenderer={optionRenderer}
               onClose={component.onCloseOptions}
-              selectedOptionValue={inputValue}
+              selectedOption={selectedOption}
               noResults={!options.length}
             />
           </InputSkin>

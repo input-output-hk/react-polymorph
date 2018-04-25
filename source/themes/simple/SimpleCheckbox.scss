@@ -48,6 +48,7 @@ $checkbox-checked-bg-color: $checkbox-border-color !default;
   &.checked {
     background-color: $checkbox-checked-bg-color;
     position: relative;
+
     &:after {
       border-color: #fff;
       border-style: solid;
