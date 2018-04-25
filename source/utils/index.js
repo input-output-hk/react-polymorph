@@ -3,7 +3,7 @@ import themeUtils from './themes';
 import eventUtils from './events';
 
 // named exports for props utility functions
-export const { pickDOMProps, StringOrElement, composeFunctions } = propsUtils;
+export const { pickDOMProps, composeFunctions } = propsUtils;
 
 // named exports for theme utility functions
 export const { composeTheme, addThemeId } = themeUtils;
@@ -24,7 +24,6 @@ export const {
 // in the instance of wanting all of them imported at once
 export default {
   pickDOMProps,
-  StringOrElement,
   composeTheme,
   addThemeId,
   getMousePosition,
