@@ -1,29 +1,28 @@
-import React from "react";
+import React from 'react';
 
 // storybook
-import { storiesOf } from "@storybook/react";
-import { withState } from "@dump247/storybook-state";
+import { storiesOf } from '@storybook/react';
+import { withState } from '@dump247/storybook-state';
 
 // components
-import { FormField, NumericInput } from "../source/components";
+import { FormField, NumericInput } from '../source/components';
 
 // skins
-import { FormFieldSkin, InputSkin } from "../source/skins/simple";
+import { FormFieldSkin, InputSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from "../source/themes/simple";
-import CustomInputTheme from "./theme-customizations/Input.custom.scss";
+import SimpleTheme from '../source/themes/simple';
+import CustomInputTheme from './theme-customizations/Input.custom.scss';
 
 // theme overrides and identifiers
-import themeOverrides from "./theme-overrides/customInput.scss";
-import { IDENTIFIERS } from "../source/themes/API";
+import themeOverrides from './theme-overrides/customInput.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
-storiesOf("NumericInput", module)
+storiesOf('NumericInput', module)
   // ====== Stories ======
 
-  .add(
-    "Plain",
-    withState({ value: "" }, store => (
+  .add('plain',
+    withState({ value: '' }, store => (
       <NumericInput
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -32,9 +31,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "Send amount - label",
-    withState({ value: "" }, store => (
+  .add('send amount - label',
+    withState({ value: '' }, store => (
       <FormField
         label="Some label"
         skin={FormFieldSkin}
@@ -50,9 +48,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "Send amount - placeholder",
-    withState({ value: "" }, store => (
+  .add('send amount - placeholder',
+    withState({ value: '' }, store => (
       <NumericInput
         value={store.state.value}
         placeholder="18.000000"
@@ -62,9 +59,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "Send amount - focus / blur",
-    withState({ value: "", focused: false, blurred: false }, store => (
+  .add('send amount - focus / blur',
+    withState({ value: '', focused: false, blurred: false }, store => (
       <NumericInput
         value={store.state.value}
         placeholder="focus / blur"
@@ -76,9 +72,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "Send amount - error",
-    withState({ value: "" }, store => (
+  .add('send amount - error',
+    withState({ value: '' }, store => (
       <FormField
         label="Amount"
         error="Please enter a valid amount"
@@ -96,9 +91,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "Send amount - beforeDot(3) and afterDot(4)",
-    withState({ value: "" }, store => (
+  .add('send amount - beforeDot(3) and afterDot(4)',
+    withState({ value: '' }, store => (
       <NumericInput
         value={store.state.value}
         placeholder="0.0000"
@@ -110,9 +104,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "Send amount - maxValue(30000)",
-    withState({ value: "" }, store => (
+  .add('send amount - maxValue(30000)',
+    withState({ value: '' }, store => (
       <FormField
         label="Amount"
         skin={FormFieldSkin}
@@ -130,9 +123,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "Send amount - maxValue(30000) and minValue(1)",
-    withState({ value: "" }, store => (
+  .add('send amount - maxValue(30000) and minValue(1)',
+    withState({ value: '' }, store => (
       <FormField
         label="Amount"
         skin={FormFieldSkin}
@@ -151,9 +143,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "Send amount - onChange",
-    withState({ value: "" }, store => (
+  .add('send amount - onChange',
+    withState({ value: '' }, store => (
       <FormField
         label="Amount"
         skin={FormFieldSkin}
@@ -174,9 +165,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "theme overrides",
-    withState({ value: "" }, store => (
+  .add('theme overrides',
+    withState({ value: '' }, store => (
       <NumericInput
         themeOverrides={themeOverrides}
         value={store.state.value}
@@ -187,9 +177,8 @@ storiesOf("NumericInput", module)
     ))
   )
 
-  .add(
-    "custom theme",
-    withState({ value: "" }, store => (
+  .add('custom theme',
+    withState({ value: '' }, store => (
       <NumericInput
         theme={CustomInputTheme}
         value={store.state.value}
