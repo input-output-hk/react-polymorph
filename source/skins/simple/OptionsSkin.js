@@ -23,6 +23,7 @@ export default props => {
     noResultsMessage,
     getHighlightedOptionIndex,
     isHighlightedOption,
+    isSelectedOption,
     handleClickOnOption,
     setHighlightedOptionIndex,
     optionsRef
@@ -37,26 +38,34 @@ export default props => {
     // if Options is being rendered via Autocomplete,
     // the value of props.render is renderOptions passed down from AutocompleteSkin
     if (!noResults && render) {
-      // call custom render function
+      // call user's custom render function
       return render(getOptionProps);
     } else if (!noResults && !render) {
-      // render default skin
-      return sortedOptions.map((option, index) => (
-        <li
-          key={index}
-          className={classnames([
-            theme[themeId].option,
-            isHighlightedOption(index) ? theme[themeId].highlightedOption : null,
-            option.isDisabled ? theme[themeId].disabledOption : null
-          ])}
-          onClick={event => handleClickOnOption(option, event)}
-          onMouseEnter={() => setHighlightedOptionIndex(index)}
-        >
-          {optionRenderer
-            ? optionRenderer(option)
-            : typeof option === "object" ? option.label : option}
-        </li>
-      ));
+      // render default simple skin
+      return sortedOptions.map((option, index) => {
+        // saves reference to func in memory, prevents unwanted rerenders
+        // anonymous funcs in event handlers are reassigned in memory each render cycle
+        const boundSetHighlightedOptionIndex = setHighlightedOptionIndex.bind(null, index);
+        const boundHandleClickOnOption = handleClickOnOption.bind(null, option);
+
+        return (
+          <li
+            key={index}
+            className={classnames([
+              theme[themeId].option,
+              isHighlightedOption(index) ? theme[themeId].highlightedOption : null,
+              isSelectedOption(index) ? theme[themeId].selectedOption : null,
+              option.isDisabled ? theme[themeId].disabledOption : null
+            ])}
+            onClick={boundHandleClickOnOption}
+            onMouseEnter={boundSetHighlightedOptionIndex}
+          >
+            {optionRenderer
+              ? optionRenderer(option)
+              : typeof option === 'object' ? option.label : option}
+          </li>
+        )
+      });
     } else {
       // render no results message
       return <li className={theme[themeId].option}>{noResultsMessage}</li>;

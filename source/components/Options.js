@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { bool, func, object, array, string, shape } from "prop-types";
+import { bool, func, object, array, string, any } from 'prop-types';
 import { withTheme } from "../themes/withTheme";
 
 // external libraries
@@ -37,7 +37,7 @@ class Options extends Component {
     optionRenderer: func,
     render: func,
     resetOnClose: bool, // reset highlighted option on options close (e.g. in autocomplete)
-    selectedOptionValue: string,
+    selectedOption: any,
     skin: func.isRequired,
     selectedOptions: array,
     theme: object,
@@ -138,6 +138,13 @@ class Options extends Component {
     }
   };
 
+  isSelectedOption = (optionIndex) => {
+    const { options, isOpeningUpward } = this.props;
+    const index = isOpeningUpward ? options.length - 1 - optionIndex : optionIndex;
+    const option = options[index];
+    return option && this.props.selectedOption === option;
+  };
+
   isHighlightedOption = optionIndex => {
     return this.state.highlightedOptionIndex === optionIndex;
   };
@@ -235,21 +242,24 @@ class Options extends Component {
   _handleKeyDown = event => {
     const highlightOptionIndex = this.state.highlightedOptionIndex;
     switch (event.keyCode) {
-      case 9: // Select currently highlighted option on Tab key
+      case 9: // Tab key: selects currently highlighted option
         event.preventDefault();
         this._handleSelectionOnEnterKey(event);
         break;
-      case 13: // Select currently highlighted option on Enter key
+      case 13: // Enter key: selects currently highlighted option
         this._handleSelectionOnEnterKey(event);
         break;
-      case 27: // Close on Escape key
+      case 32: // Space key: selects currently highlighted option
+        this._handleSelectionOnEnterKey(event);
+        break;
+      case 27: // Escape key: closes options if open
         this.close();
         break;
-      case 38: // Move selection higlight 'up' on Arrow Up key
+      case 38: // Up Arrow key: moves highlighted selection 'up' 1 index
         event.preventDefault(); // prevent caret move
         this._handleHighlightMove(highlightOptionIndex, "up");
         break;
-      case 40: // Move selection higlight 'down' on Arrow Down key
+      case 40: // Down Arrow key: moves highlighted selection 'down' 1 index
         event.preventDefault(); // prevent caret move
         this._handleHighlightMove(highlightOptionIndex, "down");
         break;
@@ -308,6 +318,7 @@ class Options extends Component {
         isOpen={isOpen}
         highlightedOptionIndex={highlightedOptionIndex}
         getHighlightedOptionIndex={this.getHighlightedOptionIndex}
+        isSelectedOption={this.isSelectedOption}
         isHighlightedOption={this.isHighlightedOption}
         handleClickOnOption={this.handleClickOnOption}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}
