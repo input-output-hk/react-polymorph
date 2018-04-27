@@ -1,5 +1,5 @@
-import React from "react";
-import { ThemeContext } from "./ThemeContext";
+import React from 'react';
+import { ThemeContext } from './ThemeContext';
 
 // withTheme is a HOC that takes a Component as a parameter
 // and returns that Component wrapped within ThemeContext.Consumer.

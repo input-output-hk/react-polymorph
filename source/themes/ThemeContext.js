@@ -1,6 +1,6 @@
-import React from "react";
-import SimpleTheme from "./simple";
-import ROOT_THEME_API from "./API";
+import React from 'react';
+import SimpleTheme from './simple';
+import ROOT_THEME_API from './API';
 
 // components that are NOT directly nested within a ThemeProvider
 // can access simple theme as "this.props.context.theme",
