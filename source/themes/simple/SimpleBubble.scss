@@ -12,7 +12,7 @@ $bubble-border-color: #c6cdd6 !default;
 $bubble-border-color-transparent: transparent !default;
 $bubble-border: $bubble-border-width solid $bubble-border-color !default;
 $bubble-border-transparent: $bubble-border-width-transparent solid
-$bubble-border-color-transparent !default;
+  $bubble-border-color-transparent !default;
 $bubble-box-shadow: 0 1.5px 5px 0 rgba(0, 0, 0, 0.18) !default;
 $bubble-padding: 6px 12px !default;
 $bubble-font-color: #5e6066 !default;
@@ -35,11 +35,21 @@ $bubble-shadow: none !default;
   // specificity internally, allowing it to be overwritten externally
   @if $bubble-arrow == true {
     &.transparent [data-bubble-arrow] {
-      @include arrow(up, $bubble-bg-color-transparent, $bubble-border-color-transparent, $bubble-arrow-size);
+      @include arrow(
+        up,
+        $bubble-bg-color-transparent,
+        $bubble-border-color-transparent,
+        $bubble-arrow-size
+      );
     }
 
     &.transparent.openUpward [data-bubble-arrow] {
-      @include arrow(down, $bubble-bg-color-transparent, $bubble-border-color-transparent, $bubble-arrow-size);
+      @include arrow(
+        down,
+        $bubble-bg-color-transparent,
+        $bubble-border-color-transparent,
+        $bubble-arrow-size
+      );
     }
 
     &:not(.transparent) [data-bubble-arrow] {
@@ -47,7 +57,12 @@ $bubble-shadow: none !default;
     }
 
     &:not(.transparent).openUpward [data-bubble-arrow] {
-      @include arrow(down, $bubble-bg-color, $bubble-border-color, $bubble-arrow-size);
+      @include arrow(
+        down,
+        $bubble-bg-color,
+        $bubble-border-color,
+        $bubble-arrow-size
+      );
     }
 
     // Make sure the arrow overlaps any borders on the bubble

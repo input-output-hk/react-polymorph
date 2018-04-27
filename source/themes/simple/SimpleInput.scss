@@ -45,7 +45,8 @@ $input-errored-border: $theme-color-error;
 
 // BEGIN SPECIAL STATES ---------- //
 
-.errored {}
+.errored {
+}
 
 .disabled {
   background-color: $input-disabled-bg-color;

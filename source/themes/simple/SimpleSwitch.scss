@@ -10,7 +10,7 @@ $switch-track-length: 50px !default;
 $switch-label-color: #5e6066 !default;
 $switch-label-disabled-color: $theme-color-light-grey !default;
 
-@mixin thumbBoxShadow ($color) {
+@mixin thumbBoxShadow($color) {
   box-shadow: -1.5px -1.5px 0 $color inset, 1.5px 1.5px 0 $color inset,
     1.5px -1.5px 0 $color inset, -1.5px 1.5px 0 $color inset;
 }
@@ -30,7 +30,9 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
   }
 
   &.disabled {
-    &:hover, .label:hover, .switch:hover .thumb:hover {
+    &:hover,
+    .label:hover,
+    .switch:hover .thumb:hover {
       cursor: default;
     }
   }
@@ -91,7 +93,7 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
   transition: left 200ms ease-in-out;
   width: $switch-track-height;
   &:hover {
-      cursor: pointer;
+    cursor: pointer;
   }
 }
 
