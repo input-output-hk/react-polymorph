@@ -30,6 +30,8 @@ type State = {
 };
 
 class Checkbox extends Component<Props, State> {
+  controlId = generateId(this.props.themeId);
+
   static defaultProps = {
     checked: false,
     disabled: false,
@@ -53,10 +55,11 @@ class Checkbox extends Component<Props, State> {
   }
 
   render() {
+    console.log(this.controlId);
     // destructuring props ensures only the "...rest" get passed down
     const { skin: CheckboxSkin, theme, themeOverrides, ...rest } = this.props;
 
-    return <CheckboxSkin theme={this.state.composedTheme} {...rest} />;
+    return <CheckboxSkin controlId={this.controlId} theme={this.state.composedTheme} {...rest} />;
   }
 }
 
