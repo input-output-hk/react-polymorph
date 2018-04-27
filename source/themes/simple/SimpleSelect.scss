@@ -84,7 +84,7 @@ $select-down-arrow-rtl-position-left: 15px !default;
 // END SPECIAL STATES ---------- //
 
 // right-to-left languages support
-body[dir="rtl"] {
+body[dir='rtl'] {
   .selectInput:after {
     left: $select-down-arrow-rtl-position-left;
   }

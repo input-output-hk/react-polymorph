@@ -34,7 +34,7 @@ export default props => {
           props.checked ? theme[themeId].checked : null
         ])}
       >
-        <span className={theme[themeId].thumb}/>
+        <span className={theme[themeId].thumb} />
       </div>
       {props.label ? (
         <label className={theme[themeId].label}>{props.label}</label>

@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { ThemeProvider, FormField, Select } from '../source/components';
+import { FormField, Select } from '../source/components';
 
 // skins
 import { SelectSkin, FormFieldSkin } from '../source/skins/simple';
@@ -48,13 +48,10 @@ const COUNTRIES_WITH_DISABLED_OPTIONS = [
 ];
 
 storiesOf('Select', module)
-  .addDecorator(story => {
-    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
-  })
-
   // ====== Stories ======
 
-  .add('Countries - options', withState({ value: '' }, store => (
+  .add('countries - options',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -64,15 +61,16 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('Countries - label', withState({ value: '' }, store => (
+  .add('countries - label',
+    withState({ value: '' }, store => (
       <FormField
-        label='Some label'
+        label="Some label"
         skin={FormFieldSkin}
         render={props => (
           <Select
             value={store.state.value}
             onChange={value => store.set({ value })}
-            label='Countries'
+            label="Countries"
             options={COUNTRIES}
             skin={SelectSkin}
           />
@@ -81,18 +79,20 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('Countries - placeholder', withState({ value: '' }, store => (
+  .add('countries - placeholder',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
-        placeholder='Select your country …'
+        placeholder="Select your country …"
         skin={SelectSkin}
       />
     ))
   )
 
-  .add('Countries - value', withState({ value: COUNTRIES[0].value }, store => (
+  .add('countries - value',
+    withState({ value: COUNTRIES[0].value }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -102,10 +102,11 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('Countries - error', withState({ value: COUNTRIES[0].value }, store => (
+  .add('countries - error',
+    withState({ value: COUNTRIES[0].value }, store => (
       <FormField
-        label='Countries'
-        error='You picked the wrong country'
+        label="Countries"
+        error="You picked the wrong country"
         skin={FormFieldSkin}
         render={props => (
           <Select
@@ -120,35 +121,35 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('Countries - custom options template', withState({ value: '' }, store => (
+  .add('countries - custom options template',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES_WITH_FLAGS}
-        optionRenderer={option => {
-          return (
-            <div className={styles.customOption}>
-              <img src={option.flag} />
-              <span>{option.label}</span>
-            </div>
-          );
-        }}
+        optionRenderer={option => (
+          <div className={styles.customOption}>
+            <img src={option.flag} />
+            <span>{option.label}</span>
+          </div>
+        )}
         skin={SelectSkin}
       />
     ))
   )
 
-  .add('Countries - isOpeningUpward', withState({ value: '' }, store => (
+  .add('countries - isOpeningUpward',
+    withState({ value: '' }, store => (
       <FormField
         className={styles.customMargin}
-        label='Countries (opening upward)'
+        label="Countries (opening upward)"
         skin={FormFieldSkin}
         render={props => (
           <Select
             value={store.state.value}
             onChange={value => store.set({ value })}
             options={COUNTRIES}
-            placeholder='Select your country …'
+            placeholder="Select your country …"
             skin={SelectSkin}
             isOpeningUpward
           />
@@ -157,28 +158,29 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('Countries - with disabled options', withState({ value: '' }, store => (
+  .add('countries - with disabled options',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
-        label='Countries (has disabled options)'
+        label="Countries (has disabled options)"
         options={COUNTRIES_WITH_DISABLED_OPTIONS}
-        placeholder='Select your country …'
+        placeholder="Select your country …"
         skin={SelectSkin}
       />
     ))
   )
 
-  .add('custom theme', withState({ value: '' }, store => (
+  .add('custom theme',
+    withState({ value: '' }, store => (
       <Select
         theme={{ ...SimpleTheme, [IDENTIFIERS.SELECT]: CustomSelectTheme }}
         value={store.state.value}
         onChange={value => store.set({ value })}
-        label='Countries (has disabled options)'
+        label="Countries (has disabled options)"
         options={COUNTRIES_WITH_DISABLED_OPTIONS}
-        placeholder='Select your country …'
+        placeholder="Select your country …"
         skin={SelectSkin}
       />
     ))
-  )
-;
+  );

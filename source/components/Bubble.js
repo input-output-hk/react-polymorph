@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
-import { string, bool, func, object } from 'prop-types';
-import { addEventsToDocument, removeEventsFromDocument } from '../utils';
-
-// Bubble theme API
-import THEME_API, { IDENTIFIERS } from '../themes/API';
+import { string, bool, func, object, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // internal utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import {
+  addEventsToDocument,
+  removeEventsFromDocument,
+  StringOrElement,
+  composeTheme,
+  addThemeId
+} from '../utils';
+
+// import constants
+import { IDENTIFIERS } from '../themes/API';
 
 class Bubble extends Component {
   static propTypes = {
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
     isHidden: bool,
     isFloating: bool,
     isOpeningUpward: bool,
     isTransparent: bool,
     skin: func.isRequired,
-    theme: object,
+    theme: object, // takes precedence over theme in context
     themeId: string,
     themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
@@ -30,15 +40,18 @@ class Bubble extends Component {
     themeOverrides: {}
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+
     this.state = {
-      position: null,
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API)
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      position: null
     };
   }
 
@@ -136,12 +149,7 @@ class Bubble extends Component {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin: BubbleSkin,
-      theme,
-      themeOverrides,
-      ...rest
-    } = this.props;
+    const { skin: BubbleSkin, theme, themeOverrides, ...rest } = this.props;
 
     return (
       <BubbleSkin
@@ -154,4 +162,4 @@ class Bubble extends Component {
   }
 }
 
-export default Bubble;
+export default withTheme(Bubble);

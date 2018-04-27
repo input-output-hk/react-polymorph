@@ -1,7 +1,7 @@
 import { isEmpty, cloneDeep } from 'lodash';
 
 const appendToProperty = (dest, name, value) => {
-  dest[name] === '' ? dest[name] = value : dest[name] += ' ' + value;
+  dest[name] === '' ? (dest[name] = value) : (dest[name] += ' ' + value);
 };
 
 const composeComponentStyles = (componentStyles, componentTheme) => {
@@ -13,6 +13,21 @@ const composeComponentStyles = (componentStyles, componentTheme) => {
       }
     }
   }
+};
+
+// checks for the existence of a property on theme
+// that matches the value of themeId (string)
+// if the property exists, also checks the type of
+// theme[themeId] to ensure it's an object
+const addThemeId = (theme, themeId) => {
+  if (!isEmpty(theme) && themeId) {
+    const themeIdExists = theme.hasOwnProperty(themeId);
+    const themeIdIsObj = typeof theme[themeId] === 'object';
+
+    return themeIdExists && themeIdIsObj ? theme : { [themeId]: theme };
+  }
+
+  return theme;
 };
 
 /**
@@ -42,5 +57,6 @@ export const composeTheme = (theme = {}, themeOverrides = {}, themeAPI = {}) => 
 };
 
 export default {
-  composeTheme
+  composeTheme,
+  addThemeId
 };

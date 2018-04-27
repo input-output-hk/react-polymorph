@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
-import { bool, func, object, string, number } from 'prop-types';
+import { bool, func, object, string, number, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // external libraries
 import { isString, flow } from 'lodash';
 
-// import the Input component's constant theme API
-import THEME_API, { IDENTIFIERS } from '../themes/API';
-
 // import utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, addThemeId } from '../utils';
+
+// import constants
+import { IDENTIFIERS } from '../themes/API';
 
 class TextArea extends Component {
   static propTypes = {
     autoFocus: bool,
     autoResize: bool,
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
     error: StringOrElement,
     maxLength: number,
     minLength: number,
@@ -40,15 +45,18 @@ class TextArea extends Component {
     value: ''
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+
     this.state = {
-      error: '',
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API)
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      error: ''
     };
   }
 
@@ -107,8 +115,7 @@ class TextArea extends Component {
   }
 
   _enforceStringValue(value) {
-    if (!isString(value))
-      throw 'Values passed to Input::onChange must be strings';
+    if (!isString(value)) throw 'Values passed to Input::onChange must be strings';
     return value;
   }
 
@@ -141,8 +148,7 @@ class TextArea extends Component {
     const heightOffset =
       style.boxSizing === 'content-box'
         ? -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom))
-        : parseFloat(style.borderTopWidth) +
-          parseFloat(style.borderBottomWidth);
+        : parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
 
     // resize the input to its content size
     textareaElement.style.height = 'auto';
@@ -173,4 +179,4 @@ class TextArea extends Component {
   }
 }
 
-export default TextArea;
+export default withTheme(TextArea);

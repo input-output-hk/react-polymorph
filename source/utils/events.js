@@ -57,10 +57,10 @@ export default {
 // constants and helper functions /////////
 
 const TRANSITIONS = {
-  'transition': 'transitionend',
-  'OTransition': 'oTransitionEnd',
-  'MozTransition': 'transitionend',
-  'WebkitTransition': 'webkitTransitionEnd'
+  transition: 'transitionend',
+  OTransition: 'oTransitionEnd',
+  MozTransition: 'transitionend',
+  WebkitTransition: 'webkitTransitionEnd'
 };
 
 function transitionEventNamesFor (element) {

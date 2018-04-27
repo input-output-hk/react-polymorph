@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { string, bool, func, object } from 'prop-types';
-
-// FormField's theme API
-import THEME_API, { IDENTIFIERS } from '../themes/API';
+import { string, bool, func, object, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // import utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, addThemeId } from '../utils';
+
+// import constants
+import { IDENTIFIERS } from '../themes/API';
 
 class FormField extends Component {
   static propTypes = {
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
     disabled: bool,
     error: StringOrElement,
     label: StringOrElement,
@@ -26,18 +31,18 @@ class FormField extends Component {
     themeOverrides: {}
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
 
-    const theme = props.theme && props.theme[props.themeId] ? props.theme : null;
+    const { context, themeId, theme, themeOverrides } = props;
 
     this.state = {
       error: '',
-      composedTheme: composeTheme(theme || context.theme, props.themeOverrides, THEME_API),
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      )
     };
   }
 
@@ -74,4 +79,4 @@ class FormField extends Component {
   }
 }
 
-export default FormField;
+export default withTheme(FormField);

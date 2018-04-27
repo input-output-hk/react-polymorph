@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import { bool, func, object, number, string } from 'prop-types';
+import { bool, func, object, number, string, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // external libraries
 import { isString, flow } from 'lodash';
 
-// Input's theme API
-import THEME_API, { IDENTIFIERS } from '../themes/API';
-
 // internal utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, addThemeId } from '../utils';
+
+// import constants
+import { IDENTIFIERS } from '../themes/API';
 
 class Input extends Component {
   static propTypes = {
     autoFocus: bool,
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
     error: StringOrElement,
     onBlur: func,
     onChange: func,
@@ -41,15 +46,20 @@ class Input extends Component {
     value: ''
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+    const test1 = addThemeId(theme || context.theme, themeId);
+    const test2 = addThemeId(themeOverrides, themeId);
+
     this.state = {
-      error: '',
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      error: ''
     };
   }
 
@@ -92,8 +102,7 @@ class Input extends Component {
   }
 
   _enforceStringValue(value) {
-    if (!isString(value))
-      throw 'Values passed to Input::onChange must be strings';
+    if (!isString(value)) throw 'Values passed to Input::onChange must be strings';
     return value;
   }
 
@@ -139,4 +148,4 @@ class Input extends Component {
   }
 }
 
-export default Input;
+export default withTheme(Input);

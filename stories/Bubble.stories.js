@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { ThemeProvider, Bubble } from '../source/components';
+import { Bubble } from '../source/components';
 
 // skins
 import { BubbleSkin } from '../source/skins/simple';
@@ -20,11 +20,6 @@ import themeOverrides from './theme-overrides/customBubble.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Bubble', module)
-
-  .addDecorator(story => {
-    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
-  })
-
   // ====== Stories ======
 
   .add('plain', () => (
@@ -84,7 +79,7 @@ storiesOf('Bubble', module)
     <div className={styles.container}>
       <Bubble
         isTransparent={false}
-        themeOverrides={{ [IDENTIFIERS.BUBBLE]: themeOverrides }}
+        themeOverrides={themeOverrides}
         skin={BubbleSkin}
       >
         theme overrides
@@ -94,11 +89,7 @@ storiesOf('Bubble', module)
 
   .add('custom theme', () => (
     <div className={styles.container}>
-      <Bubble
-        isTransparent={false}
-        theme={{ [IDENTIFIERS.BUBBLE]: BubbleCustomTheme }}
-        skin={BubbleSkin}
-      >
+      <Bubble isTransparent={false} theme={BubbleCustomTheme} skin={BubbleSkin}>
         custom theme
       </Bubble>
     </div>

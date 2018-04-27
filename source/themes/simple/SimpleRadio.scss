@@ -20,7 +20,8 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
     cursor: pointer;
   }
   &.disabled {
-    &:hover, .label:hover {
+    &:hover,
+    .label:hover {
       cursor: default;
     }
   }

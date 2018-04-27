@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import { func, object, number, string } from 'prop-types';
+import { func, object, number, string, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // external libraries
 import { flow } from 'lodash';
 
-// Input's theme API
-import THEME_API, { IDENTIFIERS } from '../themes/API';
-
 // internal utility functions
-import { StringOrElement, composeTheme } from '../utils';
+import { StringOrElement, composeTheme, addThemeId } from '../utils';
+
+// import constants
+import { IDENTIFIERS } from '../themes/API';
 
 class NumericInput extends Component {
   static propTypes = {
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
     error: StringOrElement,
     onChange: func,
     maxAfterDot: number, // max number of characters after dot
@@ -36,14 +41,17 @@ class NumericInput extends Component {
     value: ''
   };
 
-  static contextTypes = {
-    theme: object
-  };
-
-  constructor(props, context) {
+  constructor(props) {
     super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+
     this.state = {
-      composedTheme: composeTheme(props.theme || context.theme, props.themeOverrides, THEME_API),
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
       caretPosition: 0, // Current caret position
       separatorsCount: 0, // Number of comma separators used for calculating caret position after separators are injected
       error: null, // Inner (Component) state error // e.g. if value > maxValue set error message
@@ -157,8 +165,7 @@ class NumericInput extends Component {
             handledValue = lastValidValue;
           }
         } else {
-          handledValue =
-            splitedValue[0] + '.' + splitedValue[1] + splitedValue[2];
+          handledValue = splitedValue[0] + '.' + splitedValue[1] + splitedValue[2];
           // Second dot was entered after current one -> stay in same position (swallow dot)
           if (position > beforeDot.length + 1) {
             position -= 1;
@@ -328,4 +335,4 @@ class NumericInput extends Component {
   }
 }
 
-export default NumericInput;
+export default withTheme(NumericInput);

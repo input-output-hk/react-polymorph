@@ -23,7 +23,7 @@ export default props => (
     <input
       {...pickDOMProps(props)}
       className={props.theme[props.themeId].input}
-      type='checkbox'
+      type="checkbox"
     />
     <div
       className={classnames([

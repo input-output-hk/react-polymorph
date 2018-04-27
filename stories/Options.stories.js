@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { ThemeProvider, Autocomplete, Select, Options } from '../source/components';
+import { Autocomplete, Select, Options } from '../source/components';
 
 // skins
 import { AutocompleteSkin, OptionsSkin, SelectSkin } from '../source/skins/simple';
@@ -25,19 +25,24 @@ const OPTIONS_COLLECTION = [
 ];
 
 const MNEMONIC_WORDS = [
-  'home', 'cat', 'dog', 'fish', 'hide', 'hover',
-  'duck', 'category', 'join', 'paper', 'box', 'tab'
+  'home',
+  'cat',
+  'dog',
+  'fish',
+  'hide',
+  'hover',
+  'duck',
+  'category',
+  'join',
+  'paper',
+  'box',
+  'tab'
 ];
 
 storiesOf('Options', module)
-
-  .addDecorator(story => {
-    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
-  })
-
   // ====== Stories ======
-
-  .add('combined with Input to construct Select', withState({ value: '' }, store => (
+  .add('combined with Input to construct Select',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -47,11 +52,12 @@ storiesOf('Options', module)
     ))
   )
 
-  .add('combined with Input to construct Autocomplete', withState({ selectedOpts: [] }, store => (
+  .add('combined with Input to construct Autocomplete',
+    withState({ selectedOpts: [] }, store => (
       <Autocomplete
-        label='Recovery phrase'
+        label="Recovery phrase"
         options={MNEMONIC_WORDS}
-        placeholder='Enter mnemonic...'
+        placeholder="Enter mnemonic..."
         maxSelections={9}
         maxVisibleOptions={5}
         invalidCharsRegex={/[^a-zA-Z]/g}
@@ -61,9 +67,10 @@ storiesOf('Options', module)
     ))
   )
 
-  .add('custom theme', withState({ value: '' }, store => (
+  .add('custom theme',
+    withState({ value: '' }, store => (
       <Options
-        theme={{ [IDENTIFIERS.OPTIONS]: CustomOptionsTheme }}
+        theme={CustomOptionsTheme}
         isOpen={true}
         options={OPTIONS_COLLECTION}
         isOpeningUpward={false}

@@ -4,7 +4,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // components
-import { ThemeProvider, Tooltip } from '../source/components';
+import { Tooltip } from '../source/components';
 
 // skins
 import { TooltipSkin } from '../source/skins/simple';
@@ -19,11 +19,6 @@ import themeOverrides from './theme-overrides/customTooltipBubble.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Tooltip', module)
-
-  .addDecorator(story => {
-    return <ThemeProvider theme={SimpleTheme}>{story()}</ThemeProvider>;
-  })
-
   // ====== Stories ======
 
   .add('plain', () => (
@@ -59,11 +54,7 @@ storiesOf('Tooltip', module)
 
   .add('isBounded', () => (
     <div className={styles.container}>
-      <Tooltip
-        isBounded
-        skin={TooltipSkin}
-        tip="Help, I am stuck in this small box"
-      >
+      <Tooltip isBounded skin={TooltipSkin} tip="Help, I am stuck in this small box">
         hover over me
       </Tooltip>
     </div>
@@ -96,7 +87,7 @@ storiesOf('Tooltip', module)
   .add('theme overrides', () => (
     <div className={styles.container}>
       <Tooltip
-        themeOverrides={{ [IDENTIFIERS.BUBBLE]: themeOverrides }}
+        themeOverrides={{ ...SimpleTheme, [IDENTIFIERS.BUBBLE]: themeOverrides }}
         isOpeningUpward={true}
         skin={TooltipSkin}
         isTransparent={false}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ThemeContext } from '../themes/ThemeContext';
 import { object, string, element } from 'prop-types';
 
 // external libraries
@@ -13,18 +14,12 @@ import { composeTheme } from '../utils';
 
 class ThemeProvider extends Component {
   static propTypes = {
-    children: element,
     theme: object,
     themeOverrides: object // custom css/scss from user that adheres to shape of ROOT_THEME_API
   };
 
   static defaultProps = {
-    theme: { ...ROOT_THEME_API },
     themeOverrides: {}
-  };
-
-  static childContextTypes = {
-    theme: object
   };
 
   constructor(props) {
@@ -33,19 +28,8 @@ class ThemeProvider extends Component {
     const { theme, themeOverrides } = props;
 
     this.state = {
-      composedTheme: this.composeLibraryTheme(
-        theme,
-        themeOverrides,
-        ROOT_THEME_API
-      )
-    };
-  }
-
-  getChildContext() {
-    const { composedTheme } = this.state;
-
-    return {
-      theme: { ...composedTheme }
+      theme: this.composeLibraryTheme(theme, themeOverrides, ROOT_THEME_API),
+      ROOT_THEME_API
     };
   }
 
@@ -110,10 +94,12 @@ class ThemeProvider extends Component {
     }
   };
 
-  // all children of ThemeProvider HOC are passed the theme object
-  // composed with custom styles passed via this.props.themeOverrides
   render() {
-    return <div>{this.props.children}</div>;
+    return (
+      <ThemeContext.Provider value={this.state}>
+        {this.props.children}
+      </ThemeContext.Provider>
+    );
   }
 }
 
