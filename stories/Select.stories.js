@@ -1,58 +1,57 @@
-import React from "react";
+import React from 'react';
 
 // storybook
-import { storiesOf } from "@storybook/react";
-import { withState } from "@dump247/storybook-state";
+import { storiesOf } from '@storybook/react';
+import { withState } from '@dump247/storybook-state';
 
 // components
-import { FormField, Select } from "../source/components";
+import { FormField, Select } from '../source/components';
 
 // skins
-import { SelectSkin, FormFieldSkin } from "../source/skins/simple";
+import { SelectSkin, FormFieldSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from "../source/themes/simple";
-import CustomSelectTheme from "./theme-customizations/Select.custom.scss";
+import SimpleTheme from '../source/themes/simple';
+import CustomSelectTheme from './theme-customizations/Select.custom.scss';
 
 // custom styles
-import styles from "./Select.stories.scss";
+import styles from './Select.stories.scss';
 
 // images
-import flagEngland from "./images/gb.png";
-import flagSpain from "./images/es.png";
-import flagThailand from "./images/th.png";
-import flagUSA from "./images/us.png";
+import flagEngland from './images/gb.png';
+import flagSpain from './images/es.png';
+import flagThailand from './images/th.png';
+import flagUSA from './images/us.png';
 
 // constants
-import { IDENTIFIERS } from "../source/themes/API";
+import { IDENTIFIERS } from '../source/themes/API';
 
 const COUNTRIES = [
-  { value: "EN-gb", label: "England" },
-  { value: "ES-es", label: "Spain" },
-  { value: "TH-th", label: "Thailand" },
-  { value: "EN-en", label: "USA" }
+  { value: 'EN-gb', label: 'England' },
+  { value: 'ES-es', label: 'Spain' },
+  { value: 'TH-th', label: 'Thailand' },
+  { value: 'EN-en', label: 'USA' }
 ];
 
 const COUNTRIES_WITH_FLAGS = [
-  { value: "EN-gb", label: "England", flag: flagEngland },
-  { value: "ES-es", label: "Spain", flag: flagSpain },
-  { value: "TH-th", label: "Thailand", flag: flagThailand },
-  { value: "EN-en", label: "USA", flag: flagUSA }
+  { value: 'EN-gb', label: 'England', flag: flagEngland },
+  { value: 'ES-es', label: 'Spain', flag: flagSpain },
+  { value: 'TH-th', label: 'Thailand', flag: flagThailand },
+  { value: 'EN-en', label: 'USA', flag: flagUSA }
 ];
 
 const COUNTRIES_WITH_DISABLED_OPTIONS = [
-  { value: "EN-gb", label: "England" },
-  { value: "ES-es", label: "Spain" },
-  { value: "TH-th", label: "Thailand", isDisabled: true },
-  { value: "EN-en", label: "USA" }
+  { value: 'EN-gb', label: 'England' },
+  { value: 'ES-es', label: 'Spain' },
+  { value: 'TH-th', label: 'Thailand', isDisabled: true },
+  { value: 'EN-en', label: 'USA' }
 ];
 
-storiesOf("Select", module)
+storiesOf('Select', module)
   // ====== Stories ======
 
-  .add(
-    "Countries - options",
-    withState({ value: "" }, store => (
+  .add('countries - options',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -62,9 +61,8 @@ storiesOf("Select", module)
     ))
   )
 
-  .add(
-    "Countries - label",
-    withState({ value: "" }, store => (
+  .add('countries - label',
+    withState({ value: '' }, store => (
       <FormField
         label="Some label"
         skin={FormFieldSkin}
@@ -81,9 +79,8 @@ storiesOf("Select", module)
     ))
   )
 
-  .add(
-    "Countries - placeholder",
-    withState({ value: "" }, store => (
+  .add('countries - placeholder',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -94,8 +91,7 @@ storiesOf("Select", module)
     ))
   )
 
-  .add(
-    "Countries - value",
+  .add('countries - value',
     withState({ value: COUNTRIES[0].value }, store => (
       <Select
         value={store.state.value}
@@ -106,8 +102,7 @@ storiesOf("Select", module)
     ))
   )
 
-  .add(
-    "Countries - error",
+  .add('countries - error',
     withState({ value: COUNTRIES[0].value }, store => (
       <FormField
         label="Countries"
@@ -126,29 +121,25 @@ storiesOf("Select", module)
     ))
   )
 
-  .add(
-    "Countries - custom options template",
-    withState({ value: "" }, store => (
+  .add('countries - custom options template',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES_WITH_FLAGS}
-        optionRenderer={option => {
-          return (
-            <div className={styles.customOption}>
-              <img src={option.flag} />
-              <span>{option.label}</span>
-            </div>
-          );
-        }}
+        optionRenderer={option => (
+          <div className={styles.customOption}>
+            <img src={option.flag} />
+            <span>{option.label}</span>
+          </div>
+        )}
         skin={SelectSkin}
       />
     ))
   )
 
-  .add(
-    "Countries - isOpeningUpward",
-    withState({ value: "" }, store => (
+  .add('countries - isOpeningUpward',
+    withState({ value: '' }, store => (
       <FormField
         className={styles.customMargin}
         label="Countries (opening upward)"
@@ -167,9 +158,8 @@ storiesOf("Select", module)
     ))
   )
 
-  .add(
-    "Countries - with disabled options",
-    withState({ value: "" }, store => (
+  .add('countries - with disabled options',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -181,9 +171,8 @@ storiesOf("Select", module)
     ))
   )
 
-  .add(
-    "custom theme",
-    withState({ value: "" }, store => (
+  .add('custom theme',
+    withState({ value: '' }, store => (
       <Select
         theme={{ ...SimpleTheme, [IDENTIFIERS.SELECT]: CustomSelectTheme }}
         value={store.state.value}

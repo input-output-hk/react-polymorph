@@ -1,49 +1,48 @@
-import React from "react";
+import React from 'react';
 
 // storybook
-import { storiesOf } from "@storybook/react";
-import { withState } from "@dump247/storybook-state";
+import { storiesOf } from '@storybook/react';
+import { withState } from '@dump247/storybook-state';
 
 // components
-import { Autocomplete, Select, Options } from "../source/components";
+import { Autocomplete, Select, Options } from '../source/components';
 
 // skins
-import { AutocompleteSkin, OptionsSkin, SelectSkin } from "../source/skins/simple";
+import { AutocompleteSkin, OptionsSkin, SelectSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from "../source/themes/simple";
-import CustomOptionsTheme from "./theme-customizations/Options.custom.scss";
+import SimpleTheme from '../source/themes/simple';
+import CustomOptionsTheme from './theme-customizations/Options.custom.scss';
 
 // constants
-import { IDENTIFIERS } from "../source/themes/API";
+import { IDENTIFIERS } from '../source/themes/API';
 
 const OPTIONS_COLLECTION = [
-  { value: "EN-gb", label: "England" },
-  { value: "ES-es", label: "Spain" },
-  { value: "TH-th", label: "Thailand" },
-  { value: "EN-en", label: "USA" }
+  { value: 'EN-gb', label: 'England' },
+  { value: 'ES-es', label: 'Spain' },
+  { value: 'TH-th', label: 'Thailand' },
+  { value: 'EN-en', label: 'USA' }
 ];
 
 const MNEMONIC_WORDS = [
-  "home",
-  "cat",
-  "dog",
-  "fish",
-  "hide",
-  "hover",
-  "duck",
-  "category",
-  "join",
-  "paper",
-  "box",
-  "tab"
+  'home',
+  'cat',
+  'dog',
+  'fish',
+  'hide',
+  'hover',
+  'duck',
+  'category',
+  'join',
+  'paper',
+  'box',
+  'tab'
 ];
 
-storiesOf("Options", module)
+storiesOf('Options', module)
   // ====== Stories ======
-  .add(
-    "combined with Input to construct Select",
-    withState({ value: "" }, store => (
+  .add('combined with Input to construct Select',
+    withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -53,8 +52,7 @@ storiesOf("Options", module)
     ))
   )
 
-  .add(
-    "combined with Input to construct Autocomplete",
+  .add('combined with Input to construct Autocomplete',
     withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
@@ -69,9 +67,8 @@ storiesOf("Options", module)
     ))
   )
 
-  .add(
-    "custom theme",
-    withState({ value: "" }, store => (
+  .add('custom theme',
+    withState({ value: '' }, store => (
       <Options
         theme={CustomOptionsTheme}
         isOpen={true}

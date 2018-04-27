@@ -1,30 +1,30 @@
-import React from "react";
+import React from 'react';
 
 // storybook
-import { storiesOf } from "@storybook/react";
+import { storiesOf } from '@storybook/react';
 
 // components
-import { Button } from "../source/components";
+import { Button } from '../source/components';
 
 // skins
-import { ButtonSkin } from "../source/skins/simple";
+import { ButtonSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from "../source/themes/simple";
-import CustomButtonTheme from "./theme-customizations/Button.custom.scss";
+import SimpleTheme from '../source/themes/simple';
+import CustomButtonTheme from './theme-customizations/Button.custom.scss';
 
 // theme overrides and identifiers
-import themeOverrides from "./theme-overrides/customButton.scss";
-import { IDENTIFIERS } from "../source/themes/API";
+import themeOverrides from './theme-overrides/customButton.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
-storiesOf("Button", module)
+storiesOf('Button', module)
   // ====== Stories ======
 
-  .add("plain", () => <Button label="Button label" skin={ButtonSkin} />)
+  .add('plain', () => <Button label="Button label" skin={ButtonSkin} />)
 
-  .add("disabled", () => <Button disabled label="Button label" skin={ButtonSkin} />)
+  .add('disabled', () => <Button disabled label="Button label" skin={ButtonSkin} />)
 
-  .add("theme overrides", () => (
+  .add('theme overrides', () => (
     <Button
       label="theme overrides"
       themeOverrides={themeOverrides}
@@ -32,6 +32,6 @@ storiesOf("Button", module)
     />
   ))
 
-  .add("custom theme", () => (
+  .add('custom theme', () => (
     <Button label="Custom theme" theme={CustomButtonTheme} skin={ButtonSkin} />
   ));

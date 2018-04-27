@@ -1,28 +1,27 @@
-import React from "react";
+import React from 'react';
 
 // storybook
-import { storiesOf } from "@storybook/react";
-import { withState } from "@dump247/storybook-state";
+import { storiesOf } from '@storybook/react';
+import { withState } from '@dump247/storybook-state';
 
 // components
-import { Checkbox } from "../source/components";
+import { Checkbox } from '../source/components';
 
 // skins
-import { TogglerSkin } from "../source/skins/simple";
+import { TogglerSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from "../source/themes/simple";
-import CustomTogglerTheme from "./theme-customizations/Toggler.custom.scss";
+import SimpleTheme from '../source/themes/simple';
+import CustomTogglerTheme from './theme-customizations/Toggler.custom.scss';
 
 // theme overrides and identifiers
-import themeOverrides from "./theme-overrides/customToggler.scss";
-import { IDENTIFIERS } from "../source/themes/API";
+import themeOverrides from './theme-overrides/customToggler.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
-storiesOf("Toggler", module)
+storiesOf('Toggler', module)
   // ====== Stories ======
 
-  .add(
-    "plain",
+  .add('plain',
     withState({ checked: false }, store => (
       <Checkbox
         checked={store.state.checked}
@@ -35,8 +34,7 @@ storiesOf("Toggler", module)
     ))
   )
 
-  .add(
-    "in text",
+  .add('in text',
     withState({ checked: false }, store => (
       <div>
         <span>Fees&nbsp;</span>
@@ -53,8 +51,7 @@ storiesOf("Toggler", module)
     ))
   )
 
-  .add(
-    "disabled",
+  .add('disabled',
     withState({ checked: false }, store => (
       <Checkbox
         disabled
@@ -68,8 +65,7 @@ storiesOf("Toggler", module)
     ))
   )
 
-  .add(
-    "theme overrides",
+  .add('theme overrides',
     withState({ checked: false }, store => (
       <Checkbox
         themeOverrides={themeOverrides}
@@ -83,8 +79,7 @@ storiesOf("Toggler", module)
     ))
   )
 
-  .add(
-    "custom theme",
+  .add('custom theme',
     withState({ checked: false }, store => (
       <Checkbox
         theme={CustomTogglerTheme}
