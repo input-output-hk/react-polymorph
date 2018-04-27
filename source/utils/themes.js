@@ -1,7 +1,7 @@
-import { isEmpty, cloneDeep } from "lodash";
+import { isEmpty, cloneDeep } from 'lodash';
 
 const appendToProperty = (dest, name, value) => {
-  dest[name] === "" ? (dest[name] = value) : (dest[name] += " " + value);
+  dest[name] === '' ? (dest[name] = value) : (dest[name] += ' ' + value);
 };
 
 const composeComponentStyles = (componentStyles, componentTheme) => {
@@ -22,7 +22,7 @@ const composeComponentStyles = (componentStyles, componentTheme) => {
 const addThemeId = (theme, themeId) => {
   if (!isEmpty(theme) && themeId) {
     const themeIdExists = theme.hasOwnProperty(themeId);
-    const themeIdIsObj = typeof theme[themeId] === "object";
+    const themeIdIsObj = typeof theme[themeId] === 'object';
 
     return themeIdExists && themeIdIsObj ? theme : { [themeId]: theme };
   }

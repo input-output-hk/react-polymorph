@@ -1,6 +1,6 @@
-import propsUtils from "./props";
-import themeUtils from "./themes";
-import eventUtils from "./events";
+import propsUtils from './props';
+import themeUtils from './themes';
+import eventUtils from './events';
 
 // named exports for props utility functions
 export const { pickDOMProps, StringOrElement, composeFunctions } = propsUtils;
