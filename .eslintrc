@@ -20,6 +20,14 @@
     "promise/always-return": 2,
     "promise/catch-or-return": 2,
     "promise/no-native": 0,
+    "jsx-a11y/label-has-for": [ 2, {
+      "components": [ "Label" ],
+      "required": {
+        "every": [ "nesting", "id" ]
+      },
+      "allowChildren": true
+    }],
+    "react/no-did-mount-set-state": "off",
     "react/jsx-no-bind": "off",
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "react/jsx-closing-bracket-location": 1,
