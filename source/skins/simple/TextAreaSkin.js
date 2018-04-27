@@ -18,5 +18,5 @@ export default props => {
         props.error ? theme[themeId].errored : null
       ])}
     />
-  )
+  );
 };

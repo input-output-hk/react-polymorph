@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
 // external libraries
-import classnames from "classnames";
+import classnames from 'classnames';
 
 // components
-import { Options, Input } from "../../components";
+import { Options, Input } from '../../components';
 
 // skins
-import { InputSkin, OptionsSkin } from "./";
+import { InputSkin, OptionsSkin } from './';
 
 export default props => {
   const selectedOption = props.getSelectedOption();
-  const inputValue = selectedOption ? selectedOption.label : "";
+  const inputValue = selectedOption ? selectedOption.label : '';
   const { theme, themeId } = props;
   return (
     <div

@@ -33,9 +33,7 @@ export default props => {
           selected ? theme[themeId].selected : null
         ])}
       />
-      {label ? (
-        <label className={theme[themeId].label}>{label}</label>
-      ) : null}
+      {label ? (<label className={theme[themeId].label}>{label}</label>) : null}
     </div>
-  )
+  );
 };

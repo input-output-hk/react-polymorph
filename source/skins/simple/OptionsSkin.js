@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
 // external libraries
-import classnames from "classnames";
+import classnames from 'classnames';
 
 // components
-import { Bubble } from "../../components";
+import { Bubble } from '../../components';
 
 // skins
-import { BubbleSkin } from "./";
+import { BubbleSkin } from './';
 
 export default props => {
   const {
@@ -47,7 +47,6 @@ export default props => {
         // anonymous funcs in event handlers are reassigned in memory each render cycle
         const boundSetHighlightedOptionIndex = setHighlightedOptionIndex.bind(null, index);
         const boundHandleClickOnOption = handleClickOnOption.bind(null, option);
-
         return (
           <li
             key={index}
@@ -64,7 +63,7 @@ export default props => {
               ? optionRenderer(option)
               : typeof option === 'object' ? option.label : option}
           </li>
-        )
+        );
       });
     } else {
       // render no results message

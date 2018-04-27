@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
 // external libraries
-import _ from "lodash";
-import classnames from "classnames";
+import _ from 'lodash';
+import classnames from 'classnames';
 
 // components
-import { FormField, Options } from "../../components";
+import { FormField, Options } from '../../components';
 
 // skins
-import { FormFieldSkin, OptionsSkin } from "./";
+import { FormFieldSkin, OptionsSkin } from './';
 
 export default props => {
   const { label, error, theme, themeId } = props;
@@ -27,7 +27,7 @@ export default props => {
     props.selectedOptions.length < props.maxSelections;
 
   let placeholder =
-    !props.maxSelections || canMoreOptionsBeSelected ? props.placeholder : "";
+    !props.maxSelections || canMoreOptionsBeSelected ? props.placeholder : '';
 
   const renderSelectedOptions = () => {
     // check if the user passed a renderSelections function
