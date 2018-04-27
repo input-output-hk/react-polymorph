@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   bool,
   func,
@@ -8,11 +8,11 @@ import {
   string,
   instanceOf,
   shape
-} from "prop-types";
-import { withTheme } from "../themes/withTheme";
+} from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // external libraries
-import _ from "lodash";
+import _ from 'lodash';
 
 // internal utility functions
 import {
@@ -20,9 +20,9 @@ import {
   composeTheme,
   composeFunctions,
   addThemeId
-} from "../utils";
+} from '../utils';
 
-import { IDENTIFIERS } from "../themes/API";
+import { IDENTIFIERS } from '../themes/API';
 
 class Autocomplete extends Component {
   static propTypes = {
@@ -78,8 +78,8 @@ class Autocomplete extends Component {
     } = props;
 
     this.state = {
-      inputValue: "",
-      error: "",
+      inputValue: '',
+      error: '',
       selectedOptions: selectedOptions || [],
       filteredOptions:
         sortAlphabetically && options ? options.sort() : options || [],
@@ -172,7 +172,7 @@ class Autocomplete extends Component {
       }
     }
 
-    this.setState({ inputValue: "" });
+    this.setState({ inputValue: '' });
   };
 
   removeOption = (index, event) => {
@@ -242,13 +242,13 @@ class Autocomplete extends Component {
 
   _removeOptions = () => {
     this.selectionChanged([]);
-    this.setState({ selectedOptions: [], inputValue: "" });
+    this.setState({ selectedOptions: [], inputValue: '' });
   };
 
   _filterOptions = value => {
     let filteredOptions = [];
 
-    if (value !== "") {
+    if (value !== '') {
       _.some(this.props.options, function(option) {
         if (_.startsWith(option, value)) {
           filteredOptions.push(option);
@@ -262,10 +262,10 @@ class Autocomplete extends Component {
   };
 
   _filterInvalidChars = value => {
-    let filteredValue = "";
+    let filteredValue = '';
 
     if (this.props.invalidCharsRegex.test(value)) {
-      filteredValue = value.replace(this.props.invalidCharsRegex, "");
+      filteredValue = value.replace(this.props.invalidCharsRegex, '');
     } else {
       filteredValue = value;
     }

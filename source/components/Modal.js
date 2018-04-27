@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { string, bool, func, object, shape } from "prop-types";
-import { withTheme } from "../themes/withTheme";
+import React, { Component } from 'react';
+import { string, bool, func, object, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // internal utiltity functions
-import { StringOrElement, composeTheme, addThemeId } from "../utils";
+import { StringOrElement, composeTheme, addThemeId } from '../utils';
 
 // import constants
-import { IDENTIFIERS } from "../themes/API";
+import { IDENTIFIERS } from '../themes/API';
 
 class Modal extends Component {
   static propTypes = {
@@ -25,7 +25,7 @@ class Modal extends Component {
   };
 
   static defaultProps = {
-    contentLabel: "Modal Dialog",
+    contentLabel: 'Modal Dialog',
     isActive: false,
     triggerCloseOnOverlayClick: true,
     theme: null,

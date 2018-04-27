@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { bool, func, object, arrayOf, shape, string } from "prop-types";
-import { withTheme } from "../themes/withTheme";
+import React, { Component } from 'react';
+import { bool, func, object, arrayOf, shape, string } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // import internal utility functions
-import { composeTheme, addThemeId } from "../utils";
+import { composeTheme, addThemeId } from '../utils';
 
 // import constants
-import { IDENTIFIERS } from "../themes/API";
+import { IDENTIFIERS } from '../themes/API';
 
 class Select extends Component {
   static propTypes = {
@@ -41,7 +41,7 @@ class Select extends Component {
     theme: null,
     themeOverrides: {},
     themeId: IDENTIFIERS.SELECT,
-    value: ""
+    value: ''
   };
 
   constructor(props) {

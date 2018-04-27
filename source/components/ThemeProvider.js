@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { ThemeContext } from "../themes/ThemeContext";
-import { object, string, element } from "prop-types";
+import React, { Component } from 'react';
+import { ThemeContext } from '../themes/ThemeContext';
+import { object, string, element } from 'prop-types';
 
 // external libraries
-import _ from "lodash";
+import _ from 'lodash';
 
 // imports the Root Theme API object which specifies the shape
 // of a complete theme for every component in this library, used in this.composeLibraryTheme
-import ROOT_THEME_API from "../themes/API";
+import ROOT_THEME_API from '../themes/API';
 
 // internal utility functions
-import { composeTheme } from "../utils";
+import { composeTheme } from '../utils';
 
 class ThemeProvider extends Component {
   static propTypes = {
@@ -33,22 +33,26 @@ class ThemeProvider extends Component {
     };
   }
 
-  // // prevents frequent rerenders of ThemeProvider's children by
-  // // checking if theme and/or themeOverrides props have changed
-  // componentWillReceiveProps(nextProps) {
-  //   const { theme, themeOverrides } = nextProps;
-  //
-  //   const changedProps = _.pickBy(
-  //     { theme, themeOverrides },
-  //     (value, key) => this.props[key] !== value
-  //   );
-  //
-  //   if (Object.keys(changedProps).length > 0) {
-  //     this.setState({
-  //       composedTheme: this.composeLibraryTheme(theme, themeOverrides, ROOT_THEME_API)
-  //     });
-  //   }
-  // }
+  // prevents frequent rerenders of ThemeProvider's children by
+  // checking if theme and/or themeOverrides props have changed
+  componentWillReceiveProps(nextProps) {
+    const { theme, themeOverrides } = nextProps;
+
+    const changedProps = _.pickBy(
+      { theme, themeOverrides },
+      (value, key) => this.props[key] !== value
+    );
+
+    if (Object.keys(changedProps).length > 0) {
+      this.setState({
+        composedTheme: this.composeLibraryTheme(
+          theme,
+          themeOverrides,
+          ROOT_THEME_API
+        )
+      });
+    }
+  }
 
   // composeLibraryTheme returns a single obj containing theme definitions
   // for every component in the library.

@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { bool, func, object, number, string, shape } from "prop-types";
-import { withTheme } from "../themes/withTheme";
+import React, { Component } from 'react';
+import { bool, func, object, number, string, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // external libraries
-import { isString, flow } from "lodash";
+import { isString, flow } from 'lodash';
 
 // internal utility functions
-import { StringOrElement, composeTheme, addThemeId } from "../utils";
+import { StringOrElement, composeTheme, addThemeId } from '../utils';
 
 // import constants
-import { IDENTIFIERS } from "../themes/API";
+import { IDENTIFIERS } from '../themes/API';
 
 class Input extends Component {
   static propTypes = {
@@ -37,13 +37,13 @@ class Input extends Component {
 
   static defaultProps = {
     autoFocus: false,
-    error: "",
+    error: '',
     onRef: () => {},
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
     themeOverrides: {},
-    value: ""
+    value: ''
   };
 
   constructor(props) {
@@ -59,7 +59,7 @@ class Input extends Component {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      error: ""
+      error: ''
     };
   }
 
@@ -102,7 +102,7 @@ class Input extends Component {
   }
 
   _enforceStringValue(value) {
-    if (!isString(value)) throw "Values passed to Input::onChange must be strings";
+    if (!isString(value)) throw 'Values passed to Input::onChange must be strings';
     return value;
   }
 
@@ -118,7 +118,7 @@ class Input extends Component {
 
     if (isTooShort) {
       this._setError(`Please enter a valid input`);
-    } else if (this.state.error !== "") {
+    } else if (this.state.error !== '') {
       this._setError(null);
     }
 

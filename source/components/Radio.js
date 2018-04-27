@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { bool, func, object, string, shape } from "prop-types";
-import { withTheme } from "../themes/withTheme";
+import React, { Component } from 'react';
+import { bool, func, object, string, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // import utility functions
-import { StringOrElement, composeTheme, addThemeId } from "../utils";
+import { StringOrElement, composeTheme, addThemeId } from '../utils';
 
 // import constants
-import { IDENTIFIERS } from "../themes/API";
+import { IDENTIFIERS } from '../themes/API';
 
 class Radio extends Component {
   static propTypes = {

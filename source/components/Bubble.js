@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { string, bool, func, object, shape } from "prop-types";
-import { withTheme } from "../themes/withTheme";
+import React, { Component } from 'react';
+import { string, bool, func, object, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // internal utility functions
 import {
@@ -9,10 +9,10 @@ import {
   StringOrElement,
   composeTheme,
   addThemeId
-} from "../utils";
+} from '../utils';
 
 // import constants
-import { IDENTIFIERS } from "../themes/API";
+import { IDENTIFIERS } from '../themes/API';
 
 class Bubble extends Component {
   static propTypes = {
@@ -67,9 +67,9 @@ class Bubble extends Component {
     const { isFloating } = this.props;
     // Add listeners when the bubble
     if (isFloating && !nextProps.isHidden && !this._hasEventListeners) {
-      this._handleScrollEventListener("add");
+      this._handleScrollEventListener('add');
       addEventsToDocument(this._getDocumentEvents());
-      window.addEventListener("resize", this._updatePosition);
+      window.addEventListener('resize', this._updatePosition);
       this._hasEventListeners = true;
     }
   }
@@ -93,10 +93,10 @@ class Bubble extends Component {
     const rootNode = this.rootElement;
     const scrollableNode = this._getFirstScrollableParent(rootNode);
     if (scrollableNode) {
-      if (action === "add") {
-        scrollableNode.addEventListener("scroll", this._updatePosition);
-      } else if (action === "remove") {
-        scrollableNode.removeEventListener("scroll", this._updatePosition);
+      if (action === 'add') {
+        scrollableNode.addEventListener('scroll', this._updatePosition);
+      } else if (action === 'remove') {
+        scrollableNode.removeEventListener('scroll', this._updatePosition);
       }
     }
   };
@@ -104,8 +104,8 @@ class Bubble extends Component {
   _removeAllEventListeners() {
     if (this._hasEventListeners) {
       removeEventsFromDocument(this._getDocumentEvents());
-      this._handleScrollEventListener("remove");
-      window.removeEventListener("resize", this._updatePosition);
+      this._handleScrollEventListener('remove');
+      window.removeEventListener('resize', this._updatePosition);
       this._hasEventListeners = false;
     }
   }
