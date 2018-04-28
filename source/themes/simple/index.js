@@ -1,18 +1,18 @@
 // css modules plugin converts all imports below into plain objects
-import Autocomplete from "./SimpleAutocomplete.scss";
-import Bubble from "./SimpleBubble.scss";
-import Button from "./SimpleButton.scss";
-import Checkbox from "./SimpleCheckbox.scss";
-import FormField from "./SimpleFormField.scss";
-import Input from "./SimpleInput.scss";
-import Modal from "./SimpleModal.scss";
-import Options from "./SimpleOptions.scss";
-import Radio from "./SimpleRadio.scss";
-import Select from "./SimpleSelect.scss";
-import Switch from "./SimpleSwitch.scss";
-import TextArea from "./SimpleTextArea.scss";
-import Toggler from "./SimpleToggler.scss";
-import Tooltip from "./SimpleTooltip.scss";
+import Autocomplete from './SimpleAutocomplete.scss';
+import Bubble from './SimpleBubble.scss';
+import Button from './SimpleButton.scss';
+import Checkbox from './SimpleCheckbox.scss';
+import FormField from './SimpleFormField.scss';
+import Input from './SimpleInput.scss';
+import Modal from './SimpleModal.scss';
+import Options from './SimpleOptions.scss';
+import Radio from './SimpleRadio.scss';
+import Select from './SimpleSelect.scss';
+import Switch from './SimpleSwitch.scss';
+import TextArea from './SimpleTextArea.scss';
+import Toggler from './SimpleToggler.scss';
+import Tooltip from './SimpleTooltip.scss';
 
 // named exports allow user to import a single theme object per component
 // instead of importing and destructuring the entire SimpleTheme obj

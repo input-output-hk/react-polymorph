@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 // external libraries
-import classnames from "classnames";
+import classnames from 'classnames';
 
 // internal utility functions
-import { pickDOMProps } from "../../utils";
+import { pickDOMProps } from '../../utils';
 
 export default props => {
   const { theme, themeId } = props;
@@ -22,7 +22,7 @@ export default props => {
       ])}
       style={
         props.position && {
-          [props.isOpeningUpward ? "bottom" : "top"]: props.position.positionY,
+          [props.isOpeningUpward ? 'bottom' : 'top']: props.position.positionY,
           left: props.position.positionX,
           width: props.position.width
         }

@@ -1,6 +1,7 @@
-import React from "react";
-import type { ComponentType, Ref } from "react";
-import { ThemeContext } from "./ThemeContext";
+// @flow
+import React from 'react';
+import type { ComponentType, Ref } from 'react';
+import { ThemeContext } from './ThemeContext';
 
 // withTheme is a HOC that takes a Component as a parameter
 // and returns that Component wrapped within ThemeContext.Consumer.

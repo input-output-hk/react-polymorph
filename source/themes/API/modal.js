@@ -1,4 +1,4 @@
 export default {
-  overlay: "",
-  modal: ""
+  overlay: '',
+  modal: ''
 };

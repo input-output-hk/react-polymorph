@@ -1,13 +1,15 @@
-import React from "react";
+import React from 'react';
 
 // external libraries
-import classnames from "classnames";
+import classnames from 'classnames';
 
 // internal utility functions
-import { pickDOMProps } from "../../utils";
+import { pickDOMProps } from '../../utils';
 
 export default props => (
   <div
+    role="presentation"
+    aria-hidden
     className={classnames([
       props.className,
       props.theme[props.themeId].root,
@@ -31,8 +33,10 @@ export default props => (
         props.checked ? props.theme[props.themeId].checked : null
       ])}
     />
-    {props.label ? (
-      <label className={props.theme[props.themeId].label}>{props.label}</label>
-    ) : null}
+    {props.label && (
+      <label className={props.theme[props.themeId].label}>
+        {props.label}
+      </label>
+    )}
   </div>
 );

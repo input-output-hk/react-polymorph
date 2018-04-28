@@ -1,5 +1,5 @@
 export default {
-  input: "",
-  disabled: "",
-  errored: ""
+  input: '',
+  disabled: '',
+  errored: ''
 };

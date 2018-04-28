@@ -1,17 +1,17 @@
-import FORMFIELD from "./formfield";
-import INPUT from "./input";
-import CHECKBOX from "./checkbox";
-import TOGGLER from "./toggler";
-import SWITCH from "./switch";
-import TEXTAREA from "./textarea";
-import BUTTON from "./button";
-import TOOLTIP from "./tooltip";
-import BUBBLE from "./bubble";
-import SELECT from "./select";
-import AUTOCOMPLETE from "./autocomplete";
-import OPTIONS from "./options";
-import MODAL from "./modal";
-import RADIO from "./radio";
+import FORMFIELD from './formfield';
+import INPUT from './input';
+import CHECKBOX from './checkbox';
+import TOGGLER from './toggler';
+import SWITCH from './switch';
+import TEXTAREA from './textarea';
+import BUTTON from './button';
+import TOOLTIP from './tooltip';
+import BUBBLE from './bubble';
+import SELECT from './select';
+import AUTOCOMPLETE from './autocomplete';
+import OPTIONS from './options';
+import MODAL from './modal';
+import RADIO from './radio';
 
 export const FORMFIELD_THEME_API = FORMFIELD;
 export const INPUT_THEME_API = INPUT;
@@ -29,20 +29,20 @@ export const MODAL_THEME_API = MODAL;
 export const RADIO_THEME_API = RADIO;
 
 export const IDENTIFIERS = {
-  FORM_FIELD: "formfield",
-  INPUT: "input",
-  CHECKBOX: "checkbox",
-  TOGGLER: "toggler",
-  SWITCH: "switch",
-  TEXT_AREA: "textarea",
-  BUTTON: "button",
-  TOOLTIP: "tooltip",
-  BUBBLE: "bubble",
-  SELECT: "select",
-  AUTOCOMPLETE: "autocomplete",
-  OPTIONS: "options",
-  MODAL: "modal",
-  RADIO: "radio"
+  FORM_FIELD: 'formfield',
+  INPUT: 'input',
+  CHECKBOX: 'checkbox',
+  TOGGLER: 'toggler',
+  SWITCH: 'switch',
+  TEXT_AREA: 'textarea',
+  BUTTON: 'button',
+  TOOLTIP: 'tooltip',
+  BUBBLE: 'bubble',
+  SELECT: 'select',
+  AUTOCOMPLETE: 'autocomplete',
+  OPTIONS: 'options',
+  MODAL: 'modal',
+  RADIO: 'radio'
 };
 
 export default {

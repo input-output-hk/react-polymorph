@@ -1,8 +1,8 @@
 export default {
-  root: "",
-  bubble: "",
-  openUpward: "",
-  transparent: "",
-  isFloating: "",
-  isHidden: ""
+  root: '',
+  bubble: '',
+  openUpward: '',
+  transparent: '',
+  isFloating: '',
+  isHidden: ''
 };

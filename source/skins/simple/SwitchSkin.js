@@ -1,15 +1,17 @@
-import React from "react";
+import React from 'react';
 
 // external libraries
-import classnames from "classnames";
+import classnames from 'classnames';
 
 // internal utility functions
-import { pickDOMProps } from "../../utils";
+import { pickDOMProps } from '../../utils';
 
 export default props => {
   const { theme, themeId } = props;
   return (
     <div
+      role="presentation"
+      aria-hidden
       className={classnames([
         props.className,
         theme[themeId].root,

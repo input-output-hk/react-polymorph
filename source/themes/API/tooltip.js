@@ -1,7 +1,7 @@
 export default {
-  root: "",
-  bubble: "",
-  alignRight: "",
-  alignLeft: "",
-  nowrap: ""
+  root: '',
+  bubble: '',
+  alignRight: '',
+  alignLeft: '',
+  nowrap: ''
 };
