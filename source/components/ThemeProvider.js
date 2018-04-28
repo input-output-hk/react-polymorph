@@ -52,7 +52,7 @@ class ThemeProvider extends Component<Props, State> {
 
     if (Object.keys(changedProps).length > 0) {
       this.setState({
-        theme: this.composeLibraryTheme(theme, themeOverrides, ROOT_THEME_API)
+        theme: this.composeLibraryTheme(theme, themeOverrides)
       });
     }
   }
