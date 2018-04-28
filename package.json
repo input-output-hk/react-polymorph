@@ -107,10 +107,7 @@
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook",
     "watch": "nodemon npm run js && npm run sass",
-    "flow-start": "flow start",
-    "flow-stop": "flow stop",
-    "flow-status": "flow status",
-    "flow-coverage": "flow coverage",
+    "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty source stories *.js"
   },
   "babel": {
