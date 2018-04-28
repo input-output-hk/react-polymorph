@@ -190,7 +190,7 @@ storiesOf('Autocomplete', module)
     );
   })
   /*eslint-disable */
-  .add('Render prop - renderSelections',
+  .add('render prop - renderSelections',
     withState({ selectedOpts: [] }, store => (
       <Autocomplete
         label="Recovery phrase"
