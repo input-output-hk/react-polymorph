@@ -11,13 +11,11 @@ import { Radio } from '../source/components';
 import { RadioSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomRadioTheme from './theme-customizations/Radio.custom.scss';
 
 // custom styles & theme overrides
 import styles from './Radio.stories.scss';
 import themeOverrides from './theme-overrides/customRadio.scss';
-import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Radio', module)
   // ====== Stories ======
@@ -34,13 +32,11 @@ storiesOf('Radio', module)
     ))
   )
 
-  .add('disabled',
-    withState({ selected: false }, store => (
-      <div className={styles.container}>
-        <Radio disabled skin={RadioSkin} />
-      </div>
-    ))
-  )
+  .add('disabled', () => (
+    <div className={styles.container}>
+      <Radio disabled skin={RadioSkin} />
+    </div>
+  ))
 
   .add('short label',
     withState({ selected: false }, store => (

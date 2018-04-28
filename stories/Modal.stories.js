@@ -11,13 +11,11 @@ import { Modal, Button } from '../source/components';
 import { ModalSkin, ButtonSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomModalTheme from './theme-customizations/Modal.custom.scss';
 
 // custom styles & theme overrides
 import styles from './Modal.stories.scss';
 import themeOverrides from './theme-overrides/customModal.scss';
-import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Modal', module)
   // ====== Stories ======

@@ -12,12 +12,10 @@ import { FormField, Input } from '../source/components';
 import { FormFieldSkin, InputSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomInputTheme from './theme-customizations/Input.custom.scss';
 
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customInput.scss';
-import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Input', module)
   // ====== Stories ======
@@ -25,8 +23,8 @@ storiesOf('Input', module)
   .add('plain',
     withState({ value: '' }, store => (
       <Input
-        {...store.state}
-        onChange={(value, event) => store.set({ value })}
+        value={store.state.value}
+        onChange={value => store.set({ value })}
         skin={InputSkin}
       />
     ))
@@ -41,7 +39,7 @@ storiesOf('Input', module)
           <Input
             {...props}
             value={store.state.value}
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             skin={InputSkin}
           />
         )}
@@ -54,7 +52,7 @@ storiesOf('Input', module)
       <Input
         value={store.state.value}
         placeholder="user name"
-        onChange={(value, event) => store.set({ value })}
+        onChange={value => store.set({ value })}
         skin={InputSkin}
       />
     ))
@@ -66,7 +64,7 @@ storiesOf('Input', module)
         autoFocus
         value={store.state.value}
         placeholder="autoFocus"
-        onChange={(value, event) => store.set({ value })}
+        onChange={value => store.set({ value })}
         skin={InputSkin}
       />
     ))
@@ -93,7 +91,7 @@ storiesOf('Input', module)
           <Input
             {...props}
             value={store.state.value}
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             skin={InputSkin}
           />
         )}
@@ -112,7 +110,7 @@ storiesOf('Input', module)
             value={store.state.value}
             placeholder="min length"
             minLength={8}
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             skin={InputSkin}
           />
         )}
@@ -131,7 +129,7 @@ storiesOf('Input', module)
             value={store.state.value}
             placeholder="max length"
             maxLength={5}
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             skin={InputSkin}
           />
         )}
@@ -145,7 +143,7 @@ storiesOf('Input', module)
         value={store.state.value}
         type="password"
         placeholder="password"
-        onChange={(value, event) => store.set({ value })}
+        onChange={value => store.set({ value })}
         skin={InputSkin}
       />
     ))
@@ -176,7 +174,7 @@ storiesOf('Input', module)
             placeholder="max length"
             maxLength={5}
             onKeyPress={action('onKeyPress')}
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             skin={InputSkin}
           />
         )}
@@ -189,12 +187,12 @@ storiesOf('Input', module)
       <FormField
         label="Theme overrides"
         skin={FormFieldSkin}
-        render={props => (
+        render={() => (
           <Input
             themeOverrides={themeOverrides}
             value={store.state.value}
             placeholder="type here..."
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             skin={InputSkin}
           />
         )}
@@ -207,12 +205,12 @@ storiesOf('Input', module)
       <FormField
         label="Custom theme"
         skin={FormFieldSkin}
-        render={props => (
+        render={() => (
           <Input
             theme={CustomInputTheme}
             value={store.state.value}
             placeholder="type here..."
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             skin={InputSkin}
           />
         )}

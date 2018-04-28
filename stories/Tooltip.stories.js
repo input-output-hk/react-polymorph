@@ -95,7 +95,7 @@ storiesOf('Tooltip', module)
           ...SimpleTheme,
           [IDENTIFIERS.BUBBLE]: themeOverrides
         }}
-        isOpeningUpward={true}
+        isOpeningUpward
         skin={TooltipSkin}
         isTransparent={false}
         tip="plain tooltip, with theme overrides"

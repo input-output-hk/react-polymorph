@@ -11,12 +11,10 @@ import { FormField, NumericInput } from '../source/components';
 import { FormFieldSkin, InputSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomInputTheme from './theme-customizations/Input.custom.scss';
 
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customInput.scss';
-import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('NumericInput', module)
   // ====== Stories ======

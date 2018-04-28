@@ -8,14 +8,14 @@ import { withState } from '@dump247/storybook-state';
 import { Autocomplete, Select, Options } from '../source/components';
 
 // skins
-import { AutocompleteSkin, OptionsSkin, SelectSkin } from '../source/skins/simple';
+import {
+  AutocompleteSkin,
+  OptionsSkin,
+  SelectSkin
+} from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomOptionsTheme from './theme-customizations/Options.custom.scss';
-
-// constants
-import { IDENTIFIERS } from '../source/themes/API';
 
 const OPTIONS_COLLECTION = [
   { value: 'EN-gb', label: 'England' },
@@ -67,15 +67,13 @@ storiesOf('Options', module)
     ))
   )
 
-  .add('custom theme',
-    withState({ value: '' }, store => (
-      <Options
-        theme={CustomOptionsTheme}
-        isOpen={true}
-        options={OPTIONS_COLLECTION}
-        isOpeningUpward={false}
-        noResults={false}
-        skin={OptionsSkin}
-      />
-    ))
-  );
+  .add('custom theme', () => (
+    <Options
+      theme={CustomOptionsTheme}
+      isOpen
+      options={OPTIONS_COLLECTION}
+      isOpeningUpward={false}
+      noResults={false}
+      skin={OptionsSkin}
+    />
+  ));

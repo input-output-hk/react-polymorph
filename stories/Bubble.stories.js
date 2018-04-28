@@ -2,7 +2,6 @@ import React from 'react';
 
 // storybook
 import { storiesOf } from '@storybook/react';
-import { withState } from '@dump247/storybook-state';
 
 // components
 import { Bubble } from '../source/components';
@@ -11,13 +10,11 @@ import { Bubble } from '../source/components';
 import { BubbleSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import BubbleCustomTheme from './theme-customizations/Bubble.custom.scss';
 
 // custom styles & theme overrides
 import styles from './Bubble.stories.scss';
 import themeOverrides from './theme-overrides/customBubble.scss';
-import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Bubble', module)
   // ====== Stories ======

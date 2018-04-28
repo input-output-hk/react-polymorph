@@ -11,12 +11,10 @@ import { Checkbox } from '../source/components';
 import { CheckboxSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
 
 // custom styles & theme overrides
 import themeOverrides from './theme-overrides/customCheckbox.scss';
-import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Checkbox', module)
   // ====== Stories ======
@@ -31,11 +29,7 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add('disabled',
-    withState({ checked: false }, store =>
-      <Checkbox disabled skin={CheckboxSkin} />
-    )
-  )
+  .add('disabled', () => <Checkbox disabled skin={CheckboxSkin} />)
 
   .add('short label',
     withState({ checked: false }, store => (
@@ -48,11 +42,9 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add('disabled with label',
-    withState({ checked: false }, store => (
-      <Checkbox disabled label="My checkbox" skin={CheckboxSkin} />
-    ))
-  )
+  .add('disabled with label', () => (
+    <Checkbox disabled label="My checkbox" skin={CheckboxSkin} />
+  ))
 
   .add('long label',
     withState({ checked: false }, store => (

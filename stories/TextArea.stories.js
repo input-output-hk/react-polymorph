@@ -2,7 +2,6 @@ import React from 'react';
 
 // storybook
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { withState } from '@dump247/storybook-state';
 
 // components
@@ -12,12 +11,10 @@ import { TextArea, FormField } from '../source/components';
 import { TextAreaSkin, FormFieldSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomTextAreaTheme from './theme-customizations/TextArea.custom.scss';
 
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customTextarea.scss';
-import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('TextArea', module)
   // ====== Stories ======
@@ -26,7 +23,7 @@ storiesOf('TextArea', module)
     withState({ value: '' }, store => (
       <TextArea
         value={store.state.value}
-        onChange={(value, event) => store.set({ value })}
+        onChange={value => store.set({ value })}
         skin={TextAreaSkin}
       />
     ))
@@ -41,7 +38,7 @@ storiesOf('TextArea', module)
           <TextArea
             {...props}
             value={store.state.value}
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             skin={TextAreaSkin}
           />
         )}
@@ -53,7 +50,7 @@ storiesOf('TextArea', module)
     withState({ value: '' }, store => (
       <TextArea
         value={store.state.value}
-        onChange={(value, event) => store.set({ value })}
+        onChange={value => store.set({ value })}
         placeholder="Your Comment"
         skin={TextAreaSkin}
       />
@@ -66,7 +63,7 @@ storiesOf('TextArea', module)
         autoFocus
         placeholder="autoFocus"
         value={store.state.value}
-        onChange={(value, event) => store.set({ value })}
+        onChange={value => store.set({ value })}
         skin={TextAreaSkin}
       />
     ))
@@ -78,7 +75,7 @@ storiesOf('TextArea', module)
         error="bad error"
         value={store.state.value}
         maxLength={5}
-        onChange={(value, event) => store.set({ value })}
+        onChange={value => store.set({ value })}
         skin={TextAreaSkin}
       />
     ))
@@ -94,7 +91,7 @@ storiesOf('TextArea', module)
           <TextArea
             {...props}
             value={store.state.value}
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             skin={TextAreaSkin}
           />
         )}
@@ -111,7 +108,7 @@ storiesOf('TextArea', module)
           <TextArea
             {...props}
             value={store.state.value}
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             placeholder="Your description here"
             rows={5}
             skin={TextAreaSkin}
@@ -130,7 +127,7 @@ storiesOf('TextArea', module)
           <TextArea
             {...props}
             value={store.state.value}
-            onChange={(value, event) => store.set({ value })}
+            onChange={value => store.set({ value })}
             placeholder="Your description here"
             autoResize={false}
             skin={TextAreaSkin}
@@ -145,7 +142,7 @@ storiesOf('TextArea', module)
       <TextArea
         themeOverrides={themeOverrides}
         value={store.state.value}
-        onChange={(value, event) => store.set({ value })}
+        onChange={value => store.set({ value })}
         placeholder="type here..."
         skin={TextAreaSkin}
       />
@@ -157,7 +154,7 @@ storiesOf('TextArea', module)
       <TextArea
         theme={CustomTextAreaTheme}
         value={store.state.value}
-        onChange={(value, event) => store.set({ value })}
+        onChange={value => store.set({ value })}
         placeholder="type here..."
         skin={TextAreaSkin}
       />
