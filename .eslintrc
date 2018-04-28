@@ -1,6 +1,9 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "plugin:flowtype/recommended"
+  ],
   "env": {
     "browser": true,
     "mocha": true,
@@ -79,8 +82,14 @@
     "import",
     "promise",
     "react",
-    "jsx-a11y"
+    "jsx-a11y",
+    "flowtype"
   ],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  },
   "globals": {
     "API": true,
     "NETWORK": true,
