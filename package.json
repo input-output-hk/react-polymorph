@@ -98,7 +98,7 @@
     "sass-loader": "6.0.6",
     "style-loader": "0.19.0",
     "url-loader": "0.6.2",
-    "webpack": "2.6.1"
+    "webpack": "4.6.0"
   },
   "scripts": {
     "js": "babel source -d lib -s",
@@ -108,22 +108,28 @@
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook",
     "watch": "nodemon npm run js && npm run sass",
-    "test": "jest"
+    "test": "jest --no-cache"
   },
   "jest": {
-    "setupFiles": [
-      "<rootDir>/jestSetup.js"
-    ],
+    "verbose": true,
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules"],
     "moduleNameMapper": {
-      "^.+\\.(css|scss)$": "identity-obj-proxy"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__tests__/__mocks__/fileMock.js",
+      "\\.(css|scss|sass)$": "identity-obj-proxy"
     },
     "testPathIgnorePatterns": [
-      "<rootDir>/__tests__/__snapshots__"
+      "<rootDir>/__tests__/__snapshots__",
+      "<rootDir>/__tests__/__mocks__"
     ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "setupFiles": [
+      "<rootDir>/jestSetup.js"
+    ]
   },
   "babel": {
     "presets": [
