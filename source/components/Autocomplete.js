@@ -39,7 +39,7 @@ class Autocomplete extends Component {
     multipleSameSelections: bool,
     onChange: func,
     options: array,
-    selectedOptions: array,
+    preselectedOptions: array,
     placeholder: string,
     render: func,
     renderSelections: func,
@@ -74,13 +74,13 @@ class Autocomplete extends Component {
       themeOverrides,
       sortAlphabetically,
       options,
-      selectedOptions
+      preselectedOptions
     } = props;
 
     this.state = {
-      inputValue: '',
-      error: '',
-      selectedOptions: selectedOptions || [],
+      inputValue: "",
+      error: "",
+      selectedOptions: preselectedOptions || [],
       filteredOptions:
         sortAlphabetically && options ? options.sort() : options || [],
       isOpen: false,
