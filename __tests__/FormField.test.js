@@ -8,10 +8,6 @@ const renderFormField = () => (
   <div className="render-prop"></div>
 );
 
-beforeEach(() => {
-  jest.resetModules();
-});
-
 test('FormField renders to the DOM', () => {
   const component = renderer.create(
     <FormField skin={FormFieldSkin} render={renderFormField} />
@@ -54,6 +50,18 @@ test('FormField is disabled', () => {
       disabled
       skin={FormFieldSkin}
       render={({ disabled }) => <span>{disabled.toString()}</span>}
+    />
+  );
+
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+test('FormField should render an input element', () => {
+  const component = renderer.create(
+    <FormField
+      skin={FormFieldSkin}
+      render={() => <input />}
     />
   );
 

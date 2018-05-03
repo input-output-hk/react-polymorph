@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextArea has rows 1`] = `
+<textarea
+  autoFocus={false}
+  className=""
+  onChange={[Function]}
+  rows={5}
+  value=""
+/>
+`;
+
+exports[`TextArea renders to the DOM 1`] = `
+<textarea
+  autoFocus={false}
+  className=""
+  onChange={[Function]}
+  value=""
+/>
+`;
+
+exports[`TextArea renders with a value 1`] = `
+<textarea
+  autoFocus={false}
+  className=""
+  onChange={[Function]}
+  value="this one has a value"
+/>
+`;
+
+exports[`TextArea renders with placeholder 1`] = `
+<textarea
+  autoFocus={false}
+  className=""
+  onChange={[Function]}
+  placeholder="0.0000"
+  value=""
+/>
+`;

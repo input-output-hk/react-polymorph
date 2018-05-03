@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumericInput renders to the DOM 1`] = `
+<input
+  className=""
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput renders with a value 1`] = `
+<input
+  className=""
+  onChange={[Function]}
+  readOnly={false}
+  value="there is value here"
+/>
+`;
+
+exports[`NumericInput renders with placeholder 1`] = `
+<input
+  className=""
+  onChange={[Function]}
+  placeholder="0.0000"
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`maxAfterDot renders amount correctly 1`] = `
+<input
+  className=""
+  onChange={[Function]}
+  readOnly={false}
+  value="10.4891"
+/>
+`;
+
+exports[`maxBeforeDot renders amount correctly 1`] = `
+<input
+  className=""
+  onChange={[Function]}
+  readOnly={false}
+  value="333.00"
+/>
+`;
+
+exports[`maxValue throws an error 1`] = `
+<input
+  className=""
+  onChange={[Function]}
+  readOnly={false}
+  value="60"
+/>
+`;
+
+exports[`minValue throws an error 1`] = `
+<input
+  className=""
+  onChange={[Function]}
+  readOnly={false}
+  value="8"
+/>
+`;

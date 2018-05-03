@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input is readOnly 1`] = `
+<input
+  autoFocus={false}
+  className=""
+  onChange={[Function]}
+  readOnly={true}
+  value=""
+/>
+`;
+
+exports[`Input renders to the DOM 1`] = `
+<input
+  autoFocus={false}
+  className=""
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`Input renders with a value 1`] = `
+<input
+  autoFocus={false}
+  className=""
+  onChange={[Function]}
+  readOnly={false}
+  value="there is value"
+/>
+`;
+
+exports[`Input renders with placeholder 1`] = `
+<input
+  autoFocus={false}
+  className=""
+  onChange={[Function]}
+  placeholder="0.0000"
+  readOnly={false}
+  value=""
+/>
+`;

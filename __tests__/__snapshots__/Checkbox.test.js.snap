@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox is checked 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={true}
+    className={undefined}
+    disabled={false}
+    type="checkbox"
+  />
+  <div
+    className=""
+  />
+</div>
+`;
+
+exports[`Checkbox is disabled 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={false}
+    className={undefined}
+    disabled={true}
+    type="checkbox"
+  />
+  <div
+    className=""
+  />
+</div>
+`;
+
+exports[`Checkbox renders to the DOM 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={false}
+    className={undefined}
+    disabled={false}
+    type="checkbox"
+  />
+  <div
+    className=""
+  />
+</div>
+`;
+
+exports[`Checkbox renders with a label 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={false}
+    className={undefined}
+    disabled={false}
+    label="check here"
+    type="checkbox"
+  />
+  <div
+    className=""
+  />
+  <label
+    className={undefined}
+  >
+    check here
+  </label>
+</div>
+`;

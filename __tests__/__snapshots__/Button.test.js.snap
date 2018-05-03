@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button is disabled 1`] = `
+<button
+  className=""
+  disabled={true}
+/>
+`;
+
+exports[`Button renders to the DOM 1`] = `
+<button
+  className=""
+  disabled={false}
+/>
+`;
+
+exports[`Button renders with a label 1`] = `
+<button
+  className=""
+  disabled={false}
+  label="send"
+>
+  send
+</button>
+`;
