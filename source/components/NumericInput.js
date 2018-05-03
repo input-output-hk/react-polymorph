@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-// $FlowFixMe
-import type { ComponentType, SyntheticInputEvent, Element } from 'react';
+import { func, object, number, string, shape, bool } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
 // external libraries
 import { flow } from 'lodash';
@@ -13,41 +13,27 @@ import { composeTheme, addThemeId } from '../utils';
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-type Props = {
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  disabled: boolean,
-  enforceMax: boolean,
-  enforceMin: boolean,
-  error: string,
-  onChange: Function,
-  maxAfterDot: number,
-  maxBeforeDot: number,
-  maxValue: number,
-  minValue: number,
-  onRef: Function,
-  readOnly: boolean,
-  placeholder: string,
-  setError: Function,
-  skin: ComponentType<any>,
-  theme: Object, // will take precedence over theme in context if passed
-  themeId: string,
-  themeOverrides: Object,
-  value: string
-};
-
-type State = {
-  composedTheme: Object,
-  caretPosition: number,
-  separatorsCount: number,
-  error: string,
-  oldValue: string
-};
-
-class NumericInput extends Component<Props, State> {
-  inputElement: Element<'input'>;
+class NumericInput extends Component {
+  static propTypes = {
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
+    error: StringOrElement,
+    onChange: func,
+    maxAfterDot: number, // max number of characters after dot
+    maxBeforeDot: number, // max number of characters before dot
+    maxValue: number, // max allowed numeric value
+    minValue: number, // min allowed numeric value
+    onRef: func,
+    placeholder: string,
+    readOnly: bool,
+    skin: func.isRequired,
+    theme: object,
+    themeId: string,
+    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
+    value: string
+  };
 
   static defaultProps = {
     disabled: false,
