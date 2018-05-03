@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { bool, func, object, array, string, any, shape } from 'prop-types';
-import { withTheme } from '../themes/withTheme';
+import { withTheme } from "../themes/withTheme";
 
 // external libraries
 import classnames from 'classnames';

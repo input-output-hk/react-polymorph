@@ -1,12 +1,13 @@
-@import 'theme';
+@import "theme";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
 $input-width: 100% !default;
 $input-font-size: 16px !default;
-$input-font-family: $theme-font-light, sans-serif !default;
+$input-font-family: $theme-font-regular, sans-serif !default;
 $input-color: #5e6066 !default;
 $input-placeholder-color: rgba(#5e6066, 0.5) !default;
+$input-placeholder-font-family: $theme-font-light, sans-serif !default;
 $input-disabled-color: #cfcfcf !default;
 $input-disabled-bg-color: #fcfafa !default;
 $input-bg-color: #fafbfc !default;
@@ -40,6 +41,7 @@ $input-errored-border: $theme-color-error;
 
   &::-webkit-input-placeholder {
     color: $input-placeholder-color;
+    font-family: $input-placeholder-font-family;
   }
 }
 
