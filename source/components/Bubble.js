@@ -1,32 +1,59 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SkinnableComponent from './SkinnableComponent';
-import events from '../utils/events';
+import React, { Component } from 'react';
+import { string, bool, func, object, shape } from 'prop-types';
+import { withTheme } from '../themes/withTheme';
 
-export default class Bubble extends SkinnableComponent {
+// internal utility functions
+import {
+  addEventsToDocument,
+  removeEventsFromDocument,
+  StringOrElement,
+  composeTheme,
+  addThemeId
+} from '../utils';
 
-  static SKIN_PARTS = {
-    ROOT: 'root',
-    BUBBLE: 'bubble',
+// import constants
+import { IDENTIFIERS } from '../themes/API';
+
+class Bubble extends Component {
+  static propTypes = {
+    context: shape({
+      theme: object,
+      ROOT_THEME_API: object
+    }),
+    isHidden: bool,
+    isFloating: bool,
+    isOpeningUpward: bool,
+    isTransparent: bool,
+    skin: func.isRequired,
+    theme: object, // takes precedence over theme in context
+    themeId: string,
+    themeOverrides: object // custom css/scss from user that adheres to component's theme API
   };
-
-  static propTypes = Object.assign({}, SkinnableComponent.propTypes, {
-    isOpeningUpward: PropTypes.bool,
-    isTransparent: PropTypes.bool,
-    isFloating: PropTypes.bool,
-    isHidden: PropTypes.bool,
-  });
 
   static defaultProps = {
+    isHidden: false,
+    isFloating: false,
     isOpeningUpward: false,
     isTransparent: true,
-    isFloating: false,
-    isHidden: false,
+    theme: null,
+    themeId: IDENTIFIERS.BUBBLE,
+    themeOverrides: {}
   };
 
-  state = {
-    position: null,
-  };
+  constructor(props) {
+    super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+
+    this.state = {
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      position: null
+    };
+  }
 
   _hasEventListeners = false;
 
@@ -41,7 +68,7 @@ export default class Bubble extends SkinnableComponent {
     // Add listeners when the bubble
     if (isFloating && !nextProps.isHidden && !this._hasEventListeners) {
       this._handleScrollEventListener('add');
-      events.addEventsToDocument(this._getDocumentEvents());
+      addEventsToDocument(this._getDocumentEvents());
       window.addEventListener('resize', this._updatePosition);
       this._hasEventListeners = true;
     }
@@ -60,16 +87,10 @@ export default class Bubble extends SkinnableComponent {
     if (this._hasEventListeners) this._removeAllEventListeners();
   }
 
-  prepareSkinProps(props) {
-    return Object.assign({}, super.prepareSkinProps(props), {
-      position: this.state.position,
-    });
-  };
-
   // =========== PRIVATE HELPERS ==============
 
-  _handleScrollEventListener = (action) => {
-    const rootNode = this._getRootSkinPart();
+  _handleScrollEventListener = action => {
+    const rootNode = this.rootElement;
     const scrollableNode = this._getFirstScrollableParent(rootNode);
     if (scrollableNode) {
       if (action === 'add') {
@@ -82,29 +103,25 @@ export default class Bubble extends SkinnableComponent {
 
   _removeAllEventListeners() {
     if (this._hasEventListeners) {
-      events.removeEventsFromDocument(this._getDocumentEvents());
+      removeEventsFromDocument(this._getDocumentEvents());
       this._handleScrollEventListener('remove');
       window.removeEventListener('resize', this._updatePosition);
       this._hasEventListeners = false;
     }
   }
 
-  _getFirstScrollableParent = (node) => {
+  _getFirstScrollableParent = node => {
     if (node == null) return null;
-    if (node === this._getRootSkinPart() || node.scrollHeight <= node.clientHeight) {
+    if (node === this.rootElement || node.scrollHeight <= node.clientHeight) {
       return this._getFirstScrollableParent(node.parentNode);
     } else {
       return node;
     }
   };
 
-  _getRootSkinPart() {
-    return this.skinParts[Bubble.SKIN_PARTS.ROOT];
-  }
-
   _updatePosition = () => {
     const { isOpeningUpward } = this.props;
-    const rootNode = this._getRootSkinPart();
+    const rootNode = this.rootElement;
     const parentNode = rootNode.parentNode;
     const parentNodeParams = parentNode.getBoundingClientRect();
 
@@ -118,7 +135,7 @@ export default class Bubble extends SkinnableComponent {
     const position = {
       width: parentNodeParams.width,
       positionX: parentNodeParams.left,
-      positionY,
+      positionY
     };
     this.setState({ position });
   };
@@ -130,4 +147,19 @@ export default class Bubble extends SkinnableComponent {
     };
   }
 
+  render() {
+    // destructuring props ensures only the "...rest" get passed down
+    const { skin: BubbleSkin, theme, themeOverrides, ...rest } = this.props;
+
+    return (
+      <BubbleSkin
+        rootRef={el => (this.rootElement = el)}
+        position={this.state.position}
+        theme={this.state.composedTheme}
+        {...rest}
+      />
+    );
+  }
 }
+
+export default withTheme(Bubble);

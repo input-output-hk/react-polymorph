@@ -1,46 +1,108 @@
 import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
-import Checkbox from '../source/components/Checkbox';
-import SimpleSwitchSkin from '../source/skins/simple/SwitchSkin';
+import { withState } from '@dump247/storybook-state';
+
+// components
+import { Checkbox } from '../source/components';
+
+// skins
+import { SwitchSkin } from '../source/skins/simple';
+
+// themes
+import SimpleTheme from '../source/themes/simple';
+import CustomSwitchTheme from './theme-customizations/Switch.custom.scss';
+
+// custom styles & theme overrides
+import themeOverrides from './theme-overrides/customSwitch.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Switch', module)
-
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      checked: false,
-      onChange: mobxAction((value, event) => {
-        state.checked = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
-  })
-
   // ====== Stories ======
 
-  .add('plain', () => <Checkbox skin={<SimpleSwitchSkin />} />)
+  .add('plain',
+    withState({ checked: false }, store => (
+      <Checkbox
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        themeId={IDENTIFIERS.SWITCH}
+        skin={SwitchSkin}
+      />
+    ))
+  )
 
-  .add('disabled', () => <Checkbox disabled skin={<SimpleSwitchSkin />} />)
+  .add('disabled',
+    withState({ checked: false }, store => (
+      <Checkbox disabled themeId={IDENTIFIERS.SWITCH} skin={SwitchSkin} />
+    ))
+  )
 
-  .add('short label', () => <Checkbox label="My switch" skin={<SimpleSwitchSkin />} />)
+  .add('short label',
+    withState({ checked: false }, store => (
+      <Checkbox
+        label="My switch"
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        themeId={IDENTIFIERS.SWITCH}
+        skin={SwitchSkin}
+      />
+    ))
+  )
 
-  .add('disabled with label', () => (
-    <Checkbox
-      disabled
-      label="My switch"
-      skin={<SimpleSwitchSkin />}
-    />
-  ))
+  .add('disabled with label',
+    withState({ checked: false }, store => (
+      <Checkbox
+        disabled
+        label="My switch"
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        themeId={IDENTIFIERS.SWITCH}
+        skin={SwitchSkin}
+      />
+    ))
+  )
 
-  .add('long label', () => (
-    <Checkbox
-      skin={<SimpleSwitchSkin />}
-      label="I understand that if this application is moved to another device or deleted,
-             my money can be only recovered with the backup phrase which
-             were written down in a secure place"
-    />
-  ));
+  .add('long label',
+    withState({ checked: false }, store => (
+      <Checkbox
+        label="I understand that if this application is moved to another device
+              or deleted, my money can be only recovered with the backup phrase
+              which were written down in a secure place"
+        checked={store.state.checked}
+        onChange={() => store.set({ checked: !store.state.checked })}
+        themeId={IDENTIFIERS.SWITCH}
+        skin={SwitchSkin}
+      />
+    ))
+  )
+
+  .add('theme overrides',
+    withState({ checked: false }, store => (
+      <div style={{ margin: '15px' }}>
+        <Checkbox
+          themeId={IDENTIFIERS.SWITCH}
+          themeOverrides={themeOverrides}
+          label="theme override"
+          checked={store.state.checked}
+          onChange={() => store.set({ checked: !store.state.checked })}
+          skin={SwitchSkin}
+        />
+      </div>
+    ))
+  )
+
+  .add('custom theme',
+    withState({ checked: false }, store => (
+      <div style={{ margin: '15px' }}>
+        <Checkbox
+          themeId={IDENTIFIERS.SWITCH}
+          theme={CustomSwitchTheme}
+          label="custom theme"
+          checked={store.state.checked}
+          onChange={() => store.set({ checked: !store.state.checked })}
+          skin={SwitchSkin}
+        />
+      </div>
+    ))
+  );

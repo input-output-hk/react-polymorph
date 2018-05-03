@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins/arrow";
+@import 'theme';
+@import 'mixins/arrow';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -16,23 +16,46 @@ $option-font-color-disabled: rgba(#5e6066, 0.5) !default;
 $option-highlight-color: #edf0f3 !default;
 $option-checkmark-color: #5e6066 !default;
 $option-padding: 14px 20px !default;
+// Bubble arrow
+$options-bubble-arrow: true !default;
 
 .options {
   & > div {
     padding: 0;
   }
 
-  & [data-bubble-arrow] {
-    @include arrow(up, $option-bg-color, $options-border-color, $options-arrow-size);
-  }
-
-  &.firstOptionHighlighted {
-    &:not(.openUpward) [data-bubble-arrow] {
-      @include arrow(up, $option-highlight-color !important, $options-border-color, $options-arrow-size);
+  @if $options-bubble-arrow == true {
+    [data-bubble-arrow] {
+      @include arrow(
+        up,
+        $option-bg-color,
+        $options-border-color,
+        $options-arrow-size
+      );
     }
-    &.openUpward [data-bubble-arrow] {
-      height: inherit;
-      @include arrow(down, $option-highlight-color !important, $options-border-color, $options-arrow-size);
+
+    &.firstOptionHighlighted {
+      &:not(.openUpward) [data-bubble-arrow] {
+        @include arrow(
+          up,
+          $option-highlight-color !important,
+          $options-border-color,
+          $options-arrow-size
+        );
+      }
+      &.openUpward [data-bubble-arrow] {
+        height: inherit;
+        @include arrow(
+          down,
+          $option-highlight-color !important,
+          $options-border-color,
+          $options-arrow-size
+        );
+      }
+    }
+  } @else {
+    [data-bubble-arrow] {
+      display: none !important;
     }
   }
 }
@@ -53,13 +76,12 @@ $option-padding: 14px 20px !default;
 
   &.selectedOption {
     display: flex;
-
     &:after {
       align-self: center;
       border-color: $option-checkmark-color;
       border-style: solid;
       border-width: 0 2px 2px 0;
-      content: "";
+      content: '';
       height: 9px;
       margin: 0 2px 3px auto;
       transform: rotate(45deg);
@@ -77,17 +99,31 @@ $option-padding: 14px 20px !default;
   }
 }
 
-.openUpward {
-  &.options {
-    top: inherit;
+// BEGIN SPECIAL STATES ---------- //
+@if $options-bubble-arrow == true {
+  .openUpward {
+    &.options {
+      top: inherit;
 
-    [data-bubble-arrow] {
-      @include arrow(down, $option-bg-color, $options-border-color, $options-arrow-size);
-    }
+      [data-bubble-arrow] {
+        @include arrow(
+          down,
+          $option-bg-color,
+          $options-border-color,
+          $options-arrow-size
+        );
+      }
 
-    &.firstOptionHighlighted [data-bubble-arrow] {
-      @include arrow(down, $option-highlight-color, $options-border-color, $options-arrow-size);
+      &.firstOptionHighlighted [data-bubble-arrow] {
+        @include arrow(
+          down,
+          $option-highlight-color,
+          $options-border-color,
+          $options-arrow-size
+        );
+      }
     }
   }
 }
 
+// END SPECIAL STATES ---------- //

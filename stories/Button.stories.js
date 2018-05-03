@@ -1,27 +1,37 @@
 import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
-import Button from '../source/components/Button';
-import SimpleButtonSkin from '../source/skins/simple/ButtonSkin';
+
+// components
+import { Button } from '../source/components';
+
+// skins
+import { ButtonSkin } from '../source/skins/simple';
+
+// themes
+import SimpleTheme from '../source/themes/simple';
+import CustomButtonTheme from './theme-customizations/Button.custom.scss';
+
+// theme overrides and identifiers
+import themeOverrides from './theme-overrides/customButton.scss';
+import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Button', module)
-
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      value: '',
-      onChange: mobxAction((value, event) => {
-        state.value = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
-  })
-
   // ====== Stories ======
 
-  .add('plain', () => <Button label="Button label" skin={<SimpleButtonSkin />} />)
+  .add('plain', () => <Button label="Button label" skin={ButtonSkin} />)
 
-  .add('disabled', () => <Button label="Button label" disabled skin={<SimpleButtonSkin />} />);
+  .add('disabled', () => <Button disabled label="Button label" skin={ButtonSkin} />)
+
+  .add('theme overrides', () => (
+    <Button
+      label="theme overrides"
+      themeOverrides={themeOverrides}
+      skin={ButtonSkin}
+    />
+  ))
+
+  .add('custom theme', () => (
+    <Button label="Custom theme" theme={CustomButtonTheme} skin={ButtonSkin} />
+  ));

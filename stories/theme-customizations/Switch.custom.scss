@@ -1,0 +1,9 @@
+// Switch theme customizations
+$switch-on-accent-color: #3c6e3d;
+$switch-off-accent-color: #b4bdca;
+$switch-thumb-accent-color: #ffffff;
+$switch-track-height: 10px;
+$switch-track-length: 50px;
+$switch-label-color: #316626;
+
+@import '../../source/themes/simple/SimpleSwitch';

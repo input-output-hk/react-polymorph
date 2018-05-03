@@ -1,0 +1,27 @@
+.check {
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #5e6066;
+}
+
+.checked {
+  .label {
+    color: rgba(10, 145, 48, 0.6);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .check {
+    background-color: rgba(10, 145, 48, 0.6);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.label {
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    &:not(.checked) {
+      color: rgba(10, 145, 48, 0.6);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}

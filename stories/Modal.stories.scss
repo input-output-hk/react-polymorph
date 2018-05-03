@@ -1,4 +1,4 @@
-@import "../source/themes/simple/theme";
+@import '../source/themes/simple/theme';
 
 .modalTitle {
   font-family: $theme-font-medium;
@@ -16,7 +16,8 @@
   width: calc(50% - 10px);
   background-color: lightgrey;
   &:not(.disabled) {
-    &:hover, &:active {
+    &:hover,
+    &:active {
       background-color: grey;
       cursor: pointer;
     }
@@ -27,7 +28,8 @@
   width: calc(50% - 10px);
   background-color: indianred;
   &:not(.disabled) {
-    &:hover, &:active {
+    &:hover,
+    &:active {
       background-color: darkred;
       cursor: pointer;
     }
