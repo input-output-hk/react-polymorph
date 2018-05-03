@@ -15,6 +15,7 @@ type Props = {
     theme: Object,
     ROOT_THEME_API: Object
   },
+  disabled: boolean,
   label: string | Element,
   onChange: Function,
   onBlur: Function,
