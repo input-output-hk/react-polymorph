@@ -182,6 +182,13 @@ class Autocomplete extends Component {
     this.setState({ selectedOptions });
   };
 
+  removeOptions = () => {
+    this.selectionChanged([]);
+    this.setState({ selectedOptions: [] });
+    const input = this._getInputSkinPart();
+    input.value = '';
+  };
+
   selectionChanged = (selectedOptions, event) => {
     if (this.props.onChange) this.props.onChange(selectedOptions, event);
   };

@@ -1,6 +1,16 @@
 # Changelog
 
-## vNext
+## vNEXT
+
+### Features
+
+- Add checkmark for selected option [PR 54](https://github.com/input-output-hk/react-polymorph/pull/54)
+
+## 0.6.5
+
+### Features
+
+- Add Autocomplete clear feature [PR 49](https://github.com/input-output-hk/react-polymorph/pull/49)
 
 Major breaking changes due to large refactoring of component architecture:
 [PR 47](https://github.com/input-output-hk/react-polymorph/pull/47)
