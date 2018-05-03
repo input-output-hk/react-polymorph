@@ -249,13 +249,15 @@ class Options extends Component<Props, State> {
     switch (event.keyCode) {
       case 9: // Tab key: selects currently highlighted option
         event.preventDefault();
-        this._handleSelectionOnEnterKey(event);
+        this._handleSelectionOnKeyDown(event);
         break;
       case 13: // Enter key: selects currently highlighted option
-        this._handleSelectionOnEnterKey(event);
+        event.preventDefault();
+        this._handleSelectionOnKeyDown(event);
         break;
       case 32: // Space key: selects currently highlighted option
-        this._handleSelectionOnEnterKey(event);
+        event.preventDefault();
+        this._handleSelectionOnKeyDown(event);
         break;
       case 27: // Escape key: closes options if open
         this.close();

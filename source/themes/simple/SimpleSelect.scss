@@ -6,6 +6,7 @@
 
 $select-input-color: $input-color !default;
 $select-input-placeholder-color: $input-placeholder-color !default;
+$select-input-placeholder-font-family: $theme-font-light, sans-serif !default;
 $select-input-bg-color: $input-bg-color !default;
 $select-input-border-focus-color: $input-border-focus-color !default;
 $select-input-padding: $input-padding !default;
@@ -40,6 +41,7 @@ $select-down-arrow-rtl-position-left: 15px !default;
 
     &::-webkit-input-placeholder {
       color: $select-input-placeholder-color;
+      font-family: $select-input-placeholder-font-family;
     }
   }
 

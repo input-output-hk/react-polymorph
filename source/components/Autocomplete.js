@@ -73,13 +73,13 @@ class Autocomplete extends Component<Props, State> {
       themeOverrides,
       sortAlphabetically,
       options,
-      selectedOptions
+      preselectedOptions
     } = props;
 
     this.state = {
-      inputValue: '',
-      error: '',
-      selectedOptions: selectedOptions || [],
+      inputValue: "",
+      error: "",
+      selectedOptions: preselectedOptions || [],
       filteredOptions:
         sortAlphabetically && options ? options.sort() : options || [],
       isOpen: false,
