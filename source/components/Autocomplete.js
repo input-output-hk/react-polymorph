@@ -206,9 +206,7 @@ class Autocomplete extends Component<Props, State> {
   // returns an object containing props, theme, and method handlers
   // associated with rendering this.state.selectedOptions, the user can call
   // this in the body of the renderSelections function
-  getSelectionProps = ({
-    removeSelection
-  }: { removeSelection: Function } = {}) => {
+  getSelectionProps = ({ removeSelection } = {}) => {
     const { themeId } = this.props;
     const { inputValue, isOpen, selectedOptions, composedTheme } = this.state;
     return {
