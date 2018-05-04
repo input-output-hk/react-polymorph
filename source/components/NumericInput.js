@@ -334,7 +334,7 @@ class NumericInput extends Component<Props, State> {
 
   _isNumeric(value: string) {
     const replacedValue = value.replace(/,/g, '');
-    return !Number.isNaN(parseFloat(replacedValue)) && Number.isFinite(replacedValue);
+    return !isNaN(parseFloat(replacedValue)) && isFinite(replacedValue);
   }
 
   render() {
