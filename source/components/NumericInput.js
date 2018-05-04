@@ -334,6 +334,7 @@ class NumericInput extends Component<Props, State> {
 
   _isNumeric(value: string) {
     const replacedValue = value.replace(/,/g, '');
+    // eslint-disable-next-line no-restricted-globals
     return !isNaN(parseFloat(replacedValue)) && isFinite(replacedValue);
   }
 
