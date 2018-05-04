@@ -25,7 +25,7 @@ type Props = {
   multipleSameSelections: boolean,
   onChange: Function,
   options: Array<any>,
-  selectedOptions: Array<any>,
+  preselectedOptions: Array<any>,
   placeholder: string,
   renderSelections: Function,
   renderOptions: Function,
@@ -77,8 +77,8 @@ class Autocomplete extends Component<Props, State> {
     } = props;
 
     this.state = {
-      inputValue: "",
-      error: "",
+      inputValue: '',
+      error: '',
       selectedOptions: preselectedOptions || [],
       filteredOptions:
         sortAlphabetically && options ? options.sort() : options || [],
