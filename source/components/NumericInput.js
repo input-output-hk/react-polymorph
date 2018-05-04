@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+// $FlowFixMe
 import type { ComponentType, SyntheticInputEvent } from 'react';
 
 // external libraries
