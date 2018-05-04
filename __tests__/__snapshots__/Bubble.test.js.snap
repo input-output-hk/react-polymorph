@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bubble renders correctly 1`] = `
+<div
+  className=""
+  style={null}
+>
+  <div
+    className={undefined}
+    data-bubble-container={true}
+  />
+  <span
+    className={undefined}
+    data-bubble-arrow={true}
+  />
+</div>
+`;
+
+exports[`Bubble renders isFloating 1`] = `
+<div
+  className=""
+  style={null}
+>
+  <div
+    className={undefined}
+    data-bubble-container={true}
+  />
+  <span
+    className={undefined}
+    data-bubble-arrow={true}
+  />
+</div>
+`;
+
+exports[`Bubble renders isHidden 1`] = `
+<div
+  className=""
+  style={null}
+>
+  <div
+    className={undefined}
+    data-bubble-container={true}
+  />
+  <span
+    className={undefined}
+    data-bubble-arrow={true}
+  />
+</div>
+`;
+
+exports[`Bubble renders isOpeningUpward 1`] = `
+<div
+  className=""
+  style={null}
+>
+  <div
+    className={undefined}
+    data-bubble-container={true}
+  />
+  <span
+    className={undefined}
+    data-bubble-arrow={true}
+  />
+</div>
+`;
+
+exports[`Bubble renders isTransparent={false} 1`] = `
+<div
+  className=""
+  style={null}
+>
+  <div
+    className={undefined}
+    data-bubble-container={true}
+  />
+  <span
+    className={undefined}
+    data-bubble-arrow={true}
+  />
+</div>
+`;

@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch is checked 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={true}
+    className={undefined}
+    disabled={false}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className=""
+  >
+    <span
+      className={undefined}
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch is disabled 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={false}
+    className={undefined}
+    disabled={true}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className=""
+  >
+    <span
+      className={undefined}
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch renders correctly 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={false}
+    className={undefined}
+    disabled={false}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className=""
+  >
+    <span
+      className={undefined}
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch renders with a label and disabled 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={false}
+    className={undefined}
+    disabled={true}
+    label="click here"
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className=""
+  >
+    <span
+      className={undefined}
+    />
+  </div>
+  <label
+    className={undefined}
+  >
+    click here
+  </label>
+</div>
+`;
+
+exports[`Switch renders with label 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={false}
+    className={undefined}
+    disabled={false}
+    label="click here"
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className=""
+  >
+    <span
+      className={undefined}
+    />
+  </div>
+  <label
+    className={undefined}
+  >
+    click here
+  </label>
+</div>
+`;

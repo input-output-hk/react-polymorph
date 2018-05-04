@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toggler is checked 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={true}
+    className={undefined}
+    disabled={false}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className={undefined}
+  >
+    <span
+      className=""
+    >
+      Included
+    </span>
+    <span
+      className=""
+    >
+      Excluded
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Toggler is disabled 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={false}
+    className={undefined}
+    disabled={true}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className={undefined}
+  >
+    <span
+      className=""
+    >
+      Included
+    </span>
+    <span
+      className=""
+    >
+      Excluded
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Toggler renders correctly 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    checked={false}
+    className={undefined}
+    disabled={false}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className={undefined}
+  >
+    <span
+      className=""
+    >
+      Included
+    </span>
+    <span
+      className=""
+    >
+      Excluded
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Toggler renders within text 1`] = `
+<div>
+  <span>
+    Fees 
+  </span>
+  <div
+    className=""
+    onClick={[Function]}
+  >
+    <input
+      checked={false}
+      className={undefined}
+      disabled={false}
+      readOnly={true}
+      type="checkbox"
+    />
+    <div
+      className={undefined}
+    >
+      <span
+        className=""
+      >
+        Included
+      </span>
+      <span
+        className=""
+      >
+        Excluded
+      </span>
+    </div>
+  </div>
+  <span>
+     from the amount
+  </span>
+</div>
+`;

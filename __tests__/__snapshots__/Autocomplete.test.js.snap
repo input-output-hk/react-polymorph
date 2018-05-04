@@ -1,0 +1,570 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Autocomplete is disabled 1`] = `
+<div
+  className={undefined}
+>
+  <div
+    className=""
+  >
+    
+    <div
+      className={undefined}
+    >
+      <div
+        className={undefined}
+        onClick={[Function]}
+      >
+        <div
+          className=""
+        >
+          <div
+            className={undefined}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder={undefined}
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className=""
+          style={null}
+        >
+          <div
+            className={undefined}
+            data-bubble-container={true}
+          >
+            <ul
+              className={undefined}
+            >
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                cat
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                dog
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                fish
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                home
+              </li>
+            </ul>
+          </div>
+          <span
+            className={undefined}
+            data-bubble-arrow={true}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Autocomplete renders correctly 1`] = `
+<div
+  className={undefined}
+>
+  <div
+    className=""
+  >
+    
+    <div
+      className={undefined}
+    >
+      <div
+        className={undefined}
+        onClick={[Function]}
+      >
+        <div
+          className=""
+        >
+          <div
+            className={undefined}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder={undefined}
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className=""
+          style={null}
+        >
+          <div
+            className={undefined}
+            data-bubble-container={true}
+          >
+            <ul
+              className={undefined}
+            >
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                cat
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                dog
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                fish
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                home
+              </li>
+            </ul>
+          </div>
+          <span
+            className={undefined}
+            data-bubble-arrow={true}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Autocomplete renders with a placeholder 1`] = `
+<div
+  className={undefined}
+>
+  <div
+    className=""
+  >
+    
+    <div
+      className={undefined}
+    >
+      <div
+        className={undefined}
+        onClick={[Function]}
+      >
+        <div
+          className=""
+        >
+          <div
+            className={undefined}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Enter recovery phrase"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className=""
+          style={null}
+        >
+          <div
+            className={undefined}
+            data-bubble-container={true}
+          >
+            <ul
+              className={undefined}
+            >
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                cat
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                dog
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                fish
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                home
+              </li>
+            </ul>
+          </div>
+          <span
+            className={undefined}
+            data-bubble-arrow={true}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Autocomplete renders with an error 1`] = `
+<div
+  className={undefined}
+>
+  <div
+    className=""
+  >
+    <div
+      className={undefined}
+    >
+      Your mnemonic phrase is incorrect
+    </div>
+    <div
+      className={undefined}
+    >
+      <div
+        className={undefined}
+        onClick={[Function]}
+      >
+        <div
+          className=""
+        >
+          <div
+            className={undefined}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder={undefined}
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className=""
+          style={null}
+        >
+          <div
+            className={undefined}
+            data-bubble-container={true}
+          >
+            <ul
+              className={undefined}
+            >
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                cat
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                dog
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                fish
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                home
+              </li>
+            </ul>
+          </div>
+          <span
+            className={undefined}
+            data-bubble-arrow={true}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Autocomplete renders with label 1`] = `
+<div
+  className={undefined}
+>
+  <div
+    className=""
+  >
+    
+    <label
+      className={undefined}
+      onClick={[Function]}
+    >
+      Enter your recovery phrase below
+    </label>
+    <div
+      className={undefined}
+    >
+      <div
+        className={undefined}
+        onClick={[Function]}
+      >
+        <div
+          className=""
+        >
+          <div
+            className={undefined}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder={undefined}
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className=""
+          style={null}
+        >
+          <div
+            className={undefined}
+            data-bubble-container={true}
+          >
+            <ul
+              className={undefined}
+            >
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                cat
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                dog
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                fish
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                home
+              </li>
+            </ul>
+          </div>
+          <span
+            className={undefined}
+            data-bubble-arrow={true}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Autocomplete uses render prop - renderOptions 1`] = `
+<div
+  className={undefined}
+>
+  <div
+    className=""
+  >
+    
+    <div
+      className={undefined}
+    >
+      <div
+        className={undefined}
+        onClick={[Function]}
+      >
+        <div
+          className=""
+        >
+          <div
+            className={undefined}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder={undefined}
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className=""
+          style={null}
+        >
+          <div
+            className={undefined}
+            data-bubble-container={true}
+          >
+            <ul
+              className={undefined}
+            >
+              <li>
+                <span>
+                  #0: cat
+                </span>
+              </li>
+              <li>
+                <span>
+                  #1: dog
+                </span>
+              </li>
+              <li>
+                <span>
+                  #2: fish
+                </span>
+              </li>
+              <li>
+                <span>
+                  #3: home
+                </span>
+              </li>
+            </ul>
+          </div>
+          <span
+            className={undefined}
+            data-bubble-arrow={true}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Autocomplete uses render prop - renderSelections 1`] = `
+<div
+  className={undefined}
+>
+  <div
+    className=""
+  >
+    
+    <div
+      className={undefined}
+    >
+      <div
+        className={undefined}
+        onClick={[Function]}
+      >
+        <div
+          className=""
+        >
+          <div
+            className={undefined}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder={undefined}
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className=""
+          style={null}
+        >
+          <div
+            className={undefined}
+            data-bubble-container={true}
+          >
+            <ul
+              className={undefined}
+            >
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                cat
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                dog
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                fish
+              </li>
+              <li
+                className=""
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                home
+              </li>
+            </ul>
+          </div>
+          <span
+            className={undefined}
+            data-bubble-arrow={true}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio is disabled 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    className={undefined}
+    disabled={true}
+    selected={false}
+    type="radio"
+  />
+  <div
+    className=""
+  />
+</div>
+`;
+
+exports[`Radio is selected 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    className={undefined}
+    disabled={false}
+    selected={true}
+    type="radio"
+  />
+  <div
+    className=""
+  />
+</div>
+`;
+
+exports[`Radio renders correctly 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    className={undefined}
+    disabled={false}
+    selected={false}
+    type="radio"
+  />
+  <div
+    className=""
+  />
+</div>
+`;
+
+exports[`Radio renders with a label 1`] = `
+<div
+  className=""
+  onClick={[Function]}
+>
+  <input
+    className={undefined}
+    disabled={false}
+    label="click here"
+    selected={false}
+    type="radio"
+  />
+  <div
+    className=""
+  />
+  <label
+    className={undefined}
+  >
+    click here
+  </label>
+</div>
+`;
