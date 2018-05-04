@@ -204,7 +204,7 @@ class Options extends Component<Props, State> {
 
   // ========= PRIVATE HELPERS =========
 
-  _handleSelectionOnEnterKey = (event: SyntheticKeyboardEvent<>) => {
+  _handleSelectionOnKeyDown = (event: SyntheticKeyboardEvent<>) => {
     const { options } = this.props;
     if (options.length) {
       const { isOpeningUpward } = this.props;
