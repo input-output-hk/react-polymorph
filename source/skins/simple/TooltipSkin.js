@@ -1,4 +1,6 @@
+// @flow
 import React from 'react';
+import type { Node } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -12,7 +14,19 @@ import { BubbleSkin } from './';
 // internal utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => {
+type Props = {
+  children: Node,
+  className: string,
+  isAligningRight: boolean,
+  isBounded: boolean,
+  isOpeningUpward: boolean,
+  isTransparent: boolean,
+  theme: Object,
+  themeId: string,
+  tip: string | Node
+};
+
+export default (props: Props) => {
   const { theme, themeId } = props;
   return (
     <span

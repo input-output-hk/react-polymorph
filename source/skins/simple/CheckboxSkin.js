@@ -1,12 +1,23 @@
+// @flow
 import React from 'react';
-
+import type { Node } from 'react';
 // external libraries
 import classnames from 'classnames';
 
 // internal utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => (
+type Props = {
+  checked: boolean,
+  className: string,
+  disabled: boolean,
+  onChange: Function,
+  label: string | Node,
+  theme: Object,
+  themeId: string
+};
+
+export default (props: Props) => (
   <div
     role="presentation"
     aria-hidden

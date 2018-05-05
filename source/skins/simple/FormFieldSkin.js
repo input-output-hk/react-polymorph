@@ -1,8 +1,24 @@
+// @flow
 import React from 'react';
+import type { Node } from 'react';
 import { omit } from 'lodash';
 import classnames from 'classnames';
 
-export default props => (
+type Props = {
+  className: string,
+  disabled: boolean,
+  error: string | Node,
+  focusChild: Function,
+  label: string | Node,
+  onChange: Function,
+  onRef: Function,
+  render: Node,
+  setError: Function,
+  theme: Object,
+  themeId: string
+};
+
+export default (props: Props) => (
   <div
     className={classnames([
       props.className,

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 
 // external libraries
@@ -6,7 +7,22 @@ import classnames from 'classnames';
 // internal utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => (
+type Props = {
+  disabled: boolean,
+  error: string,
+  inputRef: Function,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  onKeyPress: Function,
+  placeholder: string,
+  readOnly: boolean,
+  theme: Object,
+  themeId: string,
+  value: string
+};
+
+export default (props: Props) => (
   <input
     ref={props.inputRef}
     {...pickDOMProps(props)}

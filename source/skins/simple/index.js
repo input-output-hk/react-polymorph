@@ -1,3 +1,4 @@
+// @flow
 // exports all skins as named exports
 export { default as AutocompleteSkin } from './AutocompleteSkin';
 export { default as BubbleSkin } from './BubbleSkin';

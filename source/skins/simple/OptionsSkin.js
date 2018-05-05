@@ -1,4 +1,6 @@
+// @flow
 import React from 'react';
+import type { Node } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -9,7 +11,27 @@ import { Bubble } from '../../components';
 // skins
 import { BubbleSkin } from './';
 
-export default props => {
+type Props = {
+  render: Node,
+  options: Array<any>,
+  optionRenderer: Node,
+  isOpeningUpward: boolean,
+  isOpen: boolean,
+  noResults: boolean,
+  noResultsMessage: string | Node,
+  selectedOption: any,
+  getOptionProps: Function,
+  getHighlightedOptionIndex: Function,
+  isHighlightedOption: Function,
+  isSelectedOption: Function,
+  handleClickOnOption: Function,
+  setHighlightedOptionIndex: Function,
+  optionsRef: Function,
+  theme: Object,
+  themeId: string,
+};
+
+export default (props: Props) => {
   const {
     getOptionProps,
     render,
@@ -77,7 +99,6 @@ export default props => {
     }
     // render no results message
     return <li className={theme[themeId].option}>{noResultsMessage}</li>;
-
   };
 
   return (

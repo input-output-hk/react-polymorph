@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Ref } from 'react';
+import type { Ref, Node } from 'react';
 
 // external libraries
 import _ from 'lodash';
@@ -32,8 +32,8 @@ type Props = {
   options: Array<any>,
   placeholder: string,
   removeOption: Function,
-  renderSelections: Function,
-  renderOptions: Function,
+  renderSelections: Node,
+  renderOptions: Node,
   rootRef: Ref,
   selectedOptions: Array<any>,
   suggestionsRef: Ref,

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 
 // external libraries
@@ -9,7 +10,28 @@ import { Options, Input } from '../../components';
 // skins
 import { InputSkin, OptionsSkin } from './';
 
-export default props => {
+type Props = {
+  getSelectedOption: Function,
+  handleChange: Function,
+  handleInputClick: Function,
+  inputRef: Function,
+  isOpen: boolean,
+  isOpeningUpward: boolean,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  options: Array<{
+    isDisabled: boolean,
+    value: any
+  }>,
+  placeholder: string,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  toggleOpen: Function,
+  value: string
+};
+
+export default (props: Props) => {
   const selectedOption = props.getSelectedOption();
   const inputValue = selectedOption ? selectedOption.label : '';
   const { theme, themeId } = props;
