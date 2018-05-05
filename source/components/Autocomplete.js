@@ -46,9 +46,9 @@ type State = {
 };
 
 class Autocomplete extends Component<Props, State> {
-  rootElement: ?Element;
+  rootElement: ?Element; // does not get used
   inputElement: HTMLInputElement;
-  suggestionsElement: ?Element;
+  suggestionsElement: ?Element; // does not get used
 
   static defaultProps = {
     error: null,
@@ -65,6 +65,10 @@ class Autocomplete extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+
+    this.rootElement = React.createRef();
+    this.inputElement = React.createRef();
+    this.suggestionsElement = React.createRef();
 
     const {
       context,
@@ -104,7 +108,7 @@ class Autocomplete extends Component<Props, State> {
   };
 
   handleAutocompleteClick = () => {
-    this.inputElement.focus();
+    this.inputElement.current.focus();
     if (!this.state.isOpen) {
       this.openOptions();
     } else {
@@ -214,6 +218,10 @@ class Autocomplete extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
+      context,
+      invalidCharsRegex,
+      multipleSameSelections,
+      sortAlphabetically,
       skin: AutocompleteSkin,
       theme,
       themeOverrides,
@@ -231,9 +239,9 @@ class Autocomplete extends Component<Props, State> {
         theme={this.state.composedTheme}
         handleInputChange={this.handleInputChange}
         error={error || this.state.error}
-        rootRef={el => (this.rootElement = el)}
-        inputRef={el => (this.inputElement = el)}
-        suggestionsRef={el => (this.suggestionsElement = el)}
+        rootRef={this.rootElement}
+        inputRef={this.inputElement}
+        suggestionsRef={this.suggestionsRef}
         handleChange={this.handleChange}
         closeOptions={this.closeOptions}
         handleAutocompleteClick={this.handleAutocompleteClick}
