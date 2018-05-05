@@ -15,7 +15,7 @@ type Props = {
     theme: Object,
     ROOT_THEME_API: Object
   },
-  isActive: boolean,
+  isOpen: boolean,
   onClose: Function,
   skin: ComponentType<any>,
   triggerCloseOnOverlayClick: boolean,
@@ -31,7 +31,7 @@ type State = {
 class Modal extends Component<Props, State> {
   static defaultProps = {
     contentLabel: 'Modal Dialog',
-    isActive: false,
+    isOpen: false,
     triggerCloseOnOverlayClick: true,
     theme: null,
     themeId: IDENTIFIERS.MODAL,
@@ -54,7 +54,13 @@ class Modal extends Component<Props, State> {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin: ModalSkin, theme, themeOverrides, ...rest } = this.props;
+    const {
+      skin: ModalSkin,
+      theme,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
 
     return <ModalSkin theme={this.state.composedTheme} {...rest} />;
   }

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import type { ComponentType, Node } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import utility functions
@@ -10,6 +10,7 @@ import { composeTheme, addThemeId } from '../utils';
 import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
@@ -17,7 +18,7 @@ type Props = {
   disabled: boolean,
   error: string | Element,
   label: string | Element,
-  render: Function,
+  render: Node,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
@@ -71,6 +72,7 @@ class FormField extends Component<Props, State> {
       theme,
       themeOverrides,
       error,
+      context,
       ...rest
     } = this.props;
 

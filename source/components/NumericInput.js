@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 // $FlowFixMe
-import type { ComponentType, SyntheticInputEvent } from 'react';
+import type { Node, ComponentType, SyntheticInputEvent } from 'react';
 
 // external libraries
 import { flow } from 'lodash';
@@ -19,7 +19,7 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  error: string | Element,
+  error: string | Node,
   onChange: Function,
   maxAfterDot: number,
   maxBeforeDot: number,
@@ -346,6 +346,12 @@ class NumericInput extends Component<Props, State> {
       themeOverrides,
       onChange,
       error,
+      context,
+      onRef,
+      maxValue,
+      minValue,
+      maxBeforeDot,
+      maxAfterDot,
       ...rest
     } = this.props;
 

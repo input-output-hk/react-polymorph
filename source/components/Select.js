@@ -102,7 +102,15 @@ class Select extends Component<Props, State> {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin: SelectSkin, theme, themeOverrides, ...rest } = this.props;
+    const {
+      skin: SelectSkin,
+      theme,
+      themeOverrides,
+      autoFocus,
+      context,
+      allowBlank,
+      ...rest
+    } = this.props;
 
     return (
       <SelectSkin

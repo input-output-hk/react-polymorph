@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import type { ComponentType, Node } from 'react';
 
 // external libraries
 import _ from 'lodash';
@@ -12,6 +12,7 @@ import { composeTheme, composeFunctions, addThemeId } from '../utils';
 import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
@@ -27,8 +28,8 @@ type Props = {
   options: Array<any>,
   preselectedOptions: Array<any>,
   placeholder: string,
-  renderSelections: Function,
-  renderOptions: Function,
+  renderSelections: Node,
+  renderOptions: Node,
   skin: ComponentType<any>,
   sortAlphabetically: boolean,
   theme: Object, // will take precedence over theme in context if passed

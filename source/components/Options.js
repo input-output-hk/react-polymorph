@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // $FlowFixMe
-import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent } from 'react';
+import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Node } from 'react';
 
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
@@ -23,17 +23,16 @@ type Props = {
     theme: Object,
     ROOT_THEME_API: Object
   },
-  inputValue: string,
   isOpen: boolean,
   isOpeningUpward: boolean,
   noResults: boolean,
-  noResultsMessage: string | Element,
+  noResultsMessage: string | Node,
   onBlur: Function,
   onChange: Function,
   onClose: Function,
   options: Array<any>,
-  optionRenderer: Function,
-  render: Function,
+  optionRenderer: Node,
+  render: Node,
   resetOnClose: boolean,
   selectedOption: any,
   skin: ComponentType<any>,
@@ -308,6 +307,7 @@ class Options extends Component<Props, State> {
       theme,
       themeOverrides,
       onChange,
+      context,
       ...rest
     } = this.props;
 

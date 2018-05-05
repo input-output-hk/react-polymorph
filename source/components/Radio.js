@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import type { ComponentType, Node } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import utility functions
@@ -15,7 +15,7 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  label: string | Element,
+  label: string | Node,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
@@ -55,7 +55,13 @@ class Radio extends Component<Props, State> {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin: RadioSkin, theme, themeOverrides, ...rest } = this.props;
+    const {
+      skin: RadioSkin,
+      theme,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
 
     return <RadioSkin theme={this.state.composedTheme} {...rest} />;
   }

@@ -1,3 +1,4 @@
+// @flow
 // exports all components as named exports
 export { default as ThemeProvider } from './ThemeProvider';
 export { default as Autocomplete } from './Autocomplete';

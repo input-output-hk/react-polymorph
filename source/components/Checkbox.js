@@ -11,12 +11,15 @@ import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
   checked: boolean,
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
   },
   disabled: boolean,
   label: string | Element,
+  labelLeft: string | Node,
+  labelRight: string | Node,
   onChange: Function,
   onBlur: Function,
   onFocus: Function,
@@ -55,7 +58,12 @@ class Checkbox extends Component<Props, State> {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin: CheckboxSkin, theme, themeOverrides, ...rest } = this.props;
+    const {
+      skin: CheckboxSkin,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
 
     return <CheckboxSkin theme={this.state.composedTheme} {...rest} />;
   }

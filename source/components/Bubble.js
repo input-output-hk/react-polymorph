@@ -15,6 +15,7 @@ import {
 import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
@@ -24,9 +25,9 @@ type Props = {
   isOpeningUpward: boolean,
   isTransparent: boolean,
   skin: ComponentType<any>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: Object, // takes precedence over them in context if passed
   themeId: string,
-  themeOverrides: Object // custom css/scss from user that adheres to component's theme API
+  themeOverrides: Object // custom css/scss from user adhering to component's theme API
 };
 
 type State = {
@@ -159,7 +160,12 @@ class Bubble extends Component<Props, State> {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin: BubbleSkin, theme, themeOverrides, ...rest } = this.props;
+    const {
+      skin: BubbleSkin,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
 
     return (
       <BubbleSkin

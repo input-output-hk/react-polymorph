@@ -10,6 +10,7 @@ import { composeTheme, addThemeId } from '../utils';
 import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
@@ -51,7 +52,12 @@ class Button extends Component<Props, State> {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin: ButtonSkin, theme, themeOverrides, ...rest } = this.props;
+    const {
+      skin: ButtonSkin,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
 
     return <ButtonSkin theme={this.state.composedTheme} {...rest} />;
   }

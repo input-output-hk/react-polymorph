@@ -17,7 +17,7 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  error: string | Element,
+  error: string,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
@@ -137,10 +137,16 @@ class Input extends Component<Props, State> {
     // destructuring props ensures only the "...rest" get passed down
     const {
       skin: InputSkin,
+      context,
       theme,
       themeOverrides,
       onChange,
       error,
+      onRef,
+      maxLength,
+      minLength,
+      setError,
+      autoFocus,
       ...rest
     } = this.props;
 
