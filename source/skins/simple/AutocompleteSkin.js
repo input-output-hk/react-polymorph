@@ -1,4 +1,6 @@
+// @flow
 import React from 'react';
+import type { Ref } from 'react';
 
 // external libraries
 import _ from 'lodash';
@@ -10,7 +12,36 @@ import { FormField, Options } from '../../components';
 // skins
 import { FormFieldSkin, OptionsSkin } from './';
 
-export default props => {
+type Props = {
+  className: string,
+  closeOptions: Function,
+  error: string,
+  filteredOptions: Array<any>,
+  getSelectionProps: Function,
+  handleAutocompleteClick: Function,
+  handleChange: Function,
+  handleInputChange: Function,
+  inputRef: Ref,
+  inputValue: string,
+  isOpeningUpward: boolean,
+  isOpen: boolean,
+  label: string | Element,
+  maxSelections: number,
+  maxVisibleOptions: number,
+  onKeyDown: Function,
+  options: Array<any>,
+  placeholder: string,
+  removeOption: Function,
+  renderSelections: Function,
+  renderOptions: Function,
+  rootRef: Ref,
+  selectedOptions: Array<any>,
+  suggestionsRef: Ref,
+  theme: Object,
+  themeId: string
+};
+
+export default (props: Props) => {
   const { label, error } = props;
   const theme = props.theme[props.themeId];
   const formfieldProps = { label, error };
@@ -99,7 +130,6 @@ export default props => {
               isOpen={props.isOpen}
               isOpeningUpward={props.isOpeningUpward}
               noResults={!props.filteredOptions.length}
-              noResultsMessage={props.noResultsMessage}
               onChange={props.handleChange}
               onClose={props.closeOptions}
               options={filteredAndLimitedOptions}
