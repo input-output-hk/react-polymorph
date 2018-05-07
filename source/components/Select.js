@@ -12,6 +12,7 @@ import { IDENTIFIERS } from '../themes/API';
 type Props = {
   allowBlank: boolean,
   autoFocus: boolean,
+  error: string | Node,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
@@ -20,6 +21,7 @@ type Props = {
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
+  optionRenderer: Function,
   options: Array<{
     isDisabled: boolean,
     value: any

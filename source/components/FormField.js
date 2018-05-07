@@ -16,9 +16,9 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  error: string | Element,
-  label: string | Element,
-  render: Node,
+  error: string | Node,
+  label: string | Node,
+  render: Function,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,

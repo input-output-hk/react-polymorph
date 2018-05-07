@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import type { ComponentType, Node } from 'react';
 
 // external libraries
 import { isString, flow } from 'lodash';
@@ -20,7 +20,7 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  error: string | Element,
+  error: string | Node,
   maxLength: number,
   minLength: number,
   onBlur: Function,

@@ -60,6 +60,7 @@ class Checkbox extends Component<Props, State> {
     // destructuring props ensures only the "...rest" get passed down
     const {
       skin: CheckboxSkin,
+      theme,
       themeOverrides,
       context,
       ...rest

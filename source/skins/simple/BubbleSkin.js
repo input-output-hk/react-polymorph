@@ -23,6 +23,7 @@ type Props = {
 
 export default (props: Props) => {
   const { theme, themeId } = props;
+
   return (
     <div
       ref={props.rootRef}

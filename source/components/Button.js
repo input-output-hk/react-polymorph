@@ -54,6 +54,7 @@ class Button extends Component<Props, State> {
     // destructuring props ensures only the "...rest" get passed down
     const {
       skin: ButtonSkin,
+      theme,
       themeOverrides,
       context,
       ...rest

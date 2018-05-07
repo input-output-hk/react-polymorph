@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Node } from 'react';
+import type { ComponentType } from 'react';
 
 // external libraries
 import _ from 'lodash';
@@ -28,8 +28,8 @@ type Props = {
   options: Array<any>,
   preselectedOptions: Array<any>,
   placeholder: string,
-  renderSelections: Node,
-  renderOptions: Node,
+  renderSelections: Function,
+  renderOptions: Function,
   skin: ComponentType<any>,
   sortAlphabetically: boolean,
   theme: Object, // will take precedence over theme in context if passed
@@ -67,8 +67,11 @@ class Autocomplete extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    // $FlowFixMe
     this.rootElement = React.createRef();
+    // $FlowFixMe
     this.inputElement = React.createRef();
+    // $FlowFixMe
     this.suggestionsElement = React.createRef();
 
     const {
@@ -109,7 +112,12 @@ class Autocomplete extends Component<Props, State> {
   };
 
   handleAutocompleteClick = () => {
-    this.inputElement.current.focus();
+    const { inputElement } = this;
+    if (inputElement) {
+      // $FlowFixMe
+      inputElement.current.focus();
+    }
+
     if (!this.state.isOpen) {
       this.openOptions();
     } else {
@@ -242,7 +250,7 @@ class Autocomplete extends Component<Props, State> {
         error={error || this.state.error}
         rootRef={this.rootElement}
         inputRef={this.inputElement}
-        suggestionsRef={this.suggestionsRef}
+        suggestionsRef={this.suggestionsElement}
         handleChange={this.handleChange}
         closeOptions={this.closeOptions}
         handleAutocompleteClick={this.handleAutocompleteClick}

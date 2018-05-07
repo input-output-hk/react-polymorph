@@ -12,7 +12,7 @@ type Props = {
   label: string | Node,
   onChange: Function,
   onRef: Function,
-  render: Node,
+  render: Function,
   setError: Function,
   theme: Object,
   themeId: string

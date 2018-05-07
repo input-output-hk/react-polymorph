@@ -162,6 +162,7 @@ class Bubble extends Component<Props, State> {
     // destructuring props ensures only the "...rest" get passed down
     const {
       skin: BubbleSkin,
+      theme,
       themeOverrides,
       context,
       ...rest

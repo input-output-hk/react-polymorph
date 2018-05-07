@@ -12,9 +12,9 @@ import { Bubble } from '../../components';
 import { BubbleSkin } from './';
 
 type Props = {
-  render: Node,
+  render: Function,
   options: Array<any>,
-  optionRenderer: Node,
+  optionRenderer: Function,
   isOpeningUpward: boolean,
   isOpen: boolean,
   noResults: boolean,

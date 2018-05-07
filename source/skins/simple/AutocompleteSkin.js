@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Ref, Node } from 'react';
+import type { Ref } from 'react';
 
 // external libraries
 import _ from 'lodash';
@@ -21,7 +21,7 @@ type Props = {
   handleAutocompleteClick: Function,
   handleChange: Function,
   handleInputChange: Function,
-  inputRef: Ref,
+  inputRef: Ref<*>,
   inputValue: string,
   isOpeningUpward: boolean,
   isOpen: boolean,
@@ -32,11 +32,11 @@ type Props = {
   options: Array<any>,
   placeholder: string,
   removeOption: Function,
-  renderSelections: Node,
-  renderOptions: Node,
-  rootRef: Ref,
+  renderSelections: Function,
+  renderOptions: Function,
+  rootRef: Ref<*>,
   selectedOptions: Array<any>,
-  suggestionsRef: Ref,
+  suggestionsRef: Ref<*>,
   theme: Object,
   themeId: string
 };
