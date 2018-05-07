@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Node } from 'react';
+import type { Node, Ref } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -26,7 +26,7 @@ type Props = {
   isSelectedOption: Function,
   handleClickOnOption: Function,
   setHighlightedOptionIndex: Function,
-  optionsRef: Function,
+  optionsRef: Ref<*>,
   theme: Object,
   themeId: string,
 };
@@ -102,23 +102,24 @@ export default (props: Props) => {
   };
 
   return (
-    <Bubble
-      className={classnames([
-        theme[themeId].options,
-        isOpen ? theme[themeId].isOpen : null,
-        isOpeningUpward ? theme[themeId].openUpward : null,
-        isFirstOptionHighlighted && !noResults
-          ? theme[themeId].firstOptionHighlighted
-          : null
-      ])}
-      ref={optionsRef}
-      isTransparent={false}
-      skin={BubbleSkin}
-      isOpeningUpward={isOpeningUpward}
-      isHidden={!isOpen}
-      isFloating
-    >
-      <ul className={theme[themeId].ul}>{renderOptions()}</ul>
-    </Bubble>
+    <div ref={optionsRef}>
+      <Bubble
+        className={classnames([
+          theme[themeId].options,
+          isOpen ? theme[themeId].isOpen : null,
+          isOpeningUpward ? theme[themeId].openUpward : null,
+          isFirstOptionHighlighted && !noResults
+            ? theme[themeId].firstOptionHighlighted
+            : null
+        ])}
+        isTransparent={false}
+        skin={BubbleSkin}
+        isOpeningUpward={isOpeningUpward}
+        isHidden={!isOpen}
+        isFloating
+      >
+        <ul className={theme[themeId].ul}>{renderOptions()}</ul>
+      </Bubble>
+    </div>
   );
 };

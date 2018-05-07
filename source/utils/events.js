@@ -1,4 +1,6 @@
 // @flow
+// $FlowFixMe
+import type { SyntheticMouseEvent, SyntheticTouchEvent, SyntheticEvent, Element } from 'react';
 /* eslint space-before-function-paren:0 */
 export default {
   getMousePosition (event: SyntheticMouseEvent<>) {
@@ -36,13 +38,14 @@ export default {
     }
   },
 
-  targetIsDescendant (event: SyntheticEvent<HTMLElement>, parent: ?Node) {
-    const node = event.currentTarget;
+  targetIsDescendant (event: SyntheticEvent<HTMLElement>, parent: ?Element<any>) {
+    const clickedNode = event.currentTarget;
+
     // if the node exists,
     // the node is not the given parent,
     // and the node does not contain the parent,
     // then the node is a descendant of the parent
-    if (node && node !== parent && !node.contains(parent)) {
+    if (clickedNode && clickedNode !== parent && !clickedNode.contains(parent.current)) {
       return true;
     }
     // otherwise it is not a descendant of the given parent

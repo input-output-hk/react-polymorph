@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // $FlowFixMe
-import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Node } from 'react';
+import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Node, Element } from 'react';
 
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
@@ -49,7 +49,7 @@ type State = {
 };
 
 class Options extends Component<Props, State> {
-  optionsElement: ?Element;
+  optionsElement: ?Element<'div'>;
 
   static defaultProps = {
     isOpen: false,
@@ -63,6 +63,8 @@ class Options extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+    // $FlowFixMe
+    this.optionsElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides, isOpen } = props;
 
@@ -315,7 +317,7 @@ class Options extends Component<Props, State> {
 
     return (
       <OptionsSkin
-        optionsRef={el => (this.optionsElement = el)}
+        optionsRef={this.optionsElement}
         theme={composedTheme}
         isOpen={isOpen}
         highlightedOptionIndex={highlightedOptionIndex}
