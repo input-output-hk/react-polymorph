@@ -5,7 +5,7 @@ import filterReactDomProps from 'filter-react-dom-props';
 // which would generate an error/warning
 const pickDOMProps = filterReactDomProps;
 
-const composeFunctions = (...fns: [Function]) => (...args: [any]) =>
+const composeFunctions = (...fns: [Function, Function]) => (...args: [any, any]) =>
   fns.forEach(fn => fn && fn(...args));
 
 export default {
