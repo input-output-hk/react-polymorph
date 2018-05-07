@@ -80,7 +80,7 @@ storiesOf('Switch', module)
         <Checkbox
           themeId={IDENTIFIERS.SWITCH}
           themeOverrides={themeOverrides}
-          label="theme override"
+          label="theme overrides"
           checked={store.state.checked}
           onChange={() => store.set({ checked: !store.state.checked })}
           skin={SwitchSkin}
