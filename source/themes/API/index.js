@@ -1,3 +1,4 @@
+// @flow
 import FORMFIELD from './formfield';
 import INPUT from './input';
 import CHECKBOX from './checkbox';

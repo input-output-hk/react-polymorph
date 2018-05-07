@@ -1,3 +1,4 @@
+// @flow
 import propsUtils from './props';
 import themeUtils from './themes';
 import eventUtils from './events';

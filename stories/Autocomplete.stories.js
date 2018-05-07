@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import classnames from 'classnames';
 // storybook
@@ -175,6 +176,7 @@ storiesOf('Autocomplete', module)
   )
 
   .add('Clear value on click', () => {
+    // $FlowFixMe
     const autocompleteRef = React.createRef();
     return (
       <div>

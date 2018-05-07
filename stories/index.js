@@ -1,3 +1,4 @@
+// @flow
 import './index.scss';
 import './Autocomplete.stories';
 import './Bubble.stories';

@@ -1,3 +1,4 @@
+// @flow
 // css modules plugin converts all imports below into plain objects
 import Autocomplete from './SimpleAutocomplete.scss';
 import Bubble from './SimpleBubble.scss';
