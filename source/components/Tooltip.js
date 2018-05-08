@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Node } from 'react';
+import type { ComponentType, Element } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import utility functions
@@ -23,7 +23,7 @@ type Props = {
   theme: Object, // will take precedence over theme in context if passed
   themeOverrides: Object, // custom css/scss from user that adheres to component's theme API
   themeId: string,
-  tip: string | Node
+  tip: string | Element<any>
 };
 
 type State = {

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Node } from 'react';
+import type { ComponentType, Node, Element } from 'react';
 
 // external libraries
 import { isString, flow } from 'lodash';
@@ -42,7 +42,7 @@ type State = {
 };
 
 class TextArea extends Component<Props, State> {
-  textareaElement: HTMLTextAreaElement;
+  textareaElement: Element<'textarea'>;
 
   static defaultProps = {
     autoFocus: false,
@@ -56,6 +56,9 @@ class TextArea extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+
+    // $FlowFixMe
+    this.textareaElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -104,7 +107,12 @@ class TextArea extends Component<Props, State> {
     }
   }
 
-  focus = () => this.textareaElement.focus();
+  focus = () => {
+    const { textareaElement } = this;
+    if (textareaElement && textareaElement.current) {
+      textareaElement.current.focus();
+    }
+  }
 
   onChange = (event: SyntheticInputEvent<>) => {
     const { onChange, disabled } = this.props;
@@ -152,20 +160,20 @@ class TextArea extends Component<Props, State> {
   _handleAutoresize() {
     const { textareaElement } = this;
 
-    if (!textareaElement) return;
+    if (textareaElement && textareaElement.current) {
+      // compute the height difference between inner height and outer height
+      const style = getComputedStyle(textareaElement.current, '');
+      const heightOffset =
+        style.boxSizing === 'content-box'
+          ? -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom))
+          : parseFloat(style.borderTopWidth) +
+            parseFloat(style.borderBottomWidth);
 
-    // compute the height difference between inner height and outer height
-    const style = getComputedStyle(textareaElement, '');
-    const heightOffset =
-      style.boxSizing === 'content-box'
-        ? -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom))
-        : parseFloat(style.borderTopWidth) +
-          parseFloat(style.borderBottomWidth);
-
-    // resize the input to its content size
-    textareaElement.style.height = 'auto';
-    textareaElement.style.height = `${textareaElement.scrollHeight +
-      heightOffset}px`;
+      // resize the input to its content size
+      textareaElement.current.style.height = 'auto';
+      textareaElement.current.style.height = `${textareaElement.current.scrollHeight +
+        heightOffset}px`;
+    }
   }
 
   render() {
@@ -185,7 +193,7 @@ class TextArea extends Component<Props, State> {
       <TextAreaSkin
         error={error || this.state.error}
         onChange={this.onChange}
-        textareaRef={el => (this.textareaElement = el)}
+        textareaRef={this.textareaElement}
         theme={this.state.composedTheme}
         {...rest}
       />

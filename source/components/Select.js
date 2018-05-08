@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import type { ComponentType, Element } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import internal utility functions
@@ -12,7 +12,7 @@ import { IDENTIFIERS } from '../themes/API';
 type Props = {
   allowBlank: boolean,
   autoFocus: boolean,
-  error: string | Node,
+  error: string | Element<any>,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
@@ -26,6 +26,7 @@ type Props = {
     isDisabled: boolean,
     value: any
   }>,
+  label: string | Element<any>,
   placeholder: string,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
@@ -40,7 +41,7 @@ type State = {
 };
 
 class Select extends Component<Props, State> {
-  inputElement: HTMLInputElement;
+  inputElement: Element<'input'>;
 
   static defaultProps = {
     allowBlank: true,
@@ -54,6 +55,9 @@ class Select extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+
+    // $FlowFixMe
+    this.inputElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -85,7 +89,11 @@ class Select extends Component<Props, State> {
   handleInputClick = (event: SyntheticMouseEvent<>) => {
     event.stopPropagation();
     event.preventDefault();
-    this.inputElement.blur();
+
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      inputElement.current.blur();
+    }
     this.toggleOpen();
   };
 
@@ -117,7 +125,7 @@ class Select extends Component<Props, State> {
     return (
       <SelectSkin
         isOpen={this.state.isOpen}
-        inputRef={el => (this.inputElement = el)}
+        inputRef={this.inputElement}
         theme={this.state.composedTheme}
         getSelectedOption={this.getSelectedOption}
         handleInputClick={this.handleInputClick}

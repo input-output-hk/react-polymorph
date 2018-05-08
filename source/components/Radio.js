@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Node } from 'react';
+import type { ComponentType, Element } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import utility functions
@@ -15,7 +15,7 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  label: string | Node,
+  label: string | Element<any>,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,

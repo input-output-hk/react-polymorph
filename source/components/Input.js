@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+// $FlowFixMe
+import type { ComponentType, Element, SyntheticInputEvent } from 'react';
 import { isString, flow } from 'lodash';
 
 // internal utility functions
@@ -41,7 +42,7 @@ type State = {
 };
 
 class Input extends Component<Props, State> {
-  inputElement: HTMLInputElement;
+  inputElement: Element<'input'>;
 
   static defaultProps = {
     autoFocus: false,
@@ -56,6 +57,9 @@ class Input extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+
+    // $FlowFixMe
+    this.inputElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -79,14 +83,19 @@ class Input extends Component<Props, State> {
     onRef(this);
   }
 
-  onChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
+  onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
     const { onChange, disabled } = this.props;
     if (disabled) return;
 
     if (onChange) onChange(this._processValue(event.target.value), event);
   };
 
-  focus = () => this.inputElement.focus();
+  focus = () => {
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      return inputElement.current.focus();
+    }
+  }
 
   _setError = (error: string) => {
     const { setError } = this.props;
@@ -154,7 +163,7 @@ class Input extends Component<Props, State> {
       <InputSkin
         error={error || this.state.error}
         onChange={this.onChange}
-        inputRef={el => (this.inputElement = el)}
+        inputRef={this.inputElement}
         theme={this.state.composedTheme}
         {...rest}
       />

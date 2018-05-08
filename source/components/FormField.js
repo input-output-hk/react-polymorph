@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Node } from 'react';
+import type { ComponentType, Element } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import utility functions
@@ -16,8 +16,8 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  error: string | Node,
-  label: string | Node,
+  error: string | Element<any>,
+  label: string | Element<any>,
   render: Function,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
@@ -31,7 +31,7 @@ type State = {
 };
 
 class FormField extends Component<Props, State> {
-  child: HTMLInputElement;
+  child: Element<'input'>;
 
   static defaultProps = {
     disabled: false,
@@ -63,7 +63,7 @@ class FormField extends Component<Props, State> {
     }
   };
 
-  onRef = (ref: HTMLInputElement) => (this.child = ref);
+  onRef = (ref: Element<'input'>) => (this.child = ref);
 
   render() {
     // destructuring props ensures only the "...rest" get passed down

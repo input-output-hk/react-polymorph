@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import type { ComponentType, Element } from 'react';
 
 // external libraries
 import _ from 'lodash';
@@ -20,7 +20,7 @@ type Props = {
   error: string,
   invalidCharsRegex: RegExp,
   isOpeningUpward: boolean,
-  label: string | Element,
+  label: string | Element<any>,
   maxSelections: number,
   maxVisibleOptions: number,
   multipleSameSelections: boolean,
@@ -47,9 +47,9 @@ type State = {
 };
 
 class Autocomplete extends Component<Props, State> {
-  rootElement: ?Element; // does not get used
-  inputElement: HTMLInputElement;
-  suggestionsElement: ?Element; // does not get used
+  rootElement: ?Element<any>;
+  inputElement: ?Element<'input'>;
+  suggestionsElement: ?Element<any>;
 
   static defaultProps = {
     error: null,
@@ -113,8 +113,7 @@ class Autocomplete extends Component<Props, State> {
 
   handleAutocompleteClick = () => {
     const { inputElement } = this;
-    if (inputElement) {
-      // $FlowFixMe
+    if (inputElement && inputElement.current) {
       inputElement.current.focus();
     }
 

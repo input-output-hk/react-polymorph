@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import type { ComponentType, Element } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // internal utility functions
@@ -16,7 +16,7 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  label: string | Element,
+  label: string | Element<any>,
   onClick: Function,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed

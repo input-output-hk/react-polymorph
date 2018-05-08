@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // $FlowFixMe
-import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Node, Element } from 'react';
+import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Element } from 'react';
 
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
@@ -26,7 +26,7 @@ type Props = {
   isOpen: boolean,
   isOpeningUpward: boolean,
   noResults: boolean,
-  noResultsMessage: string | Node,
+  noResultsMessage: string | Element<any>,
   onBlur: Function,
   onChange: Function,
   onClose: Function,
@@ -49,7 +49,7 @@ type State = {
 };
 
 class Options extends Component<Props, State> {
-  optionsElement: ?Element<'div'>;
+  optionsElement: ?Element<any>;
 
   static defaultProps = {
     isOpen: false,
@@ -277,10 +277,13 @@ class Options extends Component<Props, State> {
   };
 
   _handleDocumentClick = (event: SyntheticMouseEvent<>) => {
-    const isDescendant = targetIsDescendant(event, this.optionsElement);
+    const { optionsElement } = this;
+    if (optionsElement && optionsElement.current) {
+      const isDescendant = targetIsDescendant(event, optionsElement.current);
 
-    if (this.state.isOpen && !isDescendant) {
-      this.close();
+      if (this.state.isOpen && !isDescendant) {
+        this.close();
+      }
     }
   };
 

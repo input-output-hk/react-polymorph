@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import type { ComponentType, Element } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // internal utiltity functions
@@ -10,7 +10,7 @@ import { composeTheme, addThemeId } from '../utils';
 import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
-  contentLabel: string | Element,
+  contentLabel: string | Element<any>,
   context: {
     theme: Object,
     ROOT_THEME_API: Object

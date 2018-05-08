@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 // $FlowFixMe
-import type { Node, ComponentType, SyntheticInputEvent } from 'react';
+import type { ComponentType, SyntheticInputEvent, Element } from 'react';
 
 // external libraries
 import { flow } from 'lodash';
@@ -19,7 +19,7 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  error: string | Node,
+  error: string | Element<any>,
   onChange: Function,
   maxAfterDot: number,
   maxBeforeDot: number,
@@ -45,7 +45,7 @@ type State = {
 };
 
 class NumericInput extends Component<Props, State> {
-  inputElement: HTMLInputElement;
+  inputElement: Element<'input'>;
 
   static defaultProps = {
     disabled: false,
@@ -60,6 +60,9 @@ class NumericInput extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+
+    // $FlowFixMe
+    this.inputElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -83,12 +86,16 @@ class NumericInput extends Component<Props, State> {
     // NumericInput's focus method when someone clicks on FormField's label
     this.props.onRef(this);
 
-    // Set last input caret position on updates
-    this.setState({ caretPosition: this.inputElement.selectionStart });
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      // Set last input caret position on updates
+      this.setState({ caretPosition: inputElement.current.selectionStart });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.inputElement !== document.activeElement) return;
+    const { inputElement } = this;
+    if (inputElement && inputElement.current !== document.activeElement) { return; }
 
     // caret position calculation after separators injection
     let caretPosition;
@@ -109,8 +116,11 @@ class NumericInput extends Component<Props, State> {
         caretPosition = this.state.caretPosition;
       }
       caretPosition = caretPosition >= 0 ? caretPosition : 0;
-      this.inputElement.selectionEnd = caretPosition;
-      this.inputElement.selectionStart = caretPosition;
+
+      if (inputElement && inputElement.current) {
+        inputElement.current.selectionEnd = caretPosition;
+        inputElement.current.selectionStart = caretPosition;
+      }
     }
   }
 
@@ -127,9 +137,19 @@ class NumericInput extends Component<Props, State> {
     if (onChange) onChange(processedValue, event);
   };
 
-  focus = () => this.inputElement.focus();
+  focus = () => {
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      return inputElement.current.focus();
+    }
+  }
 
-  blur = () => this.inputElement.blur();
+  blur = () => {
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      return inputElement.current.blur();
+    }
+  }
 
   _setError = (error: string) => {
     const { setError } = this.props;
@@ -358,7 +378,7 @@ class NumericInput extends Component<Props, State> {
     return (
       <InputSkin
         error={error || this.state.error}
-        inputRef={el => (this.inputElement = el)}
+        inputRef={this.inputElement}
         onChange={this.onChange}
         theme={this.state.composedTheme}
         {...rest}

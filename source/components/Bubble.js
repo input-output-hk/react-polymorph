@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import type { ComponentType, Element, ElementRef } from 'react';
 
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
@@ -36,7 +36,7 @@ type State = {
 };
 
 class Bubble extends Component<Props, State> {
-  rootElement: ?Element;
+  rootElement: ?Element<any>;
 
   static defaultProps = {
     isHidden: false,
@@ -50,6 +50,9 @@ class Bubble extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+
+    // $FlowFixMe
+    this.rootElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -98,13 +101,16 @@ class Bubble extends Component<Props, State> {
   // =========== PRIVATE HELPERS ==============
 
   _handleScrollEventListener = (action: string) => {
-    const rootNode = this.rootElement;
-    const scrollableNode = this._getFirstScrollableParent(rootNode);
-    if (scrollableNode) {
-      if (action === 'add') {
-        scrollableNode.addEventListener('scroll', this._updatePosition);
-      } else if (action === 'remove') {
-        scrollableNode.removeEventListener('scroll', this._updatePosition);
+    // const rootNode = this.rootElement;
+    const { rootElement } = this;
+    if (rootElement) {
+      const scrollableNode = this._getFirstScrollableParent(rootElement);
+      if (scrollableNode) {
+        if (action === 'add') {
+          scrollableNode.addEventListener('scroll', this._updatePosition);
+        } else if (action === 'remove') {
+          scrollableNode.removeEventListener('scroll', this._updatePosition);
+        }
       }
     }
   };
@@ -118,36 +124,45 @@ class Bubble extends Component<Props, State> {
     }
   }
 
-  _getFirstScrollableParent = (node: ?Element) => {
-    if (node == null) return null;
-    if (node === this.rootElement || node.scrollHeight <= node.clientHeight) {
-      return this._getFirstScrollableParent(node.parentElement);
+  _getFirstScrollableParent = (element: ElementRef<*>) => {
+    if (element == null) return null;
+    const { rootElement } = this;
+    const node = {}.hasOwnProperty.call(element, 'current') ? element.current : element;
+
+    if (rootElement) {
+      if (node === rootElement.current || node.scrollHeight <= node.clientHeight) {
+        return this._getFirstScrollableParent(node.parentElement);
+      }
     }
+
     return node;
   };
 
   _updatePosition = () => {
     const { isOpeningUpward } = this.props;
-    const rootNode = this.rootElement;
-    const parentNode = rootNode ? rootNode.parentElement : null;
-    const parentNodeParams = parentNode
-      ? parentNode.getBoundingClientRect()
-      : null;
+    const { rootElement } = this;
 
-    if (parentNodeParams !== null) {
-      let positionY;
-      if (isOpeningUpward) {
-        positionY = window.innerHeight - parentNodeParams.top + 20;
-      } else {
-        positionY = parentNodeParams.bottom + 20;
+    if (rootElement) {
+      const parentNode = rootElement.current ? rootElement.current.parentElement : null;
+      const parentNodeParams = parentNode
+        ? parentNode.getBoundingClientRect()
+        : null;
+
+      if (parentNodeParams !== null) {
+        let positionY;
+        if (isOpeningUpward) {
+          positionY = window.innerHeight - parentNodeParams.top + 20;
+        } else {
+          positionY = parentNodeParams.bottom + 20;
+        }
+
+        const position = {
+          width: parentNodeParams.width,
+          positionX: parentNodeParams.left,
+          positionY
+        };
+        this.setState({ position });
       }
-
-      const position = {
-        width: parentNodeParams.width,
-        positionX: parentNodeParams.left,
-        positionY
-      };
-      this.setState({ position });
     }
   };
 
@@ -170,7 +185,7 @@ class Bubble extends Component<Props, State> {
 
     return (
       <BubbleSkin
-        rootRef={el => (this.rootElement = el)}
+        rootRef={this.rootElement}
         position={this.state.position}
         theme={this.state.composedTheme}
         {...rest}
