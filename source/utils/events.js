@@ -45,7 +45,7 @@ export default {
     // the node is not the given parent,
     // and the node does not contain the parent,
     // then the node is a descendant of the parent
-    if (clickedNode && clickedNode !== parent && !clickedNode.contains(parent.current)) {
+    if (clickedNode && clickedNode !== parent && !clickedNode.contains(parent)) {
       return true;
     }
     // otherwise it is not a descendant of the given parent
