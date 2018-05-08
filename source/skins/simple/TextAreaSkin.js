@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Node } from 'react';
+import type { Ref } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -17,7 +17,7 @@ type Props = {
   onRef: Function,
   placeholder: string,
   rows: number,
-  textareaRef: Function,
+  textareaRef: Ref<*>,
   theme: Object,
   themeId: string,
   value: string

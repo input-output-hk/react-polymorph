@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Node } from 'react';
+import type { Node, Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -23,7 +23,7 @@ type Props = {
   isTransparent: boolean,
   theme: Object,
   themeId: string,
-  tip: string | Node
+  tip: string | Element<any>
 };
 
 export default (props: Props) => {

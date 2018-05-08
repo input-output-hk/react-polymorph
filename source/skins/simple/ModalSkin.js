@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
-import type { Node } from 'react';
+import type { Node, Element } from 'react';
 
 // external libraries
 import ReactModal from 'react-modal';
 
 type Props = {
   children: Node,
-  contentLabel: string | Node,
+  contentLabel: string | Element<any>,
   isOpen: boolean,
   onClose: Function,
   triggerCloseOnOverlayClick: boolean,

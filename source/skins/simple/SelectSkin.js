@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Node } from 'react';
+import type { Element, Ref } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -13,14 +13,14 @@ import { InputSkin, OptionsSkin } from './';
 
 type Props = {
   className: string,
-  error: string | Node,
+  error: string | Element<any>,
   getSelectedOption: Function,
   handleChange: Function,
   handleInputClick: Function,
-  inputRef: Function,
+  inputRef: Ref<'input'>,
   isOpen: boolean,
   isOpeningUpward: boolean,
-  label: string | Node,
+  label: string | Element<any>,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,

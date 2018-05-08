@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Node } from 'react';
+import type { Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -13,7 +13,7 @@ type Props = {
   className: string,
   disabled: boolean,
   onChange: Function,
-  label: string | Node,
+  label: string | Element<any>,
   theme: Object,
   themeId: string
 };

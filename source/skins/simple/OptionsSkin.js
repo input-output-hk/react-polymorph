@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Node, Ref } from 'react';
+import type { Element, Ref } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -18,7 +18,7 @@ type Props = {
   isOpeningUpward: boolean,
   isOpen: boolean,
   noResults: boolean,
-  noResultsMessage: string | Node,
+  noResultsMessage: string | Element<any>,
   selectedOption: any,
   getOptionProps: Function,
   getHighlightedOptionIndex: Function,

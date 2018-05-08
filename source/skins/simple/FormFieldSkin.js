@@ -1,15 +1,15 @@
 // @flow
 import React from 'react';
-import type { Node } from 'react';
+import type { Element } from 'react';
 import { omit } from 'lodash';
 import classnames from 'classnames';
 
 type Props = {
   className: string,
   disabled: boolean,
-  error: string | Node,
+  error: string | Element<any>,
   focusChild: Function,
-  label: string | Node,
+  label: string | Element<any>,
   onChange: Function,
   onRef: Function,
   render: Function,

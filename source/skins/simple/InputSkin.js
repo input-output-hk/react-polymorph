@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-
+import type { Ref } from 'react';
 // external libraries
 import classnames from 'classnames';
 
@@ -10,7 +10,7 @@ import { pickDOMProps } from '../../utils';
 type Props = {
   disabled: boolean,
   error: string,
-  inputRef: Function,
+  inputRef: Ref<'input'>,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,

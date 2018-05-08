@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Node } from 'react';
+import type { Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -11,7 +11,7 @@ import { pickDOMProps } from '../../utils';
 type Props = {
   className: string,
   disabled: boolean,
-  label: string | Node,
+  label: string | Element<any>,
   theme: Object,
   themeId: string
 };
