@@ -122,7 +122,7 @@ storiesOf('NumericInput', module)
     ))
   )
 
-  .add('send amount - maxValue(30000) and minValue(1)',
+  .add('send amount - maxValue(30000) and minValue(5)',
     withState({ value: '' }, store => (
       <FormField
         label="Amount"
@@ -131,9 +131,9 @@ storiesOf('NumericInput', module)
           <NumericInput
             {...props}
             value={store.state.value}
-            placeholder="0.000000"
+            placeholder="5.000000"
             maxValue={30000}
-            minValue={1}
+            minValue={5}
             onChange={value => store.set({ value })}
             skin={InputSkin}
           />
