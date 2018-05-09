@@ -130,7 +130,7 @@ class NumericInput extends Component<Props, State> {
     if (disabled) return;
 
     const processedValue = this._processValue(
-      event.target.value,
+      event.target.value.trim(),
       event.target.selectionStart
     );
 
@@ -320,11 +320,19 @@ class NumericInput extends Component<Props, State> {
 
     // check min and max value
     const resultWithoutSeparators = parseFloat(result.replace(/,/g, ''));
-    if (
-      (maxValue && resultWithoutSeparators > maxValue) ||
-      (minValue && resultWithoutSeparators < minValue)
-    ) {
-      this._setError('Please enter a valid amount');
+
+    // if value is above props.maxValue, format & set value to maxValue
+    if (maxValue && resultWithoutSeparators >= maxValue) {
+      const formattedMaxVal = maxValue.toFixed(6).toString();
+      this._setError(`Maximum amount is ${formattedMaxVal}`);
+      this.setState({ caretPosition: position });
+      return formattedMaxVal;
+      // if value is below props.minValue, format & set value to minValue
+    } else if (minValue && resultWithoutSeparators <= minValue) {
+      const formattedMinVal = minValue.toFixed(6).toString();
+      this._setError(`Minimum amount is ${formattedMinVal}`);
+      this.setState({ caretPosition: position });
+      return formattedMinVal;
     } else if (this.state.error !== '') {
       this._setError('');
     }
