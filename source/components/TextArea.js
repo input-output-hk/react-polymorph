@@ -160,20 +160,20 @@ class TextArea extends Component<Props, State> {
   _handleAutoresize() {
     const { textareaElement } = this;
 
-    if (textareaElement && textareaElement.current) {
-      // compute the height difference between inner height and outer height
-      const style = getComputedStyle(textareaElement.current, '');
-      const heightOffset =
-        style.boxSizing === 'content-box'
-          ? -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom))
-          : parseFloat(style.borderTopWidth) +
-            parseFloat(style.borderBottomWidth);
+    if (!textareaElement.current) return;
 
-      // resize the input to its content size
-      textareaElement.current.style.height = 'auto';
-      textareaElement.current.style.height = `${textareaElement.current.scrollHeight +
-        heightOffset}px`;
-    }
+    // compute the height difference between inner height and outer height
+    const style = getComputedStyle(textareaElement.current, '');
+    const heightOffset =
+      style.boxSizing === 'content-box'
+        ? -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom))
+        : parseFloat(style.borderTopWidth) +
+          parseFloat(style.borderBottomWidth);
+
+    // resize the input to its content size
+    textareaElement.current.style.height = 'auto';
+    textareaElement.current.style.height = `${textareaElement.current.scrollHeight +
+      heightOffset}px`;
   }
 
   render() {
