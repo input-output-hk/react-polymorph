@@ -142,27 +142,27 @@ class Bubble extends Component<Props, State> {
     const { isOpeningUpward } = this.props;
     const { rootElement } = this;
 
-    if (rootElement) {
-      const parentNode = rootElement.current ? rootElement.current.parentElement : null;
-      const parentNodeParams = parentNode
-        ? parentNode.getBoundingClientRect()
-        : null;
+    if (!rootElement) return;
 
-      if (parentNodeParams !== null) {
-        let positionY;
-        if (isOpeningUpward) {
-          positionY = window.innerHeight - parentNodeParams.top + 20;
-        } else {
-          positionY = parentNodeParams.bottom + 20;
-        }
+    const parentNode = rootElement.current ? rootElement.current.parentElement : null;
+    const parentNodeParams = parentNode
+      ? parentNode.getBoundingClientRect()
+      : null;
 
-        const position = {
-          width: parentNodeParams.width,
-          positionX: parentNodeParams.left,
-          positionY
-        };
-        this.setState({ position });
+    if (parentNodeParams !== null) {
+      let positionY;
+      if (isOpeningUpward) {
+        positionY = window.innerHeight - parentNodeParams.top + 20;
+      } else {
+        positionY = parentNodeParams.bottom + 20;
       }
+
+      const position = {
+        width: parentNodeParams.width,
+        positionX: parentNodeParams.left,
+        positionY
+      };
+      this.setState({ position });
     }
   };
 
