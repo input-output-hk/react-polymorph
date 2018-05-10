@@ -16,7 +16,7 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  error: string | Element<any>,
+  error: string,
   label: string | Element<any>,
   render: Function,
   skin: ComponentType<any>,
@@ -63,6 +63,8 @@ class FormField extends Component<Props, State> {
     }
   };
 
+  // onRef is passed to Input/NumericInput components rendered
+  // via this.props.render, which makes this.focusChild possible
   onRef = (ref: Element<'input'>) => (this.child = ref);
 
   render() {
