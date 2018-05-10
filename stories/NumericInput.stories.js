@@ -24,6 +24,8 @@ storiesOf('NumericInput', module)
     withState({ value: '' }, store => (
       <NumericInput
         value={store.state.value}
+        maxBeforeDot={6}
+        maxAfterDot={6}
         onChange={value => store.set({ value })}
         skin={InputSkin}
       />
@@ -39,6 +41,8 @@ storiesOf('NumericInput', module)
           <NumericInput
             {...props}
             value={store.state.value}
+            maxBeforeDot={6}
+            maxAfterDot={6}
             onChange={value => store.set({ value })}
             skin={InputSkin}
           />
@@ -52,6 +56,8 @@ storiesOf('NumericInput', module)
       <NumericInput
         value={store.state.value}
         placeholder="18.000000"
+        maxBeforeDot={6}
+        maxAfterDot={6}
         onChange={value => store.set({ value })}
         skin={InputSkin}
       />
@@ -63,6 +69,8 @@ storiesOf('NumericInput', module)
       <NumericInput
         value={store.state.value}
         placeholder="focus / blur"
+        maxBeforeDot={6}
+        maxAfterDot={6}
         onChange={value => store.set({ value })}
         onFocus={() => store.set({ focused: true })}
         onBlur={() => store.set({ blurred: true })}
@@ -94,16 +102,17 @@ storiesOf('NumericInput', module)
     withState({ value: '' }, store => (
       <NumericInput
         value={store.state.value}
-        placeholder="0.0000"
+        placeholder="000.0000"
         maxBeforeDot={3}
         maxAfterDot={4}
+        minValue={5000}
         onChange={value => store.set({ value })}
         skin={InputSkin}
       />
     ))
   )
 
-  .add('send amount - maxValue(30000)',
+  .add('send amount - maxValue(30000) - unenforced',
     withState({ value: '' }, store => (
       <FormField
         label="Amount"
@@ -122,7 +131,7 @@ storiesOf('NumericInput', module)
     ))
   )
 
-  .add('send amount - maxValue(30000) and minValue(5)',
+  .add('send amount - minValue(50) - unenforced',
     withState({ value: '' }, store => (
       <FormField
         label="Amount"
@@ -131,9 +140,53 @@ storiesOf('NumericInput', module)
           <NumericInput
             {...props}
             value={store.state.value}
-            placeholder="5.000000"
+            placeholder="0.000000"
+            minValue={50}
+            maxAfterDot={6}
+            onChange={value => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
+
+  .add('send amount - maxValue(30000), minValue(50) - unenforced',
+    withState({ value: '' }, store => (
+      <FormField
+        label="Amount"
+        skin={FormFieldSkin}
+        render={props => (
+          <NumericInput
+            {...props}
+            value={store.state.value}
+            placeholder="0.000000"
             maxValue={30000}
-            minValue={5}
+            minValue={50}
+            maxAfterDot={6}
+            onChange={value => store.set({ value })}
+            skin={InputSkin}
+          />
+        )}
+      />
+    ))
+  )
+
+  .add('send amount - maxValue(30000), minValue(50), enforceMax=true, enforceMin=true',
+    withState({ value: '' }, store => (
+      <FormField
+        label="Amount"
+        skin={FormFieldSkin}
+        render={props => (
+          <NumericInput
+            {...props}
+            value={store.state.value}
+            placeholder="50.000000"
+            maxValue={30000}
+            minValue={50}
+            maxAfterDot={6}
+            enforceMax
+            enforceMin
             onChange={value => store.set({ value })}
             skin={InputSkin}
           />
@@ -170,6 +223,7 @@ storiesOf('NumericInput', module)
         themeOverrides={themeOverrides}
         value={store.state.value}
         placeholder="0.000000"
+        maxAfterDot={6}
         onChange={value => store.set({ value })}
         skin={InputSkin}
       />
@@ -182,6 +236,7 @@ storiesOf('NumericInput', module)
         theme={CustomInputTheme}
         value={store.state.value}
         placeholder="0.000000"
+        maxAfterDot={6}
         onChange={value => store.set({ value })}
         skin={InputSkin}
       />
