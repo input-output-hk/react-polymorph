@@ -1,4 +1,6 @@
+// @flow
 import React from 'react';
+import type { Ref } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -6,7 +8,22 @@ import classnames from 'classnames';
 // import utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => {
+type Props = {
+  disabled: boolean,
+  error: string | Node,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  onRef: Function,
+  placeholder: string,
+  rows: number,
+  textareaRef: Ref<*>,
+  theme: Object,
+  themeId: string,
+  value: string
+};
+
+export default (props: Props) => {
   const { theme, themeId } = props;
   return (
     <textarea

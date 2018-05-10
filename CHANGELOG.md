@@ -22,6 +22,7 @@ Major breaking changes due to large refactoring of component architecture:
 * Removes skin parts
 * Manages refs by passing them from parent to child
 * Removes inheritance architecture
+* Adds ESLint config from Daedalus and integrates flow library & static type declarations. Refactors components to declare refs using createRef from React v16.3^. Removes propTypes from all components and removes prop-types lib from dependencies. [PR 58](https://github.com/input-output-hk/react-polymorph/pull/58)
 
 ## Features
 

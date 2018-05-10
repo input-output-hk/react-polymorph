@@ -1,3 +1,4 @@
+// @flow
 import FORMFIELD from './formfield';
 import INPUT from './input';
 import CHECKBOX from './checkbox';
@@ -42,7 +43,7 @@ export const IDENTIFIERS = {
   AUTOCOMPLETE: 'autocomplete',
   OPTIONS: 'options',
   MODAL: 'modal',
-  RADIO: 'radio',
+  RADIO: 'radio'
 };
 
 export default {

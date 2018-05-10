@@ -1,4 +1,6 @@
+// @flow
 import React from 'react';
+import type { Element, Ref } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -9,7 +11,32 @@ import { Options, Input } from '../../components';
 // skins
 import { InputSkin, OptionsSkin } from './';
 
-export default props => {
+type Props = {
+  className: string,
+  error: string | Element<any>,
+  getSelectedOption: Function,
+  handleChange: Function,
+  handleInputClick: Function,
+  inputRef: Ref<'input'>,
+  isOpen: boolean,
+  isOpeningUpward: boolean,
+  label: string | Element<any>,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  optionRenderer: Function,
+  options: Array<{
+    isDisabled: boolean,
+    value: any
+  }>,
+  placeholder: string,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  toggleOpen: Function,
+  value: string
+};
+
+export default (props: Props) => {
   const selectedOption = props.getSelectedOption();
   const inputValue = selectedOption ? selectedOption.label : '';
   const { theme, themeId } = props;

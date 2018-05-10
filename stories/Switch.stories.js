@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 
 // storybook
@@ -11,7 +12,6 @@ import { Checkbox } from '../source/components';
 import { SwitchSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomSwitchTheme from './theme-customizations/Switch.custom.scss';
 
 // custom styles & theme overrides
@@ -32,11 +32,9 @@ storiesOf('Switch', module)
     ))
   )
 
-  .add('disabled',
-    withState({ checked: false }, store => (
-      <Checkbox disabled themeId={IDENTIFIERS.SWITCH} skin={SwitchSkin} />
-    ))
-  )
+  .add('disabled', () => (
+    <Checkbox disabled themeId={IDENTIFIERS.SWITCH} skin={SwitchSkin} />
+  ))
 
   .add('short label',
     withState({ checked: false }, store => (
@@ -83,7 +81,7 @@ storiesOf('Switch', module)
         <Checkbox
           themeId={IDENTIFIERS.SWITCH}
           themeOverrides={themeOverrides}
-          label="theme override"
+          label="theme overrides"
           checked={store.state.checked}
           onChange={() => store.set({ checked: !store.state.checked })}
           skin={SwitchSkin}

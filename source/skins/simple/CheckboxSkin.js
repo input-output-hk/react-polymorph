@@ -1,13 +1,26 @@
+// @flow
 import React from 'react';
-
+import type { Element } from 'react';
 // external libraries
 import classnames from 'classnames';
 
 // internal utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => (
+type Props = {
+  checked: boolean,
+  className: string,
+  disabled: boolean,
+  onChange: Function,
+  label: string | Element<any>,
+  theme: Object,
+  themeId: string
+};
+
+export default (props: Props) => (
   <div
+    role="presentation"
+    aria-hidden
     className={classnames([
       props.className,
       props.theme[props.themeId].root,
@@ -31,8 +44,10 @@ export default props => (
         props.checked ? props.theme[props.themeId].checked : null
       ])}
     />
-    {props.label ? (
-      <label className={props.theme[props.themeId].label}>{props.label}</label>
-    ) : null}
+    {props.label && (
+      <label className={props.theme[props.themeId].label}>
+        {props.label}
+      </label>
+    )}
   </div>
 );

@@ -1,9 +1,12 @@
+// @flow
 import React, { Component } from 'react';
-import { ThemeContext } from '../themes/ThemeContext';
-import { object, string, element } from 'prop-types';
+import type { Node } from 'react';
 
 // external libraries
 import _ from 'lodash';
+
+// contains default theme and context provider
+import { ThemeContext } from '../themes/ThemeContext';
 
 // imports the Root Theme API object which specifies the shape
 // of a complete theme for every component in this library, used in this.composeLibraryTheme
@@ -12,30 +15,34 @@ import ROOT_THEME_API from '../themes/API';
 // internal utility functions
 import { composeTheme } from '../utils';
 
-class ThemeProvider extends Component {
-  static propTypes = {
-    theme: object,
-    themeOverrides: object // custom css/scss from user that adheres to shape of ROOT_THEME_API
-  };
+type Props = {
+  children: Node,
+  theme: Object,
+  themeOverrides: Object // custom css/scss from user that adheres to shape of ROOT_THEME_API
+};
 
+type State = {
+  theme: Object
+};
+
+class ThemeProvider extends Component<Props, State> {
   static defaultProps = {
     themeOverrides: {}
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     const { theme, themeOverrides } = props;
 
     this.state = {
-      theme: this.composeLibraryTheme(theme, themeOverrides, ROOT_THEME_API),
-      ROOT_THEME_API
+      theme: this.composeLibraryTheme(theme, themeOverrides)
     };
   }
 
-  // prevents frequent rerenders of ThemeProvider's children by
-  // checking if theme and/or themeOverrides props have changed
-  componentWillReceiveProps(nextProps) {
+  // checks if theme and/or themeOverrides props have changed
+  // in order to update state before rendering
+  componentWillReceiveProps(nextProps: Props) {
     const { theme, themeOverrides } = nextProps;
 
     const changedProps = _.pickBy(
@@ -45,43 +52,43 @@ class ThemeProvider extends Component {
 
     if (Object.keys(changedProps).length > 0) {
       this.setState({
-        composedTheme: this.composeLibraryTheme(
-          theme,
-          themeOverrides,
-          ROOT_THEME_API
-        )
+        theme: this.composeLibraryTheme(theme, themeOverrides)
       });
     }
   }
 
   // composeLibraryTheme returns a single obj containing theme definitions
-  // for every component in the library.
-  // Every key on the returned obj is named in conjunction with a component
-  // in the library and each key's value is structured to contain the css
-  // definitions for each element in that component. Which is just a string via CSS-Modules.
-
+  // for every component in the library. Every key on the returned obj is named
+  // in conjunction with a component in the library and each key's value is structured
+  // to contain the css definitions for each element in that component.
+  // Which is just a string via CSS-Modules. Looks like this:
   // {
   //   button: { root: '', disabled: '' },
   //   input: { input: '', disabled: '', error: '' },
   //   formField: { root: '', label: '', error: '' },
   //   ... and so on, creating a complete theme for the library,
   //  }
-  composeLibraryTheme = (theme, themeOverrides, ROOT_THEME_API) => {
+  composeLibraryTheme = (theme: Object, themeOverrides: Object) => {
+    // if themeOverrides is empty, no need for composition
     if (_.isEmpty(themeOverrides)) {
       return theme;
-    } else {
-      let composedTheme = { ...ROOT_THEME_API };
+    }
+    // obj to be returned
+    const composedTheme = {};
 
-      for (const componentName in ROOT_THEME_API) {
-        if (theme.hasOwnProperty(componentName)) {
+    for (const componentName in ROOT_THEME_API) {
+      // check if ROOT_THEME_API contains the key of componentName
+      if ({}.hasOwnProperty.call(ROOT_THEME_API, componentName)) {
+
+        // check if theme contains a key of componentName
+        if ({}.hasOwnProperty.call(theme, componentName)) {
+          // add componentName as a key to final return obj
           composedTheme[componentName] = theme[componentName];
-        } else {
-          // delete property from composedTheme obj because it will remain empty
-          // only non-empty keys in this.props.theme should be returned
-          delete composedTheme[componentName];
         }
 
-        if (themeOverrides.hasOwnProperty(componentName)) {
+        // also check if themeOverrides contains the key componentName
+        if ({}.hasOwnProperty.call(themeOverrides, componentName)) {
+          // compose theme styles with user's themeOverrides
           composedTheme[componentName] = composeTheme(
             theme[componentName],
             themeOverrides[componentName],
@@ -89,14 +96,16 @@ class ThemeProvider extends Component {
           );
         }
       }
-
-      return composedTheme;
     }
+
+    return composedTheme;
   };
 
   render() {
+    const { theme } = this.state;
+    const providerState = { theme, ROOT_THEME_API };
     return (
-      <ThemeContext.Provider value={this.state}>
+      <ThemeContext.Provider value={providerState}>
         {this.props.children}
       </ThemeContext.Provider>
     );

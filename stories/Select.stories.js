@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 
 // storybook
@@ -66,7 +67,7 @@ storiesOf('Select', module)
       <FormField
         label="Some label"
         skin={FormFieldSkin}
-        render={props => (
+        render={() => (
           <Select
             value={store.state.value}
             onChange={value => store.set({ value })}
@@ -132,7 +133,7 @@ storiesOf('Select', module)
             <img src={option.flag} />
             <span>{option.label}</span>
           </div>
-        )}
+          )}
         skin={SelectSkin}
       />
     ))
@@ -144,7 +145,7 @@ storiesOf('Select', module)
         className={styles.customMargin}
         label="Countries (opening upward)"
         skin={FormFieldSkin}
-        render={props => (
+        render={() => (
           <Select
             value={store.state.value}
             onChange={value => store.set({ value })}

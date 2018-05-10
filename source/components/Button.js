@@ -1,28 +1,34 @@
+// @flow
 import React, { Component } from 'react';
-import { string, bool, func, object, shape } from 'prop-types';
+import type { ComponentType, Element } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // internal utility functions
-import { StringOrElement, composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Button extends Component {
-  static propTypes = {
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    disabled: bool,
-    label: StringOrElement,
-    onClick: func,
-    skin: func.isRequired,
-    theme: object,
-    themeId: string,
-    themeOverrides: object // custom css/scss from user that adheres to component's theme API
-  };
+type Props = {
+  className: string,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  disabled: boolean,
+  label: string | Element<any>,
+  onClick: Function,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object // custom css/scss from user that adheres to component's theme API
+};
 
+type State = {
+  composedTheme: Object
+};
+
+class Button extends Component<Props, State> {
   static defaultProps = {
     disabled: false,
     theme: null,
@@ -30,7 +36,7 @@ class Button extends Component {
     themeOverrides: {}
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
@@ -46,7 +52,13 @@ class Button extends Component {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin: ButtonSkin, theme, themeOverrides, ...rest } = this.props;
+    const {
+      skin: ButtonSkin,
+      theme,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
 
     return <ButtonSkin theme={this.state.composedTheme} {...rest} />;
   }

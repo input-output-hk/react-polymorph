@@ -1,4 +1,4 @@
-@mixin thumbBoxShadow ($color) {
+@mixin thumbBoxShadow($color) {
   box-shadow: -1.5px -1.5px 0 $color inset, 1.5px 1.5px 0 $color inset,
     1.5px -1.5px 0 $color inset, -1.5px 1.5px 0 $color inset;
 }

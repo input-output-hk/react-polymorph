@@ -1,12 +1,12 @@
+// @flow
 import React, { Component } from 'react';
-import { string, bool, func, object, shape } from 'prop-types';
-import { withTheme } from '../themes/withTheme';
+import type { ComponentType, Element, ElementRef } from 'react';
 
 // internal utility functions
+import { withTheme } from '../themes/withTheme';
 import {
   addEventsToDocument,
   removeEventsFromDocument,
-  StringOrElement,
   composeTheme,
   addThemeId
 } from '../utils';
@@ -14,21 +14,29 @@ import {
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Bubble extends Component {
-  static propTypes = {
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    isHidden: bool,
-    isFloating: bool,
-    isOpeningUpward: bool,
-    isTransparent: bool,
-    skin: func.isRequired,
-    theme: object, // takes precedence over theme in context
-    themeId: string,
-    themeOverrides: object // custom css/scss from user that adheres to component's theme API
-  };
+type Props = {
+  className: string,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  isHidden: boolean,
+  isFloating: boolean,
+  isOpeningUpward: boolean,
+  isTransparent: boolean,
+  skin: ComponentType<any>,
+  theme: Object, // takes precedence over them in context if passed
+  themeId: string,
+  themeOverrides: Object // custom css/scss from user adhering to component's theme API
+};
+
+type State = {
+  composedTheme: Object,
+  position: ?Object
+};
+
+class Bubble extends Component<Props, State> {
+  rootElement: ?Element<any>;
 
   static defaultProps = {
     isHidden: false,
@@ -40,8 +48,11 @@ class Bubble extends Component {
     themeOverrides: {}
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
+
+    // $FlowFixMe
+    this.rootElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -89,14 +100,17 @@ class Bubble extends Component {
 
   // =========== PRIVATE HELPERS ==============
 
-  _handleScrollEventListener = action => {
-    const rootNode = this.rootElement;
-    const scrollableNode = this._getFirstScrollableParent(rootNode);
-    if (scrollableNode) {
-      if (action === 'add') {
-        scrollableNode.addEventListener('scroll', this._updatePosition);
-      } else if (action === 'remove') {
-        scrollableNode.removeEventListener('scroll', this._updatePosition);
+  _handleScrollEventListener = (action: string) => {
+    // const rootNode = this.rootElement;
+    const { rootElement } = this;
+    if (rootElement) {
+      const scrollableNode = this._getFirstScrollableParent(rootElement);
+      if (scrollableNode) {
+        if (action === 'add') {
+          scrollableNode.addEventListener('scroll', this._updatePosition);
+        } else if (action === 'remove') {
+          scrollableNode.removeEventListener('scroll', this._updatePosition);
+        }
       }
     }
   };
@@ -110,34 +124,46 @@ class Bubble extends Component {
     }
   }
 
-  _getFirstScrollableParent = node => {
-    if (node == null) return null;
-    if (node === this.rootElement || node.scrollHeight <= node.clientHeight) {
-      return this._getFirstScrollableParent(node.parentNode);
-    } else {
-      return node;
+  _getFirstScrollableParent = (element: ElementRef<*>) => {
+    if (element == null) return null;
+    const { rootElement } = this;
+    const node = {}.hasOwnProperty.call(element, 'current') ? element.current : element;
+
+    if (rootElement) {
+      if (node === rootElement.current || node.scrollHeight <= node.clientHeight) {
+        return this._getFirstScrollableParent(node.parentElement);
+      }
     }
+
+    return node;
   };
 
   _updatePosition = () => {
     const { isOpeningUpward } = this.props;
-    const rootNode = this.rootElement;
-    const parentNode = rootNode.parentNode;
-    const parentNodeParams = parentNode.getBoundingClientRect();
+    const { rootElement } = this;
 
-    let positionY;
-    if (isOpeningUpward) {
-      positionY = window.innerHeight - parentNodeParams.top + 20;
-    } else {
-      positionY = parentNodeParams.bottom + 20;
+    if (!rootElement) return;
+
+    const parentNode = rootElement.current ? rootElement.current.parentElement : null;
+    const parentNodeParams = parentNode
+      ? parentNode.getBoundingClientRect()
+      : null;
+
+    if (parentNodeParams !== null) {
+      let positionY;
+      if (isOpeningUpward) {
+        positionY = window.innerHeight - parentNodeParams.top + 20;
+      } else {
+        positionY = parentNodeParams.bottom + 20;
+      }
+
+      const position = {
+        width: parentNodeParams.width,
+        positionX: parentNodeParams.left,
+        positionY
+      };
+      this.setState({ position });
     }
-
-    const position = {
-      width: parentNodeParams.width,
-      positionX: parentNodeParams.left,
-      positionY
-    };
-    this.setState({ position });
   };
 
   _getDocumentEvents() {
@@ -149,11 +175,17 @@ class Bubble extends Component {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin: BubbleSkin, theme, themeOverrides, ...rest } = this.props;
+    const {
+      skin: BubbleSkin,
+      theme,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
 
     return (
       <BubbleSkin
-        rootRef={el => (this.rootElement = el)}
+        rootRef={this.rootElement}
         position={this.state.position}
         theme={this.state.composedTheme}
         {...rest}

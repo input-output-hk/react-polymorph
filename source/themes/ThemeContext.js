@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import SimpleTheme from './simple';
 import ROOT_THEME_API from './API';
@@ -7,6 +8,7 @@ import ROOT_THEME_API from './API';
 // same goes for "this.props.context.ROOT_THEME_API"
 // if the user passes ThemeProvider a theme and/or ROOT_THEME_API,
 // these default values are overwritten
+// $FlowFixMe
 export const ThemeContext = React.createContext({
   theme: SimpleTheme,
   ROOT_THEME_API

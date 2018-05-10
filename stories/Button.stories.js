@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 
 // storybook
@@ -10,19 +11,19 @@ import { Button } from '../source/components';
 import { ButtonSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomButtonTheme from './theme-customizations/Button.custom.scss';
 
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customButton.scss';
-import { IDENTIFIERS } from '../source/themes/API';
 
 storiesOf('Button', module)
   // ====== Stories ======
 
   .add('plain', () => <Button label="Button label" skin={ButtonSkin} />)
 
-  .add('disabled', () => <Button disabled label="Button label" skin={ButtonSkin} />)
+  .add('disabled', () => (
+    <Button disabled label="Button label" skin={ButtonSkin} />
+  ))
 
   .add('theme overrides', () => (
     <Button

@@ -1,4 +1,6 @@
+// @flow
 import React from 'react';
+import type { Node, Ref } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -6,8 +8,22 @@ import classnames from 'classnames';
 // internal utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => {
+type Props = {
+  children: Node,
+  className: string,
+  isFloating: boolean,
+  isHidden: boolean,
+  isOpeningUpward: boolean,
+  isTransparent: boolean,
+  position: Object,
+  rootRef: Ref<*>,
+  theme: Object,
+  themeId: string
+};
+
+export default (props: Props) => {
   const { theme, themeId } = props;
+
   return (
     <div
       ref={props.rootRef}

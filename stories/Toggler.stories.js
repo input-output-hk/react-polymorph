@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 
 // storybook
@@ -11,7 +12,6 @@ import { Checkbox } from '../source/components';
 import { TogglerSkin } from '../source/skins/simple';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
 import CustomTogglerTheme from './theme-customizations/Toggler.custom.scss';
 
 // theme overrides and identifiers

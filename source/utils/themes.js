@@ -1,14 +1,15 @@
+// @flow
 import { isEmpty, cloneDeep } from 'lodash';
 
-const appendToProperty = (dest, name, value) => {
+const appendToProperty = (dest: {}, name: string, value: string) => {
   dest[name] === '' ? (dest[name] = value) : (dest[name] += ' ' + value);
 };
 
-const composeComponentStyles = (componentStyles, componentTheme) => {
+const composeComponentStyles = (componentStyles: {}, componentTheme: {}) => {
   if (!componentTheme) return;
   for (const property in componentStyles) {
-    if (componentStyles.hasOwnProperty(property)) {
-      if (componentTheme.hasOwnProperty(property)) {
+    if (Object.prototype.hasOwnProperty.call(componentStyles, property)) {
+      if (Object.prototype.hasOwnProperty.call(componentTheme, property)) {
         appendToProperty(componentStyles, property, componentTheme[property]);
       }
     }
@@ -19,9 +20,9 @@ const composeComponentStyles = (componentStyles, componentTheme) => {
 // that matches the value of themeId (string)
 // if the property exists, also checks the type of
 // theme[themeId] to ensure it's an object
-const addThemeId = (theme, themeId) => {
+const addThemeId = (theme: {}, themeId: string) => {
   if (!isEmpty(theme) && themeId) {
-    const themeIdExists = theme.hasOwnProperty(themeId);
+    const themeIdExists = Object.prototype.hasOwnProperty.call(theme, themeId);
     const themeIdIsObj = typeof theme[themeId] === 'object';
 
     return themeIdExists && themeIdIsObj ? theme : { [themeId]: theme };
@@ -40,14 +41,18 @@ const addThemeId = (theme, themeId) => {
  * @returns {{}} - The composed theme
  */
 
-export const composeTheme = (theme = {}, themeOverrides = {}, themeAPI = {}) => {
+const composeTheme = (
+  theme: {} = {},
+  themeOverrides: {} = {},
+  themeAPI: {} = {}
+) => {
   // Return theme if there are no overrides provided
   if (isEmpty(themeOverrides)) return theme;
 
-  let composedTheme = cloneDeep(themeAPI);
+  const composedTheme = cloneDeep(themeAPI);
 
   for (const componentId in themeAPI) {
-    if (composedTheme.hasOwnProperty(componentId)) {
+    if (Object.prototype.hasOwnProperty.call(composedTheme, componentId)) {
       const componentStyles = composedTheme[componentId];
       composeComponentStyles(componentStyles, theme[componentId]);
       composeComponentStyles(componentStyles, themeOverrides[componentId]);

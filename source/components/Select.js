@@ -1,5 +1,6 @@
+// @flow
 import React, { Component } from 'react';
-import { bool, func, object, arrayOf, shape, string } from 'prop-types';
+import type { ComponentType, Element } from 'react';
 import { withTheme } from '../themes/withTheme';
 
 // import internal utility functions
@@ -8,31 +9,39 @@ import { composeTheme, addThemeId } from '../utils';
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Select extends Component {
-  static propTypes = {
-    allowBlank: bool,
-    autoFocus: bool,
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    isOpeningUpward: bool,
-    onBlur: func,
-    onChange: func,
-    onFocus: func,
-    options: arrayOf(
-      shape({
-        isDisabled: bool,
-        value: string.isRequired
-      })
-    ).isRequired,
-    placeholder: string,
-    skin: func.isRequired,
-    theme: object,
-    themeId: string,
-    themeOverrides: object, // custom css/scss from user that adheres to component's theme API
-    value: string
-  };
+type Props = {
+  allowBlank: boolean,
+  autoFocus: boolean,
+  error: string | Element<any>,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  isOpeningUpward: boolean,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  optionRenderer: Function,
+  options: Array<{
+    isDisabled: boolean,
+    value: any
+  }>,
+  label: string | Element<any>,
+  placeholder: string,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object,
+  value: string
+};
+
+type State = {
+  composedTheme: Object,
+  isOpen: boolean
+};
+
+class Select extends Component<Props, State> {
+  inputElement: Element<'input'>;
 
   static defaultProps = {
     allowBlank: true,
@@ -44,8 +53,11 @@ class Select extends Component {
     value: ''
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
+
+    // $FlowFixMe
+    this.inputElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -74,14 +86,18 @@ class Select extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
-  handleInputClick = event => {
+  handleInputClick = (event: SyntheticMouseEvent<>) => {
     event.stopPropagation();
     event.preventDefault();
-    this.inputElement.blur();
+
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      inputElement.current.blur();
+    }
     this.toggleOpen();
   };
 
-  handleChange = (option, event) => {
+  handleChange = (option: Object, event: SyntheticEvent<>) => {
     if (this.props.onChange) this.props.onChange(option.value, event);
     this.toggleOpen();
   };
@@ -96,12 +112,20 @@ class Select extends Component {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin: SelectSkin, theme, themeOverrides, ...rest } = this.props;
+    const {
+      skin: SelectSkin,
+      theme,
+      themeOverrides,
+      autoFocus,
+      context,
+      allowBlank,
+      ...rest
+    } = this.props;
 
     return (
       <SelectSkin
         isOpen={this.state.isOpen}
-        inputRef={el => (this.inputElement = el)}
+        inputRef={this.inputElement}
         theme={this.state.composedTheme}
         getSelectedOption={this.getSelectedOption}
         handleInputClick={this.handleInputClick}

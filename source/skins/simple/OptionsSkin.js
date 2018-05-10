@@ -1,4 +1,6 @@
+// @flow
 import React from 'react';
+import type { Element, Ref } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -9,7 +11,27 @@ import { Bubble } from '../../components';
 // skins
 import { BubbleSkin } from './';
 
-export default props => {
+type Props = {
+  render: Function,
+  options: Array<any>,
+  optionRenderer: Function,
+  isOpeningUpward: boolean,
+  isOpen: boolean,
+  noResults: boolean,
+  noResultsMessage: string | Element<any>,
+  selectedOption: any,
+  getOptionProps: Function,
+  getHighlightedOptionIndex: Function,
+  isHighlightedOption: Function,
+  isSelectedOption: Function,
+  handleClickOnOption: Function,
+  setHighlightedOptionIndex: Function,
+  optionsRef: Ref<*>,
+  theme: Object,
+  themeId: string,
+};
+
+export default (props: Props) => {
   const {
     getOptionProps,
     render,
@@ -33,6 +55,15 @@ export default props => {
   const isFirstOptionHighlighted = highlightedOptionIndex === 0;
   const sortedOptions = isOpeningUpward ? options.slice().reverse() : options;
 
+  const checkOptionRenderer = option => {
+    if (optionRenderer) {
+      return optionRenderer(option);
+    } else if (typeof option === 'object') {
+      return option.label;
+    }
+    return option;
+  };
+
   const renderOptions = () => {
     // check for user's custom render function
     // if Options is being rendered via Autocomplete,
@@ -49,6 +80,8 @@ export default props => {
         const boundHandleClickOnOption = handleClickOnOption.bind(null, option);
         return (
           <li
+            role="presentation"
+            aria-hidden
             key={index}
             className={classnames([
               theme[themeId].option,
@@ -59,36 +92,34 @@ export default props => {
             onClick={boundHandleClickOnOption}
             onMouseEnter={boundSetHighlightedOptionIndex}
           >
-            {optionRenderer
-              ? optionRenderer(option)
-              : typeof option === 'object' ? option.label : option}
+            {checkOptionRenderer(option)}
           </li>
         );
       });
-    } else {
-      // render no results message
-      return <li className={theme[themeId].option}>{noResultsMessage}</li>;
     }
+    // render no results message
+    return <li className={theme[themeId].option}>{noResultsMessage}</li>;
   };
 
   return (
-    <Bubble
-      className={classnames([
-        theme[themeId].options,
-        isOpen ? theme[themeId].isOpen : null,
-        isOpeningUpward ? theme[themeId].openUpward : null,
-        isFirstOptionHighlighted && !noResults
-          ? theme[themeId].firstOptionHighlighted
-          : null
-      ])}
-      ref={optionsRef}
-      isTransparent={false}
-      skin={BubbleSkin}
-      isOpeningUpward={isOpeningUpward}
-      isHidden={!isOpen}
-      isFloating
-    >
-      <ul className={theme[themeId].ul}>{renderOptions()}</ul>
-    </Bubble>
+    <div ref={optionsRef}>
+      <Bubble
+        className={classnames([
+          theme[themeId].options,
+          isOpen ? theme[themeId].isOpen : null,
+          isOpeningUpward ? theme[themeId].openUpward : null,
+          isFirstOptionHighlighted && !noResults
+            ? theme[themeId].firstOptionHighlighted
+            : null
+        ])}
+        isTransparent={false}
+        skin={BubbleSkin}
+        isOpeningUpward={isOpeningUpward}
+        isHidden={!isOpen}
+        isFloating
+      >
+        <ul className={theme[themeId].ul}>{renderOptions()}</ul>
+      </Bubble>
+    </div>
   );
 };

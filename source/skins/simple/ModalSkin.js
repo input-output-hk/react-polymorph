@@ -1,9 +1,21 @@
+// @flow
 import React from 'react';
+import type { Node, Element } from 'react';
 
 // external libraries
 import ReactModal from 'react-modal';
 
-export default props => (
+type Props = {
+  children: Node,
+  contentLabel: string | Element<any>,
+  isOpen: boolean,
+  onClose: Function,
+  triggerCloseOnOverlayClick: boolean,
+  theme: Object,
+  themeId: string
+};
+
+export default (props: Props) => (
   <ReactModal
     contentLabel={props.contentLabel}
     isOpen={props.isOpen}

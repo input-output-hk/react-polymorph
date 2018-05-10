@@ -1,4 +1,6 @@
+// @flow
 import React from 'react';
+import type { Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -6,10 +8,22 @@ import classnames from 'classnames';
 // internal utility functions
 import { pickDOMProps } from '../../utils';
 
-export default props => {
+type Props = {
+  checked: boolean,
+  className: string,
+  disabled: boolean,
+  onChange: Function,
+  label: string | Element<any>,
+  theme: Object,
+  themeId: string
+};
+
+export default (props: Props) => {
   const { theme, themeId } = props;
   return (
     <div
+      role="presentation"
+      aria-hidden
       className={classnames([
         props.className,
         theme[themeId].root,
