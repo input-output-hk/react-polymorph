@@ -19,7 +19,9 @@ type Props = {
     ROOT_THEME_API: Object
   },
   disabled: boolean,
-  error: string | Element<any>,
+  enforceMax: boolean,
+  enforceMin: boolean,
+  error: string,
   onChange: Function,
   maxAfterDot: number,
   maxBeforeDot: number,
@@ -50,6 +52,8 @@ class NumericInput extends Component<Props, State> {
   static defaultProps = {
     disabled: false,
     error: '',
+    enforceMax: false,
+    enforceMin: false,
     onRef: () => {},
     readOnly: false,
     theme: null,
@@ -60,11 +64,17 @@ class NumericInput extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+    const { context, minValue, maxBeforeDot, maxAfterDot, themeId, theme, themeOverrides } = props;
 
-    // $FlowFixMe
+    const minValueIsNum = minValue && typeof minValue === 'number';
+    // if minValue is a number and user supplied maxBeforeDot and/or maxAfterDot
+    if (minValueIsNum && (maxBeforeDot || maxAfterDot)) {
+      // check combination of values for validity
+      this._validateLimitProps(minValue, maxBeforeDot, maxAfterDot);
+    }
+
+    // define refs -- $FlowFixMe
     this.inputElement = React.createRef();
-
-    const { context, themeId, theme, themeOverrides } = props;
 
     this.state = {
       composedTheme: composeTheme(
@@ -79,11 +89,10 @@ class NumericInput extends Component<Props, State> {
     };
   }
 
-  // ========= COMPONENT LIFE CYCLE =========
-
   componentDidMount() {
-    // if NumericInput is rendered by FormField, onRef allows FormField to call
-    // NumericInput's focus method when someone clicks on FormField's label
+    // if this NumericInput instance is rendered within FormField's render prop,
+    // this.props.onRef allows FormField to call NumericInput's focus method
+    // when user clicks FormField's label
     this.props.onRef(this);
 
     const { inputElement } = this;
@@ -124,11 +133,12 @@ class NumericInput extends Component<Props, State> {
     }
   }
 
-  onChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
+  onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
     const { onChange, disabled } = this.props;
-
     if (disabled) return;
 
+    // it is crucial to remove whitespace from input value
+    // with String.trim()
     const processedValue = this._processValue(
       event.target.value.trim(),
       event.target.selectionStart
@@ -151,14 +161,45 @@ class NumericInput extends Component<Props, State> {
     }
   }
 
+  _validateLimitProps(minValue: number, maxBeforeDot: number, maxAfterDot: number) {
+    const maxBeforeDotIsNum = maxBeforeDot && typeof maxBeforeDot === 'number';
+    const maxAfterDotIsNum = maxAfterDot && typeof maxAfterDot === 'number';
+    // if minValue is a float, it will split at the decimal
+    // trailing zeros are dropped with parseFloat
+    const minValParts = parseFloat(minValue).toString().split('.');
+
+    // if minValParts array has length of 2, it is a float
+    if (minValParts.length >= 2) {
+      const minValBeforeDot = minValParts[0];
+      const minValAfterDot = minValParts[1];
+
+      // if the number of integers in minValue is greater than maxBeforeDot
+      if (maxBeforeDotIsNum && (minValBeforeDot.length > maxBeforeDot)) {
+        // the combo is incompatible, throw error
+        const error = `
+          minValue: ${minValue} exceeds the limit of maxBeforeDot: ${maxBeforeDot}.
+          Adjust the values of these properties.
+        `;
+        throw new Error(error);
+      // if the number of decimal spaces in minValue is greater than maxBeforeDot
+      } else if (maxAfterDotIsNum && (minValAfterDot.length > maxAfterDot)) {
+        const error = `
+          minValue: ${minValue} exceeds the limit of maxAfterDot: ${maxAfterDot}.
+          Adjust the values of these properties.
+        `;
+        throw new Error(error);
+      }
+    }
+  }
+
   _setError = (error: string) => {
     const { setError } = this.props;
 
     // checks for setError func from FormField component
-    // if this Input instance is being used within the render function
-    // of a FormField instance, the error field within FormField's local state
-    // will be set
+    // if this NumericInput instance is rendered within FormField's render prop,
+    // FormField's local state.error will also be set via props.setError
     if (setError) setError(error);
+    // also set (this: NumericInput)'s state.error
     this.setState({ error });
   };
 
@@ -166,7 +207,7 @@ class NumericInput extends Component<Props, State> {
     return flow([
       this._enforceNumericValue,
       this._parseToParts,
-      this._enforceMaxLengths,
+      this._enforceValueLimits,
       this._separate
     ]).call(this, value, position);
   }
@@ -271,7 +312,8 @@ class NumericInput extends Component<Props, State> {
     return { value, position, parts: { beforeDot, afterDot } };
   }
 
-  _enforceMaxLengths(data: {
+  // enforces props.maxValue and props.minValue
+  _enforceValueLimits(data: {
     value: string,
     position: number,
     parts: {
@@ -281,10 +323,61 @@ class NumericInput extends Component<Props, State> {
   }) {
     if (!data) return;
 
-    const { maxBeforeDot, maxAfterDot, minValue, maxValue } = this.props;
-    const position = data.position;
-    let beforeDot = data.parts.beforeDot;
-    let afterDot = data.parts.afterDot;
+    const { minValue, maxValue, enforceMax, enforceMin, maxAfterDot } = this.props;
+    const { position } = data;
+
+    // enforce props.maxBeforeDot and props.maxAfterDot
+    const valueWithDecimalRestrictions = this._enforceDecimalRestrictions(data);
+
+    // creates floating point number equal to valueWithDecimalRestrictions (string)
+    // will be used for value comparisons against props.maxValue and props.minValue if applicable
+    const valueWithoutSeparators = parseFloat(valueWithDecimalRestrictions.replace(/,/g, ''));
+
+    // if input value is greater than props.maxValue, throw error
+    if (maxValue && valueWithoutSeparators > maxValue) {
+      const formattedMaxVal = maxValue.toFixed(maxAfterDot || 6).toString();
+      this._setError(`Maximum amount is ${formattedMaxVal}`);
+
+      // if user passes enforceMax=true, restrict input value to props.maxValue
+      if (enforceMax) {
+        this.setState({ caretPosition: position });
+        return formattedMaxVal;
+      }
+    // if input value is below props.minValue, throw error
+    } else if (minValue && valueWithoutSeparators < minValue) {
+      const formattedMinVal = minValue.toFixed(maxAfterDot || 6).toString();
+      this._setError(`Minimum amount is ${formattedMinVal}`);
+
+      // if props.enforceMin=true, restrict input value to props.minValue
+      if (enforceMin) {
+        this.setState({ caretPosition: position });
+        return formattedMinVal;
+      }
+      // if input value has no errors, clear state.error
+    } else if (this.state.error !== '') {
+      this._setError('');
+    }
+
+    // update caret in state
+    this.setState({ caretPosition: position });
+
+    // input value w/ decimal restrictions is passed along
+    // to this._separate without value restrictions
+    return valueWithDecimalRestrictions;
+  }
+
+  // enforces props.maxBeforeDot and props.maxAfterDot
+  _enforceDecimalRestrictions(data: {
+    value: string,
+    position: number,
+    parts: {
+      beforeDot: string,
+      afterDot: string
+    }
+  }) {
+    const { maxBeforeDot, maxAfterDot } = this.props;
+    let { beforeDot } = data.parts;
+    let { afterDot } = data.parts;
 
     // preventing numbers with more than maxBeforeDot units
     // - return first maxBeforeDot numbers (with comma separators)
@@ -316,28 +409,8 @@ class NumericInput extends Component<Props, State> {
       }
     }
 
+    // return input value w/decimal restrictions as a string
     const result = beforeDot + '.' + afterDot;
-
-    // check min and max value
-    const resultWithoutSeparators = parseFloat(result.replace(/,/g, ''));
-
-    // if value is above props.maxValue, format & set value to maxValue
-    if (maxValue && resultWithoutSeparators >= maxValue) {
-      const formattedMaxVal = maxValue.toFixed(6).toString();
-      this._setError(`Maximum amount is ${formattedMaxVal}`);
-      this.setState({ caretPosition: position });
-      return formattedMaxVal;
-      // if value is below props.minValue, format & set value to minValue
-    } else if (minValue && resultWithoutSeparators <= minValue) {
-      const formattedMinVal = minValue.toFixed(6).toString();
-      this._setError(`Minimum amount is ${formattedMinVal}`);
-      this.setState({ caretPosition: position });
-      return formattedMinVal;
-    } else if (this.state.error !== '') {
-      this._setError('');
-    }
-
-    this.setState({ caretPosition: position });
     return result;
   }
 
