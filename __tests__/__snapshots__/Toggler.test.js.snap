@@ -2,8 +2,10 @@
 
 exports[`Toggler is checked 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     checked={true}
@@ -31,8 +33,10 @@ exports[`Toggler is checked 1`] = `
 
 exports[`Toggler is disabled 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     checked={false}
@@ -60,8 +64,10 @@ exports[`Toggler is disabled 1`] = `
 
 exports[`Toggler renders correctly 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     checked={false}
@@ -93,8 +99,10 @@ exports[`Toggler renders within text 1`] = `
     Fees 
   </span>
   <div
+    aria-hidden={true}
     className=""
     onClick={[Function]}
+    role="presentation"
   >
     <input
       checked={false}

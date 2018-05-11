@@ -12,8 +12,10 @@ exports[`Autocomplete is disabled 1`] = `
       className={undefined}
     >
       <div
+        aria-hidden={true}
         className={undefined}
         onClick={[Function]}
+        role="presentation"
       >
         <div
           className=""
@@ -29,51 +31,61 @@ exports[`Autocomplete is disabled 1`] = `
             />
           </div>
         </div>
-        <div
-          className=""
-          style={null}
-        >
+        <div>
           <div
-            className={undefined}
-            data-bubble-container={true}
+            className=""
+            style={null}
           >
-            <ul
+            <div
               className={undefined}
+              data-bubble-container={true}
             >
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
+              <ul
+                className={undefined}
               >
-                cat
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                dog
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                fish
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                home
-              </li>
-            </ul>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  cat
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  dog
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  fish
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  home
+                </li>
+              </ul>
+            </div>
+            <span
+              className={undefined}
+              data-bubble-arrow={true}
+            />
           </div>
-          <span
-            className={undefined}
-            data-bubble-arrow={true}
-          />
         </div>
       </div>
     </div>
@@ -93,8 +105,10 @@ exports[`Autocomplete renders correctly 1`] = `
       className={undefined}
     >
       <div
+        aria-hidden={true}
         className={undefined}
         onClick={[Function]}
+        role="presentation"
       >
         <div
           className=""
@@ -110,51 +124,61 @@ exports[`Autocomplete renders correctly 1`] = `
             />
           </div>
         </div>
-        <div
-          className=""
-          style={null}
-        >
+        <div>
           <div
-            className={undefined}
-            data-bubble-container={true}
+            className=""
+            style={null}
           >
-            <ul
+            <div
               className={undefined}
+              data-bubble-container={true}
             >
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
+              <ul
+                className={undefined}
               >
-                cat
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                dog
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                fish
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                home
-              </li>
-            </ul>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  cat
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  dog
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  fish
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  home
+                </li>
+              </ul>
+            </div>
+            <span
+              className={undefined}
+              data-bubble-arrow={true}
+            />
           </div>
-          <span
-            className={undefined}
-            data-bubble-arrow={true}
-          />
         </div>
       </div>
     </div>
@@ -174,8 +198,10 @@ exports[`Autocomplete renders with a placeholder 1`] = `
       className={undefined}
     >
       <div
+        aria-hidden={true}
         className={undefined}
         onClick={[Function]}
+        role="presentation"
       >
         <div
           className=""
@@ -191,51 +217,61 @@ exports[`Autocomplete renders with a placeholder 1`] = `
             />
           </div>
         </div>
-        <div
-          className=""
-          style={null}
-        >
+        <div>
           <div
-            className={undefined}
-            data-bubble-container={true}
+            className=""
+            style={null}
           >
-            <ul
+            <div
               className={undefined}
+              data-bubble-container={true}
             >
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
+              <ul
+                className={undefined}
               >
-                cat
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                dog
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                fish
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                home
-              </li>
-            </ul>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  cat
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  dog
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  fish
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  home
+                </li>
+              </ul>
+            </div>
+            <span
+              className={undefined}
+              data-bubble-arrow={true}
+            />
           </div>
-          <span
-            className={undefined}
-            data-bubble-arrow={true}
-          />
         </div>
       </div>
     </div>
@@ -259,8 +295,10 @@ exports[`Autocomplete renders with an error 1`] = `
       className={undefined}
     >
       <div
+        aria-hidden={true}
         className={undefined}
         onClick={[Function]}
+        role="presentation"
       >
         <div
           className=""
@@ -276,51 +314,61 @@ exports[`Autocomplete renders with an error 1`] = `
             />
           </div>
         </div>
-        <div
-          className=""
-          style={null}
-        >
+        <div>
           <div
-            className={undefined}
-            data-bubble-container={true}
+            className=""
+            style={null}
           >
-            <ul
+            <div
               className={undefined}
+              data-bubble-container={true}
             >
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
+              <ul
+                className={undefined}
               >
-                cat
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                dog
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                fish
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                home
-              </li>
-            </ul>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  cat
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  dog
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  fish
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  home
+                </li>
+              </ul>
+            </div>
+            <span
+              className={undefined}
+              data-bubble-arrow={true}
+            />
           </div>
-          <span
-            className={undefined}
-            data-bubble-arrow={true}
-          />
         </div>
       </div>
     </div>
@@ -337,8 +385,10 @@ exports[`Autocomplete renders with label 1`] = `
   >
     
     <label
+      aria-hidden={true}
       className={undefined}
       onClick={[Function]}
+      role="presentation"
     >
       Enter your recovery phrase below
     </label>
@@ -346,8 +396,10 @@ exports[`Autocomplete renders with label 1`] = `
       className={undefined}
     >
       <div
+        aria-hidden={true}
         className={undefined}
         onClick={[Function]}
+        role="presentation"
       >
         <div
           className=""
@@ -363,51 +415,61 @@ exports[`Autocomplete renders with label 1`] = `
             />
           </div>
         </div>
-        <div
-          className=""
-          style={null}
-        >
+        <div>
           <div
-            className={undefined}
-            data-bubble-container={true}
+            className=""
+            style={null}
           >
-            <ul
+            <div
               className={undefined}
+              data-bubble-container={true}
             >
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
+              <ul
+                className={undefined}
               >
-                cat
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                dog
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                fish
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                home
-              </li>
-            </ul>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  cat
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  dog
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  fish
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  home
+                </li>
+              </ul>
+            </div>
+            <span
+              className={undefined}
+              data-bubble-arrow={true}
+            />
           </div>
-          <span
-            className={undefined}
-            data-bubble-arrow={true}
-          />
         </div>
       </div>
     </div>
@@ -427,8 +489,10 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
       className={undefined}
     >
       <div
+        aria-hidden={true}
         className={undefined}
         onClick={[Function]}
+        role="presentation"
       >
         <div
           className=""
@@ -444,43 +508,45 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
             />
           </div>
         </div>
-        <div
-          className=""
-          style={null}
-        >
+        <div>
           <div
-            className={undefined}
-            data-bubble-container={true}
+            className=""
+            style={null}
           >
-            <ul
+            <div
               className={undefined}
+              data-bubble-container={true}
             >
-              <li>
-                <span>
-                  #0: cat
-                </span>
-              </li>
-              <li>
-                <span>
-                  #1: dog
-                </span>
-              </li>
-              <li>
-                <span>
-                  #2: fish
-                </span>
-              </li>
-              <li>
-                <span>
-                  #3: home
-                </span>
-              </li>
-            </ul>
+              <ul
+                className={undefined}
+              >
+                <li>
+                  <span>
+                    #0: cat
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    #1: dog
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    #2: fish
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    #3: home
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <span
+              className={undefined}
+              data-bubble-arrow={true}
+            />
           </div>
-          <span
-            className={undefined}
-            data-bubble-arrow={true}
-          />
         </div>
       </div>
     </div>
@@ -500,8 +566,10 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
       className={undefined}
     >
       <div
+        aria-hidden={true}
         className={undefined}
         onClick={[Function]}
+        role="presentation"
       >
         <div
           className=""
@@ -517,51 +585,61 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
             />
           </div>
         </div>
-        <div
-          className=""
-          style={null}
-        >
+        <div>
           <div
-            className={undefined}
-            data-bubble-container={true}
+            className=""
+            style={null}
           >
-            <ul
+            <div
               className={undefined}
+              data-bubble-container={true}
             >
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
+              <ul
+                className={undefined}
               >
-                cat
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                dog
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                fish
-              </li>
-              <li
-                className=""
-                onClick={[Function]}
-                onMouseEnter={[Function]}
-              >
-                home
-              </li>
-            </ul>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  cat
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  dog
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  fish
+                </li>
+                <li
+                  aria-hidden={true}
+                  className=""
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                  role="presentation"
+                >
+                  home
+                </li>
+              </ul>
+            </div>
+            <span
+              className={undefined}
+              data-bubble-arrow={true}
+            />
           </div>
-          <span
-            className={undefined}
-            data-bubble-arrow={true}
-          />
         </div>
       </div>
     </div>

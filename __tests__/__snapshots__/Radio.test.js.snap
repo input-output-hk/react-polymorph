@@ -2,8 +2,10 @@
 
 exports[`Radio is disabled 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     className={undefined}
@@ -19,8 +21,10 @@ exports[`Radio is disabled 1`] = `
 
 exports[`Radio is selected 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     className={undefined}
@@ -36,8 +40,10 @@ exports[`Radio is selected 1`] = `
 
 exports[`Radio renders correctly 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     className={undefined}
@@ -53,8 +59,10 @@ exports[`Radio renders correctly 1`] = `
 
 exports[`Radio renders with a label 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     className={undefined}

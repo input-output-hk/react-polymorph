@@ -9,23 +9,29 @@ import { composeTheme, addThemeId } from '../utils';
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
-class Checkbox extends Component {
-  static propTypes = {
-    context: shape({
-      theme: object,
-      ROOT_THEME_API: object
-    }),
-    checked: bool,
-    disabled: bool,
-    label: StringOrElement,
-    onChange: func,
-    onBlur: func,
-    onFocus: func,
-    skin: func.isRequired,
-    theme: object,
-    themeId: string,
-    themeOverrides: object // custom css/scss from user that adheres to component's theme API
-  };
+type Props = {
+  checked: boolean,
+  className: string,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  disabled: boolean,
+  label: string | Element<any>,
+  labelLeft: string | Element<any>,
+  labelRight: string | Element<any>,
+  onChange: Function,
+  onBlur: Function,
+  onFocus: Function,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object
+};
+
+type State = {
+  composedTheme: Object
+};
 
 class Checkbox extends Component<Props, State> {
   static defaultProps = {

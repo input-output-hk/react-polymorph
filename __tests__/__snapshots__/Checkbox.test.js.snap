@@ -2,8 +2,10 @@
 
 exports[`Checkbox is checked 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     checked={true}
@@ -19,8 +21,10 @@ exports[`Checkbox is checked 1`] = `
 
 exports[`Checkbox is disabled 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     checked={false}
@@ -36,8 +40,10 @@ exports[`Checkbox is disabled 1`] = `
 
 exports[`Checkbox renders to the DOM 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     checked={false}
@@ -53,8 +59,10 @@ exports[`Checkbox renders to the DOM 1`] = `
 
 exports[`Checkbox renders with a label 1`] = `
 <div
+  aria-hidden={true}
   className=""
   onClick={[Function]}
+  role="presentation"
 >
   <input
     checked={false}

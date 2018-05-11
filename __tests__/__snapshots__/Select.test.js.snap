@@ -8,7 +8,6 @@ exports[`Select isOpen 1`] = `
     className={undefined}
   >
     <input
-      autoFocus={false}
       className=""
       label={undefined}
       onChange={[Function]}
@@ -18,58 +17,70 @@ exports[`Select isOpen 1`] = `
       value=""
     />
   </div>
-  <div
-    className=""
-    style={null}
-  >
+  <div>
     <div
-      className={undefined}
-      data-bubble-container={true}
+      className=""
+      style={null}
     >
-      <ul
+      <div
         className={undefined}
+        data-bubble-container={true}
       >
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
+        <ul
+          className={undefined}
         >
-          Frankreich
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Spanien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Kroatien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Vereinigten Staaten
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Österreich
-        </li>
-      </ul>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Frankreich
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Spanien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Kroatien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Vereinigten Staaten
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Österreich
+          </li>
+        </ul>
+      </div>
+      <span
+        className={undefined}
+        data-bubble-arrow={true}
+      />
     </div>
-    <span
-      className={undefined}
-      data-bubble-arrow={true}
-    />
   </div>
 </div>
 `;
@@ -82,7 +93,6 @@ exports[`Select isOpeningUpward 1`] = `
     className={undefined}
   >
     <input
-      autoFocus={false}
       className=""
       label={undefined}
       onChange={[Function]}
@@ -92,58 +102,70 @@ exports[`Select isOpeningUpward 1`] = `
       value=""
     />
   </div>
-  <div
-    className=""
-    style={null}
-  >
+  <div>
     <div
-      className={undefined}
-      data-bubble-container={true}
+      className=""
+      style={null}
     >
-      <ul
+      <div
         className={undefined}
+        data-bubble-container={true}
       >
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
+        <ul
+          className={undefined}
         >
-          Österreich
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Vereinigten Staaten
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Kroatien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Spanien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Frankreich
-        </li>
-      </ul>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Österreich
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Vereinigten Staaten
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Kroatien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Spanien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Frankreich
+          </li>
+        </ul>
+      </div>
+      <span
+        className={undefined}
+        data-bubble-arrow={true}
+      />
     </div>
-    <span
-      className={undefined}
-      data-bubble-arrow={true}
-    />
   </div>
 </div>
 `;
@@ -156,7 +178,6 @@ exports[`Select renders correctly 1`] = `
     className={undefined}
   >
     <input
-      autoFocus={false}
       className=""
       label={undefined}
       onChange={[Function]}
@@ -166,58 +187,70 @@ exports[`Select renders correctly 1`] = `
       value=""
     />
   </div>
-  <div
-    className=""
-    style={null}
-  >
+  <div>
     <div
-      className={undefined}
-      data-bubble-container={true}
+      className=""
+      style={null}
     >
-      <ul
+      <div
         className={undefined}
+        data-bubble-container={true}
       >
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
+        <ul
+          className={undefined}
         >
-          Frankreich
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Spanien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Kroatien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Vereinigten Staaten
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Österreich
-        </li>
-      </ul>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Frankreich
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Spanien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Kroatien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Vereinigten Staaten
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Österreich
+          </li>
+        </ul>
+      </div>
+      <span
+        className={undefined}
+        data-bubble-arrow={true}
+      />
     </div>
-    <span
-      className={undefined}
-      data-bubble-arrow={true}
-    />
   </div>
 </div>
 `;
@@ -230,7 +263,6 @@ exports[`Select renders via optionRenderer 1`] = `
     className={undefined}
   >
     <input
-      autoFocus={false}
       className=""
       label={undefined}
       onChange={[Function]}
@@ -240,103 +272,115 @@ exports[`Select renders via optionRenderer 1`] = `
       value=""
     />
   </div>
-  <div
-    className=""
-    style={null}
-  >
+  <div>
     <div
-      className={undefined}
-      data-bubble-container={true}
+      className=""
+      style={null}
     >
-      <ul
+      <div
         className={undefined}
+        data-bubble-container={true}
       >
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
+        <ul
+          className={undefined}
         >
-          <div>
-            <span>
-              German: 
-              Frankreich
-            </span>
-            <span>
-              English: 
-              France
-            </span>
-          </div>
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          <div>
-            <span>
-              German: 
-              Spanien
-            </span>
-            <span>
-              English: 
-              Spain
-            </span>
-          </div>
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          <div>
-            <span>
-              German: 
-              Kroatien
-            </span>
-            <span>
-              English: 
-              Croatia
-            </span>
-          </div>
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          <div>
-            <span>
-              German: 
-              Vereinigten Staaten
-            </span>
-            <span>
-              English: 
-              United States
-            </span>
-          </div>
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          <div>
-            <span>
-              German: 
-              Österreich
-            </span>
-            <span>
-              English: 
-              Austria
-            </span>
-          </div>
-        </li>
-      </ul>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            <div>
+              <span>
+                German: 
+                Frankreich
+              </span>
+              <span>
+                English: 
+                France
+              </span>
+            </div>
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            <div>
+              <span>
+                German: 
+                Spanien
+              </span>
+              <span>
+                English: 
+                Spain
+              </span>
+            </div>
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            <div>
+              <span>
+                German: 
+                Kroatien
+              </span>
+              <span>
+                English: 
+                Croatia
+              </span>
+            </div>
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            <div>
+              <span>
+                German: 
+                Vereinigten Staaten
+              </span>
+              <span>
+                English: 
+                United States
+              </span>
+            </div>
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            <div>
+              <span>
+                German: 
+                Österreich
+              </span>
+              <span>
+                English: 
+                Austria
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <span
+        className={undefined}
+        data-bubble-arrow={true}
+      />
     </div>
-    <span
-      className={undefined}
-      data-bubble-arrow={true}
-    />
   </div>
 </div>
 `;
@@ -349,7 +393,6 @@ exports[`Select renders with an error 1`] = `
     className={undefined}
   >
     <input
-      autoFocus={false}
       className=""
       label={undefined}
       onChange={[Function]}
@@ -359,58 +402,70 @@ exports[`Select renders with an error 1`] = `
       value=""
     />
   </div>
-  <div
-    className=""
-    style={null}
-  >
+  <div>
     <div
-      className={undefined}
-      data-bubble-container={true}
+      className=""
+      style={null}
     >
-      <ul
+      <div
         className={undefined}
+        data-bubble-container={true}
       >
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
+        <ul
+          className={undefined}
         >
-          Frankreich
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Spanien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Kroatien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Vereinigten Staaten
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Österreich
-        </li>
-      </ul>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Frankreich
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Spanien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Kroatien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Vereinigten Staaten
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Österreich
+          </li>
+        </ul>
+      </div>
+      <span
+        className={undefined}
+        data-bubble-arrow={true}
+      />
     </div>
-    <span
-      className={undefined}
-      data-bubble-arrow={true}
-    />
   </div>
 </div>
 `;
@@ -423,7 +478,6 @@ exports[`Select renders with disabled options 1`] = `
     className={undefined}
   >
     <input
-      autoFocus={false}
       className=""
       label={undefined}
       onChange={[Function]}
@@ -433,51 +487,61 @@ exports[`Select renders with disabled options 1`] = `
       value=""
     />
   </div>
-  <div
-    className=""
-    style={null}
-  >
+  <div>
     <div
-      className={undefined}
-      data-bubble-container={true}
+      className=""
+      style={null}
     >
-      <ul
+      <div
         className={undefined}
+        data-bubble-container={true}
       >
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
+        <ul
+          className={undefined}
         >
-          England
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Spain
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Thailand
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          USA
-        </li>
-      </ul>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            England
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Spain
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Thailand
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            USA
+          </li>
+        </ul>
+      </div>
+      <span
+        className={undefined}
+        data-bubble-arrow={true}
+      />
     </div>
-    <span
-      className={undefined}
-      data-bubble-arrow={true}
-    />
   </div>
 </div>
 `;
@@ -490,7 +554,6 @@ exports[`Select renders with placeholder 1`] = `
     className={undefined}
   >
     <input
-      autoFocus={false}
       className=""
       label={undefined}
       onChange={[Function]}
@@ -500,58 +563,70 @@ exports[`Select renders with placeholder 1`] = `
       value=""
     />
   </div>
-  <div
-    className=""
-    style={null}
-  >
+  <div>
     <div
-      className={undefined}
-      data-bubble-container={true}
+      className=""
+      style={null}
     >
-      <ul
+      <div
         className={undefined}
+        data-bubble-container={true}
       >
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
+        <ul
+          className={undefined}
         >
-          Frankreich
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Spanien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Kroatien
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Vereinigten Staaten
-        </li>
-        <li
-          className=""
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-        >
-          Österreich
-        </li>
-      </ul>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Frankreich
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Spanien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Kroatien
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Vereinigten Staaten
+          </li>
+          <li
+            aria-hidden={true}
+            className=""
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            Österreich
+          </li>
+        </ul>
+      </div>
+      <span
+        className={undefined}
+        data-bubble-arrow={true}
+      />
     </div>
-    <span
-      className={undefined}
-      data-bubble-arrow={true}
-    />
   </div>
 </div>
 `;

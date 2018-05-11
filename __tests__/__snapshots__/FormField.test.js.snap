@@ -55,8 +55,10 @@ exports[`FormField renders with label 1`] = `
 >
   
   <label
+    aria-hidden={true}
     className={undefined}
     onClick={[Function]}
+    role="presentation"
   >
     Add a Label
   </label>
