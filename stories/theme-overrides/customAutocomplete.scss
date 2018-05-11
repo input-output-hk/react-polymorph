@@ -1,0 +1,34 @@
+.selectedWords {
+  input {
+    padding-top: 8px;
+  }
+
+  .selectedWordBox {
+    background: rgba(10, 145, 48, 0.8);
+    border: 2px solid rgba(10, 145, 48, 0.8);
+    border-radius: 0px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    height: 40px;
+    padding-top: 8px;
+
+    &:hover {
+      border-radius: 5px;
+      transition: all 0.2s ease-in-out;
+      background-color: #fff;
+      border: 2px solid rgba(10, 145, 48, 0.8);
+
+      .selectedWordValue {
+        color: rgba(10, 145, 48, 0.8);
+      }
+    }
+
+    .selectedWordValue {
+      color: #fff;
+    }
+  }
+}
+
+.customHighlight {
+  background-color: rgba(231, 254, 231, 0.5);
+}

@@ -1,0 +1,58 @@
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$input-width: 100% !default;
+$input-font-size: 16px !default;
+$input-font-family: $theme-font-regular, sans-serif !default;
+$input-color: #5e6066 !default;
+$input-placeholder-color: rgba(#5e6066, 0.5) !default;
+$input-placeholder-font-family: $theme-font-light, sans-serif !default;
+$input-disabled-color: #cfcfcf !default;
+$input-disabled-bg-color: #fcfafa !default;
+$input-bg-color: #fafbfc !default;
+$input-border: 1px solid #c6cdd6 !default;
+$input-border-radius: 2px !default;
+$input-border-focus-color: #5e6066 !default;
+$input-padding: 14px 20px !default;
+$input-errored-border: $theme-color-error;
+
+.input {
+  background-color: $input-bg-color;
+  border: $input-border;
+  border-radius: $input-border-radius;
+  box-sizing: border-box;
+  color: $input-color;
+  font-family: $input-font-family;
+  font-size: $input-font-size;
+  padding: $input-padding;
+  width: $input-width;
+
+  &.errored {
+    border-color: $input-errored-border;
+  }
+
+  &:focus {
+    border-color: $input-border-focus-color;
+    outline: none;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.2s;
+  }
+
+  &::-webkit-input-placeholder {
+    color: $input-placeholder-color;
+    font-family: $input-placeholder-font-family;
+  }
+}
+
+// BEGIN SPECIAL STATES ---------- //
+
+.errored {
+}
+
+.disabled {
+  background-color: $input-disabled-bg-color;
+  border-color: $input-disabled-color;
+}
+
+// END SPECIAL STATES ---------- //

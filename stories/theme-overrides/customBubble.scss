@@ -1,0 +1,27 @@
+@import "../../source/themes/simple/mixins/arrow";
+
+.root {
+  &:not(.transparent) {
+    background-color: #fff;
+
+    [data-bubble-arrow] {
+      @include arrow(up, #fff, rgba(10, 145, 48, 0.8), 5px);
+    }
+
+    .bubble {
+      background-color: #fff;
+      border: 1px solid rgba(10, 145, 48, 0.8);
+      box-shadow: none;
+      border-radius: 0;
+      text-transform: capitalize;
+      transition: all 0.4s ease-in-out;
+
+      &:hover {
+        border-radius: 5px;
+        text-transform: lowercase;
+        padding-left: 38px;
+        transition: all 0.4s ease-in-out;
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$button-width: 100% !default;
+$button-bg-color-normal: #243e62 !default;
+$button-bg-color-hover: #2f496e !default;
+$button-bg-color-active: #1e304a !default;
+$button-bg-color-disabled: #b9c2cc !default;
+$button-label-font: $theme-font-medium !default;
+$button-label-color: #fff !default;
+$button-font-size: 14px !default;
+$button-border-radius: 5px !default;
+$button-padding: 15px 20px !default;
+
+.root {
+  background-color: $button-bg-color-normal;
+  border: none;
+  border-radius: $button-border-radius;
+  box-sizing: border-box;
+  color: $button-label-color;
+  font-family: $button-label-font, sans-serif;
+  font-size: $button-font-size;
+  padding: $button-padding;
+  width: $button-width;
+
+  &:not(.disabled) {
+    &:hover {
+      background-color: $button-bg-color-hover;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: $button-bg-color-active;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// BEGIN SPECIAL STATES ---------- //
+
+.disabled {
+  background-color: $button-bg-color-disabled;
+}
+
+// END SPECIAL STATES ---------- //

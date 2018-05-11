@@ -1,0 +1,77 @@
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$toggler-background: #445b7c !default;
+$toggler-background-disabled: $theme-color-light-grey !default;
+$toggler-label-off-color: #fafbfc !default;
+$toggler-label-on-color: #445b7c !default;
+$toggler-label-on-background: #fafbfc !default;
+$toggler-height: 25px !default;
+$toggler-padding: 2px !default;
+
+.root {
+  display: inline-block;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.disabled {
+  .root:hover,
+  .label:hover,
+  .toggler:hover {
+    cursor: default;
+  }
+
+  .toggler {
+    background-color: $toggler-background-disabled;
+
+    .label.checked {
+      color: $toggler-background-disabled;
+    }
+  }
+}
+
+.checked {
+  background-color: $toggler-label-on-background;
+  color: $toggler-label-on-color;
+}
+
+.input {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+}
+
+.toggler {
+  align-self: center;
+  background-color: $toggler-background;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  height: $toggler-height + $toggler-padding * 2;
+  padding: $toggler-padding;
+  transition: background-color 200ms ease-in-out;
+}
+
+.label {
+  border-radius: 3px;
+  flex: 50%;
+  font-family: $theme-font-regular;
+  font-size: 14px;
+  line-height: $toggler-height;
+  padding: 1px 8px;
+  text-align: center;
+  transition: background-color 200ms ease-in-out;
+  white-space: nowrap;
+
+  &:not(.checked) {
+    background-color: transparent;
+    color: $toggler-label-off-color;
+  }
+}

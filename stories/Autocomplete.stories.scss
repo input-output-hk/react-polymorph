@@ -1,0 +1,64 @@
+@import "../source/themes/simple/theme";
+
+.customMargin {
+  margin-top: 230px;
+}
+
+:global {
+  .SimpleModal_overlay {
+    z-index: 100;
+  }
+  .SimpleModal_modal {
+    display: flex;
+    flex-direction: column;
+    max-height: 90%;
+    width: 640px;
+  }
+}
+
+.dialogWrapper {
+  color: #5e6066;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+
+  & > .title {
+    font-family: $theme-font-medium;
+    font-size: 18px;
+    line-height: 1.39;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  & > .content {
+    flex: 1;
+    margin-right: -24px;
+    padding-right: 24px;
+
+    .walletName {
+      margin-bottom: 20px;
+    }
+  }
+
+  & > .actions {
+    display: flex;
+    flex-shrink: 0;
+    margin-top: 30px;
+
+    button {
+      width: 50%;
+
+      &:only-child {
+        margin: auto;
+        width: 65%;
+      }
+
+      & + button {
+        margin-left: 20px;
+      }
+    }
+  }
+}

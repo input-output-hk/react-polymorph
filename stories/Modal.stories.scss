@@ -1,0 +1,37 @@
+@import '../source/themes/simple/theme';
+
+.modalTitle {
+  font-family: $theme-font-medium;
+  font-size: 16px;
+  text-align: center;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.cancelButton {
+  width: calc(50% - 10px);
+  background-color: lightgrey;
+  &:not(.disabled) {
+    &:hover,
+    &:active {
+      background-color: grey;
+      cursor: pointer;
+    }
+  }
+}
+
+.deleteButton {
+  width: calc(50% - 10px);
+  background-color: indianred;
+  &:not(.disabled) {
+    &:hover,
+    &:active {
+      background-color: darkred;
+      cursor: pointer;
+    }
+  }
+}

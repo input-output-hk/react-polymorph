@@ -1,0 +1,27 @@
+.container {
+  position: relative;
+  border: 1px solid grey;
+  width: 100px;
+  height: 100px;
+  margin: 75px auto 0;
+}
+
+.customBubble [data-bubble-container] {
+  white-space: nowrap;
+  right: 0;
+}
+
+.scrollContainer {
+  width: 110px;
+  height: 126px;
+  margin: 75px auto 0;
+  overflow-x: hidden;
+  overflow-y: overlay;
+}
+
+.scrollContent {
+  position: relative;
+  border: 1px solid grey;
+  width: 100px;
+  height: 100px;
+}

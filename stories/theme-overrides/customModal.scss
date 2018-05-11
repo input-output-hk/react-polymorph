@@ -1,0 +1,17 @@
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 100px;
+  transition: all 0.4s ease-in-out;
+
+  &:focus {
+    height: 300px;
+    min-width: 850px;
+    max-width: 900px;
+    border: 3px solid rgba(10, 145, 48, 0.8);
+    outline: none;
+    transition: all 0.4s ease-in-out;
+  }
+}

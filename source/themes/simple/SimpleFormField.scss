@@ -1,0 +1,47 @@
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+$form-field-label-font: $theme-font-medium !default;
+$form-field-label-font-size: 16px !default;
+$form-field-label-color: #5e6066 !default;
+$form-field-label-margin-bottom: 10px !default;
+$form-field-error-font: $theme-font-regular !default;
+$form-field-error-font-size: 14px !default;
+$form-field-error-margin: 1.5px 0 11.5px 0 !default;
+
+.root {
+  position: relative;
+}
+
+.label {
+  color: $form-field-label-color;
+  display: block;
+  font-family: $form-field-label-font, sans-serif;
+  font-size: $form-field-label-font-size;
+  line-height: 1.38;
+  margin-bottom: $form-field-label-margin-bottom;
+}
+
+.error {
+  color: rgba($theme-color-error, 0.5);
+  float: right;
+  font-family: $form-field-error-font, sans-serif;
+  font-size: $form-field-error-font-size;
+  line-height: 1.36;
+  margin: $form-field-error-margin;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+// BEGIN SPECIAL STATES ---------- //
+
+.disabled {
+  .label {
+    color: $theme-color-disabled;
+  }
+}
+
+// END SPECIAL STATES ---------- //

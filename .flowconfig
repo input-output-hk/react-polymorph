@@ -1,0 +1,10 @@
+[include]
+.*/source/.*
+.*/stories/.*
+
+[libs]
+./source/utils/global.js
+
+[options]
+module.name_mapper='.+\.s?css' -> 'CSSModule'
+module.system=haste
