@@ -138,7 +138,8 @@
     },
     "testPathIgnorePatterns": [
       "<rootDir>/__tests__/__snapshots__",
-      "<rootDir>/__tests__/__mocks__"
+      "<rootDir>/__tests__/__mocks__",
+      "<rootDir>/__tests__/helpers"
     ],
     "testEnvironment": "jsdom",
     "setupFiles": [

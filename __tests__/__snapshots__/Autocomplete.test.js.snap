@@ -13,15 +13,15 @@ exports[`Autocomplete is disabled 1`] = `
     >
       <div
         aria-hidden={true}
-        className={undefined}
+        className="autocompleteWrapper"
         onClick={[Function]}
         role="presentation"
       >
         <div
-          className=""
+          className="autocompleteContent"
         >
           <div
-            className={undefined}
+            className="selectedWords"
           >
             <input
               onChange={[Function]}
@@ -106,15 +106,15 @@ exports[`Autocomplete renders correctly 1`] = `
     >
       <div
         aria-hidden={true}
-        className={undefined}
+        className="autocompleteWrapper"
         onClick={[Function]}
         role="presentation"
       >
         <div
-          className=""
+          className="autocompleteContent"
         >
           <div
-            className={undefined}
+            className="selectedWords"
           >
             <input
               onChange={[Function]}
@@ -199,15 +199,15 @@ exports[`Autocomplete renders with a placeholder 1`] = `
     >
       <div
         aria-hidden={true}
-        className={undefined}
+        className="autocompleteWrapper"
         onClick={[Function]}
         role="presentation"
       >
         <div
-          className=""
+          className="autocompleteContent"
         >
           <div
-            className={undefined}
+            className="selectedWords"
           >
             <input
               onChange={[Function]}
@@ -296,15 +296,15 @@ exports[`Autocomplete renders with an error 1`] = `
     >
       <div
         aria-hidden={true}
-        className={undefined}
+        className="autocompleteWrapper"
         onClick={[Function]}
         role="presentation"
       >
         <div
-          className=""
+          className="autocompleteContent errored"
         >
           <div
-            className={undefined}
+            className="selectedWords"
           >
             <input
               onChange={[Function]}
@@ -397,15 +397,15 @@ exports[`Autocomplete renders with label 1`] = `
     >
       <div
         aria-hidden={true}
-        className={undefined}
+        className="autocompleteWrapper"
         onClick={[Function]}
         role="presentation"
       >
         <div
-          className=""
+          className="autocompleteContent"
         >
           <div
-            className={undefined}
+            className="selectedWords"
           >
             <input
               onChange={[Function]}
@@ -490,15 +490,15 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
     >
       <div
         aria-hidden={true}
-        className={undefined}
+        className="autocompleteWrapper"
         onClick={[Function]}
         role="presentation"
       >
         <div
-          className=""
+          className="autocompleteContent"
         >
           <div
-            className={undefined}
+            className="selectedWords"
           >
             <input
               onChange={[Function]}
@@ -567,15 +567,15 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
     >
       <div
         aria-hidden={true}
-        className={undefined}
+        className="autocompleteWrapper"
         onClick={[Function]}
         role="presentation"
       >
         <div
-          className=""
+          className="autocompleteContent"
         >
           <div
-            className={undefined}
+            className="selectedWords"
           >
             <input
               onChange={[Function]}
