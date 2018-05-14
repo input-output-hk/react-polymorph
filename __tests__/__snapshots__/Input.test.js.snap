@@ -2,7 +2,7 @@
 
 exports[`Input is readOnly 1`] = `
 <input
-  className=""
+  className="input"
   onChange={[Function]}
   readOnly={true}
   value=""
@@ -11,7 +11,7 @@ exports[`Input is readOnly 1`] = `
 
 exports[`Input renders to the DOM 1`] = `
 <input
-  className=""
+  className="input"
   onChange={[Function]}
   readOnly={false}
   value=""
@@ -20,7 +20,7 @@ exports[`Input renders to the DOM 1`] = `
 
 exports[`Input renders with a value 1`] = `
 <input
-  className=""
+  className="input"
   onChange={[Function]}
   readOnly={false}
   value="there is value"
@@ -29,7 +29,7 @@ exports[`Input renders with a value 1`] = `
 
 exports[`Input renders with placeholder 1`] = `
 <input
-  className=""
+  className="input"
   onChange={[Function]}
   placeholder="0.0000"
   readOnly={false}

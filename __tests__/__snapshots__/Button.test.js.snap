@@ -2,21 +2,21 @@
 
 exports[`Button is disabled 1`] = `
 <button
-  className=""
+  className="root disabled"
   disabled={true}
 />
 `;
 
 exports[`Button renders to the DOM 1`] = `
 <button
-  className=""
+  className="root"
   disabled={false}
 />
 `;
 
 exports[`Button renders with a label 1`] = `
 <button
-  className=""
+  className="root"
   disabled={false}
   label="send"
 >

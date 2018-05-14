@@ -2,10 +2,10 @@
 
 exports[`Select isOpen 1`] = `
 <div
-  className=""
+  className="select isOpen"
 >
   <div
-    className={undefined}
+    className="selectInput"
   >
     <input
       className=""
@@ -87,10 +87,10 @@ exports[`Select isOpen 1`] = `
 
 exports[`Select isOpeningUpward 1`] = `
 <div
-  className=""
+  className="select openUpward"
 >
   <div
-    className={undefined}
+    className="selectInput"
   >
     <input
       className=""
@@ -172,10 +172,10 @@ exports[`Select isOpeningUpward 1`] = `
 
 exports[`Select renders correctly 1`] = `
 <div
-  className=""
+  className="select"
 >
   <div
-    className={undefined}
+    className="selectInput"
   >
     <input
       className=""
@@ -257,10 +257,10 @@ exports[`Select renders correctly 1`] = `
 
 exports[`Select renders via optionRenderer 1`] = `
 <div
-  className=""
+  className="select"
 >
   <div
-    className={undefined}
+    className="selectInput"
   >
     <input
       className=""
@@ -387,10 +387,10 @@ exports[`Select renders via optionRenderer 1`] = `
 
 exports[`Select renders with an error 1`] = `
 <div
-  className=""
+  className="select"
 >
   <div
-    className={undefined}
+    className="selectInput"
   >
     <input
       className=""
@@ -472,10 +472,10 @@ exports[`Select renders with an error 1`] = `
 
 exports[`Select renders with disabled options 1`] = `
 <div
-  className=""
+  className="select"
 >
   <div
-    className={undefined}
+    className="selectInput"
   >
     <input
       className=""
@@ -548,10 +548,10 @@ exports[`Select renders with disabled options 1`] = `
 
 exports[`Select renders with placeholder 1`] = `
 <div
-  className=""
+  className="select"
 >
   <div
-    className={undefined}
+    className="selectInput"
   >
     <input
       className=""

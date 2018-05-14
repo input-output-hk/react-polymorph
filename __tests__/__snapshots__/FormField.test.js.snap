@@ -2,11 +2,11 @@
 
 exports[`FormField is disabled 1`] = `
 <div
-  className=""
+  className="root disabled"
 >
   
   <div
-    className={undefined}
+    className="inputWrapper"
   >
     <span>
       true
@@ -17,11 +17,11 @@ exports[`FormField is disabled 1`] = `
 
 exports[`FormField renders to the DOM 1`] = `
 <div
-  className=""
+  className="root"
 >
   
   <div
-    className={undefined}
+    className="inputWrapper"
   >
     <div
       className="render-prop"
@@ -32,15 +32,15 @@ exports[`FormField renders to the DOM 1`] = `
 
 exports[`FormField renders with an error 1`] = `
 <div
-  className=""
+  className="root errored"
 >
   <div
-    className={undefined}
+    className="error"
   >
     Add an Error
   </div>
   <div
-    className={undefined}
+    className="inputWrapper"
   >
     <div
       className="render-prop"
@@ -51,19 +51,19 @@ exports[`FormField renders with an error 1`] = `
 
 exports[`FormField renders with label 1`] = `
 <div
-  className=""
+  className="root"
 >
   
   <label
     aria-hidden={true}
-    className={undefined}
+    className="label"
     onClick={[Function]}
     role="presentation"
   >
     Add a Label
   </label>
   <div
-    className={undefined}
+    className="inputWrapper"
   >
     <div
       className="render-prop"
@@ -74,11 +74,11 @@ exports[`FormField renders with label 1`] = `
 
 exports[`FormField should render an input element 1`] = `
 <div
-  className=""
+  className="root"
 >
   
   <div
-    className={undefined}
+    className="inputWrapper"
   >
     <input />
   </div>

@@ -2,7 +2,7 @@
 
 exports[`NumericInput renders to the DOM 1`] = `
 <input
-  className=""
+  className="input"
   disabled={false}
   onChange={[Function]}
   readOnly={false}
@@ -12,7 +12,7 @@ exports[`NumericInput renders to the DOM 1`] = `
 
 exports[`NumericInput renders with a value 1`] = `
 <input
-  className=""
+  className="input"
   disabled={false}
   onChange={[Function]}
   readOnly={false}
@@ -22,7 +22,7 @@ exports[`NumericInput renders with a value 1`] = `
 
 exports[`NumericInput renders with placeholder 1`] = `
 <input
-  className=""
+  className="input"
   disabled={false}
   onChange={[Function]}
   placeholder="0.0000"
@@ -33,7 +33,7 @@ exports[`NumericInput renders with placeholder 1`] = `
 
 exports[`maxAfterDot renders amount correctly 1`] = `
 <input
-  className=""
+  className="input"
   disabled={false}
   onChange={[Function]}
   readOnly={false}
@@ -43,7 +43,7 @@ exports[`maxAfterDot renders amount correctly 1`] = `
 
 exports[`maxBeforeDot renders amount correctly 1`] = `
 <input
-  className=""
+  className="input"
   disabled={false}
   onChange={[Function]}
   readOnly={false}
@@ -53,17 +53,17 @@ exports[`maxBeforeDot renders amount correctly 1`] = `
 
 exports[`maxValue throws an error 1`] = `
 <input
-  className=""
+  className="input"
   disabled={false}
   onChange={[Function]}
   readOnly={false}
-  value="60"
+  value="there is value here"
 />
 `;
 
 exports[`minValue throws an error 1`] = `
 <input
-  className=""
+  className="input"
   disabled={false}
   onChange={[Function]}
   readOnly={false}

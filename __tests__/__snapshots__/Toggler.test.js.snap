@@ -15,7 +15,7 @@ exports[`Toggler is checked 1`] = `
     type="checkbox"
   />
   <div
-    className={undefined}
+    className={null}
   >
     <span
       className=""
@@ -46,7 +46,7 @@ exports[`Toggler is disabled 1`] = `
     type="checkbox"
   />
   <div
-    className={undefined}
+    className={null}
   >
     <span
       className=""
@@ -77,7 +77,7 @@ exports[`Toggler renders correctly 1`] = `
     type="checkbox"
   />
   <div
-    className={undefined}
+    className={null}
   >
     <span
       className=""
@@ -112,7 +112,7 @@ exports[`Toggler renders within text 1`] = `
       type="checkbox"
     />
     <div
-      className={undefined}
+      className={null}
     >
       <span
         className=""

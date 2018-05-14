@@ -2,15 +2,15 @@
 
 exports[`Bubble renders correctly 1`] = `
 <div
-  className=""
+  className="root transparent"
   style={null}
 >
   <div
-    className={undefined}
+    className="bubble"
     data-bubble-container={true}
   />
   <span
-    className={undefined}
+    className="arrow"
     data-bubble-arrow={true}
   />
 </div>
@@ -18,15 +18,15 @@ exports[`Bubble renders correctly 1`] = `
 
 exports[`Bubble renders isFloating 1`] = `
 <div
-  className=""
+  className="root transparent isFloating"
   style={null}
 >
   <div
-    className={undefined}
+    className="bubble"
     data-bubble-container={true}
   />
   <span
-    className={undefined}
+    className="arrow"
     data-bubble-arrow={true}
   />
 </div>
@@ -34,15 +34,15 @@ exports[`Bubble renders isFloating 1`] = `
 
 exports[`Bubble renders isHidden 1`] = `
 <div
-  className=""
+  className="root transparent isHidden"
   style={null}
 >
   <div
-    className={undefined}
+    className="bubble"
     data-bubble-container={true}
   />
   <span
-    className={undefined}
+    className="arrow"
     data-bubble-arrow={true}
   />
 </div>
@@ -50,15 +50,15 @@ exports[`Bubble renders isHidden 1`] = `
 
 exports[`Bubble renders isOpeningUpward 1`] = `
 <div
-  className=""
+  className="root openUpward transparent"
   style={null}
 >
   <div
-    className={undefined}
+    className="bubble"
     data-bubble-container={true}
   />
   <span
-    className={undefined}
+    className="arrow"
     data-bubble-arrow={true}
   />
 </div>
@@ -66,15 +66,15 @@ exports[`Bubble renders isOpeningUpward 1`] = `
 
 exports[`Bubble renders isTransparent={false} 1`] = `
 <div
-  className=""
+  className="root"
   style={null}
 >
   <div
-    className={undefined}
+    className="bubble"
     data-bubble-container={true}
   />
   <span
-    className={undefined}
+    className="arrow"
     data-bubble-arrow={true}
   />
 </div>

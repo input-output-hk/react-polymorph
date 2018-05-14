@@ -2,7 +2,7 @@
 
 exports[`TextArea has rows 1`] = `
 <textarea
-  className=""
+  className="textarea"
   onChange={[Function]}
   rows={5}
   value=""
@@ -11,7 +11,7 @@ exports[`TextArea has rows 1`] = `
 
 exports[`TextArea renders to the DOM 1`] = `
 <textarea
-  className=""
+  className="textarea"
   onChange={[Function]}
   value=""
 />
@@ -19,7 +19,7 @@ exports[`TextArea renders to the DOM 1`] = `
 
 exports[`TextArea renders with a value 1`] = `
 <textarea
-  className=""
+  className="textarea"
   onChange={[Function]}
   value="this one has a value"
 />
@@ -27,7 +27,7 @@ exports[`TextArea renders with a value 1`] = `
 
 exports[`TextArea renders with placeholder 1`] = `
 <textarea
-  className=""
+  className="textarea"
   onChange={[Function]}
   placeholder="0.0000"
   value=""
