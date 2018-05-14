@@ -3,10 +3,13 @@ import renderer from 'react-test-renderer';
 
 import { Bubble } from '../source/components';
 import { BubbleSkin } from '../source/skins/simple';
+import BubbleTheme from '../source/themes/simple/SimpleBubble.scss';
+
+const SimpleTheme = { bubble: BubbleTheme };
 
 test('Bubble renders correctly', () => {
   const component = renderer.create(
-    <Bubble skin={BubbleSkin} />
+    <Bubble theme={SimpleTheme} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();
@@ -15,7 +18,7 @@ test('Bubble renders correctly', () => {
 
 test('Bubble renders isOpeningUpward', () => {
   const component = renderer.create(
-    <Bubble isOpeningUpward skin={BubbleSkin} />
+    <Bubble isOpeningUpward theme={SimpleTheme} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();
@@ -24,7 +27,7 @@ test('Bubble renders isOpeningUpward', () => {
 
 test('Bubble renders isTransparent={false}', () => {
   const component = renderer.create(
-    <Bubble isTransparent={false} skin={BubbleSkin} />
+    <Bubble isTransparent={false} theme={SimpleTheme} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();
@@ -33,7 +36,7 @@ test('Bubble renders isTransparent={false}', () => {
 
 test('Bubble renders isHidden', () => {
   const component = renderer.create(
-    <Bubble isHidden skin={BubbleSkin} />
+    <Bubble isHidden theme={SimpleTheme} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();
@@ -42,7 +45,7 @@ test('Bubble renders isHidden', () => {
 
 test('Bubble renders isFloating', () => {
   const component = renderer.create(
-    <Bubble isFloating skin={BubbleSkin} />
+    <Bubble isFloating theme={SimpleTheme} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();

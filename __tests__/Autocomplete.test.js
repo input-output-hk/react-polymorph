@@ -12,7 +12,7 @@ const MNEMONIC_WORDS = [
   'fish'
 ];
 
-const SimpleTheme = { ['autocomplete']: AutocompleteTheme };
+const SimpleTheme = { autocomplete: AutocompleteTheme };
 
 test('Autocomplete renders correctly', () => {
   const component = renderer.create(

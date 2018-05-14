@@ -3,12 +3,14 @@ import renderer from 'react-test-renderer';
 
 import { Checkbox } from '../source/components';
 import { CheckboxSkin } from '../source/skins/simple';
+import CheckboxTheme from '../source/themes/simple/SimpleCheckbox.scss';
+
+const SimpleTheme = { checkbox: CheckboxTheme };
 
 test('Checkbox renders to the DOM', () => {
   const component = renderer.create(
-    <Checkbox skin={CheckboxSkin} />
+    <Checkbox theme={SimpleTheme} skin={CheckboxSkin} />
   );
-
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -16,9 +18,8 @@ test('Checkbox renders to the DOM', () => {
 
 test('Checkbox renders with a label', () => {
   const component = renderer.create(
-    <Checkbox label="check here" skin={CheckboxSkin} />
+    <Checkbox label="check here" theme={SimpleTheme} skin={CheckboxSkin} />
   );
-
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -26,9 +27,8 @@ test('Checkbox renders with a label', () => {
 
 test('Checkbox is disabled', () => {
   const component = renderer.create(
-    <Checkbox disabled skin={CheckboxSkin} />
+    <Checkbox disabled theme={SimpleTheme} skin={CheckboxSkin} />
   );
-
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -36,12 +36,9 @@ test('Checkbox is disabled', () => {
 
 test('Checkbox is checked', () => {
   const component = renderer.create(
-    <Checkbox checked skin={CheckboxSkin} />
+    <Checkbox checked theme={SimpleTheme} skin={CheckboxSkin} />
   );
-
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
-
-// TODO: need to simulate onChange event for Checkbox tests

@@ -3,6 +3,9 @@ import renderer from 'react-test-renderer';
 
 import { Options } from '../source/components';
 import { OptionsSkin } from '../source/skins/simple';
+import OptionsTheme from '../source/themes/simple/SimpleOptions.scss';
+
+const SimpleTheme = { options: OptionsTheme };
 
 const MNEMONIC_WORDS = [
   'home',
@@ -29,9 +32,12 @@ const COUNTRIES_OPTIONS = [
 
 test('Options renders to the DOM', () => {
   const component = renderer.create(
-    <Options options={MNEMONIC_WORDS} skin={OptionsSkin} />
+    <Options
+      options={MNEMONIC_WORDS}
+      theme={SimpleTheme}
+      skin={OptionsSkin}
+    />
   );
-
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -41,6 +47,7 @@ test('Options renders via render prop', () => {
   const component = renderer.create(
     <Options
       options={MNEMONIC_WORDS}
+      theme={SimpleTheme}
       skin={OptionsSkin}
       render={getOptionProps => {
         const { options } = getOptionProps();
@@ -48,11 +55,10 @@ test('Options renders via render prop', () => {
           <li key={index}>
             <span>{option}</span>
           </li>
-        ))
+        ));
       }}
     />
   );
-
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -62,6 +68,7 @@ test('Options renders via optionRenderer', () => {
   const component = renderer.create(
     <Options
       options={COUNTRIES_OPTIONS}
+      theme={SimpleTheme}
       skin={OptionsSkin}
       optionRenderer={option => (
         <div>
@@ -71,7 +78,6 @@ test('Options renders via optionRenderer', () => {
       )}
     />
   );
-
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();

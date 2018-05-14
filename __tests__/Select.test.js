@@ -3,6 +3,9 @@ import renderer from 'react-test-renderer';
 
 import { Select } from '../source/components';
 import { SelectSkin } from '../source/skins/simple';
+import SelectTheme from '../source/themes/simple/SimpleSelect.scss';
+
+const SimpleTheme = { select: SelectTheme };
 
 const COUNTRIES = [
   { label: 'Frankreich', value: 'France' },
@@ -23,6 +26,7 @@ test('Select renders correctly', () => {
   const component = renderer.create(
     <Select
       options={COUNTRIES}
+      theme={SimpleTheme}
       skin={SelectSkin}
     />
   );
@@ -36,6 +40,7 @@ test('Select renders with placeholder', () => {
     <Select
       placeholder="Select your country …"
       options={COUNTRIES}
+      theme={SimpleTheme}
       skin={SelectSkin}
     />
   );
@@ -49,6 +54,7 @@ test('Select renders with an error', () => {
     <Select
       error="Please select a different option"
       options={COUNTRIES}
+      theme={SimpleTheme}
       skin={SelectSkin}
     />
   );
@@ -61,6 +67,7 @@ test('Select renders with disabled options', () => {
   const component = renderer.create(
     <Select
       options={COUNTRIES_WITH_DISABLED_OPTIONS}
+      theme={SimpleTheme}
       skin={SelectSkin}
     />
   );
@@ -74,6 +81,7 @@ test('Select isOpeningUpward', () => {
     <Select
       isOpeningUpward
       options={COUNTRIES}
+      theme={SimpleTheme}
       skin={SelectSkin}
     />
   );
@@ -87,6 +95,7 @@ test('Select isOpen', () => {
     <Select
       isOpen
       options={COUNTRIES}
+      theme={SimpleTheme}
       skin={SelectSkin}
     />
   );
@@ -99,6 +108,7 @@ test('Select renders via optionRenderer', () => {
   const component = renderer.create(
     <Select
       options={COUNTRIES}
+      theme={SimpleTheme}
       skin={SelectSkin}
       optionRenderer={option => (
         <div>
