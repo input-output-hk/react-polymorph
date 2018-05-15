@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import { Autocomplete } from '../source/components';
 import { AutocompleteSkin } from '../source/skins/simple';
-import AutocompleteTheme from '../source/themes/simple/SimpleAutocomplete.scss';
+import { CONTEXT } from './helpers/context';
 
 const MNEMONIC_WORDS = [
   'home',
@@ -12,17 +12,14 @@ const MNEMONIC_WORDS = [
   'fish'
 ];
 
-const SimpleTheme = { autocomplete: AutocompleteTheme };
-
 test('Autocomplete renders correctly', () => {
   const component = renderer.create(
     <Autocomplete
-      theme={SimpleTheme}
       options={MNEMONIC_WORDS}
+      context={CONTEXT}
       skin={AutocompleteSkin}
     />
   );
-
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -31,9 +28,9 @@ test('Autocomplete renders correctly', () => {
 test('Autocomplete renders with label', () => {
   const component = renderer.create(
     <Autocomplete
-      theme={SimpleTheme}
       label="Enter your recovery phrase below"
       options={MNEMONIC_WORDS}
+      context={CONTEXT}
       skin={AutocompleteSkin}
     />
   );
@@ -45,9 +42,9 @@ test('Autocomplete renders with label', () => {
 test('Autocomplete renders with a placeholder', () => {
   const component = renderer.create(
     <Autocomplete
-      theme={SimpleTheme}
       placeholder="Enter recovery phrase"
       options={MNEMONIC_WORDS}
+      context={CONTEXT}
       skin={AutocompleteSkin}
     />
   );
@@ -59,9 +56,9 @@ test('Autocomplete renders with a placeholder', () => {
 test('Autocomplete renders with an error', () => {
   const component = renderer.create(
     <Autocomplete
-      theme={SimpleTheme}
       error="Your mnemonic phrase is incorrect"
       options={MNEMONIC_WORDS}
+      context={CONTEXT}
       skin={AutocompleteSkin}
     />
   );
@@ -74,8 +71,8 @@ test('Autocomplete is disabled', () => {
   const component = renderer.create(
     <Autocomplete
       disabled
-      theme={SimpleTheme}
       options={MNEMONIC_WORDS}
+      context={CONTEXT}
       skin={AutocompleteSkin}
     />
   );
@@ -87,8 +84,8 @@ test('Autocomplete is disabled', () => {
 test('Autocomplete uses render prop - renderSelections', () => {
   const component = renderer.create(
     <Autocomplete
-      theme={SimpleTheme}
       options={MNEMONIC_WORDS}
+      context={CONTEXT}
       skin={AutocompleteSkin}
       renderSelections={getSelectionProps => {
         const { selectedOptions, removeSelection } = getSelectionProps();
@@ -114,11 +111,11 @@ test('Autocomplete uses render prop - renderSelections', () => {
 test('Autocomplete uses render prop - renderOptions', () => {
   const component = renderer.create(
     <Autocomplete
-      theme={SimpleTheme}
       options={MNEMONIC_WORDS}
+      context={CONTEXT}
       skin={AutocompleteSkin}
       renderOptions={getOptionProps => {
-        const { options } = getOptionProps();
+        const { options } = getOptionProps({});
 
         return options.map((option, index) => (
           <li key={index}>

@@ -3,9 +3,7 @@ import renderer from 'react-test-renderer';
 
 import { Select } from '../source/components';
 import { SelectSkin } from '../source/skins/simple';
-import SelectTheme from '../source/themes/simple/SimpleSelect.scss';
-
-const SimpleTheme = { select: SelectTheme };
+import { CONTEXT } from './helpers/context';
 
 const COUNTRIES = [
   { label: 'Frankreich', value: 'France' },
@@ -15,7 +13,7 @@ const COUNTRIES = [
   { label: 'Österreich', value: 'Austria' }
 ];
 
-const COUNTRIES_WITH_DISABLED_OPTIONS = [
+const COUNTRIES_DISABLED_OPTIONS = [
   { value: 'EN-gb', label: 'England' },
   { value: 'ES-es', label: 'Spain', isDisabled: true },
   { value: 'TH-th', label: 'Thailand', isDisabled: true },
@@ -26,7 +24,7 @@ test('Select renders correctly', () => {
   const component = renderer.create(
     <Select
       options={COUNTRIES}
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -40,7 +38,7 @@ test('Select renders with placeholder', () => {
     <Select
       placeholder="Select your country …"
       options={COUNTRIES}
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -54,7 +52,7 @@ test('Select renders with an error', () => {
     <Select
       error="Please select a different option"
       options={COUNTRIES}
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -66,8 +64,8 @@ test('Select renders with an error', () => {
 test('Select renders with disabled options', () => {
   const component = renderer.create(
     <Select
-      options={COUNTRIES_WITH_DISABLED_OPTIONS}
-      theme={SimpleTheme}
+      options={COUNTRIES_DISABLED_OPTIONS}
+      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -76,12 +74,12 @@ test('Select renders with disabled options', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('Select isOpeningUpward', () => {
+test('Select isOpeningUpward={true}', () => {
   const component = renderer.create(
     <Select
       isOpeningUpward
       options={COUNTRIES}
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -90,12 +88,12 @@ test('Select isOpeningUpward', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('Select isOpen', () => {
+test('Select isOpen={true}', () => {
   const component = renderer.create(
     <Select
       isOpen
       options={COUNTRIES}
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -104,11 +102,11 @@ test('Select isOpen', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('Select renders via optionRenderer', () => {
+test('Select uses render prop - optionRenderer', () => {
   const component = renderer.create(
     <Select
       options={COUNTRIES}
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SelectSkin}
       optionRenderer={option => (
         <div>

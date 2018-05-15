@@ -3,13 +3,11 @@ import renderer from 'react-test-renderer';
 
 import { Checkbox } from '../source/components';
 import { CheckboxSkin } from '../source/skins/simple';
-import CheckboxTheme from '../source/themes/simple/SimpleCheckbox.scss';
+import { CONTEXT } from './helpers/context';
 
-const SimpleTheme = { checkbox: CheckboxTheme };
-
-test('Checkbox renders to the DOM', () => {
+test('Checkbox renders correctly', () => {
   const component = renderer.create(
-    <Checkbox theme={SimpleTheme} skin={CheckboxSkin} />
+    <Checkbox context={CONTEXT} skin={CheckboxSkin} />
   );
 
   let tree = component.toJSON();
@@ -18,7 +16,7 @@ test('Checkbox renders to the DOM', () => {
 
 test('Checkbox renders with a label', () => {
   const component = renderer.create(
-    <Checkbox label="check here" theme={SimpleTheme} skin={CheckboxSkin} />
+    <Checkbox label="check here" context={CONTEXT} skin={CheckboxSkin} />
   );
 
   let tree = component.toJSON();
@@ -27,7 +25,7 @@ test('Checkbox renders with a label', () => {
 
 test('Checkbox is disabled', () => {
   const component = renderer.create(
-    <Checkbox disabled theme={SimpleTheme} skin={CheckboxSkin} />
+    <Checkbox disabled context={CONTEXT} skin={CheckboxSkin} />
   );
 
   let tree = component.toJSON();
@@ -36,7 +34,7 @@ test('Checkbox is disabled', () => {
 
 test('Checkbox is checked', () => {
   const component = renderer.create(
-    <Checkbox checked theme={SimpleTheme} skin={CheckboxSkin} />
+    <Checkbox checked context={CONTEXT} skin={CheckboxSkin} />
   );
 
   let tree = component.toJSON();

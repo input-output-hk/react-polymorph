@@ -3,13 +3,11 @@ import renderer from 'react-test-renderer';
 
 import { Input } from '../source/components';
 import { InputSkin } from '../source/skins/simple';
-import InputTheme from '../source/themes/simple/SimpleInput.scss';
+import { CONTEXT } from './helpers/context';
 
-const SimpleTheme = { input: InputTheme };
-
-test('Input renders to the DOM', () => {
+test('Input renders correctly', () => {
   const component = renderer.create(
-    <Input theme={SimpleTheme} skin={InputSkin} />
+    <Input context={CONTEXT} skin={InputSkin} />
   );
 
   let tree = component.toJSON();
@@ -18,7 +16,7 @@ test('Input renders to the DOM', () => {
 
 test('Input renders with placeholder', () => {
   const component = renderer.create(
-    <Input placeholder="0.0000" theme={SimpleTheme} skin={InputSkin} />
+    <Input placeholder="0.0000" context={CONTEXT} skin={InputSkin} />
   );
 
   let tree = component.toJSON();
@@ -27,7 +25,7 @@ test('Input renders with placeholder', () => {
 
 test('Input renders with a value', () => {
   const component = renderer.create(
-    <Input value="there is value" theme={SimpleTheme} skin={InputSkin} />
+    <Input value="there is value" context={CONTEXT} skin={InputSkin} />
   );
 
   let tree = component.toJSON();
@@ -38,7 +36,7 @@ test('Input is readOnly', () => {
   const component = renderer.create(
     <Input
       readOnly
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={InputSkin}
     />
   );

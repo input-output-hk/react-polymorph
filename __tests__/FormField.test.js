@@ -3,18 +3,14 @@ import renderer from 'react-test-renderer';
 
 import { FormField } from '../source/components';
 import { FormFieldSkin } from '../source/skins/simple';
-import FormFieldTheme from '../source/themes/simple/SimpleFormField.scss';
+import { CONTEXT } from './helpers/context';
 
-const SimpleTheme = { formfield: FormFieldTheme };
+const renderFormField = () => <div className="render-prop" />;
 
-const renderFormField = () => (
-  <div className="render-prop" />
-);
-
-test('FormField renders to the DOM', () => {
+test('FormField renders correctly', () => {
   const component = renderer.create(
     <FormField
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={FormFieldSkin}
       render={renderFormField}
     />
@@ -28,7 +24,7 @@ test('FormField renders with label', () => {
   const component = renderer.create(
     <FormField
       label="Add a Label"
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={FormFieldSkin}
       render={renderFormField}
     />
@@ -42,7 +38,7 @@ test('FormField renders with an error', () => {
   const component = renderer.create(
     <FormField
       error="Add an Error"
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={FormFieldSkin}
       render={renderFormField}
     />
@@ -56,7 +52,7 @@ test('FormField is disabled', () => {
   const component = renderer.create(
     <FormField
       disabled
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={FormFieldSkin}
       render={({ disabled }) => <span>{disabled.toString()}</span>}
     />
@@ -66,12 +62,12 @@ test('FormField is disabled', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('FormField should render an input element', () => {
+test('FormField renders an input element', () => {
   const component = renderer.create(
     <FormField
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={FormFieldSkin}
-      render={() => <input />}
+      render={() => <input className="render-prop" />}
     />
   );
 

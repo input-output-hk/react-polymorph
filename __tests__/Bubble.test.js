@@ -3,22 +3,20 @@ import renderer from 'react-test-renderer';
 
 import { Bubble } from '../source/components';
 import { BubbleSkin } from '../source/skins/simple';
-import BubbleTheme from '../source/themes/simple/SimpleBubble.scss';
-
-const SimpleTheme = { bubble: BubbleTheme };
+import { CONTEXT } from './helpers/context';
 
 test('Bubble renders correctly', () => {
   const component = renderer.create(
-    <Bubble theme={SimpleTheme} skin={BubbleSkin} />
+    <Bubble context={CONTEXT} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-test('Bubble renders isOpeningUpward', () => {
+test('Bubble renders isOpeningUpward={true}', () => {
   const component = renderer.create(
-    <Bubble isOpeningUpward theme={SimpleTheme} skin={BubbleSkin} />
+    <Bubble isOpeningUpward context={CONTEXT} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();
@@ -27,25 +25,25 @@ test('Bubble renders isOpeningUpward', () => {
 
 test('Bubble renders isTransparent={false}', () => {
   const component = renderer.create(
-    <Bubble isTransparent={false} theme={SimpleTheme} skin={BubbleSkin} />
+    <Bubble isTransparent={false} context={CONTEXT} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-test('Bubble renders isHidden', () => {
+test('Bubble renders isHidden={true}', () => {
   const component = renderer.create(
-    <Bubble isHidden theme={SimpleTheme} skin={BubbleSkin} />
+    <Bubble isHidden context={CONTEXT} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-test('Bubble renders isFloating', () => {
+test('Bubble renders isFloating={true}', () => {
   const component = renderer.create(
-    <Bubble isFloating theme={SimpleTheme} skin={BubbleSkin} />
+    <Bubble isFloating context={CONTEXT} skin={BubbleSkin} />
   );
 
   let tree = component.toJSON();

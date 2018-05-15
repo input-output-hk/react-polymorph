@@ -3,14 +3,12 @@ import renderer from 'react-test-renderer';
 
 import { Checkbox } from '../source/components';
 import { SwitchSkin } from '../source/skins/simple';
-import SwitchTheme from '../source/themes/simple/SimpleSwitch.scss';
-
-const SimpleTheme = { switch: SwitchTheme };
+import { CONTEXT } from './helpers/context';
 
 test('Switch renders correctly', () => {
   const component = renderer.create(
     <Checkbox
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SwitchSkin}
     />
   );
@@ -23,7 +21,7 @@ test('Switch renders with label', () => {
   const component = renderer.create(
     <Checkbox
       label="click here"
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SwitchSkin}
     />
   );
@@ -36,7 +34,7 @@ test('Switch is disabled', () => {
   const component = renderer.create(
     <Checkbox
       disabled
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SwitchSkin}
     />
   );
@@ -45,12 +43,12 @@ test('Switch is disabled', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('Switch renders with a label and disabled', () => {
+test('Switch is disabled and renders a label', () => {
   const component = renderer.create(
     <Checkbox
       disabled
       label="click here"
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SwitchSkin}
     />
   );
@@ -63,7 +61,7 @@ test('Switch is checked', () => {
   const component = renderer.create(
     <Checkbox
       checked
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={SwitchSkin}
     />
   );

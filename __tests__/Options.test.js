@@ -3,9 +3,7 @@ import renderer from 'react-test-renderer';
 
 import { Options } from '../source/components';
 import { OptionsSkin } from '../source/skins/simple';
-import OptionsTheme from '../source/themes/simple/SimpleOptions.scss';
-
-const SimpleTheme = { options: OptionsTheme };
+import { CONTEXT } from './helpers/context';
 
 const MNEMONIC_WORDS = [
   'home',
@@ -30,11 +28,11 @@ const COUNTRIES_OPTIONS = [
   { german: 'Österreich', english: 'Austria' }
 ];
 
-test('Options renders to the DOM', () => {
+test('Options renders correctly', () => {
   const component = renderer.create(
     <Options
       options={MNEMONIC_WORDS}
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={OptionsSkin}
     />
   );
@@ -43,11 +41,11 @@ test('Options renders to the DOM', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('Options renders via render prop', () => {
+test('Options uses render prop - render', () => {
   const component = renderer.create(
     <Options
       options={MNEMONIC_WORDS}
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={OptionsSkin}
       render={getOptionProps => {
         const { options } = getOptionProps();
@@ -64,11 +62,11 @@ test('Options renders via render prop', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('Options renders via optionRenderer', () => {
+test('Options uses render prop - optionRenderer', () => {
   const component = renderer.create(
     <Options
       options={COUNTRIES_OPTIONS}
-      theme={SimpleTheme}
+      context={CONTEXT}
       skin={OptionsSkin}
       optionRenderer={option => (
         <div>
