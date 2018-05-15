@@ -102,7 +102,7 @@ export class NumericInput extends Component<Props, State> {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     const { inputElement } = this;
     if (inputElement && inputElement.current !== document.activeElement) { return; }
 
