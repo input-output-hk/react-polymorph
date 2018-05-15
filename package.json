@@ -114,14 +114,14 @@
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook",
     "watch": "nodemon npm run js && npm run sass",
-    "test": "jest --no-cache",
+    "test": "jest",
     "test:clean": "jest --no-cache -u",
     "test:watch": "jest --no-cache --watchAll",
     "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty source stories *.js"
   },
   "jest": {
-    "verbose": true,
+    "verbose": false,
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
