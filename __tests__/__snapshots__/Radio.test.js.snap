@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio is disabled 1`] = `
+<div
+  aria-hidden={true}
+  className="root disabled"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    className="input"
+    disabled={true}
+    selected={false}
+    type="radio"
+  />
+  <div
+    className="circle"
+  />
+</div>
+`;
+
+exports[`Radio is selected 1`] = `
+<div
+  aria-hidden={true}
+  className="root selected"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    className="input"
+    disabled={false}
+    selected={true}
+    type="radio"
+  />
+  <div
+    className="circle selected"
+  />
+</div>
+`;
+
+exports[`Radio renders correctly 1`] = `
+<div
+  aria-hidden={true}
+  className="root"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    className="input"
+    disabled={false}
+    selected={false}
+    type="radio"
+  />
+  <div
+    className="circle"
+  />
+</div>
+`;
+
+exports[`Radio renders with a label 1`] = `
+<div
+  aria-hidden={true}
+  className="root"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    className="input"
+    disabled={false}
+    label="click here"
+    selected={false}
+    type="radio"
+  />
+  <div
+    className="circle"
+  />
+  <label
+    className="label"
+  >
+    click here
+  </label>
+</div>
+`;

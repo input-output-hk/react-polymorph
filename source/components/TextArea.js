@@ -186,6 +186,7 @@ class TextArea extends Component<Props, State> {
       error,
       context,
       autoFocus,
+      autoResize,
       ...rest
     } = this.props;
 
