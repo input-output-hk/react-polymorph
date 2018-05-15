@@ -7,7 +7,7 @@ exports[`Button is disabled 1`] = `
 />
 `;
 
-exports[`Button renders to the DOM 1`] = `
+exports[`Button renders correctly 1`] = `
 <button
   className="root"
   disabled={false}

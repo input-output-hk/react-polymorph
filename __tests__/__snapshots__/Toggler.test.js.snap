@@ -3,27 +3,27 @@
 exports[`Toggler is checked 1`] = `
 <div
   aria-hidden={true}
-  className=""
+  className="root"
   onClick={[Function]}
   role="presentation"
 >
   <input
     checked={true}
-    className={undefined}
+    className="input"
     disabled={false}
     readOnly={true}
     type="checkbox"
   />
   <div
-    className={null}
+    className="toggler"
   >
     <span
-      className=""
+      className="label checked"
     >
       Included
     </span>
     <span
-      className=""
+      className="label"
     >
       Excluded
     </span>
@@ -34,27 +34,27 @@ exports[`Toggler is checked 1`] = `
 exports[`Toggler is disabled 1`] = `
 <div
   aria-hidden={true}
-  className=""
+  className="root disabled"
   onClick={[Function]}
   role="presentation"
 >
   <input
     checked={false}
-    className={undefined}
+    className="input"
     disabled={true}
     readOnly={true}
     type="checkbox"
   />
   <div
-    className={null}
+    className="toggler"
   >
     <span
-      className=""
+      className="label"
     >
       Included
     </span>
     <span
-      className=""
+      className="label checked"
     >
       Excluded
     </span>
@@ -65,27 +65,27 @@ exports[`Toggler is disabled 1`] = `
 exports[`Toggler renders correctly 1`] = `
 <div
   aria-hidden={true}
-  className=""
+  className="root"
   onClick={[Function]}
   role="presentation"
 >
   <input
     checked={false}
-    className={undefined}
+    className="input"
     disabled={false}
     readOnly={true}
     type="checkbox"
   />
   <div
-    className={null}
+    className="toggler"
   >
     <span
-      className=""
+      className="label"
     >
       Included
     </span>
     <span
-      className=""
+      className="label checked"
     >
       Excluded
     </span>
@@ -100,27 +100,27 @@ exports[`Toggler renders within text 1`] = `
   </span>
   <div
     aria-hidden={true}
-    className=""
+    className="root"
     onClick={[Function]}
     role="presentation"
   >
     <input
       checked={false}
-      className={undefined}
+      className="input"
       disabled={false}
       readOnly={true}
       type="checkbox"
     />
     <div
-      className={null}
+      className="toggler"
     >
       <span
-        className=""
+        className="label"
       >
         Included
       </span>
       <span
-        className=""
+        className="label checked"
       >
         Excluded
       </span>

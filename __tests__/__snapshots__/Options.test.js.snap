@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Options renders to the DOM 1`] = `
+exports[`Options renders correctly 1`] = `
 <div>
   <div
     className="options firstOptionHighlighted"
@@ -131,7 +131,7 @@ exports[`Options renders to the DOM 1`] = `
 </div>
 `;
 
-exports[`Options renders via optionRenderer 1`] = `
+exports[`Options uses render prop - optionRenderer 1`] = `
 <div>
   <div
     className="options firstOptionHighlighted"
@@ -234,7 +234,7 @@ exports[`Options renders via optionRenderer 1`] = `
 </div>
 `;
 
-exports[`Options renders via render prop 1`] = `
+exports[`Options uses render prop - render 1`] = `
 <div>
   <div
     className="options firstOptionHighlighted"

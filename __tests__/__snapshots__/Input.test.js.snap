@@ -9,7 +9,7 @@ exports[`Input is readOnly 1`] = `
 />
 `;
 
-exports[`Input renders to the DOM 1`] = `
+exports[`Input renders correctly 1`] = `
 <input
   className="input"
   onChange={[Function]}

@@ -3,22 +3,22 @@
 exports[`Switch is checked 1`] = `
 <div
   aria-hidden={true}
-  className=""
+  className="root checked"
   onClick={[Function]}
   role="presentation"
 >
   <input
     checked={true}
-    className={undefined}
+    className="input"
     disabled={false}
     readOnly={true}
     type="checkbox"
   />
   <div
-    className=""
+    className="switch checked"
   >
     <span
-      className={undefined}
+      className="thumb"
     />
   </div>
 </div>
@@ -27,105 +27,105 @@ exports[`Switch is checked 1`] = `
 exports[`Switch is disabled 1`] = `
 <div
   aria-hidden={true}
-  className=""
+  className="root disabled"
   onClick={[Function]}
   role="presentation"
 >
   <input
     checked={false}
-    className={undefined}
+    className="input"
     disabled={true}
     readOnly={true}
     type="checkbox"
   />
   <div
-    className=""
+    className="switch"
   >
     <span
-      className={undefined}
+      className="thumb"
     />
   </div>
 </div>
 `;
 
-exports[`Switch renders correctly 1`] = `
+exports[`Switch is disabled and renders a label 1`] = `
 <div
   aria-hidden={true}
-  className=""
+  className="root disabled"
   onClick={[Function]}
   role="presentation"
 >
   <input
     checked={false}
-    className={undefined}
-    disabled={false}
-    readOnly={true}
-    type="checkbox"
-  />
-  <div
-    className=""
-  >
-    <span
-      className={undefined}
-    />
-  </div>
-</div>
-`;
-
-exports[`Switch renders with a label and disabled 1`] = `
-<div
-  aria-hidden={true}
-  className=""
-  onClick={[Function]}
-  role="presentation"
->
-  <input
-    checked={false}
-    className={undefined}
+    className="input"
     disabled={true}
     label="click here"
     readOnly={true}
     type="checkbox"
   />
   <div
-    className=""
+    className="switch"
   >
     <span
-      className={undefined}
+      className="thumb"
     />
   </div>
   <label
-    className={undefined}
+    className="label"
   >
     click here
   </label>
 </div>
 `;
 
-exports[`Switch renders with label 1`] = `
+exports[`Switch renders correctly 1`] = `
 <div
   aria-hidden={true}
-  className=""
+  className="root"
   onClick={[Function]}
   role="presentation"
 >
   <input
     checked={false}
-    className={undefined}
+    className="input"
+    disabled={false}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className="switch"
+  >
+    <span
+      className="thumb"
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch renders with label 1`] = `
+<div
+  aria-hidden={true}
+  className="root"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    checked={false}
+    className="input"
     disabled={false}
     label="click here"
     readOnly={true}
     type="checkbox"
   />
   <div
-    className=""
+    className="switch"
   >
     <span
-      className={undefined}
+      className="thumb"
     />
   </div>
   <label
-    className={undefined}
+    className="label"
   >
     click here
   </label>

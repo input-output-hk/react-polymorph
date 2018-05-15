@@ -16,7 +16,7 @@ exports[`Bubble renders correctly 1`] = `
 </div>
 `;
 
-exports[`Bubble renders isFloating 1`] = `
+exports[`Bubble renders isFloating={true} 1`] = `
 <div
   className="root transparent isFloating"
   style={null}
@@ -32,7 +32,7 @@ exports[`Bubble renders isFloating 1`] = `
 </div>
 `;
 
-exports[`Bubble renders isHidden 1`] = `
+exports[`Bubble renders isHidden={true} 1`] = `
 <div
   className="root transparent isHidden"
   style={null}
@@ -48,7 +48,7 @@ exports[`Bubble renders isHidden 1`] = `
 </div>
 `;
 
-exports[`Bubble renders isOpeningUpward 1`] = `
+exports[`Bubble renders isOpeningUpward={true} 1`] = `
 <div
   className="root openUpward transparent"
   style={null}

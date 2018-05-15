@@ -1,6 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NumericInput renders to the DOM 1`] = `
+exports[`NumericInput snapshot tests NumericInput is disabled 1`] = `
+<input
+  className="input disabled"
+  disabled={true}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput snapshot tests NumericInput is readOnly 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={true}
+  value=""
+/>
+`;
+
+exports[`NumericInput snapshot tests NumericInput renders correctly 1`] = `
 <input
   className="input"
   disabled={false}
@@ -10,17 +30,87 @@ exports[`NumericInput renders to the DOM 1`] = `
 />
 `;
 
-exports[`NumericInput renders with a value 1`] = `
+exports[`NumericInput snapshot tests NumericInput renders with a value 1`] = `
 <input
   className="input"
   disabled={false}
   onChange={[Function]}
   readOnly={false}
-  value="there is value here"
+  value="555.333"
 />
 `;
 
-exports[`NumericInput renders with placeholder 1`] = `
+exports[`NumericInput snapshot tests NumericInput renders with an error 1`] = `
+<input
+  className="input errored"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput snapshot tests NumericInput renders with enforceMax 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput snapshot tests NumericInput renders with enforceMin 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput snapshot tests NumericInput renders with maxAfterDot 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput snapshot tests NumericInput renders with maxBeforeDot 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput snapshot tests NumericInput renders with maxValue 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput snapshot tests NumericInput renders with minValue 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput snapshot tests NumericInput renders with placeholder 1`] = `
 <input
   className="input"
   disabled={false}
@@ -28,45 +118,5 @@ exports[`NumericInput renders with placeholder 1`] = `
   placeholder="0.0000"
   readOnly={false}
   value=""
-/>
-`;
-
-exports[`maxAfterDot renders amount correctly 1`] = `
-<input
-  className="input"
-  disabled={false}
-  onChange={[Function]}
-  readOnly={false}
-  value="10.4891"
-/>
-`;
-
-exports[`maxBeforeDot renders amount correctly 1`] = `
-<input
-  className="input"
-  disabled={false}
-  onChange={[Function]}
-  readOnly={false}
-  value="333.00"
-/>
-`;
-
-exports[`maxValue throws an error 1`] = `
-<input
-  className="input"
-  disabled={false}
-  onChange={[Function]}
-  readOnly={false}
-  value="there is value here"
-/>
-`;
-
-exports[`minValue throws an error 1`] = `
-<input
-  className="input"
-  disabled={false}
-  onChange={[Function]}
-  readOnly={false}
-  value="8"
 />
 `;

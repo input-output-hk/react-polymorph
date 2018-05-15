@@ -38,7 +38,7 @@ exports[`Checkbox is disabled 1`] = `
 </div>
 `;
 
-exports[`Checkbox renders to the DOM 1`] = `
+exports[`Checkbox renders correctly 1`] = `
 <div
   aria-hidden={true}
   className="root"
