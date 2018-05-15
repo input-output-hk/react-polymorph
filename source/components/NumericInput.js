@@ -46,7 +46,7 @@ type State = {
   oldValue: string
 };
 
-class NumericInput extends Component<Props, State> {
+export class NumericInput extends Component<Props, State> {
   inputElement: Element<'input'>;
 
   static defaultProps = {
