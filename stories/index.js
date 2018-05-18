@@ -14,3 +14,4 @@ import './TextArea.stories';
 import './Toggler.stories';
 import './Tooltip.stories';
 import './Radio.stories';
+import './ThemeProvider.stories';
