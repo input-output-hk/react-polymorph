@@ -16,7 +16,7 @@ test('FormField renders correctly', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -30,7 +30,7 @@ test('FormField renders with label', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -44,7 +44,7 @@ test('FormField renders with an error', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -58,7 +58,7 @@ test('FormField is disabled', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -71,6 +71,6 @@ test('FormField renders an input element', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

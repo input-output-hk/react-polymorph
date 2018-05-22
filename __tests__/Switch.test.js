@@ -13,7 +13,7 @@ test('Switch renders correctly', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -26,7 +26,7 @@ test('Switch renders with label', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -39,7 +39,7 @@ test('Switch is disabled', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -53,7 +53,7 @@ test('Switch is disabled and renders a label', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -66,6 +66,6 @@ test('Switch is checked', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

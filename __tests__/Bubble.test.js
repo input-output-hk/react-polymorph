@@ -10,7 +10,7 @@ test('Bubble renders correctly', () => {
     <Bubble context={CONTEXT} skin={BubbleSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -19,7 +19,7 @@ test('Bubble renders isOpeningUpward={true}', () => {
     <Bubble isOpeningUpward context={CONTEXT} skin={BubbleSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -28,7 +28,7 @@ test('Bubble renders isTransparent={false}', () => {
     <Bubble isTransparent={false} context={CONTEXT} skin={BubbleSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -37,7 +37,7 @@ test('Bubble renders isHidden={true}', () => {
     <Bubble isHidden context={CONTEXT} skin={BubbleSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -46,6 +46,6 @@ test('Bubble renders isFloating={true}', () => {
     <Bubble isFloating context={CONTEXT} skin={BubbleSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

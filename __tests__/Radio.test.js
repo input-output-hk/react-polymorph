@@ -10,7 +10,7 @@ test('Radio renders correctly', () => {
     <Radio context={CONTEXT} skin={RadioSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -19,7 +19,7 @@ test('Radio renders with a label', () => {
     <Radio label="click here" context={CONTEXT} skin={RadioSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -28,7 +28,7 @@ test('Radio is disabled', () => {
     <Radio disabled context={CONTEXT} skin={RadioSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -37,6 +37,6 @@ test('Radio is selected', () => {
     <Radio selected context={CONTEXT} skin={RadioSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

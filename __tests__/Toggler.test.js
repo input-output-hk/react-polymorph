@@ -15,7 +15,7 @@ test('Toggler renders correctly', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -33,7 +33,7 @@ test('Toggler renders within text', () => {
     </div>
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -48,7 +48,7 @@ test('Toggler is disabled', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -63,6 +63,6 @@ test('Toggler is checked', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

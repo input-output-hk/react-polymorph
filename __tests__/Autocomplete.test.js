@@ -21,7 +21,7 @@ test('Autocomplete renders correctly', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -35,7 +35,7 @@ test('Autocomplete renders with label', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -49,7 +49,7 @@ test('Autocomplete renders with a placeholder', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -63,7 +63,7 @@ test('Autocomplete renders with an error', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -77,7 +77,7 @@ test('Autocomplete is disabled', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -104,7 +104,7 @@ test('Autocomplete uses render prop - renderSelections', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -126,6 +126,6 @@ test('Autocomplete uses render prop - renderOptions', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -29,7 +29,7 @@ test('Select renders correctly', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -43,7 +43,7 @@ test('Select renders with placeholder', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -57,7 +57,7 @@ test('Select renders with an error', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -70,7 +70,7 @@ test('Select renders with disabled options', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -84,7 +84,7 @@ test('Select isOpeningUpward={true}', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -98,7 +98,7 @@ test('Select isOpen={true}', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -117,6 +117,6 @@ test('Select uses render prop - optionRenderer', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

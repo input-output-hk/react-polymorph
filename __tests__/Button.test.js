@@ -10,7 +10,7 @@ test('Button renders correctly', () => {
     <Button context={CONTEXT} skin={ButtonSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -19,7 +19,7 @@ test('Button renders with a label', () => {
     <Button label="send" context={CONTEXT} skin={ButtonSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -28,6 +28,6 @@ test('Button is disabled', () => {
     <Button disabled context={CONTEXT} skin={ButtonSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

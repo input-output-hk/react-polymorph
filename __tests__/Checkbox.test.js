@@ -10,7 +10,7 @@ test('Checkbox renders correctly', () => {
     <Checkbox context={CONTEXT} skin={CheckboxSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -19,7 +19,7 @@ test('Checkbox renders with a label', () => {
     <Checkbox label="check here" context={CONTEXT} skin={CheckboxSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -28,7 +28,7 @@ test('Checkbox is disabled', () => {
     <Checkbox disabled context={CONTEXT} skin={CheckboxSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -37,6 +37,6 @@ test('Checkbox is checked', () => {
     <Checkbox checked context={CONTEXT} skin={CheckboxSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

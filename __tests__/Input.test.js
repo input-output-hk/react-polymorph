@@ -10,7 +10,7 @@ test('Input renders correctly', () => {
     <Input context={CONTEXT} skin={InputSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -19,7 +19,7 @@ test('Input renders with placeholder', () => {
     <Input placeholder="0.0000" context={CONTEXT} skin={InputSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -28,7 +28,7 @@ test('Input renders with a value', () => {
     <Input value="there is value" context={CONTEXT} skin={InputSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -41,6 +41,6 @@ test('Input is readOnly', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });

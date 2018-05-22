@@ -10,7 +10,7 @@ test('TextArea renders correctly', () => {
     <TextArea context={CONTEXT} skin={TextAreaSkin} />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -23,7 +23,7 @@ test('TextArea renders with placeholder', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -36,7 +36,7 @@ test('TextArea renders with an error', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -49,7 +49,7 @@ test('TextArea renders with a value', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -62,6 +62,6 @@ test('TextArea renders with 5 rows', () => {
     />
   );
 
-  let tree = component.toJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
