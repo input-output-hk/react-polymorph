@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumericInput is disabled 1`] = `
+<input
+  className="input disabled"
+  disabled={true}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput is readOnly 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={true}
+  value=""
+/>
+`;
+
+exports[`NumericInput renders correctly 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput renders with a value 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value="555.333"
+/>
+`;
+
+exports[`NumericInput renders with an error 1`] = `
+<input
+  className="input errored"
+  disabled={false}
+  onChange={[Function]}
+  readOnly={false}
+  value=""
+/>
+`;
+
+exports[`NumericInput renders with placeholder 1`] = `
+<input
+  className="input"
+  disabled={false}
+  onChange={[Function]}
+  placeholder="0.0000"
+  readOnly={false}
+  value=""
+/>
+`;

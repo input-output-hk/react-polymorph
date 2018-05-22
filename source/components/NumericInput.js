@@ -46,7 +46,7 @@ type State = {
   oldValue: string
 };
 
-class NumericInput extends Component<Props, State> {
+export class NumericInput extends Component<Props, State> {
   inputElement: Element<'input'>;
 
   static defaultProps = {
@@ -102,7 +102,7 @@ class NumericInput extends Component<Props, State> {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     const { inputElement } = this;
     if (inputElement && inputElement.current !== document.activeElement) { return; }
 

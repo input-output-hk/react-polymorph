@@ -2,6 +2,10 @@
 
 ## vNEXT
 
+### Chores
+
+- Add snapshot test coverage from using jest and enzyme. Add event simulation tests for NumericInput. Adds story for ThemeProvider. [PR 60](https://github.com/input-output-hk/react-polymorph/pull/60)
+
 ### Features
 
 - Add checkmark for selected option [PR 54](https://github.com/input-output-hk/react-polymorph/pull/54)

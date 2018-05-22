@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox is checked 1`] = `
+<div
+  aria-hidden={true}
+  className="root checked"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    checked={true}
+    className="input"
+    disabled={false}
+    type="checkbox"
+  />
+  <div
+    className="check checked"
+  />
+</div>
+`;
+
+exports[`Checkbox is disabled 1`] = `
+<div
+  aria-hidden={true}
+  className="root disabled"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    checked={false}
+    className="input"
+    disabled={true}
+    type="checkbox"
+  />
+  <div
+    className="check"
+  />
+</div>
+`;
+
+exports[`Checkbox renders correctly 1`] = `
+<div
+  aria-hidden={true}
+  className="root"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    checked={false}
+    className="input"
+    disabled={false}
+    type="checkbox"
+  />
+  <div
+    className="check"
+  />
+</div>
+`;
+
+exports[`Checkbox renders with a label 1`] = `
+<div
+  aria-hidden={true}
+  className="root"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    checked={false}
+    className="input"
+    disabled={false}
+    label="check here"
+    type="checkbox"
+  />
+  <div
+    className="check"
+  />
+  <label
+    className="label"
+  >
+    check here
+  </label>
+</div>
+`;

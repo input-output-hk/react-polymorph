@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextArea renders correctly 1`] = `
+<textarea
+  className="textarea"
+  onChange={[Function]}
+  value=""
+/>
+`;
+
+exports[`TextArea renders with 5 rows 1`] = `
+<textarea
+  className="textarea"
+  onChange={[Function]}
+  rows={5}
+  value=""
+/>
+`;
+
+exports[`TextArea renders with a value 1`] = `
+<textarea
+  className="textarea"
+  onChange={[Function]}
+  value="this one has a value"
+/>
+`;
+
+exports[`TextArea renders with an error 1`] = `
+<textarea
+  className="textarea errored"
+  onChange={[Function]}
+  value=""
+/>
+`;
+
+exports[`TextArea renders with placeholder 1`] = `
+<textarea
+  className="textarea"
+  onChange={[Function]}
+  placeholder="0.0000"
+  value=""
+/>
+`;

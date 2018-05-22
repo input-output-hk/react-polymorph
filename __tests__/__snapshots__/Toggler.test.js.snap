@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toggler is checked 1`] = `
+<div
+  aria-hidden={true}
+  className="root"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    checked={true}
+    className="input"
+    disabled={false}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className="toggler"
+  >
+    <span
+      className="label checked"
+    >
+      Included
+    </span>
+    <span
+      className="label"
+    >
+      Excluded
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Toggler is disabled 1`] = `
+<div
+  aria-hidden={true}
+  className="root disabled"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    checked={false}
+    className="input"
+    disabled={true}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className="toggler"
+  >
+    <span
+      className="label"
+    >
+      Included
+    </span>
+    <span
+      className="label checked"
+    >
+      Excluded
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Toggler renders correctly 1`] = `
+<div
+  aria-hidden={true}
+  className="root"
+  onClick={[Function]}
+  role="presentation"
+>
+  <input
+    checked={false}
+    className="input"
+    disabled={false}
+    readOnly={true}
+    type="checkbox"
+  />
+  <div
+    className="toggler"
+  >
+    <span
+      className="label"
+    >
+      Included
+    </span>
+    <span
+      className="label checked"
+    >
+      Excluded
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Toggler renders within text 1`] = `
+<div>
+  <span>
+    Fees 
+  </span>
+  <div
+    aria-hidden={true}
+    className="root"
+    onClick={[Function]}
+    role="presentation"
+  >
+    <input
+      checked={false}
+      className="input"
+      disabled={false}
+      readOnly={true}
+      type="checkbox"
+    />
+    <div
+      className="toggler"
+    >
+      <span
+        className="label"
+      >
+        Included
+      </span>
+      <span
+        className="label checked"
+      >
+        Excluded
+      </span>
+    </div>
+  </div>
+  <span>
+     from the amount
+  </span>
+</div>
+`;
