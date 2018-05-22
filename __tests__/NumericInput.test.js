@@ -6,163 +6,81 @@ import { NumericInput } from '../source/components/NumericInput';
 import { InputSkin } from '../source/skins/simple';
 import { CONTEXT } from './helpers/context';
 
-describe('NumericInput snapshot tests', () => {
-  test('NumericInput renders correctly', () => {
-    const component = renderer.create(
-      <NumericInput
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
+test('NumericInput renders correctly', () => {
+  const component = renderer.create(
+    <NumericInput
+      context={CONTEXT}
+      skin={InputSkin}
+    />
+  );
 
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
-  test('NumericInput renders with placeholder', () => {
-    const component = renderer.create(
-      <NumericInput
-        placeholder="0.0000"
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
+test('NumericInput renders with placeholder', () => {
+  const component = renderer.create(
+    <NumericInput
+      placeholder="0.0000"
+      context={CONTEXT}
+      skin={InputSkin}
+    />
+  );
 
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
-  test('NumericInput is disabled', () => {
-    const component = renderer.create(
-      <NumericInput
-        disabled
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
+test('NumericInput is disabled', () => {
+  const component = renderer.create(
+    <NumericInput
+      disabled
+      context={CONTEXT}
+      skin={InputSkin}
+    />
+  );
 
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
-  test('NumericInput is readOnly', () => {
-    const component = renderer.create(
-      <NumericInput
-        readOnly
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
+test('NumericInput is readOnly', () => {
+  const component = renderer.create(
+    <NumericInput
+      readOnly
+      context={CONTEXT}
+      skin={InputSkin}
+    />
+  );
 
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
-  test('NumericInput renders with an error', () => {
-    const component = renderer.create(
-      <NumericInput
-        error="Invalid Amount"
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
+test('NumericInput renders with an error', () => {
+  const component = renderer.create(
+    <NumericInput
+      error="Invalid Amount"
+      context={CONTEXT}
+      skin={InputSkin}
+    />
+  );
 
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
-  test('NumericInput renders with a value', () => {
-    const component = renderer.create(
-      <NumericInput
-        value="555.333"
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
+test('NumericInput renders with a value', () => {
+  const component = renderer.create(
+    <NumericInput
+      value="555.333"
+      context={CONTEXT}
+      skin={InputSkin}
+    />
+  );
 
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  test('NumericInput renders with minValue', () => {
-    const component = renderer.create(
-      <NumericInput
-        minValue={10}
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
-
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  test('NumericInput renders with maxValue', () => {
-    const component = renderer.create(
-      <NumericInput
-        maxValue={50}
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
-
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  test('NumericInput renders with maxBeforeDot', () => {
-    const component = renderer.create(
-      <NumericInput
-        maxBeforeDot={3}
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
-
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  test('NumericInput renders with maxAfterDot', () => {
-    const component = renderer.create(
-      <NumericInput
-        maxAfterDot={3}
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
-
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  test('NumericInput renders with enforceMin', () => {
-    const component = renderer.create(
-      <NumericInput
-        enforceMin
-        minValue={10}
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
-
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  test('NumericInput renders with enforceMax', () => {
-    const component = renderer.create(
-      <NumericInput
-        enforceMax
-        minValue={50}
-        context={CONTEXT}
-        skin={InputSkin}
-      />
-    );
-
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
 });
 
 describe('NumericInput onChange simulations', () => {
