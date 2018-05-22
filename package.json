@@ -107,18 +107,18 @@
     "webpack": "2.6.1"
   },
   "scripts": {
-    "js": "babel source -d lib -s",
     "build": "cross-env npm run clean && npm run sass && npm run js",
     "clean": "rimraf ./lib",
+    "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
+    "js": "babel source -d lib -s",
+    "lint": "eslint --format=node_modules/eslint-formatter-pretty source stories *.js",
     "prepare": "npm run clean && npm run build",
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook",
-    "watch": "nodemon npm run js && npm run sass",
     "test": "jest",
-    "test:clean": "jest -u",
-    "test:watch": "jest --watchAll",
-    "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
-    "lint": "eslint --format=node_modules/eslint-formatter-pretty source stories *.js"
+    "test-clean": "jest -u",
+    "test-watch": "jest --watchAll",
+    "watch": "nodemon npm run js && npm run sass"
   },
   "jest": {
     "verbose": false,
