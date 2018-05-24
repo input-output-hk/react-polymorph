@@ -62,6 +62,6 @@ const composeTheme = (
 };
 
 export default {
-  composeTheme,
-  addThemeId
+  addThemeId,
+  composeTheme
 };
