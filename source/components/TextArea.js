@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import type { ComponentType, Node, Element } from 'react';
 
 // external libraries
+import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
-// import utility functions
+// internal utility functions
 import { withTheme } from '../themes/withTheme';
 import { composeTheme, addThemeId } from '../utils';
 
@@ -57,8 +58,8 @@ class TextArea extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    // $FlowFixMe
-    this.textareaElement = React.createRef();
+    // define ref
+    this.textareaElement = createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 

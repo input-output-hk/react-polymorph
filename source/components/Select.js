@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
-import { withTheme } from '../themes/withTheme';
+import createRef from 'create-react-ref/lib/createRef';
 
-// import internal utility functions
+// internal utility functions
+import { withTheme } from '../themes/withTheme';
 import { composeTheme, addThemeId } from '../utils';
 
 // import constants
@@ -56,8 +57,8 @@ class Select extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    // $FlowFixMe
-    this.inputElement = React.createRef();
+    // define ref
+    this.inputElement = createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 

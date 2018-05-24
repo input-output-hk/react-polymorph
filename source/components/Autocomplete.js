@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
 // external libraries
+import createRef from 'create-react-ref/lib/createRef';
 import _ from 'lodash';
 
 // internal utility functions
@@ -67,12 +68,10 @@ class Autocomplete extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    // $FlowFixMe
-    this.rootElement = React.createRef();
-    // $FlowFixMe
-    this.inputElement = React.createRef();
-    // $FlowFixMe
-    this.suggestionsElement = React.createRef();
+    // define refs
+    this.rootElement = createRef();
+    this.inputElement = createRef();
+    this.suggestionsElement = createRef();
 
     const {
       context,

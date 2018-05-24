@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 // $FlowFixMe
 import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Element } from 'react';
+import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
@@ -63,8 +64,9 @@ class Options extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    // $FlowFixMe
-    this.optionsElement = React.createRef();
+
+    // define ref
+    this.optionsElement = createRef();
 
     const { context, themeId, theme, themeOverrides, isOpen } = props;
 

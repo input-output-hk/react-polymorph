@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 // $FlowFixMe
 import type { ComponentType, Element, SyntheticInputEvent } from 'react';
+import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
 // internal utility functions
@@ -58,8 +59,8 @@ class Input extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    // $FlowFixMe
-    this.inputElement = React.createRef();
+    // define ref
+    this.inputElement = createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
