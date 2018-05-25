@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
-import { withTheme } from '../themes/withTheme';
 
 // internal utility functions
+import { withTheme } from '../themes/withTheme';
 import { composeTheme, addThemeId } from '../utils';
 
 // import constants

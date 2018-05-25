@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import type { ComponentType, SyntheticInputEvent, Element } from 'react';
 
 // external libraries
+import createRef from 'create-react-ref/lib/createRef';
 import { flow } from 'lodash';
 
 // internal utility functions
@@ -73,8 +74,8 @@ export class NumericInput extends Component<Props, State> {
       this._validateLimitProps(minValue, maxBeforeDot, maxAfterDot);
     }
 
-    // define refs -- $FlowFixMe
-    this.inputElement = React.createRef();
+    // define ref
+    this.inputElement = createRef();
 
     this.state = {
       composedTheme: composeTheme(

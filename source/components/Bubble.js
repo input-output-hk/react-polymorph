@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element, ElementRef } from 'react';
+import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
@@ -51,8 +52,8 @@ class Bubble extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    // $FlowFixMe
-    this.rootElement = React.createRef();
+    // define ref
+    this.rootElement = createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 

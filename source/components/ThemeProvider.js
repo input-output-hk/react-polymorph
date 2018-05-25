@@ -40,23 +40,6 @@ class ThemeProvider extends Component<Props, State> {
     };
   }
 
-  // checks if theme and/or themeOverrides props have changed
-  // in order to update state before rendering
-  componentWillReceiveProps(nextProps: Props) {
-    const { theme, themeOverrides } = nextProps;
-
-    const changedProps = _.pickBy(
-      { theme, themeOverrides },
-      (value, key) => this.props[key] !== value
-    );
-
-    if (Object.keys(changedProps).length > 0) {
-      this.setState({
-        theme: this.composeLibraryTheme(theme, themeOverrides)
-      });
-    }
-  }
-
   // composeLibraryTheme returns a single obj containing theme definitions
   // for every component in the library. Every key on the returned obj is named
   // in conjunction with a component in the library and each key's value is structured
