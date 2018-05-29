@@ -20,6 +20,7 @@ type Props = {
   },
   disabled: boolean,
   error: string,
+  label: string,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
