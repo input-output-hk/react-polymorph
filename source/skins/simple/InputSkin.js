@@ -32,6 +32,7 @@ export default (props: Props) => (
   <FormField
     disabled={props.disabled}
     label={props.label}
+    theme={props.theme}
     error={props.error}
     skin={FormFieldSkin}
     render={() => (
