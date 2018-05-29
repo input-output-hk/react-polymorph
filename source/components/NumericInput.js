@@ -21,6 +21,7 @@ type Props = {
   },
   disabled: boolean,
   enforceMax: boolean,
+  label: string,
   enforceMin: boolean,
   error: string,
   onChange: Function,
