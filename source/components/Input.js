@@ -14,6 +14,7 @@ import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
   autoFocus: boolean,
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object

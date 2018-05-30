@@ -13,6 +13,7 @@ import { FormFieldSkin } from './';
 import { pickDOMProps } from '../../utils';
 
 type Props = {
+  className: string,
   disabled: boolean,
   error: string,
   label: string,
@@ -30,6 +31,7 @@ type Props = {
 
 export default (props: Props) => (
   <FormField
+    className={props.className}
     disabled={props.disabled}
     label={props.label}
     error={props.error}
