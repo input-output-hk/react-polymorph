@@ -44,7 +44,7 @@ import CustomModalTheme from './theme-customizations/Modal.custom.scss';
 import CustomButtonTheme from './theme-customizations/Button.custom.scss';
 import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
 import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.scss';
-import { BubbleTheme } from '../source/themes/simple/';
+import { BubbleTheme, FormFieldTheme } from '../source/themes/simple';
 
 const OPTIONS = [
   'home',
@@ -64,7 +64,8 @@ const CUSTOM_THEME = {
   [IDENTIFIERS.BUTTON]: CustomButtonTheme,
   [IDENTIFIERS.CHECKBOX]: CustomCheckboxTheme,
   [IDENTIFIERS.AUTOCOMPLETE]: CustomAutocompleteTheme,
-  [IDENTIFIERS.BUBBLE]: BubbleTheme
+  [IDENTIFIERS.BUBBLE]: BubbleTheme,
+  [IDENTIFIERS.FORM_FIELD]: FormFieldTheme
 };
 
 storiesOf('ThemeProvider', module)
@@ -102,8 +103,8 @@ storiesOf('ThemeProvider', module)
 
         <div style={{ margin: '100px' }}>
           <Checkbox
+            label="Switch with custom theme"
             themeId={IDENTIFIERS.SWITCH}
-            label="custom theme"
             checked={store.state.switchChecked}
             onChange={() => store.set({ switchChecked: !store.state.switchChecked })}
             skin={SwitchSkin}
@@ -112,7 +113,7 @@ storiesOf('ThemeProvider', module)
 
         <div style={{ margin: '100px' }}>
           <Radio
-            label="Radio with a custom theme"
+            label="Radio with custom theme"
             selected={store.state.radioSelected}
             onChange={() => store.set({ radioSelected: !store.state.radioSelected })}
             skin={RadioSkin}
@@ -121,6 +122,7 @@ storiesOf('ThemeProvider', module)
 
         <div style={{ margin: '100px' }}>
           <NumericInput
+            label="NumericInput with custom theme"
             value={store.state.numericInputValue}
             placeholder="0.000000"
             maxAfterDot={6}
@@ -147,7 +149,7 @@ storiesOf('ThemeProvider', module)
 
         <div style={{ margin: '100px' }}>
           <Checkbox
-            label="check here"
+            label="Checkbox with custom theme"
             checked={store.state.checkboxChecked}
             onChange={() => store.set({ checkboxChecked: !store.state.checkboxChecked })}
             skin={CheckboxSkin}
@@ -166,7 +168,7 @@ storiesOf('ThemeProvider', module)
 
         <div style={{ margin: '100px', height: '225px' }}>
           <Autocomplete
-            label="Custom Autocomplete theme"
+            label="Autocomplete with custom theme"
             options={OPTIONS}
             placeholder="Enter mnemonic..."
             maxSelections={12}
