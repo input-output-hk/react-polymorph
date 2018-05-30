@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 
 import { NumericInput } from '../source/components/NumericInput';
-import { InputSkin } from '../source/skins/simple';
+import InputSkin from './helpers/InputSkin';
 import { CONTEXT } from './helpers/context';
 
 test('NumericInput renders correctly', () => {

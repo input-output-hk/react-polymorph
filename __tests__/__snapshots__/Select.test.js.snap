@@ -7,15 +7,24 @@ exports[`Select isOpen={true} 1`] = `
   <div
     className="selectInput"
   >
-    <input
-      className="input"
-      label={undefined}
-      onChange={[Function]}
-      onClick={[Function]}
-      placeholder={undefined}
-      readOnly={true}
-      value=""
-    />
+    <div
+      className=""
+    >
+      
+      <div
+        className={undefined}
+      >
+        <input
+          className="input"
+          label={undefined}
+          onChange={[Function]}
+          onClick={[Function]}
+          placeholder={undefined}
+          readOnly={true}
+          value=""
+        />
+      </div>
+    </div>
   </div>
   <div>
     <div
@@ -92,15 +101,24 @@ exports[`Select isOpeningUpward={true} 1`] = `
   <div
     className="selectInput"
   >
-    <input
-      className="input"
-      label={undefined}
-      onChange={[Function]}
-      onClick={[Function]}
-      placeholder={undefined}
-      readOnly={true}
-      value=""
-    />
+    <div
+      className=""
+    >
+      
+      <div
+        className={undefined}
+      >
+        <input
+          className="input"
+          label={undefined}
+          onChange={[Function]}
+          onClick={[Function]}
+          placeholder={undefined}
+          readOnly={true}
+          value=""
+        />
+      </div>
+    </div>
   </div>
   <div>
     <div
@@ -177,15 +195,24 @@ exports[`Select renders correctly 1`] = `
   <div
     className="selectInput"
   >
-    <input
-      className="input"
-      label={undefined}
-      onChange={[Function]}
-      onClick={[Function]}
-      placeholder={undefined}
-      readOnly={true}
-      value=""
-    />
+    <div
+      className=""
+    >
+      
+      <div
+        className={undefined}
+      >
+        <input
+          className="input"
+          label={undefined}
+          onChange={[Function]}
+          onClick={[Function]}
+          placeholder={undefined}
+          readOnly={true}
+          value=""
+        />
+      </div>
+    </div>
   </div>
   <div>
     <div
@@ -262,15 +289,28 @@ exports[`Select renders with an error 1`] = `
   <div
     className="selectInput"
   >
-    <input
-      className="input errored"
-      label={undefined}
-      onChange={[Function]}
-      onClick={[Function]}
-      placeholder={undefined}
-      readOnly={true}
-      value=""
-    />
+    <div
+      className=""
+    >
+      <div
+        className={undefined}
+      >
+        Please select a different option
+      </div>
+      <div
+        className={undefined}
+      >
+        <input
+          className="input errored"
+          label={undefined}
+          onChange={[Function]}
+          onClick={[Function]}
+          placeholder={undefined}
+          readOnly={true}
+          value=""
+        />
+      </div>
+    </div>
   </div>
   <div>
     <div
@@ -347,15 +387,24 @@ exports[`Select renders with disabled options 1`] = `
   <div
     className="selectInput"
   >
-    <input
-      className="input"
-      label={undefined}
-      onChange={[Function]}
-      onClick={[Function]}
-      placeholder={undefined}
-      readOnly={true}
-      value=""
-    />
+    <div
+      className=""
+    >
+      
+      <div
+        className={undefined}
+      >
+        <input
+          className="input"
+          label={undefined}
+          onChange={[Function]}
+          onClick={[Function]}
+          placeholder={undefined}
+          readOnly={true}
+          value=""
+        />
+      </div>
+    </div>
   </div>
   <div>
     <div
@@ -423,15 +472,24 @@ exports[`Select renders with placeholder 1`] = `
   <div
     className="selectInput"
   >
-    <input
-      className="input"
-      label={undefined}
-      onChange={[Function]}
-      onClick={[Function]}
-      placeholder="Select your country …"
-      readOnly={true}
-      value=""
-    />
+    <div
+      className=""
+    >
+      
+      <div
+        className={undefined}
+      >
+        <input
+          className="input"
+          label={undefined}
+          onChange={[Function]}
+          onClick={[Function]}
+          placeholder="Select your country …"
+          readOnly={true}
+          value=""
+        />
+      </div>
+    </div>
   </div>
   <div>
     <div
@@ -508,15 +566,24 @@ exports[`Select uses render prop - optionRenderer 1`] = `
   <div
     className="selectInput"
   >
-    <input
-      className="input"
-      label={undefined}
-      onChange={[Function]}
-      onClick={[Function]}
-      placeholder={undefined}
-      readOnly={true}
-      value=""
-    />
+    <div
+      className=""
+    >
+      
+      <div
+        className={undefined}
+      >
+        <input
+          className="input"
+          label={undefined}
+          onChange={[Function]}
+          onClick={[Function]}
+          placeholder={undefined}
+          readOnly={true}
+          value=""
+        />
+      </div>
+    </div>
   </div>
   <div>
     <div

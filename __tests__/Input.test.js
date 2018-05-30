@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import { Input } from '../source/components';
-import { InputSkin } from '../source/skins/simple';
+import InputSkin from './helpers/InputSkin'; // use helper InputSkin
 import { CONTEXT } from './helpers/context';
 
 test('Input renders correctly', () => {
