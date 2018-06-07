@@ -2,6 +2,10 @@
 
 ## vNEXT
 
+### Fixes
+
+- Fixed broken right-to-left positiong of selected option checkmark [PR 62](https://github.com/input-output-hk/react-polymorph/pull/62)
+
 ### Chores
 
 - Adds polyfills for React's new context API and ref API released in v16.3.0. Drops support for React versions less than v16.[PR 61](https://github.com/input-output-hk/react-polymorph/pull/61)
