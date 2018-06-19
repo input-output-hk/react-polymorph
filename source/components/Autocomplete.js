@@ -47,7 +47,7 @@ type State = {
   composedTheme: Object
 };
 
-class Autocomplete extends Component<Props, State> {
+export class Autocomplete extends Component<Props, State> {
   rootElement: ?Element<any>;
   inputElement: ?Element<'input'>;
   suggestionsElement: ?Element<any>;

@@ -49,7 +49,7 @@ type State = {
   highlightedOptionIndex: number
 };
 
-class Options extends Component<Props, State> {
+export class Options extends Component<Props, State> {
   optionsElement: ?Element<any>;
 
   static defaultProps = {
