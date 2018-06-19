@@ -15,7 +15,7 @@ import classnames from 'classnames';
 // components & skins
 import { FormField } from '../../source/components/FormField';
 import { FormFieldSkin } from '../../source/skins/simple';
-import ROOT_THEME_API from '../../source/themes/API';
+import { CONTEXT } from './context';
 
 // internal utility functions
 import { pickDOMProps } from '../../source/utils';
@@ -39,12 +39,11 @@ type Props = {
 
 export default (props: Props) => (
   <FormField
-    context={{ ROOT_THEME_API }}
+    context={CONTEXT}
     disabled={props.disabled}
     error={props.error}
     label={props.label}
     skin={FormFieldSkin}
-    theme={props.theme}
     render={() => (
       <input
         ref={props.inputRef}
