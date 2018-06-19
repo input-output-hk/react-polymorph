@@ -5,11 +5,11 @@ exports[`Autocomplete is disabled 1`] = `
   className={undefined}
 >
   <div
-    className=""
+    className="root"
   >
     
     <div
-      className={undefined}
+      className="inputWrapper"
     >
       <div
         aria-hidden={true}
@@ -33,7 +33,7 @@ exports[`Autocomplete is disabled 1`] = `
         </div>
         <div>
           <div
-            className=""
+            className="options firstOptionHighlighted"
             style={null}
           >
             <div
@@ -41,11 +41,11 @@ exports[`Autocomplete is disabled 1`] = `
               data-bubble-container={true}
             >
               <ul
-                className={undefined}
+                className="ul"
               >
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option highlightedOption"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -54,7 +54,7 @@ exports[`Autocomplete is disabled 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -63,7 +63,7 @@ exports[`Autocomplete is disabled 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -72,7 +72,7 @@ exports[`Autocomplete is disabled 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -98,11 +98,11 @@ exports[`Autocomplete renders correctly 1`] = `
   className={undefined}
 >
   <div
-    className=""
+    className="root"
   >
     
     <div
-      className={undefined}
+      className="inputWrapper"
     >
       <div
         aria-hidden={true}
@@ -126,7 +126,7 @@ exports[`Autocomplete renders correctly 1`] = `
         </div>
         <div>
           <div
-            className=""
+            className="options firstOptionHighlighted"
             style={null}
           >
             <div
@@ -134,11 +134,11 @@ exports[`Autocomplete renders correctly 1`] = `
               data-bubble-container={true}
             >
               <ul
-                className={undefined}
+                className="ul"
               >
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option highlightedOption"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -147,7 +147,7 @@ exports[`Autocomplete renders correctly 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -156,7 +156,7 @@ exports[`Autocomplete renders correctly 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -165,7 +165,7 @@ exports[`Autocomplete renders correctly 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -191,11 +191,11 @@ exports[`Autocomplete renders with a placeholder 1`] = `
   className={undefined}
 >
   <div
-    className=""
+    className="root"
   >
     
     <div
-      className={undefined}
+      className="inputWrapper"
     >
       <div
         aria-hidden={true}
@@ -219,7 +219,7 @@ exports[`Autocomplete renders with a placeholder 1`] = `
         </div>
         <div>
           <div
-            className=""
+            className="options firstOptionHighlighted"
             style={null}
           >
             <div
@@ -227,11 +227,11 @@ exports[`Autocomplete renders with a placeholder 1`] = `
               data-bubble-container={true}
             >
               <ul
-                className={undefined}
+                className="ul"
               >
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option highlightedOption"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -240,7 +240,7 @@ exports[`Autocomplete renders with a placeholder 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -249,7 +249,7 @@ exports[`Autocomplete renders with a placeholder 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -258,7 +258,7 @@ exports[`Autocomplete renders with a placeholder 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -284,15 +284,15 @@ exports[`Autocomplete renders with an error 1`] = `
   className={undefined}
 >
   <div
-    className=""
+    className="root errored"
   >
     <div
-      className={undefined}
+      className="error"
     >
       Your mnemonic phrase is incorrect
     </div>
     <div
-      className={undefined}
+      className="inputWrapper"
     >
       <div
         aria-hidden={true}
@@ -316,7 +316,7 @@ exports[`Autocomplete renders with an error 1`] = `
         </div>
         <div>
           <div
-            className=""
+            className="options firstOptionHighlighted"
             style={null}
           >
             <div
@@ -324,11 +324,11 @@ exports[`Autocomplete renders with an error 1`] = `
               data-bubble-container={true}
             >
               <ul
-                className={undefined}
+                className="ul"
               >
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option highlightedOption"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -337,7 +337,7 @@ exports[`Autocomplete renders with an error 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -346,7 +346,7 @@ exports[`Autocomplete renders with an error 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -355,7 +355,7 @@ exports[`Autocomplete renders with an error 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -381,19 +381,19 @@ exports[`Autocomplete renders with label 1`] = `
   className={undefined}
 >
   <div
-    className=""
+    className="root"
   >
     
     <label
       aria-hidden={true}
-      className={undefined}
+      className="label"
       onClick={[Function]}
       role="presentation"
     >
       Enter your recovery phrase below
     </label>
     <div
-      className={undefined}
+      className="inputWrapper"
     >
       <div
         aria-hidden={true}
@@ -417,7 +417,7 @@ exports[`Autocomplete renders with label 1`] = `
         </div>
         <div>
           <div
-            className=""
+            className="options firstOptionHighlighted"
             style={null}
           >
             <div
@@ -425,11 +425,11 @@ exports[`Autocomplete renders with label 1`] = `
               data-bubble-container={true}
             >
               <ul
-                className={undefined}
+                className="ul"
               >
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option highlightedOption"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -438,7 +438,7 @@ exports[`Autocomplete renders with label 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -447,7 +447,7 @@ exports[`Autocomplete renders with label 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -456,7 +456,7 @@ exports[`Autocomplete renders with label 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -482,11 +482,11 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
   className={undefined}
 >
   <div
-    className=""
+    className="root"
   >
     
     <div
-      className={undefined}
+      className="inputWrapper"
     >
       <div
         aria-hidden={true}
@@ -510,7 +510,7 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
         </div>
         <div>
           <div
-            className=""
+            className="options firstOptionHighlighted"
             style={null}
           >
             <div
@@ -518,7 +518,7 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
               data-bubble-container={true}
             >
               <ul
-                className={undefined}
+                className="ul"
               >
                 <li>
                   <span>
@@ -559,11 +559,11 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
   className={undefined}
 >
   <div
-    className=""
+    className="root"
   >
     
     <div
-      className={undefined}
+      className="inputWrapper"
     >
       <div
         aria-hidden={true}
@@ -587,7 +587,7 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
         </div>
         <div>
           <div
-            className=""
+            className="options firstOptionHighlighted"
             style={null}
           >
             <div
@@ -595,11 +595,11 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
               data-bubble-container={true}
             >
               <ul
-                className={undefined}
+                className="ul"
               >
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option highlightedOption"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -608,7 +608,7 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -617,7 +617,7 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
@@ -626,7 +626,7 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
                 </li>
                 <li
                   aria-hidden={true}
-                  className=""
+                  className="option"
                   onClick={[Function]}
                   onMouseEnter={[Function]}
                   role="presentation"
