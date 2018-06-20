@@ -1,12 +1,4 @@
 // @flow
-
-// We need this as a separate file from source/skins/simple/AutocompleteSkin.js
-// Enzyme doesn't yet support the context API from React 16.3
-// Here we pass context as a prop to the FormField and Options components
-// which would normally be passed via the context Provider in ThemeContext.js.
-// We also pass FormField and Options the theme prop as they are not able to access
-// their default theme via context.
-
 import React from 'react';
 import type { Ref } from 'react';
 
@@ -16,12 +8,12 @@ import _ from 'lodash';
 
 // components & skins
 import { FormField } from '../../source/components/FormField';
+import { FormFieldSkin } from '../../source/skins/simple';
 import { Options } from '../../source/components/Options';
-import { FormFieldSkin, OptionsSkin } from '../../source/skins/simple';
-import { CONTEXT } from './context';
+import OptionsSkin from './OptionsSkin';
 
-// internal utility functions
-// import { pickDOMProps } from '../../source/utils';
+// context helper for enzyme
+import { CONTEXT } from './context';
 
 type Props = {
   className: string,
@@ -53,9 +45,7 @@ type Props = {
 };
 
 export default (props: Props) => {
-  const { label, error } = props;
   const theme = props.theme[props.themeId];
-  const formfieldProps = { label, error };
 
   const filteredAndLimitedOptions = _.slice(
     props.filteredOptions,
