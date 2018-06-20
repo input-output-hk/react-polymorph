@@ -36,7 +36,7 @@ type State = {
   position: ?Object
 };
 
-class Bubble extends Component<Props, State> {
+export class Bubble extends Component<Props, State> {
   rootElement: ?Element<any>;
 
   static defaultProps = {
