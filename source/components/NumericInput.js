@@ -1,106 +1,231 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import React, { Component } from 'react';
+// $FlowFixMe
+import type { ComponentType, SyntheticInputEvent, Element } from 'react';
+
+// external libraries
+import createRef from 'create-react-ref/lib/createRef';
 import { flow } from 'lodash';
-import Input from './Input';
-import FormField from './FormField';
-import { StringOrElement } from '../utils/props';
 
-export default class NumericInput extends FormField {
+// internal utility functions
+import { withTheme } from '../themes/withTheme';
+import { composeTheme, addThemeId } from '../utils';
 
-  state = {
-    caretPosition: 0,   // Current caret position
-    separatorsCount: 0, // Number of comma separators used for calculating caret position after separators are injected
-    error: null,        // Inner (Component) state error
-                        // e.g. if value > maxValue set error message
-    oldValue: null,     // Last recorded value before input change
-  };
+// import constants
+import { IDENTIFIERS } from '../themes/API';
 
-  static SKIN_PARTS = {
-    INPUT: Input.SKIN_PARTS.INPUT,
-  };
+type Props = {
+  className: string,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  disabled: boolean,
+  enforceMax: boolean,
+  label: string,
+  enforceMin: boolean,
+  error: string,
+  onChange: Function,
+  maxAfterDot: number,
+  maxBeforeDot: number,
+  maxValue: number,
+  minValue: number,
+  onRef: Function,
+  readOnly: boolean,
+  placeholder: string,
+  setError: Function,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object,
+  value: string
+};
 
-  static propTypes = Object.assign({}, FormField.propTypes, {
-    error: StringOrElement,
-    value: PropTypes.string,
-    placeholder: PropTypes.string,
-    maxBeforeDot: PropTypes.number, // max number of characters before dot
-    maxAfterDot: PropTypes.number,  // max number of characters after dot
-    maxValue: PropTypes.number,     // max allowed numeric value
-    minValue: PropTypes.number,     // min allowed numeric value
-  });
+type State = {
+  composedTheme: Object,
+  caretPosition: number,
+  separatorsCount: number,
+  error: string,
+  oldValue: string
+};
+
+export class NumericInput extends Component<Props, State> {
+  inputElement: Element<'input'>;
 
   static defaultProps = {
-    value: '',
+    disabled: false,
     error: '',
+    enforceMax: false,
+    enforceMin: false,
+    onRef: () => {},
+    readOnly: false,
+    theme: null,
+    themeId: IDENTIFIERS.INPUT,
+    themeOverrides: {},
+    value: ''
   };
 
-  // ========= COMPONENT LIFE CYCLE =========
+  constructor(props: Props) {
+    super(props);
+    const { context, minValue, maxBeforeDot, maxAfterDot, themeId, theme, themeOverrides } = props;
 
-  componentDidMount() {
-    // Set last input caret position on updates
-    const input = this.skinParts[NumericInput.SKIN_PARTS.INPUT];
-    this.setState({ caretPosition: input.selectionStart });
+    const minValueIsNum = minValue && typeof minValue === 'number';
+    // if minValue is a number and user supplied maxBeforeDot and/or maxAfterDot
+    if (minValueIsNum && (maxBeforeDot || maxAfterDot)) {
+      // check combination of values for validity
+      this._validateLimitProps(minValue, maxBeforeDot, maxAfterDot);
+    }
+
+    // define ref
+    this.inputElement = createRef();
+
+    this.state = {
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      caretPosition: 0,
+      separatorsCount: 0,
+      error: '',
+      oldValue: ''
+    };
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    const input = this.skinParts[NumericInput.SKIN_PARTS.INPUT];
-    if (input !== document.activeElement) return;
+  componentDidMount() {
+    // if this NumericInput instance is rendered within FormField's render prop,
+    // this.props.onRef allows FormField to call NumericInput's focus method
+    // when user clicks FormField's label
+    this.props.onRef(this);
+
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      // Set last input caret position on updates
+      this.setState({ caretPosition: inputElement.current.selectionStart });
+    }
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    const { inputElement } = this;
+    if (inputElement && inputElement.current !== document.activeElement) { return; }
 
     // caret position calculation after separators injection
     let caretPosition;
     // prevent unnecessary changes on re-rendering
-    if (this.state.oldValue != prevState.oldValue || this.state.caretPosition != prevState.caretPosition) {
-      if (this.state.separatorsCount != prevState.separatorsCount
-        && (this.state.separatorsCount - prevState.separatorsCount) <= 1
-        && (this.state.separatorsCount - prevState.separatorsCount) >= -1) {
-        caretPosition = this.state.caretPosition + (this.state.separatorsCount - prevState.separatorsCount);
+    if (
+      this.state.oldValue !== prevState.oldValue ||
+      this.state.caretPosition !== prevState.caretPosition
+    ) {
+      if (
+        this.state.separatorsCount !== prevState.separatorsCount &&
+        this.state.separatorsCount - prevState.separatorsCount <= 1 &&
+        this.state.separatorsCount - prevState.separatorsCount >= -1
+      ) {
+        caretPosition =
+          this.state.caretPosition +
+          (this.state.separatorsCount - prevState.separatorsCount);
       } else {
         caretPosition = this.state.caretPosition;
       }
-      caretPosition = (caretPosition >= 0) ? caretPosition : 0;
-      input.selectionEnd = caretPosition;
-      input.selectionStart = caretPosition;
+      caretPosition = caretPosition >= 0 ? caretPosition : 0;
+
+      if (inputElement && inputElement.current) {
+        inputElement.current.selectionEnd = caretPosition;
+        inputElement.current.selectionStart = caretPosition;
+      }
     }
   }
 
-  onChange = (event) => {
+  onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
     const { onChange, disabled } = this.props;
     if (disabled) return;
-    const processedValue = this._processValue(event.target.value, event.target.selectionStart, {});
+
+    // it is crucial to remove whitespace from input value
+    // with String.trim()
+    const processedValue = this._processValue(
+      event.target.value.trim(),
+      event.target.selectionStart
+    );
+
     if (onChange) onChange(processedValue, event);
   };
 
-  prepareSkinProps(props) {
-    return Object.assign({}, super.prepareSkinProps(props), {
-      onChange: this.onChange,
-      error: this.props.error || this.state.error,
-    });
+  focus = () => {
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      return inputElement.current.focus();
+    }
   }
 
-  focus = () => this.skinParts[NumericInput.SKIN_PARTS.INPUT].focus();
+  blur = () => {
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      return inputElement.current.blur();
+    }
+  }
 
-  blur = () => this.skinParts[NumericInput.SKIN_PARTS.INPUT].blur();
+  _validateLimitProps(minValue: number, maxBeforeDot: number, maxAfterDot: number) {
+    const maxBeforeDotIsNum = maxBeforeDot && typeof maxBeforeDot === 'number';
+    const maxAfterDotIsNum = maxAfterDot && typeof maxAfterDot === 'number';
+    // if minValue is a float, it will split at the decimal
+    // trailing zeros are dropped with parseFloat
+    const minValParts = parseFloat(minValue).toString().split('.');
 
-  _processValue(value, position) {
+    // if minValParts array has length of 2, it is a float
+    if (minValParts.length >= 2) {
+      const minValBeforeDot = minValParts[0];
+      const minValAfterDot = minValParts[1];
+
+      // if the number of integers in minValue is greater than maxBeforeDot
+      if (maxBeforeDotIsNum && (minValBeforeDot.length > maxBeforeDot)) {
+        // the combo is incompatible, throw error
+        const error = `
+          minValue: ${minValue} exceeds the limit of maxBeforeDot: ${maxBeforeDot}.
+          Adjust the values of these properties.
+        `;
+        throw new Error(error);
+      // if the number of decimal spaces in minValue is greater than maxBeforeDot
+      } else if (maxAfterDotIsNum && (minValAfterDot.length > maxAfterDot)) {
+        const error = `
+          minValue: ${minValue} exceeds the limit of maxAfterDot: ${maxAfterDot}.
+          Adjust the values of these properties.
+        `;
+        throw new Error(error);
+      }
+    }
+  }
+
+  _setError = (error: string) => {
+    const { setError } = this.props;
+
+    // checks for setError func from FormField component
+    // if this NumericInput instance is rendered within FormField's render prop,
+    // FormField's local state.error will also be set via props.setError
+    if (setError) setError(error);
+    // also set (this: NumericInput)'s state.error
+    this.setState({ error });
+  };
+
+  _processValue(value: string, position: number) {
     return flow([
       this._enforceNumericValue,
       this._parseToParts,
-      this._enforceMaxLengths,
+      this._enforceValueLimits,
       this._separate
     ]).call(this, value, position);
   }
 
-  _enforceNumericValue(value, position) {
+  _enforceNumericValue(value: string, position: number) {
     const regex = /^[0-9.,]+$/;
-    let isValueRegular = regex.test(value);
+    const isValueRegular = regex.test(value);
     let handledValue;
     const lastValidValue = this.state.oldValue;
     if (!isValueRegular && value !== '') {
       // input contains invalid value
       // e.g. 1,00AAbasdasd.asdasd123123
       // - reject it and show last valid value
-      handledValue = lastValidValue ? lastValidValue : '0.000000';
-      position = position - 1;
+      handledValue = lastValidValue || '0.000000';
+      position -= 1;
     } else if (!this._isNumeric(value)) {
       // input contains comma separated number
       // e.g. 1,000,000.123456
@@ -120,13 +245,18 @@ export default class NumericInput extends FormField {
             handledValue = lastValidValue;
           }
         } else {
-          handledValue = splitedValue[0] + '.' + splitedValue[1] + splitedValue[2];
+          handledValue =
+            splitedValue[0] + '.' + splitedValue[1] + splitedValue[2];
           // Second dot was entered after current one -> stay in same position (swallow dot)
           if (position > beforeDot.length + 1) {
             position -= 1;
           }
         }
-      } else if (splitedValue.length === 2 && splitedValue[0] === '' && splitedValue[1] === '') {
+      } else if (
+        splitedValue.length === 2 &&
+        splitedValue[0] === '' &&
+        splitedValue[1] === ''
+      ) {
         // special case when dot is inserted in an empty input
         // - return 0.|00000
         handledValue = '0.000000';
@@ -141,24 +271,28 @@ export default class NumericInput extends FormField {
     const lastInsertedCharacter = value.substring(position - 1, position);
     if (lastInsertedCharacter === ',') {
       // prevent move caret position on hit ','
-      position = position - 1;
+      position -= 1;
     }
 
-    return !this._isNumeric(value) ? { value: handledValue, position } : { value, position };
+    return !this._isNumeric(value)
+      ? { value: handledValue, position }
+      : { value, position };
   }
 
-  _parseToParts(data) {
+  _parseToParts(data: { value: string, position: number }) {
     const value = data.value;
     let position = data.position;
 
     // show placeholder on select all and delete/backspace key action
     if (!value) return;
 
-    let beforeDot, afterDot;
+    let beforeDot;
+    let afterDot;
+
     if (data.value.length > 1 && value.split('.').length < 2) {
       // handle numbers deletion from both integer and decimal parts at once
       beforeDot = value.substring(0, position) || '0';
-      afterDot =  value.substring(position, value.length);
+      afterDot = value.substring(position, value.length);
     } else {
       // split float number to integer and decimal part - regular way
       const splitedValue = value.split('.');
@@ -167,41 +301,103 @@ export default class NumericInput extends FormField {
     }
 
     // remove leading zero and update caret position
-    if (value.charAt(0) === '0' && (parseInt(beforeDot.replace(/,/g, '')) > 0)) {
-      beforeDot = parseInt(beforeDot.replace(/,/g, ''));
+    if (value.charAt(0) === '0' && parseInt(beforeDot.replace(/,/g, ''), 10) > 0) {
+      beforeDot = parseInt(beforeDot.replace(/,/g, ''), 10);
       if (position !== 2) {
         position = 0;
       } else {
         position = 1;
       }
-    } else if (parseInt(beforeDot.replace(/,/g, '')) === 0) {
-      beforeDot = parseInt(beforeDot.replace(/,/g, ''));
+    } else if (parseInt(beforeDot.replace(/,/g, ''), 10) === 0) {
+      beforeDot = parseInt(beforeDot.replace(/,/g, ''), 10);
     }
 
-    return {value, position, parts: {beforeDot, afterDot}}
+    return { value, position, parts: { beforeDot, afterDot } };
   }
 
-  _enforceMaxLengths(data) {
+  // enforces props.maxValue and props.minValue
+  _enforceValueLimits(data: {
+    value: string,
+    position: number,
+    parts: {
+      beforeDot: string,
+      afterDot: string
+    }
+  }) {
     if (!data) return;
 
-    const {maxBeforeDot, maxAfterDot, minValue, maxValue} = this.props;
-    const value = data.value;
-    let position = data.position;
-    let beforeDot = data.parts.beforeDot;
-    let afterDot = data.parts.afterDot;
+    const { minValue, maxValue, enforceMax, enforceMin, maxAfterDot } = this.props;
+    const { position } = data;
+
+    // enforce props.maxBeforeDot and props.maxAfterDot
+    const valueWithDecimalRestrictions = this._enforceDecimalRestrictions(data);
+
+    // creates floating point number equal to valueWithDecimalRestrictions (string)
+    // will be used for value comparisons against props.maxValue and props.minValue if applicable
+    const valueWithoutSeparators = parseFloat(valueWithDecimalRestrictions.replace(/,/g, ''));
+
+    // if input value is greater than props.maxValue, throw error
+    if (maxValue && valueWithoutSeparators > maxValue) {
+      const formattedMaxVal = maxValue.toFixed(maxAfterDot || 6).toString();
+      this._setError(`Maximum amount is ${formattedMaxVal}`);
+
+      // if user passes enforceMax=true, restrict input value to props.maxValue
+      if (enforceMax) {
+        this.setState({ caretPosition: position });
+        return formattedMaxVal;
+      }
+    // if input value is below props.minValue, throw error
+    } else if (minValue && valueWithoutSeparators < minValue) {
+      const formattedMinVal = minValue.toFixed(maxAfterDot || 6).toString();
+      this._setError(`Minimum amount is ${formattedMinVal}`);
+
+      // if props.enforceMin=true, restrict input value to props.minValue
+      if (enforceMin) {
+        this.setState({ caretPosition: position });
+        return formattedMinVal;
+      }
+      // if input value has no errors, clear state.error
+    } else if (this.state.error !== '') {
+      this._setError('');
+    }
+
+    // update caret in state
+    this.setState({ caretPosition: position });
+
+    // input value w/ decimal restrictions is passed along
+    // to this._separate without value restrictions
+    return valueWithDecimalRestrictions;
+  }
+
+  // enforces props.maxBeforeDot and props.maxAfterDot
+  _enforceDecimalRestrictions(data: {
+    value: string,
+    position: number,
+    parts: {
+      beforeDot: string,
+      afterDot: string
+    }
+  }) {
+    const { maxBeforeDot, maxAfterDot } = this.props;
+    let { beforeDot } = data.parts;
+    let { afterDot } = data.parts;
 
     // preventing numbers with more than maxBeforeDot units
     // - return first maxBeforeDot numbers (with comma separators)
     if (maxBeforeDot && beforeDot) {
       // max number of commas depending on max number of characters before dot
-      const numberOfCommas = ((maxBeforeDot % 3) > 0) ? parseInt(maxBeforeDot / 3) :  (parseInt(maxBeforeDot / 3) - 1);
+      const numberOfCommas =
+        maxBeforeDot % 3 > 0
+          ? parseInt(maxBeforeDot / 3, 10)
+          : parseInt(maxBeforeDot / 3, 10) - 1;
       const maxBeforeDotWithSeparator = maxBeforeDot + numberOfCommas;
       if (beforeDot.length > maxBeforeDotWithSeparator) {
         beforeDot = beforeDot.substring(0, maxBeforeDotWithSeparator);
       }
     }
 
-    // remove commas from decimal part (e.g. 123,23,2.002000 -> dot after 2.character reproduce 12.3,23,2)
+    // remove commas from decimal part
+    // (e.g. 123,23,2.002000 -> dot after 2.character reproduce 12.3,23,2)
     afterDot = afterDot.replace(/,/g, '');
     // preventing numbers with more than maxAfterDot units - return first maxAfterDot numbers
     if (maxAfterDot && afterDot && afterDot.length > maxAfterDot) {
@@ -211,42 +407,68 @@ export default class NumericInput extends FormField {
     // if decimal number has less than maxAfterDot numbers add trailing zeros
     let afterDotLength = afterDot ? afterDot.length : 0;
     if (maxAfterDot && afterDotLength < maxAfterDot) {
-      let i;
       for (afterDotLength; afterDotLength < maxAfterDot; afterDotLength++) {
-        afterDot = afterDot + '0';
+        afterDot += '0';
       }
     }
 
+    // return input value w/decimal restrictions as a string
     const result = beforeDot + '.' + afterDot;
-
-    // check min and max value
-    const resultWithoutSeparators = parseFloat(result.replace(/,/g, ''));
-    if ((maxValue && resultWithoutSeparators > maxValue) || (minValue && (resultWithoutSeparators < minValue))) {
-      this.setState({error: 'Please enter a valid amount'});
-    } else if (this.state.error !== '') {
-      this.setState({error: null});
-    }
-
-    this.setState({caretPosition: position});
     return result;
   }
 
-  _separate(value, position) {
+  _separate(value: string) {
     this.setState({ oldValue: value });
     if (value) {
       const splitedValue = value.split('.');
-      const separatedValue = splitedValue[0].replace(/,/g, '').split('').reverse().join('')
-                    .replace(/(\d{3}\B)/g, '$1,')
-                    .split('').reverse().join('');
+      const separatedValue = splitedValue[0]
+        .replace(/,/g, '')
+        .split('')
+        .reverse()
+        .join('')
+        .replace(/(\d{3}\B)/g, '$1,')
+        .split('')
+        .reverse()
+        .join('');
       const newSeparatorsCount = (separatedValue.match(/,/g) || []).length;
       this.setState({ separatorsCount: newSeparatorsCount });
       return separatedValue + '.' + splitedValue[1];
     }
   }
 
-  _isNumeric(value) {
+  _isNumeric(value: string) {
     const replacedValue = value.replace(/,/g, '');
+    // eslint-disable-next-line no-restricted-globals
     return !isNaN(parseFloat(replacedValue)) && isFinite(replacedValue);
   }
 
+  render() {
+    // destructuring props ensures only the "...rest" get passed down
+    const {
+      skin: InputSkin,
+      theme,
+      themeOverrides,
+      onChange,
+      error,
+      context,
+      onRef,
+      maxValue,
+      minValue,
+      maxBeforeDot,
+      maxAfterDot,
+      ...rest
+    } = this.props;
+
+    return (
+      <InputSkin
+        error={error || this.state.error}
+        inputRef={this.inputElement}
+        onChange={this.onChange}
+        theme={this.state.composedTheme}
+        {...rest}
+      />
+    );
+  }
 }
+
+export default withTheme(NumericInput);

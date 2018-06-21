@@ -1,0 +1,20 @@
+.textarea {
+  width: 30%;
+  transition: all 0.4s ease-in-out;
+  overflow-x: hidden;
+
+  &:focus {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 50%;
+    border-color: rgba(10, 145, 48, 0.8);
+    outline: none;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    border-color: rgba(10, 145, 48, 0.8);
+    transition: all 0.2s ease-in-out;
+  }
+}

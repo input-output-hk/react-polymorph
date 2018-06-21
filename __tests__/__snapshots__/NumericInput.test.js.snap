@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumericInput is disabled 1`] = `
+<div
+  className="root disabled"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input disabled"
+      disabled={true}
+      onChange={[Function]}
+      readOnly={false}
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`NumericInput is readOnly 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input"
+      disabled={false}
+      onChange={[Function]}
+      readOnly={true}
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`NumericInput renders correctly 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input"
+      disabled={false}
+      onChange={[Function]}
+      readOnly={false}
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`NumericInput renders with a value 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input"
+      disabled={false}
+      onChange={[Function]}
+      readOnly={false}
+      value="555.333"
+    />
+  </div>
+</div>
+`;
+
+exports[`NumericInput renders with an error 1`] = `
+<div
+  className="root errored"
+>
+  <div
+    className="error"
+  >
+    Invalid Amount
+  </div>
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input errored"
+      disabled={false}
+      onChange={[Function]}
+      readOnly={false}
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`NumericInput renders with placeholder 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input"
+      disabled={false}
+      onChange={[Function]}
+      placeholder="0.0000"
+      readOnly={false}
+      value=""
+    />
+  </div>
+</div>
+`;

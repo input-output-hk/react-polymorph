@@ -1,7 +1,63 @@
+// @flow
 import React from 'react';
-import { themr } from 'react-css-themr';
-import { RADIO } from './identifiers';
-import DefaultRadioTheme from '../../themes/simple/SimpleRadio.scss';
-import RadioSkin from './raw/RadioSkin';
+import type { Element } from 'react';
 
-export default themr(RADIO, DefaultRadioTheme)(RadioSkin);
+// external libraries
+import classnames from 'classnames';
+
+// internal utility functions
+import { pickDOMProps } from '../../utils';
+
+type Props = {
+  className: string,
+  disabled: boolean,
+  selected: boolean,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  label: string | Element<any>,
+  theme: Object,
+  themeId: string
+};
+
+export default (props: Props) => {
+  const {
+    theme,
+    themeId,
+    className,
+    disabled,
+    selected,
+    onChange,
+    label
+  } = props;
+  return (
+    <div
+      role="presentation"
+      aria-hidden
+      className={classnames([
+        className,
+        theme[themeId].root,
+        disabled ? theme[themeId].disabled : null,
+        selected ? theme[themeId].selected : null
+      ])}
+      onClick={event => {
+        if (!disabled && onChange) {
+          onChange(!selected, event);
+        }
+      }}
+    >
+      <input
+        {...pickDOMProps(props)}
+        className={theme[themeId].input}
+        type="radio"
+      />
+      <div
+        className={classnames([
+          theme[themeId].circle,
+          selected ? theme[themeId].selected : null
+        ])}
+      />
+      {label ? <label className={theme[themeId].label}>{label}</label> : null}
+    </div>
+  );
+};

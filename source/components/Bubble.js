@@ -1,32 +1,71 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SkinnableComponent from './SkinnableComponent';
-import events from '../utils/events';
+// @flow
+import React, { Component } from 'react';
+import type { ComponentType, Element, ElementRef } from 'react';
+import createRef from 'create-react-ref/lib/createRef';
 
-export default class Bubble extends SkinnableComponent {
+// internal utility functions
+import { withTheme } from '../themes/withTheme';
+import {
+  addEventsToDocument,
+  removeEventsFromDocument,
+  composeTheme,
+  addThemeId
+} from '../utils';
 
-  static SKIN_PARTS = {
-    ROOT: 'root',
-    BUBBLE: 'bubble',
-  };
+// import constants
+import { IDENTIFIERS } from '../themes/API';
 
-  static propTypes = Object.assign({}, SkinnableComponent.propTypes, {
-    isOpeningUpward: PropTypes.bool,
-    isTransparent: PropTypes.bool,
-    isFloating: PropTypes.bool,
-    isHidden: PropTypes.bool,
-  });
+type Props = {
+  className: string,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  isHidden: boolean,
+  isFloating: boolean,
+  isOpeningUpward: boolean,
+  isTransparent: boolean,
+  skin: ComponentType<any>,
+  theme: Object, // takes precedence over them in context if passed
+  themeId: string,
+  themeOverrides: Object // custom css/scss from user adhering to component's theme API
+};
+
+type State = {
+  composedTheme: Object,
+  position: ?Object
+};
+
+class Bubble extends Component<Props, State> {
+  rootElement: ?Element<any>;
 
   static defaultProps = {
+    isHidden: false,
+    isFloating: false,
     isOpeningUpward: false,
     isTransparent: true,
-    isFloating: false,
-    isHidden: false,
+    theme: null,
+    themeId: IDENTIFIERS.BUBBLE,
+    themeOverrides: {}
   };
 
-  state = {
-    position: null,
-  };
+  constructor(props: Props) {
+    super(props);
+
+    // define ref
+    this.rootElement = createRef();
+
+    const { context, themeId, theme, themeOverrides } = props;
+
+    this.state = {
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      position: null
+    };
+  }
 
   _hasEventListeners = false;
 
@@ -41,7 +80,7 @@ export default class Bubble extends SkinnableComponent {
     // Add listeners when the bubble
     if (isFloating && !nextProps.isHidden && !this._hasEventListeners) {
       this._handleScrollEventListener('add');
-      events.addEventsToDocument(this._getDocumentEvents());
+      addEventsToDocument(this._getDocumentEvents());
       window.addEventListener('resize', this._updatePosition);
       this._hasEventListeners = true;
     }
@@ -60,67 +99,72 @@ export default class Bubble extends SkinnableComponent {
     if (this._hasEventListeners) this._removeAllEventListeners();
   }
 
-  prepareSkinProps(props) {
-    return Object.assign({}, super.prepareSkinProps(props), {
-      position: this.state.position,
-    });
-  };
-
   // =========== PRIVATE HELPERS ==============
 
-  _handleScrollEventListener = (action) => {
-    const rootNode = this._getRootSkinPart();
-    const scrollableNode = this._getFirstScrollableParent(rootNode);
-    if (scrollableNode) {
-      if (action === 'add') {
-        scrollableNode.addEventListener('scroll', this._updatePosition);
-      } else if (action === 'remove') {
-        scrollableNode.removeEventListener('scroll', this._updatePosition);
+  _handleScrollEventListener = (action: string) => {
+    // const rootNode = this.rootElement;
+    const { rootElement } = this;
+    if (rootElement) {
+      const scrollableNode = this._getFirstScrollableParent(rootElement);
+      if (scrollableNode) {
+        if (action === 'add') {
+          scrollableNode.addEventListener('scroll', this._updatePosition);
+        } else if (action === 'remove') {
+          scrollableNode.removeEventListener('scroll', this._updatePosition);
+        }
       }
     }
   };
 
   _removeAllEventListeners() {
     if (this._hasEventListeners) {
-      events.removeEventsFromDocument(this._getDocumentEvents());
+      removeEventsFromDocument(this._getDocumentEvents());
       this._handleScrollEventListener('remove');
       window.removeEventListener('resize', this._updatePosition);
       this._hasEventListeners = false;
     }
   }
 
-  _getFirstScrollableParent = (node) => {
-    if (node == null) return null;
-    if (node === this._getRootSkinPart() || node.scrollHeight <= node.clientHeight) {
-      return this._getFirstScrollableParent(node.parentNode);
-    } else {
-      return node;
-    }
-  };
+  _getFirstScrollableParent = (element: ElementRef<*>) => {
+    if (element == null) return null;
+    const { rootElement } = this;
+    const node = {}.hasOwnProperty.call(element, 'current') ? element.current : element;
 
-  _getRootSkinPart() {
-    return this.skinParts[Bubble.SKIN_PARTS.ROOT];
-  }
+    if (rootElement) {
+      if (node === rootElement.current || node.scrollHeight <= node.clientHeight) {
+        return this._getFirstScrollableParent(node.parentElement);
+      }
+    }
+
+    return node;
+  };
 
   _updatePosition = () => {
     const { isOpeningUpward } = this.props;
-    const rootNode = this._getRootSkinPart();
-    const parentNode = rootNode.parentNode;
-    const parentNodeParams = parentNode.getBoundingClientRect();
+    const { rootElement } = this;
 
-    let positionY;
-    if (isOpeningUpward) {
-      positionY = window.innerHeight - parentNodeParams.top + 20;
-    } else {
-      positionY = parentNodeParams.bottom + 20;
+    if (!rootElement) return;
+
+    const parentNode = rootElement.current ? rootElement.current.parentElement : null;
+    const parentNodeParams = parentNode
+      ? parentNode.getBoundingClientRect()
+      : null;
+
+    if (parentNodeParams !== null) {
+      let positionY;
+      if (isOpeningUpward) {
+        positionY = window.innerHeight - parentNodeParams.top + 20;
+      } else {
+        positionY = parentNodeParams.bottom + 20;
+      }
+
+      const position = {
+        width: parentNodeParams.width,
+        positionX: parentNodeParams.left,
+        positionY
+      };
+      this.setState({ position });
     }
-
-    const position = {
-      width: parentNodeParams.width,
-      positionX: parentNodeParams.left,
-      positionY,
-    };
-    this.setState({ position });
   };
 
   _getDocumentEvents() {
@@ -130,4 +174,25 @@ export default class Bubble extends SkinnableComponent {
     };
   }
 
+  render() {
+    // destructuring props ensures only the "...rest" get passed down
+    const {
+      skin: BubbleSkin,
+      theme,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
+
+    return (
+      <BubbleSkin
+        rootRef={this.rootElement}
+        position={this.state.position}
+        theme={this.state.composedTheme}
+        {...rest}
+      />
+    );
+  }
 }
+
+export default withTheme(Bubble);

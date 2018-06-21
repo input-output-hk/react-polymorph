@@ -40,6 +40,10 @@ $button-padding: 15px 20px !default;
   }
 }
 
+// BEGIN SPECIAL STATES ---------- //
+
 .disabled {
   background-color: $button-bg-color-disabled;
 }
+
+// END SPECIAL STATES ---------- //

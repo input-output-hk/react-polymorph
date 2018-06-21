@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input is readOnly 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input"
+      onChange={[Function]}
+      readOnly={true}
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Input renders correctly 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input"
+      onChange={[Function]}
+      readOnly={false}
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Input renders with a value 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input"
+      onChange={[Function]}
+      readOnly={false}
+      value="there is value"
+    />
+  </div>
+</div>
+`;
+
+exports[`Input renders with placeholder 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="input"
+      onChange={[Function]}
+      placeholder="0.0000"
+      readOnly={false}
+      value=""
+    />
+  </div>
+</div>
+`;

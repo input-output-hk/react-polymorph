@@ -1,0 +1,60 @@
+.root {
+  transition: all 0.2s ease-in-out;
+
+  // on hover
+  &:hover {
+    .circle {
+      border: 1px solid rgba(10, 145, 48, 0.8);
+      transition: all 0.2s ease-in-out;
+
+      // when radio is not selected (during hover)
+      &:not(.selected) {
+        &:after {
+          border: 1px solid rgba(10, 145, 48, 0.8);
+          transition: all 0.2s ease-in-out;
+        }
+      }
+    }
+  }
+
+  .circle {
+    border: 1px solid #d3d3d3;
+    transition: all 0.2s ease-in-out;
+
+    // when radio is selected
+    &.selected {
+      border: 1px solid rgba(10, 145, 48, 1);
+      background-color: rgba(10, 145, 48, 0.8);
+      transition: all 0.2s ease-in-out;
+
+      &:after {
+        background-color: white;
+        border-radius: 0px;
+        width: 6px;
+        height: 20px;
+        left: 41%;
+        top: 15%;
+        bottom: 0%;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+
+    // when radio is not selected (separate from hover styles)
+    &:not(.selected) {
+      position: relative;
+
+      &:after {
+        content: "";
+        position: absolute;
+        border: 1px solid #d3d3d3;
+        border-radius: 0px;
+        width: 20px;
+        height: 5px;
+        left: 10%;
+        top: 40%;
+        bottom: 0%;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+}

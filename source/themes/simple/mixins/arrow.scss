@@ -1,29 +1,42 @@
 // CSS arrow box inspired from http://www.cssarrowplease.com/
 @mixin arrow($direction, $bg-color, $border-color, $size) {
-  &:after, &:before {
-    @if $direction == up { bottom: 100%; }
+  &:after,
+  &:before {
+    @if $direction == up {
+      bottom: 100%;
+    }
     border: solid transparent;
     content: " ";
     height: 0;
     left: 50%;
     pointer-events: none;
     position: absolute;
-    @if $direction == down { top: 100%; }
+    @if $direction == down {
+      top: 100%;
+    }
     width: 0;
   }
 
   &:after {
     border-color: transparent;
-    @if $direction == up { border-bottom-color: $bg-color; }
-    @if $direction == down { border-top-color: $bg-color; }
+    @if $direction == up {
+      border-bottom-color: $bg-color;
+    }
+    @if $direction == down {
+      border-top-color: $bg-color;
+    }
     border-width: $size - 1px;
     margin-left: -($size - 1px);
   }
 
   &:before {
     border-color: transparent;
-    @if $direction == up { border-bottom-color: $border-color; }
-    @if $direction == down { border-top-color: $border-color; }
+    @if $direction == up {
+      border-bottom-color: $border-color;
+    }
+    @if $direction == down {
+      border-top-color: $border-color;
+    }
     border-width: $size;
     margin-left: -$size;
   }

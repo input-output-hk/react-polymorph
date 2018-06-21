@@ -1,0 +1,16 @@
+// Options theme customizations
+$options-border-color: #35673f;
+$options-border: 1px solid $options-border-color;
+$options-border-radius: 0;
+$options-font-family: serif;
+$options-font-size: 16px;
+$options-arrow-size: 10px;
+$options-shadow: none;
+$option-bg-color: #d3fccc;
+$option-font-color: #204f66;
+$option-highlight-color: #94cff3;
+$option-padding: 14px 20px;
+// Bubble arrow
+$options-bubble-arrow: true;
+
+@import "../../source/themes/simple/SimpleOptions";

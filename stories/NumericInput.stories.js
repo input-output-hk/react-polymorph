@@ -1,106 +1,204 @@
+// @flow
 import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
-import NumericInput from '../source/components/NumericInput';
-import SimpleInputSkin from '../source/skins/simple/InputSkin';
+import { withState } from '@dump247/storybook-state';
+
+// components
+import { NumericInput } from '../source/components';
+
+// skins
+import { InputSkin } from '../source/skins/simple';
+
+// themes
+import CustomInputTheme from './theme-customizations/Input.custom.scss';
+
+// theme overrides and identifiers
+import themeOverrides from './theme-overrides/customInput.scss';
 
 storiesOf('NumericInput', module)
-
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      value: '',
-      onChange: mobxAction((value, event) => {
-        state.value = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
-  })
-
   // ====== Stories ======
 
-  .add('Send amount - plain', () => <NumericInput skin={<SimpleInputSkin />} /> )
+  .add('plain',
+    withState({ value: '' }, store => (
+      <NumericInput
+        value={store.state.value}
+        maxBeforeDot={6}
+        maxAfterDot={6}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - label', () => (
-    <NumericInput
-      label="Amount"
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add('send amount - label',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Some label"
+        value={store.state.value}
+        maxBeforeDot={6}
+        maxAfterDot={6}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - placeholder', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add('send amount - placeholder',
+    withState({ value: '' }, store => (
+      <NumericInput
+        value={store.state.value}
+        placeholder="18.000000"
+        maxBeforeDot={6}
+        maxAfterDot={6}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - focus / blur', () => {
-    let input;
-    return (
-      <div>
-        <NumericInput
-          ref={(ref) => input = ref}
-          label="Amount"
-          onFocus={action('onFocus')}
-          onBlur={action('onBlur')}
-          skin={<SimpleInputSkin />}
-        />
-        <button onClick={() => input.focus()}>focus</button> | <button onClick={() => input.blur()}>blur</button>
-      </div>
-    );
-  })
+  .add('send amount - focus / blur',
+    withState({ value: '', focused: false, blurred: false }, store => (
+      <NumericInput
+        value={store.state.value}
+        placeholder="focus / blur"
+        maxBeforeDot={6}
+        maxAfterDot={6}
+        onChange={value => store.set({ value })}
+        onFocus={() => store.set({ focused: true })}
+        onBlur={() => store.set({ blurred: true })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - error', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      error="Please enter a valid amount"
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add('send amount - error',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Amount"
+        error="Please enter a valid amount"
+        value={store.state.value}
+        placeholder="0.000000"
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - beforeDot(3) and afterDot(4)', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.0000"
-      maxBeforeDot={3}
-      maxAfterDot={4}
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add('send amount - beforeDot(3) and afterDot(4)',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Amount"
+        value={store.state.value}
+        placeholder="000.0000"
+        maxBeforeDot={3}
+        maxAfterDot={4}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - maxValue(30000)', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      maxValue={30000}
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add('send amount - maxValue(30000) - unenforced',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Amount"
+        value={store.state.value}
+        placeholder="0.000000"
+        maxValue={30000}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - maxValue(30000) and minValue(1)', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      maxValue={30000}
-      minValue={1}
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add('send amount - minValue(50) - unenforced',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Amount"
+        value={store.state.value}
+        placeholder="0.000000"
+        minValue={50}
+        maxAfterDot={6}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('Send amount - onChange', () => (
-    <NumericInput
-      label="Amount"
-      placeholder="0.000000"
-      maxBeforeDot={12}
-      maxAfterDot={6}
-      maxValue={45000000000}
-      minValue={0.000001}
-      skin={<SimpleInputSkin />}
-    />
-  ));
+  .add('send amount - maxValue(30000), minValue(50) - unenforced',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Amount"
+        value={store.state.value}
+        placeholder="0.000000"
+        maxValue={30000}
+        minValue={50}
+        maxAfterDot={6}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add('send amount - maxValue(30000), minValue(50), enforceMax=true, enforceMin=true',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Amount"
+        value={store.state.value}
+        placeholder="50.000000"
+        maxValue={30000}
+        minValue={50}
+        maxAfterDot={6}
+        enforceMax
+        enforceMin
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add('send amount - onChange',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Amount"
+        value={store.state.value}
+        placeholder="0.000000"
+        maxBeforeDot={12}
+        maxAfterDot={6}
+        maxValue={45000000000}
+        minValue={0.000001}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add('theme overrides',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Amount"
+        themeOverrides={themeOverrides}
+        value={store.state.value}
+        placeholder="0.000000"
+        maxAfterDot={6}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add('custom theme',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Amount"
+        theme={CustomInputTheme}
+        value={store.state.value}
+        placeholder="0.000000"
+        maxAfterDot={6}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  );

@@ -1,21 +1,70 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SkinnableComponent from './SkinnableComponent';
-import { StringOrElement } from '../utils/props';
+// @flow
+import React, { Component } from 'react';
+import type { ComponentType, Element } from 'react';
 
-export default class Radio extends SkinnableComponent {
+// internal utility functions
+import { withTheme } from '../themes/withTheme';
+import { composeTheme, addThemeId } from '../utils';
 
-  static propTypes = Object.assign({}, SkinnableComponent.propTypes, {
-    selected: PropTypes.bool,
-    label: StringOrElement,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-  });
+// import constants
+import { IDENTIFIERS } from '../themes/API';
 
+type Props = {
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  disabled: boolean,
+  label: string | Element<any>,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  selected: boolean,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object
+};
+
+type State = {
+  composedTheme: Object
+};
+
+class Radio extends Component<Props, State> {
   static defaultProps = {
-    checked: false,
     disabled: false,
+    selected: false,
+    theme: null,
+    themeId: IDENTIFIERS.RADIO,
+    themeOverrides: {}
   };
 
+  constructor(props: Props) {
+    super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+
+    this.state = {
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      )
+    };
+  }
+
+  render() {
+    // destructuring props ensures only the "...rest" get passed down
+    const {
+      skin: RadioSkin,
+      theme,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
+
+    return <RadioSkin theme={this.state.composedTheme} {...rest} />;
+  }
 }
+
+export default withTheme(Radio);

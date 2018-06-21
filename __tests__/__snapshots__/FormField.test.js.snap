@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormField is disabled 1`] = `
+<div
+  className="root disabled"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <span>
+      true
+    </span>
+  </div>
+</div>
+`;
+
+exports[`FormField renders an input element 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <input
+      className="render-prop"
+    />
+  </div>
+</div>
+`;
+
+exports[`FormField renders correctly 1`] = `
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <div
+      className="render-prop"
+    />
+  </div>
+</div>
+`;
+
+exports[`FormField renders with an error 1`] = `
+<div
+  className="root errored"
+>
+  <div
+    className="error"
+  >
+    Add an Error
+  </div>
+  <div
+    className="inputWrapper"
+  >
+    <div
+      className="render-prop"
+    />
+  </div>
+</div>
+`;
+
+exports[`FormField renders with label 1`] = `
+<div
+  className="root"
+>
+  
+  <label
+    aria-hidden={true}
+    className="label"
+    onClick={[Function]}
+    role="presentation"
+  >
+    Add a Label
+  </label>
+  <div
+    className="inputWrapper"
+  >
+    <div
+      className="render-prop"
+    />
+  </div>
+</div>
+`;

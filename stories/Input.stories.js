@@ -1,85 +1,178 @@
+// @flow
 import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
-import Input from '../source/components/Input';
-import SimpleInputSkin from '../source/skins/simple/InputSkin';
+import { withState } from '@dump247/storybook-state';
+
+// components
+import { Input } from '../source/components';
+
+// skins
+import { InputSkin } from '../source/skins/simple';
+
+// themes
+import CustomInputTheme from './theme-customizations/Input.custom.scss';
+
+// theme overrides and identifiers
+import themeOverrides from './theme-overrides/customInput.scss';
 
 storiesOf('Input', module)
-
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      value: '',
-      onChange: mobxAction((value, event) => {
-        state.value = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
-  })
-
   // ====== Stories ======
 
-  .add('plain', () => <Input skin={<SimpleInputSkin />} />)
+  .add('plain',
+    withState({ value: '' }, store => (
+      <Input
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('label', () => <Input label="Some label" skin={<SimpleInputSkin />} />)
+  .add('label',
+    withState({ value: '' }, store => (
+      <Input
+        label="Some label"
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('placeholder', () => <Input placeholder="Username" skin={<SimpleInputSkin />} />)
+  .add('placeholder',
+    withState({ value: '' }, store => (
+      <Input
+        value={store.state.value}
+        placeholder="user name"
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add('autoFocus',
+    withState({ value: '' }, store => (
+      <Input
+        autoFocus
+        value={store.state.value}
+        placeholder="autoFocus"
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
   .add('disabled', () => (
     <Input
-      label="Disabled Input"
-      placeholder="disabled"
       disabled
-      skin={<SimpleInputSkin />}
+      label="Disabled Input"
+      placeholder="user name"
+      skin={InputSkin}
     />
   ))
 
-  .add('error', () => (
-    <div>
-      <Input label="With label" error="Something went wrong" skin={<SimpleInputSkin />} />
-      <Input value="Franz" error="Requires at least 8 characters" skin={<SimpleInputSkin />} />
-    </div>
-  ))
+  .add('error',
+    withState({ value: '' }, store => (
+      <Input
+        label="With Label"
+        error="Something went wrong"
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('type=password', () => {
-    return (
-      <Input value="secret" type="password" skin={<SimpleInputSkin />} />
-    );
-  })
+  .add('minLength(8)',
+    withState({ value: '' }, store => (
+      <Input
+        label="Input with min. 5 Characters"
+        value={store.state.value}
+        placeholder="min length"
+        minLength={8}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('focus / blur', () => {
-    let input;
-    return (
-      <div>
-        <Input
-          ref={(ref) => input = ref}
-          skin={<SimpleInputSkin />}
-          onFocus={action('onFocus')}
-          onBlur={action('onBlur')}
-        />
-        <button onClick={() => input.focus()}>focus</button> | <button onClick={() => input.blur()}>blur</button>
-      </div>
-    );
-  })
+  .add('maxLength(5)',
+    withState({ value: '' }, store => (
+      <Input
+        label="Input with max. 5 Characters"
+        value={store.state.value}
+        placeholder="max length"
+        maxLength={5}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('maxLength(5)', () => (
-    <Input
-      label="Input with max. 5 Characters"
-      onChange={mobxAction((value) => { state.value = value; })}
-      maxLength={5}
-      skin={<SimpleInputSkin />}
-    />
-  ))
+  .add('type=password',
+    withState({ value: '' }, store => (
+      <Input
+        value={store.state.value}
+        type="password"
+        placeholder="password"
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
 
-  .add('onChange / onKeyPress', () => {
-    return (
+  .add('focus / blur',
+    withState({ value: '', focused: false, blurred: false }, store => (
+      <Input
+        value={store.state.value}
+        placeholder="focus / blur"
+        onChange={value => store.set({ value })}
+        onFocus={() => store.set({ focused: true })}
+        onBlur={() => store.set({ blurred: true })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add('onKeyPress',
+    withState({ value: '' }, store => (
       <Input
         label="Type to see events logged"
+        value={store.state.value}
+        placeholder="max length"
+        maxLength={5}
         onKeyPress={action('onKeyPress')}
-        skin={<SimpleInputSkin />}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
       />
-    );
-  });
+    ))
+  )
+
+  .add('theme overrides',
+    withState({ value: '' }, store => (
+      <Input
+        label="Theme overrides"
+        themeOverrides={themeOverrides}
+        value={store.state.value}
+        placeholder="type here..."
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add('custom theme',
+    withState({ value: '' }, store => (
+      <Input
+        label="Custom theme"
+        theme={CustomInputTheme}
+        value={store.state.value}
+        placeholder="type here..."
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  );

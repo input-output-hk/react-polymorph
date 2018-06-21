@@ -1,67 +1,138 @@
+// @flow
 import React from 'react';
+
+// storybook
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { observable, action as mobxAction } from 'mobx';
-import PropsObserver from './support/PropsObserver';
-import Radio from '../source/components/Radio';
-import SimpleRadioSkin from '../source/skins/simple/RadioSkin';
+import { withState } from '@dump247/storybook-state';
+
+// components
+import { Radio } from '../source/components';
+
+// skins
+import { RadioSkin } from '../source/skins/simple';
+
+// themes
+import CustomRadioTheme from './theme-customizations/Radio.custom.scss';
+
+// custom styles & theme overrides
 import styles from './Radio.stories.scss';
+import themeOverrides from './theme-overrides/customRadio.scss';
 
 storiesOf('Radio', module)
-
-  .addDecorator((story) => {
-    const onChangeAction = action('onChange');
-    const state = observable({
-      selected: false,
-      onChange: mobxAction((value, event) => {
-        state.selected = value;
-        onChangeAction(value, event);
-      })
-    });
-    return <PropsObserver propsForChildren={state}>{story()}</PropsObserver>;
-  })
-
   // ====== Stories ======
 
-  .add('plain', () => <Radio skin={<SimpleRadioSkin />} />)
+  .add('plain',
+    withState({ selected: false }, store => (
+      <div className={styles.container}>
+        <Radio
+          selected={store.state.selected}
+          onChange={() => store.set({ selected: !store.state.selected })}
+          skin={RadioSkin}
+        />
+      </div>
+    ))
+  )
 
-  .add('disabled', () => <Radio disabled skin={<SimpleRadioSkin />} />)
-
-  .add('short label', () => (
-    <Radio
-      label="My radio"
-      skin={<SimpleRadioSkin />}
-    />
+  .add('disabled', () => (
+    <div className={styles.container}>
+      <Radio disabled skin={RadioSkin} />
+    </div>
   ))
 
-  .add('custom className', () => (
-    <Radio
-      label="My radio"
-      skin={<SimpleRadioSkin />}
-      className={styles.padding}
-    />
-  ))
+  .add('short label',
+    withState({ selected: false }, store => (
+      <div className={styles.container}>
+        <Radio
+          label="My radio"
+          selected={store.state.selected}
+          onChange={() => store.set({ selected: !store.state.selected })}
+          skin={RadioSkin}
+        />
+      </div>
+    ))
+  )
 
-  .add('disabled with label', () => (
-    <Radio
-      disabled
-      label="My radio"
-      skin={<SimpleRadioSkin />}
-    />
-  ))
+  .add('custom className',
+    withState({ selected: false }, store => (
+      <Radio
+        className={styles.padding}
+        selected={store.state.selected}
+        onChange={() => store.set({ selected: !store.state.selected })}
+        skin={RadioSkin}
+      />
+    ))
+  )
 
-  .add('long label', () => (
-    <Radio
-      skin={<SimpleRadioSkin />}
-      label="I understand that if this application is moved to another device or deleted,
-             my money can be only recovered with the backup phrase which
-             were written down in a secure place"
-    />
-  ))
+  .add('disabled with label',
+    withState({ selected: false }, store => (
+      <div className={styles.container}>
+        <Radio
+          disabled
+          label="My radio"
+          selected={store.state.selected}
+          onChange={() => store.set({ selected: !store.state.selected })}
+          skin={RadioSkin}
+        />
+      </div>
+    ))
+  )
 
-  .add('html label', () => (
-    <Radio
-      skin={<SimpleRadioSkin />}
-      label={<div>Example for a <strong>bold</strong> word in an html label</div>}
-    />
-  ));
+  .add('long label',
+    withState({ selected: false }, store => (
+      <div className={styles.container}>
+        <Radio
+          label="I understand that if this application is moved to another device
+                or deleted, my money can be only recovered with the backup phrase
+                which were written down in a secure place"
+          selected={store.state.selected}
+          onChange={() => store.set({ selected: !store.state.selected })}
+          skin={RadioSkin}
+        />
+      </div>
+    ))
+  )
+
+  .add('html label',
+    withState({ selected: false }, store => (
+      <div className={styles.container}>
+        <Radio
+          selected={store.state.selected}
+          onChange={() => store.set({ selected: !store.state.selected })}
+          skin={RadioSkin}
+          label={
+            <div>
+              Example for a <strong>bold</strong> word in an html label
+            </div>
+          }
+        />
+      </div>
+    ))
+  )
+
+  .add('theme overrides',
+    withState({ selected: false }, store => (
+      <div className={styles.container}>
+        <Radio
+          themeOverrides={themeOverrides}
+          label="Radio with a composed theme"
+          selected={store.state.selected}
+          onChange={() => store.set({ selected: !store.state.selected })}
+          skin={RadioSkin}
+        />
+      </div>
+    ))
+  )
+
+  .add('custom theme',
+    withState({ selected: false }, store => (
+      <div className={styles.container}>
+        <Radio
+          theme={CustomRadioTheme}
+          label="Radio with a custom theme"
+          selected={store.state.selected}
+          onChange={() => store.set({ selected: !store.state.selected })}
+          skin={RadioSkin}
+        />
+      </div>
+    ))
+  );

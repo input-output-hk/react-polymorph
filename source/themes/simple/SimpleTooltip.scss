@@ -1,19 +1,27 @@
-@import "theme";
-@import "mixins/arrow";
+@import 'theme';
+@import 'mixins/arrow';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-// GENERAL
 $tooltip-font-color: white !default;
 $tooltip-font-family: $theme-font-light, sans-serif !default;
+$tooltip-bg-color: #fafbfc !default;
 
 .root {
   position: relative;
+
+  // ======= SPECIAL STATES =======
+  &:hover {
+    .bubble {
+      display: block;
+    }
+  }
 }
 
 .bubble {
   font-family: $tooltip-font-family;
   color: $tooltip-font-color;
+  background-color: $tooltip-bg-color;
   display: none;
 }
 
@@ -27,12 +35,4 @@ $tooltip-font-family: $theme-font-light, sans-serif !default;
 
 .nowrap {
   white-space: nowrap;
-}
-
-
-// ======= SPECIAL STATES =======
-.root {
-  &:hover .bubble {
-    display: block;
-  }
 }

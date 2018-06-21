@@ -32,12 +32,16 @@ $form-field-error-margin: 1.5px 0 11.5px 0 !default;
   margin: $form-field-error-margin;
 }
 
+.inputWrapper {
+  position: relative;
+}
+
+// BEGIN SPECIAL STATES ---------- //
+
 .disabled {
   .label {
     color: $theme-color-disabled;
   }
 }
 
-.inputWrapper {
-  position: relative;
-}
+// END SPECIAL STATES ---------- //

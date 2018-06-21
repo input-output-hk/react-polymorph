@@ -1,7 +1,30 @@
+// @flow
 import React from 'react';
-import { themr } from 'react-css-themr';
-import { MODAL } from './identifiers';
-import DefaultModalTheme from '../../themes/simple/SimpleModal.scss';
-import ModalSkin from './raw/ModalSkin';
+import type { Node, Element } from 'react';
 
-export default themr(MODAL, DefaultModalTheme)(ModalSkin);
+// external libraries
+import ReactModal from 'react-modal';
+
+type Props = {
+  children: Node,
+  contentLabel: string | Element<any>,
+  isOpen: boolean,
+  onClose: Function,
+  triggerCloseOnOverlayClick: boolean,
+  theme: Object,
+  themeId: string
+};
+
+export default (props: Props) => (
+  <ReactModal
+    contentLabel={props.contentLabel}
+    isOpen={props.isOpen}
+    onRequestClose={props.onClose}
+    shouldCloseOnOverlayClick={props.triggerCloseOnOverlayClick}
+    className={props.theme[props.themeId].modal}
+    overlayClassName={props.theme[props.themeId].overlay}
+    ariaHideApp={false}
+  >
+    {props.children}
+  </ReactModal>
+);

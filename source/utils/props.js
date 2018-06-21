@@ -1,6 +1,14 @@
-import PropTypes from 'prop-types';
+// @flow
 import filterReactDomProps from 'filter-react-dom-props';
 
-export const pickDOMProps = filterReactDomProps;
+// filters out / prevents invalid props from being rendered to the dom
+// which would generate an error/warning
+const pickDOMProps = filterReactDomProps;
 
-export const StringOrElement = PropTypes.oneOfType([PropTypes.string, PropTypes.element]);
+const composeFunctions = (...fns: [Function, Function]) => (...args: [any, any]) =>
+  fns.forEach(fn => fn && fn(...args));
+
+export default {
+  pickDOMProps,
+  composeFunctions
+};

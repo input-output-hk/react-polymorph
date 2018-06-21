@@ -1,60 +1,106 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import FormField from './FormField';
-import Input from './Input';
+// @flow
+import React, { Component } from 'react';
+import type { ComponentType, Element } from 'react';
+import createRef from 'create-react-ref/lib/createRef';
 
-export default class Select extends FormField {
+// internal utility functions
+import { withTheme } from '../themes/withTheme';
+import { composeTheme, addThemeId } from '../utils';
 
-  static SKIN_PARTS = {
-    ROOT: 'root',
-    INPUT: Input.SKIN_PARTS.INPUT,
-  };
+// import constants
+import { IDENTIFIERS } from '../themes/API';
 
-  // Handle props used strictly for Select parent element which is in this case Input.
-  // Other props (Options props) are same for different parent elements and must be handled on one place - Options
-  static propTypes = Object.assign({}, FormField.propTypes, {
-    options: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      isDisabled: PropTypes.bool,
-    })).isRequired,
-    value: PropTypes.string,
-    allowBlank: PropTypes.bool,
-    placeholder: PropTypes.string,
-  });
+type Props = {
+  allowBlank: boolean,
+  autoFocus: boolean,
+  error: string | Element<any>,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  isOpeningUpward: boolean,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  optionRenderer: Function,
+  options: Array<{
+    isDisabled: boolean,
+    value: any
+  }>,
+  label: string | Element<any>,
+  placeholder: string,
+  skin: ComponentType<any>,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object,
+  value: string
+};
+
+type State = {
+  composedTheme: Object,
+  isOpen: boolean
+};
+
+class Select extends Component<Props, State> {
+  inputElement: Element<'input'>;
 
   static defaultProps = {
     allowBlank: true,
+    autoFocus: false,
+    isOpeningUpward: false,
+    theme: null,
+    themeOverrides: {},
+    themeId: IDENTIFIERS.SELECT,
+    value: ''
   };
 
-  state = {
-    isOpen: false,
-  };
+  constructor(props: Props) {
+    super(props);
 
-  prepareSkinProps(props) {
-    return Object.assign({}, super.prepareSkinProps(props), {
-      isOpen: this.state.isOpen,
-    });
+    // define ref
+    this.inputElement = createRef();
+
+    const { context, themeId, theme, themeOverrides } = props;
+
+    this.state = {
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
+      isOpen: false
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.autoFocus) {
+      return this.focus();
+    }
   }
 
   // ========= PUBLIC SKIN API =========
 
   // Focus the component - toggle dropdown
-  focus = () => this.toggleOptions();
+  focus = () => this.toggleOpen();
 
-  onCloseOptions = () => {
-    this.setState({ isOpen: false });
+  toggleOpen = () => {
+    this.setState({ isOpen: !this.state.isOpen });
   };
 
-  handleInputClick = (event) => {
+  handleInputClick = (event: SyntheticMouseEvent<>) => {
     event.stopPropagation();
     event.preventDefault();
-    this._getInputSkinPart().blur();
-    this.toggleOptions();
+
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      inputElement.current.blur();
+    }
+    this.toggleOpen();
   };
 
-  handleChange = (option, event) => {
+  handleChange = (option: Object, event: SyntheticEvent<>) => {
     if (this.props.onChange) this.props.onChange(option.value, event);
-    this.toggleOptions();
+    this.toggleOpen();
   };
 
   getSelectedOption = () => {
@@ -65,14 +111,31 @@ export default class Select extends FormField {
     if (!allowBlank) return options[0];
   };
 
-  toggleOptions = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
+  render() {
+    // destructuring props ensures only the "...rest" get passed down
+    const {
+      skin: SelectSkin,
+      theme,
+      themeOverrides,
+      autoFocus,
+      context,
+      allowBlank,
+      ...rest
+    } = this.props;
 
-  // ========= PRIVATE HELPERS =========
-
-  _getInputSkinPart() {
-    return this.skinParts[Select.SKIN_PARTS.INPUT];
+    return (
+      <SelectSkin
+        isOpen={this.state.isOpen}
+        inputRef={this.inputElement}
+        theme={this.state.composedTheme}
+        getSelectedOption={this.getSelectedOption}
+        handleInputClick={this.handleInputClick}
+        handleChange={this.handleChange}
+        toggleOpen={this.toggleOpen}
+        {...rest}
+      />
+    );
   }
-
 }
+
+export default withTheme(Select);

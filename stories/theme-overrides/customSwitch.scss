@@ -1,0 +1,46 @@
+@mixin thumbBoxShadow($color) {
+  box-shadow: -1.5px -1.5px 0 $color inset, 1.5px 1.5px 0 $color inset,
+    1.5px -1.5px 0 $color inset, -1.5px 1.5px 0 $color inset;
+}
+
+.switch {
+  transition: all 0.3s ease-in-out;
+
+  &.checked {
+    border-radius: 0px;
+    background-color: rgba(10, 145, 48, 0.6);
+
+    .thumb {
+      border-radius: 0px;
+      @include thumbBoxShadow(rgba(10, 145, 48, 0.9));
+    }
+
+    &:hover {
+      box-shadow: 0 0 5px 1px #c6cdd6;
+      -webkit-box-shadow: 0 0 5px 1px #c6cdd6;
+      -moz-box-shadow: 0 0 5px 1px #c6cdd6;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &:not(.checked) {
+    &:hover {
+      box-shadow: 0 0 5px 1px rgba(10, 145, 48, 0.4);
+      -webkit-box-shadow: 0 0 5px 1px rgba(10, 145, 48, 0.4);
+      -moz-box-shadow: 0 0 5px 1px rgba(10, 145, 48, 0.4);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}
+
+.checked {
+  .label {
+    color: #5e6066;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.label {
+  color: rgba(10, 145, 48, 0.6);
+  transition: all 0.2s ease-in-out;
+}

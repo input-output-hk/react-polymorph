@@ -18,81 +18,93 @@ $autocomplete-placeholder-color: rgba(#5e6066, 0.5) !default;
 $autocomplete-selected-words-font-family: $theme-font-light, sans-serif !default;
 $autocomplete-selected-word-box-min-height: 28px !default;
 $autocomplete-selected-word-text-color: #fafbfc !default;
-$autocomplete-selected-word-box-background-color: rgba(68, 91, 124, 0.5) !default;
+$autocomplete-selected-word-box-background-color: rgba(
+  68,
+  91,
+  124,
+  0.5
+) !default;
 
 .autocompleteWrapper {
-  .autocompleteContent {
-    background-color: $autocomplete-bg-color;
-    border: $autocomplete-border;
-    border-radius: $autocomplete-border-radius;
-    box-sizing: border-box;
+}
+
+.autocompleteContent {
+  background-color: $autocomplete-bg-color;
+  border: $autocomplete-border;
+  border-radius: $autocomplete-border-radius;
+  box-sizing: border-box;
+  font-size: $autocomplete-font-size;
+  min-height: $autocomplete-min-height;
+  padding: $autocomplete-padding;
+  width: 100%;
+
+  &:hover {
+    cursor: text;
+  }
+
+  input {
+    background: transparent;
+    border: 0;
+    color: $autocomplete-search-color;
+    display: block;
+    flex: 1;
+    font-family: $autocomplete-input-font-family;
     font-size: $autocomplete-font-size;
-    min-height: $autocomplete-min-height;
-    padding: $autocomplete-padding;
-    width: 100%;
+    height: $autocomplete-selected-word-box-min-height;
+    margin: 6px 0;
+    max-width: 100%;
+    outline: none;
+    padding: 0;
 
-    &:hover {
-      cursor: text;
-    }
-
-    &.opened {
-      border-color: $autocomplete-border-focus-color !important;
-    }
-
-    &.errored {
-      border-color: $autocomplete-error-color;
-    }
-
-    &.hasSelectedWords {}
-
-    .selectedWords {
-      display: flex;
-      flex-wrap: wrap;
-      min-height: $autocomplete-selected-word-box-min-height;
-      font-family: $autocomplete-selected-words-font-family;
-
-      .selectedWordBox {
-        background: $autocomplete-selected-word-box-background-color;
-        border-radius: 5px;
-        box-sizing: border-box;
-        display: flex;
-        height: 28px;
-        margin: 6px 12px 6px 0;
-        padding: 3px 9px;
-        position: relative;
-
-        .selectedWordValue {
-          color: $autocomplete-selected-word-text-color;
-          font-size: 16px;
-          line-height: 1.38;
-
-          .selectedWordRemoveButton {
-            font-size: 16px;
-            cursor: pointer;
-            margin-left: 8px;
-          }
-        }
-      }
-
-      input {
-        background: transparent;
-        border: 0;
-        color: $autocomplete-search-color;
-        display: block;
-        flex: 1;
-        font-family: $autocomplete-input-font-family;
-        font-size: $autocomplete-font-size;
-        height: $autocomplete-selected-word-box-min-height;
-        margin: 6px 0;
-        max-width: 100%;
-        outline: none;
-        padding: 0;
-
-        &::-webkit-input-placeholder {
-          color: $autocomplete-placeholder-color;
-          font-family: $autocomplete-placeholder-font-family;
-        }
-      }
+    &::-webkit-input-placeholder {
+      color: $autocomplete-placeholder-color;
+      font-family: $autocomplete-placeholder-font-family;
     }
   }
 }
+
+.selectedWords {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: $autocomplete-selected-word-box-min-height;
+  font-family: $autocomplete-selected-words-font-family;
+}
+
+.selectedWordBox {
+  background-color: $autocomplete-selected-word-box-background-color;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  height: 28px;
+  margin: 6px 12px 6px 0;
+  padding: 3px 9px;
+  position: relative;
+}
+
+.selectedWordValue {
+  color: $autocomplete-selected-word-text-color;
+  font-size: 16px;
+  line-height: 1.38;
+}
+
+.selectedWordRemoveButton {
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 8px;
+  color: inherit;
+}
+
+// BEGIN SPECIAL STATES ---------- //
+
+.hasSelectedWords {
+}
+
+.opened {
+  border-color: $autocomplete-border-focus-color;
+}
+
+.errored {
+  border-color: $autocomplete-error-color;
+}
+
+// END SPECIAL STATES ---------- //

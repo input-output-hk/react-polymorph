@@ -1,8 +1,52 @@
+// @flow
 import React from 'react';
-import { themr } from 'react-css-themr';
-import { INPUT } from './identifiers';
-import DefaultInputTheme from '../../themes/simple/SimpleInput.scss';
-import { inputSkinFactory } from './raw/InputSkin';
-import FormFieldSkin from './FormFieldSkin';
+import type { Ref } from 'react';
 
-export default themr(INPUT, DefaultInputTheme)(inputSkinFactory(FormFieldSkin));
+// external libraries
+import classnames from 'classnames';
+
+// components & skins
+import { FormField } from '../../components';
+import { FormFieldSkin } from './';
+
+// internal utility functions
+import { pickDOMProps } from '../../utils';
+
+type Props = {
+  className: string,
+  disabled: boolean,
+  error: string,
+  label: string,
+  inputRef: Ref<'input'>,
+  onBlur: Function,
+  onChange: Function,
+  onFocus: Function,
+  onKeyPress: Function,
+  placeholder: string,
+  readOnly: boolean,
+  theme: Object,
+  themeId: string,
+  value: string
+};
+
+export default (props: Props) => (
+  <FormField
+    className={props.className}
+    disabled={props.disabled}
+    label={props.label}
+    error={props.error}
+    skin={FormFieldSkin}
+    render={() => (
+      <input
+        ref={props.inputRef}
+        {...pickDOMProps(props)}
+        className={classnames([
+          props.theme[props.themeId].input,
+          props.disabled ? props.theme[props.themeId].disabled : null,
+          props.error ? props.theme[props.themeId].errored : null
+        ])}
+        readOnly={props.readOnly}
+      />
+    )}
+  />
+);

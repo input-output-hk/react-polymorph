@@ -1,0 +1,21 @@
+.root {
+  margin-top: 25px;
+  margin-left: 25px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  width: 50%;
+  border-radius: 0px;
+  border: 2px solid rgba(10, 145, 48, 0.8);
+  background-color: rgba(10, 145, 48, 0.8);
+  transition: all 0.2s ease-in-out;
+
+  &:not(.disabled) {
+    &:hover {
+      border-radius: 3px;
+      background-color: white;
+      border: 2px solid rgba(10, 145, 48, 0.8);
+      color: rgba(10, 145, 48, 0.8);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+// Checkbox theme customizations
+$checkbox-size: 40px;
+$checkbox-border-color: #436e43;
+$checkbox-label-color: #0f492d;
+$checkbox-checked-bg-color: $checkbox-border-color;
+$checkbox-check-thickness: 3px;
+
+@import "../../source/themes/simple/SimpleCheckbox";

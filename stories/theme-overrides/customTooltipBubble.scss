@@ -1,0 +1,8 @@
+.root {
+  &:not(.transparent) {
+    .bubble {
+      color: rgba(10, 145, 48, 0.8);
+      box-shadow: 0 1.5px 5px 0 rgba(10, 145, 48, 0.8);
+    }
+  }
+}

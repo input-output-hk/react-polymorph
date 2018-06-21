@@ -4,7 +4,7 @@
 
 $radio-size: 30px !default;
 $radio-color: white !default;
-$radio-border-color: #294B70 !default;
+$radio-border-color: #294b70 !default;
 $radio-border-width: 1px !default;
 
 $radio-border-disabled-color: $theme-color-disabled !default;
@@ -20,11 +20,9 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
     cursor: pointer;
   }
   &.disabled {
-    &:hover, .label:hover {
+    &:hover,
+    .label:hover {
       cursor: default;
-    }
-    .label {
-      color: $radio-label-disabled-color;
     }
   }
 }
@@ -46,8 +44,35 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
   flex-shrink: 0;
   height: $radio-size;
   width: $radio-size;
+}
 
-  &.selected {
+.label {
+  color: $radio-label-color;
+  font-family: $theme-font-light;
+  font-size: 16px;
+  line-height: $radio-size;
+  margin-left: 20px;
+  white-space: normal;
+  display: inline-block;
+  vertical-align: middle;
+  &:hover {
+    cursor: pointer;
+  }
+  strong {
+    font-weight: 800;
+  }
+}
+
+// BEGIN SPECIAL STATES ---------- //
+
+.disabled {
+  .label {
+    color: $radio-label-disabled-color;
+  }
+}
+
+.selected {
+  .circle {
     background-color: $radio-border-color;
     border-width: 0;
     position: relative;
@@ -64,20 +89,4 @@ $radio-label-disabled-color: $theme-color-light-grey !default;
   }
 }
 
-
-.label {
-  color: $radio-label-color;
-  font-family: $theme-font-light;
-  font-size: 16px;
-  line-height: 1.38;
-  margin-left: 20px;
-  white-space: normal;
-  display: inline-block;
-  vertical-align: middle;
-  &:hover {
-    cursor: pointer;
-  }
-  strong {
-    font-family: $theme-font-bold;
-  }
-}
+// END SPECIAL STATES ---------- //
