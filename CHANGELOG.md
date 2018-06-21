@@ -2,6 +2,8 @@
 
 ## vNEXT
 
+## 0.7.0
+
 ### Fixes
 
 - Fixed broken right-to-left positiong of selected option checkmark [PR 62](https://github.com/input-output-hk/react-polymorph/pull/62)
