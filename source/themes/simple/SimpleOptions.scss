@@ -76,6 +76,9 @@ $options-bubble-arrow: true !default;
 
   &.selectedOption {
     display: flex;
+    .label {
+      flex-grow: 1;
+    }
     &:after {
       align-self: center;
       border-color: $option-checkmark-color;

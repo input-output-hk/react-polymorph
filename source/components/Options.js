@@ -302,7 +302,6 @@ class Options extends Component<Props, State> {
     return {
       keydown: this._handleKeyDown,
       click: this._handleDocumentClick,
-      touchend: this._handleDocumentClick,
       scroll: this._handleScroll
     };
   }

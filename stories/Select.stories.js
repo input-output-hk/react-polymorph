@@ -172,6 +172,19 @@ storiesOf('Select', module)
     ))
   )
 
+  .add('countries - rtl support',
+    withState({ value: COUNTRIES[0].value }, store => (
+      <div dir="rtl">
+        <Select
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+          options={COUNTRIES}
+          skin={SelectSkin}
+        />
+      </div>
+    ))
+  )
+
   .add('custom theme',
     withState({ value: '' }, store => (
       <Select
