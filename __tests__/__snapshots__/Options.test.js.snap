@@ -3,11 +3,11 @@
 exports[`Options renders correctly 1`] = `
 <div>
   <div
-    className="options firstOptionHighlighted"
+    className="options firstOptionHighlighted root isFloating isHidden"
     style={null}
   >
     <div
-      className={undefined}
+      className="bubble"
       data-bubble-container={true}
     >
       <ul
@@ -124,7 +124,7 @@ exports[`Options renders correctly 1`] = `
       </ul>
     </div>
     <span
-      className={undefined}
+      className="arrow"
       data-bubble-arrow={true}
     />
   </div>
@@ -134,11 +134,11 @@ exports[`Options renders correctly 1`] = `
 exports[`Options uses render prop - optionRenderer 1`] = `
 <div>
   <div
-    className="options firstOptionHighlighted"
+    className="options firstOptionHighlighted root isFloating isHidden"
     style={null}
   >
     <div
-      className={undefined}
+      className="bubble"
       data-bubble-container={true}
     >
       <ul
@@ -227,7 +227,7 @@ exports[`Options uses render prop - optionRenderer 1`] = `
       </ul>
     </div>
     <span
-      className={undefined}
+      className="arrow"
       data-bubble-arrow={true}
     />
   </div>
@@ -237,11 +237,11 @@ exports[`Options uses render prop - optionRenderer 1`] = `
 exports[`Options uses render prop - render 1`] = `
 <div>
   <div
-    className="options firstOptionHighlighted"
+    className="options firstOptionHighlighted root isFloating isHidden"
     style={null}
   >
     <div
-      className={undefined}
+      className="bubble"
       data-bubble-container={true}
     >
       <ul
@@ -310,7 +310,7 @@ exports[`Options uses render prop - render 1`] = `
       </ul>
     </div>
     <span
-      className={undefined}
+      className="arrow"
       data-bubble-arrow={true}
     />
   </div>
