@@ -2,6 +2,12 @@
 
 ## vNEXT
 
+## 0.7.0
+
+### Fixes
+
+- Fixed broken right-to-left positiong of selected option checkmark [PR 62](https://github.com/input-output-hk/react-polymorph/pull/62)
+
 ### Chores
 
 - Adds keydown and click simulation tests for Autocomplete using jest and enzyme. Removes helper skins from test directory and refactors the way in which components are wrapped in a ThemeContext Consumer HOC before they're exported in order to handle a test environment. [PR 63](https://github.com/input-output-hk/react-polymorph/pull/63)

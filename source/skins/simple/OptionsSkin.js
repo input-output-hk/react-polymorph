@@ -59,7 +59,7 @@ export const OptionsSkin = (props: Props) => {
     if (optionRenderer) {
       return optionRenderer(option);
     } else if (typeof option === 'object') {
-      return option.label;
+      return <span className={theme[themeId].label}>{option.label}</span>;
     }
     return option;
   };
