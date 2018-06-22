@@ -45,7 +45,11 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -54,7 +58,11 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -63,7 +71,11 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -72,7 +84,11 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -81,7 +97,11 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
         </ul>
       </div>
@@ -139,7 +159,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -148,7 +172,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -157,7 +185,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -166,7 +198,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -175,7 +211,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
         </ul>
       </div>
@@ -233,7 +273,11 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -242,7 +286,11 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -251,7 +299,11 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -260,7 +312,11 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -269,7 +325,11 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
         </ul>
       </div>
@@ -331,7 +391,11 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -340,7 +404,11 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -349,7 +417,11 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -358,7 +430,11 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -367,7 +443,11 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
         </ul>
       </div>
@@ -425,7 +505,11 @@ exports[`Select renders with disabled options 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            England
+            <span
+              className="label"
+            >
+              England
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -434,7 +518,11 @@ exports[`Select renders with disabled options 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spain
+            <span
+              className="label"
+            >
+              Spain
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -443,7 +531,11 @@ exports[`Select renders with disabled options 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Thailand
+            <span
+              className="label"
+            >
+              Thailand
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -452,7 +544,11 @@ exports[`Select renders with disabled options 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            USA
+            <span
+              className="label"
+            >
+              USA
+            </span>
           </li>
         </ul>
       </div>
@@ -510,7 +606,11 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -519,7 +619,11 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -528,7 +632,11 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -537,7 +645,11 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -546,7 +658,11 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
         </ul>
       </div>
