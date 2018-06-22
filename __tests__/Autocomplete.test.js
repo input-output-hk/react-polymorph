@@ -2,9 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 
-import { Autocomplete } from '../source/components/Autocomplete';
-import AutocompleteSkin from './helpers/AutocompleteSkin';
-import { CONTEXT } from './helpers/context';
+import { Autocomplete } from '../source/components';
+import { AutocompleteSkin } from '../source/skins/simple';
 
 const OPTIONS = [
   'home',
@@ -47,7 +46,6 @@ test('Autocomplete renders correctly', () => {
   const component = renderer.create(
     <Autocomplete
       options={OPTIONS}
-      context={CONTEXT}
       skin={AutocompleteSkin}
     />
   );
@@ -61,7 +59,6 @@ test('Autocomplete renders with label', () => {
     <Autocomplete
       label="Enter your recovery phrase below"
       options={OPTIONS}
-      context={CONTEXT}
       skin={AutocompleteSkin}
     />
   );
@@ -75,7 +72,6 @@ test('Autocomplete renders with a placeholder', () => {
     <Autocomplete
       placeholder="Enter recovery phrase"
       options={OPTIONS}
-      context={CONTEXT}
       skin={AutocompleteSkin}
     />
   );
@@ -89,7 +85,6 @@ test('Autocomplete renders with an error', () => {
     <Autocomplete
       error="Your mnemonic phrase is incorrect"
       options={OPTIONS}
-      context={CONTEXT}
       skin={AutocompleteSkin}
     />
   );
@@ -102,7 +97,6 @@ test('Autocomplete uses render prop - renderSelections', () => {
   const component = renderer.create(
     <Autocomplete
       options={OPTIONS}
-      context={CONTEXT}
       skin={AutocompleteSkin}
       renderSelections={getSelectionProps => {
         const { selectedOptions, removeSelection } = getSelectionProps();
@@ -129,7 +123,6 @@ test('Autocomplete uses render prop - renderOptions', () => {
   const component = renderer.create(
     <Autocomplete
       options={OPTIONS}
-      context={CONTEXT}
       skin={AutocompleteSkin}
       renderOptions={getOptionProps => {
         const { options } = getOptionProps({});
@@ -152,11 +145,10 @@ describe('Autocomplete onChange simulations', () => {
     const wrapper = mount(
       <Autocomplete
         options={MNEMONIC_WORDS}
-        context={CONTEXT}
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.instance();
+    const component = wrapper.find('AutocompleteBase').instance();
     const input = wrapper.find('input');
     const options = wrapper.find('div.options');
 
@@ -181,11 +173,10 @@ describe('Autocomplete onChange simulations', () => {
     const wrapper = mount(
       <Autocomplete
         options={MNEMONIC_WORDS}
-        context={CONTEXT}
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.instance();
+    const component = wrapper.find('AutocompleteBase').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -219,11 +210,10 @@ describe('Autocomplete onChange simulations', () => {
     const wrapper = mount(
       <Autocomplete
         options={MNEMONIC_WORDS}
-        context={CONTEXT}
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.instance();
+    const component = wrapper.find('AutocompleteBase').instance();
     const input = wrapper.find('input');
     const options = wrapper.find('div.options');
 
@@ -245,11 +235,10 @@ describe('Autocomplete onChange simulations', () => {
     const wrapper = mount(
       <Autocomplete
         options={MNEMONIC_WORDS}
-        context={CONTEXT}
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.instance();
+    const component = wrapper.find('AutocompleteBase').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -292,12 +281,10 @@ describe('Autocomplete onChange simulations', () => {
     const wrapper = mount(
       <Autocomplete
         options={MNEMONIC_WORDS}
-        context={CONTEXT}
         skin={AutocompleteSkin}
       />
     );
-
-    const component = wrapper.instance();
+    const component = wrapper.find('AutocompleteBase').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -323,12 +310,10 @@ describe('Autocomplete onChange simulations', () => {
     const wrapper = mount(
       <Autocomplete
         options={MNEMONIC_WORDS}
-        context={CONTEXT}
         skin={AutocompleteSkin}
       />
     );
-
-    const component = wrapper.instance();
+    const component = wrapper.find('AutocompleteBase').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -354,12 +339,10 @@ describe('Autocomplete onChange simulations', () => {
     const wrapper = mount(
       <Autocomplete
         options={MNEMONIC_WORDS}
-        context={CONTEXT}
         skin={AutocompleteSkin}
       />
     );
-
-    const component = wrapper.instance();
+    const component = wrapper.find('AutocompleteBase').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -385,12 +368,10 @@ describe('Autocomplete onChange simulations', () => {
     const wrapper = mount(
       <Autocomplete
         options={MNEMONIC_WORDS}
-        context={CONTEXT}
         skin={AutocompleteSkin}
       />
     );
-
-    const component = wrapper.instance();
+    const component = wrapper.find('AutocompleteBase').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
