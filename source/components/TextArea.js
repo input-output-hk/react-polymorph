@@ -42,7 +42,7 @@ type State = {
   composedTheme: Object
 };
 
-class TextArea extends Component<Props, State> {
+class TextAreaBase extends Component<Props, State> {
   textareaElement: Element<'textarea'>;
 
   static defaultProps = {
@@ -203,4 +203,4 @@ class TextArea extends Component<Props, State> {
   }
 }
 
-export default withTheme(TextArea);
+export const TextArea = withTheme(TextAreaBase);

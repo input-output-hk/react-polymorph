@@ -49,7 +49,7 @@ type State = {
   oldValue: string
 };
 
-export class NumericInput extends Component<Props, State> {
+class NumericInputBase extends Component<Props, State> {
   inputElement: Element<'input'>;
 
   static defaultProps = {
@@ -471,4 +471,4 @@ export class NumericInput extends Component<Props, State> {
   }
 }
 
-export default withTheme(NumericInput);
+export const NumericInput = withTheme(NumericInputBase);

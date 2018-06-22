@@ -30,7 +30,7 @@ type State = {
   composedTheme: Object
 };
 
-class Tooltip extends Component<Props, State> {
+class TooltipBase extends Component<Props, State> {
   static defaultProps = {
     isOpeningUpward: true,
     isTransparent: true,
@@ -61,4 +61,4 @@ class Tooltip extends Component<Props, State> {
   }
 }
 
-export default withTheme(Tooltip);
+export const Tooltip = withTheme(TooltipBase);

@@ -25,7 +25,7 @@ type State = {
   theme: Object
 };
 
-class ThemeProvider extends Component<Props, State> {
+export class ThemeProvider extends Component<Props, State> {
   static defaultProps = {
     themeOverrides: {}
   };
@@ -94,5 +94,3 @@ class ThemeProvider extends Component<Props, State> {
     );
   }
 }
-
-export default ThemeProvider;

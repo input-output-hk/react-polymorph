@@ -30,7 +30,7 @@ type State = {
   composedTheme: Object
 };
 
-export class FormField extends Component<Props, State> {
+class FormFieldBase extends Component<Props, State> {
   child: Element<'input'>;
 
   static defaultProps = {
@@ -91,4 +91,4 @@ export class FormField extends Component<Props, State> {
   }
 }
 
-export default withTheme(FormField);
+export const FormField = withTheme(FormFieldBase);

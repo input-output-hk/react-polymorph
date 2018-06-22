@@ -28,7 +28,7 @@ type State = {
   composedTheme: Object
 };
 
-class Button extends Component<Props, State> {
+class ButtonBase extends Component<Props, State> {
   static defaultProps = {
     disabled: false,
     theme: null,
@@ -64,4 +64,4 @@ class Button extends Component<Props, State> {
   }
 }
 
-export default withTheme(Button);
+export const Button = withTheme(ButtonBase);
