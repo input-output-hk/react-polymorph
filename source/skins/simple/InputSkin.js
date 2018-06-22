@@ -29,7 +29,7 @@ type Props = {
   value: string
 };
 
-export default (props: Props) => (
+export const InputSkin = (props: Props) => (
   <FormField
     className={props.className}
     disabled={props.disabled}

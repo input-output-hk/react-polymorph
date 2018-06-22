@@ -18,7 +18,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => {
+export const SwitchSkin = (props: Props) => {
   const { theme, themeId } = props;
   return (
     <div

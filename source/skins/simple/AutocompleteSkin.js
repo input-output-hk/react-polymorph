@@ -41,7 +41,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => {
+export const AutocompleteSkin = (props: Props) => {
   const theme = props.theme[props.themeId];
 
   const filteredAndLimitedOptions = _.slice(

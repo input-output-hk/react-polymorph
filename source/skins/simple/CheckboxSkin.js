@@ -17,7 +17,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => (
+export const CheckboxSkin = (props: Props) => (
   <div
     role="presentation"
     aria-hidden

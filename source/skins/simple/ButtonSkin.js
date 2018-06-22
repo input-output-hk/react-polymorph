@@ -16,7 +16,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => (
+export const ButtonSkin = (props: Props) => (
   <button
     {...pickDOMProps(props)}
     className={classnames([

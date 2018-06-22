@@ -31,7 +31,7 @@ type Props = {
   themeId: string,
 };
 
-export default (props: Props) => {
+export const OptionsSkin = (props: Props) => {
   const {
     getOptionProps,
     render,

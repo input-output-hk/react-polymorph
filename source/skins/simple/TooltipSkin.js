@@ -26,7 +26,7 @@ type Props = {
   tip: string | Element<any>
 };
 
-export default (props: Props) => {
+export const TooltipSkin = (props: Props) => {
   const { theme, themeId } = props;
   return (
     <span

@@ -18,7 +18,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => (
+export const FormFieldSkin = (props: Props) => (
   <div
     className={classnames([
       props.className,
