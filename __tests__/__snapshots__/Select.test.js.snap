@@ -8,11 +8,11 @@ exports[`Select isOpen={true} 1`] = `
     className="selectInput"
   >
     <div
-      className=""
+      className="root"
     >
       
       <div
-        className={undefined}
+        className="inputWrapper"
       >
         <input
           className="input"
@@ -28,11 +28,11 @@ exports[`Select isOpen={true} 1`] = `
   </div>
   <div>
     <div
-      className="options isOpen firstOptionHighlighted"
+      className="options isOpen firstOptionHighlighted root isFloating"
       style={null}
     >
       <div
-        className={undefined}
+        className="bubble"
         data-bubble-container={true}
       >
         <ul
@@ -45,7 +45,11 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -54,7 +58,11 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -63,7 +71,11 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -72,7 +84,11 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -81,12 +97,16 @@ exports[`Select isOpen={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
         </ul>
       </div>
       <span
-        className={undefined}
+        className="arrow"
         data-bubble-arrow={true}
       />
     </div>
@@ -102,11 +122,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
     className="selectInput"
   >
     <div
-      className=""
+      className="root"
     >
       
       <div
-        className={undefined}
+        className="inputWrapper"
       >
         <input
           className="input"
@@ -122,11 +142,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
   </div>
   <div>
     <div
-      className="options openUpward"
+      className="options openUpward root openUpward isFloating isHidden"
       style={null}
     >
       <div
-        className={undefined}
+        className="bubble"
         data-bubble-container={true}
       >
         <ul
@@ -139,7 +159,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -148,7 +172,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -157,7 +185,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -166,7 +198,11 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -175,12 +211,16 @@ exports[`Select isOpeningUpward={true} 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
         </ul>
       </div>
       <span
-        className={undefined}
+        className="arrow"
         data-bubble-arrow={true}
       />
     </div>
@@ -196,11 +236,11 @@ exports[`Select renders correctly 1`] = `
     className="selectInput"
   >
     <div
-      className=""
+      className="root"
     >
       
       <div
-        className={undefined}
+        className="inputWrapper"
       >
         <input
           className="input"
@@ -216,11 +256,11 @@ exports[`Select renders correctly 1`] = `
   </div>
   <div>
     <div
-      className="options firstOptionHighlighted"
+      className="options firstOptionHighlighted root isFloating isHidden"
       style={null}
     >
       <div
-        className={undefined}
+        className="bubble"
         data-bubble-container={true}
       >
         <ul
@@ -233,7 +273,11 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -242,7 +286,11 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -251,7 +299,11 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -260,7 +312,11 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -269,12 +325,16 @@ exports[`Select renders correctly 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
         </ul>
       </div>
       <span
-        className={undefined}
+        className="arrow"
         data-bubble-arrow={true}
       />
     </div>
@@ -290,15 +350,15 @@ exports[`Select renders with an error 1`] = `
     className="selectInput"
   >
     <div
-      className=""
+      className="root errored"
     >
       <div
-        className={undefined}
+        className="error"
       >
         Please select a different option
       </div>
       <div
-        className={undefined}
+        className="inputWrapper"
       >
         <input
           className="input errored"
@@ -314,11 +374,11 @@ exports[`Select renders with an error 1`] = `
   </div>
   <div>
     <div
-      className="options firstOptionHighlighted"
+      className="options firstOptionHighlighted root isFloating isHidden"
       style={null}
     >
       <div
-        className={undefined}
+        className="bubble"
         data-bubble-container={true}
       >
         <ul
@@ -331,7 +391,11 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -340,7 +404,11 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -349,7 +417,11 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -358,7 +430,11 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -367,12 +443,16 @@ exports[`Select renders with an error 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
         </ul>
       </div>
       <span
-        className={undefined}
+        className="arrow"
         data-bubble-arrow={true}
       />
     </div>
@@ -388,11 +468,11 @@ exports[`Select renders with disabled options 1`] = `
     className="selectInput"
   >
     <div
-      className=""
+      className="root"
     >
       
       <div
-        className={undefined}
+        className="inputWrapper"
       >
         <input
           className="input"
@@ -408,11 +488,11 @@ exports[`Select renders with disabled options 1`] = `
   </div>
   <div>
     <div
-      className="options firstOptionHighlighted"
+      className="options firstOptionHighlighted root isFloating isHidden"
       style={null}
     >
       <div
-        className={undefined}
+        className="bubble"
         data-bubble-container={true}
       >
         <ul
@@ -425,7 +505,11 @@ exports[`Select renders with disabled options 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            England
+            <span
+              className="label"
+            >
+              England
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -434,7 +518,11 @@ exports[`Select renders with disabled options 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spain
+            <span
+              className="label"
+            >
+              Spain
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -443,7 +531,11 @@ exports[`Select renders with disabled options 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Thailand
+            <span
+              className="label"
+            >
+              Thailand
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -452,12 +544,16 @@ exports[`Select renders with disabled options 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            USA
+            <span
+              className="label"
+            >
+              USA
+            </span>
           </li>
         </ul>
       </div>
       <span
-        className={undefined}
+        className="arrow"
         data-bubble-arrow={true}
       />
     </div>
@@ -473,11 +569,11 @@ exports[`Select renders with placeholder 1`] = `
     className="selectInput"
   >
     <div
-      className=""
+      className="root"
     >
       
       <div
-        className={undefined}
+        className="inputWrapper"
       >
         <input
           className="input"
@@ -493,11 +589,11 @@ exports[`Select renders with placeholder 1`] = `
   </div>
   <div>
     <div
-      className="options firstOptionHighlighted"
+      className="options firstOptionHighlighted root isFloating isHidden"
       style={null}
     >
       <div
-        className={undefined}
+        className="bubble"
         data-bubble-container={true}
       >
         <ul
@@ -510,7 +606,11 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Frankreich
+            <span
+              className="label"
+            >
+              Frankreich
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -519,7 +619,11 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Spanien
+            <span
+              className="label"
+            >
+              Spanien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -528,7 +632,11 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Kroatien
+            <span
+              className="label"
+            >
+              Kroatien
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -537,7 +645,11 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Vereinigten Staaten
+            <span
+              className="label"
+            >
+              Vereinigten Staaten
+            </span>
           </li>
           <li
             aria-hidden={true}
@@ -546,12 +658,16 @@ exports[`Select renders with placeholder 1`] = `
             onMouseEnter={[Function]}
             role="presentation"
           >
-            Österreich
+            <span
+              className="label"
+            >
+              Österreich
+            </span>
           </li>
         </ul>
       </div>
       <span
-        className={undefined}
+        className="arrow"
         data-bubble-arrow={true}
       />
     </div>
@@ -567,11 +683,11 @@ exports[`Select uses render prop - optionRenderer 1`] = `
     className="selectInput"
   >
     <div
-      className=""
+      className="root"
     >
       
       <div
-        className={undefined}
+        className="inputWrapper"
       >
         <input
           className="input"
@@ -587,11 +703,11 @@ exports[`Select uses render prop - optionRenderer 1`] = `
   </div>
   <div>
     <div
-      className="options firstOptionHighlighted"
+      className="options firstOptionHighlighted root isFloating isHidden"
       style={null}
     >
       <div
-        className={undefined}
+        className="bubble"
         data-bubble-container={true}
       >
         <ul
@@ -690,7 +806,7 @@ exports[`Select uses render prop - optionRenderer 1`] = `
         </ul>
       </div>
       <span
-        className={undefined}
+        className="arrow"
         data-bubble-arrow={true}
       />
     </div>

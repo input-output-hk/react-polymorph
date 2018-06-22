@@ -19,7 +19,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => {
+export const TogglerSkin = (props: Props) => {
   const { theme, themeId } = props;
   return (
     <div

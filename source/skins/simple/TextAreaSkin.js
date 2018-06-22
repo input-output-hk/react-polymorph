@@ -23,7 +23,7 @@ type Props = {
   value: string
 };
 
-export default (props: Props) => {
+export const TextAreaSkin = (props: Props) => {
   const { theme, themeId } = props;
   return (
     <textarea

@@ -44,7 +44,7 @@ type State = {
   composedTheme: Object
 };
 
-class Input extends Component<Props, State> {
+class InputBase extends Component<Props, State> {
   inputElement: Element<'input'>;
 
   static defaultProps = {
@@ -174,4 +174,4 @@ class Input extends Component<Props, State> {
   }
 }
 
-export default withTheme(Input);
+export const Input = withTheme(InputBase);

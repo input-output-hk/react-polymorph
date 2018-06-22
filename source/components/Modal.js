@@ -28,7 +28,7 @@ type State = {
   composedTheme: Object
 };
 
-class Modal extends Component<Props, State> {
+class ModalBase extends Component<Props, State> {
   static defaultProps = {
     contentLabel: 'Modal Dialog',
     isOpen: false,
@@ -66,4 +66,4 @@ class Modal extends Component<Props, State> {
   }
 }
 
-export default withTheme(Modal);
+export const Modal = withTheme(ModalBase);

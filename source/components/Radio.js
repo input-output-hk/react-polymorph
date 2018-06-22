@@ -30,7 +30,7 @@ type State = {
   composedTheme: Object
 };
 
-class Radio extends Component<Props, State> {
+class RadioBase extends Component<Props, State> {
   static defaultProps = {
     disabled: false,
     selected: false,
@@ -67,4 +67,4 @@ class Radio extends Component<Props, State> {
   }
 }
 
-export default withTheme(Radio);
+export const Radio = withTheme(RadioBase);

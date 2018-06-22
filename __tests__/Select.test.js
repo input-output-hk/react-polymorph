@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 
 import { Select } from '../source/components';
 import { SelectSkin } from '../source/skins/simple';
-import { CONTEXT } from './helpers/context';
 
 const COUNTRIES = [
   { label: 'Frankreich', value: 'France' },
@@ -24,7 +23,6 @@ test('Select renders correctly', () => {
   const component = renderer.create(
     <Select
       options={COUNTRIES}
-      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -38,7 +36,6 @@ test('Select renders with placeholder', () => {
     <Select
       placeholder="Select your country …"
       options={COUNTRIES}
-      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -52,7 +49,6 @@ test('Select renders with an error', () => {
     <Select
       error="Please select a different option"
       options={COUNTRIES}
-      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -65,7 +61,6 @@ test('Select renders with disabled options', () => {
   const component = renderer.create(
     <Select
       options={COUNTRIES_DISABLED_OPTIONS}
-      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -79,7 +74,6 @@ test('Select isOpeningUpward={true}', () => {
     <Select
       isOpeningUpward
       options={COUNTRIES}
-      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -93,7 +87,6 @@ test('Select isOpen={true}', () => {
     <Select
       isOpen
       options={COUNTRIES}
-      context={CONTEXT}
       skin={SelectSkin}
     />
   );
@@ -106,7 +99,6 @@ test('Select uses render prop - optionRenderer', () => {
   const component = renderer.create(
     <Select
       options={COUNTRIES}
-      context={CONTEXT}
       skin={SelectSkin}
       optionRenderer={option => (
         <div>

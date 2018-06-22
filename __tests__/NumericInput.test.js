@@ -2,14 +2,12 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 
-import { NumericInput } from '../source/components/NumericInput';
-import InputSkin from './helpers/InputSkin';
-import { CONTEXT } from './helpers/context';
+import { NumericInput } from '../source/components';
+import { InputSkin } from '../source/skins/simple';
 
 test('NumericInput renders correctly', () => {
   const component = renderer.create(
     <NumericInput
-      context={CONTEXT}
       skin={InputSkin}
     />
   );
@@ -22,7 +20,6 @@ test('NumericInput renders with placeholder', () => {
   const component = renderer.create(
     <NumericInput
       placeholder="0.0000"
-      context={CONTEXT}
       skin={InputSkin}
     />
   );
@@ -35,7 +32,6 @@ test('NumericInput is disabled', () => {
   const component = renderer.create(
     <NumericInput
       disabled
-      context={CONTEXT}
       skin={InputSkin}
     />
   );
@@ -48,7 +44,6 @@ test('NumericInput is readOnly', () => {
   const component = renderer.create(
     <NumericInput
       readOnly
-      context={CONTEXT}
       skin={InputSkin}
     />
   );
@@ -61,7 +56,6 @@ test('NumericInput renders with an error', () => {
   const component = renderer.create(
     <NumericInput
       error="Invalid Amount"
-      context={CONTEXT}
       skin={InputSkin}
     />
   );
@@ -74,7 +68,6 @@ test('NumericInput renders with a value', () => {
   const component = renderer.create(
     <NumericInput
       value="555.333"
-      context={CONTEXT}
       skin={InputSkin}
     />
   );
@@ -87,12 +80,11 @@ describe('NumericInput onChange simulations', () => {
   test('onChange updates state with valid amount', () => {
     const wrapper = mount(
       <NumericInput
-        context={CONTEXT}
         skin={InputSkin}
       />
     );
 
-    const component = wrapper.instance();
+    const component = wrapper.find('NumericInputBase').instance();
     const input = wrapper.find('input');
 
     // valid input value
@@ -104,12 +96,11 @@ describe('NumericInput onChange simulations', () => {
     const wrapper = mount(
       <NumericInput
         maxValue={1000}
-        context={CONTEXT}
         skin={InputSkin}
       />
     );
 
-    const component = wrapper.instance();
+    const component = wrapper.find('NumericInputBase').instance();
     const input = wrapper.find('input');
 
     // invalid input value: value > maxValue
@@ -123,12 +114,11 @@ describe('NumericInput onChange simulations', () => {
     const wrapper = mount(
       <NumericInput
         minValue={500}
-        context={CONTEXT}
         skin={InputSkin}
       />
     );
 
-    const component = wrapper.instance();
+    const component = wrapper.find('NumericInputBase').instance();
     const input = wrapper.find('input');
 
     // invalid input value: value < minValue
@@ -142,12 +132,11 @@ describe('NumericInput onChange simulations', () => {
     const wrapper = mount(
       <NumericInput
         maxBeforeDot={3}
-        context={CONTEXT}
         skin={InputSkin}
       />
     );
 
-    const component = wrapper.instance();
+    const component = wrapper.find('NumericInputBase').instance();
     const input = wrapper.find('input');
 
     // input value is valid: value has 3 integer places
@@ -164,12 +153,11 @@ describe('NumericInput onChange simulations', () => {
     const wrapper = mount(
       <NumericInput
         maxAfterDot={4}
-        context={CONTEXT}
         skin={InputSkin}
       />
     );
 
-    const component = wrapper.instance();
+    const component = wrapper.find('NumericInputBase').instance();
     const input = wrapper.find('input');
 
     // simulate onChange with 4 decimal places (valid)
@@ -188,12 +176,11 @@ describe('NumericInput onChange simulations', () => {
         enforceMax
         maxValue={24999}
         maxAfterDot={2}
-        context={CONTEXT}
         skin={InputSkin}
       />
     );
 
-    const component = wrapper.instance();
+    const component = wrapper.find('NumericInputBase').instance();
     const input = wrapper.find('input');
 
     // valid input value: there should be no error in state or className
@@ -230,12 +217,11 @@ describe('NumericInput onChange simulations', () => {
         enforceMin
         minValue={99.99}
         maxAfterDot={2}
-        context={CONTEXT}
         skin={InputSkin}
       />
     );
 
-    const component = wrapper.instance();
+    const component = wrapper.find('NumericInputBase').instance();
     const input = wrapper.find('input');
 
     // simulate onChange with valid amount

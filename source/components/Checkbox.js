@@ -33,7 +33,7 @@ type State = {
   composedTheme: Object
 };
 
-class Checkbox extends Component<Props, State> {
+class CheckboxBase extends Component<Props, State> {
   static defaultProps = {
     checked: false,
     disabled: false,
@@ -70,4 +70,4 @@ class Checkbox extends Component<Props, State> {
   }
 }
 
-export default withTheme(Checkbox);
+export const Checkbox = withTheme(CheckboxBase);

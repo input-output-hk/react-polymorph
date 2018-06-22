@@ -36,7 +36,7 @@ type State = {
   position: ?Object
 };
 
-class Bubble extends Component<Props, State> {
+class BubbleBase extends Component<Props, State> {
   rootElement: ?Element<any>;
 
   static defaultProps = {
@@ -195,4 +195,4 @@ class Bubble extends Component<Props, State> {
   }
 }
 
-export default withTheme(Bubble);
+export const Bubble = withTheme(BubbleBase);

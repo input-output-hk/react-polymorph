@@ -49,7 +49,7 @@ type State = {
   highlightedOptionIndex: number
 };
 
-class Options extends Component<Props, State> {
+class OptionsBase extends Component<Props, State> {
   optionsElement: ?Element<any>;
 
   static defaultProps = {
@@ -337,4 +337,4 @@ class Options extends Component<Props, State> {
   }
 }
 
-export default withTheme(Options);
+export const Options = withTheme(OptionsBase);

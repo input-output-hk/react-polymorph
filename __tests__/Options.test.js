@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 
 import { Options } from '../source/components';
 import { OptionsSkin } from '../source/skins/simple';
-import { CONTEXT } from './helpers/context';
 
 const MNEMONIC_WORDS = [
   'home',
@@ -32,7 +31,6 @@ test('Options renders correctly', () => {
   const component = renderer.create(
     <Options
       options={MNEMONIC_WORDS}
-      context={CONTEXT}
       skin={OptionsSkin}
     />
   );
@@ -45,7 +43,6 @@ test('Options uses render prop - render', () => {
   const component = renderer.create(
     <Options
       options={MNEMONIC_WORDS}
-      context={CONTEXT}
       skin={OptionsSkin}
       render={getOptionProps => {
         const { options } = getOptionProps();
@@ -66,7 +63,6 @@ test('Options uses render prop - optionRenderer', () => {
   const component = renderer.create(
     <Options
       options={COUNTRIES_OPTIONS}
-      context={CONTEXT}
       skin={OptionsSkin}
       optionRenderer={option => (
         <div>

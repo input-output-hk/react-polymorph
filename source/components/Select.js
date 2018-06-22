@@ -41,7 +41,7 @@ type State = {
   isOpen: boolean
 };
 
-class Select extends Component<Props, State> {
+class SelectBase extends Component<Props, State> {
   inputElement: Element<'input'>;
 
   static defaultProps = {
@@ -138,4 +138,4 @@ class Select extends Component<Props, State> {
   }
 }
 
-export default withTheme(Select);
+export const Select = withTheme(SelectBase);

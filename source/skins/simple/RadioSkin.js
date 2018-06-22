@@ -20,7 +20,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => {
+export const RadioSkin = (props: Props) => {
   const {
     theme,
     themeId,

@@ -36,7 +36,7 @@ type Props = {
   value: string
 };
 
-export default (props: Props) => {
+export const SelectSkin = (props: Props) => {
   const selectedOption = props.getSelectedOption();
   const inputValue = selectedOption ? selectedOption.label : '';
   const { theme, themeId } = props;

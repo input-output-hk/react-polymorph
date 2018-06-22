@@ -41,10 +41,8 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => {
-  const { label, error } = props;
+export const AutocompleteSkin = (props: Props) => {
   const theme = props.theme[props.themeId];
-  const formfieldProps = { label, error };
 
   const filteredAndLimitedOptions = _.slice(
     props.filteredOptions,
@@ -140,7 +138,6 @@ export default (props: Props) => {
             />
           </div>
         )}
-        {...formfieldProps}
       />
     </div>
   );

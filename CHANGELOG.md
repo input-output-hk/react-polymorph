@@ -10,6 +10,8 @@
 
 ### Chores
 
+- Adds keydown and click simulation tests for Autocomplete using jest and enzyme. Removes helper skins from test directory and refactors the way in which components are wrapped in a ThemeContext Consumer HOC before they're exported in order to handle a test environment. [PR 63](https://github.com/input-output-hk/react-polymorph/pull/63)
+
 - Adds polyfills for React's new context API and ref API released in v16.3.0. Drops support for React versions less than v16.[PR 61](https://github.com/input-output-hk/react-polymorph/pull/61)
 
 - Add snapshot test coverage from using jest and enzyme. Add event simulation tests for NumericInput. Adds story for ThemeProvider. [PR 60](https://github.com/input-output-hk/react-polymorph/pull/60)

@@ -21,7 +21,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => {
+export const BubbleSkin = (props: Props) => {
   const { theme, themeId } = props;
 
   return (
