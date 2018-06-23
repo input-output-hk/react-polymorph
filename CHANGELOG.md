@@ -1,6 +1,14 @@
 # Changelog
 
 ## vNEXT
+### Fixes
+
+### Chores
+
+- Adds support for React v15 - v16.4.1. Upgrades to latest versions of react, jest, and enzyme related devDependencies. [PR 65](https://github.com/input-output-hk/react-polymorph/pull/65)
+
+### Features
+
 
 ## 0.7.0
 
