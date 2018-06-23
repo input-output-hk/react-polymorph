@@ -16,10 +16,8 @@ exports[`Select isOpen={true} 1`] = `
       >
         <input
           className="input"
-          label={undefined}
           onChange={[Function]}
           onClick={[Function]}
-          placeholder={undefined}
           readOnly={true}
           value=""
         />
@@ -130,10 +128,8 @@ exports[`Select isOpeningUpward={true} 1`] = `
       >
         <input
           className="input"
-          label={undefined}
           onChange={[Function]}
           onClick={[Function]}
-          placeholder={undefined}
           readOnly={true}
           value=""
         />
@@ -244,10 +240,8 @@ exports[`Select renders correctly 1`] = `
       >
         <input
           className="input"
-          label={undefined}
           onChange={[Function]}
           onClick={[Function]}
-          placeholder={undefined}
           readOnly={true}
           value=""
         />
@@ -362,10 +356,8 @@ exports[`Select renders with an error 1`] = `
       >
         <input
           className="input errored"
-          label={undefined}
           onChange={[Function]}
           onClick={[Function]}
-          placeholder={undefined}
           readOnly={true}
           value=""
         />
@@ -476,10 +468,8 @@ exports[`Select renders with disabled options 1`] = `
       >
         <input
           className="input"
-          label={undefined}
           onChange={[Function]}
           onClick={[Function]}
-          placeholder={undefined}
           readOnly={true}
           value=""
         />
@@ -577,7 +567,6 @@ exports[`Select renders with placeholder 1`] = `
       >
         <input
           className="input"
-          label={undefined}
           onChange={[Function]}
           onClick={[Function]}
           placeholder="Select your country …"
@@ -691,10 +680,8 @@ exports[`Select uses render prop - optionRenderer 1`] = `
       >
         <input
           className="input"
-          label={undefined}
           onChange={[Function]}
           onClick={[Function]}
-          placeholder={undefined}
           readOnly={true}
           value=""
         />
