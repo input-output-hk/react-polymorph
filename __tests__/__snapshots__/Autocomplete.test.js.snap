@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Autocomplete renders correctly 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
     className="root"
   >
@@ -26,7 +24,6 @@ exports[`Autocomplete renders correctly 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
             />
           </div>
@@ -94,9 +91,7 @@ exports[`Autocomplete renders correctly 1`] = `
 `;
 
 exports[`Autocomplete renders with a placeholder 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
     className="root"
   >
@@ -187,9 +182,7 @@ exports[`Autocomplete renders with a placeholder 1`] = `
 `;
 
 exports[`Autocomplete renders with an error 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
     className="root errored"
   >
@@ -216,7 +209,6 @@ exports[`Autocomplete renders with an error 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
             />
           </div>
@@ -284,9 +276,7 @@ exports[`Autocomplete renders with an error 1`] = `
 `;
 
 exports[`Autocomplete renders with label 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
     className="root"
   >
@@ -317,7 +307,6 @@ exports[`Autocomplete renders with label 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
             />
           </div>
@@ -385,9 +374,7 @@ exports[`Autocomplete renders with label 1`] = `
 `;
 
 exports[`Autocomplete uses render prop - renderOptions 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
     className="root"
   >
@@ -410,7 +397,6 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
             />
           </div>
@@ -462,9 +448,7 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
 `;
 
 exports[`Autocomplete uses render prop - renderSelections 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
     className="root"
   >
@@ -487,7 +471,6 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
             />
           </div>

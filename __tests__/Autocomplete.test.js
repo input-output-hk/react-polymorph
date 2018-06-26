@@ -395,4 +395,42 @@ describe('Autocomplete onChange simulations', () => {
     expect(component.state.selectedOptions[0]).toBe(ABC_SORTED_MNEMONICS[3]);
     expect(component.state.isOpen).toBe(false);
   });
+
+  test('Autocomplete deletes a selected option when backspace is pressed', () => {
+    const map = {};
+    document.addEventListener = jest.fn().mockImplementation((event, cb) => {
+      map[event] = cb;
+    });
+
+    const wrapper = mount(
+      <Autocomplete
+        options={MNEMONIC_WORDS}
+        skin={AutocompleteSkin}
+      />
+    );
+    const component = wrapper.find('AutocompleteBase').instance();
+    const input = wrapper.find('input');
+
+    // open Autocomplete
+    input.simulate('click', {});
+
+    // simulate user typing 'hide'
+    input.simulate('change', { target: { value: 'hide' } });
+
+    // select 'hide' via pressing enter key
+    map.keydown({ keyCode: 13, preventDefault() {} });
+
+    // assert 'hide' is now a selected option
+    expect(component.state.selectedOptions.length).toBe(1);
+    expect(component.state.selectedOptions[0]).toBe('hide');
+
+    // assert inputValue is empty before attempting to delete 'hide'
+    expect(component.state.inputValue).toBe('');
+
+    // simulate backspace to delete 'hide'
+    input.simulate('keydown', { keyCode: 8 });
+
+    // assert backspace deleted the selected option 'hide'
+    expect(component.state.selectedOptions.length).toBe(0);
+  });
 });
