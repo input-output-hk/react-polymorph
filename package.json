@@ -112,15 +112,15 @@
   "scripts": {
     "build": "cross-env npm run clean && npm run sass && npm run js",
     "clean": "rimraf ./lib",
-    "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
+    "flow:test": "flow; test $? -eq 0 -o $? -eq 2",
     "js": "babel source -d lib -s",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty source stories *.js",
     "prepare": "npm run clean && npm run build",
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook",
     "test": "cross-env NODE_ENV=test jest",
-    "test-clean": "cross-env NODE_ENV=test jest -u",
-    "test-watch": "cross-env NODE_ENV=test jest --watchAll",
+    "test:clean": "cross-env NODE_ENV=test jest -u",
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "watch": "nodemon npm run js && npm run sass"
   },
   "jest": {
