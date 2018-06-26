@@ -5,7 +5,7 @@
 
 ### Chores
 
-- Adds support for React v15 - v16.4.1. Upgrades to latest versions of react, jest, and enzyme related devDependencies. [PR 65](https://github.com/input-output-hk/react-polymorph/pull/65)
+- Adds support for React v15 - v16.4.1. Upgrades devDependencies to latest versions of react, jest, and enzyme related libraries. Adds Autocomplete simulation test for deleting a selected option via backspace key. [PR 65](https://github.com/input-output-hk/react-polymorph/pull/65)
 
 ### Features
 
