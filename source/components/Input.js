@@ -21,11 +21,10 @@ type Props = {
   },
   disabled: boolean,
   error: string,
-  label: string,
+  label: string | Element<any>,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
-  onRef: Function,
   maxLength: number,
   minLength: number,
   onKeyPress: Function,
@@ -50,7 +49,6 @@ class InputBase extends Component<Props, State> {
   static defaultProps = {
     autoFocus: false,
     error: '',
-    onRef: () => {},
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
@@ -77,13 +75,7 @@ class InputBase extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const { onRef, autoFocus } = this.props;
-
-    if (autoFocus) this.focus();
-
-    // if Input is rendered by FormField, onRef allows FormField to call
-    // Input's focus method when someone clicks on FormField's label
-    onRef(this);
+    if (this.props.autoFocus) this.focus();
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
@@ -95,9 +87,8 @@ class InputBase extends Component<Props, State> {
 
   focus = () => {
     const { inputElement } = this;
-    if (inputElement && inputElement.current) {
-      return inputElement.current.focus();
-    }
+    if (!inputElement.current) return;
+    inputElement.current.focus();
   }
 
   _setError = (error: string) => {
@@ -154,7 +145,6 @@ class InputBase extends Component<Props, State> {
       themeOverrides,
       onChange,
       error,
-      onRef,
       maxLength,
       minLength,
       setError,
