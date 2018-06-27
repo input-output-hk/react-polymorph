@@ -13,11 +13,13 @@ import { IDENTIFIERS } from '../themes/API';
 type Props = {
   allowBlank: boolean,
   autoFocus: boolean,
-  error: string | Element<any>,
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
   },
+  error: string | Element<any>,
+  label: string | Element<any>,
   isOpeningUpward: boolean,
   onBlur: Function,
   onChange: Function,
@@ -27,7 +29,6 @@ type Props = {
     isDisabled: boolean,
     value: any
   }>,
-  label: string | Element<any>,
   placeholder: string,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
