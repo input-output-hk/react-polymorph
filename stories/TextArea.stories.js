@@ -5,11 +5,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
-// components
-import { TextArea, FormField } from '../source/components';
-
-// skins
-import { TextAreaSkin, FormFieldSkin } from '../source/skins/simple';
+// components & skins
+import { TextArea } from '../source/components';
+import { TextAreaSkin } from '../source/skins/simple';
 
 // themes
 import CustomTextAreaTheme from './theme-customizations/TextArea.custom.scss';
@@ -32,17 +30,11 @@ storiesOf('TextArea', module)
 
   .add('label',
     withState({ value: '' }, store => (
-      <FormField
+      <TextArea
         label="Your Comment"
-        skin={FormFieldSkin}
-        render={props => (
-          <TextArea
-            {...props}
-            value={store.state.value}
-            onChange={value => store.set({ value })}
-            skin={TextAreaSkin}
-          />
-        )}
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        skin={TextAreaSkin}
       />
     ))
   )
@@ -53,6 +45,18 @@ storiesOf('TextArea', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         placeholder="Your Comment"
+        skin={TextAreaSkin}
+      />
+    ))
+  )
+
+  .add('disabled',
+    withState({ value: '' }, store => (
+      <TextArea
+        disabled
+        label="Your Comment"
+        value={store.state.value}
+        onChange={value => store.set({ value })}
         skin={TextAreaSkin}
       />
     ))
@@ -70,6 +74,19 @@ storiesOf('TextArea', module)
     ))
   )
 
+  .add('onFocus / onBlur',
+    withState({ value: '', focused: false, blurred: false }, store => (
+      <TextArea
+        value={store.state.value}
+        placeholder="onFocus / onBlur"
+        onChange={value => store.set({ value })}
+        onFocus={() => store.set({ focused: true })}
+        onBlur={() => store.set({ blurred: true })}
+        skin={TextAreaSkin}
+      />
+    ))
+  )
+
   .add('maxLength(5)',
     withState({ value: '' }, store => (
       <TextArea
@@ -82,58 +99,40 @@ storiesOf('TextArea', module)
     ))
   )
 
-  .add('error',
+  .add('with error',
     withState({ value: '' }, store => (
-      <FormField
+      <TextArea
         label="With label"
         error="Something went wrong"
-        skin={FormFieldSkin}
-        render={props => (
-          <TextArea
-            {...props}
-            value={store.state.value}
-            onChange={value => store.set({ value })}
-            skin={TextAreaSkin}
-          />
-        )}
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        skin={TextAreaSkin}
       />
     ))
   )
 
   .add('rows={5}',
     withState({ value: '' }, store => (
-      <FormField
+      <TextArea
         label="Textarea with fixed amount of rows to start with"
-        skin={FormFieldSkin}
-        render={props => (
-          <TextArea
-            {...props}
-            value={store.state.value}
-            onChange={value => store.set({ value })}
-            placeholder="Your description here"
-            rows={5}
-            skin={TextAreaSkin}
-          />
-        )}
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        placeholder="Your description here"
+        rows={5}
+        skin={TextAreaSkin}
       />
     ))
   )
 
   .add('autoResize={false}',
     withState({ value: '' }, store => (
-      <FormField
+      <TextArea
         label="Textarea without auto resizing"
-        skin={FormFieldSkin}
-        render={props => (
-          <TextArea
-            {...props}
-            value={store.state.value}
-            onChange={value => store.set({ value })}
-            placeholder="Your description here"
-            autoResize={false}
-            skin={TextAreaSkin}
-          />
-        )}
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        placeholder="Your description here"
+        autoResize={false}
+        skin={TextAreaSkin}
       />
     ))
   )
