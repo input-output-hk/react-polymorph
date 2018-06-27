@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Ref, Node } from 'react';
+import type { Ref, Element } from 'react';
 
 // external libraries
 import _ from 'lodash';
@@ -25,7 +25,7 @@ type Props = {
   inputValue: string,
   isOpeningUpward: boolean,
   isOpen: boolean,
-  label: string | Node,
+  label: string | Element<any>,
   maxSelections: number,
   maxVisibleOptions: number,
   onKeyDown: Function,
@@ -100,6 +100,7 @@ export const AutocompleteSkin = (props: Props) => {
   return (
     <div className={props.className} ref={props.rootRef}>
       <FormField
+        inputRef={props.inputRef}
         error={props.error}
         label={props.label}
         skin={FormFieldSkin}

@@ -11,7 +11,6 @@ type Props = {
   focusChild: Function,
   label: string | Element<any>,
   onChange: Function,
-  onRef: Function,
   render: Function,
   setError: Function,
   theme: Object,
