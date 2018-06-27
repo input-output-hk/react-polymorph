@@ -15,6 +15,7 @@ import { composeTheme, addThemeId } from '../utils';
 import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
+  autoFocus: boolean,
   className: string,
   context: {
     theme: Object,
@@ -22,15 +23,16 @@ type Props = {
   },
   disabled: boolean,
   enforceMax: boolean,
-  label: string,
+  label: string | Element<any>,
   enforceMin: boolean,
   error: string,
+  onBlur: Function,
   onChange: Function,
+  onFocus: Function,
   maxAfterDot: number,
   maxBeforeDot: number,
   maxValue: number,
   minValue: number,
-  onRef: Function,
   readOnly: boolean,
   placeholder: string,
   setError: Function,
@@ -57,7 +59,6 @@ class NumericInputBase extends Component<Props, State> {
     error: '',
     enforceMax: false,
     enforceMin: false,
-    onRef: () => {},
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
@@ -93,14 +94,12 @@ class NumericInputBase extends Component<Props, State> {
   }
 
   componentDidMount() {
-    // if this NumericInput instance is rendered within FormField's render prop,
-    // this.props.onRef allows FormField to call NumericInput's focus method
-    // when user clicks FormField's label
-    this.props.onRef(this);
-
     const { inputElement } = this;
+    // check for autoFocus prop
+    if (this.props.autoFocus) this.focus();
+
+    // Set last input caret position on updates
     if (inputElement && inputElement.current) {
-      // Set last input caret position on updates
       this.setState({ caretPosition: inputElement.current.selectionStart });
     }
   }
@@ -152,16 +151,8 @@ class NumericInputBase extends Component<Props, State> {
 
   focus = () => {
     const { inputElement } = this;
-    if (inputElement && inputElement.current) {
-      return inputElement.current.focus();
-    }
-  }
-
-  blur = () => {
-    const { inputElement } = this;
-    if (inputElement && inputElement.current) {
-      return inputElement.current.blur();
-    }
+    if (!inputElement.current) return;
+    inputElement.current.focus();
   }
 
   _validateLimitProps(minValue: number, maxBeforeDot: number, maxAfterDot: number) {
@@ -451,7 +442,6 @@ class NumericInputBase extends Component<Props, State> {
       onChange,
       error,
       context,
-      onRef,
       maxValue,
       minValue,
       maxBeforeDot,

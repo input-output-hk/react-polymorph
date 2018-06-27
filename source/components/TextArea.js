@@ -16,18 +16,19 @@ import { IDENTIFIERS } from '../themes/API';
 type Props = {
   autoFocus: boolean,
   autoResize: boolean,
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
   },
   disabled: boolean,
+  label: string | Element<any>,
   error: string | Node,
   maxLength: number,
   minLength: number,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
-  onRef: Function,
   placeholder: string,
   rows: number,
   skin: ComponentType<any>,
@@ -48,7 +49,6 @@ class TextAreaBase extends Component<Props, State> {
   static defaultProps = {
     autoFocus: false,
     autoResize: true,
-    onRef: () => {},
     theme: null,
     themeId: IDENTIFIERS.TEXT_AREA,
     themeOverrides: {},
@@ -74,20 +74,14 @@ class TextAreaBase extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const { autoResize, autoFocus, onRef } = this.props;
+    const { autoResize, autoFocus } = this.props;
 
     if (autoResize) {
       window.addEventListener('resize', this._handleAutoresize);
       this._handleAutoresize();
     }
 
-    if (autoFocus) {
-      this.focus();
-    }
-
-    // if TextArea is rendered by FormField, onRef allows FormField to call
-    // TextArea's focus method when someone clicks on FormField's label
-    onRef(this);
+    if (autoFocus) { this.focus(); }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -110,9 +104,8 @@ class TextAreaBase extends Component<Props, State> {
 
   focus = () => {
     const { textareaElement } = this;
-    if (textareaElement && textareaElement.current) {
-      textareaElement.current.focus();
-    }
+    if (!textareaElement.current) return;
+    textareaElement.current.focus();
   }
 
   onChange = (event: SyntheticInputEvent<>) => {

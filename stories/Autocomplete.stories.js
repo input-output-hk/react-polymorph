@@ -7,15 +7,9 @@ import classnames from 'classnames';
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
-// components
+// components & skins
 import { Autocomplete, Modal, Button } from '../source/components';
-
-// skins
-import {
-  AutocompleteSkin,
-  ModalSkin,
-  ButtonSkin
-} from '../source/skins/simple';
+import { AutocompleteSkin, ModalSkin, ButtonSkin } from '../source/skins/simple';
 
 // themes
 import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.scss';

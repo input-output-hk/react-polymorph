@@ -3,6 +3,8 @@
 ## vNEXT
 ### Fixes
 
+- Wraps TextAreaSkin's render method in FormField so labels and errors are rendered the same as in Input and NumericInput. Fixes Input, NumericInput, and TextArea components so they pass a prop called inputRef or textareaRef to FormField in their skins. This properly makes use of React v16.3.1+'s ref API instead of using the onRef callback. Adds autoFocus, onBlur, and onFocus props to NumericInput and TextArea. [PR 67](https://github.com/input-output-hk/react-polymorph/pull/67)
+
 ### Chores
 
 - Adds support for React v15 - v16.4.1. Upgrades devDependencies to latest versions of react, jest, and enzyme related libraries. Adds Autocomplete simulation test for deleting a selected option via backspace key. [PR 65](https://github.com/input-output-hk/react-polymorph/pull/65)

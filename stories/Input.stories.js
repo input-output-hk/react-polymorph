@@ -74,7 +74,7 @@ storiesOf('Input', module)
     />
   ))
 
-  .add('error',
+  .add('with error',
     withState({ value: '' }, store => (
       <Input
         label="With Label"
@@ -124,14 +124,14 @@ storiesOf('Input', module)
     ))
   )
 
-  .add('focus / blur',
+  .add('onFocus / onBlur',
     withState({ value: '', focused: false, blurred: false }, store => (
       <Input
         value={store.state.value}
-        placeholder="focus / blur"
+        placeholder="onFocus / onBlur"
         onChange={value => store.set({ value })}
-        onFocus={() => store.set({ focused: true })}
-        onBlur={() => store.set({ blurred: true })}
+        onFocus={() => store.set({ focused: true, blurred: false })}
+        onBlur={() => store.set({ blurred: true, focused: false })}
         skin={InputSkin}
       />
     ))

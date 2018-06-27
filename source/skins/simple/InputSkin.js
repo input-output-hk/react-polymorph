@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Ref } from 'react';
+import type { Ref, Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -16,7 +16,7 @@ type Props = {
   className: string,
   disabled: boolean,
   error: string,
-  label: string,
+  label: string | Element<any>,
   inputRef: Ref<'input'>,
   onBlur: Function,
   onChange: Function,
@@ -35,6 +35,7 @@ export const InputSkin = (props: Props) => (
     disabled={props.disabled}
     label={props.label}
     error={props.error}
+    inputRef={props.inputRef}
     skin={FormFieldSkin}
     render={() => (
       <input
