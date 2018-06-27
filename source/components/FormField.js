@@ -17,6 +17,7 @@ type Props = {
   },
   disabled: boolean,
   error: string,
+  inputRef: Object,
   label: string | Element<any>,
   render: Function,
   skin: ComponentType<any>,
@@ -31,8 +32,6 @@ type State = {
 };
 
 class FormFieldBase extends Component<Props, State> {
-  child: Element<'input'>;
-
   static defaultProps = {
     disabled: false,
     theme: null,
@@ -58,14 +57,10 @@ class FormFieldBase extends Component<Props, State> {
   setError = (error: string) => this.setState({ error });
 
   focusChild = () => {
-    if (this.child && this.child.focus !== undefined) {
-      this.child.focus();
-    }
+    const { inputRef } = this.props;
+    if (!inputRef.current) return;
+    inputRef.current.focus();
   };
-
-  // onRef is passed to Input/NumericInput components rendered
-  // via this.props.render, which makes this.focusChild possible
-  onRef = (ref: Element<'input'>) => (this.child = ref);
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
@@ -75,6 +70,7 @@ class FormFieldBase extends Component<Props, State> {
       themeOverrides,
       error,
       context,
+      inputRef,
       ...rest
     } = this.props;
 
@@ -84,7 +80,6 @@ class FormFieldBase extends Component<Props, State> {
         setError={this.setError}
         theme={this.state.composedTheme}
         focusChild={this.focusChild}
-        onRef={this.onRef}
         {...rest}
       />
     );
