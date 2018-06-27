@@ -1,43 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TextArea renders correctly 1`] = `
-<textarea
-  className="textarea"
-  onChange={[Function]}
-  value=""
-/>
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <textarea
+      className="textarea"
+      onChange={[Function]}
+      value=""
+    />
+  </div>
+</div>
 `;
 
 exports[`TextArea renders with 5 rows 1`] = `
-<textarea
-  className="textarea"
-  onChange={[Function]}
-  rows={5}
-  value=""
-/>
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <textarea
+      className="textarea"
+      onChange={[Function]}
+      rows={5}
+      value=""
+    />
+  </div>
+</div>
 `;
 
 exports[`TextArea renders with a value 1`] = `
-<textarea
-  className="textarea"
-  onChange={[Function]}
-  value="this one has a value"
-/>
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <textarea
+      className="textarea"
+      onChange={[Function]}
+      value="this one has a value"
+    />
+  </div>
+</div>
 `;
 
 exports[`TextArea renders with an error 1`] = `
-<textarea
-  className="textarea errored"
-  onChange={[Function]}
-  value=""
-/>
+<div
+  className="root errored"
+>
+  <div
+    className="error"
+  >
+    Please enter valid input
+  </div>
+  <div
+    className="inputWrapper"
+  >
+    <textarea
+      className="textarea errored"
+      onChange={[Function]}
+      value=""
+    />
+  </div>
+</div>
 `;
 
 exports[`TextArea renders with placeholder 1`] = `
-<textarea
-  className="textarea"
-  onChange={[Function]}
-  placeholder="0.0000"
-  value=""
-/>
+<div
+  className="root"
+>
+  
+  <div
+    className="inputWrapper"
+  >
+    <textarea
+      className="textarea"
+      onChange={[Function]}
+      placeholder="0.0000"
+      value=""
+    />
+  </div>
+</div>
 `;
