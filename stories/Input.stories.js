@@ -130,8 +130,8 @@ storiesOf('Input', module)
         value={store.state.value}
         placeholder="onFocus / onBlur"
         onChange={value => store.set({ value })}
-        onFocus={() => store.set({ focused: true })}
-        onBlur={() => store.set({ blurred: true })}
+        onFocus={() => store.set({ focused: true, blurred: false })}
+        onBlur={() => store.set({ blurred: true, focused: false })}
         skin={InputSkin}
       />
     ))
