@@ -11,15 +11,22 @@ $select-input-bg-color: $input-bg-color !default;
 $select-input-border-focus-color: $input-border-focus-color !default;
 $select-input-padding: $input-padding !default;
 $select-input-border: $input-border !default;
-$select-up-arrow-url: url("#{$theme-assets-path}/select-up-arrow.svg") !default;
-$select-up-arrow-focus-url: url("#{$theme-assets-path}/select-up-arrow-focus.svg") !default;
-$select-down-arrow-url: url("#{$theme-assets-path}/select-down-arrow.svg") !default;
-$select-down-arrow-focus-url: url("#{$theme-assets-path}/select-down-arrow-focus.svg") !default;
-$select-down-arrow-width: 11px !default;
-$select-down-arrow-height: 7px !default;
-$select-down-arrow-position-bottom: 20px !default;
-$select-down-arrow-position-left: calc(100% - 32px) !default;
-$select-down-arrow-rtl-position-left: 15px !default;
+// Arrow in default state
+$select-arrow-url: url("#{$theme-assets-path}/select-arrow.svg") !default;
+$select-arrow-color: #c6cdd6 !default;
+$select-arrow-width: 11px !default;
+$select-arrow-height: 7px !default;
+$select-arrow-position-bottom: 20px !default;
+$select-arrow-position-left: calc(100% - 32px) !default;
+$select-arrow-rtl-position-left: 19px !default;
+// Arrow in open state
+$select-open-arrow-url: url("#{$theme-assets-path}/select-open-arrow.svg") !default;
+$select-open-arrow-color: #5e6066 !default;
+$select-open-arrow-width: $select-arrow-width !default;
+$select-open-arrow-height: $select-arrow-height !default;
+$select-open-arrow-position-bottom: $select-arrow-position-bottom !default;
+$select-open-arrow-position-left: $select-arrow-position-left !default;
+$select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
 
 .select {
   position: relative;
@@ -46,15 +53,16 @@ $select-down-arrow-rtl-position-left: 15px !default;
   }
 
   &:after {
-    background: $select-down-arrow-url;
-    background-size: $select-down-arrow-width $select-down-arrow-height;
-    bottom: $select-down-arrow-position-bottom;
+    background-color: $select-arrow-color;
+    -webkit-mask: $select-arrow-url;
+    mask: $select-arrow-url;
+    bottom: $select-arrow-position-bottom;
     content: "";
     pointer-events: none;
     position: absolute;
-    left: $select-down-arrow-position-left;
-    height: $select-down-arrow-height;
-    width: $select-down-arrow-width;
+    left: $select-arrow-position-left;
+    height: $select-arrow-height;
+    width: $select-arrow-width;
   }
 }
 
@@ -67,19 +75,22 @@ $select-down-arrow-rtl-position-left: 15px !default;
   }
 
   .selectInput:after {
-    background-image: $select-up-arrow-focus-url;
+    -webkit-mask: $select-open-arrow-url;
+    mask: $select-open-arrow-url;
+    background-color: $select-open-arrow-color;
   }
 }
 
 // ==== STATE: openUpward ====
 .openUpward {
   .selectInput:after {
-    background-image: $select-up-arrow-url;
+    background-image: $select-open-arrow-url;
   }
 
   &.isOpen {
     .selectInput:after {
-      background-image: $select-down-arrow-focus-url;
+      -webkit-mask: $select-arrow-url;
+      mask: $select-arrow-url;
     }
   }
 }
@@ -88,6 +99,6 @@ $select-down-arrow-rtl-position-left: 15px !default;
 // right-to-left languages support
 [dir='rtl'] {
   .selectInput:after {
-    left: $select-down-arrow-rtl-position-left;
+    left: $select-arrow-rtl-position-left;
   }
 }
