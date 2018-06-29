@@ -3,15 +3,11 @@ import React, { Component } from 'react';
 
 // $FlowFixMe
 import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Element } from 'react';
-import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
 import {
   composeTheme,
-  addEventsToDocument,
-  removeEventsFromDocument,
-  targetIsDescendant,
   composeFunctions,
   addThemeId
 } from '../utils';
@@ -33,6 +29,7 @@ type Props = {
   onClose: Function,
   options: Array<any>,
   optionRenderer: Function,
+  optionsRef: Ref<any>,
   render: Function,
   resetOnClose: boolean,
   selectedOption: any,
@@ -45,13 +42,10 @@ type Props = {
 
 type State = {
   composedTheme: Object,
-  isOpen: boolean,
   highlightedOptionIndex: number
 };
 
 class OptionsBase extends Component<Props, State> {
-  optionsElement: ?Element<any>;
-
   static defaultProps = {
     isOpen: false,
     isOpeningUpward: false,
@@ -65,10 +59,7 @@ class OptionsBase extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    // define ref
-    this.optionsElement = createRef();
-
-    const { context, themeId, theme, themeOverrides, isOpen } = props;
+    const { context, themeId, theme, themeOverrides } = props;
 
     this.state = {
       composedTheme: composeTheme(
@@ -76,42 +67,17 @@ class OptionsBase extends Component<Props, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      isOpen,
       highlightedOptionIndex: 0
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.isOpen !== nextProps.isOpen) {
-      this.setState({ isOpen: nextProps.isOpen });
+    // if Options is open and optionsShouldClose is true
+    if (this.props.isOpen && nextProps.optionsShouldClose) {
+      // call toggleOpen (Select's method for toggling its local state)
+      this.props.toggleOpen();
     }
   }
-
-  componentWillUpdate(nextProps, nextState) {
-    // update isOpen state when parent component force open / close options
-    // (e.g. click on Input in Select component)
-    if (!this.state.isOpen && nextState.isOpen) {
-      window.addEventListener('resize', this._handleWindowResize);
-      addEventsToDocument(this._getDocumentEvents());
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.isOpen && !this.state.isOpen) this._removeAllEventListeners();
-  }
-
-  componentWillUnmount() {
-    this._removeAllEventListeners();
-  }
-
-  open = () => {
-    this.setState({
-      isOpen: true,
-      highlightedOptionIndex: this.props.resetOnClose
-        ? 0
-        : this.state.highlightedOptionIndex
-    });
-  };
 
   close = () => {
     if (this.props.onClose) this.props.onClose();
@@ -247,6 +213,7 @@ class OptionsBase extends Component<Props, State> {
     }
   };
 
+  // this needs to get passed to OptionsSkin and attached to each Option Li
   _handleKeyDown = (event: SyntheticKeyboardEvent<>) => {
     const highlightOptionIndex = this.state.highlightedOptionIndex;
     switch (event.keyCode) {
@@ -278,34 +245,6 @@ class OptionsBase extends Component<Props, State> {
     }
   };
 
-  _handleDocumentClick = (event: SyntheticMouseEvent<>) => {
-    const { optionsElement } = this;
-    if (optionsElement && optionsElement.current) {
-      const isDescendant = targetIsDescendant(event, optionsElement.current);
-
-      if (this.state.isOpen && !isDescendant) {
-        this.close();
-      }
-    }
-  };
-
-  _handleWindowResize = () => this.state.isOpen && this.close();
-
-  _handleScroll = () => this.state.isOpen && this.close();
-
-  _removeAllEventListeners() {
-    removeEventsFromDocument(this._getDocumentEvents());
-    window.removeEventListener('resize', this._handleWindowResize);
-  }
-
-  _getDocumentEvents() {
-    return {
-      keydown: this._handleKeyDown,
-      click: this._handleDocumentClick,
-      scroll: this._handleScroll
-    };
-  }
-
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
@@ -314,14 +253,16 @@ class OptionsBase extends Component<Props, State> {
       themeOverrides,
       onChange,
       context,
+      optionsRef,
+      isOpen,
       ...rest
     } = this.props;
 
-    const { composedTheme, isOpen, highlightedOptionIndex } = this.state;
+    const { composedTheme, highlightedOptionIndex } = this.state;
 
     return (
       <OptionsSkin
-        optionsRef={this.optionsElement}
+        optionsRef={optionsRef}
         theme={composedTheme}
         isOpen={isOpen}
         highlightedOptionIndex={highlightedOptionIndex}
