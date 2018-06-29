@@ -24,11 +24,13 @@ type Props = {
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
-  optionRenderer: Function,
   options: Array<{
     isDisabled: boolean,
     value: any
   }>,
+  optionRenderer: Function,
+  optionsRef: Ref<any>,
+  optionsShouldClose: boolean,
   placeholder: string,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
@@ -66,11 +68,14 @@ export const SelectSkin = (props: Props) => {
         skin={OptionsSkin}
         theme={theme}
         isOpen={props.isOpen}
+        optionsRef={props.optionsRef}
+        optionsShouldClose={props.optionsShouldClose}
+        toggleOpen={props.toggleOpen}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}
         onChange={props.handleChange}
         optionRenderer={props.optionRenderer}
-        onClose={props.toggleOpen}
+        onClose={() => {}}
         selectedOption={selectedOption}
         noResults={!props.options.length}
       />

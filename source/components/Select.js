@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
+import { WindowHelpers } from './WindowHelpers';
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
 import { composeTheme, addThemeId } from '../utils';
@@ -39,11 +40,13 @@ type Props = {
 
 type State = {
   composedTheme: Object,
+  highlightedOptionIndex: number,
   isOpen: boolean
 };
 
 class SelectBase extends Component<Props, State> {
   inputElement: Element<'input'>;
+  optionsElement: ?Element<any>;
 
   static defaultProps = {
     allowBlank: true,
@@ -60,6 +63,7 @@ class SelectBase extends Component<Props, State> {
 
     // define ref
     this.inputElement = createRef();
+    this.optionsElement = createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -74,6 +78,7 @@ class SelectBase extends Component<Props, State> {
   }
 
   componentDidMount() {
+    // check for autoFocus of input element
     if (this.props.autoFocus) {
       return this.focus();
     }
@@ -81,7 +86,8 @@ class SelectBase extends Component<Props, State> {
 
   // ========= PUBLIC SKIN API =========
 
-  // Focus the component - toggle dropdown
+  // applying focus to the input element will
+  // toggle options open because Select's input is read only
   focus = () => this.toggleOpen();
 
   toggleOpen = () => {
@@ -100,7 +106,9 @@ class SelectBase extends Component<Props, State> {
   };
 
   handleChange = (option: Object, event: SyntheticEvent<>) => {
+    // check if the user passed an onChange handler and call it
     if (this.props.onChange) this.props.onChange(option.value, event);
+    // onChange is called when an option is selected, so close options
     this.toggleOpen();
   };
 
@@ -125,16 +133,25 @@ class SelectBase extends Component<Props, State> {
     } = this.props;
 
     return (
-      <SelectSkin
-        isOpen={this.state.isOpen}
-        inputRef={this.inputElement}
-        theme={this.state.composedTheme}
-        getSelectedOption={this.getSelectedOption}
-        handleInputClick={this.handleInputClick}
-        handleChange={this.handleChange}
-        toggleOpen={this.toggleOpen}
-        {...rest}
-      />
+      <WindowHelpers
+        optionsIsOpen={this.state.isOpen}
+        optionsRef={this.optionsElement}
+      >
+        {({ optionsShouldClose }) => (
+          <SelectSkin
+            optionsShouldClose={optionsShouldClose}
+            isOpen={this.state.isOpen}
+            inputRef={this.inputElement}
+            optionsRef={this.optionsElement}
+            theme={this.state.composedTheme}
+            getSelectedOption={this.getSelectedOption}
+            handleInputClick={this.handleInputClick}
+            handleChange={this.handleChange}
+            toggleOpen={this.toggleOpen}
+            {...rest}
+          />
+        )}
+      </WindowHelpers>
     );
   }
 }
