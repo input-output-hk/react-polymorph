@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
+import { GlobalListeners } from './HOC/GlobalListeners';
 
-import { WindowHelpers } from './WindowHelpers';
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
 import { composeTheme, addThemeId } from '../utils';
@@ -90,9 +90,7 @@ class SelectBase extends Component<Props, State> {
   // toggle options open because Select's input is read only
   focus = () => this.toggleOpen();
 
-  toggleOpen = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
+  toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
   handleInputClick = (event: SyntheticMouseEvent<>) => {
     event.stopPropagation();
@@ -133,13 +131,13 @@ class SelectBase extends Component<Props, State> {
     } = this.props;
 
     return (
-      <WindowHelpers
+      <GlobalListeners
+        toggleOpen={this.toggleOpen}
         optionsIsOpen={this.state.isOpen}
         optionsRef={this.optionsElement}
       >
-        {({ optionsShouldClose }) => (
+        {() => (
           <SelectSkin
-            optionsShouldClose={optionsShouldClose}
             isOpen={this.state.isOpen}
             inputRef={this.inputElement}
             optionsRef={this.optionsElement}
@@ -151,7 +149,7 @@ class SelectBase extends Component<Props, State> {
             {...rest}
           />
         )}
-      </WindowHelpers>
+      </GlobalListeners>
     );
   }
 }
