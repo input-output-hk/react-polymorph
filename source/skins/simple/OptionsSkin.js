@@ -4,6 +4,7 @@ import type { Element, Ref } from 'react';
 
 // external libraries
 import classnames from 'classnames';
+import { isFunction, isObject } from 'lodash';
 
 // components
 import { Bubble } from '../../components';
@@ -12,21 +13,21 @@ import { Bubble } from '../../components';
 import { BubbleSkin } from './';
 
 type Props = {
-  render: Function,
-  options: Array<any>,
-  optionRenderer: Function,
-  isOpeningUpward: boolean,
-  isOpen: boolean,
-  noResults: boolean,
-  noResultsMessage: string | Element<any>,
-  selectedOption: any,
   getOptionProps: Function,
   getHighlightedOptionIndex: Function,
-  isHighlightedOption: Function,
-  isSelectedOption: Function,
   handleClickOnOption: Function,
-  setHighlightedOptionIndex: Function,
+  isHighlightedOption: Function,
+  isOpen: boolean,
+  isOpeningUpward: boolean,
+  isSelectedOption: Function,
+  noResults: boolean,
+  noResultsMessage: string | Element<any>,
+  optionRenderer: Function,
+  options: Array<any>,
   optionsRef: Ref<*>,
+  render: Function,
+  selectedOption: any,
+  setHighlightedOptionIndex: Function,
   theme: Object,
   themeId: string,
 };
@@ -34,35 +35,26 @@ type Props = {
 export const OptionsSkin = (props: Props) => {
   const {
     getOptionProps,
-    render,
-    theme,
-    themeId,
-    options,
-    optionRenderer,
-    isOpeningUpward,
+    getHighlightedOptionIndex,
+    handleClickOnOption,
+    isHighlightedOption,
     isOpen,
+    isOpeningUpward,
+    isSelectedOption,
     noResults,
     noResultsMessage,
-    getHighlightedOptionIndex,
-    isHighlightedOption,
-    isSelectedOption,
-    handleClickOnOption,
+    optionRenderer,
+    options,
+    optionsRef,
+    render,
     setHighlightedOptionIndex,
-    optionsRef
+    theme,
+    themeId,
   } = props;
 
   const highlightedOptionIndex = getHighlightedOptionIndex();
   const isFirstOptionHighlighted = highlightedOptionIndex === 0;
   const sortedOptions = isOpeningUpward ? options.slice().reverse() : options;
-
-  const checkOptionRenderer = option => {
-    if (optionRenderer) {
-      return optionRenderer(option);
-    } else if (typeof option === 'object') {
-      return <span className={theme[themeId].label}>{option.label}</span>;
-    }
-    return option;
-  };
 
   const renderOptions = () => {
     // check for user's custom render function
@@ -74,10 +66,10 @@ export const OptionsSkin = (props: Props) => {
     } else if (!noResults && !render) {
       // render default simple skin
       return sortedOptions.map((option, index) => {
-        // saves reference to func in memory, prevents unwanted rerenders
-        // anonymous funcs in event handlers are reassigned in memory each render cycle
+        // set reference of event handlers in memory to prevent excess re-renders
         const boundSetHighlightedOptionIndex = setHighlightedOptionIndex.bind(null, index);
         const boundHandleClickOnOption = handleClickOnOption.bind(null, option);
+
         return (
           <li
             role="presentation"
@@ -92,13 +84,24 @@ export const OptionsSkin = (props: Props) => {
             onClick={boundHandleClickOnOption}
             onMouseEnter={boundSetHighlightedOptionIndex}
           >
-            {checkOptionRenderer(option)}
+            {renderOption(option)}
           </li>
         );
       });
     }
     // render no results message
     return <li className={theme[themeId].option}>{noResultsMessage}</li>;
+  };
+
+  const renderOption = option => {
+    // check if user has passed render prop "optionRenderer"
+    if (optionRenderer && isFunction(optionRenderer)) {
+      // call user's custom rendering logic
+      return optionRenderer(option);
+    } else if (isObject(option)) {
+      return <span className={theme[themeId].label}>{option.label}</span>;
+    }
+    return option;
   };
 
   return (
