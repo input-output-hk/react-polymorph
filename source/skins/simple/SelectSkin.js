@@ -30,11 +30,9 @@ type Props = {
   }>,
   optionRenderer: Function,
   optionsRef: Ref<any>,
-  optionsShouldClose: boolean,
   placeholder: string,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
-  toggleOpen: Function,
   value: string
 };
 
@@ -69,8 +67,6 @@ export const SelectSkin = (props: Props) => {
         theme={theme}
         isOpen={props.isOpen}
         optionsRef={props.optionsRef}
-        optionsShouldClose={props.optionsShouldClose}
-        toggleOpen={props.toggleOpen}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}
         onChange={props.handleChange}
