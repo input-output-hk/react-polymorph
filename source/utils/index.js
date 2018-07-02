@@ -15,6 +15,8 @@ export const {
   getTouchPosition,
   pauseEvent,
   addEventsToDocument,
+  addEventsToWindow,
+  removeEventsFromWindow,
   removeEventsFromDocument,
   targetIsDescendant,
   addEventListenerOnTransitionEnded,

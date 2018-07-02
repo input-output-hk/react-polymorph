@@ -30,10 +30,26 @@ export default {
     }
   },
 
+  addEventsToWindow (eventMap: {}) {
+    for (const key in eventMap) {
+      if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
+        window.addEventListener(key, eventMap[key]);
+      }
+    }
+  },
+
   removeEventsFromDocument (eventMap: {}) {
     for (const key in eventMap) {
       if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
         document.removeEventListener(key, eventMap[key], false);
+      }
+    }
+  },
+
+  removeEventsFromWindow (eventMap: {}) {
+    for (const key in eventMap) {
+      if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
+        window.removeEventListener(key, eventMap[key]);
       }
     }
   },
