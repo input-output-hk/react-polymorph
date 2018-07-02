@@ -14,7 +14,6 @@ import { FormFieldSkin, OptionsSkin } from './';
 
 type Props = {
   className: string,
-  closeOptions: Function,
   error: string,
   filteredOptions: Array<any>,
   getSelectionProps: Function,
@@ -30,6 +29,7 @@ type Props = {
   maxVisibleOptions: number,
   onKeyDown: Function,
   options: Array<any>,
+  optionsRef: Ref<any>,
   placeholder: string,
   removeOption: Function,
   renderSelections: Function,
@@ -126,11 +126,11 @@ export const AutocompleteSkin = (props: Props) => {
             </div>
 
             <Options
+              optionsRef={props.optionsRef}
               isOpen={props.isOpen}
               isOpeningUpward={props.isOpeningUpward}
               noResults={!props.filteredOptions.length}
               onChange={props.handleChange}
-              onClose={props.closeOptions}
               options={filteredAndLimitedOptions}
               resetOnClose
               selectedOptions={props.selectedOptions}
