@@ -71,7 +71,6 @@ export const SelectSkin = (props: Props) => {
         isOpeningUpward={props.isOpeningUpward}
         onChange={props.handleChange}
         optionRenderer={props.optionRenderer}
-        onClose={() => {}}
         selectedOption={selectedOption}
         noResults={!props.options.length}
       />
