@@ -71,12 +71,12 @@ class OptionsBase extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    // if Options is open and optionsShouldClose is true
-    if (this.props.isOpen && nextProps.optionsShouldClose) {
-      // call toggleOpen (Select's method for toggling its local state)
-      this.props.toggleOpen();
-    }
+  componentDidMount() {
+    document.addEventListener('keydown', this._handleKeyDown, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._handleKeyDown, false);
   }
 
   close = () => {
