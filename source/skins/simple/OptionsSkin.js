@@ -105,24 +105,22 @@ export const OptionsSkin = (props: Props) => {
   };
 
   return (
-    <div ref={optionsRef}>
-      <Bubble
-        className={classnames([
-          theme[themeId].options,
-          isOpen ? theme[themeId].isOpen : null,
-          isOpeningUpward ? theme[themeId].openUpward : null,
-          isFirstOptionHighlighted && !noResults
-            ? theme[themeId].firstOptionHighlighted
-            : null
-        ])}
-        isTransparent={false}
-        skin={BubbleSkin}
-        isOpeningUpward={isOpeningUpward}
-        isHidden={!isOpen}
-        isFloating
-      >
-        <ul className={theme[themeId].ul}>{renderOptions()}</ul>
-      </Bubble>
-    </div>
+    <Bubble
+      className={classnames([
+        theme[themeId].options,
+        isOpen ? theme[themeId].isOpen : null,
+        isOpeningUpward ? theme[themeId].openUpward : null,
+        isFirstOptionHighlighted && !noResults
+          ? theme[themeId].firstOptionHighlighted
+          : null
+      ])}
+      isTransparent={false}
+      skin={BubbleSkin}
+      isOpeningUpward={isOpeningUpward}
+      isHidden={!isOpen}
+      isFloating
+    >
+      <ul ref={optionsRef} className={theme[themeId].ul}>{renderOptions()}</ul>
+    </Bubble>
   );
 };
