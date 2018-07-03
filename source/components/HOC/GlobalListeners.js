@@ -76,7 +76,7 @@ export class GlobalListeners extends Component<Props> {
     // check if user has clicked a DOM element within Options
     const isDescendant = targetIsDescendant(event, optionsRef.current);
 
-    // return early if isDescendant == true
+    // return early
     if (isDescendant) { return; }
 
     // user has clicked outside of Options component
