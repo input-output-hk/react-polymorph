@@ -34,7 +34,7 @@ type Props = {
   removeOption: Function,
   renderSelections: Function,
   renderOptions: Function,
-  rootRef: Ref<*>,
+  rootRef: Ref<any>,
   selectedOptions: Array<any>,
   suggestionsRef: Ref<*>,
   theme: Object,
@@ -83,62 +83,61 @@ export const AutocompleteSkin = (props: Props) => {
     return null;
   };
 
-  // selected words and input for entering a new one
-  const autocompleteContent = (
-    <div className={theme.selectedWords}>
-      {renderSelectedOptions()}
-      <input
-        ref={props.inputRef}
-        placeholder={placeholder}
-        value={props.inputValue}
-        onChange={props.handleInputChange}
-        onKeyDown={props.onKeyDown}
-      />
-    </div>
+  // A label, input, and selected words are the content
+  const renderContent = () => (
+    <FormField
+      error={props.error}
+      label={props.label}
+      skin={FormFieldSkin}
+      render={() => (
+        <div
+          className={classnames([
+            theme.autocompleteContent,
+            props.isOpen ? theme.opened : null,
+            props.selectedOptions.length
+              ? theme.hasSelectedWords
+              : null,
+            props.error ? theme.errored : null
+          ])}
+          ref={props.suggestionsRef}
+        >
+          <div className={theme.selectedWords}>
+            {renderSelectedOptions()}
+            <input
+              ref={props.inputRef}
+              placeholder={placeholder}
+              value={props.inputValue}
+              onChange={props.handleInputChange}
+              onKeyDown={props.onKeyDown}
+            />
+          </div>
+        </div>
+      )}
+    />
   );
 
   return (
-    <div className={props.className} ref={props.rootRef}>
-      <FormField
-        inputRef={props.inputRef}
-        error={props.error}
-        label={props.label}
-        skin={FormFieldSkin}
-        render={() => (
-          <div
-            role="presentation"
-            aria-hidden
-            className={theme.autocompleteWrapper}
-            onClick={props.handleAutocompleteClick}
-          >
-            <div
-              className={classnames([
-                theme.autocompleteContent,
-                props.isOpen ? theme.opened : null,
-                props.selectedOptions.length
-                  ? theme.hasSelectedWords
-                  : null,
-                props.error ? theme.errored : null
-              ])}
-              ref={props.suggestionsRef}
-            >
-              {autocompleteContent}
-            </div>
+    <div
+      aria-hidden
+      className={classnames([props.className, theme.autocompleteWrapper])}
+      onClick={props.handleAutocompleteClick}
+      ref={props.rootRef}
+      role="presentation"
+    >
 
-            <Options
-              optionsRef={props.optionsRef}
-              isOpen={props.isOpen}
-              isOpeningUpward={props.isOpeningUpward}
-              noResults={!props.filteredOptions.length}
-              onChange={props.handleChange}
-              options={filteredAndLimitedOptions}
-              resetOnClose
-              selectedOptions={props.selectedOptions}
-              skin={OptionsSkin}
-              render={props.renderOptions}
-            />
-          </div>
-        )}
+      {renderContent()}
+
+      <Options
+        optionsRef={props.optionsRef}
+        isOpen={props.isOpen}
+        isOpeningUpward={props.isOpeningUpward}
+        noResults={!props.filteredOptions.length}
+        onChange={props.handleChange}
+        options={filteredAndLimitedOptions}
+        resetOnClose
+        selectedOptions={props.selectedOptions}
+        skin={OptionsSkin}
+        render={props.renderOptions}
       />
     </div>
   );
