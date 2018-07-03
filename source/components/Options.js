@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // $FlowFixMe
-import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Element } from 'react';
+import type { Ref, ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Element } from 'react';
 
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
@@ -35,7 +35,7 @@ type Props = {
   selectedOption: any,
   skin: ComponentType<any>,
   selectedOptions: Array<any>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: Object, // if passed by user, it will take precedence over this.props.context.theme
   themeId: string,
   themeOverrides: Object
 };

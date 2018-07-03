@@ -40,7 +40,6 @@ type Props = {
 
 type State = {
   composedTheme: Object,
-  highlightedOptionIndex: number,
   isOpen: boolean
 };
 

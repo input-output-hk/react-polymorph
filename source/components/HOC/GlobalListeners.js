@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import type { Ref, SyntheticMouseEvent } from 'react';
+// $FlowFixMe
+import type { SyntheticMouseEvent } from 'react';
 
 import {
   addEventsToDocument,
@@ -13,7 +14,7 @@ import {
 type Props = {
   children: Function,
   optionsIsOpen: boolean,
-  optionsRef: Ref<any>,
+  optionsRef: ?Object,
   toggleOpen: Function
 };
 
@@ -22,7 +23,7 @@ export class GlobalListeners extends Component<Props> {
     optionsIsOpen: false
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     // check if optionsIsOpen is transferring from false to true
     if (!this.props.optionsIsOpen && nextProps.optionsIsOpen) {
 
@@ -89,6 +90,6 @@ export class GlobalListeners extends Component<Props> {
   handleDocumentScroll = () => this._removeAllEventsAndCloseOptions();
 
   render() {
-    return this.props.children();
+    return <div>{this.props.children()}</div>;
   }
 }

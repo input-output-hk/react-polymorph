@@ -8,3 +8,4 @@
 [options]
 module.name_mapper='.*\(.s?css\)' -> 'CSSModule'
 module.system=haste
+no_flowlib=false
