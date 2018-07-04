@@ -137,7 +137,7 @@ class NumericInputBase extends Component<Props, State> {
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
     const { onChange, disabled } = this.props;
-    if (disabled) return;
+    if (disabled) { return; }
 
     // it is crucial to remove whitespace from input value
     // with String.trim()
@@ -146,7 +146,11 @@ class NumericInputBase extends Component<Props, State> {
       event.target.selectionStart
     );
 
-    if (onChange) onChange(processedValue, event);
+    // if the processed value is the same, then the user probably entered
+    // invalid input such as nonnumeric characters, do not call onChange
+    if (processedValue === this.state.oldValue) { return; }
+
+    if (onChange) { onChange(processedValue, event); }
   };
 
   focus = () => {
