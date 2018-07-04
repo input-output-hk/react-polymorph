@@ -136,6 +136,7 @@ class NumericInputBase extends Component<Props, State> {
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
+    event.preventDefault();
     const { onChange, disabled } = this.props;
     if (disabled) { return; }
 
