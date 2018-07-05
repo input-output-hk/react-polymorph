@@ -46,6 +46,7 @@
     "create-react-context": "0.2.2",
     "create-react-ref": "0.1.0",
     "filter-react-dom-props": "0.0.2",
+    "postinstall-build": "5.0.1",
     "react-modal": "3.1.12"
   },
   "peerDependencies": {
@@ -116,6 +117,7 @@
     "js": "babel source -d lib -s",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty source stories *.js",
     "prepare": "npm run clean && npm run build",
+    "postinstall": "postinstall-build lib --only-as-dependency",
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
     "storybook": "start-storybook -p 6543 -c storybook",
     "test": "cross-env NODE_ENV=test jest",
