@@ -44,6 +44,7 @@ type State = {
 };
 
 class InputBase extends Component<Props, State> {
+
   inputElement: Element<'input'>;
 
   static defaultProps = {
@@ -89,7 +90,7 @@ class InputBase extends Component<Props, State> {
     const { inputElement } = this;
     if (!inputElement.current) return;
     inputElement.current.focus();
-  }
+  };
 
   _setError = (error: string) => {
     const { setError } = this.props;

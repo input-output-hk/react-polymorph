@@ -26,6 +26,7 @@ type Props = {
   isSelectedOption: Function,
   handleClickOnOption: Function,
   setHighlightedOptionIndex: Function,
+  targetRef: Ref<*>,
   optionsRef: Ref<*>,
   theme: Object,
   themeId: string,
@@ -48,7 +49,8 @@ export const OptionsSkin = (props: Props) => {
     isSelectedOption,
     handleClickOnOption,
     setHighlightedOptionIndex,
-    optionsRef
+    optionsRef,
+    targetRef
   } = props;
 
   const highlightedOptionIndex = getHighlightedOptionIndex();
@@ -114,6 +116,7 @@ export const OptionsSkin = (props: Props) => {
         ])}
         isTransparent={false}
         skin={BubbleSkin}
+        targetRef={targetRef}
         isOpeningUpward={isOpeningUpward}
         isHidden={!isOpen}
         isFloating

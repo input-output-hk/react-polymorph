@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element, ElementRef } from 'react';
+import type { ComponentType, Element, ElementRef, Ref } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
@@ -28,7 +28,8 @@ type Props = {
   skin: ComponentType<any>,
   theme: Object, // takes precedence over them in context if passed
   themeId: string,
-  themeOverrides: Object // custom css/scss from user adhering to component's theme API
+  themeOverrides: Object, // custom css/scss from user adhering to component's theme API
+  targetRef: ?Ref<*>, // ref to the target DOM element used for positioning the bubble
 };
 
 type State = {
@@ -37,6 +38,7 @@ type State = {
 };
 
 class BubbleBase extends Component<Props, State> {
+
   rootElement: ?Element<any>;
 
   static defaultProps = {
@@ -140,31 +142,33 @@ class BubbleBase extends Component<Props, State> {
   };
 
   _updatePosition = () => {
-    const { isOpeningUpward } = this.props;
+    const { isOpeningUpward, targetRef } = this.props;
     const { rootElement } = this;
 
-    if (!rootElement) return;
+    let target = targetRef && typeof targetRef !== 'string' ? targetRef.current : null;
 
-    const parentNode = rootElement.current ? rootElement.current.parentElement : null;
-    const parentNodeParams = parentNode
-      ? parentNode.getBoundingClientRect()
-      : null;
-
-    if (parentNodeParams !== null) {
-      let positionY;
-      if (isOpeningUpward) {
-        positionY = window.innerHeight - parentNodeParams.top + 20;
-      } else {
-        positionY = parentNodeParams.bottom + 20;
-      }
-
-      const position = {
-        width: parentNodeParams.width,
-        positionX: parentNodeParams.left,
-        positionY
-      };
-      this.setState({ position });
+    // Without a target, try to fallback to the parent node
+    if (!target) {
+      //  Only proceed if the root element is defined
+      if (!rootElement || !rootElement.current) return;
+      target = rootElement.current.parentElement;
     }
+
+    const targetRect = target.getBoundingClientRect();
+
+    let positionY;
+    if (isOpeningUpward) {
+      positionY = window.innerHeight - targetRect.top + 20;
+    } else {
+      positionY = targetRect.bottom + 20;
+    }
+
+    const position = {
+      width: targetRect.width,
+      positionX: targetRect.left,
+      positionY
+    };
+    this.setState({ position });
   };
 
   _getDocumentEvents() {

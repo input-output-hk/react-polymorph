@@ -43,6 +43,7 @@ type State = {
 };
 
 class SelectBase extends Component<Props, State> {
+
   inputElement: Element<'input'>;
 
   static defaultProps = {
