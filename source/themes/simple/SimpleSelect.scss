@@ -24,7 +24,7 @@ $select-open-arrow-url: url("#{$theme-assets-path}/select-open-arrow.svg") !defa
 $select-open-arrow-color: #5e6066 !default;
 $select-open-arrow-width: $select-arrow-width !default;
 $select-open-arrow-height: $select-arrow-height !default;
-$select-open-arrow-position-bottom: $select-arrow-position-bottom !default;
+$select-open-arrow-position-bottom: 21px !default;
 $select-open-arrow-position-left: $select-arrow-position-left !default;
 $select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
 
@@ -78,19 +78,22 @@ $select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
     -webkit-mask: $select-open-arrow-url;
     mask: $select-open-arrow-url;
     background-color: $select-open-arrow-color;
+    bottom: $select-open-arrow-position-bottom;
   }
 }
 
 // ==== STATE: openUpward ====
 .openUpward {
   .selectInput:after {
-    background-image: $select-open-arrow-url;
+    -webkit-mask: $select-open-arrow-url;
+    bottom: $select-open-arrow-position-bottom;
   }
 
   &.isOpen {
     .selectInput:after {
       -webkit-mask: $select-arrow-url;
       mask: $select-arrow-url;
+      bottom: $select-arrow-position-bottom;
     }
   }
 }
