@@ -6,8 +6,8 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components & skins
-import { Select } from '../source/components';
-import { SelectSkin } from '../source/skins/simple';
+import { Select, Modal, Button } from '../source/components';
+import { SelectSkin, ModalSkin, ButtonSkin } from '../source/skins/simple';
 
 // themes
 import SimpleTheme from '../source/themes/simple';
@@ -177,5 +177,49 @@ storiesOf('Select', module)
         placeholder="Select your country …"
         skin={SelectSkin}
       />
+    ))
+  )
+
+  .add('inside a modal',
+    withState({ isOpen: true, value: '' }, store => (
+      store.state.isOpen
+        ? (
+          <Modal
+            isOpen={store.state.isOpen}
+            triggerCloseOnOverlayClick={false}
+            skin={ModalSkin}
+            onClose={() => store.set({ isOpen: false })}
+          >
+            <div className={styles.dialogWrapper}>
+              <div className={styles.title}>
+                <h1>Select in Modal</h1>
+              </div>
+              <div className={styles.content}>
+                <Select
+                  value={store.state.value}
+                  onChange={value => store.set({ value })}
+                  options={COUNTRIES}
+                  skin={SelectSkin}
+                />
+              </div>
+              <div className={styles.actions}>
+                <Button
+                  onClick={() => store.set({ isOpen: false })}
+                  className="primary"
+                  label="Submit"
+                  skin={ButtonSkin}
+                />
+              </div>
+            </div>
+          </Modal>
+        )
+        : (
+          <button
+            className={styles.reopenModal}
+            onClick={() => store.set({ isOpen: !store.state.isOpen })}
+          >
+            Reopen modal
+          </button>
+        )
     ))
   );

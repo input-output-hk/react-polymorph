@@ -123,8 +123,9 @@ class AutocompleteBase extends Component<Props, State> {
     }
   };
 
-  // checks for backspace in order to delete the last selected option
   onKeyDown = (event: SyntheticKeyboardEvent<>) => {
+
+    // checks for backspace in order to delete the last selected option
     if (
       event.keyCode === 8 &&
       !event.target.value &&
@@ -132,6 +133,10 @@ class AutocompleteBase extends Component<Props, State> {
     ) {
       // Remove last selected option
       this.removeOption(this.state.selectedOptions.length - 1, event);
+
+    // ESCAPE key - stops propagation to avoid the modal to be closed
+    } else if (event.keyCode === 27) {
+      event.stopPropagation();
     }
   };
 
