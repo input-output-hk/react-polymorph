@@ -158,6 +158,8 @@ class BubbleBase extends Component<Props, State> {
 
     let positionY;
     if (isOpeningUpward) {
+      // Since we don't know the height of the bubble before rendering it we positioning
+      // it with { bottom: XYpx } (within the viewport) and need this calculation:
       positionY = window.innerHeight - targetRect.top + 20;
     } else {
       positionY = targetRect.bottom + 20;
