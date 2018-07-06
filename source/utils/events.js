@@ -22,7 +22,7 @@ export default {
     event.preventDefault();
   },
 
-  addEventsToDocument (eventMap: {}) {
+  addDocumentListeners (eventMap: {}) {
     for (const key in eventMap) {
       if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
         document.addEventListener(key, eventMap[key], false);
@@ -30,15 +30,7 @@ export default {
     }
   },
 
-  addEventsToWindow (eventMap: {}) {
-    for (const key in eventMap) {
-      if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
-        window.addEventListener(key, eventMap[key]);
-      }
-    }
-  },
-
-  removeEventsFromDocument (eventMap: {}) {
+  removeDocumentListeners (eventMap: {}) {
     for (const key in eventMap) {
       if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
         document.removeEventListener(key, eventMap[key], false);
@@ -46,7 +38,15 @@ export default {
     }
   },
 
-  removeEventsFromWindow (eventMap: {}) {
+  addWindowListeners (eventMap: {}) {
+    for (const key in eventMap) {
+      if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
+        window.addEventListener(key, eventMap[key]);
+      }
+    }
+  },
+
+  removeWindowListeners (eventMap: {}) {
     for (const key in eventMap) {
       if (Object.prototype.hasOwnProperty.call(eventMap, key)) {
         window.removeEventListener(key, eventMap[key]);
@@ -55,15 +55,18 @@ export default {
   },
 
   targetIsDescendant (event: SyntheticEvent<HTMLElement>, parent: ?Element<any>) {
-    const clickedNode = event.currentTarget;
+    const clickedNode = event.target;
 
     // if the node exists,
     // the node is not the given parent,
     // and the node does not contain the parent,
     // then the node is a descendant of the parent
-    if (clickedNode && clickedNode !== parent && !clickedNode.contains(parent)) {
+    if (clickedNode && parent && parent.contains(clickedNode) && !clickedNode.contains(parent)) {
       return true;
     }
+    // if (clickedNode && clickedNode !== parent && !clickedNode.contains(parent)) {
+    //   return true;
+    // }
     // otherwise it is not a descendant of the given parent
     return false;
   },

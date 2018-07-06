@@ -6,8 +6,8 @@ import createRef from 'create-react-ref/lib/createRef';
 // internal utility functions
 import { withTheme } from '../themes/withTheme';
 import {
-  addEventsToDocument,
-  removeEventsFromDocument,
+  addDocumentListeners,
+  removeDocumentListeners,
   composeTheme,
   addThemeId
 } from '../utils';
@@ -80,7 +80,7 @@ class BubbleBase extends Component<Props, State> {
     // Add listeners when the bubble
     if (isFloating && !nextProps.isHidden && !this._hasEventListeners) {
       this._handleScrollEventListener('add');
-      addEventsToDocument(this._getDocumentEvents());
+      addDocumentListeners(this._getDocumentEvents());
       window.addEventListener('resize', this._updatePosition);
       this._hasEventListeners = true;
     }
@@ -118,7 +118,7 @@ class BubbleBase extends Component<Props, State> {
 
   _removeAllEventListeners() {
     if (this._hasEventListeners) {
-      removeEventsFromDocument(this._getDocumentEvents());
+      removeDocumentListeners(this._getDocumentEvents());
       this._handleScrollEventListener('remove');
       window.removeEventListener('resize', this._updatePosition);
       this._hasEventListeners = false;
