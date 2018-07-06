@@ -1,8 +1,17 @@
 // @flow
 import React, { Component } from 'react';
 
-// $FlowFixMe
-import type { ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Element } from 'react';
+import type {
+  ComponentType,
+  // $FlowFixMe
+  SyntheticKeyboardEvent,
+  // $FlowFixMe
+  SyntheticMouseEvent,
+  // $FlowFixMe
+  SyntheticEvent,
+  Element,
+  Ref
+} from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
@@ -38,6 +47,7 @@ type Props = {
   selectedOption: any,
   skin: ComponentType<any>,
   selectedOptions: Array<any>,
+  targetRef: Ref<*> ,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object
@@ -50,6 +60,7 @@ type State = {
 };
 
 class OptionsBase extends Component<Props, State> {
+
   optionsElement: ?Element<any>;
 
   static defaultProps = {
@@ -310,6 +321,7 @@ class OptionsBase extends Component<Props, State> {
     // destructuring props ensures only the "...rest" get passed down
     const {
       skin: OptionsSkin,
+      targetRef,
       theme,
       themeOverrides,
       onChange,
@@ -321,6 +333,7 @@ class OptionsBase extends Component<Props, State> {
 
     return (
       <OptionsSkin
+        targetRef={targetRef}
         optionsRef={this.optionsElement}
         theme={composedTheme}
         isOpen={isOpen}

@@ -4,6 +4,8 @@
 ### Fixes
 
 - Wraps TextAreaSkin's render method in FormField so labels and errors are rendered the same as in Input and NumericInput. Fixes Input, NumericInput, and TextArea components so they pass a prop called inputRef or textareaRef to FormField in their skins. This properly makes use of React v16.3.1+'s ref API instead of using the onRef callback. Adds autoFocus, onBlur, and onFocus props to NumericInput and TextArea. [PR 67](https://github.com/input-output-hk/react-polymorph/pull/67)
+- Fixed wrong positioning of select options when opening upward [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
+- Fixed vertical positioning of select arrow when opened [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
 ### Chores
 
@@ -12,6 +14,7 @@
 
 ### Features
 
+- Bubble takes an optional `targetRef` for positioning now [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
 ## 0.7.0
 

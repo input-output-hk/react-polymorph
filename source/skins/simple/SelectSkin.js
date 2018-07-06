@@ -73,6 +73,7 @@ export const SelectSkin = (props: Props) => {
         onClose={props.toggleOpen}
         selectedOption={selectedOption}
         noResults={!props.options.length}
+        targetRef={props.inputRef}
       />
     </div>
   );
