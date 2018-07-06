@@ -7,10 +7,12 @@ import _ from 'lodash';
 import classnames from 'classnames';
 
 // components
-import { FormField, Options } from '../../components';
+import { FormField } from '../../components/FormField';
+import { Options } from '../../components/Options';
 
 // skins
-import { FormFieldSkin, OptionsSkin } from './';
+import { FormFieldSkin } from './FormFieldSkin';
+import { OptionsSkin } from './OptionsSkin';
 
 type Props = {
   className: string,
@@ -87,6 +89,7 @@ export const AutocompleteSkin = (props: Props) => {
   const renderContent = () => (
     <FormField
       error={props.error}
+      inputRef={props.inputRef}
       label={props.label}
       skin={FormFieldSkin}
       render={() => (
