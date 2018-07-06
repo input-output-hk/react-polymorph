@@ -37,7 +37,8 @@ type Props = {
   selectedOptions: Array<any>,
   theme: Object, // if passed by user, it will take precedence over this.props.context.theme
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
+  toggleOpen: Function
 };
 
 type State = {
@@ -90,12 +91,17 @@ class OptionsBase extends Component<Props, State> {
   }
 
   close = () => {
-    if (this.props.onClose) this.props.onClose();
+    const { onClose, resetOnClose, toggleOpen, isOpen } = this.props;
+
+    if (isOpen) { toggleOpen(); }
+
     this.setState({
-      highlightedOptionIndex: this.props.resetOnClose
+      highlightedOptionIndex: resetOnClose
         ? 0
         : this.state.highlightedOptionIndex
     });
+
+    if (onClose) { onClose(); }
   };
 
   getHighlightedOptionIndex = () => {
@@ -272,16 +278,16 @@ class OptionsBase extends Component<Props, State> {
 
     return (
       <OptionsSkin
-        optionsRef={optionsRef}
-        theme={composedTheme}
-        isOpen={isOpen}
-        highlightedOptionIndex={highlightedOptionIndex}
         getHighlightedOptionIndex={this.getHighlightedOptionIndex}
-        isSelectedOption={this.isSelectedOption}
-        isHighlightedOption={this.isHighlightedOption}
-        handleClickOnOption={this.handleClickOnOption}
-        setHighlightedOptionIndex={this.setHighlightedOptionIndex}
         getOptionProps={this.getOptionProps}
+        handleClickOnOption={this.handleClickOnOption}
+        highlightedOptionIndex={highlightedOptionIndex}
+        isHighlightedOption={this.isHighlightedOption}
+        isOpen={isOpen}
+        isSelectedOption={this.isSelectedOption}
+        optionsRef={optionsRef}
+        setHighlightedOptionIndex={this.setHighlightedOptionIndex}
+        theme={composedTheme}
         {...rest}
       />
     );
