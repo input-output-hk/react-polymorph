@@ -9,7 +9,7 @@ import {
   removeDocumentListeners,
   removeWindowListeners,
   targetIsDescendant
-} from '../../utils';
+} from '../../utils/events';
 
 type Props = {
   children: Function,
