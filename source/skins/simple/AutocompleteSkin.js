@@ -142,6 +142,7 @@ export const AutocompleteSkin = (props: Props) => {
         resetOnClose
         selectedOptions={props.selectedOptions}
         skin={OptionsSkin}
+        targetRef={props.suggestionsRef}
         toggleOpen={props.toggleOpen}
       />
     </div>
