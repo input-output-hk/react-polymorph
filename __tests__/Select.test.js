@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Select } from '../source/components';
-import { SelectSkin } from '../source/skins/simple';
+import { Select } from '../source/components/Select';
+import { SelectSkin } from '../source/skins/simple/SelectSkin';
 
 const COUNTRIES = [
   { label: 'Frankreich', value: 'France' },

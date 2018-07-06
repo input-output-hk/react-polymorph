@@ -6,14 +6,14 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Autocomplete, Select, Options } from '../source/components';
+import { Autocomplete } from '../source/components/Autocomplete';
+import { Select } from '../source/components/Select';
+import { Options } from '../source/components/Options';
 
 // skins
-import {
-  AutocompleteSkin,
-  OptionsSkin,
-  SelectSkin
-} from '../source/skins/simple';
+import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
+import { SelectSkin } from '../source/skins/simple/SelectSkin';
+import { OptionsSkin } from '../source/skins/simple/OptionsSkin';
 
 // themes
 import CustomOptionsTheme from './theme-customizations/Options.custom.scss';

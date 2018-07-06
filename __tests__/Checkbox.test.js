@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Checkbox } from '../source/components';
-import { CheckboxSkin } from '../source/skins/simple';
+import { Checkbox } from '../source/components/Checkbox';
+import { CheckboxSkin } from '../source/skins/simple/CheckboxSkin';
 
 test('Checkbox renders correctly', () => {
   const component = renderer.create(

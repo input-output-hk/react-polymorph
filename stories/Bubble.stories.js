@@ -5,10 +5,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // components
-import { Bubble } from '../source/components';
+import { Bubble } from '../source/components/Bubble';
 
 // skins
-import { BubbleSkin } from '../source/skins/simple';
+import { BubbleSkin } from '../source/skins/simple/BubbleSkin';
 
 // themes
 import BubbleCustomTheme from './theme-customizations/Bubble.custom.scss';

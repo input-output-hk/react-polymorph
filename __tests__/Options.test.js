@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Options } from '../source/components';
-import { OptionsSkin } from '../source/skins/simple';
+import { Options } from '../source/components/Options';
+import { OptionsSkin } from '../source/skins/simple/OptionsSkin';
 
 const MNEMONIC_WORDS = [
   'home',

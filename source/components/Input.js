@@ -2,12 +2,16 @@
 import React, { Component } from 'react';
 // $FlowFixMe
 import type { ComponentType, Element, SyntheticInputEvent } from 'react';
+
+// external libraries
 import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -44,6 +48,7 @@ type State = {
 };
 
 class InputBase extends Component<Props, State> {
+
   inputElement: Element<'input'>;
 
   static defaultProps = {
@@ -89,7 +94,7 @@ class InputBase extends Component<Props, State> {
     const { inputElement } = this;
     if (!inputElement.current) return;
     inputElement.current.focus();
-  }
+  };
 
   _setError = (error: string) => {
     const { setError } = this.props;

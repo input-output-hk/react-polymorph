@@ -6,10 +6,10 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { NumericInput } from '../source/components';
+import { NumericInput } from '../source/components/NumericInput';
 
 // skins
-import { InputSkin } from '../source/skins/simple';
+import { InputSkin } from '../source/skins/simple/InputSkin';
 
 // themes
 import CustomInputTheme from './theme-customizations/Input.custom.scss';

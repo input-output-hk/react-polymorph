@@ -5,10 +5,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // components
-import { Button } from '../source/components';
+import { Button } from '../source/components/Button';
 
 // skins
-import { ButtonSkin } from '../source/skins/simple';
+import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 
 // themes
 import CustomButtonTheme from './theme-customizations/Button.custom.scss';

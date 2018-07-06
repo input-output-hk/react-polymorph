@@ -3,7 +3,11 @@
 ## vNEXT
 ### Fixes
 
+- Adds a new HOC GlobalListeners which is used in Select and Autocomplete that attaches document and window listeners for closing the window. Fixes bubble and arrow positioning when Bubble is rendered via Select and Autocomplete. NumericInput does not execute the user's onChange prop unless the value changes internally after being processed. Removes index.js in components and skins directories to reduce size of library. [PR 69](https://github.com/input-output-hk/react-polymorph/pull/69)
+
 - Wraps TextAreaSkin's render method in FormField so labels and errors are rendered the same as in Input and NumericInput. Fixes Input, NumericInput, and TextArea components so they pass a prop called inputRef or textareaRef to FormField in their skins. This properly makes use of React v16.3.1+'s ref API instead of using the onRef callback. Adds autoFocus, onBlur, and onFocus props to NumericInput and TextArea. [PR 67](https://github.com/input-output-hk/react-polymorph/pull/67)
+- Fixed wrong positioning of select options when opening upward [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
+- Fixed vertical positioning of select arrow when opened [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
 ### Chores
 
@@ -12,6 +16,7 @@
 
 ### Features
 
+- Bubble takes an optional `targetRef` for positioning now [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
 ## 0.7.0
 

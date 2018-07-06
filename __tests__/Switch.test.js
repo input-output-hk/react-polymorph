@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Checkbox } from '../source/components';
-import { SwitchSkin } from '../source/skins/simple';
+import { Checkbox } from '../source/components/Checkbox';
+import { SwitchSkin } from '../source/skins/simple/SwitchSkin';
 import { IDENTIFIERS } from '../source/themes/API';
 
 test('Switch renders correctly', () => {

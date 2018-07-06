@@ -6,8 +6,8 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components & skins
-import { TextArea } from '../source/components';
-import { TextAreaSkin } from '../source/skins/simple';
+import { TextArea } from '../source/components/TextArea';
+import { TextAreaSkin } from '../source/skins/simple/TextAreaSkin';
 
 // themes
 import CustomTextAreaTheme from './theme-customizations/TextArea.custom.scss';

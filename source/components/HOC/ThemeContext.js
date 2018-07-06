@@ -2,21 +2,21 @@
 import React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
 
-import ROOT_THEME_API from './API';
-import SimpleAutocomplete from './simple/SimpleAutocomplete.scss';
-import SimpleBubble from './simple/SimpleBubble.scss';
-import SimpleButton from './simple/SimpleButton.scss';
-import SimpleCheckbox from './simple/SimpleCheckbox.scss';
-import SimpleFormField from './simple/SimpleFormField.scss';
-import SimpleInput from './simple/SimpleInput.scss';
-import SimpleModal from './simple/SimpleModal.scss';
-import SimpleOptions from './simple/SimpleOptions.scss';
-import SimpleRadio from './simple/SimpleRadio.scss';
-import SimpleSelect from './simple/SimpleSelect.scss';
-import SimpleSwitch from './simple/SimpleSwitch.scss';
-import SimpleTextArea from './simple/SimpleTextArea.scss';
-import SimpleToggler from './simple/SimpleToggler.scss';
-import SimpleTooltip from './simple/SimpleTooltip.scss';
+import ROOT_THEME_API from '../../themes/API';
+import SimpleAutocomplete from '../../themes/simple/SimpleAutocomplete.scss';
+import SimpleBubble from '../../themes/simple/SimpleBubble.scss';
+import SimpleButton from '../../themes/simple/SimpleButton.scss';
+import SimpleCheckbox from '../../themes/simple/SimpleCheckbox.scss';
+import SimpleFormField from '../../themes/simple/SimpleFormField.scss';
+import SimpleInput from '../../themes/simple/SimpleInput.scss';
+import SimpleModal from '../../themes/simple/SimpleModal.scss';
+import SimpleOptions from '../../themes/simple/SimpleOptions.scss';
+import SimpleRadio from '../../themes/simple/SimpleRadio.scss';
+import SimpleSelect from '../../themes/simple/SimpleSelect.scss';
+import SimpleSwitch from '../../themes/simple/SimpleSwitch.scss';
+import SimpleTextArea from '../../themes/simple/SimpleTextArea.scss';
+import SimpleToggler from '../../themes/simple/SimpleToggler.scss';
+import SimpleTooltip from '../../themes/simple/SimpleTooltip.scss';
 
 // components that are NOT directly nested within a ThemeProvider
 // can access simple theme as "this.props.context.theme",

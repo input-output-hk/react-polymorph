@@ -6,10 +6,10 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Radio } from '../source/components';
+import { Radio } from '../source/components/Radio';
 
 // skins
-import { RadioSkin } from '../source/skins/simple';
+import { RadioSkin } from '../source/skins/simple/RadioSkin';
 
 // themes
 import CustomRadioTheme from './theme-customizations/Radio.custom.scss';

@@ -1,30 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select isOpen={true} 1`] = `
-<div
-  className="select isOpen"
->
+<div>
   <div
-    className="selectInput"
+    className="select isOpen"
   >
     <div
-      className="root"
+      className="selectInput"
     >
-      
       <div
-        className="inputWrapper"
+        className="root"
       >
-        <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
-          value=""
-        />
+        
+        <div
+          className="inputWrapper"
+        >
+          <input
+            className="input"
+            onChange={[Function]}
+            onClick={[Function]}
+            readOnly={true}
+            value=""
+          />
+        </div>
       </div>
     </div>
-  </div>
-  <div>
     <div
       className="options isOpen firstOptionHighlighted root isFloating"
       style={null}
@@ -113,30 +113,30 @@ exports[`Select isOpen={true} 1`] = `
 `;
 
 exports[`Select isOpeningUpward={true} 1`] = `
-<div
-  className="select openUpward"
->
+<div>
   <div
-    className="selectInput"
+    className="select openUpward"
   >
     <div
-      className="root"
+      className="selectInput"
     >
-      
       <div
-        className="inputWrapper"
+        className="root"
       >
-        <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
-          value=""
-        />
+        
+        <div
+          className="inputWrapper"
+        >
+          <input
+            className="input"
+            onChange={[Function]}
+            onClick={[Function]}
+            readOnly={true}
+            value=""
+          />
+        </div>
       </div>
     </div>
-  </div>
-  <div>
     <div
       className="options openUpward root openUpward isFloating isHidden"
       style={null}
@@ -225,30 +225,30 @@ exports[`Select isOpeningUpward={true} 1`] = `
 `;
 
 exports[`Select renders correctly 1`] = `
-<div
-  className="select"
->
+<div>
   <div
-    className="selectInput"
+    className="select"
   >
     <div
-      className="root"
+      className="selectInput"
     >
-      
       <div
-        className="inputWrapper"
+        className="root"
       >
-        <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
-          value=""
-        />
+        
+        <div
+          className="inputWrapper"
+        >
+          <input
+            className="input"
+            onChange={[Function]}
+            onClick={[Function]}
+            readOnly={true}
+            value=""
+          />
+        </div>
       </div>
     </div>
-  </div>
-  <div>
     <div
       className="options firstOptionHighlighted root isFloating isHidden"
       style={null}
@@ -337,34 +337,34 @@ exports[`Select renders correctly 1`] = `
 `;
 
 exports[`Select renders with an error 1`] = `
-<div
-  className="select"
->
+<div>
   <div
-    className="selectInput"
+    className="select"
   >
     <div
-      className="root errored"
+      className="selectInput"
     >
       <div
-        className="error"
+        className="root errored"
       >
-        Please select a different option
-      </div>
-      <div
-        className="inputWrapper"
-      >
-        <input
-          className="input errored"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
-          value=""
-        />
+        <div
+          className="error"
+        >
+          Please select a different option
+        </div>
+        <div
+          className="inputWrapper"
+        >
+          <input
+            className="input errored"
+            onChange={[Function]}
+            onClick={[Function]}
+            readOnly={true}
+            value=""
+          />
+        </div>
       </div>
     </div>
-  </div>
-  <div>
     <div
       className="options firstOptionHighlighted root isFloating isHidden"
       style={null}
@@ -453,30 +453,30 @@ exports[`Select renders with an error 1`] = `
 `;
 
 exports[`Select renders with disabled options 1`] = `
-<div
-  className="select"
->
+<div>
   <div
-    className="selectInput"
+    className="select"
   >
     <div
-      className="root"
+      className="selectInput"
     >
-      
       <div
-        className="inputWrapper"
+        className="root"
       >
-        <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
-          value=""
-        />
+        
+        <div
+          className="inputWrapper"
+        >
+          <input
+            className="input"
+            onChange={[Function]}
+            onClick={[Function]}
+            readOnly={true}
+            value=""
+          />
+        </div>
       </div>
     </div>
-  </div>
-  <div>
     <div
       className="options firstOptionHighlighted root isFloating isHidden"
       style={null}
@@ -552,31 +552,31 @@ exports[`Select renders with disabled options 1`] = `
 `;
 
 exports[`Select renders with placeholder 1`] = `
-<div
-  className="select"
->
+<div>
   <div
-    className="selectInput"
+    className="select"
   >
     <div
-      className="root"
+      className="selectInput"
     >
-      
       <div
-        className="inputWrapper"
+        className="root"
       >
-        <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          placeholder="Select your country …"
-          readOnly={true}
-          value=""
-        />
+        
+        <div
+          className="inputWrapper"
+        >
+          <input
+            className="input"
+            onChange={[Function]}
+            onClick={[Function]}
+            placeholder="Select your country …"
+            readOnly={true}
+            value=""
+          />
+        </div>
       </div>
     </div>
-  </div>
-  <div>
     <div
       className="options firstOptionHighlighted root isFloating isHidden"
       style={null}
@@ -665,30 +665,30 @@ exports[`Select renders with placeholder 1`] = `
 `;
 
 exports[`Select uses render prop - optionRenderer 1`] = `
-<div
-  className="select"
->
+<div>
   <div
-    className="selectInput"
+    className="select"
   >
     <div
-      className="root"
+      className="selectInput"
     >
-      
       <div
-        className="inputWrapper"
+        className="root"
       >
-        <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
-          value=""
-        />
+        
+        <div
+          className="inputWrapper"
+        >
+          <input
+            className="input"
+            onChange={[Function]}
+            onClick={[Function]}
+            readOnly={true}
+            value=""
+          />
+        </div>
       </div>
     </div>
-  </div>
-  <div>
     <div
       className="options firstOptionHighlighted root isFloating isHidden"
       style={null}

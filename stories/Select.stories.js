@@ -6,8 +6,8 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components & skins
-import { Select, Modal, Button } from '../source/components';
-import { SelectSkin, ModalSkin, ButtonSkin } from '../source/skins/simple';
+import { Select, Modal, Button } from '../source/components/Select';
+import { SelectSkin, ModalSkin, ButtonSkin } from '../source/skins/simple/SelectSkin';
 
 // themes
 import SimpleTheme from '../source/themes/simple';

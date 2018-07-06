@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
