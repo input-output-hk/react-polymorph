@@ -72,7 +72,17 @@ class OptionsBase extends Component<Props, State> {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this._handleKeyDown, false);
+    if (this.props.isOpen) {
+      document.addEventListener('keydown', this._handleKeyDown, false);
+    }
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (!this.props.isOpen && nextProps.isOpen) {
+      document.addEventListener('keydown', this._handleKeyDown, false);
+    } else if (this.props.isOpen && !nextProps.isOpen) {
+      document.removeEventListener('keydown', this._handleKeyDown, false);
+    }
   }
 
   componentWillUnmount() {
