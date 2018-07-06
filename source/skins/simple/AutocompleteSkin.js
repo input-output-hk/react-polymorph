@@ -40,7 +40,8 @@ type Props = {
   selectedOptions: Array<any>,
   suggestionsRef: Ref<*>,
   theme: Object,
-  themeId: string
+  themeId: string,
+  toggleOpen: Function
 };
 
 export const AutocompleteSkin = (props: Props) => {
@@ -131,16 +132,17 @@ export const AutocompleteSkin = (props: Props) => {
       {renderContent()}
 
       <Options
-        optionsRef={props.optionsRef}
         isOpen={props.isOpen}
         isOpeningUpward={props.isOpeningUpward}
         noResults={!props.filteredOptions.length}
         onChange={props.handleChange}
         options={filteredAndLimitedOptions}
+        optionsRef={props.optionsRef}
+        render={props.renderOptions}
         resetOnClose
         selectedOptions={props.selectedOptions}
         skin={OptionsSkin}
-        render={props.renderOptions}
+        toggleOpen={props.toggleOpen}
       />
     </div>
   );
