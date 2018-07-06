@@ -109,6 +109,10 @@ class AutocompleteBase extends Component<Props, State> {
 
   focus = () => this.handleAutocompleteClick();
 
+  open = () => this.setState({ isOpen: true });
+
+  close = () => this.setState({ isOpen: false });
+
   toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
   handleAutocompleteClick = () => {
@@ -120,34 +124,25 @@ class AutocompleteBase extends Component<Props, State> {
     this.toggleOpen();
   };
 
-  // checks for backspace in order to delete the last selected option
   onKeyDown = (event: SyntheticKeyboardEvent<>) => {
     if (
+      // Check for backspace in order to delete the last selected option
       event.keyCode === 8 &&
       !event.target.value &&
       this.state.selectedOptions.length
     ) {
       // Remove last selected option
       this.removeOption(this.state.selectedOptions.length - 1, event);
+    } else if (event.keyCode === 13) { // Open suggestions on ENTER
+      this.open();
+    } else if (event.keyCode === 27) { // Close suggestions on ESC
+      this.close();
     }
   };
 
   // onChange handler for input element in AutocompleteSkin
   handleInputChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-
-    // filter out invalid characters
-    const filteredValue = this._filterInvalidChars(value);
-
-    // filter options
-    const filteredOptions = this._filterOptions(filteredValue);
-
-    // open options, update filteredOptions, and update inputValue
-    this.setState({
-      isOpen: true,
-      inputValue: filteredValue,
-      filteredOptions
-    });
+    this._setInputValue(event.target.value);
   };
 
   // passed to Options onChange handler in AutocompleteSkin
@@ -182,7 +177,7 @@ class AutocompleteBase extends Component<Props, State> {
       }
     }
 
-    this.setState({ inputValue: '' });
+    this._setInputValue('');
   };
 
   removeOption = (index: number, event: SyntheticEvent<>) => {
@@ -302,6 +297,16 @@ class AutocompleteBase extends Component<Props, State> {
 
     return filteredValue;
   };
+
+  _setInputValue = (value: string) => {
+    const filteredValue = this._filterInvalidChars(value);
+    const filteredOptions = this._filterOptions(filteredValue);
+    this.setState({
+      isOpen: true,
+      inputValue: filteredValue,
+      filteredOptions
+    });
+  }
 }
 
 export const Autocomplete = withTheme(AutocompleteBase);
