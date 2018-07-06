@@ -42,6 +42,7 @@ export const SelectSkin = (props: Props) => {
   const { theme, themeId } = props;
   return (
     <div
+      ref={props.rootRef}
       className={classnames([
         props.className,
         theme[themeId].select,
