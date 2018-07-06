@@ -156,7 +156,7 @@ storiesOf('ThemeProvider', module)
           />
         </div>
 
-        <div style={{ margin: '100px', height: '200px' }}>
+        <div style={{ margin: '50px' }}>
           <Options
             isOpen
             options={OPTIONS}
@@ -166,7 +166,7 @@ storiesOf('ThemeProvider', module)
           />
         </div>
 
-        <div style={{ margin: '100px', height: '225px' }}>
+        <div style={{ margin: '400px 100px 250px 100px', height: '225px' }}>
           <Autocomplete
             label="Autocomplete with custom theme"
             options={OPTIONS}
