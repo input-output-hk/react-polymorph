@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 import type { SyntheticMouseEvent } from 'react';
 
 import {
-  addEventsToDocument,
-  addEventsToWindow,
-  removeEventsFromDocument,
-  removeEventsFromWindow,
+  addDocumentListeners,
+  addWindowListeners,
+  removeDocumentListeners,
+  removeWindowListeners,
   targetIsDescendant
 } from '../../utils';
 
@@ -15,6 +15,7 @@ type Props = {
   children: Function,
   optionsIsOpen: boolean,
   optionsRef: ?Object,
+  rootRef: ?Object,
   toggleOpen: Function
 };
 
@@ -24,70 +25,65 @@ export class GlobalListeners extends Component<Props> {
   };
 
   componentWillReceiveProps(nextProps: Props) {
-    // check if optionsIsOpen is transferring from false to true
-    if (!this.props.optionsIsOpen && nextProps.optionsIsOpen) {
+    const { optionsIsOpen } = this.props;
 
-      // add all event listeners to window
-      addEventsToWindow(this._getWindowEvents());
-      // add all event listeners to document
-      addEventsToDocument(this._getDocumentEvents());
+    // if Options is transferring from closed to open, add listeners
+    // if Options is transferring from open to closed, remove listeners
+    if (!optionsIsOpen && nextProps.optionsIsOpen) {
+      addWindowListeners(this._getWindowListeners());
+      addDocumentListeners(this._getDocumentListeners());
+    } else if (optionsIsOpen && !nextProps.optionsIsOpen) {
+      this._removeGlobalListeners();
     }
   }
 
+  // before unmounting, remove all global listeners
   componentWillUnmount() {
-    // when WindowHelpers unmounts, clear all event listeners from window and document
-    this._clearWindowAndDocument();
+    this._removeGlobalListeners();
   }
 
-  _removeAllEventsAndCloseOptions = () => {
-    const { optionsIsOpen, toggleOpen } = this.props;
-    // if Select is not currently rendering Options, return early
-    if (!optionsIsOpen) { return; }
-
-    // otherwise remove all event handlers from document and window
-    // and close Options using Select's toggleOpen method
-    this._clearWindowAndDocument();
-    toggleOpen();
+  // removes all event listeners from document and window
+  _removeGlobalListeners() {
+    removeDocumentListeners(this._getDocumentListeners());
+    removeWindowListeners(this._getWindowListeners());
   }
 
-  _clearWindowAndDocument() {
-    removeEventsFromDocument(this._getDocumentEvents());
-    removeEventsFromWindow(this._getWindowEvents());
+  // removes all global listeners, then closes Options
+  _removeListenersAndToggle = () => {
+    const { optionsIsOpen, optionsRef } = this.props;
+    this._removeGlobalListeners();
+
+    // before toggle, ensure options is open and optionsRef exists on DOM
+    if (!optionsIsOpen || !optionsRef || !optionsRef.current) { return; }
+    this.props.toggleOpen();
   }
 
-  _getDocumentEvents() {
-    return {
-      click: this.handleDocumentClick,
-      scroll: this.handleDocumentScroll
-    };
-  }
+  _getDocumentListeners = () => ({
+    click: this.handleDocumentClick,
+    scroll: this.handleDocumentScroll
+  });
 
-  _getWindowEvents() {
-    return {
-      resize: this.handleWindowResize
-    };
-  }
+  _getWindowListeners = () => ({
+    resize: this.handleWindowResize
+  });
 
   handleDocumentClick = (event: SyntheticMouseEvent<>) => {
-    const { optionsRef } = this.props;
+    const { optionsIsOpen, rootRef } = this.props;
 
-    // check for valid Options ref currently on DOM
-    if (!optionsRef || !optionsRef.current) { return; }
+    // ensure Options is open
+    if (!optionsIsOpen || !rootRef || !rootRef.current) { return; }
 
-    // check if user has clicked a DOM element within Options
-    const isDescendant = targetIsDescendant(event, optionsRef.current);
+    // return early if the user clicked an element within the parent component
+    // for example, the parent component could be Autocomplete or Select
+    if (targetIsDescendant(event, rootRef.current)) { return; }
 
-    // return early
-    if (isDescendant) { return; }
-
-    // user has clicked outside of Options component
-    // remove all event listeners from document & window, close Options component
-    this._removeAllEventsAndCloseOptions();
+    // otherwise, remove all listeners and close Options
+    this._removeListenersAndToggle();
   };
 
-  handleWindowResize = () => this._removeAllEventsAndCloseOptions();
+  handleWindowResize = () => this._removeListenersAndToggle();
 
-  handleDocumentScroll = () => this._removeAllEventsAndCloseOptions();
+  handleDocumentScroll = () => this._removeListenersAndToggle();
 
   render() {
     return <div>{this.props.children()}</div>;
