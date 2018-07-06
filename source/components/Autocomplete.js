@@ -258,6 +258,7 @@ class AutocompleteBase extends Component<Props, State> {
             selectedOptions={this.state.selectedOptions}
             suggestionsRef={this.suggestionsElement}
             theme={this.state.composedTheme}
+            toggleOpen={this.toggleOpen}
             {...rest}
           />
         )}
