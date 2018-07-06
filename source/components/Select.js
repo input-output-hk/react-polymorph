@@ -44,8 +44,9 @@ type State = {
 };
 
 class SelectBase extends Component<Props, State> {
+  rootElement: ?Element<*>;
   inputElement: Element<'input'>;
-  optionsElement: ?Element<any>;
+  optionsElement: ?Element<*>;
 
   static defaultProps = {
     allowBlank: true,
@@ -61,6 +62,7 @@ class SelectBase extends Component<Props, State> {
     super(props);
 
     // define ref
+    this.rootElement = createRef();
     this.inputElement = createRef();
     this.optionsElement = createRef();
 
@@ -96,7 +98,7 @@ class SelectBase extends Component<Props, State> {
     event.preventDefault();
 
     const { inputElement } = this;
-    if (inputElement && inputElement.current) {
+    if (inputElement.current && document.activeElement === inputElement.current) {
       inputElement.current.blur();
     }
     this.toggleOpen();
@@ -134,10 +136,12 @@ class SelectBase extends Component<Props, State> {
         toggleOpen={this.toggleOpen}
         optionsIsOpen={this.state.isOpen}
         optionsRef={this.optionsElement}
+        rootRef={this.rootElement}
       >
         {() => (
           <SelectSkin
             isOpen={this.state.isOpen}
+            rootRef={this.rootElement}
             inputRef={this.inputElement}
             optionsRef={this.optionsElement}
             theme={this.state.composedTheme}
