@@ -3,14 +3,12 @@ import React, { Component } from 'react';
 import type { ComponentType, Element, ElementRef } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import {
-  addDocumentListeners,
-  removeDocumentListeners,
-  composeTheme,
-  addThemeId
-} from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
+import { addDocumentListeners, removeDocumentListeners } from '../utils/events';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';

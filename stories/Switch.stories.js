@@ -6,10 +6,10 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Checkbox } from '../source/components';
+import { Checkbox } from '../source/components/Checkbox';
 
 // skins
-import { SwitchSkin } from '../source/skins/simple';
+import { SwitchSkin } from '../source/skins/simple/SwitchSkin';
 
 // themes
 import CustomSwitchTheme from './theme-customizations/Switch.custom.scss';

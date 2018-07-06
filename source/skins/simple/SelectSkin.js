@@ -5,11 +5,14 @@ import type { Element, Ref } from 'react';
 // external libraries
 import classnames from 'classnames';
 
+
 // components
-import { Options, Input } from '../../components';
+import { Options } from '../../components/Options';
+import { Input } from '../../components/Input';
 
 // skins
-import { InputSkin, OptionsSkin } from './';
+import { OptionsSkin } from './OptionsSkin';
+import { InputSkin } from './InputSkin';
 
 type Props = {
   className: string,
@@ -31,8 +34,10 @@ type Props = {
   optionRenderer: Function,
   optionsRef: Ref<any>,
   placeholder: string,
+  rootRef: Ref<*>,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
+  toggleOpen: Function,
   value: string
 };
 
@@ -74,6 +79,7 @@ export const SelectSkin = (props: Props) => {
         optionRenderer={props.optionRenderer}
         selectedOption={selectedOption}
         noResults={!props.options.length}
+        toggleOpen={props.toggleOpen}
       />
     </div>
   );

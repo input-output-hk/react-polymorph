@@ -7,10 +7,10 @@ import classnames from 'classnames';
 import { isFunction, isObject } from 'lodash';
 
 // components
-import { Bubble } from '../../components';
+import { Bubble } from '../../components/Bubble';
 
 // skins
-import { BubbleSkin } from './';
+import { BubbleSkin } from './BubbleSkin';
 
 type Props = {
   getOptionProps: Function,

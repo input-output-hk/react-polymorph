@@ -2,8 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 
-import { NumericInput } from '../source/components';
-import { InputSkin } from '../source/skins/simple';
+import { NumericInput } from '../source/components/NumericInput';
+import { InputSkin } from '../source/skins/simple/InputSkin';
 
 test('NumericInput renders correctly', () => {
   const component = renderer.create(

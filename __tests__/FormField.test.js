@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { FormField } from '../source/components';
-import { FormFieldSkin } from '../source/skins/simple';
+import { FormField } from '../source/components/FormField';
+import { FormFieldSkin } from '../source/skins/simple/FormFieldSkin';
 
 const renderFormField = () => <div className="render-prop" />;
 

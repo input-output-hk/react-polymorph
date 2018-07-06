@@ -9,10 +9,11 @@ import _ from 'lodash';
 
 // interal components
 import { GlobalListeners } from './HOC/GlobalListeners';
+import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, composeFunctions, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
+import { composeFunctions } from '../utils/props';
 
 import { IDENTIFIERS } from '../themes/API';
 

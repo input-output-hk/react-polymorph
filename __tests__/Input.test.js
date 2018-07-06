@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Input } from '../source/components';
-import { InputSkin } from '../source/skins/simple';
+import { Input } from '../source/components/Input';
+import { InputSkin } from '../source/skins/simple/InputSkin';
 
 test('Input renders correctly', () => {
   const component = renderer.create(

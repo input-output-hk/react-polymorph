@@ -2,8 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 
-import { Autocomplete } from '../source/components';
-import { AutocompleteSkin } from '../source/skins/simple';
+import { Autocomplete } from '../source/components/Autocomplete';
+import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
 
 const OPTIONS = [
   'home',

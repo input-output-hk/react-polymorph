@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Radio } from '../source/components';
-import { RadioSkin } from '../source/skins/simple';
+import { Radio } from '../source/components/Radio';
+import { RadioSkin } from '../source/skins/simple/RadioSkin';
 
 test('Radio renders correctly', () => {
   const component = renderer.create(

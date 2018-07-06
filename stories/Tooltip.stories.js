@@ -5,10 +5,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // components
-import { Tooltip } from '../source/components';
+import { Tooltip } from '../source/components/Tooltip';
 
 // skins
-import { TooltipSkin } from '../source/skins/simple';
+import { TooltipSkin } from '../source/skins/simple/TooltipSkin';
 
 // themes
 import SimpleTheme from '../source/themes/simple';

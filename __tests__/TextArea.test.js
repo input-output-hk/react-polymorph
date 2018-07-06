@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { TextArea } from '../source/components';
-import { TextAreaSkin } from '../source/skins/simple';
+import { TextArea } from '../source/components/TextArea';
+import { TextAreaSkin } from '../source/skins/simple/TextAreaSkin';
 
 test('TextArea renders correctly', () => {
   const component = renderer.create(

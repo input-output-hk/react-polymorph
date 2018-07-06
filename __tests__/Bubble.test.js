@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Bubble } from '../source/components';
-import { BubbleSkin } from '../source/skins/simple';
+import { Bubble } from '../source/components/Bubble';
+import { BubbleSkin } from '../source/skins/simple/BubbleSkin';
 
 test('Bubble renders correctly', () => {
   const component = renderer.create(

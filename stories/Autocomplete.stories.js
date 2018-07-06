@@ -7,9 +7,15 @@ import classnames from 'classnames';
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
-// components & skins
-import { Autocomplete, Modal, Button } from '../source/components';
-import { AutocompleteSkin, ModalSkin, ButtonSkin } from '../source/skins/simple';
+// components
+import { Autocomplete } from '../source/components/Autocomplete';
+import { Modal } from '../source/components/Modal';
+import { Button } from '../source/components/Button';
+
+// skins
+import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
+import { ModalSkin } from '../source/skins/simple/ModalSkin';
+import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 
 // themes
 import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.scss';

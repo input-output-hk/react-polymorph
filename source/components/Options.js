@@ -4,13 +4,12 @@ import React, { Component } from 'react';
 // $FlowFixMe
 import type { Ref, ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Element } from 'react';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import {
-  composeTheme,
-  composeFunctions,
-  addThemeId
-} from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
+import { composeFunctions } from '../utils/props';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -54,7 +53,8 @@ class OptionsBase extends Component<Props, State> {
     resetOnClose: false,
     theme: null,
     themeId: IDENTIFIERS.OPTIONS,
-    themeOverrides: {}
+    themeOverrides: {},
+    toggleOpen() {}
   };
 
   constructor(props: Props) {
