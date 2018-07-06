@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
+// internal components
+import { GlobalListeners } from './HOC/GlobalListeners';
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -44,7 +47,9 @@ type State = {
 
 class SelectBase extends Component<Props, State> {
 
+  rootElement: ?Element<*>;
   inputElement: Element<'input'>;
+  optionsElement: ?Element<*>;
 
   static defaultProps = {
     allowBlank: true,
@@ -60,7 +65,9 @@ class SelectBase extends Component<Props, State> {
     super(props);
 
     // define ref
+    this.rootElement = createRef();
     this.inputElement = createRef();
+    this.optionsElement = createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -75,6 +82,7 @@ class SelectBase extends Component<Props, State> {
   }
 
   componentDidMount() {
+    // check for autoFocus of input element
     if (this.props.autoFocus) {
       return this.focus();
     }
@@ -82,26 +90,27 @@ class SelectBase extends Component<Props, State> {
 
   // ========= PUBLIC SKIN API =========
 
-  // Focus the component - toggle dropdown
+  // applying focus to the input element will
+  // toggle options open because Select's input is read only
   focus = () => this.toggleOpen();
 
-  toggleOpen = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
+  toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
   handleInputClick = (event: SyntheticMouseEvent<>) => {
     event.stopPropagation();
     event.preventDefault();
 
     const { inputElement } = this;
-    if (inputElement && inputElement.current) {
+    if (inputElement.current && document.activeElement === inputElement.current) {
       inputElement.current.blur();
     }
     this.toggleOpen();
   };
 
   handleChange = (option: Object, event: SyntheticEvent<>) => {
+    // check if the user passed an onChange handler and call it
     if (this.props.onChange) this.props.onChange(option.value, event);
+    // onChange is called when an option is selected, so close options
     this.toggleOpen();
   };
 
@@ -126,16 +135,27 @@ class SelectBase extends Component<Props, State> {
     } = this.props;
 
     return (
-      <SelectSkin
-        isOpen={this.state.isOpen}
-        inputRef={this.inputElement}
-        theme={this.state.composedTheme}
-        getSelectedOption={this.getSelectedOption}
-        handleInputClick={this.handleInputClick}
-        handleChange={this.handleChange}
+      <GlobalListeners
         toggleOpen={this.toggleOpen}
-        {...rest}
-      />
+        optionsIsOpen={this.state.isOpen}
+        optionsRef={this.optionsElement}
+        rootRef={this.rootElement}
+      >
+        {() => (
+          <SelectSkin
+            isOpen={this.state.isOpen}
+            rootRef={this.rootElement}
+            inputRef={this.inputElement}
+            optionsRef={this.optionsElement}
+            theme={this.state.composedTheme}
+            getSelectedOption={this.getSelectedOption}
+            handleInputClick={this.handleInputClick}
+            handleChange={this.handleChange}
+            toggleOpen={this.toggleOpen}
+            {...rest}
+          />
+        )}
+      </GlobalListeners>
     );
   }
 }

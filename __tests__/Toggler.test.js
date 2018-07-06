@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Checkbox } from '../source/components';
-import { TogglerSkin } from '../source/skins/simple';
+import { Checkbox } from '../source/components/Checkbox';
+import { TogglerSkin } from '../source/skins/simple/TogglerSkin';
 import { IDENTIFIERS } from '../source/themes/API';
 
 test('Toggler renders correctly', () => {

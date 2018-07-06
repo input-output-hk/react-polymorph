@@ -1,11 +1,11 @@
 // @flow
 import { isEmpty, cloneDeep } from 'lodash';
 
-const appendToProperty = (dest: {}, name: string, value: string) => {
+export const appendToProperty = (dest: {}, name: string, value: string) => {
   dest[name] === '' ? (dest[name] = value) : (dest[name] += ' ' + value);
 };
 
-const composeComponentStyles = (componentStyles: {}, componentTheme: {}) => {
+export const composeComponentStyles = (componentStyles: {}, componentTheme: {}) => {
   if (!componentTheme) return;
   for (const property in componentStyles) {
     if (Object.prototype.hasOwnProperty.call(componentStyles, property)) {
@@ -20,7 +20,7 @@ const composeComponentStyles = (componentStyles: {}, componentTheme: {}) => {
 // that matches the value of themeId (string)
 // if the property exists, also checks the type of
 // theme[themeId] to ensure it's an object
-const addThemeId = (theme: {}, themeId: string) => {
+export const addThemeId = (theme: {}, themeId: string) => {
   if (!isEmpty(theme) && themeId) {
     const themeIdExists = Object.prototype.hasOwnProperty.call(theme, themeId);
     const themeIdIsObj = typeof theme[themeId] === 'object';
@@ -41,7 +41,7 @@ const addThemeId = (theme: {}, themeId: string) => {
  * @returns {{}} - The composed theme
  */
 
-const composeTheme = (
+export const composeTheme = (
   theme: {} = {},
   themeOverrides: {} = {},
   themeAPI: {} = {}
@@ -59,9 +59,4 @@ const composeTheme = (
     }
   }
   return composedTheme;
-};
-
-export default {
-  addThemeId,
-  composeTheme
 };

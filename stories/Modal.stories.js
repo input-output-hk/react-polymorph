@@ -6,10 +6,12 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Modal, Button } from '../source/components';
+import { Modal } from '../source/components/Modal';
+import { Button } from '../source/components/Button';
 
 // skins
-import { ModalSkin, ButtonSkin } from '../source/skins/simple';
+import { ModalSkin } from '../source/skins/simple/ModalSkin';
+import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 
 // themes
 import CustomModalTheme from './theme-customizations/Modal.custom.scss';

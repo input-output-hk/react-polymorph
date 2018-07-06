@@ -6,7 +6,7 @@ import type { Node, Ref } from 'react';
 import classnames from 'classnames';
 
 // internal utility functions
-import { pickDOMProps } from '../../utils';
+import { pickDOMProps } from '../../utils/props';
 
 type Props = {
   children: Node,

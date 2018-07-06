@@ -2,7 +2,8 @@
   "parser": "babel-eslint",
   "extends": [
     "airbnb",
-    "plugin:flowtype/recommended"
+    "plugin:flowtype/recommended",
+    "plugin:react/recommended"
   ],
   "env": {
     "browser": true,
@@ -38,6 +39,7 @@
     "react/no-unused-prop-types": "off",
     "react/prop-types": 0,
     "react/sort-comp": 0,
+    "react/display-name": ["off", { "ignoreTranspilerName": false }],
     "class-methods-use-this": 0,
     "no-duplicate-imports": 0,
     "no-param-reassign": 0,

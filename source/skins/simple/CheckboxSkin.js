@@ -5,7 +5,7 @@ import type { Element } from 'react';
 import classnames from 'classnames';
 
 // internal utility functions
-import { pickDOMProps } from '../../utils';
+import { pickDOMProps } from '../../utils/props';
 
 type Props = {
   checked: boolean,

@@ -3,14 +3,12 @@ import React, { Component } from 'react';
 import type { ComponentType, Element, ElementRef, Ref } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import {
-  addEventsToDocument,
-  removeEventsFromDocument,
-  composeTheme,
-  addThemeId
-} from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
+import { addDocumentListeners, removeDocumentListeners } from '../utils/events';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -82,7 +80,7 @@ class BubbleBase extends Component<Props, State> {
     // Add listeners when the bubble
     if (isFloating && !nextProps.isHidden && !this._hasEventListeners) {
       this._handleScrollEventListener('add');
-      addEventsToDocument(this._getDocumentEvents());
+      addDocumentListeners(this._getDocumentEvents());
       window.addEventListener('resize', this._updatePosition);
       this._hasEventListeners = true;
     }
@@ -120,7 +118,7 @@ class BubbleBase extends Component<Props, State> {
 
   _removeAllEventListeners() {
     if (this._hasEventListeners) {
-      removeEventsFromDocument(this._getDocumentEvents());
+      removeDocumentListeners(this._getDocumentEvents());
       this._handleScrollEventListener('remove');
       window.removeEventListener('resize', this._updatePosition);
       this._hasEventListeners = false;

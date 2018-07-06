@@ -2,13 +2,18 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
+
 // external libraries
 import createRef from 'create-react-ref/lib/createRef';
 import _ from 'lodash';
 
+// interal components
+import { GlobalListeners } from './HOC/GlobalListeners';
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, composeFunctions, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
+import { composeFunctions } from '../utils/props';
 
 import { IDENTIFIERS } from '../themes/API';
 
@@ -51,6 +56,7 @@ class AutocompleteBase extends Component<Props, State> {
   rootElement: ?Element<any>;
   inputElement: ?Element<'input'>;
   suggestionsElement: ?Element<any>;
+  optionsElement: ?Element<any>;
 
   static defaultProps = {
     error: null,
@@ -72,6 +78,7 @@ class AutocompleteBase extends Component<Props, State> {
     this.rootElement = createRef();
     this.inputElement = createRef();
     this.suggestionsElement = createRef();
+    this.optionsElement = createRef();
 
     const {
       context,
@@ -102,55 +109,38 @@ class AutocompleteBase extends Component<Props, State> {
 
   focus = () => this.handleAutocompleteClick();
 
-  openOptions = () => {
-    this.setState({ isOpen: true });
-  };
+  open = () => this.setState({ isOpen: true });
 
-  closeOptions = () => {
-    this.setState({ isOpen: false });
-  };
+  close = () => this.setState({ isOpen: false });
+
+  toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
   handleAutocompleteClick = () => {
     const { inputElement } = this;
     if (inputElement && inputElement.current) {
       inputElement.current.focus();
     }
-
-    if (!this.state.isOpen) {
-      this.openOptions();
-    } else {
-      this.closeOptions();
-    }
+    // toggle options open/closed
+    this.toggleOpen();
   };
 
-  // checks for backspace in order to delete the last selected option
   onKeyDown = (event: SyntheticKeyboardEvent<>) => {
     if (
+      // Check for backspace in order to delete the last selected option
       event.keyCode === 8 &&
       !event.target.value &&
       this.state.selectedOptions.length
     ) {
       // Remove last selected option
       this.removeOption(this.state.selectedOptions.length - 1, event);
+    } else if (event.keyCode === 13) { // Open suggestions on ENTER
+      this.open();
     }
   };
 
   // onChange handler for input element in AutocompleteSkin
   handleInputChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-
-    // filter out invalid characters
-    const filteredValue = this._filterInvalidChars(value);
-
-    // filter options
-    const filteredOptions = this._filterOptions(filteredValue);
-
-    // open options, update filteredOptions, and update inputValue
-    this.setState({
-      isOpen: true,
-      inputValue: filteredValue,
-      filteredOptions
-    });
+    this._setInputValue(event.target.value);
   };
 
   // passed to Options onChange handler in AutocompleteSkin
@@ -185,7 +175,7 @@ class AutocompleteBase extends Component<Props, State> {
       }
     }
 
-    this.setState({ inputValue: '' });
+    this._setInputValue('');
   };
 
   removeOption = (index: number, event: SyntheticEvent<>) => {
@@ -238,25 +228,35 @@ class AutocompleteBase extends Component<Props, State> {
     } = this.props;
 
     return (
-      <AutocompleteSkin
-        inputValue={this.state.inputValue}
-        selectedOptions={this.state.selectedOptions}
-        filteredOptions={this.state.filteredOptions}
-        isOpen={this.state.isOpen}
-        theme={this.state.composedTheme}
-        handleInputChange={this.handleInputChange}
-        error={error || this.state.error}
+      <GlobalListeners
+        optionsIsOpen={this.state.isOpen}
+        optionsRef={this.optionsElement}
         rootRef={this.rootElement}
-        inputRef={this.inputElement}
-        suggestionsRef={this.suggestionsElement}
-        handleChange={this.handleChange}
-        closeOptions={this.closeOptions}
-        handleAutocompleteClick={this.handleAutocompleteClick}
-        removeOption={this.removeOption}
-        onKeyDown={this.onKeyDown}
-        getSelectionProps={this.getSelectionProps}
-        {...rest}
-      />
+        toggleOpen={this.toggleOpen}
+      >
+        {() => (
+          <AutocompleteSkin
+            error={error || this.state.error}
+            filteredOptions={this.state.filteredOptions}
+            getSelectionProps={this.getSelectionProps}
+            handleAutocompleteClick={this.handleAutocompleteClick}
+            handleChange={this.handleChange}
+            handleInputChange={this.handleInputChange}
+            inputRef={this.inputElement}
+            inputValue={this.state.inputValue}
+            isOpen={this.state.isOpen}
+            onKeyDown={this.onKeyDown}
+            optionsRef={this.optionsElement}
+            removeOption={this.removeOption}
+            rootRef={this.rootElement}
+            selectedOptions={this.state.selectedOptions}
+            suggestionsRef={this.suggestionsElement}
+            theme={this.state.composedTheme}
+            toggleOpen={this.toggleOpen}
+            {...rest}
+          />
+        )}
+      </GlobalListeners>
     );
   }
 
@@ -295,6 +295,16 @@ class AutocompleteBase extends Component<Props, State> {
 
     return filteredValue;
   };
+
+  _setInputValue = (value: string) => {
+    const filteredValue = this._filterInvalidChars(value);
+    const filteredOptions = this._filterOptions(filteredValue);
+    this.setState({
+      isOpen: true,
+      inputValue: filteredValue,
+      filteredOptions
+    });
+  }
 }
 
 export const Autocomplete = withTheme(AutocompleteBase);

@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
 import type {
   ComponentType,
   // $FlowFixMe
@@ -15,15 +17,8 @@ import type {
 import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import {
-  composeTheme,
-  addEventsToDocument,
-  removeEventsFromDocument,
-  targetIsDescendant,
-  composeFunctions,
-  addThemeId
-} from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
+import { composeFunctions } from '../utils/props';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -42,20 +37,21 @@ type Props = {
   onClose: Function,
   options: Array<any>,
   optionRenderer: Function,
+  optionsRef: Ref<any>,
   render: Function,
   resetOnClose: boolean,
   selectedOption: any,
   skin: ComponentType<any>,
   selectedOptions: Array<any>,
-  targetRef: Ref<*> ,
-  theme: Object, // will take precedence over theme in context if passed
+  targetRef: Ref<*>,
+  theme: Object, // if passed by user, it will take precedence over this.props.context.theme
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
+  toggleOpen: Function
 };
 
 type State = {
   composedTheme: Object,
-  isOpen: boolean,
   highlightedOptionIndex: number
 };
 
@@ -70,16 +66,14 @@ class OptionsBase extends Component<Props, State> {
     resetOnClose: false,
     theme: null,
     themeId: IDENTIFIERS.OPTIONS,
-    themeOverrides: {}
+    themeOverrides: {},
+    toggleOpen() {}
   };
 
   constructor(props: Props) {
     super(props);
 
-    // define ref
-    this.optionsElement = createRef();
-
-    const { context, themeId, theme, themeOverrides, isOpen } = props;
+    const { context, themeId, theme, themeOverrides } = props;
 
     this.state = {
       composedTheme: composeTheme(
@@ -87,50 +81,40 @@ class OptionsBase extends Component<Props, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      isOpen,
       highlightedOptionIndex: 0
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.isOpen !== nextProps.isOpen) {
-      this.setState({ isOpen: nextProps.isOpen });
+  componentDidMount() {
+    if (this.props.isOpen) {
+      document.addEventListener('keydown', this._handleKeyDown, false);
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    // update isOpen state when parent component force open / close options
-    // (e.g. click on Input in Select component)
-    if (!this.state.isOpen && nextState.isOpen) {
-      window.addEventListener('resize', this._handleWindowResize);
-      addEventsToDocument(this._getDocumentEvents());
+  componentWillReceiveProps(nextProps: Props) {
+    if (!this.props.isOpen && nextProps.isOpen) {
+      document.addEventListener('keydown', this._handleKeyDown, false);
+    } else if (this.props.isOpen && !nextProps.isOpen) {
+      document.removeEventListener('keydown', this._handleKeyDown, false);
     }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.isOpen && !this.state.isOpen) this._removeAllEventListeners();
   }
 
   componentWillUnmount() {
-    this._removeAllEventListeners();
+    document.removeEventListener('keydown', this._handleKeyDown, false);
   }
 
-  open = () => {
-    this.setState({
-      isOpen: true,
-      highlightedOptionIndex: this.props.resetOnClose
-        ? 0
-        : this.state.highlightedOptionIndex
-    });
-  };
-
   close = () => {
-    if (this.props.onClose) this.props.onClose();
+    const { onClose, resetOnClose, toggleOpen, isOpen } = this.props;
+
+    if (isOpen) { toggleOpen(); }
+
     this.setState({
-      highlightedOptionIndex: this.props.resetOnClose
+      highlightedOptionIndex: resetOnClose
         ? 0
         : this.state.highlightedOptionIndex
     });
+
+    if (onClose) { onClose(); }
   };
 
   getHighlightedOptionIndex = () => {
@@ -258,6 +242,7 @@ class OptionsBase extends Component<Props, State> {
     }
   };
 
+  // this needs to get passed to OptionsSkin and attached to each Option Li
   _handleKeyDown = (event: SyntheticKeyboardEvent<>) => {
     const highlightOptionIndex = this.state.highlightedOptionIndex;
     switch (event.keyCode) {
@@ -289,34 +274,6 @@ class OptionsBase extends Component<Props, State> {
     }
   };
 
-  _handleDocumentClick = (event: SyntheticMouseEvent<>) => {
-    const { optionsElement } = this;
-    if (optionsElement && optionsElement.current) {
-      const isDescendant = targetIsDescendant(event, optionsElement.current);
-
-      if (this.state.isOpen && !isDescendant) {
-        this.close();
-      }
-    }
-  };
-
-  _handleWindowResize = () => this.state.isOpen && this.close();
-
-  _handleScroll = () => this.state.isOpen && this.close();
-
-  _removeAllEventListeners() {
-    removeEventsFromDocument(this._getDocumentEvents());
-    window.removeEventListener('resize', this._handleWindowResize);
-  }
-
-  _getDocumentEvents() {
-    return {
-      keydown: this._handleKeyDown,
-      click: this._handleDocumentClick,
-      scroll: this._handleScroll
-    };
-  }
-
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
@@ -326,24 +283,26 @@ class OptionsBase extends Component<Props, State> {
       themeOverrides,
       onChange,
       context,
+      optionsRef,
+      isOpen,
       ...rest
     } = this.props;
 
-    const { composedTheme, isOpen, highlightedOptionIndex } = this.state;
+    const { composedTheme, highlightedOptionIndex } = this.state;
 
     return (
       <OptionsSkin
-        targetRef={targetRef}
-        optionsRef={this.optionsElement}
-        theme={composedTheme}
-        isOpen={isOpen}
-        highlightedOptionIndex={highlightedOptionIndex}
         getHighlightedOptionIndex={this.getHighlightedOptionIndex}
-        isSelectedOption={this.isSelectedOption}
-        isHighlightedOption={this.isHighlightedOption}
-        handleClickOnOption={this.handleClickOnOption}
-        setHighlightedOptionIndex={this.setHighlightedOptionIndex}
         getOptionProps={this.getOptionProps}
+        handleClickOnOption={this.handleClickOnOption}
+        highlightedOptionIndex={highlightedOptionIndex}
+        isHighlightedOption={this.isHighlightedOption}
+        isOpen={isOpen}
+        isSelectedOption={this.isSelectedOption}
+        optionsRef={optionsRef}
+        setHighlightedOptionIndex={this.setHighlightedOptionIndex}
+        targetRef={targetRef}
+        theme={composedTheme}
         {...rest}
       />
     );

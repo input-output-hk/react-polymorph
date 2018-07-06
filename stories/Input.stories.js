@@ -7,10 +7,10 @@ import { action } from '@storybook/addon-actions';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Input } from '../source/components';
+import { Input } from '../source/components/Input';
 
 // skins
-import { InputSkin } from '../source/skins/simple';
+import { InputSkin } from '../source/skins/simple/InputSkin';
 
 // themes
 import CustomInputTheme from './theme-customizations/Input.custom.scss';
