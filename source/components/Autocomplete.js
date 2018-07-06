@@ -235,28 +235,29 @@ class AutocompleteBase extends Component<Props, State> {
 
     return (
       <GlobalListeners
-        toggleOpen={this.toggleOpen}
         optionsIsOpen={this.state.isOpen}
         optionsRef={this.optionsElement}
+        rootRef={this.rootElement}
+        toggleOpen={this.toggleOpen}
       >
         {() => (
           <AutocompleteSkin
-            inputValue={this.state.inputValue}
-            selectedOptions={this.state.selectedOptions}
-            filteredOptions={this.state.filteredOptions}
-            isOpen={this.state.isOpen}
-            theme={this.state.composedTheme}
-            handleInputChange={this.handleInputChange}
             error={error || this.state.error}
-            rootRef={this.rootElement}
-            inputRef={this.inputElement}
-            suggestionsRef={this.suggestionsElement}
-            optionsRef={this.optionsElement}
-            handleChange={this.handleChange}
-            handleAutocompleteClick={this.handleAutocompleteClick}
-            removeOption={this.removeOption}
-            onKeyDown={this.onKeyDown}
+            filteredOptions={this.state.filteredOptions}
             getSelectionProps={this.getSelectionProps}
+            handleAutocompleteClick={this.handleAutocompleteClick}
+            handleChange={this.handleChange}
+            handleInputChange={this.handleInputChange}
+            inputRef={this.inputElement}
+            inputValue={this.state.inputValue}
+            isOpen={this.state.isOpen}
+            onKeyDown={this.onKeyDown}
+            optionsRef={this.optionsElement}
+            removeOption={this.removeOption}
+            rootRef={this.rootElement}
+            selectedOptions={this.state.selectedOptions}
+            suggestionsRef={this.suggestionsElement}
+            theme={this.state.composedTheme}
             {...rest}
           />
         )}
