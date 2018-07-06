@@ -28,6 +28,7 @@ type Props = {
   render: Function,
   selectedOption: any,
   setHighlightedOptionIndex: Function,
+  targetRef: Ref<*>,
   theme: Object,
   themeId: string,
 };
@@ -48,6 +49,7 @@ export const OptionsSkin = (props: Props) => {
     optionsRef,
     render,
     setHighlightedOptionIndex,
+    targetRef,
     theme,
     themeId,
   } = props;
@@ -119,6 +121,7 @@ export const OptionsSkin = (props: Props) => {
       isOpeningUpward={isOpeningUpward}
       isHidden={!isOpen}
       isFloating
+      targetRef={targetRef}
     >
       <ul ref={optionsRef} className={theme[themeId].ul}>{renderOptions()}</ul>
     </Bubble>

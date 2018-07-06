@@ -1,11 +1,20 @@
 // @flow
 import React, { Component } from 'react';
 
-// $FlowFixMe
-import type { Ref, ComponentType, SyntheticKeyboardEvent, SyntheticMouseEvent, SyntheticEvent, Element } from 'react';
-
 // internal components
 import { withTheme } from './HOC/withTheme';
+import type {
+  ComponentType,
+  // $FlowFixMe
+  SyntheticKeyboardEvent,
+  // $FlowFixMe
+  SyntheticMouseEvent,
+  // $FlowFixMe
+  SyntheticEvent,
+  Element,
+  Ref
+} from 'react';
+import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
 import { composeTheme, addThemeId } from '../utils/themes';
@@ -34,6 +43,7 @@ type Props = {
   selectedOption: any,
   skin: ComponentType<any>,
   selectedOptions: Array<any>,
+  targetRef: Ref<*>,
   theme: Object, // if passed by user, it will take precedence over this.props.context.theme
   themeId: string,
   themeOverrides: Object,
@@ -46,6 +56,9 @@ type State = {
 };
 
 class OptionsBase extends Component<Props, State> {
+
+  optionsElement: ?Element<any>;
+
   static defaultProps = {
     isOpen: false,
     isOpeningUpward: false,
@@ -265,6 +278,7 @@ class OptionsBase extends Component<Props, State> {
     // destructuring props ensures only the "...rest" get passed down
     const {
       skin: OptionsSkin,
+      targetRef,
       theme,
       themeOverrides,
       onChange,
@@ -287,6 +301,7 @@ class OptionsBase extends Component<Props, State> {
         isSelectedOption={this.isSelectedOption}
         optionsRef={optionsRef}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}
+        targetRef={targetRef}
         theme={composedTheme}
         {...rest}
       />

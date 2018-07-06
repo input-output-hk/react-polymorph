@@ -79,6 +79,7 @@ export const SelectSkin = (props: Props) => {
         optionRenderer={props.optionRenderer}
         selectedOption={selectedOption}
         noResults={!props.options.length}
+        targetRef={props.inputRef}
         toggleOpen={props.toggleOpen}
       />
     </div>

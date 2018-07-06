@@ -46,6 +46,7 @@ type State = {
 };
 
 class SelectBase extends Component<Props, State> {
+
   rootElement: ?Element<*>;
   inputElement: Element<'input'>;
   optionsElement: ?Element<*>;
