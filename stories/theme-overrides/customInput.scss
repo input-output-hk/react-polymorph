@@ -2,6 +2,18 @@
   width: 25%;
   transition: all 0.4s ease-in-out;
 
+  &.errored {
+    border-color: rgba(#de3226, 0.5);
+
+    &:focus {
+      border-color: rgba(#de3226, 0.5);
+    }
+
+    &:hover {
+      border-color: rgba(#de3226, 0.5);
+    }
+  }
+
   &:focus {
     width: 50%;
     border-color: rgba(10, 145, 48, 0.8);

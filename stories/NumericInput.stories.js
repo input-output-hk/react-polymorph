@@ -62,6 +62,7 @@ storiesOf('NumericInput', module)
     withState({ value: '' }, store => (
       <NumericInput
         autoFocus
+        label="With autoFocus"
         value={store.state.value}
         placeholder="18.000000"
         maxBeforeDot={6}
@@ -173,10 +174,11 @@ storiesOf('NumericInput', module)
     ))
   )
 
-  .add('theme overrides',
+  .add('theme overrides, minValue(50)',
     withState({ value: '' }, store => (
       <NumericInput
-        label="Amount"
+        label="Composed Theme"
+        minValue={50}
         themeOverrides={themeOverrides}
         value={store.state.value}
         placeholder="0.000000"
@@ -187,7 +189,7 @@ storiesOf('NumericInput', module)
     ))
   )
 
-  .add('custom theme',
+  .add('Custom Theme',
     withState({ value: '' }, store => (
       <NumericInput
         label="Amount"
