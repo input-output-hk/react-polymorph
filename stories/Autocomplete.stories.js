@@ -143,37 +143,49 @@ storiesOf('Autocomplete', module)
 
   .add('Enter mnemonics in Modal',
     withState({ isOpen: true, selectedOpts: [] }, store => (
-      <Modal
-        isOpen={store.state.isOpen}
-        triggerCloseOnOverlayClick={false}
-        skin={ModalSkin}
-      >
-        <div className={styles.dialogWrapper}>
-          <div className={styles.title}>
-            <h1>Autocomplete in Modal</h1>
-          </div>
-          <div className={styles.content}>
-            <Autocomplete
-              label="Recovery phrase"
-              placeholder="Enter recovery phrase"
-              options={OPTIONS}
-              maxSelections={12}
-              maxVisibleOptions={5}
-              invalidCharsRegex={/[^a-zA-Z]/g}
-              skin={AutocompleteSkin}
-              onChange={selectedOpts => store.set({ selectedOpts })}
-            />
-          </div>
-          <div className={styles.actions}>
-            <Button
-              onClick={() => store.set({ isOpen: false })}
-              className="primary"
-              label="Submit"
-              skin={ButtonSkin}
-            />
-          </div>
-        </div>
-      </Modal>
+      store.state.isOpen
+        ? (
+          <Modal
+            isOpen={store.state.isOpen}
+            triggerCloseOnOverlayClick={false}
+            skin={ModalSkin}
+            onClose={() => store.set({ isOpen: false })}
+          >
+            <div className={styles.dialogWrapper}>
+              <div className={styles.title}>
+                <h1>Autocomplete in Modal</h1>
+              </div>
+              <div className={styles.content}>
+                <Autocomplete
+                  label="Recovery phrase"
+                  placeholder="Enter recovery phrase"
+                  options={OPTIONS}
+                  maxSelections={12}
+                  maxVisibleOptions={5}
+                  invalidCharsRegex={/[^a-zA-Z]/g}
+                  skin={AutocompleteSkin}
+                  onChange={selectedOpts => store.set({ selectedOpts })}
+                />
+              </div>
+              <div className={styles.actions}>
+                <Button
+                  onClick={() => store.set({ isOpen: false })}
+                  className="primary"
+                  label="Submit"
+                  skin={ButtonSkin}
+                />
+              </div>
+            </div>
+          </Modal>
+        )
+        : (
+          <button
+            className={styles.reopenModal}
+            onClick={() => store.set({ isOpen: !store.state.isOpen })}
+          >
+            Reopen modal
+          </button>
+        )
     ))
   )
 
