@@ -13,6 +13,7 @@
 
 ### Chores
 
+- Runs snyk to check for vulnerable dependencies. Installs snyk as a devDependency and adds snyk:test to npm scripts. [PR 72](https://github.com/input-output-hk/react-polymorph/pull/72)
 - Adds support for React v15 - v16.4.1. Upgrades devDependencies to latest versions of react, jest, and enzyme related libraries. Adds Autocomplete simulation test for deleting a selected option via backspace key. [PR 65](https://github.com/input-output-hk/react-polymorph/pull/65)
 - Refactor npm scripts to colon style [PR 66](https://github.com/input-output-hk/react-polymorph/pull/66)
 
