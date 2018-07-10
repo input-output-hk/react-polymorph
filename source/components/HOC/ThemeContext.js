@@ -9,6 +9,7 @@ import SimpleButton from '../../themes/simple/SimpleButton.scss';
 import SimpleCheckbox from '../../themes/simple/SimpleCheckbox.scss';
 import SimpleFormField from '../../themes/simple/SimpleFormField.scss';
 import SimpleInput from '../../themes/simple/SimpleInput.scss';
+import SimpleLoadingSpinner from '../../themes/simple/SimpleLoadingSpinner.scss';
 import SimpleModal from '../../themes/simple/SimpleModal.scss';
 import SimpleOptions from '../../themes/simple/SimpleOptions.scss';
 import SimpleRadio from '../../themes/simple/SimpleRadio.scss';
@@ -45,6 +46,7 @@ const SimpleTheme = {
   button: SimpleButton,
   checkbox: SimpleCheckbox,
   formfield: SimpleFormField,
+  loadingspinner: SimpleLoadingSpinner,
   input: SimpleInput,
   modal: SimpleModal,
   options: SimpleOptions,

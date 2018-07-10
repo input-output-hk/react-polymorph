@@ -6,6 +6,7 @@ import Button from './SimpleButton.scss';
 import Checkbox from './SimpleCheckbox.scss';
 import FormField from './SimpleFormField.scss';
 import Input from './SimpleInput.scss';
+import LoadingSpinner from './SimpleLoadingSpinner.scss';
 import Modal from './SimpleModal.scss';
 import Options from './SimpleOptions.scss';
 import Radio from './SimpleRadio.scss';
@@ -23,6 +24,7 @@ export const ButtonTheme = Button;
 export const CheckboxTheme = Checkbox;
 export const FormFieldTheme = FormField;
 export const InputTheme = Input;
+export const LoadingSpinnerTheme = LoadingSpinner;
 export const ModalTheme = Modal;
 export const OptionsTheme = Options;
 export const RadioTheme = Radio;
@@ -43,6 +45,7 @@ export default {
   checkbox: { ...CheckboxTheme },
   formfield: { ...FormFieldTheme },
   input: { ...InputTheme },
+  loadingspinner: { ...LoadingSpinnerTheme },
   modal: { ...ModalTheme },
   options: { ...OptionsTheme },
   radio: { ...RadioTheme },
