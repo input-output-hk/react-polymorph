@@ -17,7 +17,13 @@ import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
 // custom styles & theme overrides
 import themeOverrides from './theme-overrides/customCheckbox.scss';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Checkbox', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain',

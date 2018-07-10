@@ -20,7 +20,13 @@ import CustomModalTheme from './theme-customizations/Modal.custom.scss';
 import styles from './Modal.stories.scss';
 import themeOverrides from './theme-overrides/customModal.scss';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Modal', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('cancelable via overlay',

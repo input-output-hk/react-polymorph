@@ -19,7 +19,13 @@ import styles from './Tooltip.stories.scss';
 import themeOverrides from './theme-overrides/customTooltipBubble.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Tooltip', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain', () => (
