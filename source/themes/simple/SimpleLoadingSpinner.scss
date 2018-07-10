@@ -1,0 +1,23 @@
+@import "theme";
+
+$theme-loading-spinner-color: #8793a1 !default;
+
+.root {
+  margin: 20px auto;
+  animation: loading-spin 1.5s linear;
+  animation-iteration-count: infinite;
+
+  &.big {
+    height: 44px;
+    width: 44px;
+  }
+
+  &.small {
+    height: 30px;
+    width: 30px;
+  }
+
+  .icon svg path {
+    fill: $theme-loading-spinner-color;
+  }
+}
