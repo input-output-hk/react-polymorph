@@ -18,6 +18,7 @@
 
 ### Features
 
+- Adds ButtonSpinnerSkin to simple skins to show LoadingSpinner within the Button component when page data is loading. Adds new button story to exemplify this skin and functionality. [PR 76](https://github.com/input-output-hk/react-polymorph/pull/76)
 - Adds LoadingSpinner component, LoadingSpinnerSkin, and SimpleLoadingSpinner theme. Adds reusable loading-spinner mixin to themes. Adds 5 LoadingSpinner stories. [PR 75](https://github.com/input-output-hk/react-polymorph/pull/75)
 - Bubble takes an optional `targetRef` for positioning now [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
