@@ -47,13 +47,11 @@
     "create-react-ref": "0.1.0",
     "filter-react-dom-props": "0.0.2",
     "postinstall-build": "5.0.1",
-    "react-modal": "3.1.12",
-    "react-svg-inline": "2.1.1"
+    "react-modal": "3.1.12"
   },
   "peerDependencies": {
     "classnames": ">=2",
     "lodash": ">=4",
-    "prop-types": ">=15.5.7",
     "react": ">=15.0.0 || <=16.4.1",
     "react-dom": ">=15.0.0 || <=16.4.1"
   },
@@ -91,7 +89,6 @@
     "eslint-plugin-jsx-a11y": "6.0.2",
     "eslint-plugin-promise": "3.7.0",
     "eslint-plugin-react": "7.4.0",
-    "express": "4.16.2",
     "extract-text-webpack-plugin": "2.1.2",
     "file-loader": "1.1.5",
     "flow-bin": "0.60.1",
