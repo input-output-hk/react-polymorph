@@ -1,9 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
-
-// external libraries
-import createRef from 'create-react-ref/lib/createRef';
+import type { ComponentType } from 'react';
 
 // internal components
 import { withTheme } from './HOC/withTheme';
@@ -24,7 +21,8 @@ type Props = {
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
+  visible: boolean
 };
 
 type State = {
@@ -32,20 +30,16 @@ type State = {
 };
 
 class LoadingSpinnerBase extends Component<Props, State> {
-  rootElement: ?Element<*>;
-
   static defaultProps = {
     big: false,
     theme: null,
     themeId: IDENTIFIERS.LOADING_SPINNER,
-    themeOverrides: {}
+    themeOverrides: {},
+    visible: true
   };
 
   constructor(props: Props) {
     super(props);
-
-    // define refs
-    this.rootElement = createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -68,13 +62,7 @@ class LoadingSpinnerBase extends Component<Props, State> {
       ...rest
     } = this.props;
 
-    return (
-      <LoadingSpinnerSkin
-        rootRef={this.rootElement}
-        theme={this.state.composedTheme}
-        {...rest}
-      />
-    );
+    return <LoadingSpinnerSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
 
