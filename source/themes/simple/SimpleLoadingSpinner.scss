@@ -5,7 +5,7 @@ $loading-spinner-color: $theme-color-light-grey !default;
 $loading-spinner-speed: 1.5s !default;
 
 .root {
-  margin: 20px auto;
+  margin: auto;
   pointer-events: none;
   @include loading-spinner($loading-spinner-color, $loading-spinner-speed);
 }
