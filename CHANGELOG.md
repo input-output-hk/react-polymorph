@@ -18,6 +18,7 @@
 
 ### Features
 
+- Adds LoadingSpinner component, LoadingSpinnerSkin, and SimpleLoadingSpinner theme. Adds 5 LoadingSpinner stories. [PR 75](https://github.com/input-output-hk/react-polymorph/pull/75)
 - Bubble takes an optional `targetRef` for positioning now [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
 ## 0.7.0
