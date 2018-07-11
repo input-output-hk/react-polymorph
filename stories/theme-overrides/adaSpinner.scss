@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: rgba(10, 145, 48, 0.6) transparent;
+  animation-duration: 3s;
+
+  &:after {
+    content: '₳';
+    font-size: 22px;
+    color: rgba(10, 145, 48, 0.6);
+  }
+}

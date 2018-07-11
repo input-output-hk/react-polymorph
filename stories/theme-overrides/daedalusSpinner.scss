@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: rgba(94, 96, 102, 0.7) transparent;
+  animation-duration: 3s;
+
+  &:after {
+    content: url("../images/daedalus-logo.svg");
+  }
+
+  &.big {
+    height: 80px;
+    width: 80px;
+  }
+}
