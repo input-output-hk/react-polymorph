@@ -40,7 +40,8 @@ import CustomModalTheme from './theme-customizations/Modal.custom.scss';
 import CustomButtonTheme from './theme-customizations/Button.custom.scss';
 import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
 import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.scss';
-import { BubbleTheme, FormFieldTheme } from '../source/themes/simple';
+import SimpleBubble from '../source/themes/simple/SimpleBubble.scss';
+import SimpleFormField from '../source/themes/simple/SimpleFormField.scss';
 
 const OPTIONS = [
   'home',
@@ -60,8 +61,8 @@ const CUSTOM_THEME = {
   [IDENTIFIERS.BUTTON]: CustomButtonTheme,
   [IDENTIFIERS.CHECKBOX]: CustomCheckboxTheme,
   [IDENTIFIERS.AUTOCOMPLETE]: CustomAutocompleteTheme,
-  [IDENTIFIERS.BUBBLE]: BubbleTheme,
-  [IDENTIFIERS.FORM_FIELD]: FormFieldTheme
+  [IDENTIFIERS.BUBBLE]: SimpleBubble,
+  [IDENTIFIERS.FORM_FIELD]: SimpleFormField
 };
 
 storiesOf('ThemeProvider', module)
