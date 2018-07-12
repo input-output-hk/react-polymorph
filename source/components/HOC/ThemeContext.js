@@ -2,7 +2,10 @@
 import React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
 
-import ROOT_THEME_API from '../../themes/API';
+// import constants
+import { IDENTIFIERS, ROOT_THEME_API } from '../../themes/API';
+
+// import simple theme file for every component
 import SimpleAutocomplete from '../../themes/simple/SimpleAutocomplete.scss';
 import SimpleBubble from '../../themes/simple/SimpleBubble.scss';
 import SimpleButton from '../../themes/simple/SimpleButton.scss';
@@ -11,6 +14,7 @@ import SimpleFormField from '../../themes/simple/SimpleFormField.scss';
 import SimpleInput from '../../themes/simple/SimpleInput.scss';
 import SimpleModal from '../../themes/simple/SimpleModal.scss';
 import SimpleOptions from '../../themes/simple/SimpleOptions.scss';
+import SimpleProgressBar from '../../themes/simple/SimpleProgressBar.scss';
 import SimpleRadio from '../../themes/simple/SimpleRadio.scss';
 import SimpleSelect from '../../themes/simple/SimpleSelect.scss';
 import SimpleSwitch from '../../themes/simple/SimpleSwitch.scss';
@@ -39,21 +43,23 @@ type Theme = {
   ROOT_THEME_API: Object
 };
 
+// construct SimpleTheme object
 const SimpleTheme = {
-  autocomplete: SimpleAutocomplete,
-  bubble: SimpleBubble,
-  button: SimpleButton,
-  checkbox: SimpleCheckbox,
-  formfield: SimpleFormField,
-  input: SimpleInput,
-  modal: SimpleModal,
-  options: SimpleOptions,
-  radio: SimpleRadio,
-  select: SimpleSelect,
-  switch: SimpleSwitch,
-  textarea: SimpleTextArea,
-  toggler: SimpleToggler,
-  tooltip: SimpleTooltip
+  [IDENTIFIERS.AUTOCOMPLETE]: SimpleAutocomplete,
+  [IDENTIFIERS.BUBBLE]: SimpleBubble,
+  [IDENTIFIERS.BUTTON]: SimpleButton,
+  [IDENTIFIERS.CHECKBOX]: SimpleCheckbox,
+  [IDENTIFIERS.FORM_FIELD]: SimpleFormField,
+  [IDENTIFIERS.INPUT]: SimpleInput,
+  [IDENTIFIERS.MODAL]: SimpleModal,
+  [IDENTIFIERS.OPTIONS]: SimpleOptions,
+  [IDENTIFIERS.PROGRESS_BAR]: SimpleProgressBar,
+  [IDENTIFIERS.RADIO]: SimpleRadio,
+  [IDENTIFIERS.SELECT]: SimpleSelect,
+  [IDENTIFIERS.SWITCH]: SimpleSwitch,
+  [IDENTIFIERS.TEXT_AREA]: SimpleTextArea,
+  [IDENTIFIERS.TOGGLER]: SimpleToggler,
+  [IDENTIFIERS.TOOLTIP]: SimpleTooltip
 };
 
 const defaultContext = { theme: SimpleTheme, ROOT_THEME_API };
