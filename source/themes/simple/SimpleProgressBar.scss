@@ -1,0 +1,51 @@
+@import "theme";
+$progress-bar-background-color: #BCC2C8 !default;
+$progress-bar-fill-color: rgba(198, 205, 214, 0.5) !default;
+
+.bar {
+  height: 30px;
+  width: 500px;
+	position: relative;
+	background: transparent;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.progress {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background-color: $progress-bar-background-color;
+  position: relative;
+  overflow: hidden;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background-image: linear-gradient(
+      -45deg,
+      $progress-bar-fill-color 25%,
+      transparent 25%,
+      transparent 50%,
+      $progress-bar-fill-color 50%,
+      $progress-bar-fill-color 75%,
+      transparent 75%,
+      transparent
+    );
+    z-index: 1;
+    background-size: 80px 80px;
+    animation: move 2s linear infinite;
+    overflow: hidden;
+  }
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 80px 80px;
+  }
+}
