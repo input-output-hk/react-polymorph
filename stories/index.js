@@ -8,6 +8,7 @@ import './Input.stories';
 import './Modal.stories';
 import './NumericInput.stories';
 import './Options.stories';
+import './ProgressBar.stories';
 import './Select.stories';
 import './Switch.stories';
 import './TextArea.stories';
