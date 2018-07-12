@@ -673,7 +673,7 @@ import React from "react";
 import { ThemeProvider } from "react-polymorph/lib/components";
 
 // themes
-import SimpleTheme from "react-polymorph/lib/themes/simple";
+import { SimpleTheme } from "react-polymorph/lib/themes/simple";
 
 const App = () => (
   <ThemeProvider theme={SimpleTheme}>
