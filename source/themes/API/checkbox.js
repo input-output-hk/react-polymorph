@@ -1,5 +1,5 @@
 // @flow
-export default {
+export const CHECKBOX_THEME_API = {
   root: '',
   disabled: '',
   checked: '',
