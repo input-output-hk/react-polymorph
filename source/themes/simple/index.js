@@ -1,54 +1,40 @@
 // @flow
-// css modules plugin converts all imports below into plain objects
-import Autocomplete from './SimpleAutocomplete.scss';
-import Bubble from './SimpleBubble.scss';
-import Button from './SimpleButton.scss';
-import Checkbox from './SimpleCheckbox.scss';
-import FormField from './SimpleFormField.scss';
-import Input from './SimpleInput.scss';
-import Modal from './SimpleModal.scss';
-import Options from './SimpleOptions.scss';
-import Radio from './SimpleRadio.scss';
-import Select from './SimpleSelect.scss';
-import Switch from './SimpleSwitch.scss';
-import TextArea from './SimpleTextArea.scss';
-import Toggler from './SimpleToggler.scss';
-import Tooltip from './SimpleTooltip.scss';
+// import theme IDENTIFIERS constants
+import { IDENTIFIERS } from '../API';
 
-// named exports allow user to import a single theme object per component
-// instead of importing and destructuring the entire SimpleTheme obj
-export const AutocompleteTheme = Autocomplete;
-export const BubbleTheme = Bubble;
-export const ButtonTheme = Button;
-export const CheckboxTheme = Checkbox;
-export const FormFieldTheme = FormField;
-export const InputTheme = Input;
-export const ModalTheme = Modal;
-export const OptionsTheme = Options;
-export const RadioTheme = Radio;
-export const SelectTheme = Select;
-export const SwitchTheme = Switch;
-export const TextAreaTheme = TextArea;
-export const TogglerTheme = Toggler;
-export const TooltipTheme = Tooltip;
+// css modules plugin converts all imports below into plain objects
+import SimpleAutocomplete from './SimpleAutocomplete.scss';
+import SimpleBubble from './SimpleBubble.scss';
+import SimpleButton from './SimpleButton.scss';
+import SimpleCheckbox from './SimpleCheckbox.scss';
+import SimpleFormField from './SimpleFormField.scss';
+import SimpleInput from './SimpleInput.scss';
+import SimpleModal from './SimpleModal.scss';
+import SimpleOptions from './SimpleOptions.scss';
+import SimpleRadio from './SimpleRadio.scss';
+import SimpleSelect from './SimpleSelect.scss';
+import SimpleSwitch from './SimpleSwitch.scss';
+import SimpleTextArea from './SimpleTextArea.scss';
+import SimpleToggler from './SimpleToggler.scss';
+import SimpleTooltip from './SimpleTooltip.scss';
 
 // SimpleTheme is a plain object serving as the default export.
 // Each key is named after a component and each key's value
 // is the component's corresponding theme. The user can
 // pass this entire obj directly to ThemeProvider via the "theme" prop
-export default {
-  autocomplete: { ...AutocompleteTheme },
-  bubble: { ...BubbleTheme },
-  button: { ...ButtonTheme },
-  checkbox: { ...CheckboxTheme },
-  formfield: { ...FormFieldTheme },
-  input: { ...InputTheme },
-  modal: { ...ModalTheme },
-  options: { ...OptionsTheme },
-  radio: { ...RadioTheme },
-  select: { ...SelectTheme },
-  switch: { ...SwitchTheme },
-  textarea: { ...TextAreaTheme },
-  toggler: { ...TogglerTheme },
-  tooltip: { ...TooltipTheme }
+export const SimpleTheme = {
+  [IDENTIFIERS.AUTOCOMPLETE]: SimpleAutocomplete,
+  [IDENTIFIERS.BUBBLE]: SimpleBubble,
+  [IDENTIFIERS.BUTTON]: SimpleButton,
+  [IDENTIFIERS.CHECKBOX]: SimpleCheckbox,
+  [IDENTIFIERS.FORM_FIELD]: SimpleFormField,
+  [IDENTIFIERS.INPUT]: SimpleInput,
+  [IDENTIFIERS.MODAL]: SimpleModal,
+  [IDENTIFIERS.OPTIONS]: SimpleOptions,
+  [IDENTIFIERS.RADIO]: SimpleRadio,
+  [IDENTIFIERS.SELECT]: SimpleSelect,
+  [IDENTIFIERS.SWITCH]: SimpleSwitch,
+  [IDENTIFIERS.TEXT_AREA]: SimpleTextArea,
+  [IDENTIFIERS.TOGGLER]: SimpleToggler,
+  [IDENTIFIERS.TOOLTIP]: SimpleTooltip
 };
