@@ -6,7 +6,7 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { ThemeProvider } from '../source/components/ThemeProvider';
+import { ThemeProvider } from '../source/components/HOC/ThemeProvider';
 import { NumericInput } from '../source/components/NumericInput';
 import { Checkbox } from '../source/components/Checkbox';
 import { Modal } from '../source/components/Modal';

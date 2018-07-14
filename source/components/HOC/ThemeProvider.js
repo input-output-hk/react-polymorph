@@ -6,14 +6,14 @@ import type { Node } from 'react';
 import _ from 'lodash';
 
 // contains default theme and context provider
-import { ThemeContext } from './HOC/ThemeContext';
+import { ThemeContext } from './ThemeContext';
 
 // imports the Root Theme API object which specifies the shape
 // of a complete theme for every component in this library, used in this.composeLibraryTheme
-import { ROOT_THEME_API } from '../themes/API';
+import { ROOT_THEME_API } from '../../themes/API';
 
 // internal utility functions
-import { composeTheme } from '../utils/themes';
+import { composeTheme } from '../../utils/themes';
 
 type Props = {
   children: Node,
