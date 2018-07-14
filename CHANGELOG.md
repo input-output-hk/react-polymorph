@@ -18,7 +18,7 @@
 
 ### Features
 
-- Adds ProgressBar component to library with stories. [PR 77](https://github.com/input-output-hk/react-polymorph/pull/77)
+- Adds ProgressBar component to library with stories. [PR 78](https://github.com/input-output-hk/react-polymorph/pull/78)
 - Bubble takes an optional `targetRef` for positioning now [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
 ## 0.7.0
