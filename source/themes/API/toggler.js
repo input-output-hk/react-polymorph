@@ -1,5 +1,5 @@
 // @flow
-export default {
+export const TOGGLER_THEME_API = {
   root: '',
   input: '',
   toggler: '',

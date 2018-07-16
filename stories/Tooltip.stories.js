@@ -11,7 +11,7 @@ import { Tooltip } from '../source/components/Tooltip';
 import { TooltipSkin } from '../source/skins/simple/TooltipSkin';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
+import { SimpleTheme } from '../source/themes/simple';
 import CustomBubbleTheme from './theme-customizations/Bubble.custom.scss';
 
 // custom styles & theme overrides

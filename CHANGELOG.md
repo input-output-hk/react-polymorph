@@ -12,6 +12,8 @@
 
 ### Chores
 
+- Replaces all default exports in the theme directory with constants and exports them. Additionally, all import statements previously importing a default export are replaced with an appropriate named import. Defines all properties of the SimpleTheme and ROOT_THEME_API objects using IDENTIFIERS and arranges their properties in ABC order for better readability. [77](https://github.com/input-output-hk/react-polymorph/pull/77)
+
 - Adds support for React v15 - v16.4.1. Upgrades devDependencies to latest versions of react, jest, and enzyme related libraries. Adds Autocomplete simulation test for deleting a selected option via backspace key. [PR 65](https://github.com/input-output-hk/react-polymorph/pull/65)
 - Refactor npm scripts to colon style [PR 66](https://github.com/input-output-hk/react-polymorph/pull/66)
 
