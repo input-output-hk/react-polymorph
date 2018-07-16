@@ -1,6 +1,7 @@
 .bar {
   height: 50px;
-  border: 1px solid #333;
+  border: 3px solid rgba(85, 85, 85, 1);
+  background: rgba(85, 85, 85, 0.9);
 }
 
 .progress {
@@ -19,15 +20,6 @@
       transparent
     );
     z-index: 1;
-    background-size: 60px 60px;
+    background-size: 80px 80px;
   }
 }
-// 
-// @keyframes move {
-//   0% {
-//     background-position: 0 0;
-//   }
-//   100% {
-//     background-position: 60px 60px;
-//   }
-// }

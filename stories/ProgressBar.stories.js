@@ -29,16 +29,26 @@ storiesOf('ProgressBar', module)
     </div>
   ))
 
-  .add('default - 100%', () => (
+  .add('default - label', () => (
     <div className={styles.marginWrapper}>
-      <ProgressBar progress={100} skin={ProgressBarSkin} />
+      <ProgressBar label="Pending Transaction" skin={ProgressBarSkin} />
     </div>
   ))
 
-  .add('theme overrides - 100%', () => (
+  .add('theme overrides - 50%', () => (
     <div className={styles.marginWrapper}>
       <ProgressBar
-        progress={100}
+        progress={50}
+        themeOverrides={themeOverrides}
+        skin={ProgressBarSkin}
+      />
+    </div>
+  ))
+
+  .add('theme overrides - label', () => (
+    <div className={styles.marginWrapper}>
+      <ProgressBar
+        label="Pending Transaction"
         themeOverrides={themeOverrides}
         skin={ProgressBarSkin}
       />
