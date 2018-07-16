@@ -13,12 +13,17 @@ $progress-bar-fill-color: rgba(198, 205, 214, 0.5) !default;
 }
 
 .progress {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   border-radius: 4px;
   background-color: $progress-bar-background-color;
   position: relative;
   overflow: hidden;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: $theme-font-bold, sans-serif;
 
   &:after {
     content: "";
