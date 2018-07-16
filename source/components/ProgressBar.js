@@ -17,6 +17,7 @@ type Props = {
     theme: Object,
     ROOT_THEME_API: Object
   },
+  label: string,
   progress: number,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
@@ -30,7 +31,7 @@ type State = {
 
 class ProgressBarBase extends Component<Props, State> {
   static defaultProps = {
-    progress: 0,
+    progress: 100,
     theme: null,
     themeId: IDENTIFIERS.PROGRESS_BAR,
     themeOverrides: {}
