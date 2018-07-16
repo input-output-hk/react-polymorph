@@ -1,5 +1,5 @@
 // @flow
-export default {
+export const AUTOCOMPLETE_THEME_API = {
   autocompleteWrapper: '',
   autocompleteContent: '',
   selectedWords: '',

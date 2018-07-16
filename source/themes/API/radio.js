@@ -1,5 +1,5 @@
 // @flow
-export default {
+export const RADIO_THEME_API = {
   root: '',
   disabled: '',
   input: '',
