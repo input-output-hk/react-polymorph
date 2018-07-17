@@ -5,6 +5,7 @@ import './Bubble.stories';
 import './Button.stories';
 import './Checkbox.stories';
 import './Input.stories';
+import './Layout.stories';
 import './Modal.stories';
 import './NumericInput.stories';
 import './Options.stories';
