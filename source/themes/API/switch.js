@@ -1,5 +1,5 @@
 // @flow
-export default {
+export const SWITCH_THEME_API = {
   root: '',
   input: '',
   switch: '',

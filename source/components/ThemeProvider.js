@@ -10,7 +10,7 @@ import { ThemeContext } from './HOC/ThemeContext';
 
 // imports the Root Theme API object which specifies the shape
 // of a complete theme for every component in this library, used in this.composeLibraryTheme
-import ROOT_THEME_API from '../themes/API';
+import { ROOT_THEME_API } from '../themes/API';
 
 // internal utility functions
 import { composeTheme } from '../utils/themes';

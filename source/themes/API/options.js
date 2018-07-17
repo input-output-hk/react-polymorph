@@ -1,5 +1,5 @@
 // @flow
-export default {
+export const OPTIONS_THEME_API = {
   disabledOption: '',
   firstOptionHighlighted: '',
   highlightedOption: '',
