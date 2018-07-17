@@ -1,24 +1,38 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
+import { pickBy } from 'lodash';
+
+// components
 import { Base } from './Base';
+// styles
+import flexStyles from '../../themes/layout/Flex.scss';
+// utilities
+import { formatFlexProps } from '../../utils/themes';
 
 type Props = {
-  row: boolean,
+  alignItems: string,
+  className: string,
+  center: boolean,
   column: boolean,
-  rowReverse: boolean,
   columnReverse: boolean,
-  nowrap: boolean,
-  wrap: boolean,
-  wrapReverse: boolean
+  justifyContent: string,
+  row: boolean,
+  rowReverse: boolean
 };
 
-export class Flex extends Component<Props> {
-  render() {
-    // TODO: Pass Flex properties down to Base for composition
-    const fakeStylesFromUser = {};
+export const Flex = (props: Props) => {
+  const { children, className, ...flexProps } = props;
 
-    return (
-      <Base enhancements={fakeStylesFromUser}>{this.props.children}</Base>
-    );
-  }
-}
+  const activeProps = pickBy(({ flex: true, ...flexProps }));
+  const activeClasses = Object.keys(formatFlexProps(activeProps));
+  console.log(activeClasses);
+  return (
+    <Base
+      className={className}
+      stylesToAdd={flexStyles}
+      activeClasses={activeClasses}
+    >
+      {children}
+    </Base>
+  );
+};
