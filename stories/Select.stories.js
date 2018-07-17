@@ -14,7 +14,7 @@ import { Button } from '../source/components/Button';
 import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
+import { SimpleTheme } from '../source/themes/simple';
 import CustomSelectTheme from './theme-customizations/Select.custom.scss';
 
 // custom styles

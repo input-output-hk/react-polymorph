@@ -1,5 +1,5 @@
 // @flow
-export default {
+export const FORM_FIELD_THEME_API = {
   root: '',
   disabled: '',
   error: '',
