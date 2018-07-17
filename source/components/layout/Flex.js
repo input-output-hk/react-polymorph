@@ -4,8 +4,10 @@ import { pickBy } from 'lodash';
 
 // components
 import { Base } from './Base';
+
 // styles
-import flexStyles from '../../themes/layout/Flex.scss';
+import flexStyles from '../../themes/simple/layout/Flex.scss';
+
 // utilities
 import { formatFlexProps } from '../../utils/themes';
 
@@ -25,7 +27,7 @@ export const Flex = (props: Props) => {
 
   const activeProps = pickBy(({ flex: true, ...flexProps }));
   const activeClasses = Object.keys(formatFlexProps(activeProps));
-  console.log(activeClasses);
+
   return (
     <Base
       className={className}
