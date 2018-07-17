@@ -1,0 +1,23 @@
+.flexItem {
+  flex: 0;
+
+  &.alignStart {
+    align-self: flex-start;
+  }
+
+  &.alignEnd {
+    align-self: flex-end;
+  }
+
+  &.alignCenter {
+    align-self: center;
+  }
+
+  &.alignBaseline {
+    align-self: baseline;
+  }
+
+  &.alignStretch {
+    align-self: stretch;
+  }
+}

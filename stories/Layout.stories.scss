@@ -4,7 +4,15 @@
   width: auto;
   border: 1px solid green;
 
-  h1 {
-    margin: 10px;
+  div {
+    background: tomato;
+    padding: 5px;
+    width: 100px;
+    margin: 5px;
+
+    line-height: 100px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
   }
 }

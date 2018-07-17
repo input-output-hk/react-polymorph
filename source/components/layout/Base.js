@@ -12,6 +12,7 @@ type Props = {
   activeClasses: Array<''>,
   children: Element<*>,
   className: string,
+  inlineStyles: Object,
   stylesToAdd: Object
 };
 
@@ -31,11 +32,11 @@ export class Base extends Component<Props, State> {
   }
 
   render() {
-    const { className, children } = this.props;
+    const { className, children, inlineStyles } = this.props;
     const { composedStyles } = this.state;
 
     return (
-      <div className={classnames([className, composedStyles.base])}>
+      <div style={inlineStyles} className={classnames([className, composedStyles.base])}>
         {children}
       </div>
     );

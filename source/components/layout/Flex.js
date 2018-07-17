@@ -4,12 +4,13 @@ import { pickBy } from 'lodash';
 
 // components
 import { Base } from './Base';
+import { FlexItem } from './FlexItem';
 
 // styles
 import flexStyles from '../../themes/simple/layout/Flex.scss';
 
 // utilities
-import { formatFlexProps } from '../../utils/themes';
+import { formatFlexProps } from '../../utils/layout';
 
 type Props = {
   alignItems: string,
@@ -38,3 +39,5 @@ export const Flex = (props: Props) => {
     </Base>
   );
 };
+
+Flex.Item = FlexItem;
