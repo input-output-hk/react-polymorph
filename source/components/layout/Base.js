@@ -1,12 +1,18 @@
 // @flow
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import styles from '../../themes/layout/Base.scss';
-import { composeComponentStyles } from '../../utils/themes';
+
+// styles
+import baseStyles from '../../themes/layout/Base.scss';
+
+// utilities
+import { composeBaseStyles } from '../../utils/themes';
 
 type Props = {
-  enhancements: Object,
-  children: Element<*>
+  activeClasses: Array<''>,
+  children: Element<*>,
+  className: string,
+  stylesToAdd: Object
 };
 
 type State = {
@@ -17,19 +23,19 @@ export class Base extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const { enhancements } = props;
+    const { activeClasses, stylesToAdd } = props;
 
     this.state = {
-      composedStyles: composeComponentStyles(styles, enhancements)
+      composedStyles: composeBaseStyles(baseStyles, stylesToAdd, activeClasses)
     };
   }
 
   render() {
-    const { children } = this.props;
+    const { className, children } = this.props;
     const { composedStyles } = this.state;
 
     return (
-      <div className={classnames([...Object.values(composedStyles)])}>
+      <div className={classnames([className, composedStyles.base])}>
         {children}
       </div>
     );
