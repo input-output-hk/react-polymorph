@@ -18,7 +18,13 @@ import CustomTogglerTheme from './theme-customizations/Toggler.custom.scss';
 import themeOverrides from './theme-overrides/customToggler.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 
+// theme
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Toggler', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain',

@@ -1,8 +1,6 @@
 // @flow
 import React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
-
-// import constants
 import { ROOT_THEME_API } from '../../themes/API';
 import { SimpleTheme } from '../../themes/simple/';
 
