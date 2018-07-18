@@ -29,9 +29,6 @@ import flagUSA from './images/us.png';
 // constants
 import { IDENTIFIERS } from '../source/themes/API';
 
-// helpers
-import { decorateWithSimpleTheme } from './helpers/theming';
-
 const COUNTRIES = [
   { value: 'EN-gb', label: 'England' },
   { value: 'ES-es', label: 'Spain' },
@@ -54,9 +51,6 @@ const COUNTRIES_WITH_DISABLED_OPTIONS = [
 ];
 
 storiesOf('Select', module)
-
-  .addDecorator(decorateWithSimpleTheme)
-
   // ====== Stories ======
 
   .add('options',

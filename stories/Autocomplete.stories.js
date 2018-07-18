@@ -25,9 +25,6 @@ import styles from './Autocomplete.stories.scss';
 import themeOverrides from './theme-overrides/customAutocomplete.scss';
 import trashIcon from './images/trash-icon.png';
 
-// helpers
-import { decorateWithSimpleTheme } from './helpers/theming';
-
 const OPTIONS = [
   'home',
   'cat',
@@ -44,9 +41,6 @@ const OPTIONS = [
 ];
 
 storiesOf('Autocomplete', module)
-
-  .addDecorator(decorateWithSimpleTheme)
-
   // ====== Stories ======
 
   .add('Enter mnemonics - plain', () => (
