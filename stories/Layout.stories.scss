@@ -16,3 +16,27 @@
     text-align: center;
   }
 }
+
+
+.header,
+.footer {
+  grid-column: 1 / span 2;
+}
+
+.header,
+.main,
+.aside,
+.footer {
+  background: #eaeaea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  background: #eaeaea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
