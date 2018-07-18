@@ -7,3 +7,5 @@ export const pickDOMProps = filterReactDomProps;
 
 export const composeFunctions = (...fns: [Function, Function]) => (...args: [any, any]) =>
   fns.forEach(fn => fn && fn(...args));
+
+export const numberToPx = val => (typeof val === 'number' ? `${val}px` : val);
