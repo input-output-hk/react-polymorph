@@ -9,9 +9,6 @@ import { FlexItem } from './FlexItem';
 // styles
 import flexStyles from '../../themes/simple/layout/Flex.scss';
 
-// utilities
-import { formatFlexProps } from '../../utils/layout';
-
 type Props = {
   alignItems: string,
   className: string,
@@ -24,16 +21,28 @@ type Props = {
 };
 
 export const Flex = (props: Props) => {
-  const { children, className, ...flexProps } = props;
+  const {
+    alignItems,
+    children,
+    className,
+    center,
+    column,
+    columnReverse,
+    justifyContent,
+    row,
+    rowReverse
+  } = props;
 
-  const activeProps = pickBy(({ flex: true, ...flexProps }));
-  const activeClasses = Object.keys(formatFlexProps(activeProps));
+  const activeProps = pickBy(({ flex: true, center, column, columnReverse, row, rowReverse }));
+  const activeClasses = Object.keys(activeProps);
+  const positioning = { alignItems, justifyContent };
 
   return (
     <Base
-      className={className}
-      stylesToAdd={flexStyles}
       activeClasses={activeClasses}
+      className={className}
+      inlineStyles={positioning}
+      stylesToAdd={flexStyles}
     >
       {children}
     </Base>

@@ -1,15 +1,8 @@
 // @flow
 import React from 'react';
-import { pickBy } from 'lodash';
 
 // components
 import { Base } from './Base';
-
-// styles
-import itemStyles from '../../themes/simple/layout/FlexItem.scss';
-
-// utilities
-import { formatFlexItemProps } from '../../utils/layout';
 
 type Props = {
   alignSelf: string,
@@ -19,17 +12,10 @@ type Props = {
 };
 
 export const FlexItem = (props: Props) => {
-  const { children, className, order, ...flexItemProps } = props;
+  const { children, className, alignSelf, flex, order } = props;
 
-  const activeProps = pickBy(({ flexItem: true, ...flexItemProps }));
-  const activeClasses = Object.keys(formatFlexItemProps(activeProps));
   return (
-    <Base
-      activeClasses={activeClasses}
-      className={className}
-      inlineStyles={{ order }}
-      stylesToAdd={itemStyles}
-    >
+    <Base className={className} inlineStyles={{ order, alignSelf, flex }}>
       {children}
     </Base>
   );
