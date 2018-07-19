@@ -20,7 +20,7 @@
 
 ### Features
 
-- Adds layout components: Base, Gutter, Flex, FlexItem, Grid, and GridItem. This abstracts layout into composable components that facilitate a more uniform and reusable layout solution. Enables third party developers using react-polymorph to craft applications with uniformity of layout and style more easily.
+- Adds layout components: Base, Gutter, Flex, FlexItem, Grid, and GridItem. This abstracts layout into composable components that facilitate a more uniform and reusable layout solution. Enables third party developers using react-polymorph to craft applications with uniformity of layout and style more easily. [PR 80](https://github.com/input-output-hk/react-polymorph/pull/80)
 
 - Bubble takes an optional `targetRef` for positioning now [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
