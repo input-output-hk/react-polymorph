@@ -10,55 +10,67 @@ import { GridItem } from './GridItem';
 import gridStyles from '../../themes/simple/layout/Grid.scss';
 
 // utilities
-import { formatFlexProps } from '../../utils/layout';
 import { numberToPx } from '../../utils/props';
+import { formatTemplateAreas } from '../../utils/layout';
 
 type Props = {
-  className: string,
-  columns: string,
-  columnGap: string | number,
-  gap: string | number,
+  alignItems: string,
   autoColumns: string,
   autoRows: string,
+  className: string,
+  center: boolean,
+  columnGap: string | number,
+  columns: string,
+  gap: string | number,
+  justifyItems: string,
+  rowGap: string | number,
   rows: string,
-  rowGap: string | number
+  template: string,
+  templateAreas: Array<''>
 };
 
 export class Grid extends Component<Props> {
+  static defaultProps = {
+    columnGap: 5,
+    rowGap: 5
+  };
+
   // creates obj passed Base component's inline styles (see render)
   _assembleInlineGrid = () => {
     const { className, ...gridProps } = this.props;
 
     // return early if gridProps are empty
-    if (isEmpty(pickBy({ ...gridProps }))) return {};
+    if (isEmpty(pickBy({ ...gridProps }))) { return; }
 
     const {
-      columns,
-      rows,
-      gap,
-      columnGap,
-      rowGap,
+      alignItems,
       autoColumns,
-      autoRows
-    } = this.props;
+      autoRows,
+      center,
+      columnGap,
+      columns,
+      gap,
+      justifyItems,
+      rowGap,
+      rows,
+      template,
+      templateAreas
+    } = gridProps;
 
     // obj with correct css grid class names
     const inlineClasses = {
+      alignItems: center ? 'center' : alignItems,
       gridAutoColumns: autoColumns,
       gridAutoRows: autoRows,
       gridTemplateColumns: columns,
       gridTemplateRows: rows,
+      gridColumnGap: gap ? false : numberToPx(columnGap),
       gridGap: numberToPx(gap),
-      gridColumnGap: numberToPx(columnGap),
-      gridRowGap: numberToPx(rowGap)
+      gridRowGap: gap ? false : numberToPx(rowGap),
+      gridTemplate: template,
+      gridTemplateAreas: formatTemplateAreas(templateAreas),
+      justifyItems: center ? 'center' : justifyItems
     };
-
-    // grid-gap is shorthand defining both colum & row gaps
-    // makes individual definitions unnecessary
-    if (inlineClasses.gridGap) {
-      inlineClasses.gridColumnGap = false;
-      inlineClasses.gridRowGap = false;
-    }
 
     // filters out keys with false(sy) values
     return pickBy(inlineClasses);
@@ -66,16 +78,13 @@ export class Grid extends Component<Props> {
 
   render() {
     const { children, className, ...gridProps } = this.props;
-    // filters out keys with false(sy) values
-    const activeProps = pickBy(({ grid: true, ...gridProps }));
-    const activeClasses = Object.keys(formatFlexProps(activeProps));
     const inlineGrid = this._assembleInlineGrid({ ...gridProps });
 
     return (
       <Base
         className={className}
         stylesToAdd={gridStyles}
-        activeClasses={activeClasses}
+        activeClasses={['grid']}
         inlineStyles={inlineGrid}
       >
         {children}
