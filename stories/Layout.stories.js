@@ -12,7 +12,7 @@ import { Gutter } from '../source/components/layout/Gutter';
 // styles
 import styles from './Layout.stories.scss';
 
-const { wrapper, header, main, aside, footer, box } = styles;
+const { full, wrapper, header, main, aside, footer, tomato, boxDark, boxLight, boxPastel } = styles;
 
 storiesOf('Layout', module)
   // ====== Layout Stories ======
@@ -89,8 +89,8 @@ storiesOf('Layout', module)
   ))
 
   .add('Grid - simple', () => (
-    <Gutter>
-      <Grid columns="75% 25%" rows="10vw 30vw 10vw" gap="1em">
+    <Gutter padding={60}>
+      <Grid columns="75% 25%" rows="10vw 30vw 10vw" gap={30}>
         <div className={header}>header</div>
         <div className={main}>main</div>
         <div className={aside}>aside</div>
@@ -100,27 +100,96 @@ storiesOf('Layout', module)
   ))
 
   .add('Grid - even', () => (
-    <Gutter>
+    <Gutter padding={30}>
       <Grid
+        center
+        className={tomato}
         columns="repeat(auto-fill, minmax(200px, 1fr))"
         autoRows="minmax(150px, auto)"
         gap="1em"
       >
-        <div className={box}>1</div>
-        <div className={box}>2</div>
-        <div className={box}>3</div>
-        <div className={box}>4</div>
-        <div className={box}>5</div>
-        <div className={box}>6</div>
-        <div className={box}>7</div>
-        <div className={box}>8</div>
-        <div className={box}>9</div>
-        <div className={box}>10</div>
-        <div className={box}>11</div>
-        <div className={box}>12</div>
-        <div className={box}>13</div>
-        <div className={box}>14</div>
-        <div className={box}>15</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>11</div>
+        <div>12</div>
+        <div>13</div>
+        <div>14</div>
+        <div>15</div>
       </Grid>
     </Gutter>
-  ));
+  ))
+
+  .add('Grid.Item - column & row', () => (
+    <Flex className={full} column center>
+      <Grid
+        className={boxPastel}
+        columns="200px 200px 200px"
+        rows="125px 125px 125px"
+        gap={40}
+      >
+        <Grid.Item column="1 / 3" row="1">
+          1
+        </Grid.Item>
+        <Grid.Item column="3" row="1 / 3">
+          2
+        </Grid.Item>
+        <Grid.Item column="1" row="2">
+          3
+        </Grid.Item>
+        <Grid.Item column="2" row="2">
+          4
+        </Grid.Item>
+      </Grid>
+    </Flex>
+  ))
+
+  .add('Grid.Item - columnStart/End rowStart/End', () => (
+    <Flex className={full} column center>
+      <Grid className={boxLight} columns="repeat(3, 200px)" rows="repeat(3, 125px)" gap={10}>
+        <Grid.Item columnStart={2} columnEnd={3} rowStart={1}>
+          1
+        </Grid.Item>
+        <Grid.Item columnStart={3} rowStart={1} rowEnd={2}>
+          2
+        </Grid.Item>
+        <Grid.Item columnStart={1} rowStart={1} rowEnd={3}>
+          3
+        </Grid.Item>
+        <Grid.Item columnStart={2} columnEnd={4} rowStart={2}>
+          4
+        </Grid.Item>
+      </Grid>
+    </Flex>
+  ))
+
+  .add('Grid - template & templateAreas', () => {
+    const templateAreas = [
+      'header header header',
+      'sidebar content content',
+      'sidebar content content',
+      'footer footer footer'
+    ];
+    return (
+      <Gutter padding="25vh 20vw">
+        <Grid
+          className={boxDark}
+          template="repeat(4, 1fr) / repeat(3, 1fr)"
+          templateAreas={templateAreas}
+          gap={10}
+        >
+          <Grid.Item gridArea="content">1</Grid.Item>
+          <Grid.Item gridArea="sidebar">2</Grid.Item>
+          <Grid.Item gridArea="header">3</Grid.Item>
+          <Grid.Item gridArea="footer">4</Grid.Item>
+        </Grid>
+      </Gutter>
+    );
+  });
