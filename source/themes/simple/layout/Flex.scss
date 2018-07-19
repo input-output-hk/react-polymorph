@@ -21,40 +21,4 @@
     justify-content: center;
     align-items: center;
   }
-
-  &.justifyStart {
-    justify-content: flex-start;
-  }
-
-  &.justifyEnd {
-    justify-content: flex-end;
-  }
-
-  &.justifyCenter {
-    justify-content: center;
-  }
-
-  &.justifyAround {
-    justify-content: space-around;
-  }
-
-  &.justifyBetween {
-    justify-content: space-between;
-  }
-
-  &.alignStart {
-    align-items: flex-start;
-  }
-
-  &.alignEnd {
-    align-items: flex-end;
-  }
-
-  &.alignCenter {
-    align-items: center;
-  }
-
-  &.alignBaseline {
-    align-items: baseline;
-  }
 }
