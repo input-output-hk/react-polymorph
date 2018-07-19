@@ -5,23 +5,6 @@ export const appendToProperty = (dest: {}, name: string, value: string) => {
   dest[name] === '' ? (dest[name] = value) : (dest[name] += ' ' + value);
 };
 
-export const composeBaseStyles = (
-  baseStyles: Object,
-  stylesToAdd: Object,
-  activeClasses: Array) => {
-  if (!activeClasses.length) { return baseStyles; }
-
-  const composedBase = { ...baseStyles };
-
-  activeClasses.forEach(className => {
-    if (Object.hasOwnProperty.call(stylesToAdd, className) && stylesToAdd[className]) {
-      composedBase.base += ` ${stylesToAdd[className]}`;
-    }
-  });
-
-  return composedBase;
-};
-
 export const composeComponentStyles = (componentStyles: {}, componentTheme: {}) => {
   if (!componentTheme) return;
   for (const property in componentStyles) {

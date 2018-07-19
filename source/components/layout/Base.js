@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import baseStyles from '../../themes/simple/layout/Base.scss';
 
 // utilities
-import { composeBaseStyles } from '../../utils/themes';
+import { composeBaseStyles } from '../../utils/layout';
 
 type Props = {
   activeClasses: Array<''>,
