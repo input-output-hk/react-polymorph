@@ -1,6 +1,7 @@
 # Changelog
 
-## vNEXT
+## 0.7.1
+
 ### Fixes
 
 - Fixed wrong border color for errored & focused textareas 
