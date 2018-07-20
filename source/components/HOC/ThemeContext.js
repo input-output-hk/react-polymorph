@@ -2,7 +2,6 @@
 import React from 'react';
 import createReactContext, { type Context } from 'create-react-context';
 import { ROOT_THEME_API } from '../../themes/API';
-import { SimpleTheme } from '../../themes/simple/';
 
 // components that are NOT directly nested within a ThemeProvider
 // can access simple theme as "this.props.context.theme",
@@ -25,6 +24,6 @@ type Theme = {
   ROOT_THEME_API: Object
 };
 
-const defaultContext = { theme: SimpleTheme, ROOT_THEME_API };
+const defaultContext = { theme: ROOT_THEME_API, ROOT_THEME_API };
 
 export const ThemeContext: Context<Theme> = createContext(defaultContext);

@@ -4,9 +4,10 @@ import renderer from 'react-test-renderer';
 import { Checkbox } from '../source/components/Checkbox';
 import { TogglerSkin } from '../source/skins/simple/TogglerSkin';
 import { IDENTIFIERS } from '../source/themes/API';
+import { renderInSimpleTheme } from './helpers/theming';
 
 test('Toggler renders correctly', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       labelLeft="Included"
       labelRight="Excluded"
@@ -20,7 +21,7 @@ test('Toggler renders correctly', () => {
 });
 
 test('Toggler renders within text', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <div>
       <span>Fees&nbsp;</span>
       <Checkbox
@@ -38,7 +39,7 @@ test('Toggler renders within text', () => {
 });
 
 test('Toggler is disabled', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       disabled
       labelLeft="Included"
@@ -53,7 +54,7 @@ test('Toggler is disabled', () => {
 });
 
 test('Toggler is checked', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       checked
       labelLeft="Included"
