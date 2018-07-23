@@ -1,0 +1,19 @@
+@import "../theme";
+
+.header {
+  &.light {
+    font-family: $theme-font-light;
+  }
+  &.medium {
+    font-family: $theme-font-medium;
+  }
+  &.regular {
+    font-family: $theme-font-regular;
+  }
+  &.thin {
+    font-family: $theme-font-thin;
+  }
+  &.bold {
+    font-family: $theme-font-bold;
+  }
+}
