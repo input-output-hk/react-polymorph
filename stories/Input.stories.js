@@ -18,13 +18,7 @@ import CustomInputTheme from './theme-customizations/Input.custom.scss';
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customInput.scss';
 
-// helpers
-import { decorateWithSimpleTheme } from './helpers/theming';
-
 storiesOf('Input', module)
-
-  .addDecorator(decorateWithSimpleTheme)
-
   // ====== Stories ======
 
   .add('plain',

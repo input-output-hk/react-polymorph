@@ -17,13 +17,7 @@ import CustomButtonTheme from './theme-customizations/Button.custom.scss';
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customButton.scss';
 
-// helpers
-import { decorateWithSimpleTheme } from './helpers/theming';
-
 storiesOf('Button', module)
-
-  .addDecorator(decorateWithSimpleTheme)
-
   // ====== Stories ======
 
   .add('plain', () => <Button label="Button label" skin={ButtonSkin} />)
