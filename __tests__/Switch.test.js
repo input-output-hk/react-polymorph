@@ -4,9 +4,10 @@ import renderer from 'react-test-renderer';
 import { Checkbox } from '../source/components/Checkbox';
 import { SwitchSkin } from '../source/skins/simple/SwitchSkin';
 import { IDENTIFIERS } from '../source/themes/API';
+import { renderInSimpleTheme } from './helpers/theming';
 
 test('Switch renders correctly', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       themeId={IDENTIFIERS.SWITCH}
       skin={SwitchSkin}
@@ -18,7 +19,7 @@ test('Switch renders correctly', () => {
 });
 
 test('Switch renders with label', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       themeId={IDENTIFIERS.SWITCH}
       label="click here"
@@ -31,7 +32,7 @@ test('Switch renders with label', () => {
 });
 
 test('Switch is disabled', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       themeId={IDENTIFIERS.SWITCH}
       disabled
@@ -44,7 +45,7 @@ test('Switch is disabled', () => {
 });
 
 test('Switch is disabled and renders a label', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       themeId={IDENTIFIERS.SWITCH}
       disabled
@@ -58,7 +59,7 @@ test('Switch is disabled and renders a label', () => {
 });
 
 test('Switch is checked', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       themeId={IDENTIFIERS.SWITCH}
       checked

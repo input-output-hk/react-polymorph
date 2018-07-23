@@ -18,6 +18,9 @@ import { OptionsSkin } from '../source/skins/simple/OptionsSkin';
 // themes
 import CustomOptionsTheme from './theme-customizations/Options.custom.scss';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 const OPTIONS_COLLECTION = [
   { value: 'EN-gb', label: 'England' },
   { value: 'ES-es', label: 'Spain' },
@@ -41,7 +44,11 @@ const MNEMONIC_WORDS = [
 ];
 
 storiesOf('Options', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
+
   .add('combined with Input to construct Select',
     withState({ value: '' }, store => (
       <Select
