@@ -6,9 +6,11 @@ import type { ComponentType, Node, Element } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -16,18 +18,19 @@ import { IDENTIFIERS } from '../themes/API';
 type Props = {
   autoFocus: boolean,
   autoResize: boolean,
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
   },
   disabled: boolean,
+  label: string | Element<any>,
   error: string | Node,
   maxLength: number,
   minLength: number,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
-  onRef: Function,
   placeholder: string,
   rows: number,
   skin: ComponentType<any>,
@@ -42,13 +45,12 @@ type State = {
   composedTheme: Object
 };
 
-class TextArea extends Component<Props, State> {
+class TextAreaBase extends Component<Props, State> {
   textareaElement: Element<'textarea'>;
 
   static defaultProps = {
     autoFocus: false,
     autoResize: true,
-    onRef: () => {},
     theme: null,
     themeId: IDENTIFIERS.TEXT_AREA,
     themeOverrides: {},
@@ -74,20 +76,14 @@ class TextArea extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const { autoResize, autoFocus, onRef } = this.props;
+    const { autoResize, autoFocus } = this.props;
 
     if (autoResize) {
       window.addEventListener('resize', this._handleAutoresize);
       this._handleAutoresize();
     }
 
-    if (autoFocus) {
-      this.focus();
-    }
-
-    // if TextArea is rendered by FormField, onRef allows FormField to call
-    // TextArea's focus method when someone clicks on FormField's label
-    onRef(this);
+    if (autoFocus) { this.focus(); }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -110,9 +106,8 @@ class TextArea extends Component<Props, State> {
 
   focus = () => {
     const { textareaElement } = this;
-    if (textareaElement && textareaElement.current) {
-      textareaElement.current.focus();
-    }
+    if (!textareaElement.current) return;
+    textareaElement.current.focus();
   }
 
   onChange = (event: SyntheticInputEvent<>) => {
@@ -203,4 +198,4 @@ class TextArea extends Component<Props, State> {
   }
 }
 
-export default withTheme(TextArea);
+export const TextArea = withTheme(TextAreaBase);

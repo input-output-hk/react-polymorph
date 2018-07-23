@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -17,6 +19,7 @@ type Props = {
   },
   disabled: boolean,
   error: string,
+  inputRef: Object,
   label: string | Element<any>,
   render: Function,
   skin: ComponentType<any>,
@@ -30,9 +33,7 @@ type State = {
   composedTheme: Object
 };
 
-export class FormField extends Component<Props, State> {
-  child: Element<'input'>;
-
+class FormFieldBase extends Component<Props, State> {
   static defaultProps = {
     disabled: false,
     theme: null,
@@ -58,14 +59,10 @@ export class FormField extends Component<Props, State> {
   setError = (error: string) => this.setState({ error });
 
   focusChild = () => {
-    if (this.child && this.child.focus !== undefined) {
-      this.child.focus();
-    }
+    const { inputRef } = this.props;
+    if (!inputRef.current) return;
+    inputRef.current.focus();
   };
-
-  // onRef is passed to Input/NumericInput components rendered
-  // via this.props.render, which makes this.focusChild possible
-  onRef = (ref: Element<'input'>) => (this.child = ref);
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
@@ -75,6 +72,7 @@ export class FormField extends Component<Props, State> {
       themeOverrides,
       error,
       context,
+      inputRef,
       ...rest
     } = this.props;
 
@@ -84,11 +82,10 @@ export class FormField extends Component<Props, State> {
         setError={this.setError}
         theme={this.state.composedTheme}
         focusChild={this.focusChild}
-        onRef={this.onRef}
         {...rest}
       />
     );
   }
 }
 
-export default withTheme(FormField);
+export const FormField = withTheme(FormFieldBase);

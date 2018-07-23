@@ -6,7 +6,7 @@ import type { Element } from 'react';
 import classnames from 'classnames';
 
 // internal utility functions
-import { pickDOMProps } from '../../utils';
+import { pickDOMProps } from '../../utils/props';
 
 type Props = {
   className: string,
@@ -20,7 +20,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => {
+export const RadioSkin = (props: Props) => {
   const {
     theme,
     themeId,

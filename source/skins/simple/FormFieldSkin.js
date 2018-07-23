@@ -11,14 +11,13 @@ type Props = {
   focusChild: Function,
   label: string | Element<any>,
   onChange: Function,
-  onRef: Function,
   render: Function,
   setError: Function,
   theme: Object,
   themeId: string
 };
 
-export default (props: Props) => (
+export const FormFieldSkin = (props: Props) => (
   <div
     className={classnames([
       props.className,

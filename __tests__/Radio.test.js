@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Radio } from '../source/components';
-import { RadioSkin } from '../source/skins/simple';
-import { CONTEXT } from './helpers/context';
+import { Radio } from '../source/components/Radio';
+import { RadioSkin } from '../source/skins/simple/RadioSkin';
+import { renderInSimpleTheme } from './helpers/theming';
 
 test('Radio renders correctly', () => {
-  const component = renderer.create(
-    <Radio context={CONTEXT} skin={RadioSkin} />
+  const component = renderInSimpleTheme(
+    <Radio skin={RadioSkin} />
   );
 
   const tree = component.toJSON();
@@ -15,8 +15,8 @@ test('Radio renders correctly', () => {
 });
 
 test('Radio renders with a label', () => {
-  const component = renderer.create(
-    <Radio label="click here" context={CONTEXT} skin={RadioSkin} />
+  const component = renderInSimpleTheme(
+    <Radio label="click here" skin={RadioSkin} />
   );
 
   const tree = component.toJSON();
@@ -24,8 +24,8 @@ test('Radio renders with a label', () => {
 });
 
 test('Radio is disabled', () => {
-  const component = renderer.create(
-    <Radio disabled context={CONTEXT} skin={RadioSkin} />
+  const component = renderInSimpleTheme(
+    <Radio disabled skin={RadioSkin} />
   );
 
   const tree = component.toJSON();
@@ -33,8 +33,8 @@ test('Radio is disabled', () => {
 });
 
 test('Radio is selected', () => {
-  const component = renderer.create(
-    <Radio selected context={CONTEXT} skin={RadioSkin} />
+  const component = renderInSimpleTheme(
+    <Radio selected skin={RadioSkin} />
   );
 
   const tree = component.toJSON();

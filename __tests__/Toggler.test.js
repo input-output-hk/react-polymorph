@@ -1,16 +1,17 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Checkbox } from '../source/components';
-import { TogglerSkin } from '../source/skins/simple';
-import { CONTEXT } from './helpers/context';
+import { Checkbox } from '../source/components/Checkbox';
+import { TogglerSkin } from '../source/skins/simple/TogglerSkin';
+import { IDENTIFIERS } from '../source/themes/API';
+import { renderInSimpleTheme } from './helpers/theming';
 
 test('Toggler renders correctly', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       labelLeft="Included"
       labelRight="Excluded"
-      context={CONTEXT}
+      themeId={IDENTIFIERS.TOGGLER}
       skin={TogglerSkin}
     />
   );
@@ -20,13 +21,13 @@ test('Toggler renders correctly', () => {
 });
 
 test('Toggler renders within text', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <div>
       <span>Fees&nbsp;</span>
       <Checkbox
         labelLeft="Included"
         labelRight="Excluded"
-        context={CONTEXT}
+        themeId={IDENTIFIERS.TOGGLER}
         skin={TogglerSkin}
       />
       <span>&nbsp;from the amount</span>
@@ -38,12 +39,12 @@ test('Toggler renders within text', () => {
 });
 
 test('Toggler is disabled', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       disabled
       labelLeft="Included"
       labelRight="Excluded"
-      context={CONTEXT}
+      themeId={IDENTIFIERS.TOGGLER}
       skin={TogglerSkin}
     />
   );
@@ -53,12 +54,12 @@ test('Toggler is disabled', () => {
 });
 
 test('Toggler is checked', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Checkbox
       checked
       labelLeft="Included"
       labelRight="Excluded"
-      context={CONTEXT}
+      themeId={IDENTIFIERS.TOGGLER}
       skin={TogglerSkin}
     />
   );

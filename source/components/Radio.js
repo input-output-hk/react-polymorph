@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -30,7 +32,7 @@ type State = {
   composedTheme: Object
 };
 
-class Radio extends Component<Props, State> {
+class RadioBase extends Component<Props, State> {
   static defaultProps = {
     disabled: false,
     selected: false,
@@ -67,4 +69,4 @@ class Radio extends Component<Props, State> {
   }
 }
 
-export default withTheme(Radio);
+export const Radio = withTheme(RadioBase);

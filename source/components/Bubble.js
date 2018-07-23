@@ -1,16 +1,14 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element, ElementRef } from 'react';
+import type { ComponentType, Element, ElementRef, Ref } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import {
-  addEventsToDocument,
-  removeEventsFromDocument,
-  composeTheme,
-  addThemeId
-} from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
+import { addDocumentListeners, removeDocumentListeners } from '../utils/events';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -28,7 +26,8 @@ type Props = {
   skin: ComponentType<any>,
   theme: Object, // takes precedence over them in context if passed
   themeId: string,
-  themeOverrides: Object // custom css/scss from user adhering to component's theme API
+  themeOverrides: Object, // custom css/scss from user adhering to component's theme API
+  targetRef: ?Ref<*>, // ref to the target DOM element used for positioning the bubble
 };
 
 type State = {
@@ -36,7 +35,8 @@ type State = {
   position: ?Object
 };
 
-class Bubble extends Component<Props, State> {
+class BubbleBase extends Component<Props, State> {
+
   rootElement: ?Element<any>;
 
   static defaultProps = {
@@ -80,7 +80,7 @@ class Bubble extends Component<Props, State> {
     // Add listeners when the bubble
     if (isFloating && !nextProps.isHidden && !this._hasEventListeners) {
       this._handleScrollEventListener('add');
-      addEventsToDocument(this._getDocumentEvents());
+      addDocumentListeners(this._getDocumentEvents());
       window.addEventListener('resize', this._updatePosition);
       this._hasEventListeners = true;
     }
@@ -118,7 +118,7 @@ class Bubble extends Component<Props, State> {
 
   _removeAllEventListeners() {
     if (this._hasEventListeners) {
-      removeEventsFromDocument(this._getDocumentEvents());
+      removeDocumentListeners(this._getDocumentEvents());
       this._handleScrollEventListener('remove');
       window.removeEventListener('resize', this._updatePosition);
       this._hasEventListeners = false;
@@ -140,31 +140,35 @@ class Bubble extends Component<Props, State> {
   };
 
   _updatePosition = () => {
-    const { isOpeningUpward } = this.props;
+    const { isOpeningUpward, targetRef } = this.props;
     const { rootElement } = this;
 
-    if (!rootElement) return;
+    let target = targetRef && typeof targetRef !== 'string' ? targetRef.current : null;
 
-    const parentNode = rootElement.current ? rootElement.current.parentElement : null;
-    const parentNodeParams = parentNode
-      ? parentNode.getBoundingClientRect()
-      : null;
-
-    if (parentNodeParams !== null) {
-      let positionY;
-      if (isOpeningUpward) {
-        positionY = window.innerHeight - parentNodeParams.top + 20;
-      } else {
-        positionY = parentNodeParams.bottom + 20;
-      }
-
-      const position = {
-        width: parentNodeParams.width,
-        positionX: parentNodeParams.left,
-        positionY
-      };
-      this.setState({ position });
+    // Without a target, try to fallback to the parent node
+    if (!target) {
+      //  Only proceed if the root element is defined
+      if (!rootElement || !rootElement.current) return;
+      target = rootElement.current.parentElement;
     }
+
+    const targetRect = target.getBoundingClientRect();
+
+    let positionY;
+    if (isOpeningUpward) {
+      // Since we don't know the height of the bubble before rendering it we positioning
+      // it with { bottom: XYpx } (within the viewport) and need this calculation:
+      positionY = window.innerHeight - targetRect.top + 20;
+    } else {
+      positionY = targetRect.bottom + 20;
+    }
+
+    const position = {
+      width: targetRect.width,
+      positionX: targetRect.left,
+      positionY
+    };
+    this.setState({ position });
   };
 
   _getDocumentEvents() {
@@ -195,4 +199,4 @@ class Bubble extends Component<Props, State> {
   }
 }
 
-export default withTheme(Bubble);
+export const Bubble = withTheme(BubbleBase);

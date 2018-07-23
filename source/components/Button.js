@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -28,7 +30,7 @@ type State = {
   composedTheme: Object
 };
 
-class Button extends Component<Props, State> {
+class ButtonBase extends Component<Props, State> {
   static defaultProps = {
     disabled: false,
     theme: null,
@@ -64,4 +66,4 @@ class Button extends Component<Props, State> {
   }
 }
 
-export default withTheme(Button);
+export const Button = withTheme(ButtonBase);

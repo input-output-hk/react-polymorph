@@ -6,31 +6,27 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import {
-  ThemeProvider,
-  NumericInput,
-  Checkbox,
-  Modal,
-  TextArea,
-  Autocomplete,
-  Radio,
-  Options,
-  Button
-} from '../source/components';
+import { ThemeProvider } from '../source/components/ThemeProvider';
+import { NumericInput } from '../source/components/NumericInput';
+import { Checkbox } from '../source/components/Checkbox';
+import { Modal } from '../source/components/Modal';
+import { TextArea } from '../source/components/TextArea';
+import { Autocomplete } from '../source/components/Autocomplete';
+import { Radio } from '../source/components/Radio';
+import { Options } from '../source/components/Options';
+import { Button } from '../source/components/Button';
 
 // skins
-import {
-  InputSkin,
-  SwitchSkin,
-  ModalSkin,
-  TextAreaSkin,
-  TogglerSkin,
-  AutocompleteSkin,
-  RadioSkin,
-  OptionsSkin,
-  ButtonSkin,
-  CheckboxSkin
-} from '../source/skins/simple';
+import { InputSkin } from '../source/skins/simple/InputSkin';
+import { SwitchSkin } from '../source/skins/simple/SwitchSkin';
+import { ModalSkin } from '../source/skins/simple/ModalSkin';
+import { TextAreaSkin } from '../source/skins/simple/TextAreaSkin';
+import { TogglerSkin } from '../source/skins/simple/TogglerSkin';
+import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
+import { RadioSkin } from '../source/skins/simple/RadioSkin';
+import { OptionsSkin } from '../source/skins/simple/OptionsSkin';
+import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
+import { CheckboxSkin } from '../source/skins/simple/CheckboxSkin';
 
 // theme
 import { IDENTIFIERS } from '../source/themes/API';
@@ -44,7 +40,8 @@ import CustomModalTheme from './theme-customizations/Modal.custom.scss';
 import CustomButtonTheme from './theme-customizations/Button.custom.scss';
 import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
 import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.scss';
-import { BubbleTheme, FormFieldTheme } from '../source/themes/simple';
+import SimpleBubble from '../source/themes/simple/SimpleBubble.scss';
+import SimpleFormField from '../source/themes/simple/SimpleFormField.scss';
 
 const OPTIONS = [
   'home',
@@ -64,8 +61,8 @@ const CUSTOM_THEME = {
   [IDENTIFIERS.BUTTON]: CustomButtonTheme,
   [IDENTIFIERS.CHECKBOX]: CustomCheckboxTheme,
   [IDENTIFIERS.AUTOCOMPLETE]: CustomAutocompleteTheme,
-  [IDENTIFIERS.BUBBLE]: BubbleTheme,
-  [IDENTIFIERS.FORM_FIELD]: FormFieldTheme
+  [IDENTIFIERS.BUBBLE]: SimpleBubble,
+  [IDENTIFIERS.FORM_FIELD]: SimpleFormField
 };
 
 storiesOf('ThemeProvider', module)
@@ -156,7 +153,7 @@ storiesOf('ThemeProvider', module)
           />
         </div>
 
-        <div style={{ margin: '100px', height: '200px' }}>
+        <div style={{ margin: '50px' }}>
           <Options
             isOpen
             options={OPTIONS}
@@ -166,7 +163,7 @@ storiesOf('ThemeProvider', module)
           />
         </div>
 
-        <div style={{ margin: '100px', height: '225px' }}>
+        <div style={{ margin: '400px 100px 250px 100px', height: '225px' }}>
           <Autocomplete
             label="Autocomplete with custom theme"
             options={OPTIONS}

@@ -15,7 +15,7 @@ type Props = {
   themeId: string
 };
 
-export default (props: Props) => (
+export const ModalSkin = (props: Props) => (
   <ReactModal
     contentLabel={props.contentLabel}
     isOpen={props.isOpen}

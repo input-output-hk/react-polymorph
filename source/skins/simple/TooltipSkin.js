@@ -6,13 +6,13 @@ import type { Node, Element } from 'react';
 import classnames from 'classnames';
 
 // components
-import { Bubble } from '../../components';
+import { Bubble } from '../../components/Bubble';
 
 // skins
-import { BubbleSkin } from './';
+import { BubbleSkin } from './BubbleSkin';
 
 // internal utility functions
-import { pickDOMProps } from '../../utils';
+import { pickDOMProps } from '../../utils/props';
 
 type Props = {
   children: Node,
@@ -26,7 +26,7 @@ type Props = {
   tip: string | Element<any>
 };
 
-export default (props: Props) => {
+export const TooltipSkin = (props: Props) => {
   const { theme, themeId } = props;
   return (
     <span

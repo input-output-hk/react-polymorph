@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { TextArea } from '../source/components';
-import { TextAreaSkin } from '../source/skins/simple';
-import { CONTEXT } from './helpers/context';
+import { TextArea } from '../source/components/TextArea';
+import { TextAreaSkin } from '../source/skins/simple/TextAreaSkin';
+import { renderInSimpleTheme } from './helpers/theming';
 
 test('TextArea renders correctly', () => {
-  const component = renderer.create(
-    <TextArea context={CONTEXT} skin={TextAreaSkin} />
+  const component = renderInSimpleTheme(
+    <TextArea skin={TextAreaSkin} />
   );
 
   const tree = component.toJSON();
@@ -15,10 +15,9 @@ test('TextArea renders correctly', () => {
 });
 
 test('TextArea renders with placeholder', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <TextArea
       placeholder="0.0000"
-      context={CONTEXT}
       skin={TextAreaSkin}
     />
   );
@@ -28,10 +27,9 @@ test('TextArea renders with placeholder', () => {
 });
 
 test('TextArea renders with an error', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <TextArea
       error="Please enter valid input"
-      context={CONTEXT}
       skin={TextAreaSkin}
     />
   );
@@ -41,10 +39,9 @@ test('TextArea renders with an error', () => {
 });
 
 test('TextArea renders with a value', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <TextArea
       value="this one has a value"
-      context={CONTEXT}
       skin={TextAreaSkin}
     />
   );
@@ -54,10 +51,9 @@ test('TextArea renders with a value', () => {
 });
 
 test('TextArea renders with 5 rows', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <TextArea
       rows={5}
-      context={CONTEXT}
       skin={TextAreaSkin}
     />
   );

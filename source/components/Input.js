@@ -2,12 +2,16 @@
 import React, { Component } from 'react';
 // $FlowFixMe
 import type { ComponentType, Element, SyntheticInputEvent } from 'react';
+
+// external libraries
 import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -21,11 +25,10 @@ type Props = {
   },
   disabled: boolean,
   error: string,
-  label: string,
+  label: string | Element<any>,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
-  onRef: Function,
   maxLength: number,
   minLength: number,
   onKeyPress: Function,
@@ -44,13 +47,13 @@ type State = {
   composedTheme: Object
 };
 
-class Input extends Component<Props, State> {
+class InputBase extends Component<Props, State> {
+
   inputElement: Element<'input'>;
 
   static defaultProps = {
     autoFocus: false,
     error: '',
-    onRef: () => {},
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
@@ -77,13 +80,7 @@ class Input extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const { onRef, autoFocus } = this.props;
-
-    if (autoFocus) this.focus();
-
-    // if Input is rendered by FormField, onRef allows FormField to call
-    // Input's focus method when someone clicks on FormField's label
-    onRef(this);
+    if (this.props.autoFocus) this.focus();
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
@@ -95,10 +92,9 @@ class Input extends Component<Props, State> {
 
   focus = () => {
     const { inputElement } = this;
-    if (inputElement && inputElement.current) {
-      return inputElement.current.focus();
-    }
-  }
+    if (!inputElement.current) return;
+    inputElement.current.focus();
+  };
 
   _setError = (error: string) => {
     const { setError } = this.props;
@@ -154,7 +150,6 @@ class Input extends Component<Props, State> {
       themeOverrides,
       onChange,
       error,
-      onRef,
       maxLength,
       minLength,
       setError,
@@ -174,4 +169,4 @@ class Input extends Component<Props, State> {
   }
 }
 
-export default withTheme(Input);
+export const Input = withTheme(InputBase);

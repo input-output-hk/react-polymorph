@@ -5,13 +5,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // components
-import { Tooltip } from '../source/components';
+import { Tooltip } from '../source/components/Tooltip';
 
 // skins
-import { TooltipSkin } from '../source/skins/simple';
+import { TooltipSkin } from '../source/skins/simple/TooltipSkin';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
+import { SimpleTheme } from '../source/themes/simple';
 import CustomBubbleTheme from './theme-customizations/Bubble.custom.scss';
 
 // custom styles & theme overrides
@@ -19,7 +19,13 @@ import styles from './Tooltip.stories.scss';
 import themeOverrides from './theme-overrides/customTooltipBubble.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Tooltip', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain', () => (

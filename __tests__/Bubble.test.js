@@ -1,13 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 
-import { Bubble } from '../source/components';
-import { BubbleSkin } from '../source/skins/simple';
-import { CONTEXT } from './helpers/context';
+import { Bubble } from '../source/components/Bubble';
+import { BubbleSkin } from '../source/skins/simple/BubbleSkin';
+import { renderInSimpleTheme } from './helpers/theming';
 
 test('Bubble renders correctly', () => {
-  const component = renderer.create(
-    <Bubble context={CONTEXT} skin={BubbleSkin} />
+  const component = renderInSimpleTheme(
+    <Bubble skin={BubbleSkin} />
   );
 
   const tree = component.toJSON();
@@ -15,8 +14,8 @@ test('Bubble renders correctly', () => {
 });
 
 test('Bubble renders isOpeningUpward={true}', () => {
-  const component = renderer.create(
-    <Bubble isOpeningUpward context={CONTEXT} skin={BubbleSkin} />
+  const component = renderInSimpleTheme(
+    <Bubble isOpeningUpward skin={BubbleSkin} />
   );
 
   const tree = component.toJSON();
@@ -24,8 +23,8 @@ test('Bubble renders isOpeningUpward={true}', () => {
 });
 
 test('Bubble renders isTransparent={false}', () => {
-  const component = renderer.create(
-    <Bubble isTransparent={false} context={CONTEXT} skin={BubbleSkin} />
+  const component = renderInSimpleTheme(
+    <Bubble isTransparent={false} skin={BubbleSkin} />
   );
 
   const tree = component.toJSON();
@@ -33,8 +32,8 @@ test('Bubble renders isTransparent={false}', () => {
 });
 
 test('Bubble renders isHidden={true}', () => {
-  const component = renderer.create(
-    <Bubble isHidden context={CONTEXT} skin={BubbleSkin} />
+  const component = renderInSimpleTheme(
+    <Bubble isHidden skin={BubbleSkin} />
   );
 
   const tree = component.toJSON();
@@ -42,8 +41,8 @@ test('Bubble renders isHidden={true}', () => {
 });
 
 test('Bubble renders isFloating={true}', () => {
-  const component = renderer.create(
-    <Bubble isFloating context={CONTEXT} skin={BubbleSkin} />
+  const component = renderInSimpleTheme(
+    <Bubble isFloating skin={BubbleSkin} />
   );
 
   const tree = component.toJSON();

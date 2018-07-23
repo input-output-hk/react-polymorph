@@ -7,10 +7,10 @@ import { action } from '@storybook/addon-actions';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Input } from '../source/components';
+import { Input } from '../source/components/Input';
 
 // skins
-import { InputSkin } from '../source/skins/simple';
+import { InputSkin } from '../source/skins/simple/InputSkin';
 
 // themes
 import CustomInputTheme from './theme-customizations/Input.custom.scss';
@@ -18,7 +18,13 @@ import CustomInputTheme from './theme-customizations/Input.custom.scss';
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customInput.scss';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Input', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain',
@@ -34,7 +40,7 @@ storiesOf('Input', module)
   .add('label',
     withState({ value: '' }, store => (
       <Input
-        label="Some label"
+        label="Click Me to Focus"
         value={store.state.value}
         onChange={value => store.set({ value })}
         skin={InputSkin}
@@ -57,6 +63,7 @@ storiesOf('Input', module)
     withState({ value: '' }, store => (
       <Input
         autoFocus
+        label="With autoFocus"
         value={store.state.value}
         placeholder="autoFocus"
         onChange={value => store.set({ value })}
@@ -74,10 +81,10 @@ storiesOf('Input', module)
     />
   ))
 
-  .add('error',
+  .add('with error',
     withState({ value: '' }, store => (
       <Input
-        label="With Label"
+        label="With Error"
         error="Something went wrong"
         value={store.state.value}
         onChange={value => store.set({ value })}
@@ -89,7 +96,7 @@ storiesOf('Input', module)
   .add('minLength(8)',
     withState({ value: '' }, store => (
       <Input
-        label="Input with min. 5 Characters"
+        label="Minimum 8 Characters"
         value={store.state.value}
         placeholder="min length"
         minLength={8}
@@ -102,7 +109,7 @@ storiesOf('Input', module)
   .add('maxLength(5)',
     withState({ value: '' }, store => (
       <Input
-        label="Input with max. 5 Characters"
+        label="Maximum 5 Characters"
         value={store.state.value}
         placeholder="max length"
         maxLength={5}
@@ -124,14 +131,15 @@ storiesOf('Input', module)
     ))
   )
 
-  .add('focus / blur',
+  .add('onFocus / onBlur',
     withState({ value: '', focused: false, blurred: false }, store => (
       <Input
+        label="See the State Tab Below"
         value={store.state.value}
-        placeholder="focus / blur"
+        placeholder="onFocus / onBlur"
         onChange={value => store.set({ value })}
-        onFocus={() => store.set({ focused: true })}
-        onBlur={() => store.set({ blurred: true })}
+        onFocus={() => store.set({ focused: true, blurred: false })}
+        onBlur={() => store.set({ blurred: true, focused: false })}
         skin={InputSkin}
       />
     ))
@@ -140,9 +148,9 @@ storiesOf('Input', module)
   .add('onKeyPress',
     withState({ value: '' }, store => (
       <Input
-        label="Type to see events logged"
+        label="Type to See Events Logged"
         value={store.state.value}
-        placeholder="max length"
+        placeholder="max 5 characters"
         maxLength={5}
         onKeyPress={action('onKeyPress')}
         onChange={value => store.set({ value })}
@@ -151,10 +159,11 @@ storiesOf('Input', module)
     ))
   )
 
-  .add('theme overrides',
+  .add('theme overrides, minLength(8)',
     withState({ value: '' }, store => (
       <Input
-        label="Theme overrides"
+        label="Composed Theme"
+        minLength={8}
         themeOverrides={themeOverrides}
         value={store.state.value}
         placeholder="type here..."
@@ -167,7 +176,7 @@ storiesOf('Input', module)
   .add('custom theme',
     withState({ value: '' }, store => (
       <Input
-        label="Custom theme"
+        label="Custom Theme"
         theme={CustomInputTheme}
         value={store.state.value}
         placeholder="type here..."

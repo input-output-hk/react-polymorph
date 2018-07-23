@@ -1,22 +1,24 @@
 // @flow
 import React from 'react';
-import type { Ref } from 'react';
+import type { Ref, Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
 
-// components & skins
-import { FormField } from '../../components';
-import { FormFieldSkin } from './';
+// components
+import { FormField } from '../../components/FormField';
+
+// skins
+import { FormFieldSkin } from './FormFieldSkin';
 
 // internal utility functions
-import { pickDOMProps } from '../../utils';
+import { pickDOMProps } from '../../utils/props';
 
 type Props = {
   className: string,
   disabled: boolean,
   error: string,
-  label: string,
+  label: string | Element<any>,
   inputRef: Ref<'input'>,
   onBlur: Function,
   onChange: Function,
@@ -29,12 +31,13 @@ type Props = {
   value: string
 };
 
-export default (props: Props) => (
+export const InputSkin = (props: Props) => (
   <FormField
     className={props.className}
     disabled={props.disabled}
     label={props.label}
     error={props.error}
+    inputRef={props.inputRef}
     skin={FormFieldSkin}
     render={() => (
       <input

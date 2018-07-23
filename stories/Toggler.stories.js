@@ -6,10 +6,10 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Checkbox } from '../source/components';
+import { Checkbox } from '../source/components/Checkbox';
 
 // skins
-import { TogglerSkin } from '../source/skins/simple';
+import { TogglerSkin } from '../source/skins/simple/TogglerSkin';
 
 // themes
 import CustomTogglerTheme from './theme-customizations/Toggler.custom.scss';
@@ -18,7 +18,13 @@ import CustomTogglerTheme from './theme-customizations/Toggler.custom.scss';
 import themeOverrides from './theme-overrides/customToggler.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 
+// theme
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Toggler', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain',

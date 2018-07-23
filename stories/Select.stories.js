@@ -5,14 +5,16 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
-// components
-import { FormField, Select } from '../source/components';
-
-// skins
-import { SelectSkin, FormFieldSkin } from '../source/skins/simple';
+// components & skins
+import { Select } from '../source/components/Select';
+import { SelectSkin } from '../source/skins/simple/SelectSkin';
+import { Modal } from '../source/components/Modal';
+import { ModalSkin } from '../source/skins/simple/ModalSkin';
+import { Button } from '../source/components/Button';
+import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 
 // themes
-import SimpleTheme from '../source/themes/simple';
+import { SimpleTheme } from '../source/themes/simple';
 import CustomSelectTheme from './theme-customizations/Select.custom.scss';
 
 // custom styles
@@ -26,6 +28,9 @@ import flagUSA from './images/us.png';
 
 // constants
 import { IDENTIFIERS } from '../source/themes/API';
+
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
 
 const COUNTRIES = [
   { value: 'EN-gb', label: 'England' },
@@ -49,9 +54,12 @@ const COUNTRIES_WITH_DISABLED_OPTIONS = [
 ];
 
 storiesOf('Select', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
-  .add('countries - options',
+  .add('options',
     withState({ value: '' }, store => (
       <Select
         value={store.state.value}
@@ -62,25 +70,19 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('countries - label',
+  .add('label',
     withState({ value: '' }, store => (
-      <FormField
-        label="Some label"
-        skin={FormFieldSkin}
-        render={() => (
-          <Select
-            value={store.state.value}
-            onChange={value => store.set({ value })}
-            label="Countries"
-            options={COUNTRIES}
-            skin={SelectSkin}
-          />
-        )}
+      <Select
+        label="Select a country"
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES}
+        skin={SelectSkin}
       />
     ))
   )
 
-  .add('countries - placeholder',
+  .add('placeholder',
     withState({ value: '' }, store => (
       <Select
         value={store.state.value}
@@ -92,7 +94,7 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('countries - value',
+  .add('value',
     withState({ value: COUNTRIES[0].value }, store => (
       <Select
         value={store.state.value}
@@ -103,26 +105,20 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('countries - error',
+  .add('with error',
     withState({ value: COUNTRIES[0].value }, store => (
-      <FormField
+      <Select
         label="Countries"
         error="You picked the wrong country"
-        skin={FormFieldSkin}
-        render={props => (
-          <Select
-            {...props}
-            value={store.state.value}
-            onChange={value => store.set({ value })}
-            options={COUNTRIES}
-            skin={SelectSkin}
-          />
-        )}
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES}
+        skin={SelectSkin}
       />
     ))
   )
 
-  .add('countries - custom options template',
+  .add('custom options template',
     withState({ value: '' }, store => (
       <Select
         value={store.state.value}
@@ -139,27 +135,22 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('countries - isOpeningUpward',
+  .add('isOpeningUpward',
     withState({ value: '' }, store => (
-      <FormField
+      <Select
+        isOpeningUpward
         className={styles.customMargin}
         label="Countries (opening upward)"
-        skin={FormFieldSkin}
-        render={() => (
-          <Select
-            value={store.state.value}
-            onChange={value => store.set({ value })}
-            options={COUNTRIES}
-            placeholder="Select your country …"
-            skin={SelectSkin}
-            isOpeningUpward
-          />
-        )}
+        placeholder="Select your country …"
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES}
+        skin={SelectSkin}
       />
     ))
   )
 
-  .add('countries - with disabled options',
+  .add('with disabled options',
     withState({ value: '' }, store => (
       <Select
         value={store.state.value}
@@ -172,7 +163,7 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('countries - rtl support',
+  .add('rtl support',
     withState({ value: COUNTRIES[0].value }, store => (
       <div dir="rtl">
         <Select
@@ -196,5 +187,49 @@ storiesOf('Select', module)
         placeholder="Select your country …"
         skin={SelectSkin}
       />
+    ))
+  )
+
+  .add('inside a modal',
+    withState({ isOpen: true, value: '' }, store => (
+      store.state.isOpen
+        ? (
+          <Modal
+            isOpen={store.state.isOpen}
+            triggerCloseOnOverlayClick={false}
+            skin={ModalSkin}
+            onClose={() => store.set({ isOpen: false })}
+          >
+            <div className={styles.dialogWrapper}>
+              <div className={styles.title}>
+                <h1>Select in Modal</h1>
+              </div>
+              <div className={styles.content}>
+                <Select
+                  value={store.state.value}
+                  onChange={value => store.set({ value })}
+                  options={COUNTRIES}
+                  skin={SelectSkin}
+                />
+              </div>
+              <div className={styles.actions}>
+                <Button
+                  onClick={() => store.set({ isOpen: false })}
+                  className="primary"
+                  label="Submit"
+                  skin={ButtonSkin}
+                />
+              </div>
+            </div>
+          </Modal>
+        )
+        : (
+          <button
+            className={styles.reopenModal}
+            onClick={() => store.set({ isOpen: !store.state.isOpen })}
+          >
+            Reopen modal
+          </button>
+        )
     ))
   );

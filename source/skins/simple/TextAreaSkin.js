@@ -1,20 +1,27 @@
 // @flow
 import React from 'react';
-import type { Ref } from 'react';
+import type { Ref, Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
 
+// components
+import { FormField } from '../../components/FormField';
+
+// skins
+import { FormFieldSkin } from './FormFieldSkin';
+
 // import utility functions
-import { pickDOMProps } from '../../utils';
+import { pickDOMProps } from '../../utils/props';
 
 type Props = {
+  className: string,
   disabled: boolean,
-  error: string | Node,
+  error: string | Element<any>,
+  label: string | Element<any>,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
-  onRef: Function,
   placeholder: string,
   rows: number,
   textareaRef: Ref<*>,
@@ -23,17 +30,27 @@ type Props = {
   value: string
 };
 
-export default (props: Props) => {
+export const TextAreaSkin = (props: Props) => {
   const { theme, themeId } = props;
   return (
-    <textarea
-      ref={props.textareaRef}
-      {...pickDOMProps(props)}
-      className={classnames([
-        theme[themeId].textarea,
-        props.disabled ? theme[themeId].disabled : null,
-        props.error ? theme[themeId].errored : null
-      ])}
+    <FormField
+      className={props.className}
+      disabled={props.disabled}
+      label={props.label}
+      error={props.error}
+      inputRef={props.textareaRef}
+      skin={FormFieldSkin}
+      render={() => (
+        <textarea
+          ref={props.textareaRef}
+          {...pickDOMProps(props)}
+          className={classnames([
+            theme[themeId].textarea,
+            props.disabled ? theme[themeId].disabled : null,
+            props.error ? theme[themeId].errored : null
+          ])}
+        />
+      )}
     />
   );
 };

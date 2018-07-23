@@ -5,11 +5,14 @@ import type { Element, Ref } from 'react';
 // external libraries
 import classnames from 'classnames';
 
+
 // components
-import { Options, Input } from '../../components';
+import { Options } from '../../components/Options';
+import { Input } from '../../components/Input';
 
 // skins
-import { InputSkin, OptionsSkin } from './';
+import { OptionsSkin } from './OptionsSkin';
+import { InputSkin } from './InputSkin';
 
 type Props = {
   className: string,
@@ -24,24 +27,27 @@ type Props = {
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
-  optionRenderer: Function,
   options: Array<{
     isDisabled: boolean,
     value: any
   }>,
+  optionRenderer: Function,
+  optionsRef: Ref<any>,
   placeholder: string,
+  rootRef: Ref<*>,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
   toggleOpen: Function,
   value: string
 };
 
-export default (props: Props) => {
+export const SelectSkin = (props: Props) => {
   const selectedOption = props.getSelectedOption();
   const inputValue = selectedOption ? selectedOption.label : '';
   const { theme, themeId } = props;
   return (
     <div
+      ref={props.rootRef}
       className={classnames([
         props.className,
         theme[themeId].select,
@@ -66,13 +72,15 @@ export default (props: Props) => {
         skin={OptionsSkin}
         theme={theme}
         isOpen={props.isOpen}
+        optionsRef={props.optionsRef}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}
         onChange={props.handleChange}
         optionRenderer={props.optionRenderer}
-        onClose={props.toggleOpen}
         selectedOption={selectedOption}
         noResults={!props.options.length}
+        targetRef={props.inputRef}
+        toggleOpen={props.toggleOpen}
       />
     </div>
   );

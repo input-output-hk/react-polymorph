@@ -1,13 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 
-import { Input } from '../source/components';
-import InputSkin from './helpers/InputSkin'; // use helper InputSkin
-import { CONTEXT } from './helpers/context';
+import { Input } from '../source/components/Input';
+import { InputSkin } from '../source/skins/simple/InputSkin';
+import { renderInSimpleTheme } from './helpers/theming';
 
 test('Input renders correctly', () => {
-  const component = renderer.create(
-    <Input context={CONTEXT} skin={InputSkin} />
+  const component = renderInSimpleTheme(
+    <Input skin={InputSkin} />
   );
 
   const tree = component.toJSON();
@@ -15,8 +14,8 @@ test('Input renders correctly', () => {
 });
 
 test('Input renders with placeholder', () => {
-  const component = renderer.create(
-    <Input placeholder="0.0000" context={CONTEXT} skin={InputSkin} />
+  const component = renderInSimpleTheme(
+    <Input placeholder="0.0000" skin={InputSkin} />
   );
 
   const tree = component.toJSON();
@@ -24,8 +23,8 @@ test('Input renders with placeholder', () => {
 });
 
 test('Input renders with a value', () => {
-  const component = renderer.create(
-    <Input value="there is value" context={CONTEXT} skin={InputSkin} />
+  const component = renderInSimpleTheme(
+    <Input value="there is value" skin={InputSkin} />
   );
 
   const tree = component.toJSON();
@@ -33,10 +32,9 @@ test('Input renders with a value', () => {
 });
 
 test('Input is readOnly', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Input
       readOnly
-      context={CONTEXT}
       skin={InputSkin}
     />
   );

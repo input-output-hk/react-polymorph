@@ -1,21 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Autocomplete is disabled 1`] = `
-<div
-  className={undefined}
->
+exports[`Autocomplete renders correctly 1`] = `
+<div>
   <div
-    className=""
+    aria-hidden={true}
+    className="autocompleteWrapper"
+    onClick={[Function]}
+    role="presentation"
   >
-    
     <div
-      className={undefined}
+      className="root"
     >
+      
       <div
-        aria-hidden={true}
-        className="autocompleteWrapper"
-        onClick={[Function]}
-        role="presentation"
+        className="inputWrapper"
       >
         <div
           className="autocompleteContent"
@@ -26,182 +24,84 @@ exports[`Autocomplete is disabled 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
-            />
-          </div>
-        </div>
-        <div>
-          <div
-            className=""
-            style={null}
-          >
-            <div
-              className={undefined}
-              data-bubble-container={true}
-            >
-              <ul
-                className={undefined}
-              >
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  cat
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  dog
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  fish
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  home
-                </li>
-              </ul>
-            </div>
-            <span
-              className={undefined}
-              data-bubble-arrow={true}
             />
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-`;
-
-exports[`Autocomplete renders correctly 1`] = `
-<div
-  className={undefined}
->
-  <div
-    className=""
-  >
-    
     <div
-      className={undefined}
+      className="options firstOptionHighlighted root isFloating isHidden"
+      style={null}
     >
       <div
-        aria-hidden={true}
-        className="autocompleteWrapper"
-        onClick={[Function]}
-        role="presentation"
+        className="bubble"
+        data-bubble-container={true}
       >
-        <div
-          className="autocompleteContent"
+        <ul
+          className="ul"
         >
-          <div
-            className="selectedWords"
+          <li
+            aria-hidden={true}
+            className="option highlightedOption"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
           >
-            <input
-              onChange={[Function]}
-              onKeyDown={[Function]}
-              placeholder={undefined}
-              value=""
-            />
-          </div>
-        </div>
-        <div>
-          <div
-            className=""
-            style={null}
+            cat
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
           >
-            <div
-              className={undefined}
-              data-bubble-container={true}
-            >
-              <ul
-                className={undefined}
-              >
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  cat
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  dog
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  fish
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  home
-                </li>
-              </ul>
-            </div>
-            <span
-              className={undefined}
-              data-bubble-arrow={true}
-            />
-          </div>
-        </div>
+            dog
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            fish
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            home
+          </li>
+        </ul>
       </div>
+      <span
+        className="arrow"
+        data-bubble-arrow={true}
+      />
     </div>
   </div>
 </div>
 `;
 
 exports[`Autocomplete renders with a placeholder 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
-    className=""
+    aria-hidden={true}
+    className="autocompleteWrapper"
+    onClick={[Function]}
+    role="presentation"
   >
-    
     <div
-      className={undefined}
+      className="root"
     >
+      
       <div
-        aria-hidden={true}
-        className="autocompleteWrapper"
-        onClick={[Function]}
-        role="presentation"
+        className="inputWrapper"
       >
         <div
           className="autocompleteContent"
@@ -217,88 +117,84 @@ exports[`Autocomplete renders with a placeholder 1`] = `
             />
           </div>
         </div>
-        <div>
-          <div
-            className=""
-            style={null}
-          >
-            <div
-              className={undefined}
-              data-bubble-container={true}
-            >
-              <ul
-                className={undefined}
-              >
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  cat
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  dog
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  fish
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  home
-                </li>
-              </ul>
-            </div>
-            <span
-              className={undefined}
-              data-bubble-arrow={true}
-            />
-          </div>
-        </div>
       </div>
+    </div>
+    <div
+      className="options firstOptionHighlighted root isFloating isHidden"
+      style={null}
+    >
+      <div
+        className="bubble"
+        data-bubble-container={true}
+      >
+        <ul
+          className="ul"
+        >
+          <li
+            aria-hidden={true}
+            className="option highlightedOption"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            cat
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            dog
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            fish
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            home
+          </li>
+        </ul>
+      </div>
+      <span
+        className="arrow"
+        data-bubble-arrow={true}
+      />
     </div>
   </div>
 </div>
 `;
 
 exports[`Autocomplete renders with an error 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
-    className=""
+    aria-hidden={true}
+    className="autocompleteWrapper"
+    onClick={[Function]}
+    role="presentation"
   >
     <div
-      className={undefined}
-    >
-      Your mnemonic phrase is incorrect
-    </div>
-    <div
-      className={undefined}
+      className="root errored"
     >
       <div
-        aria-hidden={true}
-        className="autocompleteWrapper"
-        onClick={[Function]}
-        role="presentation"
+        className="error"
+      >
+        Your mnemonic phrase is incorrect
+      </div>
+      <div
+        className="inputWrapper"
       >
         <div
           className="autocompleteContent errored"
@@ -309,97 +205,92 @@ exports[`Autocomplete renders with an error 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
             />
           </div>
         </div>
-        <div>
-          <div
-            className=""
-            style={null}
-          >
-            <div
-              className={undefined}
-              data-bubble-container={true}
-            >
-              <ul
-                className={undefined}
-              >
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  cat
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  dog
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  fish
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  home
-                </li>
-              </ul>
-            </div>
-            <span
-              className={undefined}
-              data-bubble-arrow={true}
-            />
-          </div>
-        </div>
       </div>
+    </div>
+    <div
+      className="options firstOptionHighlighted root isFloating isHidden"
+      style={null}
+    >
+      <div
+        className="bubble"
+        data-bubble-container={true}
+      >
+        <ul
+          className="ul"
+        >
+          <li
+            aria-hidden={true}
+            className="option highlightedOption"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            cat
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            dog
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            fish
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            home
+          </li>
+        </ul>
+      </div>
+      <span
+        className="arrow"
+        data-bubble-arrow={true}
+      />
     </div>
   </div>
 </div>
 `;
 
 exports[`Autocomplete renders with label 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
-    className=""
+    aria-hidden={true}
+    className="autocompleteWrapper"
+    onClick={[Function]}
+    role="presentation"
   >
-    
-    <label
-      aria-hidden={true}
-      className={undefined}
-      onClick={[Function]}
-      role="presentation"
-    >
-      Enter your recovery phrase below
-    </label>
     <div
-      className={undefined}
+      className="root"
     >
-      <div
+      
+      <label
         aria-hidden={true}
-        className="autocompleteWrapper"
+        className="label"
         onClick={[Function]}
         role="presentation"
+      >
+        Enter your recovery phrase below
+      </label>
+      <div
+        className="inputWrapper"
       >
         <div
           className="autocompleteContent"
@@ -410,89 +301,84 @@ exports[`Autocomplete renders with label 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
             />
           </div>
         </div>
-        <div>
-          <div
-            className=""
-            style={null}
-          >
-            <div
-              className={undefined}
-              data-bubble-container={true}
-            >
-              <ul
-                className={undefined}
-              >
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  cat
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  dog
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  fish
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  home
-                </li>
-              </ul>
-            </div>
-            <span
-              className={undefined}
-              data-bubble-arrow={true}
-            />
-          </div>
-        </div>
       </div>
+    </div>
+    <div
+      className="options firstOptionHighlighted root isFloating isHidden"
+      style={null}
+    >
+      <div
+        className="bubble"
+        data-bubble-container={true}
+      >
+        <ul
+          className="ul"
+        >
+          <li
+            aria-hidden={true}
+            className="option highlightedOption"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            cat
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            dog
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            fish
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            home
+          </li>
+        </ul>
+      </div>
+      <span
+        className="arrow"
+        data-bubble-arrow={true}
+      />
     </div>
   </div>
 </div>
 `;
 
 exports[`Autocomplete uses render prop - renderOptions 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
-    className=""
+    aria-hidden={true}
+    className="autocompleteWrapper"
+    onClick={[Function]}
+    role="presentation"
   >
-    
     <div
-      className={undefined}
+      className="root"
     >
+      
       <div
-        aria-hidden={true}
-        className="autocompleteWrapper"
-        onClick={[Function]}
-        role="presentation"
+        className="inputWrapper"
       >
         <div
           className="autocompleteContent"
@@ -503,73 +389,68 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
             />
           </div>
         </div>
-        <div>
-          <div
-            className=""
-            style={null}
-          >
-            <div
-              className={undefined}
-              data-bubble-container={true}
-            >
-              <ul
-                className={undefined}
-              >
-                <li>
-                  <span>
-                    #0: cat
-                  </span>
-                </li>
-                <li>
-                  <span>
-                    #1: dog
-                  </span>
-                </li>
-                <li>
-                  <span>
-                    #2: fish
-                  </span>
-                </li>
-                <li>
-                  <span>
-                    #3: home
-                  </span>
-                </li>
-              </ul>
-            </div>
-            <span
-              className={undefined}
-              data-bubble-arrow={true}
-            />
-          </div>
-        </div>
       </div>
+    </div>
+    <div
+      className="options firstOptionHighlighted root isFloating isHidden"
+      style={null}
+    >
+      <div
+        className="bubble"
+        data-bubble-container={true}
+      >
+        <ul
+          className="ul"
+        >
+          <li>
+            <span>
+              #0: cat
+            </span>
+          </li>
+          <li>
+            <span>
+              #1: dog
+            </span>
+          </li>
+          <li>
+            <span>
+              #2: fish
+            </span>
+          </li>
+          <li>
+            <span>
+              #3: home
+            </span>
+          </li>
+        </ul>
+      </div>
+      <span
+        className="arrow"
+        data-bubble-arrow={true}
+      />
     </div>
   </div>
 </div>
 `;
 
 exports[`Autocomplete uses render prop - renderSelections 1`] = `
-<div
-  className={undefined}
->
+<div>
   <div
-    className=""
+    aria-hidden={true}
+    className="autocompleteWrapper"
+    onClick={[Function]}
+    role="presentation"
   >
-    
     <div
-      className={undefined}
+      className="root"
     >
+      
       <div
-        aria-hidden={true}
-        className="autocompleteWrapper"
-        onClick={[Function]}
-        role="presentation"
+        className="inputWrapper"
       >
         <div
           className="autocompleteContent"
@@ -580,68 +461,65 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
             <input
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder={undefined}
               value=""
             />
           </div>
         </div>
-        <div>
-          <div
-            className=""
-            style={null}
-          >
-            <div
-              className={undefined}
-              data-bubble-container={true}
-            >
-              <ul
-                className={undefined}
-              >
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  cat
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  dog
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  fish
-                </li>
-                <li
-                  aria-hidden={true}
-                  className=""
-                  onClick={[Function]}
-                  onMouseEnter={[Function]}
-                  role="presentation"
-                >
-                  home
-                </li>
-              </ul>
-            </div>
-            <span
-              className={undefined}
-              data-bubble-arrow={true}
-            />
-          </div>
-        </div>
       </div>
+    </div>
+    <div
+      className="options firstOptionHighlighted root isFloating isHidden"
+      style={null}
+    >
+      <div
+        className="bubble"
+        data-bubble-container={true}
+      >
+        <ul
+          className="ul"
+        >
+          <li
+            aria-hidden={true}
+            className="option highlightedOption"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            cat
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            dog
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            fish
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            home
+          </li>
+        </ul>
+      </div>
+      <span
+        className="arrow"
+        data-bubble-arrow={true}
+      />
     </div>
   </div>
 </div>

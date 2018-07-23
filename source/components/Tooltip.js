@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -30,7 +32,7 @@ type State = {
   composedTheme: Object
 };
 
-class Tooltip extends Component<Props, State> {
+class TooltipBase extends Component<Props, State> {
   static defaultProps = {
     isOpeningUpward: true,
     isTransparent: true,
@@ -61,4 +63,4 @@ class Tooltip extends Component<Props, State> {
   }
 }
 
-export default withTheme(Tooltip);
+export const Tooltip = withTheme(TooltipBase);

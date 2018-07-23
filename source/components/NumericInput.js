@@ -7,14 +7,17 @@ import type { ComponentType, SyntheticInputEvent, Element } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 import { flow } from 'lodash';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
+  autoFocus: boolean,
   className: string,
   context: {
     theme: Object,
@@ -22,15 +25,16 @@ type Props = {
   },
   disabled: boolean,
   enforceMax: boolean,
-  label: string,
+  label: string | Element<any>,
   enforceMin: boolean,
   error: string,
+  onBlur: Function,
   onChange: Function,
+  onFocus: Function,
   maxAfterDot: number,
   maxBeforeDot: number,
   maxValue: number,
   minValue: number,
-  onRef: Function,
   readOnly: boolean,
   placeholder: string,
   setError: Function,
@@ -49,7 +53,7 @@ type State = {
   oldValue: string
 };
 
-export class NumericInput extends Component<Props, State> {
+class NumericInputBase extends Component<Props, State> {
   inputElement: Element<'input'>;
 
   static defaultProps = {
@@ -57,7 +61,6 @@ export class NumericInput extends Component<Props, State> {
     error: '',
     enforceMax: false,
     enforceMin: false,
-    onRef: () => {},
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
@@ -93,14 +96,12 @@ export class NumericInput extends Component<Props, State> {
   }
 
   componentDidMount() {
-    // if this NumericInput instance is rendered within FormField's render prop,
-    // this.props.onRef allows FormField to call NumericInput's focus method
-    // when user clicks FormField's label
-    this.props.onRef(this);
-
     const { inputElement } = this;
+    // check for autoFocus prop
+    if (this.props.autoFocus) this.focus();
+
+    // Set last input caret position on updates
     if (inputElement && inputElement.current) {
-      // Set last input caret position on updates
       this.setState({ caretPosition: inputElement.current.selectionStart });
     }
   }
@@ -137,8 +138,9 @@ export class NumericInput extends Component<Props, State> {
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
+    event.preventDefault();
     const { onChange, disabled } = this.props;
-    if (disabled) return;
+    if (disabled) { return; }
 
     // it is crucial to remove whitespace from input value
     // with String.trim()
@@ -147,21 +149,17 @@ export class NumericInput extends Component<Props, State> {
       event.target.selectionStart
     );
 
-    if (onChange) onChange(processedValue, event);
+    // if the processed value is the same, then the user probably entered
+    // invalid input such as nonnumeric characters, do not call onChange
+    if (processedValue === this.state.oldValue) { return; }
+
+    if (onChange) { onChange(processedValue, event); }
   };
 
   focus = () => {
     const { inputElement } = this;
-    if (inputElement && inputElement.current) {
-      return inputElement.current.focus();
-    }
-  }
-
-  blur = () => {
-    const { inputElement } = this;
-    if (inputElement && inputElement.current) {
-      return inputElement.current.blur();
-    }
+    if (!inputElement.current) return;
+    inputElement.current.focus();
   }
 
   _validateLimitProps(minValue: number, maxBeforeDot: number, maxAfterDot: number) {
@@ -451,7 +449,6 @@ export class NumericInput extends Component<Props, State> {
       onChange,
       error,
       context,
-      onRef,
       maxValue,
       minValue,
       maxBeforeDot,
@@ -471,4 +468,4 @@ export class NumericInput extends Component<Props, State> {
   }
 }
 
-export default withTheme(NumericInput);
+export const NumericInput = withTheme(NumericInputBase);

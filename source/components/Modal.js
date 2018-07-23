@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
-// internal utiltity functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+// internal components
+import { withTheme } from './HOC/withTheme';
+
+// internal utility functions
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -28,7 +30,7 @@ type State = {
   composedTheme: Object
 };
 
-class Modal extends Component<Props, State> {
+class ModalBase extends Component<Props, State> {
   static defaultProps = {
     contentLabel: 'Modal Dialog',
     isOpen: false,
@@ -66,4 +68,4 @@ class Modal extends Component<Props, State> {
   }
 }
 
-export default withTheme(Modal);
+export const Modal = withTheme(ModalBase);

@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
+// internal components
+import { withTheme } from './HOC/withTheme';
+
 // internal utility functions
-import { withTheme } from '../themes/withTheme';
-import { composeTheme, addThemeId } from '../utils';
+import { composeTheme, addThemeId } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -33,7 +35,7 @@ type State = {
   composedTheme: Object
 };
 
-class Checkbox extends Component<Props, State> {
+class CheckboxBase extends Component<Props, State> {
   static defaultProps = {
     checked: false,
     disabled: false,
@@ -70,4 +72,4 @@ class Checkbox extends Component<Props, State> {
   }
 }
 
-export default withTheme(Checkbox);
+export const Checkbox = withTheme(CheckboxBase);

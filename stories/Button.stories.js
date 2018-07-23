@@ -5,10 +5,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // components
-import { Button } from '../source/components';
+import { Button } from '../source/components/Button';
 
 // skins
-import { ButtonSkin } from '../source/skins/simple';
+import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 
 // themes
 import CustomButtonTheme from './theme-customizations/Button.custom.scss';
@@ -16,7 +16,13 @@ import CustomButtonTheme from './theme-customizations/Button.custom.scss';
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customButton.scss';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Button', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain', () => <Button label="Button label" skin={ButtonSkin} />)

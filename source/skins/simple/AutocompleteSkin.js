@@ -1,20 +1,21 @@
 // @flow
 import React from 'react';
-import type { Ref, Node } from 'react';
+import type { Ref, Element } from 'react';
 
 // external libraries
 import _ from 'lodash';
 import classnames from 'classnames';
 
 // components
-import { FormField, Options } from '../../components';
+import { FormField } from '../../components/FormField';
+import { Options } from '../../components/Options';
 
 // skins
-import { FormFieldSkin, OptionsSkin } from './';
+import { FormFieldSkin } from './FormFieldSkin';
+import { OptionsSkin } from './OptionsSkin';
 
 type Props = {
   className: string,
-  closeOptions: Function,
   error: string,
   filteredOptions: Array<any>,
   getSelectionProps: Function,
@@ -25,26 +26,26 @@ type Props = {
   inputValue: string,
   isOpeningUpward: boolean,
   isOpen: boolean,
-  label: string | Node,
+  label: string | Element<any>,
   maxSelections: number,
   maxVisibleOptions: number,
   onKeyDown: Function,
   options: Array<any>,
+  optionsRef: Ref<any>,
   placeholder: string,
   removeOption: Function,
   renderSelections: Function,
   renderOptions: Function,
-  rootRef: Ref<*>,
+  rootRef: Ref<any>,
   selectedOptions: Array<any>,
   suggestionsRef: Ref<*>,
   theme: Object,
-  themeId: string
+  themeId: string,
+  toggleOpen: Function
 };
 
-export default (props: Props) => {
-  const { label, error } = props;
+export const AutocompleteSkin = (props: Props) => {
   const theme = props.theme[props.themeId];
-  const formfieldProps = { label, error };
 
   const filteredAndLimitedOptions = _.slice(
     props.filteredOptions,
@@ -85,62 +86,64 @@ export default (props: Props) => {
     return null;
   };
 
-  // selected words and input for entering a new one
-  const autocompleteContent = (
-    <div className={theme.selectedWords}>
-      {renderSelectedOptions()}
-      <input
-        ref={props.inputRef}
-        placeholder={placeholder}
-        value={props.inputValue}
-        onChange={props.handleInputChange}
-        onKeyDown={props.onKeyDown}
-      />
-    </div>
+  // A label, input, and selected words are the content
+  const renderContent = () => (
+    <FormField
+      error={props.error}
+      inputRef={props.inputRef}
+      label={props.label}
+      skin={FormFieldSkin}
+      render={() => (
+        <div
+          className={classnames([
+            theme.autocompleteContent,
+            props.isOpen ? theme.opened : null,
+            props.selectedOptions.length
+              ? theme.hasSelectedWords
+              : null,
+            props.error ? theme.errored : null
+          ])}
+          ref={props.suggestionsRef}
+        >
+          <div className={theme.selectedWords}>
+            {renderSelectedOptions()}
+            <input
+              ref={props.inputRef}
+              placeholder={placeholder}
+              value={props.inputValue}
+              onChange={props.handleInputChange}
+              onKeyDown={props.onKeyDown}
+            />
+          </div>
+        </div>
+      )}
+    />
   );
 
   return (
-    <div className={props.className} ref={props.rootRef}>
-      <FormField
-        error={props.error}
-        label={props.label}
-        skin={FormFieldSkin}
-        render={() => (
-          <div
-            role="presentation"
-            aria-hidden
-            className={theme.autocompleteWrapper}
-            onClick={props.handleAutocompleteClick}
-          >
-            <div
-              className={classnames([
-                theme.autocompleteContent,
-                props.isOpen ? theme.opened : null,
-                props.selectedOptions.length
-                  ? theme.hasSelectedWords
-                  : null,
-                props.error ? theme.errored : null
-              ])}
-              ref={props.suggestionsRef}
-            >
-              {autocompleteContent}
-            </div>
+    <div
+      aria-hidden
+      className={classnames([props.className, theme.autocompleteWrapper])}
+      onClick={props.handleAutocompleteClick}
+      ref={props.rootRef}
+      role="presentation"
+    >
 
-            <Options
-              isOpen={props.isOpen}
-              isOpeningUpward={props.isOpeningUpward}
-              noResults={!props.filteredOptions.length}
-              onChange={props.handleChange}
-              onClose={props.closeOptions}
-              options={filteredAndLimitedOptions}
-              resetOnClose
-              selectedOptions={props.selectedOptions}
-              skin={OptionsSkin}
-              render={props.renderOptions}
-            />
-          </div>
-        )}
-        {...formfieldProps}
+      {renderContent()}
+
+      <Options
+        isOpen={props.isOpen}
+        isOpeningUpward={props.isOpeningUpward}
+        noResults={!props.filteredOptions.length}
+        onChange={props.handleChange}
+        options={filteredAndLimitedOptions}
+        optionsRef={props.optionsRef}
+        render={props.renderOptions}
+        resetOnClose
+        selectedOptions={props.selectedOptions}
+        skin={OptionsSkin}
+        targetRef={props.suggestionsRef}
+        toggleOpen={props.toggleOpen}
       />
     </div>
   );

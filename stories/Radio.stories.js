@@ -6,10 +6,10 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Radio } from '../source/components';
+import { Radio } from '../source/components/Radio';
 
 // skins
-import { RadioSkin } from '../source/skins/simple';
+import { RadioSkin } from '../source/skins/simple/RadioSkin';
 
 // themes
 import CustomRadioTheme from './theme-customizations/Radio.custom.scss';
@@ -18,7 +18,13 @@ import CustomRadioTheme from './theme-customizations/Radio.custom.scss';
 import styles from './Radio.stories.scss';
 import themeOverrides from './theme-overrides/customRadio.scss';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Radio', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain',

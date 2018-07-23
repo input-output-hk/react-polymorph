@@ -8,14 +8,14 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Autocomplete, Modal, Button } from '../source/components';
+import { Autocomplete } from '../source/components/Autocomplete';
+import { Modal } from '../source/components/Modal';
+import { Button } from '../source/components/Button';
 
 // skins
-import {
-  AutocompleteSkin,
-  ModalSkin,
-  ButtonSkin
-} from '../source/skins/simple';
+import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
+import { ModalSkin } from '../source/skins/simple/ModalSkin';
+import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 
 // themes
 import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.scss';
@@ -24,6 +24,9 @@ import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.
 import styles from './Autocomplete.stories.scss';
 import themeOverrides from './theme-overrides/customAutocomplete.scss';
 import trashIcon from './images/trash-icon.png';
+
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
 
 const OPTIONS = [
   'home',
@@ -41,6 +44,9 @@ const OPTIONS = [
 ];
 
 storiesOf('Autocomplete', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('Enter mnemonics - plain', () => (
@@ -143,37 +149,49 @@ storiesOf('Autocomplete', module)
 
   .add('Enter mnemonics in Modal',
     withState({ isOpen: true, selectedOpts: [] }, store => (
-      <Modal
-        isOpen={store.state.isOpen}
-        triggerCloseOnOverlayClick={false}
-        skin={ModalSkin}
-      >
-        <div className={styles.dialogWrapper}>
-          <div className={styles.title}>
-            <h1>Autocomplete in Modal</h1>
-          </div>
-          <div className={styles.content}>
-            <Autocomplete
-              label="Recovery phrase"
-              placeholder="Enter recovery phrase"
-              options={OPTIONS}
-              maxSelections={12}
-              maxVisibleOptions={5}
-              invalidCharsRegex={/[^a-zA-Z]/g}
-              skin={AutocompleteSkin}
-              onChange={selectedOpts => store.set({ selectedOpts })}
-            />
-          </div>
-          <div className={styles.actions}>
-            <Button
-              onClick={() => store.set({ isOpen: false })}
-              className="primary"
-              label="Submit"
-              skin={ButtonSkin}
-            />
-          </div>
-        </div>
-      </Modal>
+      store.state.isOpen
+        ? (
+          <Modal
+            isOpen={store.state.isOpen}
+            triggerCloseOnOverlayClick={false}
+            skin={ModalSkin}
+            onClose={() => store.set({ isOpen: false })}
+          >
+            <div className={styles.dialogWrapper}>
+              <div className={styles.title}>
+                <h1>Autocomplete in Modal</h1>
+              </div>
+              <div className={styles.content}>
+                <Autocomplete
+                  label="Recovery phrase"
+                  placeholder="Enter recovery phrase"
+                  options={OPTIONS}
+                  maxSelections={12}
+                  maxVisibleOptions={5}
+                  invalidCharsRegex={/[^a-zA-Z]/g}
+                  skin={AutocompleteSkin}
+                  onChange={selectedOpts => store.set({ selectedOpts })}
+                />
+              </div>
+              <div className={styles.actions}>
+                <Button
+                  onClick={() => store.set({ isOpen: false })}
+                  className="primary"
+                  label="Submit"
+                  skin={ButtonSkin}
+                />
+              </div>
+            </div>
+          </Modal>
+        )
+        : (
+          <button
+            className={styles.reopenModal}
+            onClick={() => store.set({ isOpen: !store.state.isOpen })}
+          >
+            Reopen modal
+          </button>
+        )
     ))
   )
 
