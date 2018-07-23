@@ -19,6 +19,7 @@ type Props = {
   },
   disabled: boolean,
   label: string | Element<any>,
+  loading: boolean,
   onClick: Function,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
@@ -33,6 +34,7 @@ type State = {
 class ButtonBase extends Component<Props, State> {
   static defaultProps = {
     disabled: false,
+    loading: false,
     theme: null,
     themeId: IDENTIFIERS.BUTTON,
     themeOverrides: {}
