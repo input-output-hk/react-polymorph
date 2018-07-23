@@ -5,7 +5,7 @@ import React from 'react';
 import { Base } from './Base';
 
 // styles
-import gutterStyles from '../../themes/simple/layout/Gutter.scss';
+import gutterStyles from '../../themes/helpers/Gutter.scss';
 
 // utilities
 import { numberToPx } from '../../utils/props';

@@ -7,7 +7,7 @@ import { Base } from './Base';
 import { GridItem } from './GridItem';
 
 // styles
-import gridStyles from '../../themes/simple/layout/Grid.scss';
+import gridStyles from '../../themes/helpers/Grid.scss';
 
 // utilities
 import { numberToPx } from '../../utils/props';

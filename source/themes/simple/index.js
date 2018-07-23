@@ -8,6 +8,7 @@ import SimpleBubble from './SimpleBubble.scss';
 import SimpleButton from './SimpleButton.scss';
 import SimpleCheckbox from './SimpleCheckbox.scss';
 import SimpleFormField from './SimpleFormField.scss';
+import SimpleHeader from './SimpleHeader.scss';
 import SimpleInput from './SimpleInput.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
@@ -28,6 +29,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.BUTTON]: SimpleButton,
   [IDENTIFIERS.CHECKBOX]: SimpleCheckbox,
   [IDENTIFIERS.FORM_FIELD]: SimpleFormField,
+  [IDENTIFIERS.HEADER]: SimpleHeader,
   [IDENTIFIERS.INPUT]: SimpleInput,
   [IDENTIFIERS.MODAL]: SimpleModal,
   [IDENTIFIERS.OPTIONS]: SimpleOptions,

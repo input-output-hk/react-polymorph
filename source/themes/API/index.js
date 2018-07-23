@@ -4,6 +4,8 @@ import { BUBBLE_THEME_API } from './bubble';
 import { BUTTON_THEME_API } from './button';
 import { CHECKBOX_THEME_API } from './checkbox';
 import { FORM_FIELD_THEME_API } from './formfield';
+import { HEADER_THEME_API } from './header';
+import { INFINITE_SCROLL_THEME_API } from './infinitescroll';
 import { INPUT_THEME_API } from './input';
 import { MODAL_THEME_API } from './modal';
 import { OPTIONS_THEME_API } from './options';
@@ -20,6 +22,8 @@ export const IDENTIFIERS = {
   BUTTON: 'button',
   CHECKBOX: 'checkbox',
   FORM_FIELD: 'formfield',
+  HEADER: 'header',
+  INFINITE_SCROLL: 'infinitescroll',
   INPUT: 'input',
   MODAL: 'modal',
   OPTIONS: 'options',
@@ -37,6 +41,8 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.BUTTON]: BUTTON_THEME_API,
   [IDENTIFIERS.CHECKBOX]: CHECKBOX_THEME_API,
   [IDENTIFIERS.FORM_FIELD]: FORM_FIELD_THEME_API,
+  [IDENTIFIERS.HEADER]: HEADER_THEME_API,
+  [IDENTIFIERS.INFINITE_SCROLL]: INFINITE_SCROLL_THEME_API,
   [IDENTIFIERS.INPUT]: INPUT_THEME_API,
   [IDENTIFIERS.MODAL]: MODAL_THEME_API,
   [IDENTIFIERS.OPTIONS]: OPTIONS_THEME_API,

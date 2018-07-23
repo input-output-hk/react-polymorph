@@ -7,7 +7,7 @@ import { Base } from './Base';
 import { FlexItem } from './FlexItem';
 
 // styles
-import flexStyles from '../../themes/simple/layout/Flex.scss';
+import flexStyles from '../../themes/helpers/Flex.scss';
 
 type Props = {
   alignItems: string,

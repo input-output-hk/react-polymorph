@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 
 // styles
-import baseStyles from '../../themes/simple/layout/Base.scss';
+import baseStyles from '../../themes/helpers/Base.scss';
 
 // utilities
 import { composeBaseStyles } from '../../utils/layout';
