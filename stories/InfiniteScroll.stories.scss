@@ -1,0 +1,18 @@
+.full {
+  height: 100vh;
+  width: 100vw;
+}
+
+.scrollItem {
+  height: 200px;
+  width: 175px;
+  font-family: 'apercu-pro', sans-serif;
+  background-color: #fff;
+  color: #444;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 10px;
+  border: 3px solid tomato;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+}
