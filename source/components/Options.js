@@ -1,8 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-
-// internal components
-import { withTheme } from './HOC/withTheme';
 import type {
   ComponentType,
   // $FlowFixMe
@@ -14,7 +11,9 @@ import type {
   Element,
   Ref
 } from 'react';
-import createRef from 'create-react-ref/lib/createRef';
+
+// internal components
+import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
 import { composeTheme, addThemeId } from '../utils/themes';

@@ -1,5 +1,11 @@
 # Changelog
 
+## vNext
+
+## Features
+
+- Adds LoadingSpinner component, LoadingSpinnerSkin, and SimpleLoadingSpinner theme. Adds reusable loading-spinner mixin to themes. Adds 5 LoadingSpinner stories. [PR 75](https://github.com/input-output-hk/react-polymorph/pull/75)
+
 ## 0.7.1
 
 ### Fixes

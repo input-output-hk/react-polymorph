@@ -9,6 +9,7 @@ import SimpleButton from './SimpleButton.scss';
 import SimpleCheckbox from './SimpleCheckbox.scss';
 import SimpleFormField from './SimpleFormField.scss';
 import SimpleInput from './SimpleInput.scss';
+import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
 import SimpleRadio from './SimpleRadio.scss';
@@ -29,6 +30,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.CHECKBOX]: SimpleCheckbox,
   [IDENTIFIERS.FORM_FIELD]: SimpleFormField,
   [IDENTIFIERS.INPUT]: SimpleInput,
+  [IDENTIFIERS.LOADING_SPINNER]: SimpleLoadingSpinner,
   [IDENTIFIERS.MODAL]: SimpleModal,
   [IDENTIFIERS.OPTIONS]: SimpleOptions,
   [IDENTIFIERS.RADIO]: SimpleRadio,

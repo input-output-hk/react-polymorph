@@ -133,9 +133,9 @@ class AutocompleteBase extends Component<Props, State> {
     ) {
       // Remove last selected option
       this.removeOption(this.state.selectedOptions.length - 1, event);
-    } else if (event.keyCode === 27) { // ESCAPE key - stops propagation to avoid the modal to be closed
+    } else if (event.keyCode === 27) { // ESCAPE key: Stops propagation & modal closing
       event.stopPropagation();
-    } else if (event.keyCode === 13) {// Open suggestions on ENTER
+    } else if (event.keyCode === 13) { // ENTER key: Opens suggestions
       this.open();
     }
   };
