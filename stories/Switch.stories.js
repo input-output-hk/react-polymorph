@@ -18,7 +18,13 @@ import CustomSwitchTheme from './theme-customizations/Switch.custom.scss';
 import themeOverrides from './theme-overrides/customSwitch.scss';
 import { IDENTIFIERS } from '../source/themes/API';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Switch', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain',

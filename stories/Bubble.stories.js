@@ -17,7 +17,13 @@ import BubbleCustomTheme from './theme-customizations/Bubble.custom.scss';
 import styles from './Bubble.stories.scss';
 import themeOverrides from './theme-overrides/customBubble.scss';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Bubble', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain', () => (

@@ -15,9 +15,13 @@ import dashedSpinner from './theme-overrides/dashedSpinner.scss';
 import adaSpinner from './theme-overrides/adaSpinner.scss';
 import daedalusSpinner from './theme-overrides/daedalusSpinner.scss';
 import styles from './LoadingSpinner.stories.scss';
+import { decorateWithSimpleTheme } from './helpers/theming';
 
 storiesOf('LoadingSpinner', module)
-  // ====== LoadingSpinner Stories ======
+
+  .addDecorator(decorateWithSimpleTheme)
+
+  // ======  Stories ======
 
   .add('small', () => (
     <div className={styles.marginWrapper}>
