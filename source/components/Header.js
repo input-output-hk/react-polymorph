@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
-import { pickBy } from 'lodash';
+import { pickBy, isEmpty } from 'lodash';
 
 // components
 import { withTheme } from './HOC/withTheme';
@@ -42,7 +42,7 @@ type Props = {
   upperCase: boolean
 };
 
-type State = { composedTheme: Object, isThemed: boolean };
+type State = { composedTheme: Object };
 
 class HeaderBase extends Component <Props, State> {
   static defaultProps = {
@@ -61,39 +61,78 @@ class HeaderBase extends Component <Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
-      isThemed: false
+      )
     };
   }
 
   _assembleInlineStyles = ({ center, lowerCase, left, right, upperCase }) => {
+    const inlineStyles = {};
     const textAlign = pickBy({ center, left, right });
     const textTransform = pickBy({ lowerCase, upperCase });
-    return pickBy({ textAlign, textTransform });
+
+    if (!isEmpty(textAlign)) {
+      inlineStyles.textAlign = Object.keys(textAlign)[0];
+    }
+
+    if (!isEmpty(textTransform)) {
+      inlineStyles.textTransform = Object.keys(textTransform)[0];
+    }
+
+    return inlineStyles;
+  };
+
+  _assembleHeaderTheme = (styleProps: Object) => {
+    const {
+      props: { themeId },
+      state: { composedTheme }
+    } = this;
+    const activeClasses = this._getActiveClasses(styleProps);
+    const stylesToAdd = { ...composedTheme[themeId], ...headerStyles };
+
+    return activeClasses.reduce((theme, activeClass) => {
+      if (Object.hasOwnProperty.call(stylesToAdd, activeClass)) {
+        theme[activeClass] = stylesToAdd[activeClass];
+      }
+      return theme;
+    }, {});
+  }
+
+  _getActiveFont = ({ light, medium, regular, thin, bold }) => {
+    const fontProps = pickBy({ light, medium, regular, thin, bold });
+    if (isEmpty(fontProps)) { return; }
+    // returns the first active font if more than 1 is passed
+    return Object.keys(fontProps)[0];
   };
 
   _getActiveTheme = ({ h1, h2, h3, h4 }) => {
-    const truthyProps = pickBy({ h1, h2, h3, h4 });
-    const activeClasses = ['header', Object.keys(truthyProps)[0]];
-    if (activeClasses.length > 1) { this.setState({ isThemed: true }); }
-    return activeClasses;
+    const themeProps = pickBy({ h1, h2, h3, h4 });
+    if (isEmpty(themeProps)) { return; }
+    // returns the first active theme if more than 1 is passed
+    return Object.keys(themeProps)[0];
+  };
+
+  _getActiveClasses = (styleProps: Object) => {
+    const activeClasses = ['header'];
+    const activeTheme = this._getActiveTheme(styleProps);
+    const activeFont = this._getActiveFont(styleProps);
+
+    if (activeTheme) { return [...activeClasses, activeTheme]; }
+    if (activeFont) { return [...activeClasses, activeFont]; }
+
+    return [...activeClasses, activeTheme, activeFont].filter(val => val);
   }
 
   render() {
-    const { composedTheme, isThemed } = this.state;
     const { children, className, skin: HeaderSkin, ...styleProps } = this.props;
 
-    // assemble props that will be passed to Base
-    const activeClasses = this._getActiveTheme(styleProps);
-    const inlineStyles = isThemed ? null : this._assembleInlineStyles(styleProps);
-    const stylesToAdd = isThemed ? composedTheme : headerStyles;
+    const reducedTheme = this._assembleHeaderTheme(styleProps);
+    const inlineStyles = this._assembleInlineStyles(styleProps);
 
     return (
       <HeaderSkin
-        activeClasses={activeClasses}
         className={className}
         inlineStyles={inlineStyles}
-        stylesToAdd={stylesToAdd}
+        theme={reducedTheme}
       >
         {children}
       </HeaderSkin>
