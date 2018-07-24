@@ -8,7 +8,6 @@ import styles from '../themes/simple/SimpleInfiniteScroll.scss';
 
 type Props = {
   fetchData: Function,
-  render: Function,
   renderItems: Function
 };
 
@@ -31,7 +30,7 @@ export class InfiniteScroll extends Component<Props, State> {
     this.scrollContainer = createRef();
     this.state = {
       data: [],
-      error: null,
+      error: false,
       isLoading: false,
       hasMoreData: true
     };
@@ -46,20 +45,11 @@ export class InfiniteScroll extends Component<Props, State> {
     scrollContainer.current.addEventListener('scroll', this.handleScroll);
   }
 
-  // before unmounting, remove scroll listener
-  componentWillUnmount() {
-    const { scrollContainer } = this;
-    scrollContainer.current.removeEventListener('scroll');
-  }
-
   _isFunction = (renderProp: ?Function) => (renderProp && typeof renderProp === 'function');
 
   setError = (error: string | Element<*>) => this.setState({ error });
 
-  handleFetchData = () => {
-    const { fetchData } = this.props;
-    this.setState({ isLoading: true }, () => fetchData(this.setState.bind(this)));
-  }
+  handleFetchData = () => this.props.fetchData(this.setState.bind(this));
 
   checkForScrollBottom = () => {
     const { scrollContainer } = this;
@@ -79,16 +69,14 @@ export class InfiniteScroll extends Component<Props, State> {
   };
 
   render() {
-    const { _isFunction, props: { render, renderItems } } = this;
+    const { renderItems } = this.props;
+    const { scrollContainer, _isFunction, state } = this;
 
-    if (render && _isFunction(render)) {
-      return render(this.state);
-    } else if (renderItems && _isFunction(renderItems)) {
-      return (
-        <div ref={this.scrollContainer} className={styles.root}>
-          {renderItems(this.state)}
-        </div>
-      );
-    }
+    if (!_isFunction(renderItems)) { return null; }
+    return (
+      <div ref={scrollContainer} className={styles.root}>
+        {renderItems({ ...state, scrollContainer })}
+      </div>
+    );
   }
 }
