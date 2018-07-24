@@ -1,23 +1,22 @@
 // @flow
 import React from 'react';
 import type { Element } from 'react';
-import { Base } from '../../components/layout/Base';
+import classnames from 'classnames';
 
 type Props = {
-  activeClasses: Array<''>,
   children: Element<*>,
   className: string,
   inlineStyles: Object,
-  stylesToAdd: Object
+  theme: Object
 };
 
-export const HeaderSkin = (props: Props) => (
-  <Base
-    activeClasses={props.activeClasses}
-    className={props.className}
-    inlineStyles={props.inlineStyles}
-    stylesToAdd={props.stylesToAdd}
-  >
-    {props.children}
-  </Base>
-);
+export const HeaderSkin = (props: Props) => {
+  const { children, className, inlineStyles, theme } = props;
+  const themeClasses = Object.values(theme);
+
+  return (
+    <header className={classnames([className, ...themeClasses])} style={inlineStyles}>
+      {children}
+    </header>
+  );
+};
