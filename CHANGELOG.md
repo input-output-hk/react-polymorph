@@ -4,6 +4,9 @@
 
 ## Features
 
+- Adds ProgressBar component to library with stories.
+  [PR 78](https://github.com/input-output-hk/react-polymorph/pull/78)
+
 - Adds LoadingSpinner component, LoadingSpinnerSkin, and SimpleLoadingSpinner theme. Adds reusable 
   loading-spinner mixin to themes. Adds 5 LoadingSpinner stories.
   [PR 75](https://github.com/input-output-hk/react-polymorph/pull/75)

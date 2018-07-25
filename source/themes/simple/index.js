@@ -12,6 +12,7 @@ import SimpleInput from './SimpleInput.scss';
 import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
+import SimpleProgressBar from './SimpleProgressBar.scss';
 import SimpleRadio from './SimpleRadio.scss';
 import SimpleSelect from './SimpleSelect.scss';
 import SimpleSwitch from './SimpleSwitch.scss';
@@ -33,6 +34,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.LOADING_SPINNER]: SimpleLoadingSpinner,
   [IDENTIFIERS.MODAL]: SimpleModal,
   [IDENTIFIERS.OPTIONS]: SimpleOptions,
+  [IDENTIFIERS.PROGRESS_BAR]: SimpleProgressBar,
   [IDENTIFIERS.RADIO]: SimpleRadio,
   [IDENTIFIERS.SELECT]: SimpleSelect,
   [IDENTIFIERS.SWITCH]: SimpleSwitch,

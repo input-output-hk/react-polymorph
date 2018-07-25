@@ -9,6 +9,7 @@ import './LoadingSpinner.stories';
 import './Modal.stories';
 import './NumericInput.stories';
 import './Options.stories';
+import './ProgressBar.stories';
 import './Radio.stories';
 import './Select.stories';
 import './Switch.stories';

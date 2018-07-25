@@ -8,6 +8,7 @@ import { INPUT_THEME_API } from './input';
 import { LOADING_SPINNER_API } from './loadingspinner';
 import { MODAL_THEME_API } from './modal';
 import { OPTIONS_THEME_API } from './options';
+import { PROGRESS_BAR_THEME_API } from './progressbar';
 import { RADIO_THEME_API } from './radio';
 import { SELECT_THEME_API } from './select';
 import { SWITCH_THEME_API } from './switch';
@@ -25,6 +26,7 @@ export const IDENTIFIERS = {
   LOADING_SPINNER: 'loadingspinner',
   MODAL: 'modal',
   OPTIONS: 'options',
+  PROGRESS_BAR: 'progressbar',
   RADIO: 'radio',
   SELECT: 'select',
   SWITCH: 'switch',
@@ -43,6 +45,7 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.LOADING_SPINNER]: LOADING_SPINNER_API,
   [IDENTIFIERS.MODAL]: MODAL_THEME_API,
   [IDENTIFIERS.OPTIONS]: OPTIONS_THEME_API,
+  [IDENTIFIERS.PROGRESS_BAR]: PROGRESS_BAR_THEME_API,
   [IDENTIFIERS.RADIO]: RADIO_THEME_API,
   [IDENTIFIERS.SELECT]: SELECT_THEME_API,
   [IDENTIFIERS.SWITCH]: SWITCH_THEME_API,
