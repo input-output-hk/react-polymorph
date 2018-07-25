@@ -1,0 +1,21 @@
+@import "theme";
+@import "mixins/loading-spinner";
+
+$loading-spinner-color: $theme-color-light-grey !default;
+$loading-spinner-speed: 1.5s !default;
+
+.root {
+  margin: auto;
+  pointer-events: none;
+  @include loading-spinner($loading-spinner-color, $loading-spinner-speed);
+}
+
+.small {
+  height: 30px;
+  width: 30px;
+}
+
+.big {
+  height: 44px;
+  width: 44px;
+}

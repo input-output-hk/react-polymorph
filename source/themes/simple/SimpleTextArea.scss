@@ -47,4 +47,7 @@ $textarea-error-color: $theme-color-error !default;
 
 .errored {
   border-color: $textarea-error-color;
+  &:focus {
+    border-color: $textarea-error-color;
+  }
 }

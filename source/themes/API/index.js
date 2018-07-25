@@ -5,6 +5,7 @@ import { BUTTON_THEME_API } from './button';
 import { CHECKBOX_THEME_API } from './checkbox';
 import { FORM_FIELD_THEME_API } from './formfield';
 import { INPUT_THEME_API } from './input';
+import { LOADING_SPINNER_API } from './loadingspinner';
 import { MODAL_THEME_API } from './modal';
 import { OPTIONS_THEME_API } from './options';
 import { PROGRESS_BAR_THEME_API } from './progressbar';
@@ -22,6 +23,7 @@ export const IDENTIFIERS = {
   CHECKBOX: 'checkbox',
   FORM_FIELD: 'formfield',
   INPUT: 'input',
+  LOADING_SPINNER: 'loadingspinner',
   MODAL: 'modal',
   OPTIONS: 'options',
   PROGRESS_BAR: 'progressbar',
@@ -40,6 +42,7 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.CHECKBOX]: CHECKBOX_THEME_API,
   [IDENTIFIERS.FORM_FIELD]: FORM_FIELD_THEME_API,
   [IDENTIFIERS.INPUT]: INPUT_THEME_API,
+  [IDENTIFIERS.LOADING_SPINNER]: LOADING_SPINNER_API,
   [IDENTIFIERS.MODAL]: MODAL_THEME_API,
   [IDENTIFIERS.OPTIONS]: OPTIONS_THEME_API,
   [IDENTIFIERS.PROGRESS_BAR]: PROGRESS_BAR_THEME_API,

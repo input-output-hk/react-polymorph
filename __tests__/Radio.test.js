@@ -3,9 +3,10 @@ import renderer from 'react-test-renderer';
 
 import { Radio } from '../source/components/Radio';
 import { RadioSkin } from '../source/skins/simple/RadioSkin';
+import { renderInSimpleTheme } from './helpers/theming';
 
 test('Radio renders correctly', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Radio skin={RadioSkin} />
   );
 
@@ -14,7 +15,7 @@ test('Radio renders correctly', () => {
 });
 
 test('Radio renders with a label', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Radio label="click here" skin={RadioSkin} />
   );
 
@@ -23,7 +24,7 @@ test('Radio renders with a label', () => {
 });
 
 test('Radio is disabled', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Radio disabled skin={RadioSkin} />
   );
 
@@ -32,7 +33,7 @@ test('Radio is disabled', () => {
 });
 
 test('Radio is selected', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Radio selected skin={RadioSkin} />
   );
 

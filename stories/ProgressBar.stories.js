@@ -13,8 +13,12 @@ import { ProgressBarSkin } from '../source/skins/simple/ProgressBarSkin';
 // styles
 import styles from './ProgressBar.stories.scss';
 import themeOverrides from './theme-overrides/customProgressBar.scss';
+import { decorateWithSimpleTheme } from './helpers/theming';
 
 storiesOf('ProgressBar', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== ProgressBar Stories ======
 
   .add('default - 30%', () => (
