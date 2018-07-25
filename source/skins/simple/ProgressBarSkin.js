@@ -17,10 +17,11 @@ export const ProgressBarSkin = (props: Props) => {
   const theme = props.theme[themeId];
 
   return (
-    <div className={classnames([className, theme.bar])}>
-      <span className={theme.progress} style={{ width: `${progress}%` }}>
+    <div className={classnames([className, theme.track])}>
+      <div className={theme.progress} style={{ width: `${progress}%` }} />
+      <div className={theme.label}>
         {progress === 100 && label ? label : null}
-      </span>
+      </div>
     </div>
   );
 };
