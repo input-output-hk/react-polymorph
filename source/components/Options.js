@@ -15,9 +15,6 @@ import type {
 // internal components
 import { withTheme } from './HOC/withTheme';
 
-// internal components
-import { withTheme } from './HOC/withTheme';
-
 // internal utility functions
 import { composeTheme, addThemeId } from '../utils/themes';
 import { composeFunctions } from '../utils/props';
