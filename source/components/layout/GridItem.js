@@ -25,8 +25,7 @@ export class GridItem extends Component<Props> {
   static displayName = 'GridItem';
 
   // creates obj passed to Base component's inlineStyles (see render)
-  _assembleInlineGridItem = () => {
-    const { className, ...gridItemProps } = this.props;
+  _assembleInlineGridItem = (gridItemProps: Object) => {
 
     // return early if gridProps are empty
     if (isEmpty(pickBy({ ...gridItemProps }))) { return; }
