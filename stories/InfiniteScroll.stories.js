@@ -8,17 +8,26 @@ import { storiesOf } from '@storybook/react';
 import { InfiniteScroll } from '../source/components/InfiniteScroll';
 import { Flex } from '../source/components/layout/Flex';
 import { Header } from '../source/components/Header';
+import { LoadingSpinner } from '../source/components/LoadingSpinner';
+
+// skins
 import { HeaderSkin } from '../source/skins/simple/HeaderSkin';
+import { LoadingSpinnerSkin } from '../source/skins/simple/LoadingSpinnerSkin';
 
 // styles && theme overrides
 import styles from './InfiniteScroll.stories.scss';
 import themeOverrides from './theme-overrides/customInfiniteScroll.scss';
+import { decorateWithSimpleTheme } from './helpers/theming';
 
 // helper classes
-const { full, itemsRoot } = styles;
+const { full, itemsRoot, spinner } = styles;
 
 storiesOf('InfiniteScroll', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== InfiniteScroll Stories ======
+
   .add('simple', () => (
     <Flex center className={full}>
       <InfiniteScroll
@@ -64,7 +73,11 @@ storiesOf('InfiniteScroll', module)
               </Flex.Item>
             ))}
             {!hasMoreData && <div>End of Users</div>}
-            {isLoading && <div>Loading..</div>}
+            {isLoading && (
+              <Flex.Item className={spinner}>
+                <LoadingSpinner big skin={LoadingSpinnerSkin} />
+              </Flex.Item>
+            )}
             {error && <div>Error</div>}
           </div>
         )}
