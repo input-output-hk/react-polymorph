@@ -15,7 +15,7 @@ import CustomTheme from './theme-customizations/Header.custom.scss';
 
 // custom styles & theme overrides
 import styles from './Header.stories.scss';
-import themeOverrides from './theme-overrides/customHeader.scss';
+import custom from './theme-overrides/customHeader.scss';
 
 storiesOf('Header', module)
   // ====== Header Stories ======
@@ -38,23 +38,23 @@ storiesOf('Header', module)
 
   .add('font', () => (
     <div className={styles.wrapper}>
-      <Header thin skin={HeaderSkin}>
+      <Header thin themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - thin
       </Header>
 
-      <Header light skin={HeaderSkin}>
+      <Header light themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - light
       </Header>
 
-      <Header regular skin={HeaderSkin}>
+      <Header regular themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - regular
       </Header>
 
-      <Header medium skin={HeaderSkin}>
+      <Header medium themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - medium
       </Header>
 
-      <Header bold skin={HeaderSkin}>
+      <Header bold themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - bold
       </Header>
     </div>
@@ -114,19 +114,19 @@ storiesOf('Header', module)
 
   .add('override theme - themeOverrides', () => (
     <div className={styles.wrapper}>
-      <Header h1 themeOverrides={themeOverrides} skin={HeaderSkin}>
+      <Header h1 themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - h1
       </Header>
 
-      <Header h2 themeOverrides={themeOverrides} skin={HeaderSkin}>
+      <Header h2 themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - h2
       </Header>
 
-      <Header h3 themeOverrides={themeOverrides} skin={HeaderSkin}>
+      <Header h3 themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - h3
       </Header>
 
-      <Header h4 themeOverrides={themeOverrides} skin={HeaderSkin}>
+      <Header h4 themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - h4
       </Header>
     </div>
@@ -134,13 +134,13 @@ storiesOf('Header', module)
 
   .add('override combo - props & themeOverrides', () => (
     <div className={styles.wrapper}>
-      <Header h3 upperCase left themeOverrides={themeOverrides} skin={HeaderSkin}>
+      <Header h3 upperCase left themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - h3
       </Header>
-      <Header h3 upperCase right themeOverrides={themeOverrides} skin={HeaderSkin}>
+      <Header h3 upperCase right themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - h3
       </Header>
-      <Header h3 lowerCase center themeOverrides={themeOverrides} skin={HeaderSkin}>
+      <Header h3 lowerCase center themeOverrides={custom} skin={HeaderSkin}>
         Wallet Name - h3
       </Header>
     </div>
