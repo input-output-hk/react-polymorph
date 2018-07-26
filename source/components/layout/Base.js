@@ -21,6 +21,9 @@ type State = {
 };
 
 export class Base extends Component<Props, State> {
+  // define static properties
+  static displayName = 'Base';
+
   constructor(props: Props) {
     super(props);
 
