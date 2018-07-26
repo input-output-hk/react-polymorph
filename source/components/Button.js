@@ -31,6 +31,8 @@ type State = {
 };
 
 class ButtonBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'Button';
   static defaultProps = {
     disabled: false,
     theme: null,

@@ -46,8 +46,11 @@ type State = {
 };
 
 class TextAreaBase extends Component<Props, State> {
+  // declare ref types
   textareaElement: Element<'textarea'>;
 
+  // define static properties
+  static displayName = 'TextArea';
   static defaultProps = {
     autoFocus: false,
     autoResize: true,

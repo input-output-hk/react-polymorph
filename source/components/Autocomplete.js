@@ -53,11 +53,14 @@ type State = {
 };
 
 class AutocompleteBase extends Component<Props, State> {
+  // declare ref types
   rootElement: ?Element<any>;
   inputElement: ?Element<'input'>;
   suggestionsElement: ?Element<any>;
   optionsElement: ?Element<any>;
 
+  // define static properties
+  static displayName = 'Autocomplete';
   static defaultProps = {
     error: null,
     invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
@@ -133,9 +136,9 @@ class AutocompleteBase extends Component<Props, State> {
     ) {
       // Remove last selected option
       this.removeOption(this.state.selectedOptions.length - 1, event);
-    } else if (event.keyCode === 27) { // ESCAPE key - stops propagation to avoid the modal to be closed
+    } else if (event.keyCode === 27) { // ESCAPE: prevents Modal from closing
       event.stopPropagation();
-    } else if (event.keyCode === 13) {// Open suggestions on ENTER
+    } else if (event.keyCode === 13) { // ENTER: opens Options
       this.open();
     }
   };

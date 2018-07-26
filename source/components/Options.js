@@ -1,8 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-
-// internal components
-import { withTheme } from './HOC/withTheme';
 import type {
   ComponentType,
   // $FlowFixMe
@@ -15,6 +12,9 @@ import type {
   Ref
 } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
+
+// internal components
+import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
 import { composeTheme, addThemeId } from '../utils/themes';
@@ -56,9 +56,11 @@ type State = {
 };
 
 class OptionsBase extends Component<Props, State> {
+  // declare ref types
+  optionsElement: ?Element<any>; // TODO: Does this get used? Don't think so.
 
-  optionsElement: ?Element<any>;
-
+  // define static properties
+  static displayName = 'Options';
   static defaultProps = {
     isOpen: false,
     isOpeningUpward: false,

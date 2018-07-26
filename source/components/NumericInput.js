@@ -54,8 +54,11 @@ type State = {
 };
 
 class NumericInputBase extends Component<Props, State> {
+  // declare ref types
   inputElement: Element<'input'>;
 
+  // define static properties
+  static displayName = 'NumericInput';
   static defaultProps = {
     disabled: false,
     error: '',
