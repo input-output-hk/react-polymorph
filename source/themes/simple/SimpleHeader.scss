@@ -12,7 +12,7 @@
   letter-spacing: 1px;
   text-align: center;
   text-transform: uppercase;
-  color: #cecccc;
+  color: #5e6066;
 }
 
 .h2 {
@@ -21,7 +21,7 @@
   line-height: 1.39;
   letter-spacing: 1px;
   text-align: center;
-  color: #cecccc;
+  color: #5e6066;
 }
 
 .h3 {
@@ -30,7 +30,7 @@
   line-height: 1.39;
   letter-spacing: 1px;
   text-align: center;
-  color: #cecccc;
+  color: #5e6066;
 }
 
 .h4 {
@@ -39,5 +39,25 @@
   line-height: 1.39;
   letter-spacing: 1px;
   text-align: center;
-  color: #cecccc;
+  color: #5e6066;
+}
+
+.thin {
+  font-family: $theme-font-thin;
+}
+
+.light {
+  font-family: $theme-font-light;
+}
+
+.regular {
+  font-family: $theme-font-regular;
+}
+
+.medium {
+  font-family: $theme-font-medium;
+}
+
+.bold {
+  font-family: $theme-font-bold;
 }
