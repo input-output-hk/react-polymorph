@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider } from '../../source/components/ThemeProvider';
+import { ThemeProvider } from '../../source/components/HOC/ThemeProvider';
 import { SimpleTheme } from '../../source/themes/simple';
 
 export const decorateWithSimpleTheme = (story) => (

@@ -1,0 +1,63 @@
+@import "theme";
+
+.header {
+  // styles shared between all variations
+  // useful when themeOverrides is passed to ThemeProvider
+}
+
+.h1 {
+  font-family: $theme-font-bold;
+  font-size: 21px;
+  line-height: 1.39;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #5e6066;
+}
+
+.h2 {
+  font-family: $theme-font-medium;
+  font-size: 18px;
+  line-height: 1.39;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #5e6066;
+}
+
+.h3 {
+  font-family: $theme-font-regular;
+  font-size: 16px;
+  line-height: 1.39;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #5e6066;
+}
+
+.h4 {
+  font-family: $theme-font-light;
+  font-size: 14px;
+  line-height: 1.39;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #5e6066;
+}
+
+.thin {
+  font-family: $theme-font-thin;
+}
+
+.light {
+  font-family: $theme-font-light;
+}
+
+.regular {
+  font-family: $theme-font-regular;
+}
+
+.medium {
+  font-family: $theme-font-medium;
+}
+
+.bold {
+  font-family: $theme-font-bold;
+}

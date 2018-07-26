@@ -2,7 +2,12 @@
 import React from 'react';
 import type { ComponentType, Ref } from 'react';
 import forwardRef from 'create-react-ref/lib/forwardRef';
+
+// internal components
 import { ThemeContext } from './ThemeContext';
+
+// utility functions
+import { getDisplayName } from '../../utils/props';
 
 // withTheme is a HOC that takes a Component as a parameter
 // and returns that Component wrapped within ThemeContext.Consumer.
@@ -25,6 +30,7 @@ export const withTheme = (Component: ComponentType<any>) => {
       </ThemeContext.Consumer>
     ));
   }
-
+  // create a new displayName for the wrapped component
+  WrappedComponent.displayName = `withTheme(${getDisplayName(Component)})`;
   return WrappedComponent;
 };

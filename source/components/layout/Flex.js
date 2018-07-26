@@ -1,0 +1,106 @@
+// @flow
+import React, { Component } from 'react';
+import { pickBy } from 'lodash';
+
+// components
+import { Base } from './Base';
+import { FlexItem } from './FlexItem';
+import { withTheme } from '../HOC/withTheme';
+
+// utilities
+import { composeTheme, addThemeId } from '../../utils/themes';
+
+// constants
+import { IDENTIFIERS } from '../../themes/API';
+
+type Props = {
+  alignItems: string,
+  className: string,
+  center: boolean,
+  column: boolean,
+  columnReverse: boolean,
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  justifyContent: string,
+  row: boolean,
+  rowReverse: boolean,
+  theme: Object,
+  themeId: string,
+  themeOverrides: Object
+};
+
+type State = { composedTheme: Object };
+
+class FlexBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'Flex';
+  static defaultProps = {
+    theme: null,
+    themeId: IDENTIFIERS.FLEX,
+    themeOverrides: {}
+  };
+
+  constructor(props: Props) {
+    super(props);
+
+    const { context, themeId, theme, themeOverrides } = props;
+
+    this.state = {
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      )
+    };
+  }
+
+  _getActiveClasses = ({ center, column, columnReverse, row, rowReverse }) => {
+    const activeClasses = ['container'];
+    const activeProps = pickBy({ center, column, columnReverse, row, rowReverse });
+    return [...activeClasses, ...Object.keys(activeProps)].filter(val => val);
+  }
+
+  _assembleFlexTheme = (activeClasses: ['']) => {
+    const theme = this.state.composedTheme[this.props.themeId];
+
+    return activeClasses.reduce((reducedTheme, activeClass) => {
+      if (Object.hasOwnProperty.call(theme, activeClass)) {
+        reducedTheme[activeClass] = theme[activeClass];
+      }
+      return reducedTheme;
+    }, {});
+  }
+
+  renderChildren(theme: Object) {
+    return React.Children.map(this.props.children, child => {
+      if (child.type.displayName === 'FlexItem') {
+        return React.cloneElement(child, { theme });
+      }
+      return child;
+    });
+  }
+
+  render() {
+    const { alignItems, className, justifyContent, themeId, ...directionProps } = this.props;
+
+    const inlineStyles = pickBy({ alignItems, justifyContent });
+    const activeClasses = this._getActiveClasses(directionProps);
+    const flexTheme = this._assembleFlexTheme(activeClasses);
+    const fullTheme = this.state.composedTheme[themeId];
+
+    return (
+      <Base
+        activeClasses={activeClasses}
+        className={className}
+        inlineStyles={inlineStyles}
+        stylesToAdd={flexTheme}
+      >
+        {this.renderChildren(fullTheme)}
+      </Base>
+    );
+  }
+}
+export const Flex = withTheme(FlexBase);
+Flex.Item = FlexItem;
