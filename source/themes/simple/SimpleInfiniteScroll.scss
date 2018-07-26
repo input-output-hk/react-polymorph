@@ -1,16 +1,31 @@
+@import "theme";
+
 .root {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 90vh;
-  width: 35vw;
-  border: 1px solid red;
+  height: 100%;
+  width: auto;
   overflow-y: scroll;
   overflow-x: hidden;
 
-  // &::-webkit-scrollbar {
-  //   width: 0px;  /* remove scrollbar space */
-  //   background: transparent;  /* optional: just make scrollbar invisible */
-  // }
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #c8ccce;
+    border: 7px solid transparent;
+    border-radius: 12px;
+    background-clip: content-box;
+  }
+}
+
+.item {
+  flex: auto;
 }
