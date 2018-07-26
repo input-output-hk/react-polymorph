@@ -9,12 +9,11 @@ type Props = {
   className: string,
   flex: number,
   order: number,
-  theme: Object
+  theme?: Object
 };
 
 export const FlexItem = (props: Props) => {
   const { children, className, alignSelf, flex, order, theme } = props;
-
   return (
     <Base
       activeClasses={['item']}
@@ -28,3 +27,4 @@ export const FlexItem = (props: Props) => {
 };
 // define static properties
 FlexItem.displayName = 'FlexItem';
+FlexItem.defaultProps = { theme: {} };
