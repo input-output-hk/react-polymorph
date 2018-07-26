@@ -6,9 +6,6 @@ import { pickBy, isEmpty } from 'lodash';
 // components
 import { withTheme } from './HOC/withTheme';
 
-// helper styles for boolean props
-import headerStyles from '../themes/helpers/Header.scss';
-
 // utility functions
 import { composeTheme, addThemeId } from '../utils/themes';
 
@@ -45,6 +42,8 @@ type Props = {
 type State = { composedTheme: Object };
 
 class HeaderBase extends Component <Props, State> {
+  // define static properties
+  static displayName = 'Header';
   static defaultProps = {
     theme: null,
     themeId: IDENTIFIERS.HEADER,
@@ -82,18 +81,14 @@ class HeaderBase extends Component <Props, State> {
   };
 
   _assembleHeaderTheme = (styleProps: Object) => {
-    const {
-      props: { themeId },
-      state: { composedTheme }
-    } = this;
     const activeClasses = this._getActiveClasses(styleProps);
-    const stylesToAdd = { ...composedTheme[themeId], ...headerStyles };
+    const theme = this.state.composedTheme[this.props.themeId];
 
-    return activeClasses.reduce((theme, activeClass) => {
-      if (Object.hasOwnProperty.call(stylesToAdd, activeClass)) {
-        theme[activeClass] = stylesToAdd[activeClass];
+    return activeClasses.reduce((reducedTheme, activeClass) => {
+      if (Object.hasOwnProperty.call(theme, activeClass)) {
+        reducedTheme[activeClass] = theme[activeClass];
       }
-      return theme;
+      return reducedTheme;
     }, {});
   }
 
