@@ -16,8 +16,12 @@ import CustomTheme from './theme-customizations/Header.custom.scss';
 // custom styles & theme overrides
 import styles from './Header.stories.scss';
 import custom from './theme-overrides/customHeader.scss';
+import { decorateWithSimpleTheme } from './helpers/theming';
 
 storiesOf('Header', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Header Stories ======
 
   .add('positioning', () => (

@@ -15,10 +15,14 @@ import { HeaderSkin } from '../source/skins/simple/HeaderSkin';
 import styles from './Layout.stories.scss';
 import customFlex from './theme-overrides/customFlex.scss';
 import customGrid from './theme-overrides/customGrid.scss';
+import { decorateWithSimpleTheme } from './helpers/theming';
 
 const { wrapper, header, main, aside, footer, tomato, boxDark, boxLight, boxPastel } = styles;
 
 storiesOf('Layout', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Layout Stories ======
 
   .add('Flex - column center', () => (
