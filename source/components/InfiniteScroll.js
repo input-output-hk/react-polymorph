@@ -3,12 +3,26 @@ import React, { Component } from 'react';
 // $FlowFixMe
 import createRef from 'create-react-ref/lib/createRef';
 
-// import helper styles
-import styles from '../themes/simple/SimpleInfiniteScroll.scss';
+// internal components
+import { withTheme } from './HOC/withTheme';
+
+// utilities
+import { composeTheme, addThemeId } from '../utils/themes';
+
+// constants
+import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
   fetchData: Function,
-  renderItems: Function
+  renderItems: Function,
+  theme: Object, // will take precedence over theme in context if passed
+  themeId: string,
+  themeOverrides: Object,
+  threshold: number
 };
 
 type State = {
@@ -18,17 +32,33 @@ type State = {
   hasMoreData: boolean
 };
 
-export class InfiniteScroll extends Component<Props, State> {
+class InfiniteScrollBase extends Component<Props, State> {
+  // declare ref types
   scrollContainer: ?Element<'div'>;
 
+  // define static properties
+  static displayName = 'InfiniteScroll';
   static defaultProps = {
-    fetchData() {}
+    fetchData() {},
+    theme: null,
+    themeId: IDENTIFIERS.INFINITE_SCROLL,
+    themeOverrides: {},
+    threshold: 250
   };
 
   constructor(props: Props) {
     super(props);
+    const { context, themeId, theme, themeOverrides } = props;
+
+    // refs
     this.scrollContainer = createRef();
+
     this.state = {
+      composedTheme: composeTheme(
+        addThemeId(theme || context.theme, themeId),
+        addThemeId(themeOverrides, themeId),
+        context.ROOT_THEME_API
+      ),
       data: [],
       error: false,
       isLoading: false,
@@ -52,10 +82,10 @@ export class InfiniteScroll extends Component<Props, State> {
   handleFetchData = () => this.props.fetchData(this.setState.bind(this));
 
   checkForScrollBottom = () => {
-    const { scrollContainer } = this;
+    const { scrollContainer, props: { threshold } } = this;
     const { offsetHeight, scrollTop, scrollHeight } = scrollContainer.current;
-    // can also substract height of item from scroll height to load data before the absolute end
-    if (offsetHeight + scrollTop >= scrollHeight) {
+
+    if (offsetHeight + scrollTop >= scrollHeight - threshold) {
       return this.handleFetchData();
     }
   };
@@ -69,14 +99,17 @@ export class InfiniteScroll extends Component<Props, State> {
   };
 
   render() {
-    const { renderItems } = this.props;
-    const { scrollContainer, _isFunction, state } = this;
+    const { renderItems, themeId } = this.props;
+    const { composedTheme, ...restState } = this.state;
+    const theme = composedTheme[themeId];
 
-    if (!_isFunction(renderItems)) { return null; }
+    if (!this._isFunction(renderItems)) { return null; }
     return (
-      <div ref={scrollContainer} className={styles.root}>
-        {renderItems({ ...state, scrollContainer })}
+      <div ref={this.scrollContainer} className={theme.root}>
+        {renderItems({ ...restState, theme })}
       </div>
     );
   }
 }
+
+export const InfiniteScroll = withTheme(InfiniteScrollBase);
