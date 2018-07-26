@@ -20,7 +20,7 @@
 
 ### Features
 
-- Adds layout components: Base, Gutter, Flex, FlexItem, Grid, and GridItem. This abstracts layout into composable components that facilitate a more uniform and reusable layout solution. Enables third party developers using react-polymorph to craft applications with uniformity of layout and style more easily. [PR 80](https://github.com/input-output-hk/react-polymorph/pull/80)
+- Adds layout components: Base, Gutter, Flex, FlexItem, Grid, and GridItem. This abstracts layout into composable and compound components that facilitate a more uniform and reusable layout solution. Enables third party developers using react-polymorph to craft applications with uniformity of layout and style more easily. Adds Header component for creating 4 unique instances of a themed Header and makes them available in context. Theme variation and manipulation of specific styles on the Header component can be accessed via props passed to Header as booleans. Combining and composing variations of these props makes the visual rendering of Header flexible and easy to use via JSX only. Adds InfiniteScroll component for rendering and traversing large data sets while retaining maximum flexibility of I/O and rendering. InfiniteScroll derives flexibility from the render prop pattern and allowing the user to manipulate data fetching and management of InfiniteScroll's internal state all from the outside. Think render prop applied to I/O and component level state. [PR 80](https://github.com/input-output-hk/react-polymorph/pull/80)
 
 - Bubble takes an optional `targetRef` for positioning now [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
