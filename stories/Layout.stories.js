@@ -8,11 +8,15 @@ import { storiesOf } from '@storybook/react';
 import { Flex } from '../source/components/layout/Flex';
 import { Grid } from '../source/components/layout/Grid';
 import { Gutter } from '../source/components/layout/Gutter';
+import { Header } from '../source/components/Header';
+import { HeaderSkin } from '../source/skins/simple/HeaderSkin';
 
 // styles
 import styles from './Layout.stories.scss';
+import customFlex from './theme-overrides/customFlex.scss';
+import customGrid from './theme-overrides/customGrid.scss';
 
-const { full, wrapper, header, main, aside, footer, tomato, boxDark, boxLight, boxPastel } = styles;
+const { wrapper, header, main, aside, footer, tomato, boxDark, boxLight, boxPastel } = styles;
 
 storiesOf('Layout', module)
   // ====== Layout Stories ======
@@ -62,6 +66,32 @@ storiesOf('Layout', module)
     </Flex>
   ))
 
+  .add('Flex - justifyContent="space-between"', () => (
+    <Flex
+      row
+      justifyContent="space-between"
+      alignItems="center"
+      className={wrapper}
+    >
+      <Flex.Item>FlexItem 1</Flex.Item>
+      <Flex.Item>FlexItem 2</Flex.Item>
+      <Flex.Item>FlexItem 3</Flex.Item>
+    </Flex>
+  ))
+
+  .add('Flex - themeOverrides', () => (
+    <Flex
+      row
+      justifyContent="space-between"
+      alignItems="center"
+      themeOverrides={customFlex}
+    >
+      <Flex.Item>FlexItem 1</Flex.Item>
+      <Flex.Item>FlexItem 2</Flex.Item>
+      <Flex.Item>FlexItem 3</Flex.Item>
+    </Flex>
+  ))
+
   .add('Flex.Item - alignSelf="flex-start"', () => (
     <Flex row center className={wrapper}>
       <Flex.Item alignSelf="flex-start">FlexItem 1</Flex.Item>
@@ -85,6 +115,16 @@ storiesOf('Layout', module)
       <Flex.Item order={1}>FlexItem 3</Flex.Item>
       <Flex.Item order={5}>FlexItem 4</Flex.Item>
       <Flex.Item order={4}>FlexItem 5</Flex.Item>
+    </Flex>
+  ))
+
+  .add('Flex.Item - flex', () => (
+    <Flex row center className={wrapper}>
+      <Flex.Item flex={1}>flex = 1</Flex.Item>
+      <Flex.Item flex={2}>flex = 2</Flex.Item>
+      <Flex.Item flex={3}>flex = 3</Flex.Item>
+      <Flex.Item flex={4}>flex = 4</Flex.Item>
+      <Flex.Item flex={5}>flex = 5</Flex.Item>
     </Flex>
   ))
 
@@ -128,7 +168,7 @@ storiesOf('Layout', module)
   ))
 
   .add('Grid.Item - column & row', () => (
-    <Flex className={full} column center>
+    <Gutter padding="25vh 25vw">
       <Grid
         className={boxPastel}
         columns="200px 200px 200px"
@@ -148,11 +188,11 @@ storiesOf('Layout', module)
           4
         </Grid.Item>
       </Grid>
-    </Flex>
+    </Gutter>
   ))
 
   .add('Grid.Item - columnStart/End rowStart/End', () => (
-    <Flex className={full} column center>
+    <Gutter padding="25vh 25vw">
       <Grid className={boxLight} columns="repeat(3, 200px)" rows="repeat(3, 125px)" gap={10}>
         <Grid.Item columnStart={2} columnEnd={3} rowStart={1}>
           1
@@ -167,7 +207,7 @@ storiesOf('Layout', module)
           4
         </Grid.Item>
       </Grid>
-    </Flex>
+    </Gutter>
   ))
 
   .add('Grid - template & templateAreas', () => {
@@ -185,10 +225,49 @@ storiesOf('Layout', module)
           templateAreas={templateAreas}
           gap={10}
         >
-          <Grid.Item gridArea="content">1</Grid.Item>
-          <Grid.Item gridArea="sidebar">2</Grid.Item>
-          <Grid.Item gridArea="header">3</Grid.Item>
-          <Grid.Item gridArea="footer">4</Grid.Item>
+          <Grid.Item gridArea="content">content</Grid.Item>
+          <Grid.Item gridArea="sidebar">sidebar</Grid.Item>
+          <Grid.Item gridArea="header">header</Grid.Item>
+          <Grid.Item gridArea="footer">footer</Grid.Item>
+        </Grid>
+      </Gutter>
+    );
+  })
+
+  .add('Grid - themeOverrides', () => {
+    const templateAreas = [
+      'sidebar header header header',
+      'sidebar content content aside',
+      'sidebar content content aside',
+      'sidebar footer footer footer'
+    ];
+    return (
+      <Gutter padding="25vh 20vw">
+        <Grid
+          themeOverrides={customGrid}
+          template="repeat(4, 1fr) / repeat(4, 1fr)"
+          templateAreas={templateAreas}
+          gap={10}
+        >
+          <Grid.Item gridArea="content">
+            <Header h2 left skin={HeaderSkin}>content</Header>
+          </Grid.Item>
+
+          <Grid.Item gridArea="sidebar">
+            <Header h2 left skin={HeaderSkin}>sidebar</Header>
+          </Grid.Item>
+
+          <Grid.Item gridArea="header">
+            <Header h2 left skin={HeaderSkin}>header</Header>
+          </Grid.Item>
+
+          <Grid.Item gridArea="footer">
+            <Header h2 left skin={HeaderSkin}>footer</Header>
+          </Grid.Item>
+
+          <Grid.Item gridArea="aside">
+            <Header h2 left skin={HeaderSkin}>aside</Header>
+          </Grid.Item>
         </Grid>
       </Gutter>
     );
