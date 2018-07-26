@@ -15,7 +15,13 @@ import CustomTextAreaTheme from './theme-customizations/TextArea.custom.scss';
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customTextarea.scss';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('TextArea', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain',

@@ -18,7 +18,13 @@ import CustomRadioTheme from './theme-customizations/Radio.custom.scss';
 import styles from './Radio.stories.scss';
 import themeOverrides from './theme-overrides/customRadio.scss';
 
+// helpers
+import { decorateWithSimpleTheme } from './helpers/theming';
+
 storiesOf('Radio', module)
+
+  .addDecorator(decorateWithSimpleTheme)
+
   // ====== Stories ======
 
   .add('plain',

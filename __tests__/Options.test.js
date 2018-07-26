@@ -1,8 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 
 import { Options } from '../source/components/Options';
 import { OptionsSkin } from '../source/skins/simple/OptionsSkin';
+import { renderInSimpleTheme } from './helpers/theming';
 
 const MNEMONIC_WORDS = [
   'home',
@@ -28,7 +28,7 @@ const COUNTRIES_OPTIONS = [
 ];
 
 test('Options renders correctly', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Options
       options={MNEMONIC_WORDS}
       skin={OptionsSkin}
@@ -40,7 +40,7 @@ test('Options renders correctly', () => {
 });
 
 test('Options uses render prop - render', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Options
       options={MNEMONIC_WORDS}
       skin={OptionsSkin}
@@ -60,7 +60,7 @@ test('Options uses render prop - render', () => {
 });
 
 test('Options uses render prop - optionRenderer', () => {
-  const component = renderer.create(
+  const component = renderInSimpleTheme(
     <Options
       options={COUNTRIES_OPTIONS}
       skin={OptionsSkin}

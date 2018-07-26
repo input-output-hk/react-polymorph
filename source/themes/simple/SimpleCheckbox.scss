@@ -13,6 +13,7 @@ $checkbox-checked-bg-color: $checkbox-border-color !default;
 $checkbox-check-thickness: 2px !default;
 $checkbox-check-width: $checkbox-size / 5 !default;
 $checkbox-check-height: $checkbox-size / 2 !default;
+$checkbox-check-vertical-offset: -4px !default;
 
 .root {
   display: flex;
@@ -90,7 +91,7 @@ $checkbox-check-height: $checkbox-size / 2 !default;
       width: $checkbox-check-width;
       height: $checkbox-check-height;
       transform: rotate(45deg);
-      margin-top: -1 * ($checkbox-check-height / 2);
+      margin-top: $checkbox-check-vertical-offset;
     }
   }
 }

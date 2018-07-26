@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
+import type { ComponentType } from 'react';
 
 // internal components
 import { withTheme } from './HOC/withTheme';
@@ -12,34 +12,30 @@ import { composeTheme, addThemeId } from '../utils/themes';
 import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
+  big?: boolean,
   className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
   },
-  disabled: boolean,
-  label: string | Element<any>,
-  loading: boolean,
-  onClick: Function,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object // custom css/scss from user that adheres to component's theme API
+  themeOverrides: Object,
+  visible: boolean
 };
 
 type State = {
   composedTheme: Object
 };
 
-class ButtonBase extends Component<Props, State> {
-  // define static properties
-  static displayName = 'Button';
+class LoadingSpinnerBase extends Component<Props, State> {
   static defaultProps = {
-    disabled: false,
-    loading: false,
+    big: false,
     theme: null,
-    themeId: IDENTIFIERS.BUTTON,
-    themeOverrides: {}
+    themeId: IDENTIFIERS.LOADING_SPINNER,
+    themeOverrides: {},
+    visible: true
   };
 
   constructor(props: Props) {
@@ -59,15 +55,15 @@ class ButtonBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: ButtonSkin,
+      skin: LoadingSpinnerSkin,
       theme,
       themeOverrides,
       context,
       ...rest
     } = this.props;
 
-    return <ButtonSkin theme={this.state.composedTheme} {...rest} />;
+    return <LoadingSpinnerSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
 
-export const Button = withTheme(ButtonBase);
+export const LoadingSpinner = withTheme(LoadingSpinnerBase);

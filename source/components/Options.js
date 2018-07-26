@@ -11,7 +11,9 @@ import type {
   Element,
   Ref
 } from 'react';
-import createRef from 'create-react-ref/lib/createRef';
+
+// internal components
+import { withTheme } from './HOC/withTheme';
 
 // internal components
 import { withTheme } from './HOC/withTheme';

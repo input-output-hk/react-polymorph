@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
+import type { ComponentType } from 'react';
 
 // internal components
 import { withTheme } from './HOC/withTheme';
@@ -17,10 +17,8 @@ type Props = {
     theme: Object,
     ROOT_THEME_API: Object
   },
-  disabled: boolean,
-  label: string | Element<any>,
-  loading: boolean,
-  onClick: Function,
+  label: string,
+  progress: number,
   skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
@@ -31,14 +29,11 @@ type State = {
   composedTheme: Object
 };
 
-class ButtonBase extends Component<Props, State> {
-  // define static properties
-  static displayName = 'Button';
+class ProgressBarBase extends Component<Props, State> {
   static defaultProps = {
-    disabled: false,
-    loading: false,
+    progress: 100,
     theme: null,
-    themeId: IDENTIFIERS.BUTTON,
+    themeId: IDENTIFIERS.PROGRESS_BAR,
     themeOverrides: {}
   };
 
@@ -59,15 +54,15 @@ class ButtonBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: ButtonSkin,
+      skin: ProgressBarSkin,
       theme,
       themeOverrides,
       context,
       ...rest
     } = this.props;
 
-    return <ButtonSkin theme={this.state.composedTheme} {...rest} />;
+    return <ProgressBarSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
 
-export const Button = withTheme(ButtonBase);
+export const ProgressBar = withTheme(ProgressBarBase);
