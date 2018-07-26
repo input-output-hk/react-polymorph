@@ -3,7 +3,10 @@ import { AUTOCOMPLETE_THEME_API } from './autocomplete';
 import { BUBBLE_THEME_API } from './bubble';
 import { BUTTON_THEME_API } from './button';
 import { CHECKBOX_THEME_API } from './checkbox';
+import { FLEX_THEME_API } from './flex';
 import { FORM_FIELD_THEME_API } from './formfield';
+import { GRID_THEME_API } from './grid';
+import { GUTTER_THEME_API } from './gutter';
 import { HEADER_THEME_API } from './header';
 import { INFINITE_SCROLL_THEME_API } from './infinitescroll';
 import { INPUT_THEME_API } from './input';
@@ -21,7 +24,10 @@ export const IDENTIFIERS = {
   BUBBLE: 'bubble',
   BUTTON: 'button',
   CHECKBOX: 'checkbox',
+  FLEX: 'flex',
   FORM_FIELD: 'formfield',
+  GUTTER: 'gutter',
+  GRID: 'grid',
   HEADER: 'header',
   INFINITE_SCROLL: 'infinitescroll',
   INPUT: 'input',
@@ -40,7 +46,10 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.BUBBLE]: BUBBLE_THEME_API,
   [IDENTIFIERS.BUTTON]: BUTTON_THEME_API,
   [IDENTIFIERS.CHECKBOX]: CHECKBOX_THEME_API,
+  [IDENTIFIERS.FLEX]: FLEX_THEME_API,
   [IDENTIFIERS.FORM_FIELD]: FORM_FIELD_THEME_API,
+  [IDENTIFIERS.GUTTER]: GUTTER_THEME_API,
+  [IDENTIFIERS.GRID]: GRID_THEME_API,
   [IDENTIFIERS.HEADER]: HEADER_THEME_API,
   [IDENTIFIERS.INFINITE_SCROLL]: INFINITE_SCROLL_THEME_API,
   [IDENTIFIERS.INPUT]: INPUT_THEME_API,
