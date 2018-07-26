@@ -9,7 +9,7 @@ import baseStyles from '../../themes/helpers/Base.scss';
 import { composeBaseStyles } from '../../utils/layout';
 
 type Props = {
-  activeClasses: Array<''>,
+  activeClasses: Array<*>,
   children: Element<*>,
   className: string,
   inlineStyles: Object,
