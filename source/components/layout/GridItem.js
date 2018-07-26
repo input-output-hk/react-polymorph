@@ -16,10 +16,14 @@ type Props = {
   placeSelf: string,
   row: string | number,
   rowEnd: string | number,
-  rowStart: string | number
+  rowStart: string | number,
+  theme: Object
 };
 
 export class GridItem extends Component<Props> {
+  // define static properties
+  static displayName = 'GridItem';
+
   // creates obj passed to Base component's inlineStyles (see render)
   _assembleInlineGridItem = () => {
     const { className, ...gridItemProps } = this.props;
@@ -59,11 +63,16 @@ export class GridItem extends Component<Props> {
   }
 
   render() {
-    const { children, className, ...gridItemProps } = this.props;
+    const { children, className, theme, ...gridItemProps } = this.props;
     const inlineGridItem = this._assembleInlineGridItem({ ...gridItemProps });
 
     return (
-      <Base className={className} inlineStyles={inlineGridItem}>
+      <Base
+        activeClasses={['item']}
+        className={className}
+        inlineStyles={inlineGridItem}
+        stylesToAdd={theme}
+      >
         {children}
       </Base>
     );
