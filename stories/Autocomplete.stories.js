@@ -232,9 +232,10 @@ storiesOf('Autocomplete', module)
             theme,
             removeSelection
           } = getSelectionProps({
-            removeSelection: index =>
-              console.log(`You removed: ${selectedOptions[index]}`)
-          });
+                removeSelection: index => console.log(
+                  `You removed: ${selectedOptions[index]}`
+                )
+              });
 
           return selectedOptions.map((option, index) => (
             <span className={theme.selectedWordBox} key={index}>
@@ -280,10 +281,9 @@ storiesOf('Autocomplete', module)
             onClick,
             onMouseEnter
           } = getOptionProps({
-            onClick: (option, event) => console.log(`You clicked "${option}"`),
-            onMouseEnter: (index, event) =>
-              console.log(`Mouse is on "${options[index]}"`)
-          });
+                onClick: option => console.log(`You clicked "${option}"`),
+                onMouseEnter: index => console.log(`Mouse is on "${options[index]}"`)
+              });
 
           return options.map((option, index) => {
             // calculates number of times the option
