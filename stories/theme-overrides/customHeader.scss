@@ -1,0 +1,41 @@
+.header {
+  font-family: 'Lato', sans-serif;
+
+  &.h1 {
+    color: rgba(10, 145, 48, 0.8);
+  }
+
+  &.h2 {
+    color: #5dcdfc;
+  }
+
+  &.h3 {
+    color: #1e4a2e;
+    border: 1px solid #1e4a2e;
+    padding: 10px;
+  }
+
+  &.h4 {
+    letter-spacing: 5px;
+  }
+
+  &.thin {
+    font-weight: 100;
+  }
+
+  &.light {
+    font-weight: 300;
+  }
+
+  &.regular {
+    font-weight: 400;
+  }
+
+  &.medium {
+    font-weight: 600;
+  }
+
+  &.bold {
+    font-weight: 700;
+  }
+}
