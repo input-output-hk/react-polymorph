@@ -6,6 +6,7 @@ import './Button.stories';
 import './Checkbox.stories';
 import './Header.stories';
 import './Input.stories';
+import './Layout.stories';
 import './LoadingSpinner.stories';
 import './Modal.stories';
 import './NumericInput.stories';
