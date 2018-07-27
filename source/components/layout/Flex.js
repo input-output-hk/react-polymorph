@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import type { Element, ComponentType, ChildrenArray } from 'react';
 import { pickBy } from 'lodash';
 
 // components
@@ -17,6 +18,7 @@ type Props = {
   alignItems: string,
   className: string,
   center: boolean,
+  children: ChildrenArray<*>,
   column: boolean,
   columnReverse: boolean,
   context: {
@@ -36,6 +38,7 @@ type State = { composedTheme: Object };
 class FlexBase extends Component<Props, State> {
   // define static properties
   static displayName = 'Flex';
+  static Item: ComponentType<*> = FlexItem;
   static defaultProps = {
     theme: null,
     themeId: IDENTIFIERS.FLEX,
@@ -62,7 +65,7 @@ class FlexBase extends Component<Props, State> {
     return [...activeClasses, ...Object.keys(activeProps)].filter(val => val);
   }
 
-  _assembleFlexTheme = (activeClasses: ['']) => {
+  _assembleFlexTheme = (activeClasses: Array<string>) => {
     const theme = this.state.composedTheme[this.props.themeId];
 
     return activeClasses.reduce((reducedTheme, activeClass) => {
@@ -102,5 +105,5 @@ class FlexBase extends Component<Props, State> {
     );
   }
 }
+
 export const Flex = withTheme(FlexBase);
-Flex.Item = FlexItem;

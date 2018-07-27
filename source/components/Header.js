@@ -85,7 +85,7 @@ class HeaderBase extends Component <Props, State> {
     const theme = this.state.composedTheme[this.props.themeId];
 
     return activeClasses.reduce((reducedTheme, activeClass) => {
-      if (Object.hasOwnProperty.call(theme, activeClass)) {
+      if (activeClass && Object.hasOwnProperty.call(theme, activeClass)) {
         reducedTheme[activeClass] = theme[activeClass];
       }
       return reducedTheme;

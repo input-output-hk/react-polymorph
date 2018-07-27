@@ -5,7 +5,7 @@
 // that should be added to baseStyles
 export const composeBaseStyles = (
   baseStyles: Object,
-  stylesToAdd: Object,
+  stylesToAdd: Object = {},
   activeClasses: Array<string>
 ) => {
   if (!activeClasses || !activeClasses.length) { return baseStyles; }

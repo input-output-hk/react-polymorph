@@ -11,10 +11,10 @@ import { composeBaseStyles } from '../../utils/layout';
 
 type Props = {
   activeClasses: Array<*>,
-  children: Element<*>,
+  children: Element<*> | Array<*>,
   className: string,
   inlineStyles: Object,
-  stylesToAdd: Object
+  stylesToAdd?: Object
 };
 
 type State = {
@@ -24,6 +24,7 @@ type State = {
 export class Base extends Component<Props, State> {
   // define static properties
   static displayName = 'Base';
+  static defaultProps = { stylesToAdd: {} };
 
   constructor(props: Props) {
     super(props);

@@ -1,11 +1,13 @@
 // @flow
 import React from 'react';
+import type { Element } from 'react';
 
 // components
 import { Base } from './Base';
 
 type Props = {
   alignSelf: string,
+  children: Element<*>,
   className: string,
   flex: number,
   order: number,
