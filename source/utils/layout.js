@@ -6,7 +6,7 @@
 export const composeBaseStyles = (
   baseStyles: Object,
   stylesToAdd: Object,
-  activeClasses: Array
+  activeClasses: Array<string>
 ) => {
   if (!activeClasses || !activeClasses.length) { return baseStyles; }
   const composedBase = { ...baseStyles };
