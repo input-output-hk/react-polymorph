@@ -86,7 +86,7 @@ class HeaderBase extends Component <Props, State> {
 
     return activeClasses.reduce((reducedTheme, activeClass) => {
       if (Object.hasOwnProperty.call(theme, activeClass)) {
-        reducedTheme.activeClass = theme.activeClass;
+        reducedTheme[activeClass] = theme[activeClass];
       }
       return reducedTheme;
     }, {});
