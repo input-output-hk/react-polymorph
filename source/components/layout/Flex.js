@@ -4,7 +4,7 @@ import { pickBy } from 'lodash';
 
 // components
 import { Base } from './Base';
-// import { FlexItem } from './FlexItem';
+import { FlexItem } from './FlexItem';
 import { withTheme } from '../HOC/withTheme';
 
 // utilities
@@ -103,4 +103,4 @@ class FlexBase extends Component<Props, State> {
   }
 }
 export const Flex = withTheme(FlexBase);
-// Flex.Item = FlexItem;
+Flex.Item = FlexItem;
