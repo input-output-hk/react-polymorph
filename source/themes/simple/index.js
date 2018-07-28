@@ -9,6 +9,7 @@ import SimpleButton from './SimpleButton.scss';
 import SimpleCheckbox from './SimpleCheckbox.scss';
 import SimpleFlex from './SimpleFlex.scss';
 import SimpleFormField from './SimpleFormField.scss';
+import SimpleGrid from './SimpleGrid.scss';
 import SimpleGutter from './SimpleGutter.scss';
 import SimpleHeader from './SimpleHeader.scss';
 import SimpleInput from './SimpleInput.scss';
@@ -34,6 +35,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.CHECKBOX]: SimpleCheckbox,
   [IDENTIFIERS.FLEX]: SimpleFlex,
   [IDENTIFIERS.FORM_FIELD]: SimpleFormField,
+  [IDENTIFIERS.GRID]: SimpleGrid,
   [IDENTIFIERS.GUTTER]: SimpleGutter,
   [IDENTIFIERS.HEADER]: SimpleHeader,
   [IDENTIFIERS.INPUT]: SimpleInput,
