@@ -5,7 +5,7 @@ import { pickBy, isEmpty } from 'lodash';
 
 // components
 import { Base } from './Base';
-// import { GridItem } from './GridItem';
+import { GridItem } from './GridItem';
 import { withTheme } from '../HOC/withTheme';
 
 // utilities
@@ -137,4 +137,4 @@ class GridBase extends Component<Props, State> {
 }
 
 export const Grid = withTheme(GridBase);
-// Grid.Item = GridItem;
+Grid.Item = GridItem;
