@@ -6,11 +6,12 @@ import { storiesOf } from '@storybook/react';
 
 // components
 import { InfiniteScroll } from '../source/components/InfiniteScroll';
-import { Flex } from '../source/components/layout/Flex';
 import { Header } from '../source/components/Header';
 import { LoadingSpinner } from '../source/components/LoadingSpinner';
+import { Flex } from '../source/components/layout/Flex';
 
 // skins
+import { InfiniteScrollSkin } from '../source/skins/simple/InfiniteScrollSkin';
 import { HeaderSkin } from '../source/skins/simple/HeaderSkin';
 import { LoadingSpinnerSkin } from '../source/skins/simple/LoadingSpinnerSkin';
 
@@ -31,6 +32,7 @@ storiesOf('InfiniteScroll', module)
   .add('simple', () => (
     <Flex center className={full}>
       <InfiniteScroll
+        skin={InfiniteScrollSkin}
         themeOverrides={themeOverrides}
         fetchData={setState => {
           setState({ isLoading: true }, async () => {
