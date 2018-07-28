@@ -13,7 +13,7 @@ type Props = {
   activeClasses: Array<*>,
   children: Element<*> | Array<*>,
   className: string,
-  inlineStyles: Object,
+  inlineStyles?: Object,
   stylesToAdd?: Object
 };
 
@@ -24,7 +24,10 @@ type State = {
 export class Base extends Component<Props, State> {
   // define static properties
   static displayName = 'Base';
-  static defaultProps = { stylesToAdd: {} };
+  static defaultProps = {
+    inlineStyles: {},
+    stylesToAdd: {}
+  };
 
   constructor(props: Props) {
     super(props);
