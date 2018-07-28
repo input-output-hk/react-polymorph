@@ -1,5 +1,7 @@
 // @flow
 import React, { Component } from 'react';
+import type { ComponentType, Element } from 'react';
+
 // $FlowFixMe
 import createRef from 'create-react-ref/lib/createRef';
 
@@ -13,12 +15,14 @@ import { composeTheme, addThemeId } from '../utils/themes';
 import { IDENTIFIERS } from '../themes/API';
 
 type Props = {
+  className: string,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
   },
   fetchData: Function,
   renderItems: Function,
+  skin: ComponentType<any>,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
@@ -29,13 +33,13 @@ type State = {
   composedTheme: Object,
   data: Object | Array<{}>,
   error: boolean | string | Element<*>,
-  isLoading: boolean,
-  hasMoreData: boolean
+  hasMoreData: boolean,
+  isLoading: boolean
 };
 
 class InfiniteScrollBase extends Component<Props, State> {
   // declare ref types
-  scrollContainer: ?Element<'div'>;
+  scrollContainer: ?Element<any>;
 
   // define static properties
   static displayName = 'InfiniteScroll';
@@ -100,15 +104,37 @@ class InfiniteScrollBase extends Component<Props, State> {
   };
 
   render() {
-    const { renderItems, themeId } = this.props;
-    const { composedTheme, ...restState } = this.state;
-    const theme = composedTheme[themeId];
+    const {
+      props: {
+        className,
+        renderItems,
+        skin: InfiniteScrollSkin,
+        themeId
+      },
+      state: {
+        composedTheme,
+        data,
+        error,
+        hasMoreData,
+        isLoading
+      },
+      scrollContainer
+    } = this;
 
     if (!this._isFunction(renderItems)) { return null; }
+
     return (
-      <div ref={this.scrollContainer} className={theme.root}>
-        {renderItems({ ...restState, theme })}
-      </div>
+      <InfiniteScrollSkin
+        className={className}
+        data={data}
+        error={error}
+        hasMoreData={hasMoreData}
+        isLoading={isLoading}
+        renderItems={renderItems}
+        scrollContainerRef={scrollContainer}
+        theme={composedTheme}
+        themeId={themeId}
+      />
     );
   }
 }
