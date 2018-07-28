@@ -12,6 +12,7 @@ import SimpleFormField from './SimpleFormField.scss';
 import SimpleGrid from './SimpleGrid.scss';
 import SimpleGutter from './SimpleGutter.scss';
 import SimpleHeader from './SimpleHeader.scss';
+import SimpleInfiniteScroll from './SimpleInfiniteScroll.scss';
 import SimpleInput from './SimpleInput.scss';
 import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
 import SimpleModal from './SimpleModal.scss';
@@ -38,6 +39,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.GRID]: SimpleGrid,
   [IDENTIFIERS.GUTTER]: SimpleGutter,
   [IDENTIFIERS.HEADER]: SimpleHeader,
+  [IDENTIFIERS.INFINITE_SCROLL]: SimpleInfiniteScroll,
   [IDENTIFIERS.INPUT]: SimpleInput,
   [IDENTIFIERS.LOADING_SPINNER]: SimpleLoadingSpinner,
   [IDENTIFIERS.MODAL]: SimpleModal,
