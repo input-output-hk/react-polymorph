@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { Element, ComponentType, ChildrenArray } from 'react';
+import type { ChildrenArray } from 'react';
 import { pickBy } from 'lodash';
 
 // components
@@ -38,7 +38,6 @@ type State = { composedTheme: Object };
 class FlexBase extends Component<Props, State> {
   // define static properties
   static displayName = 'Flex';
-  static Item: ComponentType<*> = FlexItem;
   static defaultProps = {
     theme: null,
     themeId: IDENTIFIERS.FLEX,
@@ -107,3 +106,4 @@ class FlexBase extends Component<Props, State> {
 }
 
 export const Flex = withTheme(FlexBase);
+Flex.Item = FlexItem;
