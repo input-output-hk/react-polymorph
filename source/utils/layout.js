@@ -20,7 +20,7 @@ export const composeBaseStyles = (
   return composedBase;
 };
 
-export const formatTemplateAreas = (areas: Array<string>) => {
+export const formatTemplateAreas = (areas: Array<''>) => {
   if (!areas || !areas.length) { return; }
 
   return areas.reduce((template, row, index) => {
