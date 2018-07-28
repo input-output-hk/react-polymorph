@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import type { Element } from 'react';
 
 // components
 import { Base } from './Base';
@@ -14,6 +15,7 @@ import { IDENTIFIERS } from '../../themes/API';
 
 type Props = {
   className: string,
+  children: Element<*>,
   context: {
     theme: Object,
     ROOT_THEME_API: Object
