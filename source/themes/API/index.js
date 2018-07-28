@@ -5,6 +5,7 @@ import { BUTTON_THEME_API } from './button';
 import { CHECKBOX_THEME_API } from './checkbox';
 import { FLEX_THEME_API } from './flex';
 import { FORM_FIELD_THEME_API } from './formfield';
+import { GRID_THEME_API } from './grid';
 import { GUTTER_THEME_API } from './gutter';
 import { HEADER_THEME_API } from './header';
 import { INPUT_THEME_API } from './input';
@@ -26,6 +27,7 @@ export const IDENTIFIERS = {
   CHECKBOX: 'checkbox',
   FLEX: 'flex',
   FORM_FIELD: 'formfield',
+  GRID: 'grid',
   GUTTER: 'gutter',
   HEADER: 'header',
   INPUT: 'input',
@@ -48,6 +50,7 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.CHECKBOX]: CHECKBOX_THEME_API,
   [IDENTIFIERS.FLEX]: FLEX_THEME_API,
   [IDENTIFIERS.FORM_FIELD]: FORM_FIELD_THEME_API,
+  [IDENTIFIERS.GRID]: GRID_THEME_API,
   [IDENTIFIERS.GUTTER]: GUTTER_THEME_API,
   [IDENTIFIERS.HEADER]: HEADER_THEME_API,
   [IDENTIFIERS.INPUT]: INPUT_THEME_API,
