@@ -19,3 +19,12 @@ export const composeBaseStyles = (
 
   return composedBase;
 };
+
+export const formatTemplateAreas = (areas: Array<string>) => {
+  if (!areas || !areas.length) { return; }
+
+  return areas.reduce((template, row, index) => {
+    if (!index) { return `'${row}'`; }
+    return `${template} '${row}'`;
+  }, '');
+};
