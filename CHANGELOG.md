@@ -4,14 +4,16 @@
 
 ## Features
 
+- Adds Base component to layout components [PR 83](https://github.com/input-output-hk/react-polymorph/pull/83)
+
 - Adds ProgressBar component to library with stories.
   [PR 78](https://github.com/input-output-hk/react-polymorph/pull/78)
 
-- Adds LoadingSpinner component, LoadingSpinnerSkin, and SimpleLoadingSpinner theme. Adds reusable 
+- Adds LoadingSpinner component, LoadingSpinnerSkin, and SimpleLoadingSpinner theme. Adds reusable
   loading-spinner mixin to themes. Adds 5 LoadingSpinner stories.
   [PR 75](https://github.com/input-output-hk/react-polymorph/pull/75)
 
-- Adds ButtonSpinnerSkin to simple skins to show LoadingSpinner within the Button component when 
+- Adds ButtonSpinnerSkin to simple skins to show LoadingSpinner within the Button component when
   page data is loading. Adds new button story to exemplify this skin and functionality.
   [PR 76](https://github.com/input-output-hk/react-polymorph/pull/76)
 
@@ -19,41 +21,41 @@
 
 ### Fixes
 
-- Fixed wrong border color for errored & focused textareas 
+- Fixed wrong border color for errored & focused textareas
   [PR 73](https://github.com/input-output-hk/react-polymorph/pull/73)
 
-- De-nests the class definitions in SimpleInput.scss. Ensures the border color of both Input and 
-  NumericInput remain the correct color when in an errored state. Improves composability when theme 
-  overrides is used with both Input components. Updates stories to reflect fixes. 
+- De-nests the class definitions in SimpleInput.scss. Ensures the border color of both Input and
+  NumericInput remain the correct color when in an errored state. Improves composability when theme
+  overrides is used with both Input components. Updates stories to reflect fixes.
   [PR 71](https://github.com/input-output-hk/react-polymorph/pull/71)
 
-- Adds a new HOC GlobalListeners which is used in Select and Autocomplete that attaches document and 
-  window listeners for closing the window. Fixes bubble and arrow positioning when Bubble is rendered 
-  via Select and Autocomplete. NumericInput does not execute the user's onChange prop unless the value 
-  changes internally after being processed. Removes index.js in components and skins directories to 
+- Adds a new HOC GlobalListeners which is used in Select and Autocomplete that attaches document and
+  window listeners for closing the window. Fixes bubble and arrow positioning when Bubble is rendered
+  via Select and Autocomplete. NumericInput does not execute the user's onChange prop unless the value
+  changes internally after being processed. Removes index.js in components and skins directories to
   reduce size of library. [PR 69](https://github.com/input-output-hk/react-polymorph/pull/69)
 
-- Wraps TextAreaSkin's render method in FormField so labels and errors are rendered the same as in Input 
-  and NumericInput. Fixes Input, NumericInput, and TextArea components so they pass a prop called inputRef 
-  or textareaRef to FormField in their skins. This properly makes use of React v16.3.1+'s ref API instead 
-  of using the onRef callback. Adds autoFocus, onBlur, and onFocus props to NumericInput and TextArea. 
+- Wraps TextAreaSkin's render method in FormField so labels and errors are rendered the same as in Input
+  and NumericInput. Fixes Input, NumericInput, and TextArea components so they pass a prop called inputRef
+  or textareaRef to FormField in their skins. This properly makes use of React v16.3.1+'s ref API instead
+  of using the onRef callback. Adds autoFocus, onBlur, and onFocus props to NumericInput and TextArea.
   [PR 67](https://github.com/input-output-hk/react-polymorph/pull/67)
 
-- Fixed wrong positioning of select options when opening upward 
+- Fixed wrong positioning of select options when opening upward
   [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
-- Fixed vertical positioning of select arrow when opened 
+- Fixed vertical positioning of select arrow when opened
   [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
 ### Chores
 
-- Replaces all default exports in the theme directory with constants and exports them. Additionally, 
-  all import statements previously importing a default export are replaced with an appropriate named 
-  import. Defines all properties of the SimpleTheme and ROOT_THEME_API objects using IDENTIFIERS and 
+- Replaces all default exports in the theme directory with constants and exports them. Additionally,
+  all import statements previously importing a default export are replaced with an appropriate named
+  import. Defines all properties of the SimpleTheme and ROOT_THEME_API objects using IDENTIFIERS and
   arranges their properties in ABC order for better readability.
   [77](https://github.com/input-output-hk/react-polymorph/pull/77)
 
-- Adds support for React v15 - v16.4.1. Upgrades devDependencies to latest versions of react, jest, and 
+- Adds support for React v15 - v16.4.1. Upgrades devDependencies to latest versions of react, jest, and
   enzyme related libraries. Adds Autocomplete simulation test for deleting a selected option via backspace key.
   [PR 65](https://github.com/input-output-hk/react-polymorph/pull/65)
 
@@ -73,15 +75,15 @@
 
 ### Chores
 
-- Adds keydown and click simulation tests for Autocomplete using jest and enzyme. Removes helper skins from 
-  test directory and refactors the way in which components are wrapped in a ThemeContext Consumer HOC before 
+- Adds keydown and click simulation tests for Autocomplete using jest and enzyme. Removes helper skins from
+  test directory and refactors the way in which components are wrapped in a ThemeContext Consumer HOC before
   they're exported in order to handle a test environment.
   [PR 63](https://github.com/input-output-hk/react-polymorph/pull/63)
 
-- Adds polyfills for React's new context API and ref API released in v16.3.0. Drops support for React versions 
+- Adds polyfills for React's new context API and ref API released in v16.3.0. Drops support for React versions
   less than v16.[PR 61](https://github.com/input-output-hk/react-polymorph/pull/61)
 
-- Add snapshot test coverage from using jest and enzyme. Add event simulation tests for NumericInput. Adds 
+- Add snapshot test coverage from using jest and enzyme. Add event simulation tests for NumericInput. Adds
 story for ThemeProvider. [PR 60](https://github.com/input-output-hk/react-polymorph/pull/60)
 
 ### Features
@@ -105,9 +107,9 @@ Major breaking changes due to large refactoring of component architecture:
   - Removes skin parts
   - Manages refs by passing them from parent to child
   - Removes inheritance architecture
-  - Adds ESLint config from Daedalus and integrates flow library & static type declarations. Refactors 
-  - components to declare refs using createRef from React v16.3^. Removes propTypes from all components 
-  and removes prop-types lib from dependencies. 
+  - Adds ESLint config from Daedalus and integrates flow library & static type declarations. Refactors
+  - components to declare refs using createRef from React v16.3^. Removes propTypes from all components
+  and removes prop-types lib from dependencies.
 
 ## Features
 
@@ -125,33 +127,33 @@ Major breaking changes due to large refactoring of component architecture:
 
 - Add Autocomplete clear feature [PR 49](https://github.com/input-output-hk/react-polymorph/pull/49)
 
-- Implements a theme API for each component. This is a plain object which exposes the shape of a component's theme. 
-  Each property on the theme API object corresponds with a class name assigned to an element within the component's 
+- Implements a theme API for each component. This is a plain object which exposes the shape of a component's theme.
+  Each property on the theme API object corresponds with a class name assigned to an element within the component's
   skin and a class definition within the component's theme.
 
-- Adds ThemeProvider HOC for applying a theme to all its nested react-polymorph children. ThemeProvider 
-  exonerates the user from explicitly declaring theme as a prop on every instantiated component. A complete 
-  theme, an object containing full theme definitions for every component in the library, may also be passed 
-  to ThemeProvider. The complete theme object may be deconstructed to contain only the necessary theme 
-  definitions used by the components nested within a particular instance of ThemeProvider, yet deconstruction 
+- Adds ThemeProvider HOC for applying a theme to all its nested react-polymorph children. ThemeProvider
+  exonerates the user from explicitly declaring theme as a prop on every instantiated component. A complete
+  theme, an object containing full theme definitions for every component in the library, may also be passed
+  to ThemeProvider. The complete theme object may be deconstructed to contain only the necessary theme
+  definitions used by the components nested within a particular instance of ThemeProvider, yet deconstruction
   is not required.
 
-- Adds themeOverrides as an optional prop on ThemeProvider and on all components within the library. 
-  themeOverrides composes the user's custom css/scss with the component's base theme. This automatic 
-  composition saves the user from the tedium of manually piecing together custom styles with those of 
-  the component's theme that the user wishes to retain, yet themeOverrides is flexible enough to restyle 
-  a component's theme in a nontrivial way. themeOverrides may be passed directly to one instance of 
-  a component or passed to all instances nested within ThemeProvider via context. This composition of 
+- Adds themeOverrides as an optional prop on ThemeProvider and on all components within the library.
+  themeOverrides composes the user's custom css/scss with the component's base theme. This automatic
+  composition saves the user from the tedium of manually piecing together custom styles with those of
+  the component's theme that the user wishes to retain, yet themeOverrides is flexible enough to restyle
+  a component's theme in a nontrivial way. themeOverrides may be passed directly to one instance of
+  a component or passed to all instances nested within ThemeProvider via context. This composition of
   styles relies on css-modules.
 
-- Adds a composed theme story to most component stories to exemplify the relationship between ThemeProvider 
+- Adds a composed theme story to most component stories to exemplify the relationship between ThemeProvider
   and themeOverrides.
 
 - Adds autofocus prop to all applicable input based components.
 
-- Adds index file to source/utils, source/themes/API, source/themes/simple, source/skins/simple, and 
-  source/components for the use of named and default exports. Makes it easier for the user to import a 
-  full theme object for ThemeProvider, or simply one component's theme. Also makes it easier to import 
+- Adds index file to source/utils, source/themes/API, source/themes/simple, source/skins/simple, and
+  source/components for the use of named and default exports. Makes it easier for the user to import a
+  full theme object for ThemeProvider, or simply one component's theme. Also makes it easier to import
   multiple skins and components on one line.
 
 ## 0.6.4
