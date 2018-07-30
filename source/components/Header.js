@@ -85,12 +85,12 @@ class HeaderBase extends Component <Props, State> {
     const theme = this.state.composedTheme[this.props.themeId];
 
     return activeClasses.reduce((reducedTheme, activeClass) => {
-      if (Object.hasOwnProperty.call(theme, activeClass)) {
+      if (activeClass && Object.hasOwnProperty.call(theme, activeClass)) {
         reducedTheme[activeClass] = theme[activeClass];
       }
       return reducedTheme;
     }, {});
-  }
+  };
 
   _getActiveFont = ({ light, medium, regular, thin, bold }) => {
     const fontProps = pickBy({ light, medium, regular, thin, bold });
@@ -115,7 +115,7 @@ class HeaderBase extends Component <Props, State> {
     if (activeFont) { return [...activeClasses, activeFont]; }
 
     return [...activeClasses, activeTheme, activeFont].filter(val => val);
-  }
+  };
 
   render() {
     const { children, className, skin: HeaderSkin, ...styleProps } = this.props;
