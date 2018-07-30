@@ -6,6 +6,7 @@ import { storiesOf } from '@storybook/react';
 
 // components
 import { Flex } from '../source/components/layout/Flex';
+import { FlexItem } from '../source/components/layout/FlexItem';
 
 // styles && themeOverrides
 import styles from './Layout.stories.scss';
@@ -23,33 +24,33 @@ storiesOf('Layout', module)
 
   .add('Flex - column center', () => (
     <Flex column center className={wrapper}>
-      <Flex.Item>FlexItem 1</Flex.Item>
-      <Flex.Item>FlexItem 2</Flex.Item>
-      <Flex.Item>FlexItem 3</Flex.Item>
+      <FlexItem>FlexItem 1</FlexItem>
+      <FlexItem>FlexItem 2</FlexItem>
+      <FlexItem>FlexItem 3</FlexItem>
     </Flex>
   ))
 
   .add('Flex - row center', () => (
     <Flex row center className={wrapper}>
-      <Flex.Item>FlexItem 1</Flex.Item>
-      <Flex.Item>FlexItem 2</Flex.Item>
-      <Flex.Item>FlexItem 3</Flex.Item>
+      <FlexItem>FlexItem 1</FlexItem>
+      <FlexItem>FlexItem 2</FlexItem>
+      <FlexItem>FlexItem 3</FlexItem>
     </Flex>
   ))
 
   .add('Flex - columnReverse', () => (
     <Flex columnReverse center className={wrapper}>
-      <Flex.Item>FlexItem 1</Flex.Item>
-      <Flex.Item>FlexItem 2</Flex.Item>
-      <Flex.Item>FlexItem 3</Flex.Item>
+      <FlexItem>FlexItem 1</FlexItem>
+      <FlexItem>FlexItem 2</FlexItem>
+      <FlexItem>FlexItem 3</FlexItem>
     </Flex>
   ))
 
   .add('Flex - rowReverse', () => (
     <Flex rowReverse center className={wrapper}>
-      <Flex.Item>FlexItem 1</Flex.Item>
-      <Flex.Item>FlexItem 2</Flex.Item>
-      <Flex.Item>FlexItem 3</Flex.Item>
+      <FlexItem>FlexItem 1</FlexItem>
+      <FlexItem>FlexItem 2</FlexItem>
+      <FlexItem>FlexItem 3</FlexItem>
     </Flex>
   ))
 
@@ -60,9 +61,9 @@ storiesOf('Layout', module)
       alignItems="center"
       className={wrapper}
     >
-      <Flex.Item>FlexItem 1</Flex.Item>
-      <Flex.Item>FlexItem 2</Flex.Item>
-      <Flex.Item>FlexItem 3</Flex.Item>
+      <FlexItem>FlexItem 1</FlexItem>
+      <FlexItem>FlexItem 2</FlexItem>
+      <FlexItem>FlexItem 3</FlexItem>
     </Flex>
   ))
 
@@ -73,9 +74,9 @@ storiesOf('Layout', module)
       alignItems="center"
       className={wrapper}
     >
-      <Flex.Item>FlexItem 1</Flex.Item>
-      <Flex.Item>FlexItem 2</Flex.Item>
-      <Flex.Item>FlexItem 3</Flex.Item>
+      <FlexItem>FlexItem 1</FlexItem>
+      <FlexItem>FlexItem 2</FlexItem>
+      <FlexItem>FlexItem 3</FlexItem>
     </Flex>
   ))
 
@@ -86,44 +87,44 @@ storiesOf('Layout', module)
       alignItems="center"
       themeOverrides={customFlex}
     >
-      <Flex.Item>FlexItem 1</Flex.Item>
-      <Flex.Item>FlexItem 2</Flex.Item>
-      <Flex.Item>FlexItem 3</Flex.Item>
+      <FlexItem>FlexItem 1</FlexItem>
+      <FlexItem>FlexItem 2</FlexItem>
+      <FlexItem>FlexItem 3</FlexItem>
     </Flex>
   ))
 
-  .add('Flex.Item - alignSelf="flex-start"', () => (
+  .add('FlexItem - alignSelf="flex-start / end"', () => (
     <Flex row center className={wrapper}>
-      <Flex.Item alignSelf="flex-start">FlexItem 1</Flex.Item>
-      <Flex.Item alignSelf="flex-end">FlexItem 2</Flex.Item>
-      <Flex.Item alignSelf="flex-start">FlexItem 3</Flex.Item>
+      <FlexItem alignSelf="flex-start">flex-start</FlexItem>
+      <FlexItem alignSelf="flex-end">flex-end</FlexItem>
+      <FlexItem alignSelf="flex-start">flex-start</FlexItem>
     </Flex>
   ))
 
-  .add('Flex.Item - alignSelf="stretch"', () => (
+  .add('FlexItem - alignSelf="stretch"', () => (
     <Flex row center className={wrapper}>
-      <Flex.Item>FlexItem 1</Flex.Item>
-      <Flex.Item alignSelf="stretch">FlexItem 2</Flex.Item>
-      <Flex.Item>FlexItem 3</Flex.Item>
+      <FlexItem>FlexItem 1</FlexItem>
+      <FlexItem alignSelf="stretch">stretch</FlexItem>
+      <FlexItem>FlexItem 3</FlexItem>
     </Flex>
   ))
 
-  .add('Flex.Item - order', () => (
+  .add('FlexItem - order', () => (
     <Flex row center className={wrapper}>
-      <Flex.Item order={2}>FlexItem 1</Flex.Item>
-      <Flex.Item order={3}>FlexItem 2</Flex.Item>
-      <Flex.Item order={1}>FlexItem 3</Flex.Item>
-      <Flex.Item order={5}>FlexItem 4</Flex.Item>
-      <Flex.Item order={4}>FlexItem 5</Flex.Item>
+      <FlexItem order={2}>FlexItem 1</FlexItem>
+      <FlexItem order={3}>FlexItem 2</FlexItem>
+      <FlexItem order={1}>FlexItem 3</FlexItem>
+      <FlexItem order={5}>FlexItem 4</FlexItem>
+      <FlexItem order={4}>FlexItem 5</FlexItem>
     </Flex>
   ))
 
-  .add('Flex.Item - flex', () => (
+  .add('FlexItem - flex', () => (
     <Flex row center className={wrapper}>
-      <Flex.Item flex={1}>flex = 1</Flex.Item>
-      <Flex.Item flex={2}>flex = 2</Flex.Item>
-      <Flex.Item flex={3}>flex = 3</Flex.Item>
-      <Flex.Item flex={4}>flex = 4</Flex.Item>
-      <Flex.Item flex={5}>flex = 5</Flex.Item>
+      <FlexItem flex={1}>flex = 1</FlexItem>
+      <FlexItem flex={2}>flex = 2</FlexItem>
+      <FlexItem flex={3}>flex = 3</FlexItem>
+      <FlexItem flex={4}>flex = 4</FlexItem>
+      <FlexItem flex={5}>flex = 5</FlexItem>
     </Flex>
   ));

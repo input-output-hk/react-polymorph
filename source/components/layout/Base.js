@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { Element } from 'react';
+import type { Node } from 'react';
 import classnames from 'classnames';
 
 // styles
@@ -11,8 +11,8 @@ import { composeBaseStyles } from '../../utils/layout';
 
 type Props = {
   activeClasses: Array<*>,
-  children: Element<*> | Array<*>,
-  className: string,
+  children: Node,
+  className?: string,
   inlineStyles: Object,
   stylesToAdd?: Object
 };
