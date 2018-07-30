@@ -1,0 +1,21 @@
+.wrapper {
+  padding: 5px;
+  margin: 20px;
+  height: 500px;
+  width: auto;
+  border: 1px solid #BEBEBE;
+
+  div {
+    background: tomato;
+    font-family: 'apercu-pro', sans-serif;
+    padding: 5px;
+    width: 100px;
+    margin: 5px;
+    border-radius: 5px;
+    line-height: 100px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  }
+}
