@@ -4,6 +4,7 @@ import { BUBBLE_THEME_API } from './bubble';
 import { BUTTON_THEME_API } from './button';
 import { CHECKBOX_THEME_API } from './checkbox';
 import { FORM_FIELD_THEME_API } from './formfield';
+import { HEADER_THEME_API } from './header';
 import { INPUT_THEME_API } from './input';
 import { LOADING_SPINNER_API } from './loadingspinner';
 import { MODAL_THEME_API } from './modal';
@@ -22,6 +23,7 @@ export const IDENTIFIERS = {
   BUTTON: 'button',
   CHECKBOX: 'checkbox',
   FORM_FIELD: 'formfield',
+  HEADER: 'header',
   INPUT: 'input',
   LOADING_SPINNER: 'loadingspinner',
   MODAL: 'modal',
@@ -41,6 +43,7 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.BUTTON]: BUTTON_THEME_API,
   [IDENTIFIERS.CHECKBOX]: CHECKBOX_THEME_API,
   [IDENTIFIERS.FORM_FIELD]: FORM_FIELD_THEME_API,
+  [IDENTIFIERS.HEADER]: HEADER_THEME_API,
   [IDENTIFIERS.INPUT]: INPUT_THEME_API,
   [IDENTIFIERS.LOADING_SPINNER]: LOADING_SPINNER_API,
   [IDENTIFIERS.MODAL]: MODAL_THEME_API,

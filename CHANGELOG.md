@@ -4,6 +4,9 @@
 
 ## Features
 
+- Adds Header component, Header skin, and adds SimpleHeader to SimpleTheme.
+  [PR 84](https://github.com/input-output-hk/react-polymorph/pull/84)
+
 - Adds Base component to layout components [PR 83](https://github.com/input-output-hk/react-polymorph/pull/83)
 
 - Adds ProgressBar component to library with stories.
