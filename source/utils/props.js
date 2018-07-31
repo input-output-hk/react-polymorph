@@ -7,3 +7,6 @@ export const pickDOMProps = filterReactDomProps;
 
 export const composeFunctions = (...fns: [Function, Function]) => (...args: [any, any]) =>
   fns.forEach(fn => fn && fn(...args));
+
+export const getDisplayName = (Component: ComponentType<*>) =>
+  (Component.displayName || Component.name);
