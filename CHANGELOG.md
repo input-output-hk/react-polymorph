@@ -7,6 +7,14 @@
 - Adds Grid and GridItem components to layout components.
   [PR 87](https://github.com/input-output-hk/react-polymorph/pull/87)
 
+- Adds Flex and FlexItem components to layout components.
+  [PR 85](https://github.com/input-output-hk/react-polymorph/pull/85)
+
+- Adds Header component, Header skin, and adds SimpleHeader to SimpleTheme.
+  [PR 84](https://github.com/input-output-hk/react-polymorph/pull/84)
+
+- Adds Base component to layout components [PR 83](https://github.com/input-output-hk/react-polymorph/pull/83)
+
 - Adds ProgressBar component to library with stories.
   [PR 78](https://github.com/input-output-hk/react-polymorph/pull/78)
 
