@@ -90,7 +90,7 @@ class HeaderBase extends Component <Props, State> {
       }
       return reducedTheme;
     }, {});
-  }
+  };
 
   _getActiveFont = ({ light, medium, regular, thin, bold }) => {
     const fontProps = pickBy({ light, medium, regular, thin, bold });
@@ -115,7 +115,7 @@ class HeaderBase extends Component <Props, State> {
     if (activeFont) { return [...activeClasses, activeFont]; }
 
     return [...activeClasses, activeTheme, activeFont].filter(val => val);
-  }
+  };
 
   render() {
     const { children, className, skin: HeaderSkin, ...styleProps } = this.props;
