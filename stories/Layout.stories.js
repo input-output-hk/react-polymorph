@@ -8,6 +8,7 @@ import { storiesOf } from '@storybook/react';
 import { Flex } from '../source/components/layout/Flex';
 import { FlexItem } from '../source/components/layout/FlexItem';
 import { Grid } from '../source/components/layout/Grid';
+import { GridItem } from '../source/components/layout/GridItem';
 import { Gutter } from '../source/components/layout/Gutter';
 import { Header } from '../source/components/Header';
 
@@ -183,18 +184,18 @@ storiesOf('Layout', module)
         rows="125px 125px 125px"
         gap={40}
       >
-        <Grid.Item column="1 / 3" row="1">
+        <GridItem column="1 / 3" row="1">
           1
-        </Grid.Item>
-        <Grid.Item column="3" row="1 / 3">
+        </GridItem>
+        <GridItem column="3" row="1 / 3">
           2
-        </Grid.Item>
-        <Grid.Item column="1" row="2">
+        </GridItem>
+        <GridItem column="1" row="2">
           3
-        </Grid.Item>
-        <Grid.Item column="2" row="2">
+        </GridItem>
+        <GridItem column="2" row="2">
           4
-        </Grid.Item>
+        </GridItem>
       </Grid>
     </Gutter>
   ))
@@ -202,18 +203,18 @@ storiesOf('Layout', module)
   .add('Grid.Item - columnStart/End rowStart/End', () => (
     <Gutter padding="25vh 25vw">
       <Grid className={boxLight} columns="repeat(3, 200px)" rows="repeat(3, 125px)" gap={10}>
-        <Grid.Item columnStart={2} columnEnd={3} rowStart={1}>
+        <GridItem columnStart={2} columnEnd={3} rowStart={1}>
           1
-        </Grid.Item>
-        <Grid.Item columnStart={3} rowStart={1} rowEnd={2}>
+        </GridItem>
+        <GridItem columnStart={3} rowStart={1} rowEnd={2}>
           2
-        </Grid.Item>
-        <Grid.Item columnStart={1} rowStart={1} rowEnd={3}>
+        </GridItem>
+        <GridItem columnStart={1} rowStart={1} rowEnd={3}>
           3
-        </Grid.Item>
-        <Grid.Item columnStart={2} columnEnd={4} rowStart={2}>
+        </GridItem>
+        <GridItem columnStart={2} columnEnd={4} rowStart={2}>
           4
-        </Grid.Item>
+        </GridItem>
       </Grid>
     </Gutter>
   ))
@@ -233,10 +234,10 @@ storiesOf('Layout', module)
           templateAreas={templateAreas}
           gap={10}
         >
-          <Grid.Item gridArea="content">content</Grid.Item>
-          <Grid.Item gridArea="sidebar">sidebar</Grid.Item>
-          <Grid.Item gridArea="header">header</Grid.Item>
-          <Grid.Item gridArea="footer">footer</Grid.Item>
+          <GridItem gridArea="content">content</GridItem>
+          <GridItem gridArea="sidebar">sidebar</GridItem>
+          <GridItem gridArea="header">header</GridItem>
+          <GridItem gridArea="footer">footer</GridItem>
         </Grid>
       </Gutter>
     );
@@ -257,25 +258,25 @@ storiesOf('Layout', module)
           templateAreas={templateAreas}
           gap={10}
         >
-          <Grid.Item gridArea="content">
+          <GridItem gridArea="content">
             <Header h2 left skin={HeaderSkin}>content</Header>
-          </Grid.Item>
+          </GridItem>
 
-          <Grid.Item gridArea="sidebar">
+          <GridItem gridArea="sidebar">
             <Header h2 left skin={HeaderSkin}>sidebar</Header>
-          </Grid.Item>
+          </GridItem>
 
-          <Grid.Item gridArea="header">
+          <GridItem gridArea="header">
             <Header h2 left skin={HeaderSkin}>header</Header>
-          </Grid.Item>
+          </GridItem>
 
-          <Grid.Item gridArea="footer">
+          <GridItem gridArea="footer">
             <Header h2 left skin={HeaderSkin}>footer</Header>
-          </Grid.Item>
+          </GridItem>
 
-          <Grid.Item gridArea="aside">
+          <GridItem gridArea="aside">
             <Header h2 left skin={HeaderSkin}>aside</Header>
-          </Grid.Item>
+          </GridItem>
         </Grid>
       </Gutter>
     );
