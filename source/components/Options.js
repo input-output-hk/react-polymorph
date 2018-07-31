@@ -55,9 +55,11 @@ type State = {
 };
 
 class OptionsBase extends Component<Props, State> {
+  // declare ref types
+  optionsElement: ?Element<any>; // TODO: Does this get used? Don't think so.
 
-  optionsElement: ?Element<any>;
-
+  // define static properties
+  static displayName = 'Options';
   static defaultProps = {
     isOpen: false,
     isOpeningUpward: false,

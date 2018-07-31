@@ -30,6 +30,8 @@ type State = {
 };
 
 class LoadingSpinnerBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'LoadingSpinner';
   static defaultProps = {
     big: false,
     theme: null,

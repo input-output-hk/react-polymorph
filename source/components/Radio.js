@@ -33,6 +33,8 @@ type State = {
 };
 
 class RadioBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'Radio';
   static defaultProps = {
     disabled: false,
     selected: false,

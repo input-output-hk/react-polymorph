@@ -20,6 +20,8 @@ type Props = {
 };
 
 export class GlobalListeners extends Component<Props> {
+  // define static properties
+  static displayName = 'GlobalListeners';
   static defaultProps = {
     optionsIsOpen: false
   };

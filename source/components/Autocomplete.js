@@ -53,11 +53,14 @@ type State = {
 };
 
 class AutocompleteBase extends Component<Props, State> {
+  // declare ref types
   rootElement: ?Element<any>;
   inputElement: ?Element<'input'>;
   suggestionsElement: ?Element<any>;
   optionsElement: ?Element<any>;
 
+  // define static properties
+  static displayName = 'Autocomplete';
   static defaultProps = {
     error: null,
     invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default

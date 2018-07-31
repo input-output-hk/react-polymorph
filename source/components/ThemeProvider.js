@@ -26,6 +26,8 @@ type State = {
 };
 
 export class ThemeProvider extends Component<Props, State> {
+  // define static properties
+  static displayName = 'ThemeProvider';
   static defaultProps = {
     themeOverrides: {}
   };
