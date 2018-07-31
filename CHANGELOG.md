@@ -4,6 +4,9 @@
 
 ## Features
 
+- Adds displayName static property to all components
+  [PR 89](https://github.com/input-output-hk/react-polymorph/pull/89)
+
 - Adds Flex and FlexItem components to layout components.
   [PR 85](https://github.com/input-output-hk/react-polymorph/pull/85)
 
