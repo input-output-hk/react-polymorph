@@ -4,6 +4,9 @@
 
 ## Features
 
+- Adds Grid and GridItem components to layout components.
+  [PR 87](https://github.com/input-output-hk/react-polymorph/pull/87)
+
 - Adds Gutter component to layout components and SimpleGutter to SimpleTheme.
   [PR 86](https://github.com/input-output-hk/react-polymorph/pull/86)
 
