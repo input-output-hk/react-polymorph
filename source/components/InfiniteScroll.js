@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
-
+import type { ComponentType, Node } from 'react';
 // $FlowFixMe
 import createRef from 'create-react-ref/lib/createRef';
+
+import type { ReactElementRef } from '../utils/types.js';
 
 // internal components
 import { withTheme } from './HOC/withTheme';
@@ -32,14 +33,14 @@ type Props = {
 type State = {
   composedTheme: Object,
   data: Object | Array<{}>,
-  error: boolean | string | Element<*>,
+  error: boolean | string | Node,
   hasMoreData: boolean,
   isLoading: boolean
 };
 
 class InfiniteScrollBase extends Component<Props, State> {
   // declare ref types
-  scrollContainer: ?Element<any>;
+  scrollContainer: ReactElementRef<typeof HTMLElement>;
 
   // define static properties
   static displayName = 'InfiniteScroll';
@@ -77,17 +78,19 @@ class InfiniteScrollBase extends Component<Props, State> {
 
   componentDidMount() {
     const { scrollContainer } = this;
+    if (!scrollContainer.current) return;
     scrollContainer.current.addEventListener('scroll', this.handleScroll);
   }
 
   _isFunction = (renderProp: ?Function) => (renderProp && typeof renderProp === 'function');
 
-  setError = (error: string | Element<*>) => this.setState({ error });
+  setError = (error: string | Node) => this.setState({ error });
 
   handleFetchData = () => this.props.fetchData(this.setState.bind(this));
 
   checkForScrollBottom = () => {
     const { scrollContainer, props: { threshold } } = this;
+    if (!scrollContainer.current) return;
     const { offsetHeight, scrollTop, scrollHeight } = scrollContainer.current;
 
     if (offsetHeight + scrollTop >= scrollHeight - threshold) {

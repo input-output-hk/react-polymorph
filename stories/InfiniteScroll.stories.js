@@ -9,6 +9,7 @@ import { InfiniteScroll } from '../source/components/InfiniteScroll';
 import { Header } from '../source/components/Header';
 import { LoadingSpinner } from '../source/components/LoadingSpinner';
 import { Flex } from '../source/components/layout/Flex';
+import { FlexItem } from '../source/components/layout/FlexItem';
 
 // skins
 import { InfiniteScrollSkin } from '../source/skins/simple/InfiniteScrollSkin';
@@ -59,7 +60,7 @@ storiesOf('InfiniteScroll', module)
         }) => (
           <div className={itemsRoot}>
             {data.map((user, index) => (
-              <Flex.Item key={index} theme={theme}>
+              <FlexItem key={index} theme={theme}>
                 <div style={{ marginBottom: '5px' }}>
                   <Header bold h2 left skin={HeaderSkin}>
                     {user.name.first} {user.name.last}
@@ -72,13 +73,13 @@ storiesOf('InfiniteScroll', module)
                   alt={user.name.first}
                   src={user.picture.medium}
                 />
-              </Flex.Item>
+              </FlexItem>
             ))}
             {!hasMoreData && <div>End of Users</div>}
             {isLoading && (
-              <Flex.Item className={spinner}>
+              <FlexItem className={spinner}>
                 <LoadingSpinner big skin={LoadingSpinnerSkin} />
-              </Flex.Item>
+              </FlexItem>
             )}
             {error && <div>Error</div>}
           </div>
