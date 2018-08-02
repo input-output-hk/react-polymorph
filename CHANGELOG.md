@@ -4,6 +4,9 @@
 
 ## Features
 
+- Adds InfiniteScroll component, InfiniteScrollSkin to simple skins, and SimpleInfiniteScroll to SimpleTheme.
+  [PR 88](https://github.com/input-output-hk/react-polymorph/pull/88)
+
 - Adds Grid and GridItem components to layout components.
   [PR 87](https://github.com/input-output-hk/react-polymorph/pull/87)
 

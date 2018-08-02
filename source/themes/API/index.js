@@ -8,6 +8,7 @@ import { FORM_FIELD_THEME_API } from './formfield';
 import { GRID_THEME_API } from './grid';
 import { GUTTER_THEME_API } from './gutter';
 import { HEADER_THEME_API } from './header';
+import { INFINITE_SCROLL_THEME_API } from './infinitescroll';
 import { INPUT_THEME_API } from './input';
 import { LOADING_SPINNER_API } from './loadingspinner';
 import { MODAL_THEME_API } from './modal';
@@ -30,6 +31,7 @@ export const IDENTIFIERS = {
   GRID: 'grid',
   GUTTER: 'gutter',
   HEADER: 'header',
+  INFINITE_SCROLL: 'infinitescroll',
   INPUT: 'input',
   LOADING_SPINNER: 'loadingspinner',
   MODAL: 'modal',
@@ -53,6 +55,7 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.GRID]: GRID_THEME_API,
   [IDENTIFIERS.GUTTER]: GUTTER_THEME_API,
   [IDENTIFIERS.HEADER]: HEADER_THEME_API,
+  [IDENTIFIERS.INFINITE_SCROLL]: INFINITE_SCROLL_THEME_API,
   [IDENTIFIERS.INPUT]: INPUT_THEME_API,
   [IDENTIFIERS.LOADING_SPINNER]: LOADING_SPINNER_API,
   [IDENTIFIERS.MODAL]: MODAL_THEME_API,

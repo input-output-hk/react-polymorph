@@ -1,0 +1,27 @@
+.root {
+  height: 90vh;
+  width: 35vw;
+  border: 2px solid rgba(102, 122, 138, 0.3);
+  border-radius: 3px;
+}
+
+.item {
+  height: auto;
+  width: auto;
+  font-family: 'apercu-pro', sans-serif;
+  background-color: #fff;
+  color: #444;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 10px;
+  border: 2px solid #2f496e;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+
+  img {
+    border-radius: 50%;
+    height: 72px;
+    marginRight: 20px;
+    width: 72px;
+  }
+}
