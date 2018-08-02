@@ -73,38 +73,39 @@ class InfiniteScrollBase extends Component<Props, State> {
   }
 
   componentWillMount() {
-    this.handleFetchData();
+    this._handleFetchData();
   }
 
   componentDidMount() {
     const { scrollContainer } = this;
     if (!scrollContainer.current) return;
-    scrollContainer.current.addEventListener('scroll', this.handleScroll);
+    scrollContainer.current.addEventListener('scroll', this._handleScroll);
   }
 
-  _isFunction = (renderProp: ?Function) => (renderProp && typeof renderProp === 'function');
+  // calls user's fetchData function from props
+  _handleFetchData = () => this.props.fetchData(this.setState.bind(this))
 
-  setError = (error: string | Node) => this.setState({ error });
+  // scroll event listener attached to scrollContainer element
+  _handleScroll = () => {
+    const { error, isLoading, hasMoreData } = this.state;
 
-  handleFetchData = () => this.props.fetchData(this.setState.bind(this));
+    // return early for error, loading, or lack of future data
+    if (error || isLoading || !hasMoreData) { return; }
+    return this._checkForScrollBottom();
+  }
 
-  checkForScrollBottom = () => {
+  // prevents new data fetch until user has scrolled near bottom of existing data
+  _checkForScrollBottom = () => {
     const { scrollContainer, props: { threshold } } = this;
     if (!scrollContainer.current) return;
     const { offsetHeight, scrollTop, scrollHeight } = scrollContainer.current;
 
     if (offsetHeight + scrollTop >= scrollHeight - threshold) {
-      return this.handleFetchData();
+      return this._handleFetchData();
     }
-  };
+  }
 
-  handleScroll = () => {
-    const { error, isLoading, hasMoreData } = this.state;
-
-    // return early for error, loading, or lack of future data
-    if (error || isLoading || !hasMoreData) { return; }
-    return this.checkForScrollBottom();
-  };
+  _isFunction = (renderProp: ?Function) => (renderProp && typeof renderProp === 'function')
 
   render() {
     const {
