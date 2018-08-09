@@ -1,5 +1,6 @@
 // @flow
 import { isEmpty, cloneDeep } from 'lodash';
+import { hasProperty } from './props';
 
 export const appendToProperty = (dest: {}, name: string, value: string) => {
   dest[name] === '' ? (dest[name] = value) : (dest[name] += ' ' + value);
@@ -8,8 +9,8 @@ export const appendToProperty = (dest: {}, name: string, value: string) => {
 export const composeComponentStyles = (componentStyles: {}, componentTheme: {}) => {
   if (!componentTheme) return;
   for (const property in componentStyles) {
-    if (Object.prototype.hasOwnProperty.call(componentStyles, property)) {
-      if (Object.prototype.hasOwnProperty.call(componentTheme, property)) {
+    if (hasProperty(componentStyles, property)) {
+      if (hasProperty(componentTheme, property)) {
         appendToProperty(componentStyles, property, componentTheme[property]);
       }
     }
@@ -22,12 +23,11 @@ export const composeComponentStyles = (componentStyles: {}, componentTheme: {}) 
 // theme[themeId] to ensure it's an object
 export const addThemeId = (theme: {}, themeId: string) => {
   if (!isEmpty(theme) && themeId) {
-    const themeIdExists = Object.prototype.hasOwnProperty.call(theme, themeId);
+    const themeIdExists = hasProperty(theme, themeId);
     const themeIdIsObj = typeof theme[themeId] === 'object';
 
     return themeIdExists && themeIdIsObj ? theme : { [themeId]: theme };
   }
-
   return theme;
 };
 
@@ -49,10 +49,11 @@ export const composeTheme = (
   // Return theme if there are no overrides provided
   if (isEmpty(themeOverrides)) return theme;
 
+  // final object to be returned
   const composedTheme = cloneDeep(themeAPI);
 
   for (const componentId in themeAPI) {
-    if (Object.prototype.hasOwnProperty.call(composedTheme, componentId)) {
+    if (hasProperty(composedTheme, componentId)) {
       const componentStyles = composedTheme[componentId];
       composeComponentStyles(componentStyles, theme[componentId]);
       composeComponentStyles(componentStyles, themeOverrides[componentId]);
