@@ -15,6 +15,10 @@ import { Autocomplete } from '../source/components/Autocomplete';
 import { Radio } from '../source/components/Radio';
 import { Options } from '../source/components/Options';
 import { Button } from '../source/components/Button';
+import { ProgressBar } from '../source/components/ProgressBar';
+import { Flex } from '../source/components/layout/Flex';
+import { FlexItem } from '../source/components/layout/FlexItem';
+import { Gutter } from '../source/components/layout/Gutter';
 
 // skins
 import { InputSkin } from '../source/skins/simple/InputSkin';
@@ -27,9 +31,10 @@ import { RadioSkin } from '../source/skins/simple/RadioSkin';
 import { OptionsSkin } from '../source/skins/simple/OptionsSkin';
 import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 import { CheckboxSkin } from '../source/skins/simple/CheckboxSkin';
+import { ProgressBarSkin } from '../source/skins/simple/ProgressBarSkin';
 
-// theme
-import { IDENTIFIERS } from '../source/themes/API';
+// themes
+import { SimpleTheme } from '../source/themes/simple';
 import CustomTextAreaTheme from './theme-customizations/TextArea.custom.scss';
 import CustomTogglerTheme from './theme-customizations/Toggler.custom.scss';
 import CustomSwitchTheme from './theme-customizations/Switch.custom.scss';
@@ -40,33 +45,50 @@ import CustomModalTheme from './theme-customizations/Modal.custom.scss';
 import CustomButtonTheme from './theme-customizations/Button.custom.scss';
 import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
 import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.scss';
-import SimpleBubble from '../source/themes/simple/SimpleBubble.scss';
-import SimpleFormField from '../source/themes/simple/SimpleFormField.scss';
 
-const OPTIONS = [
-  'home',
-  'cat',
-  'dog',
-  'fish'
-];
+// themeOverrides
+import buttonOverrides from './theme-overrides/buttonOverrides.scss';
+import checkboxOverrides from './theme-overrides/checkboxOverrides.scss';
+import progressBarOverrides from './theme-overrides/progressBarOverrides.scss';
+
+// constants
+import { IDENTIFIERS } from '../source/themes/API';
+
+const MNEMONICS = ['home', 'cat', 'dog', 'fish'];
+
+const {
+  AUTOCOMPLETE,
+  BUBBLE,
+  BUTTON,
+  CHECKBOX,
+  FORM_FIELD,
+  INPUT,
+  MODAL,
+  OPTIONS,
+  PROGRESS_BAR,
+  RADIO,
+  SWITCH,
+  TEXT_AREA,
+  TOGGLER
+} = IDENTIFIERS;
 
 const CUSTOM_THEME = {
-  [IDENTIFIERS.TEXT_AREA]: CustomTextAreaTheme,
-  [IDENTIFIERS.TOGGLER]: CustomTogglerTheme,
-  [IDENTIFIERS.SWITCH]: CustomSwitchTheme,
-  [IDENTIFIERS.RADIO]: CustomRadioTheme,
-  [IDENTIFIERS.OPTIONS]: CustomOptionsTheme,
-  [IDENTIFIERS.INPUT]: CustomInputTheme,
-  [IDENTIFIERS.MODAL]: CustomModalTheme,
-  [IDENTIFIERS.BUTTON]: CustomButtonTheme,
-  [IDENTIFIERS.CHECKBOX]: CustomCheckboxTheme,
-  [IDENTIFIERS.AUTOCOMPLETE]: CustomAutocompleteTheme,
-  [IDENTIFIERS.BUBBLE]: SimpleBubble,
-  [IDENTIFIERS.FORM_FIELD]: SimpleFormField
+  [TEXT_AREA]: CustomTextAreaTheme,
+  [TOGGLER]: CustomTogglerTheme,
+  [SWITCH]: CustomSwitchTheme,
+  [RADIO]: CustomRadioTheme,
+  [OPTIONS]: CustomOptionsTheme,
+  [INPUT]: CustomInputTheme,
+  [MODAL]: CustomModalTheme,
+  [BUTTON]: CustomButtonTheme,
+  [CHECKBOX]: CustomCheckboxTheme,
+  [AUTOCOMPLETE]: CustomAutocompleteTheme,
+  [BUBBLE]: SimpleTheme[BUBBLE],
+  [FORM_FIELD]: SimpleTheme[FORM_FIELD]
 };
 
 storiesOf('ThemeProvider', module)
-  // ====== Stories ======
+  // ====== ThemeProvider Stories ======
 
   .add('custom theme',
     withState({
@@ -156,7 +178,7 @@ storiesOf('ThemeProvider', module)
         <div style={{ margin: '50px' }}>
           <Options
             isOpen
-            options={OPTIONS}
+            options={MNEMONICS}
             isOpeningUpward={false}
             noResults={false}
             skin={OptionsSkin}
@@ -166,7 +188,7 @@ storiesOf('ThemeProvider', module)
         <div style={{ margin: '400px 100px 250px 100px', height: '225px' }}>
           <Autocomplete
             label="Autocomplete with custom theme"
-            options={OPTIONS}
+            options={MNEMONICS}
             placeholder="Enter mnemonic..."
             maxSelections={12}
             maxVisibleOptions={5}
@@ -176,4 +198,60 @@ storiesOf('ThemeProvider', module)
         </div>
       </ThemeProvider>
     ))
+  )
+
+  .add('themeOverrides',
+    withState({
+      checked: false,
+      progress: 0
+    }, store => {
+      const ThemeOverrides = {
+        [BUTTON]: buttonOverrides,
+        [CHECKBOX]: checkboxOverrides,
+        [PROGRESS_BAR]: progressBarOverrides
+      };
+      return (
+        <ThemeProvider theme={SimpleTheme} themeOverrides={ThemeOverrides}>
+          <Gutter padding="30vh 20vw">
+            <Flex row justifyContent="space-around" alignItems="center">
+              <FlexItem>
+                <Button
+                  label="+ 10%"
+                  onClick={() => store.set({ progress: store.state.progress + 10 })}
+                  skin={ButtonSkin}
+                />
+              </FlexItem>
+
+              <FlexItem>
+                <Button
+                  label="- 10%"
+                  onClick={() => store.set({ progress: store.state.progress - 10 })}
+                  skin={ButtonSkin}
+                />
+              </FlexItem>
+
+              <FlexItem>
+                <Checkbox
+                  label="Reset"
+                  checked={store.state.checked}
+                  onChange={() => {
+                    store.set({ checked: true, progress: 0 });
+                    setTimeout(() => store.set({ checked: false }), 2000);
+                  }}
+                  skin={CheckboxSkin}
+                />
+              </FlexItem>
+            </Flex>
+
+            <div style={{ margin: '50px' }}>
+              <ProgressBar
+                label="100% Complete"
+                progress={store.state.progress}
+                skin={ProgressBarSkin}
+              />
+            </div>
+          </Gutter>
+        </ThemeProvider>
+      );
+    })
   );
