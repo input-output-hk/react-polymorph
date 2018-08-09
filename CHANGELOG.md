@@ -2,6 +2,10 @@
 
 ## vNext
 
+## Fixes
+
+- Fixes a bug where ThemeProvider failed to compose its theme prop with the user's custom styles passed as a themeOverrides prop. Adds a themeOverrides story to ThemeProvider's stories to show intended functionality of theme composition. [PR 90](https://github.com/input-output-hk/react-polymorph/pull/90)
+
 ## Features
 
 - Adds InfiniteScroll component, InfiniteScrollSkin to simple skins, and SimpleInfiniteScroll to SimpleTheme.
