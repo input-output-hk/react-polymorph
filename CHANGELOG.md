@@ -4,7 +4,7 @@
 
 ## Fixes
 
-- Fixes a bug where ThemeProvider failed to compose its theme prop with the user's custom styles passed as a themeOverrides prop. Adds a themeOverrides story to ThemeProvider's stories to show intended functionality of theme composition. [PR 90](https://github.com/input-output-hk/react-polymorph/pull/90)
+- Fixes a bug where ThemeProvider failed to compose its theme prop with the user's custom styles passed as the themeOverrides prop. Adds a check to all components using context for when themeOverrides or theme changes in context. If there is a change, the component's theme and themeOverrides will be composed again and local state will update. Adds a themeOverrides story to ThemeProvider's stories to show intended functionality of theme composition and dynamic theme switching. [PR 90](https://github.com/input-output-hk/react-polymorph/pull/90)
 
 ## Features
 
