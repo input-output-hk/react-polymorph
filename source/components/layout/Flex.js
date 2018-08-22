@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import type { ChildrenArray } from 'react';
-import { pickBy } from 'lodash';
+import { pickBy, isEqual } from 'lodash';
 
 // components
 import { Base } from './Base';
@@ -55,6 +55,31 @@ class FlexBase extends Component<Props, State> {
         context.ROOT_THEME_API
       )
     };
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    const { context, themeId, theme, themeOverrides } = this.props;
+    const {
+      context: nextContext,
+      themeId: nextThemeId,
+      theme: nextTheme,
+      themeOverrides: nextOverrides
+    } = nextProps;
+
+    if (
+      !isEqual(context, nextContext) ||
+      !isEqual(themeId, nextThemeId) ||
+      !isEqual(theme, nextTheme) ||
+      !isEqual(themeOverrides, nextOverrides)
+    ) {
+      this.setState(() => ({
+        composedTheme: composeTheme(
+          addThemeId(nextTheme || nextContext.theme, nextThemeId),
+          addThemeId(nextOverrides, nextThemeId),
+          nextContext.ROOT_THEME_API
+        )
+      }));
+    }
   }
 
   _getActiveClasses = ({ center, column, columnReverse, row, rowReverse }) => {

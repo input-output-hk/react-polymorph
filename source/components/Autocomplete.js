@@ -105,6 +105,31 @@ class AutocompleteBase extends Component<Props, State> {
     };
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    const { context, themeId, theme, themeOverrides } = this.props;
+    const {
+      context: nextContext,
+      themeId: nextThemeId,
+      theme: nextTheme,
+      themeOverrides: nextOverrides
+    } = nextProps;
+
+    if (
+      !_.isEqual(context, nextContext) ||
+      !_.isEqual(themeId, nextThemeId) ||
+      !_.isEqual(theme, nextTheme) ||
+      !_.isEqual(themeOverrides, nextOverrides)
+    ) {
+      this.setState(() => ({
+        composedTheme: composeTheme(
+          addThemeId(nextTheme || nextContext.theme, nextThemeId),
+          addThemeId(nextOverrides, nextThemeId),
+          nextContext.ROOT_THEME_API
+        )
+      }));
+    }
+  }
+
   clear = () => this._removeOptions();
 
   focus = () => this.handleAutocompleteClick();

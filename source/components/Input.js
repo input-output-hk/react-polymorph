@@ -5,7 +5,7 @@ import type { ComponentType, Element, SyntheticInputEvent } from 'react';
 
 // external libraries
 import createRef from 'create-react-ref/lib/createRef';
-import { isString, flow } from 'lodash';
+import { isString, flow, isEqual } from 'lodash';
 
 // internal components
 import { withTheme } from './HOC/withTheme';
@@ -81,6 +81,31 @@ class InputBase extends Component<Props, State> {
 
   componentDidMount() {
     if (this.props.autoFocus) this.focus();
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    const { context, themeId, theme, themeOverrides } = this.props;
+    const {
+      context: nextContext,
+      themeId: nextThemeId,
+      theme: nextTheme,
+      themeOverrides: nextOverrides
+    } = nextProps;
+
+    if (
+      !isEqual(context, nextContext) ||
+      !isEqual(themeId, nextThemeId) ||
+      !isEqual(theme, nextTheme) ||
+      !isEqual(themeOverrides, nextOverrides)
+    ) {
+      this.setState(() => ({
+        composedTheme: composeTheme(
+          addThemeId(nextTheme || nextContext.theme, nextThemeId),
+          addThemeId(nextOverrides, nextThemeId),
+          nextContext.ROOT_THEME_API
+        )
+      }));
+    }
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {

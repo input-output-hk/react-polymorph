@@ -4,7 +4,7 @@ import type { ComponentType, Node, Element } from 'react';
 
 // external libraries
 import createRef from 'create-react-ref/lib/createRef';
-import { isString, flow } from 'lodash';
+import { isString, flow, isEqual } from 'lodash';
 
 // internal components
 import { withTheme } from './HOC/withTheme';
@@ -86,11 +86,33 @@ class TextAreaBase extends Component<Props, State> {
     if (autoFocus) { this.focus(); }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
+    const { context, themeId, theme, themeOverrides } = this.props;
+    const {
+      context: nextContext,
+      themeId: nextThemeId,
+      theme: nextTheme,
+      themeOverrides: nextOverrides
+    } = nextProps;
+
     if (!this.props.autoResize && nextProps.autoResize) {
       window.addEventListener('resize', this._handleAutoresize);
     } else if (this.props.autoResize && !nextProps.autoResize) {
       window.removeEventListener('resize', this._handleAutoresize);
+    }
+    if (
+      !isEqual(context, nextContext) ||
+      !isEqual(themeId, nextThemeId) ||
+      !isEqual(theme, nextTheme) ||
+      !isEqual(themeOverrides, nextOverrides)
+    ) {
+      this.setState(() => ({
+        composedTheme: composeTheme(
+          addThemeId(nextTheme || nextContext.theme, nextThemeId),
+          addThemeId(nextOverrides, nextThemeId),
+          nextContext.ROOT_THEME_API
+        )
+      }));
     }
   }
 

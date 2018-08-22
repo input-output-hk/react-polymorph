@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import type { ComponentType, Node } from 'react';
 // $FlowFixMe
 import createRef from 'create-react-ref/lib/createRef';
+import { isEqual } from 'lodash';
 
 import type { ReactElementRef } from '../utils/types.js';
 
@@ -80,6 +81,31 @@ class InfiniteScrollBase extends Component<Props, State> {
     const { scrollContainer } = this;
     if (!scrollContainer.current) return;
     scrollContainer.current.addEventListener('scroll', this._handleScroll);
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    const { context, themeId, theme, themeOverrides } = this.props;
+    const {
+      context: nextContext,
+      themeId: nextThemeId,
+      theme: nextTheme,
+      themeOverrides: nextOverrides
+    } = nextProps;
+
+    if (
+      !isEqual(context, nextContext) ||
+      !isEqual(themeId, nextThemeId) ||
+      !isEqual(theme, nextTheme) ||
+      !isEqual(themeOverrides, nextOverrides)
+    ) {
+      this.setState(() => ({
+        composedTheme: composeTheme(
+          addThemeId(nextTheme || nextContext.theme, nextThemeId),
+          addThemeId(nextOverrides, nextThemeId),
+          nextContext.ROOT_THEME_API
+        )
+      }));
+    }
   }
 
   // calls user's fetchData function from props

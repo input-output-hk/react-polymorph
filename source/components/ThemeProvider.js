@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import type { Node } from 'react';
 
 // external libraries
-import { isEmpty, cloneDeep } from 'lodash';
+import { isEmpty, isEqual, cloneDeep } from 'lodash';
 
 // contains default theme and context provider
 import { ThemeContext } from './HOC/ThemeContext';
@@ -39,6 +39,17 @@ export class ThemeProvider extends Component<Props, State> {
     this.state = {
       theme: this._composeLibraryTheme(theme, themeOverrides)
     };
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    const { theme, themeOverrides } = this.props;
+    const { theme: nextTheme, themeOverrides: nextOverrides } = nextProps;
+
+    if (!isEqual(theme, nextTheme) || !isEqual(themeOverrides, nextOverrides)) {
+      this.setState(() => ({
+        theme: this._composeLibraryTheme(nextTheme, nextOverrides)
+      }));
+    }
   }
 
   // composeLibraryTheme returns a single obj containing theme definitions
@@ -111,6 +122,7 @@ export class ThemeProvider extends Component<Props, State> {
   render() {
     const { theme } = this.state;
     const providerState = { theme, ROOT_THEME_API };
+
     return (
       <ThemeContext.Provider value={providerState}>
         {this.props.children}
