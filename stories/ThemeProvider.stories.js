@@ -49,7 +49,8 @@ import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.
 // themeOverrides
 import buttonOverrides from './theme-overrides/buttonOverrides.scss';
 import checkboxOverrides from './theme-overrides/checkboxOverrides.scss';
-import progressBarOverrides from './theme-overrides/progressBarOverrides.scss';
+import progressBarOverrides1 from './theme-overrides/progressBarOverrides.scss';
+import progressBarOverrides2 from './theme-overrides/customProgressBar.scss';
 
 // constants
 import { IDENTIFIERS } from '../source/themes/API';
@@ -203,17 +204,38 @@ storiesOf('ThemeProvider', module)
   .add('themeOverrides',
     withState({
       checked: false,
-      progress: 0
-    }, store => {
-      const ThemeOverrides = {
+      progress: 0,
+      previousOverrides: {
         [BUTTON]: buttonOverrides,
         [CHECKBOX]: checkboxOverrides,
-        [PROGRESS_BAR]: progressBarOverrides
+        [PROGRESS_BAR]: progressBarOverrides2
+      },
+      themeOverrides: {
+        [BUTTON]: buttonOverrides,
+        [CHECKBOX]: checkboxOverrides,
+        [PROGRESS_BAR]: progressBarOverrides1
+      }
+    }, store => {
+      const switchOverrides = () => {
+        const { previousOverrides, themeOverrides } = store.state;
+        store.set({
+          previousOverrides: themeOverrides,
+          themeOverrides: previousOverrides
+        });
       };
+
       return (
-        <ThemeProvider theme={SimpleTheme} themeOverrides={ThemeOverrides}>
+        <ThemeProvider theme={SimpleTheme} themeOverrides={store.state.themeOverrides}>
           <Gutter padding="30vh 20vw">
             <Flex row justifyContent="space-around" alignItems="center">
+              <FlexItem>
+                <Button
+                  label="Switch ProgressBar's Theme"
+                  onClick={switchOverrides}
+                  skin={ButtonSkin}
+                />
+              </FlexItem>
+
               <FlexItem>
                 <Button
                   label="+ 10%"
