@@ -2,14 +2,13 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
-import { isEqual } from 'lodash';
 
 // internal components
 import { GlobalListeners } from './HOC/GlobalListeners';
 import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -90,28 +89,7 @@ class SelectBase extends Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { context, themeId, theme, themeOverrides } = this.props;
-    const {
-      context: nextContext,
-      themeId: nextThemeId,
-      theme: nextTheme,
-      themeOverrides: nextOverrides
-    } = nextProps;
-
-    if (
-      !isEqual(context, nextContext) ||
-      !isEqual(themeId, nextThemeId) ||
-      !isEqual(theme, nextTheme) ||
-      !isEqual(themeOverrides, nextOverrides)
-    ) {
-      this.setState(() => ({
-        composedTheme: composeTheme(
-          addThemeId(nextTheme || nextContext.theme, nextThemeId),
-          addThemeId(nextOverrides, nextThemeId),
-          nextContext.ROOT_THEME_API
-        )
-      }));
-    }
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   // ========= PUBLIC SKIN API =========

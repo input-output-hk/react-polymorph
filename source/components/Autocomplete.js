@@ -12,7 +12,7 @@ import { GlobalListeners } from './HOC/GlobalListeners';
 import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { composeFunctions } from '../utils/props';
 
 import { IDENTIFIERS } from '../themes/API';
@@ -106,28 +106,7 @@ class AutocompleteBase extends Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { context, themeId, theme, themeOverrides } = this.props;
-    const {
-      context: nextContext,
-      themeId: nextThemeId,
-      theme: nextTheme,
-      themeOverrides: nextOverrides
-    } = nextProps;
-
-    if (
-      !_.isEqual(context, nextContext) ||
-      !_.isEqual(themeId, nextThemeId) ||
-      !_.isEqual(theme, nextTheme) ||
-      !_.isEqual(themeOverrides, nextOverrides)
-    ) {
-      this.setState(() => ({
-        composedTheme: composeTheme(
-          addThemeId(nextTheme || nextContext.theme, nextThemeId),
-          addThemeId(nextOverrides, nextThemeId),
-          nextContext.ROOT_THEME_API
-        )
-      }));
-    }
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   clear = () => this._removeOptions();

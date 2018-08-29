@@ -1,14 +1,14 @@
 // @flow
 import React, { Component } from 'react';
 import type { ChildrenArray } from 'react';
-import { pickBy, isEqual } from 'lodash';
+import { pickBy } from 'lodash';
 
 // components
 import { Base } from './Base';
 import { withTheme } from '../HOC/withTheme';
 
 // utilities
-import { composeTheme, addThemeId } from '../../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '../../themes/API';
@@ -58,28 +58,7 @@ class FlexBase extends Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { context, themeId, theme, themeOverrides } = this.props;
-    const {
-      context: nextContext,
-      themeId: nextThemeId,
-      theme: nextTheme,
-      themeOverrides: nextOverrides
-    } = nextProps;
-
-    if (
-      !isEqual(context, nextContext) ||
-      !isEqual(themeId, nextThemeId) ||
-      !isEqual(theme, nextTheme) ||
-      !isEqual(themeOverrides, nextOverrides)
-    ) {
-      this.setState(() => ({
-        composedTheme: composeTheme(
-          addThemeId(nextTheme || nextContext.theme, nextThemeId),
-          addThemeId(nextOverrides, nextThemeId),
-          nextContext.ROOT_THEME_API
-        )
-      }));
-    }
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   _getActiveClasses = ({ center, column, columnReverse, row, rowReverse }) => {
