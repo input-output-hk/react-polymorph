@@ -1,5 +1,5 @@
 // @flow
-import { isEmpty, cloneDeep } from 'lodash';
+import { cloneDeep, isEmpty, isEqual } from 'lodash';
 import { hasProperty } from './props';
 
 export const appendToProperty = (dest: {}, name: string, value: string) => {
@@ -60,4 +60,48 @@ export const composeTheme = (
     }
   }
   return composedTheme;
+};
+
+type ThemeProps = {
+  context: {
+    theme: Object,
+    ROOT_THEME_API: Object
+  },
+  themeId: string,
+  theme: Object,
+  themeOverrides: Object
+};
+
+// Used in componentWillReceiveProps, this function compares the current
+// set of theme related props against the next set to see if any have changed.
+// If true, a component's theme is recomposed and local state is updated
+export const didThemePropsChange = (
+  {
+    context,
+    themeId,
+    theme,
+    themeOverrides
+  }: ThemeProps,
+  {
+    context: nextContext,
+    themeId: nextThemeId,
+    theme: nextTheme,
+    themeOverrides: nextOverrides
+  }: ThemeProps,
+  setState: Function
+) => {
+  if (
+    !isEqual(context, nextContext) ||
+    !isEqual(themeId, nextThemeId) ||
+    !isEqual(theme, nextTheme) ||
+    !isEqual(themeOverrides, nextOverrides)
+  ) {
+    setState(() => ({
+      composedTheme: composeTheme(
+        addThemeId(nextTheme || nextContext.theme, nextThemeId),
+        addThemeId(nextOverrides, nextThemeId),
+        nextContext.ROOT_THEME_API
+      )
+    }));
+  }
 };
