@@ -10,7 +10,7 @@ import type { ReactElementRef } from '../utils/types.js';
 import { withTheme } from './HOC/withTheme';
 
 // utilities
-import { composeTheme, addThemeId } from '../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '../themes/API';
@@ -80,6 +80,10 @@ class InfiniteScrollBase extends Component<Props, State> {
     const { scrollContainer } = this;
     if (!scrollContainer.current) return;
     scrollContainer.current.addEventListener('scroll', this._handleScroll);
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   // calls user's fetchData function from props

@@ -8,7 +8,7 @@ import { GlobalListeners } from './HOC/GlobalListeners';
 import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -86,6 +86,10 @@ class SelectBase extends Component<Props, State> {
     if (this.props.autoFocus) {
       return this.focus();
     }
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   // ========= PUBLIC SKIN API =========

@@ -10,7 +10,7 @@ import { isString, flow } from 'lodash';
 import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -86,12 +86,14 @@ class TextAreaBase extends Component<Props, State> {
     if (autoFocus) { this.focus(); }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (!this.props.autoResize && nextProps.autoResize) {
       window.addEventListener('resize', this._handleAutoresize);
     } else if (this.props.autoResize && !nextProps.autoResize) {
       window.removeEventListener('resize', this._handleAutoresize);
     }
+
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   componentDidUpdate() {

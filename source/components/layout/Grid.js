@@ -10,7 +10,7 @@ import { withTheme } from '../HOC/withTheme';
 // utilities
 import { numberToPx } from '../../utils/props';
 import { formatTemplateAreas } from '../../utils/layout';
-import { composeTheme, addThemeId } from '../../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '../../themes/API';
@@ -64,6 +64,10 @@ class GridBase extends Component<Props, State> {
         context.ROOT_THEME_API
       )
     };
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   // creates obj passed Base component's inline styles (see render)

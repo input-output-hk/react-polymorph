@@ -8,7 +8,7 @@ import { Base } from './Base';
 import { withTheme } from '../HOC/withTheme';
 
 // utilities
-import { composeTheme, addThemeId } from '../../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '../../themes/API';
@@ -55,6 +55,10 @@ class FlexBase extends Component<Props, State> {
         context.ROOT_THEME_API
       )
     };
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   _getActiveClasses = ({ center, column, columnReverse, row, rowReverse }) => {

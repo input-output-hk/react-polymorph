@@ -7,7 +7,7 @@ import { pickBy, isEmpty } from 'lodash';
 import { withTheme } from './HOC/withTheme';
 
 // utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '../themes/API';
@@ -62,6 +62,10 @@ class HeaderBase extends Component <Props, State> {
         context.ROOT_THEME_API
       )
     };
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   _assembleInlineStyles = ({ center, lowerCase, left, right, upperCase }) => {

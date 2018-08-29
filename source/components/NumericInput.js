@@ -11,7 +11,7 @@ import { flow } from 'lodash';
 import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
@@ -104,6 +104,10 @@ class NumericInputBase extends Component<Props, State> {
     if (inputElement && inputElement.current) {
       this.setState({ caretPosition: inputElement.current.selectionStart });
     }
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {

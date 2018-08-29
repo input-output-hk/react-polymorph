@@ -10,3 +10,6 @@ export const composeFunctions = (...fns: [Function, Function]) => (...args: [any
 
 export const numberToPx = (val: string | number) =>
   (typeof val === 'number' ? `${val}px` : val);
+
+export const hasProperty = (obj: Object, property: ?string) =>
+  Object.prototype.hasOwnProperty.call(obj, property);
