@@ -107,7 +107,7 @@ storiesOf('NumericInput', module)
     ))
   )
 
-  .add('beforeDot(3) and afterDot(4)',
+  .add('maxBeforeDot(3) and maxAfterDot(4)',
     withState({ value: '' }, store => (
       <NumericInput
         label="Amount"
@@ -115,6 +115,20 @@ storiesOf('NumericInput', module)
         placeholder="000.0000"
         maxBeforeDot={3}
         maxAfterDot={4}
+        onChange={value => store.set({ value })}
+        skin={InputSkin}
+      />
+    ))
+  )
+
+  .add('maxBeforeDot(3) and maxAfterDot(0)',
+    withState({ value: '' }, store => (
+      <NumericInput
+        label="Integers Only"
+        value={store.state.value}
+        placeholder="123"
+        maxBeforeDot={3}
+        maxAfterDot={0}
         onChange={value => store.set({ value })}
         skin={InputSkin}
       />
