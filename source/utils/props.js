@@ -8,5 +8,8 @@ export const pickDOMProps = filterReactDomProps;
 export const composeFunctions = (...fns: [Function, Function]) => (...args: [any, any]) =>
   fns.forEach(fn => fn && fn(...args));
 
-export const getDisplayName = (Component: ComponentType<*>) =>
-  (Component.displayName || Component.name);
+export const numberToPx = (val: string | number) =>
+  (typeof val === 'number' ? `${val}px` : val);
+
+export const hasProperty = (obj: Object, property: ?string) =>
+  Object.prototype.hasOwnProperty.call(obj, property);

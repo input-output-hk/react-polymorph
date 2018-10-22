@@ -7,7 +7,7 @@ import createRef from 'create-react-ref/lib/createRef';
 import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { addDocumentListeners, removeDocumentListeners } from '../utils/events';
 
 // import constants
@@ -75,6 +75,10 @@ class BubbleBase extends Component<Props, State> {
     setTimeout(() => {
       if (this.props.isFloating) this._updatePosition();
     }, 0);
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   componentWillUpdate(nextProps) {

@@ -16,7 +16,7 @@ import type {
 import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { composeFunctions } from '../utils/props';
 
 // import constants
@@ -98,6 +98,7 @@ class OptionsBase extends Component<Props, State> {
     } else if (this.props.isOpen && !nextProps.isOpen) {
       document.removeEventListener('keydown', this._handleKeyDown, false);
     }
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   componentWillUnmount() {
