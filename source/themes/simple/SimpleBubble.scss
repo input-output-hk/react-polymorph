@@ -3,12 +3,12 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$bubble-bg-color: var(--rp-bubble-bg-color, #fafbfc);
+$bubble-bg-color: var(--rp-bubble-bg-color, #fafbfc) !default;
 $bubble-bg-color-transparent: rgba(94, 96, 102, 0.9) !default;
-$bubble-border-radius: var(--rp-bubble-border-radius, 4px);
+$bubble-border-radius: var(--rp-bubble-border-radius, 4px) !default;
 $bubble-border-width: 1px !default;
 $bubble-border-width-transparent: 0px !default;
-$bubble-border-color: var(--rp-bubble-border-color, #c6cdd6);
+$bubble-border-color: var(--rp-bubble-border-color, #c6cdd6) !default;
 $bubble-border-color-transparent: transparent !default;
 $bubble-border: $bubble-border-width solid $bubble-border-color !default;
 $bubble-border-transparent: $bubble-border-width-transparent solid

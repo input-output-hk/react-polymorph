@@ -3,12 +3,12 @@
 // OVERRIDABLE CONFIGURATION VARIABLES
 
 $button-width: 100% !default;
-$button-bg-color-primary: var(--rp-button-bg-color-primary, #243e62);
-$button-bg-color-hover: var(--rp-button-bg-color-hover, #2f496e);
-$button-bg-color-active: var(--rp-button-bg-color-active, #1e304a);
-$button-bg-color-disabled: var(--rp-button-bg-color-disabled, #b9c2cc);
-$button-font-family: var(--rp-button-font-family, $theme-font-medium);
-$button-text-color: var(--rp-button-text-color, #fff);
+$button-bg-color-primary: var(--rp-button-bg-color-primary, #243e62) !default;
+$button-bg-color-hover: var(--rp-button-bg-color-hover, #2f496e) !default;
+$button-bg-color-active: var(--rp-button-bg-color-active, #1e304a) !default;
+$button-bg-color-disabled: var(--rp-button-bg-color-disabled, #b9c2cc) !default;
+$button-font-family: var(--rp-button-font-family, $theme-font-medium) !default;
+$button-text-color: var(--rp-button-text-color, #fff) !default;
 $button-font-size: 14px !default;
 $button-border-radius: 5px !default;
 $button-padding: 15px 20px !default;
