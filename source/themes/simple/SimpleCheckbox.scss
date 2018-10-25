@@ -5,10 +5,10 @@
 $checkbox-size: 23px !default;
 $checkbox-border-radius: 2px !default;
 $checkbox-border-color: #2f496e !default;
-$checkbox-border-disabled-color: $theme-color-disabled !default;
+$checkbox-border-disabled-color: var(--rp-checkbox-border-disabled-color, $theme-color-disabled) !default;
 $checkbox-label-color: #5e6066 !default;
 $checkbox-label-size: 16px !default;
-$checkbox-label-disabled-color: $theme-color-light-grey !default;
+$checkbox-label-disabled-color: var(--rp-checkbox-label-disabled-color, $theme-color-light-grey) !default;
 $checkbox-checked-bg-color: $checkbox-border-color !default;
 $checkbox-check-thickness: 2px !default;
 $checkbox-check-width: $checkbox-size / 5 !default;
