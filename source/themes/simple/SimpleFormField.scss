@@ -2,34 +2,37 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$form-field-label-font: $theme-font-medium !default;
-$form-field-label-font-size: 16px !default;
-$form-field-label-color: #5e6066 !default;
-$form-field-label-margin-bottom: 10px !default;
-$form-field-error-font: $theme-font-regular !default;
-$form-field-error-font-size: 14px !default;
-$form-field-error-margin: 1.5px 0 11.5px 0 !default;
+$formfield-bg-color-disabled: var(--rp-formfield-bg-color-disabled, none) !default;
+$formfield-label-font: $theme-font-medium !default;
+$formfield-label-font-size: 16px !default;
+$formfield-label-color: var(--rp-formfield-label-color, #5e6066) !default;
+$formfield-label-color-disabled: var(--rp-formfield-label-color-disabled, $theme-color-disabled) !default;
+$formfield-label-margin-bottom: 10px !default;
+$formfield-error-color: var(--rp-formfield-error-color, rgba($theme-color-error, 0.5)) !default;
+$formfield-error-font: $theme-font-regular !default;
+$formfield-error-font-size: 14px !default;
+$formfield-error-margin: 1.5px 0 11.5px 0 !default;
 
 .root {
   position: relative;
 }
 
 .label {
-  color: $form-field-label-color;
+  color: $formfield-label-color;
   display: block;
-  font-family: $form-field-label-font, sans-serif;
-  font-size: $form-field-label-font-size;
+  font-family: $formfield-label-font, sans-serif;
+  font-size: $formfield-label-font-size;
   line-height: 1.38;
-  margin-bottom: $form-field-label-margin-bottom;
+  margin-bottom: $formfield-label-margin-bottom;
 }
 
 .error {
-  color: rgba($theme-color-error, 0.5);
+  color: $formfield-error-color;
   float: right;
-  font-family: $form-field-error-font, sans-serif;
-  font-size: $form-field-error-font-size;
+  font-family: $formfield-error-font, sans-serif;
+  font-size: $formfield-error-font-size;
   line-height: 1.36;
-  margin: $form-field-error-margin;
+  margin: $formfield-error-margin;
 }
 
 .inputWrapper {
@@ -39,8 +42,9 @@ $form-field-error-margin: 1.5px 0 11.5px 0 !default;
 // BEGIN SPECIAL STATES ---------- //
 
 .disabled {
+  background-color: $formfield-bg-color-disabled;
   .label {
-    color: $theme-color-disabled;
+    color: $formfield-label-color-disabled;
   }
 }
 
