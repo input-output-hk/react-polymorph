@@ -3,19 +3,23 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$options-border-color: #c6cdd6 !default;
+// OPTION
+$option-bg-color: var(--rp-option-bg-color, #fafbfc) !default;
+$option-border-color: var(--rp-option-border-color, #c6cdd6) !default;
+$option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
+$option-font-color: var(--rp-option-font-color, #5e6066) !default;
+$option-font-color-disabled: rgba(#5e6066, 0.5) !default;
+$option-highlight-color: var(--rp-option-highlight-color, #edf0f3) !default;
+$option-padding: 14px 20px !default;
+
+// OPTIONS
+$options-arrow-size: 10px !default;
+$options-border-color: var(--rp-options-border-color, #c6cdd6) !default;
 $options-border: 1px solid $options-border-color !default;
 $options-border-radius: 2px !default;
 $options-font-family: $theme-font-regular, sans-serif !default;
 $options-font-size: 16px !default;
-$options-arrow-size: 10px !default;
-$options-shadow: none !default;
-$option-bg-color: #fafbfc !default;
-$option-font-color: #5e6066 !default;
-$option-font-color-disabled: rgba(#5e6066, 0.5) !default;
-$option-highlight-color: #edf0f3 !default;
-$option-checkmark-color: #5e6066 !default;
-$option-padding: 14px 20px !default;
+$options-shadow: var(--rp-options-shadow, none) !default;
 // Bubble arrow
 $options-bubble-arrow: true !default;
 
