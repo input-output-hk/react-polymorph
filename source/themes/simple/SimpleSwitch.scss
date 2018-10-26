@@ -2,12 +2,12 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$switch-accent-color-on: #2f496e !default;
-$switch-accent-color-off: #b4bdca !default;
-$switch-thumb-accent-color: #ffffff !default;
+$switch-accent-color-on: var(--rp-switch-accent-color-on, #2f496e) !default;
+$switch-accent-color-off: var(--rp-switch-accent-color-off, #b4bdca) !default;
+$switch-thumb-accent-color: var(--rp-switch-thumb-accent-color, #ffffff) !default;
 $switch-track-height: 23px !default;
 $switch-track-length: 50px !default;
-$switch-label-color: #5e6066 !default;
+$switch-label-color: var(--rp-switch-label-color, #5e6066) !default;
 $switch-label-color-disabled: $theme-color-light-grey !default;
 
 @mixin thumbBoxShadow($color) {
