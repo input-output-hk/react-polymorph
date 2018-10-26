@@ -8,7 +8,7 @@ $formfield-label-font-size: 16px !default;
 $formfield-label-color: var(--rp-formfield-label-color, #5e6066) !default;
 $formfield-label-color-disabled: var(--rp-formfield-label-color-disabled, $theme-color-disabled) !default;
 $formfield-label-margin-bottom: 10px !default;
-$formfield-error-color: var(--rp-formfield-error-color, rgba($theme-color-error, 0.5)) !default;
+$formfield-error-color: var(--rp-formfield-error-color, rgba(#de3226, 0.5)) !default;
 $formfield-error-font: $theme-font-regular !default;
 $formfield-error-font-size: 14px !default;
 $formfield-error-margin: 1.5px 0 11.5px 0 !default;

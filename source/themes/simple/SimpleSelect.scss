@@ -3,14 +3,13 @@
 @import "mixins/arrow";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
-
-$select-input-color: $input-color !default;
-$select-input-placeholder-color: $input-placeholder-color !default;
+$select-input-color: var(--rp-input-text-color, #5e6066) !default;
+$select-input-placeholder-color: var(--rp-input-placeholder-color, rgba(#5e6066, 0.5)) !default;
 $select-input-placeholder-font-family: $theme-font-light, sans-serif !default;
-$select-input-bg-color: $input-bg-color !default;
-$select-input-border-color-focus: var(--rp-select-input-border-color-focus, $input-border-focus-color) !default;
+$select-input-bg-color: var(--rp-input-bg-color, #fafbfc) !default;
+$select-input-border-color-focus: var(--rp-select-input-border-color-focus, #5e6066) !default;
 $select-input-padding: $input-padding !default;
-$select-input-border: $input-border !default;
+$select-input-border: 1px solid var(--rp-input-border-color, #c6cdd6) !default;
 // Arrow in default state
 $select-arrow-url: url("#{$theme-assets-path}/select-arrow.svg") !default;
 $select-arrow-color: var(--rp-select-arrow-color, #c6cdd6) !default;
