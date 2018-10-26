@@ -2,13 +2,13 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$switch-on-accent-color: #2f496e !default;
-$switch-off-accent-color: #b4bdca !default;
+$switch-accent-color-on: #2f496e !default;
+$switch-accent-color-off: #b4bdca !default;
 $switch-thumb-accent-color: #ffffff !default;
 $switch-track-height: 23px !default;
 $switch-track-length: 50px !default;
 $switch-label-color: #5e6066 !default;
-$switch-label-disabled-color: $theme-color-light-grey !default;
+$switch-label-color-disabled: $theme-color-light-grey !default;
 
 @mixin thumbBoxShadow($color) {
   box-shadow: -1.5px -1.5px 0 $color inset, 1.5px 1.5px 0 $color inset,
@@ -40,7 +40,7 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
 
 .disabled {
   .label {
-    color: $switch-label-disabled-color;
+    color: $switch-label-color-disabled;
   }
 }
 
@@ -56,10 +56,10 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
 
   &:not(.checked) {
     @extend %switch;
-    background-color: $switch-off-accent-color;
+    background-color: $switch-accent-color-off;
     .thumb {
       left: 0;
-      @include thumbBoxShadow($switch-off-accent-color);
+      @include thumbBoxShadow($switch-accent-color-off);
       background-color: $switch-thumb-accent-color;
     }
   }
@@ -68,10 +68,10 @@ $switch-label-disabled-color: $theme-color-light-grey !default;
 .checked {
   .switch {
     @extend %switch;
-    background-color: $switch-on-accent-color;
+    background-color: $switch-accent-color-on;
     .thumb {
       left: $switch-track-length - $switch-track-height;
-      @include thumbBoxShadow($switch-on-accent-color);
+      @include thumbBoxShadow($switch-accent-color-on);
       background-color: $switch-thumb-accent-color;
     }
   }
