@@ -2,11 +2,11 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$modal-overlay-color: rgba(black, 0.6) !default;
-$modal-bg: white !default;
+$modal-bg-color: var(--rp-modal-bg-color, white) !default;
 $modal-border-radius: 10px !default;
-$modal-padding: 20px 30px !default;
 $modal-box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25) !default;
+$modal-overlay-color: var(--rp-modal-overlay-color, rgba(black, 0.6)) !default;
+$modal-padding: 20px 30px !default;
 
 .overlay {
   display: flex;
@@ -24,7 +24,7 @@ $modal-box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25) !default;
   min-width: 500px;
   max-width: 640px;
   border-radius: $modal-border-radius;
-  background: $modal-bg;
+  background: $modal-bg-color;
   padding: $modal-padding;
   box-shadow: $modal-box-shadow;
   &:focus {
