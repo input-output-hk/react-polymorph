@@ -8,20 +8,20 @@ $select-input-color: $input-color !default;
 $select-input-placeholder-color: $input-placeholder-color !default;
 $select-input-placeholder-font-family: $theme-font-light, sans-serif !default;
 $select-input-bg-color: $input-bg-color !default;
-$select-input-border-focus-color: $input-border-focus-color !default;
+$select-input-border-color-focus: var(--rp-select-input-border-color-focus, $input-border-focus-color) !default;
 $select-input-padding: $input-padding !default;
 $select-input-border: $input-border !default;
 // Arrow in default state
 $select-arrow-url: url("#{$theme-assets-path}/select-arrow.svg") !default;
-$select-arrow-color: #c6cdd6 !default;
+$select-arrow-color: var(--rp-select-arrow-color, #c6cdd6) !default;
 $select-arrow-width: 11px !default;
 $select-arrow-height: 7px !default;
 $select-arrow-position-bottom: 20px !default;
 $select-arrow-position-left: calc(100% - 32px) !default;
 $select-arrow-rtl-position-left: 19px !default;
 // Arrow in open state
-$select-open-arrow-url: url("#{$theme-assets-path}/select-open-arrow.svg") !default;
-$select-open-arrow-color: #5e6066 !default;
+$select-arrow-url-open: url("#{$theme-assets-path}/select-open-arrow.svg") !default;
+$select-arrow-color-open: var(--rp-select-arrow-color-open, #5e6066) !default;
 $select-open-arrow-width: $select-arrow-width !default;
 $select-open-arrow-height: $select-arrow-height !default;
 $select-open-arrow-position-bottom: 21px !default;
@@ -71,13 +71,13 @@ $select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
 // ==== STATE: isOpen ====
 .isOpen {
   input {
-    border-color: $select-input-border-focus-color;
+    border-color: $select-input-border-color-focus;
   }
 
   .selectInput:after {
-    -webkit-mask: $select-open-arrow-url;
-    mask: $select-open-arrow-url;
-    background-color: $select-open-arrow-color;
+    -webkit-mask: $select-arrow-url-open;
+    mask: $select-arrow-url-open;
+    background-color: $select-arrow-color-open;
     bottom: $select-open-arrow-position-bottom;
   }
 }
@@ -85,7 +85,7 @@ $select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
 // ==== STATE: openUpward ====
 .openUpward {
   .selectInput:after {
-    -webkit-mask: $select-open-arrow-url;
+    -webkit-mask: $select-arrow-url-open;
     bottom: $select-open-arrow-position-bottom;
   }
 
