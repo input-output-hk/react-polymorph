@@ -1,27 +1,26 @@
 @import "theme";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
-
-$textarea-color: #5e6066 !default;
-$textarea-placeholder-color: rgba(#5e6066, 0.5) !default;
-$textarea-focus-outline: none !default;
-$textarea-font-size: 16px !default;
-$textarea-font-family: $theme-font-light, sans-serif !default;
-$textarea-border: 1px solid #c6cdd6 !default;
+$textarea-bg-color: var(--rp-textarea-bg-color, #fafbfc) !default;
+$textarea-bg-color-disabled: var(--rp-textarea-bg-color-disabled, #fcfafa) !default;
+$textarea-border: var(--rp-textarea-border, 1px solid #c6cdd6) !default;
+$textarea-border-color-disabled: var(--rp-textarea-border-color-disabled, #cfcfcf) !default;
+$textarea-border-color-focus: var(--rp-textarea-border-color-focus, #5e6066) !default;
 $textarea-border-radius: 2px !default;
-$textarea-border-focus-color: #5e6066 !default;
+$textarea-error-color: var(--rp-textarea-error-color, $theme-color-error) !default;
+$textarea-font-family: $theme-font-light, sans-serif !default;
+$textarea-font-size: 16px !default;
+$textarea-outline-focus: none !default;
 $textarea-padding: 14px 20px !default;
-$textarea-disabled-border-color: #cfcfcf !default;
-$textarea-disabled-bg-color: #fcfafa !default;
-$textarea-bg-color: #fafbfc !default;
-$textarea-error-color: $theme-color-error !default;
+$textarea-placeholder-color: var(--rp-textarea-placeholder-color, rgba(#5e6066, 0.5)) !default;
+$textarea-text-color: var(--rp-textarea-text-color, #5e6066) !default;
 
 .textarea {
   background-color: $textarea-bg-color;
   border: $textarea-border;
   border-radius: $textarea-border-radius;
   box-sizing: border-box;
-  color: $textarea-color;
+  color: $textarea-text-color;
   display: block;
   font-family: $textarea-font-family;
   font-size: $textarea-font-size;
@@ -29,8 +28,8 @@ $textarea-error-color: $theme-color-error !default;
   width: 100%;
 
   &:focus {
-    border-color: $textarea-border-focus-color;
-    outline: $textarea-focus-outline;
+    border-color: $textarea-border-color-focus;
+    outline: $textarea-outline-focus;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 0.2s;
   }
@@ -41,8 +40,8 @@ $textarea-error-color: $theme-color-error !default;
 }
 
 .disabled {
-  background-color: $textarea-disabled-bg-color;
-  border-color: $textarea-disabled-border-color;
+  background-color: $textarea-bg-color-disabled;
+  border-color: $textarea-border-color-disabled;
 }
 
 .errored {
