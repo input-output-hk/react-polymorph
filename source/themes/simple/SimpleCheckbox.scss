@@ -1,18 +1,18 @@
 @import "theme";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
-$checkbox-bg-color-checked: $checkbox-border-color !default;
-$checkbox-border-color: #2f496e !default;
+$checkbox-bg-color-checked: var(--rp-checkbox-bg-color-checked, #2f496e) !default;
+$checkbox-border-color: var(--rp-checkbox-border-color, #2f496e) !default;
 $checkbox-border-color-disabled: var(--rp-checkbox-border-color-disabled, $theme-color-disabled) !default;
-$checkbox-border-radius: 2px !default;
-$checkbox-check-height: $checkbox-size / 2 !default;
-$checkbox-check-thickness: 2px !default;
-$checkbox-check-vertical-offset: -4px !default;
-$checkbox-check-width: $checkbox-size / 5 !default;
-$checkbox-label-color: #5e6066 !default;
+$checkbox-border-radius: var(--rp-checkbox-border-radius, 2px) !default;
+$checkbox-check-height: var(--rp-checkbox-check-height, calc(23 / 2 * 1px)) !default;
+$checkbox-check-thickness: var(--rp-checkbox-check-thickness, 2px) !default;
+$checkbox-check-vertical-offset: var(--rp-checkbox-check-vertical-offset, -4px) !default;
+$checkbox-check-width: var(--rp-checkbox-check-width, calc(23 / 5 * 1px)) !default;
+$checkbox-label-color: var(--rp-checkbox-label-color, #5e6066) !default;
 $checkbox-label-color-disabled: var(--rp-checkbox-label-color-disabled, $theme-color-light-grey) !default;
-$checkbox-label-size: 16px !default;
-$checkbox-size: 23px !default;
+$checkbox-label-size: var(--rp-checkbox-label-size, 16px) !default;
+$checkbox-size: var(--rp-checkbox-size, 23px) !default;
 
 
 .root {
