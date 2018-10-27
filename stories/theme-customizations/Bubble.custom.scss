@@ -1,18 +1,18 @@
 // Bubble theme customizations
 $bubble-bg-color: #5dcdfc;
 $bubble-bg-color-transparent: rgba(94, 96, 102, 0.9);
-$bubble-border-radius: 0;
-$bubble-border-width: 0;
-$bubble-border-width-transparent: 0px;
+$bubble-border: $bubble-border-width solid $bubble-border-color;
 $bubble-border-color: none;
 $bubble-border-color-transparent: transparent;
-$bubble-border: $bubble-border-width solid $bubble-border-color;
+$bubble-border-radius: 0;
 $bubble-border-transparent: $bubble-border-width-transparent solid
   $bubble-border-color-transparent;
+$bubble-border-width: 0;
+$bubble-border-width-transparent: 0px;
 $bubble-box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.18);
-$bubble-padding: 6px;
+$bubble-distance: calc(100% + 14px);
 $bubble-font-color: #ebf0ff;
 $bubble-font-color-transparent: white;
-$bubble-distance: calc(100% + 14px);
+$bubble-padding: 6px;
 
 @import "../../source/themes/simple/SimpleBubble";
