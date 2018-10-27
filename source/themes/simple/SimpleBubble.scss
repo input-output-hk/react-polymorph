@@ -10,7 +10,7 @@ $bubble-border-color: var(--rp-bubble-border-color, #c6cdd6) !default;
 $bubble-border-color-transparent: var(--rp-bubble-border-color-transparent, transparent) !default;
 $bubble-border-radius: var(--rp-bubble-border-radius, 4px) !default;
 $bubble-border-transparent: var(--rp-bubble-border-transparent, 0px solid transparent) !default;
-$bubble-border-width: var(--rp-bubble-border-width, 1px) !default;
+$bubble-border-width: var(--rp-bubble-border-width, -1px) !default;
 $bubble-border-width-transparent: var(--rp-bubble-border-width-transparent, 0px) !default;
 $bubble-box-shadow: var(--rp-bubble-box-shadow, 0 1.5px 5px 0 rgba(0, 0, 0, 0.18)) !default;
 $bubble-distance: var(--rp-bubble-distance, calc(100% + 14px)) !default;
@@ -19,9 +19,7 @@ $bubble-font-color-transparent: var(--rp-bubble-font-color-transparent, white) !
 $bubble-padding: var(--rp-bubble-padding, 6px 12px) !default;
 
 // ARROW
-// $bubble-arrow: var(--rp-bubble-arrow, true) !default;
 $bubble-arrow: true !default;
-// $bubble-arrow-size: var(--rp-bubble-arrow-size, 10px) !default;
 $bubble-arrow-size: 10px !default;
 $bubble-shadow: var(--rp-bubble-shadow, none) !default;
 
@@ -73,19 +71,19 @@ $bubble-shadow: var(--rp-bubble-shadow, none) !default;
 
     // Make sure the arrow overlaps any borders on the bubble
     &.transparent.openUpward .bubble {
-      margin-bottom: -$bubble-border-width-transparent;
+      margin-bottom: $bubble-border-width-transparent;
     }
 
     &.transparent:not(.openUpward) .bubble {
-      margin-top: -$bubble-border-width-transparent;
+      margin-top: $bubble-border-width-transparent;
     }
 
     &:not(.transparent).openUpward .bubble {
-      margin-bottom: -$bubble-border-width;
+      margin-bottom: $bubble-border-width;
     }
 
     &:not(.transparent):not(.openUpward) .bubble {
-      margin-top: -$bubble-border-width;
+      margin-top: $bubble-border-width;
     }
   }
 }
