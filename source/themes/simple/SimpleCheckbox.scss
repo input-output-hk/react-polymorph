@@ -1,19 +1,19 @@
 @import "theme";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
-
-$checkbox-size: 23px !default;
-$checkbox-border-radius: 2px !default;
+$checkbox-bg-color-checked: $checkbox-border-color !default;
 $checkbox-border-color: #2f496e !default;
-$checkbox-border-disabled-color: var(--rp-checkbox-border-disabled-color, $theme-color-disabled) !default;
-$checkbox-label-color: #5e6066 !default;
-$checkbox-label-size: 16px !default;
-$checkbox-label-disabled-color: var(--rp-checkbox-label-disabled-color, $theme-color-light-grey) !default;
-$checkbox-checked-bg-color: $checkbox-border-color !default;
-$checkbox-check-thickness: 2px !default;
-$checkbox-check-width: $checkbox-size / 5 !default;
+$checkbox-border-color-disabled: var(--rp-checkbox-border-color-disabled, $theme-color-disabled) !default;
+$checkbox-border-radius: 2px !default;
 $checkbox-check-height: $checkbox-size / 2 !default;
+$checkbox-check-thickness: 2px !default;
 $checkbox-check-vertical-offset: -4px !default;
+$checkbox-check-width: $checkbox-size / 5 !default;
+$checkbox-label-color: #5e6066 !default;
+$checkbox-label-color-disabled: var(--rp-checkbox-label-color-disabled, $theme-color-light-grey) !default;
+$checkbox-label-size: 16px !default;
+$checkbox-size: 23px !default;
+
 
 .root {
   display: flex;
@@ -65,20 +65,20 @@ $checkbox-check-vertical-offset: -4px !default;
   }
 
   .check {
-    border: 1px solid $checkbox-border-disabled-color;
+    border: 1px solid $checkbox-border-color-disabled;
     &:hover {
       cursor: default;
     }
   }
 
   .label {
-    color: $checkbox-label-disabled-color;
+    color: $checkbox-label-color-disabled;
   }
 }
 
 .checked {
   .check {
-    background-color: $checkbox-checked-bg-color;
+    background-color: $checkbox-bg-color-checked;
     position: relative;
     display: flex;
     align-items: center;
