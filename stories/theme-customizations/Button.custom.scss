@@ -1,13 +1,14 @@
 // Button theme customizations
-$button-width: 200px;
-$button-bg-color-primary: #3d6243;
+
+$button-bg-color: #3d6243;
 $button-bg-color-hover: #3e6e33;
 $button-bg-color-active: #1e4a2e;
 $button-bg-color-disabled: #b9c2cc;
-$button-font-family: serif;
-$button-text-color: #fff;
-$button-font-size: 18px;
 $button-border-radius: 0;
+$button-font-family: serif;
+$button-font-size: 18px;
 $button-padding: 15px 20px;
+$button-text-color: #fff;
+$button-width: 200px;
 
 @import "../../source/themes/simple/SimpleButton";
