@@ -2,6 +2,7 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 $checkbox-bg-color-checked: var(--rp-checkbox-bg-color-checked, #2f496e) !default;
+$checkbox-border: var(--rp-checkbox-border, 1px solid var(--rp-checkbox-border-color, #2f496e)) !default;
 $checkbox-border-color: var(--rp-checkbox-border-color, #2f496e) !default;
 $checkbox-border-color-disabled: var(--rp-checkbox-border-color-disabled, $theme-color-disabled) !default;
 $checkbox-border-radius: var(--rp-checkbox-border-radius, 2px) !default;
@@ -30,7 +31,7 @@ $checkbox-size: var(--rp-checkbox-size, 23px) !default;
 
 .check {
   align-self: center;
-  border: 1px solid $checkbox-border-color;
+  border: $checkbox-border;
   border-radius: $checkbox-border-radius;
   box-sizing: border-box;
   flex-shrink: 0;
