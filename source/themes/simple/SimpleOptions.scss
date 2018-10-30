@@ -8,19 +8,20 @@ $option-bg-color: var(--rp-option-bg-color, #fafbfc) !default;
 $option-border-color: var(--rp-option-border-color, #c6cdd6) !default;
 $option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
 $option-font-color: var(--rp-option-font-color, #5e6066) !default;
-$option-font-color-disabled: rgba(#5e6066, 0.5) !default;
+$option-font-color-disabled: var(--rp-option-font-color-disabled, rgba(#5e6066, 0.5)) !default;
 $option-highlight-color: var(--rp-option-highlight-color, #edf0f3) !default;
-$option-padding: 14px 20px !default;
+$option-padding: var(--rp-option-padding, 14px 20px) !default;
 
 // OPTIONS
-$options-arrow-size: 10px !default;
 $options-border-color: var(--rp-options-border-color, #c6cdd6) !default;
-$options-border: 1px solid $options-border-color !default;
-$options-border-radius: 2px !default;
-$options-font-family: $theme-font-regular, sans-serif !default;
-$options-font-size: 16px !default;
+$options-border: var(--rp-options-border, 1px solid $options-border-color) !default;
+$options-border-radius: var(--rp-options-border-radius, 2px) !default;
+$options-font-family: var(--rp-options-font-family, $theme-font-regular) !default;
+$options-font-size: var(--rp-options-font-size, 16px) !default;
 $options-shadow: var(--rp-options-shadow, none) !default;
+
 // Bubble arrow
+$options-arrow-size: 10px !default;
 $options-bubble-arrow: true !default;
 
 .options {
@@ -68,7 +69,7 @@ $options-bubble-arrow: true !default;
   width: 100%;
   padding: 0;
   list-style: none;
-  font-family: $options-font-family;
+  font-family: $options-font-family, sans-serif;
   font-size: $options-font-size;
 }
 
