@@ -3,10 +3,13 @@
 // OVERRIDABLE CONFIGURATION VARIABLES
 
 $modal-bg-color: var(--rp-modal-bg-color, white) !default;
-$modal-border-radius: 10px !default;
-$modal-box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.25) !default;
+$modal-border-radius: var(--rp-modal-border-radius, 10px) !default;
+$modal-box-shadow: var(--rp-modal-box-shadow, 0 5px 20px 0 rgba(0, 0, 0, 0.25)) !default;
+$modal-max-width: var(--rp-modal-max-width, 640px) !default;
+$modal-min-width: var(--rp-modal-min-width, 500px) !default;
+$modal-outline-focus: var(--rp-modal-outline-focus, none) !default;
 $modal-overlay-color: var(--rp-modal-overlay-color, rgba(black, 0.6)) !default;
-$modal-padding: 20px 30px !default;
+$modal-padding: var(--rp-modal-padding, 20px 30px) !default;
 
 .overlay {
   display: flex;
@@ -21,13 +24,13 @@ $modal-padding: 20px 30px !default;
 }
 
 .modal {
-  min-width: 500px;
-  max-width: 640px;
+  min-width: $modal-min-width;
+  max-width: $modal-max-width;
   border-radius: $modal-border-radius;
   background: $modal-bg-color;
   padding: $modal-padding;
   box-shadow: $modal-box-shadow;
   &:focus {
-    outline: none;
+    outline: $modal-outline-focus;
   }
 }
