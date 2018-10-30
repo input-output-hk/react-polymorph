@@ -16,6 +16,7 @@ $bubble-box-shadow: var(--rp-bubble-box-shadow, 0 1.5px 5px 0 rgba(0, 0, 0, 0.18
 $bubble-distance: var(--rp-bubble-distance, calc(100% + 14px)) !default;
 $bubble-font-color: var(--rp-bubble-font-color, #5e6066) !default;
 $bubble-font-color-transparent: var(--rp-bubble-font-color-transparent, white) !default;
+$bubble-min-width: var(--rp-bubble-min-width, 100%) !default;
 $bubble-padding: var(--rp-bubble-padding, 6px 12px) !default;
 
 // ARROW
@@ -93,7 +94,7 @@ $bubble-shadow: var(--rp-bubble-shadow, none) !default;
   box-shadow: $bubble-box-shadow;
   padding: $bubble-padding;
   position: absolute;
-  min-width: 100%;
+  min-width: $bubble-min-width;
   box-sizing: border-box;
 }
 
