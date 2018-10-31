@@ -20,8 +20,8 @@ $bubble-min-width: var(--rp-bubble-min-width, 100%) !default;
 $bubble-padding: var(--rp-bubble-padding, 6px 12px) !default;
 
 // ARROW
-$bubble-arrow: true !default;
-$bubble-arrow-size: 10px !default;
+$bubble-arrow: var(--rp-bubble-arrow, true) !default;
+$bubble-arrow-size: var(--rp-bubble-arrow-size, 10px) !default;
 $bubble-shadow: var(--rp-bubble-shadow, none) !default;
 
 .root {
@@ -33,7 +33,7 @@ $bubble-shadow: var(--rp-bubble-shadow, none) !default;
   // ==== ARROW ====
   // The arrow is referred to as [data-bubble-arrow] so that the component doesn't have a high
   // specificity internally, allowing it to be overwritten externally
-  @if $bubble-arrow == true {
+  @if calc(#{$bubble-arrow} == true) {
     &.transparent [data-bubble-arrow] {
       @include arrow(
         up,
