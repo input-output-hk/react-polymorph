@@ -5,15 +5,17 @@ $textarea-bg-color: var(--rp-textarea-bg-color, #fafbfc) !default;
 $textarea-bg-color-disabled: var(--rp-textarea-bg-color-disabled, #fcfafa) !default;
 $textarea-border: var(--rp-textarea-border, 1px solid #c6cdd6) !default;
 $textarea-border-color-disabled: var(--rp-textarea-border-color-disabled, #cfcfcf) !default;
+$textarea-border-color-errored: var(--rp-textarea-border-color-errored, $theme-color-error) !default;
+$textarea-border-color-errored-focus: var(--rp-textarea-border-color-errored-focus, $theme-color-error) !default;
 $textarea-border-color-focus: var(--rp-textarea-border-color-focus, #5e6066) !default;
-$textarea-border-radius: 2px !default;
-$textarea-error-color: var(--rp-textarea-error-color, $theme-color-error) !default;
-$textarea-font-family: $theme-font-light, sans-serif !default;
-$textarea-font-size: 16px !default;
-$textarea-outline-focus: none !default;
-$textarea-padding: 14px 20px !default;
+$textarea-border-radius: var(--rp-textarea-border-radius, 2px) !default;
+$textarea-font-family: var(--rp-textarea-font-family, $theme-font-light, sans-serif) !default;
+$textarea-font-size: var(--rp-textarea-font-size, 16px) !default;
+$textarea-outline-focus: var(--rp-textarea-outline-focus, none) !default;
+$textarea-padding: var(--rp-textarea-padding, 14px 20px) !default;
 $textarea-placeholder-color: var(--rp-textarea-placeholder-color, rgba(#5e6066, 0.5)) !default;
 $textarea-text-color: var(--rp-textarea-text-color, #5e6066) !default;
+$textarea-width: var(--rp-textarea-width, 100%) !default;
 
 .textarea {
   background-color: $textarea-bg-color;
@@ -25,7 +27,7 @@ $textarea-text-color: var(--rp-textarea-text-color, #5e6066) !default;
   font-family: $textarea-font-family;
   font-size: $textarea-font-size;
   padding: $textarea-padding;
-  width: 100%;
+  width: $textarea-width;
 
   &:focus {
     border-color: $textarea-border-color-focus;
@@ -45,8 +47,8 @@ $textarea-text-color: var(--rp-textarea-text-color, #5e6066) !default;
 }
 
 .errored {
-  border-color: $textarea-error-color;
+  border-color: $textarea-border-color-errored;
   &:focus {
-    border-color: $textarea-error-color;
+    border-color: $textarea-border-color-errored-focus;
   }
 }
