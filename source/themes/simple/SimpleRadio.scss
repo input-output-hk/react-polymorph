@@ -26,9 +26,6 @@ $radio-label-margin: var(--rp-radio-label-margin, 0 0 0 20px) !default;
   flex-direction: row;
   align-items: center;
   position: relative;
-  &:hover {
-    cursor: pointer;
-  }
   &.disabled {
     &:hover,
     .label:hover {
@@ -54,6 +51,9 @@ $radio-label-margin: var(--rp-radio-label-margin, 0 0 0 20px) !default;
   flex-shrink: 0;
   height: $radio-size;
   width: $radio-size;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .label {
@@ -81,6 +81,9 @@ $radio-label-margin: var(--rp-radio-label-margin, 0 0 0 20px) !default;
   }
   .circle {
     border: $radio-border-width solid $radio-border-color-disabled;
+  }
+  .circle:hover {
+    cursor: default;
   }
 }
 
