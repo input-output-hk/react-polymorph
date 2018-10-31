@@ -1,5 +1,44 @@
 @import "theme";
 
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+// h1
+$header-h1-font-family: var(--rp-header-h1-font-family, $theme-font-bold) !default;
+$header-h1-font-size: var(--rp-header-h1-font-size, 21px) !default;
+$header-h1-letter-spacing: var(--rp-header-h1-letter-spacing, 1px) !default;
+$header-h1-line-height: var(--rp-header-h1-line-height, 1.39) !default;
+$header-h1-text-align: var(--rp-header-h1-text-align, center) !default;
+$header-h1-text-color: var(--rp-header-h1-text-color, #5e6066) !default;
+$header-h1-text-transform: var(--rp-header-h1-text-transform, uppercase) !default;
+
+// h2
+$header-h2-font-family: var(--rp-header-h2-font-family, $theme-font-medium) !default;
+$header-h2-font-size: var(--rp-header-h2-font-size, 18px) !default;
+$header-h2-letter-spacing: var(--rp-header-h2-letter-spacing, 1px) !default;
+$header-h2-line-height: var(--rp-header-h2-line-height, 1.39) !default;
+$header-h2-text-align: var(--rp-header-h2-text-align, center) !default;
+$header-h2-text-color: var(--rp-header-h2-text-color, #5e6066) !default;
+$header-h2-text-transform: var(--rp-header-h2-text-transform, none) !default;
+
+//h3
+$header-h3-font-family: var(--rp-header-h3-font-family, $theme-font-regular) !default;
+$header-h3-font-size: var(--rp-header-h3-font-size, 16px) !default;
+$header-h3-letter-spacing: var(--rp-header-h3-letter-spacing, 1px) !default;
+$header-h3-line-height: var(--rp-header-h3-line-height, 1.39) !default;
+$header-h3-text-align: var(--rp-header-h3-text-align, center) !default;
+$header-h3-text-color: var(--rp-header-h3-text-color, #5e6066) !default;
+$header-h3-text-transform: var(--rp-header-h3-text-transform, none) !default;
+
+// h4
+$header-h4-font-family: var(--rp-header-h4-font-family, $theme-font-light) !default;
+$header-h4-font-size: var(--rp-header-h4-font-size, 14px) !default;
+$header-h4-letter-spacing: var(--rp-header-h4-letter-spacing, 1px) !default;
+$header-h4-line-height: var(--rp-header-h4-line-height, 1.39) !default;
+$header-h4-text-align: var(--rp-header-h4-text-align, center) !default;
+$header-h4-text-color: var(--rp-header-h4-text-color, #5e6066) !default;
+$header-h4-text-transform: var(--rp-header-h4-text-transform, none) !default;
+
+
 .header {
   // styles shared between all variations
   // useful when themeOverrides is passed to ThemeProvider
@@ -21,6 +60,7 @@
   line-height: 1.39;
   letter-spacing: 1px;
   text-align: center;
+  text-transform: none;
   color: #5e6066;
 }
 
@@ -30,6 +70,7 @@
   line-height: 1.39;
   letter-spacing: 1px;
   text-align: center;
+  text-transform: none;
   color: #5e6066;
 }
 
@@ -39,6 +80,7 @@
   line-height: 1.39;
   letter-spacing: 1px;
   text-align: center;
+  text-transform: none;
   color: #5e6066;
 }
 
