@@ -1,8 +1,8 @@
 @import "theme";
 @import "mixins/loading-spinner";
 
-$loading-spinner-color: $theme-color-light-grey !default;
-$loading-spinner-speed: 1.5s !default;
+$loading-spinner-color: var(--rp-loading-spinner-color, $theme-color-light-grey) !default;
+$loading-spinner-speed: var(--rp-loading-spinner-speed, 1.5s) !default;
 
 .root {
   margin: auto;
