@@ -45,43 +45,43 @@ $header-h4-text-transform: var(--rp-header-h4-text-transform, none) !default;
 }
 
 .h1 {
-  font-family: $theme-font-bold;
-  font-size: 21px;
-  line-height: 1.39;
-  letter-spacing: 1px;
-  text-align: center;
-  text-transform: uppercase;
-  color: #5e6066;
+  font-family: $header-h1-font-family;
+  font-size: $header-h1-font-size;
+  letter-spacing: $header-h1-letter-spacing;
+  line-height: $header-h1-line-height;
+  text-align: $header-h1-text-align;
+  text-transform: $header-h1-text-transform;
+  color: $header-h1-text-color;
 }
 
 .h2 {
-  font-family: $theme-font-medium;
-  font-size: 18px;
-  line-height: 1.39;
-  letter-spacing: 1px;
-  text-align: center;
-  text-transform: none;
-  color: #5e6066;
+  font-family: $header-h2-font-family;
+  font-size: $header-h2-font-size;
+  letter-spacing: $header-h2-letter-spacing;
+  line-height: $header-h2-line-height;
+  text-align: $header-h2-text-align;
+  text-transform: $header-h2-text-transform;
+  color: $header-h2-text-color;
 }
 
 .h3 {
-  font-family: $theme-font-regular;
-  font-size: 16px;
-  line-height: 1.39;
-  letter-spacing: 1px;
-  text-align: center;
-  text-transform: none;
-  color: #5e6066;
+  font-family: $header-h3-font-family;
+  font-size: $header-h3-font-size;
+  letter-spacing: $header-h3-letter-spacing;
+  line-height: $header-h3-line-height;
+  text-align: $header-h3-text-align;
+  text-transform: $header-h3-text-transform;
+  color: $header-h3-text-color;
 }
 
 .h4 {
-  font-family: $theme-font-light;
-  font-size: 14px;
-  line-height: 1.39;
-  letter-spacing: 1px;
-  text-align: center;
-  text-transform: none;
-  color: #5e6066;
+  font-family: $header-h4-font-family;
+  font-size: $header-h4-font-size;
+  letter-spacing: $header-h4-letter-spacing;
+  line-height: $header-h4-line-height;
+  text-align: $header-h4-text-align;
+  text-transform: $header-h4-text-transform;
+  color: $header-h4-text-color;
 }
 
 .thin {
