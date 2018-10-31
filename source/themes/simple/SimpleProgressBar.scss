@@ -1,18 +1,27 @@
 @import "theme";
-// General config
-$progress-bar-height: 30px !default;
-$progress-bar-width: 100% !default;
-// Track config
-$progress-bar-track-color: #c6cdd6 !default;
-$progress-bar-track-border-radius: 5px !default;
-// Progress bar config
-$progress-bar-background-color: #34465e !default;
-$progress-bar-fill-color: #445b7c !default;
-$progress-bar-border-radius: 4px !default;
-$progress-bar-stripes-angle: -45deg !default;
-$progress-bar-background-size: 80px 80px !default;
-// Label config
-$progress-bar-label-color: white !default;
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+// general
+$progress-bar-height: var(--rp-progress-bar-height, 30px) !default;
+$progress-bar-width: var(--rp-progress-bar-width, 100%) !default;
+
+// track
+$progress-bar-track-border-radius: var(--rp-progress-bar-track-border-radius, 5px) !default;
+$progress-bar-track-color: var(--rp-progress-bar-track-color, #c6cdd6) !default;
+
+// bar
+$progress-bar-bg-color: var(--rp-progress-bar-bg-color, #34465e) !default;
+$progress-bar-bg-size: var(--rp-progress-bar-bg-size, 80px 80px) !default;
+$progress-bar-border-radius: var(--rp-progress-bar-border-radius, 4px) !default;
+$progress-bar-fill-color: var(--rp-progress-bar-fill-color, #445b7c) !default;
+$progress-bar-stripes-angle: var(--rp-progress-bar-stripes-angle, -45deg) !default;
+
+// label
+$progress-bar-label-color: var(--rp-progress-bar-label-color, white) !default;
+$progress-bar-label-font-family: var(--rp-progress-bar-label-font-family, $theme-font-bold) !default;
+$progress-bar-label-letter-spacing: var(--rp-progress-bar-label-letter-spacing, 0) !default;
+$progress-bar-label-text-transform: var(--rp-progress-bar-label-text-transform, uppercase) !default;
 
 .track {
   height: $progress-bar-height;
@@ -27,7 +36,7 @@ $progress-bar-label-color: white !default;
 .progress {
   height: 100%;
   border-radius: $progress-bar-border-radius;
-  background-color: $progress-bar-background-color;
+  background-color: $progress-bar-bg-color;
   overflow: hidden;
   position: relative;
 
@@ -49,7 +58,7 @@ $progress-bar-label-color: white !default;
       transparent
     );
     z-index: 1;
-    background-size: $progress-bar-background-size;
+    background-size: $progress-bar-bg-size;
     animation: move 2s linear infinite;
     overflow: hidden;
   }
@@ -65,8 +74,9 @@ $progress-bar-label-color: white !default;
   justify-content: center;
   align-items: center;
   color: $progress-bar-label-color;
-  text-transform: uppercase;
-  font-family: $theme-font-bold, sans-serif;
+  text-transform: $progress-bar-label-text-transform;
+  letter-spacing: $progress-bar-label-letter-spacing;
+  font-family: $progress-bar-label-font-family, sans-serif;
   z-index: 2;
 }
 
@@ -75,6 +85,6 @@ $progress-bar-label-color: white !default;
     background-position: 0 0;
   }
   100% {
-    background-position: $progress-bar-background-size;
+    background-position: $progress-bar-bg-size;
   }
 }
