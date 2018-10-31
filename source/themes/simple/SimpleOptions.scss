@@ -14,22 +14,22 @@ $option-padding: var(--rp-option-padding, 14px 20px) !default;
 
 // OPTIONS
 $options-border-color: var(--rp-options-border-color, #c6cdd6) !default;
-$options-border: var(--rp-options-border, 1px solid $options-border-color) !default;
+$options-border: var(--rp-options-border, 1px solid #c6cdd6) !default;
 $options-border-radius: var(--rp-options-border-radius, 2px) !default;
 $options-font-family: var(--rp-options-font-family, $theme-font-regular) !default;
 $options-font-size: var(--rp-options-font-size, 16px) !default;
 $options-shadow: var(--rp-options-shadow, none) !default;
 
 // Bubble arrow
-$options-arrow-size: 10px !default;
-$options-bubble-arrow: true !default;
+$options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
+$options-bubble-arrow: var(--rp-options-bubble-arrow, true) !default;
 
 .options {
   & > div {
     padding: 0;
   }
 
-  @if $options-bubble-arrow == true {
+  @if calc(#{$options-bubble-arrow} == true) {
     [data-bubble-arrow] {
       @include arrow(
         up,
@@ -108,7 +108,7 @@ $options-bubble-arrow: true !default;
 }
 
 // BEGIN SPECIAL STATES ---------- //
-@if $options-bubble-arrow == true {
+@if calc(#{$options-bubble-arrow} == true) {
   .openUpward {
     &.options {
       top: inherit;
