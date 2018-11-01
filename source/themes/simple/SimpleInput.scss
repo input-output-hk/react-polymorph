@@ -2,22 +2,25 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$input-width: var(--rp-input-width, 100%) !default;
+// input
+$input-bg-color: var(--rp-input-bg-color, #fafbfc) !default;
+$input-bg-color-disabled: var(--rp-input-bg-color-disabled, #fcfafa) !default;
+$input-border: var(--rp-input-border, 1px solid var(--rp-input-border-color, #c6cdd6)) !default;
+$input-border-color-disabled: var(--rp-input-border-color-disabled, #cfcfcf) !default;
+$input-border-color-errored: var(--rp-input-border-color-errored, $theme-color-error) !default;
+$input-border-color-focus: var(--rp-input-border-color-focus, #5e6066) !default;
+$input-border-radius: var(--rp-input-border-radius, 2px) !default;
+$input-font-family: var(--rp-input-font-family, $theme-font-regular, sans-serif) !default;
 $input-font-size: var(--rp-input-font-size, 16px) !default;
-$input-font-family: var(--rp-input-font-family, $theme-font-regular) !default;
+$input-outline-focus: var(--rp-input-outline-focus, none) !default;
+$input-padding: var(--rp-input-padding, 14px 20px) !default;
 $input-text-color: var(--rp-input-text-color, #5e6066) !default;
+$input-width: var(--rp-input-width, 100%) !default;
+
+// placeholder
 $input-placeholder-color: var(--rp-input-placeholder-color, rgba(#5e6066, 0.5)) !default;
 $input-placeholder-color-disabled: var(--rp-input-placeholder-color-disabled, rgba(#5e6066, 0.5)) !default;
 $input-placeholder-font-family: var(--rp-input-placeholder-font-family, $theme-font-light, sans-serif) !default;
-$input-border-color-disabled: var(--rp-input-border-color-disabled, #cfcfcf) !default;
-$input-bg-color-disabled: var(--rp-input-bg-color-disabled, #fcfafa) !default;
-$input-bg-color: var(--rp-input-bg-color, #fafbfc) !default;
-$input-border: var(--rp-input-border, 1px solid var(--rp-input-border-color, #c6cdd6)) !default;
-$input-border-radius: var(--rp-input-border-radius, 2px) !default;
-$input-border-color-errored: var(--rp-input-border-color-errored, $theme-color-error) !default;
-$input-border-color-focus: var(--rp-input-border-color-focus, #5e6066) !default;
-$input-padding: var(--rp-input-padding, 14px 20px) !default;
-$input-outline-focus: var(--rp-input-outline-focus, none) !default;
 
 .input {
   background-color: $input-bg-color;
@@ -25,7 +28,7 @@ $input-outline-focus: var(--rp-input-outline-focus, none) !default;
   border-radius: $input-border-radius;
   box-sizing: border-box;
   color: $input-text-color;
-  font-family: $input-font-family, sans-serif;
+  font-family: $input-font-family;
   font-size: $input-font-size;
   padding: $input-padding;
   width: $input-width;
