@@ -1,31 +1,35 @@
 @import "theme";
-@import "SimpleInput";
 @import "mixins/arrow";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
-$select-input-color: var(--rp-input-text-color, #5e6066) !default;
-$select-input-placeholder-color: var(--rp-input-placeholder-color, rgba(#5e6066, 0.5)) !default;
-$select-input-placeholder-font-family: $theme-font-light, sans-serif !default;
-$select-input-bg-color: var(--rp-input-bg-color, #fafbfc) !default;
+
+// select-input
+$select-input-bg-color: var(--rp-select-input-bg-color, #fafbfc) !default;
+$select-input-border: var(--rp-select-input-border, 1px solid var(--rp-select-input-border-color, #c6cdd6)) !default;
 $select-input-border-color-focus: var(--rp-select-input-border-color-focus, #5e6066) !default;
-$select-input-padding: $input-padding !default;
-$select-input-border: 1px solid var(--rp-input-border-color, #c6cdd6) !default;
-// Arrow in default state
-$select-arrow-url: url("#{$theme-assets-path}/select-arrow.svg") !default;
+$select-input-cursor: var(--rp-select-input-cursor, default) !default;
+$select-input-padding: var(--rp-select-input-padding, 14px 20px) !default;
+$select-input-placeholder-color: var(--rp-select-input-placeholder-color, rgba(#5e6066, 0.5)) !default;
+$select-input-placeholder-font-family: var(--rp-select-input-placeholder-font-family, $theme-font-light, sans-serif) !default;
+$select-input-text-color: var(--rp-select-input-text-color, #5e6066) !default;
+
+// arrow in default state
+$select-arrow-bottom: var(--rp-select-arrow-bottom, 20px) !default;
 $select-arrow-color: var(--rp-select-arrow-color, #c6cdd6) !default;
-$select-arrow-width: 11px !default;
-$select-arrow-height: 7px !default;
-$select-arrow-position-bottom: 20px !default;
-$select-arrow-position-left: calc(100% - 32px) !default;
-$select-arrow-rtl-position-left: 19px !default;
-// Arrow in open state
-$select-arrow-url-open: url("#{$theme-assets-path}/select-open-arrow.svg") !default;
-$select-arrow-color-open: var(--rp-select-arrow-color-open, #5e6066) !default;
-$select-open-arrow-width: $select-arrow-width !default;
-$select-open-arrow-height: $select-arrow-height !default;
-$select-open-arrow-position-bottom: 21px !default;
-$select-open-arrow-position-left: $select-arrow-position-left !default;
-$select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
+$select-arrow-height: var(--rp-select-arrow-height, 7px) !default;
+$select-arrow-left: var(--rp-select-arrow-left, calc(100% - 32px)) !default;
+$select-arrow-rtl-left: var(--rp-select-arrow-rtl-left, 19px) !default;
+$select-arrow-url: var(--rp-select-arrow-url, url("#{$theme-assets-path}/select-arrow.svg")) !default;
+$select-arrow-width: var(--rp-select-arrow-width, 11px) !default;
+
+// arrow in open state
+$select-arrow-bg-color-open: var(--rp-select-arrow-bg-color-open, #5e6066) !default;
+$select-arrow-url-open: var(--rp-select-arrow-url-open, url("#{$theme-assets-path}/select-open-arrow.svg")) !default;
+/* $select-open-arrow-height: var(--rp-select-open-arrow-height, $select-arrow-height) !default; */
+$select-arrow-bottom-open: var(--rp-select-arrow-bottom-open, 21px) !default;
+/* $select-open-arrow-position-left: var(--rp-select-open-arrow-position-left, $select-arrow-left) !default; */
+/* $select-open-arrow-rtl-position-left: var(--rp-select-open-arrow-rtl-position-left, $select-arrow-rtl-left) !default; */
+/* $select-open-arrow-width: var(--rp-select-open-arrow-width, $select-arrow-width) !default; */
 
 .select {
   position: relative;
@@ -33,10 +37,10 @@ $select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
 
 .selectInput {
   input {
-    color: $select-input-color;
+    color: $select-input-text-color;
     background-color: $select-input-bg-color;
     border: $select-input-border;
-    cursor: pointer;
+    cursor: $select-input-cursor;
     padding: $select-input-padding;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -55,11 +59,11 @@ $select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
     background-color: $select-arrow-color;
     -webkit-mask: $select-arrow-url;
     mask: $select-arrow-url;
-    bottom: $select-arrow-position-bottom;
+    bottom: $select-arrow-bottom;
     content: "";
     pointer-events: none;
     position: absolute;
-    left: $select-arrow-position-left;
+    left: $select-arrow-left;
     height: $select-arrow-height;
     width: $select-arrow-width;
   }
@@ -76,8 +80,8 @@ $select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
   .selectInput:after {
     -webkit-mask: $select-arrow-url-open;
     mask: $select-arrow-url-open;
-    background-color: $select-arrow-color-open;
-    bottom: $select-open-arrow-position-bottom;
+    background-color: $select-arrow-bg-color-open;
+    bottom: $select-arrow-bottom-open;
   }
 }
 
@@ -85,14 +89,14 @@ $select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
 .openUpward {
   .selectInput:after {
     -webkit-mask: $select-arrow-url-open;
-    bottom: $select-open-arrow-position-bottom;
+    bottom: $select-arrow-bottom-open;
   }
 
   &.isOpen {
     .selectInput:after {
       -webkit-mask: $select-arrow-url;
       mask: $select-arrow-url;
-      bottom: $select-arrow-position-bottom;
+      bottom: $select-arrow-bottom;
     }
   }
 }
@@ -101,6 +105,6 @@ $select-open-arrow-rtl-position-left: $select-arrow-rtl-position-left !default;
 // right-to-left languages support
 [dir='rtl'] {
   .selectInput:after {
-    left: $select-arrow-rtl-position-left;
+    left: $select-arrow-rtl-left;
   }
 }

@@ -1,5 +1,5 @@
 // Select theme customizations
-$select-input-color: white;
+$select-input-text-color: white;
 $select-input-placeholder-color: #495863;
 $select-input-bg-color: #212930;
 $select-input-border-color-focus: #33415e;
@@ -8,10 +8,10 @@ $select-input-border: none;
 $select-arrow-url: url("./assets/select-arrow.svg");
 $select-arrow-color: green;
 $select-arrow-url-open: url("./assets/select-open-arrow.svg");
-$select-arrow-color-open: red;
+$select-arrow-bg-color-open: red;
 $select-arrow-width: 11px;
 $select-arrow-height: 4px;
-$select-arrow-position-bottom: 16px;
-$select-arrow-position-left: calc(100% - 32px);
+$select-arrow-bottom: 16px;
+$select-arrow-left: calc(100% - 32px);
 
 @import "../../source/themes/simple/SimpleSelect";
