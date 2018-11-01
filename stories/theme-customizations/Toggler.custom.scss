@@ -1,8 +1,8 @@
 // Toggler theme customizations
-$toggler-background: #557c61;
-$toggler-label-off-color: #e5fcd9;
-$toggler-label-on-color: #467c47;
-$toggler-label-on-background: #fafbfc;
+$toggler-bg-color: #557c61;
+$toggler-label-text-color-off: #e5fcd9;
+$toggler-label-text-color-on: #467c47;
+$toggler-label-bg-color-on: #fafbfc;
 $toggler-height: 40px;
 
 @import "../../source/themes/simple/SimpleToggler";
