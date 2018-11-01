@@ -2,13 +2,16 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
+// infinite-scroll
 $infinite-scroll-height: var(--rp-infinite-scroll-height, 100%) !default;
+$infinite-scroll-width: var(--rp-infinite-scroll-width, auto) !default;
+
+// scrollbar
 $infinite-scroll-scrollbar-thumb-bg-color: var(--rp-infinite-scroll-scrollbar-thumb-bg-color, #c8ccce) !default;
 $infinite-scroll-scrollbar-thumb-border: var(--rp-infinite-scroll-scrollbar-thumb-border, 7px solid transparent) !default;
 $infinite-scroll-scrollbar-thumb-border-radius: var(--rp-infinite-scroll-scrollbar-thumb-border-radius, 12px) !default;
 $infinite-scroll-scrollbar-track-bg-color: var(--rp-infinite-scroll-scrollbar-track-bg-color, transparent) !default;
 $infinite-scroll-scrollbar-width: var(--rp-infinite-scroll-scrollbar-width, 20px) !default;
-$infinite-scroll-width: var(--rp-infinite-scroll-width, auto) !default;
 
 .root {
   display: flex;
