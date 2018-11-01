@@ -3,9 +3,9 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$tooltip-font-color: white !default;
-$tooltip-font-family: $theme-font-light, sans-serif !default;
-$tooltip-bg-color: #fafbfc !default;
+$tooltip-bg-color: var(--rp-tooltip-bg-color, #fafbfc) !default;
+$tooltip-font-family: var(--rp-tooltip-font-family, $theme-font-light, sans-serif) !default;
+$tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
 
 .root {
   position: relative;
@@ -20,7 +20,7 @@ $tooltip-bg-color: #fafbfc !default;
 
 .bubble {
   font-family: $tooltip-font-family;
-  color: $tooltip-font-color;
+  color: $tooltip-text-color;
   background-color: $tooltip-bg-color;
   display: none;
 }
