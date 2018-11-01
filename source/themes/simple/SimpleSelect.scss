@@ -25,11 +25,8 @@ $select-arrow-width: var(--rp-select-arrow-width, 11px) !default;
 // arrow in open state
 $select-arrow-bg-color-open: var(--rp-select-arrow-bg-color-open, #5e6066) !default;
 $select-arrow-url-open: var(--rp-select-arrow-url-open, url("#{$theme-assets-path}/select-open-arrow.svg")) !default;
-/* $select-open-arrow-height: var(--rp-select-open-arrow-height, $select-arrow-height) !default; */
 $select-arrow-bottom-open: var(--rp-select-arrow-bottom-open, 21px) !default;
-/* $select-open-arrow-position-left: var(--rp-select-open-arrow-position-left, $select-arrow-left) !default; */
-/* $select-open-arrow-rtl-position-left: var(--rp-select-open-arrow-rtl-position-left, $select-arrow-rtl-left) !default; */
-/* $select-open-arrow-width: var(--rp-select-open-arrow-width, $select-arrow-width) !default; */
+
 
 .select {
   position: relative;
