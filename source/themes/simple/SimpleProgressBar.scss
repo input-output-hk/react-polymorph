@@ -19,7 +19,7 @@ $progress-bar-stripes-angle: var(--rp-progress-bar-stripes-angle, -45deg) !defau
 
 // label
 $progress-bar-label-color: var(--rp-progress-bar-label-color, white) !default;
-$progress-bar-label-font-family: var(--rp-progress-bar-label-font-family, $theme-font-bold) !default;
+$progress-bar-label-font-family: var(--rp-progress-bar-label-font-family, $theme-font-bold, sans-serif) !default;
 $progress-bar-label-letter-spacing: var(--rp-progress-bar-label-letter-spacing, 0) !default;
 $progress-bar-label-text-transform: var(--rp-progress-bar-label-text-transform, uppercase) !default;
 
@@ -76,7 +76,7 @@ $progress-bar-label-text-transform: var(--rp-progress-bar-label-text-transform, 
   color: $progress-bar-label-color;
   text-transform: $progress-bar-label-text-transform;
   letter-spacing: $progress-bar-label-letter-spacing;
-  font-family: $progress-bar-label-font-family, sans-serif;
+  font-family: $progress-bar-label-font-family;
   z-index: 2;
 }
 

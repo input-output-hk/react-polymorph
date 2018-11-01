@@ -4,7 +4,7 @@
 
 $formfield-bg-color: var(--rp-formfield-bg-color, none) !default;
 $formfield-bg-color-disabled: var(--rp-formfield-bg-color-disabled, none) !default;
-$formfield-label-font-family: var(--rp-formfield-label-font-family, $theme-font-medium) !default;
+$formfield-label-font-family: var(--rp-formfield-label-font-family, $theme-font-medium, sans-serif) !default;
 $formfield-label-font-size: var(--rp-formfield-label-font-size, 16px) !default;
 $formfield-label-text-color: var(--rp-formfield-label-text-color, #5e6066) !default;
 $formfield-label-text-color-disabled: var(--rp-formfield-label-text-color-disabled, $theme-color-disabled) !default;

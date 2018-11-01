@@ -11,7 +11,7 @@ $button-border-outline-focus: var(--rp-button-border-outline-focus, none) !defau
 $button-border-radius: var(--rp-button-border-radius, 5px) !default;
 $button-cursor: var(--rp-button-cursor, pointer) !default;
 $button-cursor-disabled: var(--rp-button-cursor-disabled, default) !default;
-$button-font-family: var(--rp-button-font-family, $theme-font-medium) !default;
+$button-font-family: var(--rp-button-font-family, $theme-font-medium, sans-serif) !default;
 $button-font-size: var(--rp-button-font-size, 14px) !default;
 $button-padding: var(--rp-button-padding, 15px 20px) !default;
 $button-text-color: var(--rp-button-text-color, #fff) !default;
@@ -23,7 +23,7 @@ $button-width: var(--rp-button-width, 100%) !default;
   border-radius: $button-border-radius;
   box-sizing: border-box;
   color: $button-text-color;
-  font-family: $button-font-family, sans-serif;
+  font-family: $button-font-family;
   font-size: $button-font-size;
   padding: $button-padding;
   width: $button-width;

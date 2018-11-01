@@ -16,7 +16,7 @@ $option-padding: var(--rp-option-padding, 14px 20px) !default;
 $options-border-color: var(--rp-options-border-color, #c6cdd6) !default;
 $options-border: var(--rp-options-border, 1px solid #c6cdd6) !default;
 $options-border-radius: var(--rp-options-border-radius, 2px) !default;
-$options-font-family: var(--rp-options-font-family, $theme-font-regular) !default;
+$options-font-family: var(--rp-options-font-family, $theme-font-regular, sans-serif) !default;
 $options-font-size: var(--rp-options-font-size, 16px) !default;
 $options-shadow: var(--rp-options-shadow, none) !default;
 
@@ -69,7 +69,7 @@ $options-bubble-arrow: var(--rp-options-bubble-arrow, true) !default;
   width: 100%;
   padding: 0;
   list-style: none;
-  font-family: $options-font-family, sans-serif;
+  font-family: $options-font-family;
   font-size: $options-font-size;
 }
 

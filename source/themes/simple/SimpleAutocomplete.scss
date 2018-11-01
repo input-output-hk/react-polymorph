@@ -10,7 +10,7 @@ $autocomplete-border-color-errored: var(--rp-autocomplete-border-color-errored, 
 $autocomplete-input-bg-color: var(--rp-autocomplete-input-bg-color, transparent) !default;
 $autocomplete-input-border: var(--rp-autocomplete-input-border, 0) !default;
 $autocomplete-input-font-size: var(--rp-autocomplete-input-font-size, 16px) !default;
-$autocomplete-input-font-family: var(--rp-autocomplete-input-font-family, $theme-font-light) !default;
+$autocomplete-input-font-family: var(--rp-autocomplete-input-font-family, $theme-font-light, sans-serif) !default;
 $autocomplete-input-height: var(--rp-autocomplete-input-height, 28px) !default;
 $autocomplete-input-margin: var(--rp-autocomplete-input-margin, 6px 0) !default;
 $autocomplete-input-max-width: var(--rp-autocomplete-input-max-width, 100%) !default;
@@ -20,7 +20,7 @@ $autocomplete-input-text-color: var(--rp-autocomplete-input-text-color, #5e6066)
 $autocomplete-min-height: var(--rp-autocomplete-min-height, 90px) !default;
 $autocomplete-padding: var(--rp-autocomplete-padding, 5px 20px) !default;
 $autocomplete-placeholder-color: var(--rp-autocomplete-placeholder-color, rgba(#5e6066, 0.5)) !default;
-$autocomplete-placeholder-font-family: var(--rp-autocomplete-placeholder-font-family, $theme-font-light) !default;
+$autocomplete-placeholder-font-family: var(--rp-autocomplete-placeholder-font-family, $theme-font-light, sans-serif) !default;
 $autocomplete-placeholder-font-size: var(--rp-autocomplete-placeholder-font-size, 16px) !default;
 $autocomplete-selected-word-box-bg-color: var(
   --rp-autocomplete-selected-word-box-bg-color,
@@ -34,7 +34,7 @@ $autocomplete-selected-word-text-color: var(--rp-autocomplete-selected-word-text
 $autocomplete-selected-word-font-size: var(--rp-autocomplete-selected-word-font-size, 16px) !default;
 $autocomplete-selected-words-font-family: var(
   --rp-autocomplete-selected-words-font-family,
-  $theme-font-light
+  $theme-font-light, sans-serif
 ) !default;
 $autocomplete-selected-words-min-height: var(--rp-autocomplete-selected-words-min-height, 28px) !default;
 $autocomplete-width: var(--rp-autocomplete-width, 100%) !default;
@@ -61,7 +61,7 @@ $autocomplete-width: var(--rp-autocomplete-width, 100%) !default;
     color: $autocomplete-input-text-color;
     display: block;
     flex: 1;
-    font-family: $autocomplete-input-font-family, sans-serif;
+    font-family: $autocomplete-input-font-family;
     font-size: $autocomplete-input-font-size;
     height: $autocomplete-input-height;
     margin: $autocomplete-input-margin;
@@ -71,7 +71,7 @@ $autocomplete-width: var(--rp-autocomplete-width, 100%) !default;
 
     &::-webkit-input-placeholder {
       color: $autocomplete-placeholder-color;
-      font-family: $autocomplete-placeholder-font-family, sans-serif;
+      font-family: $autocomplete-placeholder-font-family;
       font-size: $autocomplete-placeholder-font-size;
     }
   }
@@ -81,7 +81,7 @@ $autocomplete-width: var(--rp-autocomplete-width, 100%) !default;
   display: flex;
   flex-wrap: wrap;
   min-height: $autocomplete-selected-words-min-height;
-  font-family: $autocomplete-selected-words-font-family, sans-serif;
+  font-family: $autocomplete-selected-words-font-family;
 }
 
 .selectedWordBox {

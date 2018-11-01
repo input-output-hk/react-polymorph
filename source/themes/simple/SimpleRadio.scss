@@ -13,7 +13,7 @@ $radio-border-width: var(--rp-radio-border-width, 1px) !default;
 
 // label
 $radio-label-cursor-hover: var(--rp-radio-label-cursor-hover, pointer) !default;
-$radio-label-font-family: var(--rp-radio-label-font-family, $theme-font-light) !default;
+$radio-label-font-family: var(--rp-radio-label-font-family, $theme-font-light, sans-serif) !default;
 $radio-label-font-size: var(--rp-radio-label-font-size, 16px) !default;
 $radio-label-font-weight: var(--rp-radio-label-font-weight, 800) !default;
 $radio-label-line-height: var(--rp-radio-label-line-height, 30px) !default;
