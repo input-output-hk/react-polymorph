@@ -10,9 +10,11 @@ $checkbox-check-height: var(--rp-checkbox-check-height, calc(23 / 2 * 1px)) !def
 $checkbox-check-thickness: var(--rp-checkbox-check-thickness, 2px) !default;
 $checkbox-check-vertical-offset: var(--rp-checkbox-check-vertical-offset, -4px) !default;
 $checkbox-check-width: var(--rp-checkbox-check-width, calc(23 / 5 * 1px)) !default;
-$checkbox-label-color: var(--rp-checkbox-label-color, #5e6066) !default;
-$checkbox-label-color-disabled: var(--rp-checkbox-label-color-disabled, $theme-color-light-grey) !default;
-$checkbox-label-size: var(--rp-checkbox-label-size, 16px) !default;
+$checkbox-label-font-family: var(--rp-checkbox-label-font-family, $theme-font-light, sans-serif) !default;
+$checkbox-label-font-size: var(--rp-checkbox-label-font-size, 16px) !default;
+$checkbox-label-margin: var(--rp-checkbox-label-margin, 0 0 0 20px) !default;
+$checkbox-label-text-color: var(--rp-checkbox-label-text-color, #5e6066) !default;
+$checkbox-label-text-color-disabled: var(--rp-checkbox-label-text-color-disabled, $theme-color-light-grey) !default;
 $checkbox-size: var(--rp-checkbox-size, 23px) !default;
 
 
@@ -44,11 +46,11 @@ $checkbox-size: var(--rp-checkbox-size, 23px) !default;
 }
 
 .label {
-  color: $checkbox-label-color;
-  font-family: $theme-font-light;
-  font-size: $checkbox-label-size;
+  color: $checkbox-label-text-color;
+  font-family: $checkbox-label-font-family;
+  font-size: $checkbox-label-font-size;
   line-height: $checkbox-size;
-  margin-left: 20px;
+  margin: $checkbox-label-margin;
   white-space: normal;
   &:hover {
     cursor: pointer;
@@ -73,7 +75,7 @@ $checkbox-size: var(--rp-checkbox-size, 23px) !default;
   }
 
   .label {
-    color: $checkbox-label-color-disabled;
+    color: $checkbox-label-text-color-disabled;
   }
 }
 
