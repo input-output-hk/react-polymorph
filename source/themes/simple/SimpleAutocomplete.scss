@@ -2,11 +2,17 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
+// autocomplete
 $autocomplete-bg-color: var(--rp-autocomplete-bg-color, #fafbfc) !default;
 $autocomplete-border: var(--rp-autocomplete-border, 1px solid #c6cdd6) !default;
 $autocomplete-border-radius: var(--rp-autocomplete-border-radius, 2px) !default;
 $autocomplete-border-color-opened: var(--rp-autocomplete-border-color-opened, #5e6066) !default;
 $autocomplete-border-color-errored: var(--rp-autocomplete-border-color-errored, $theme-color-error) !default;
+$autocomplete-min-height: var(--rp-autocomplete-min-height, 90px) !default;
+$autocomplete-padding: var(--rp-autocomplete-padding, 5px 20px) !default;
+$autocomplete-width: var(--rp-autocomplete-width, 100%) !default;
+
+// input
 $autocomplete-input-bg-color: var(--rp-autocomplete-input-bg-color, transparent) !default;
 $autocomplete-input-border: var(--rp-autocomplete-input-border, 0) !default;
 $autocomplete-input-font-size: var(--rp-autocomplete-input-font-size, 16px) !default;
@@ -17,8 +23,8 @@ $autocomplete-input-max-width: var(--rp-autocomplete-input-max-width, 100%) !def
 $autocomplete-input-outline: var(--rp-autocomplete-input-outline, none) !default;
 $autocomplete-input-padding: var(--rp-autocomplete-input-padding, 0) !default;
 $autocomplete-input-text-color: var(--rp-autocomplete-input-text-color, #5e6066) !default;
-$autocomplete-min-height: var(--rp-autocomplete-min-height, 90px) !default;
-$autocomplete-padding: var(--rp-autocomplete-padding, 5px 20px) !default;
+
+// placeholder
 $autocomplete-placeholder-color: var(--rp-autocomplete-placeholder-color, rgba(#5e6066, 0.5)) !default;
 $autocomplete-placeholder-font-family: var(--rp-autocomplete-placeholder-font-family, $theme-font-light, sans-serif) !default;
 $autocomplete-placeholder-font-size: var(--rp-autocomplete-placeholder-font-size, 16px) !default;
@@ -26,18 +32,21 @@ $autocomplete-selected-word-box-bg-color: var(
   --rp-autocomplete-selected-word-box-bg-color,
   rgba(68, 91, 124, 0.5)
 ) !default;
+
+// selected-word-box
 $autocomplete-selected-word-box-border-radius: var(--rp-autocomplete-selected-word-box-border-radius, 5px) !default;
 $autocomplete-selected-word-box-height: var(--rp-autocomplete-selected-word-box-height, 28px) !default;
 $autocomplete-selected-word-box-margin: var(--rp-autocomplete-selected-word-box-margin, 6px 12px 6px 0) !default;
 $autocomplete-selected-word-box-padding: var(--rp-autocomplete-selected-word-box-padding, 3px 9px) !default;
 $autocomplete-selected-word-text-color: var(--rp-autocomplete-selected-word-text-color, #fafbfc) !default;
 $autocomplete-selected-word-font-size: var(--rp-autocomplete-selected-word-font-size, 16px) !default;
+
+// selected-words
 $autocomplete-selected-words-font-family: var(
   --rp-autocomplete-selected-words-font-family,
   $theme-font-light, sans-serif
 ) !default;
 $autocomplete-selected-words-min-height: var(--rp-autocomplete-selected-words-min-height, 28px) !default;
-$autocomplete-width: var(--rp-autocomplete-width, 100%) !default;
 
 .autocompleteWrapper {
 }
