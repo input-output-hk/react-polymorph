@@ -2,32 +2,30 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-// general
-$progress-bar-height: var(--rp-progress-bar-height, 30px) !default;
-$progress-bar-width: var(--rp-progress-bar-width, 100%) !default;
-
 // track
+$progress-bar-track-bg-color: var(--rp-progress-bar-track-bg-color, #c6cdd6) !default;
 $progress-bar-track-border-radius: var(--rp-progress-bar-track-border-radius, 5px) !default;
-$progress-bar-track-color: var(--rp-progress-bar-track-color, #c6cdd6) !default;
+$progress-bar-track-height: var(--rp-progress-bar-track-height, 30px) !default;
+$progress-bar-track-width: var(--rp-progress-bar-track-width, 100%) !default;
 
-// bar
-$progress-bar-bg-color: var(--rp-progress-bar-bg-color, #34465e) !default;
-$progress-bar-bg-size: var(--rp-progress-bar-bg-size, 80px 80px) !default;
-$progress-bar-border-radius: var(--rp-progress-bar-border-radius, 4px) !default;
-$progress-bar-fill-color: var(--rp-progress-bar-fill-color, #445b7c) !default;
-$progress-bar-stripes-angle: var(--rp-progress-bar-stripes-angle, -45deg) !default;
+// progress
+$progress-bar-progress-bg-color: var(--rp-progress-bar-progress-bg-color, #34465e) !default;
+$progress-bar-progress-bg-size: var(--rp-progress-bar-progress-bg-size, 80px 80px) !default;
+$progress-bar-progress-border-radius: var(--rp-progress-bar-progress-border-radius, 4px) !default;
+$progress-bar-progress-stripes-color: var(--rp-progress-bar-progress-stripes-color, #445b7c) !default;
+$progress-bar-progress-stripes-angle: var(--rp-progress-bar-progress-stripes-angle, -45deg) !default;
 
 // label
-$progress-bar-label-color: var(--rp-progress-bar-label-color, white) !default;
 $progress-bar-label-font-family: var(--rp-progress-bar-label-font-family, $theme-font-bold, sans-serif) !default;
 $progress-bar-label-letter-spacing: var(--rp-progress-bar-label-letter-spacing, 0) !default;
+$progress-bar-label-text-color: var(--rp-progress-bar-label-text-color, white) !default;
 $progress-bar-label-text-transform: var(--rp-progress-bar-label-text-transform, uppercase) !default;
 
 .track {
-  height: $progress-bar-height;
-  width: $progress-bar-width;
+  height: $progress-bar-track-height;
+  width: $progress-bar-track-width;
   position: relative;
-  background: $progress-bar-track-color;
+  background-color: $progress-bar-track-bg-color;
   border-radius: $progress-bar-track-border-radius;
   -moz-border-radius: $progress-bar-track-border-radius;
   -webkit-border-radius: $progress-bar-track-border-radius;
@@ -35,8 +33,8 @@ $progress-bar-label-text-transform: var(--rp-progress-bar-label-text-transform, 
 
 .progress {
   height: 100%;
-  border-radius: $progress-bar-border-radius;
-  background-color: $progress-bar-bg-color;
+  border-radius: $progress-bar-progress-border-radius;
+  background-color: $progress-bar-progress-bg-color;
   overflow: hidden;
   position: relative;
 
@@ -48,17 +46,17 @@ $progress-bar-label-text-transform: var(--rp-progress-bar-label-text-transform, 
     bottom: 0;
     right: 0;
     background-image: linear-gradient(
-      $progress-bar-stripes-angle,
-      $progress-bar-fill-color 25%,
+      $progress-bar-progress-stripes-angle,
+      $progress-bar-progress-stripes-color 25%,
       transparent 25%,
       transparent 50%,
-      $progress-bar-fill-color 50%,
-      $progress-bar-fill-color 75%,
+      $progress-bar-progress-stripes-color 50%,
+      $progress-bar-progress-stripes-color 75%,
       transparent 75%,
       transparent
     );
     z-index: 1;
-    background-size: $progress-bar-bg-size;
+    background-size: $progress-bar-progress-bg-size;
     animation: move 2s linear infinite;
     overflow: hidden;
   }
@@ -73,7 +71,7 @@ $progress-bar-label-text-transform: var(--rp-progress-bar-label-text-transform, 
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $progress-bar-label-color;
+  color: $progress-bar-label-text-color;
   text-transform: $progress-bar-label-text-transform;
   letter-spacing: $progress-bar-label-letter-spacing;
   font-family: $progress-bar-label-font-family;
@@ -85,6 +83,6 @@ $progress-bar-label-text-transform: var(--rp-progress-bar-label-text-transform, 
     background-position: 0 0;
   }
   100% {
-    background-position: $progress-bar-bg-size;
+    background-position: $progress-bar-progress-bg-size;
   }
 }
