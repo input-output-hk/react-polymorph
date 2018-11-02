@@ -1,13 +1,14 @@
 // Checkbox theme customizations
-$input-width: 200px;
-$input-font-family: serif;
-$input-font-size: 14px;
-$input-color: #2f6630;
-$input-placeholder-color: rgba(#4d664f, 0.5);
+
 $input-bg-color: #dcf7fc;
 $input-border: 1px solid #454a4b;
-$input-border-radius: 0;
 $input-border-color-focus: #84c7fc;
+$input-border-radius: 0;
+$input-color: #2f6630;
+$input-font-family: serif;
+$input-font-size: 14px;
 $input-padding: 14px 20px;
+$input-placeholder-color: rgba(#4d664f, 0.5);
+$input-width: 200px;
 
 @import "../../source/themes/simple/SimpleInput";
