@@ -14,8 +14,8 @@ $select-input-placeholder-font-family: var(--rp-select-input-placeholder-font-fa
 $select-input-text-color: var(--rp-select-input-text-color, #5e6066) !default;
 
 // arrow default
+$select-arrow-bg-color: var(--rp-select-arrow-bg-color, #c6cdd6) !default;
 $select-arrow-bottom: var(--rp-select-arrow-bottom, 20px) !default;
-$select-arrow-color: var(--rp-select-arrow-color, #c6cdd6) !default;
 $select-arrow-height: var(--rp-select-arrow-height, 7px) !default;
 $select-arrow-left: var(--rp-select-arrow-left, calc(100% - 32px)) !default;
 $select-arrow-rtl-left: var(--rp-select-arrow-rtl-left, 19px) !default;
@@ -53,7 +53,7 @@ $select-arrow-url-open: var(--rp-select-arrow-url-open, url("#{$theme-assets-pat
   }
 
   &:after {
-    background-color: $select-arrow-color;
+    background-color: $select-arrow-bg-color;
     -webkit-mask: $select-arrow-url;
     mask: $select-arrow-url;
     bottom: $select-arrow-bottom;
