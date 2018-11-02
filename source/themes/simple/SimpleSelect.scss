@@ -13,7 +13,7 @@ $select-input-placeholder-color: var(--rp-select-input-placeholder-color, rgba(#
 $select-input-placeholder-font-family: var(--rp-select-input-placeholder-font-family, $theme-font-light, sans-serif) !default;
 $select-input-text-color: var(--rp-select-input-text-color, #5e6066) !default;
 
-// arrow in default state
+// arrow default
 $select-arrow-bottom: var(--rp-select-arrow-bottom, 20px) !default;
 $select-arrow-color: var(--rp-select-arrow-color, #c6cdd6) !default;
 $select-arrow-height: var(--rp-select-arrow-height, 7px) !default;
@@ -22,10 +22,10 @@ $select-arrow-rtl-left: var(--rp-select-arrow-rtl-left, 19px) !default;
 $select-arrow-url: var(--rp-select-arrow-url, url("#{$theme-assets-path}/select-arrow.svg")) !default;
 $select-arrow-width: var(--rp-select-arrow-width, 11px) !default;
 
-// arrow in open state
+// arrow open
 $select-arrow-bg-color-open: var(--rp-select-arrow-bg-color-open, #5e6066) !default;
-$select-arrow-url-open: var(--rp-select-arrow-url-open, url("#{$theme-assets-path}/select-open-arrow.svg")) !default;
 $select-arrow-bottom-open: var(--rp-select-arrow-bottom-open, 21px) !default;
+$select-arrow-url-open: var(--rp-select-arrow-url-open, url("#{$theme-assets-path}/select-open-arrow.svg")) !default;
 
 
 .select {
