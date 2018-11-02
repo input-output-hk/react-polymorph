@@ -6,7 +6,7 @@ $textarea-bg-color-disabled: var(--rp-textarea-bg-color-disabled, #fcfafa) !defa
 $textarea-border: var(--rp-textarea-border, 1px solid #c6cdd6) !default;
 $textarea-border-color-disabled: var(--rp-textarea-border-color-disabled, #cfcfcf) !default;
 $textarea-border-color-errored: var(--rp-textarea-border-color-errored, $theme-color-error) !default;
-$textarea-border-color-errored-focus: var(--rp-textarea-border-color-errored-focus, $theme-color-error) !default;
+$textarea-border-color-errored-focus: var(--rp-textarea-border-color-errored-focus, $textarea-border-color-errored) !default;
 $textarea-border-color-focus: var(--rp-textarea-border-color-focus, #5e6066) !default;
 $textarea-border-radius: var(--rp-textarea-border-radius, 2px) !default;
 $textarea-font-family: var(--rp-textarea-font-family, $theme-font-light, sans-serif) !default;
