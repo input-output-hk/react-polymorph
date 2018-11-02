@@ -15,7 +15,6 @@ $radio-size: var(--rp-radio-size, 30px) !default;
 $radio-label-cursor: var(--rp-radio-label-cursor, pointer) !default;
 $radio-label-font-family: var(--rp-radio-label-font-family, $theme-font-light, sans-serif) !default;
 $radio-label-font-size: var(--rp-radio-label-font-size, 16px) !default;
-$radio-label-font-weight: var(--rp-radio-label-font-weight, 800) !default;
 $radio-label-line-height: var(--rp-radio-label-line-height, 30px) !default;
 $radio-label-text-color: var(--rp-radio-label-text-color, #5e6066) !default;
 $radio-label-text-color-disabled: var(--rp-radio-label-text-color-disabled, $theme-color-light-grey) !default;
@@ -69,7 +68,7 @@ $radio-label-margin: var(--rp-radio-label-margin, 0 0 0 20px) !default;
     cursor: $radio-label-cursor;
   }
   strong {
-    font-weight: $radio-label-font-weight;
+    font-weight: 800;
   }
 }
 
