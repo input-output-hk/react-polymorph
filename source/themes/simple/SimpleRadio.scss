@@ -4,15 +4,15 @@
 
 // radio
 $radio-bg-color: var(--rp-radio-color, white) !default;
-$radio-size: var(--rp-radio-size, 30px) !default;
-
-// border
 $radio-border-color: var(--rp-radio-border-color, #294b70) !default;
 $radio-border-color-disabled: var(--rp-radio-border-color-disabled, $theme-color-disabled) !default;
 $radio-border-width: var(--rp-radio-border-width, 1px) !default;
+$radio-cursor: var(--rp-radio-cursor, pointer) !default;
+$radio-cursor-disabled: var(--rp-radio-cursor-disabled, default) !default;
+$radio-size: var(--rp-radio-size, 30px) !default;
 
 // label
-$radio-label-cursor-hover: var(--rp-radio-label-cursor-hover, pointer) !default;
+$radio-label-cursor: var(--rp-radio-label-cursor, pointer) !default;
 $radio-label-font-family: var(--rp-radio-label-font-family, $theme-font-light, sans-serif) !default;
 $radio-label-font-size: var(--rp-radio-label-font-size, 16px) !default;
 $radio-label-font-weight: var(--rp-radio-label-font-weight, 800) !default;
@@ -29,7 +29,7 @@ $radio-label-margin: var(--rp-radio-label-margin, 0 0 0 20px) !default;
   &.disabled {
     &:hover,
     .label:hover {
-      cursor: default;
+      cursor: $radio-cursor-disabled;
     }
   }
 }
@@ -52,7 +52,7 @@ $radio-label-margin: var(--rp-radio-label-margin, 0 0 0 20px) !default;
   height: $radio-size;
   width: $radio-size;
   &:hover {
-    cursor: pointer;
+    cursor: $radio-cursor;
   }
 }
 
@@ -66,7 +66,7 @@ $radio-label-margin: var(--rp-radio-label-margin, 0 0 0 20px) !default;
   display: inline-block;
   vertical-align: middle;
   &:hover {
-    cursor: $radio-label-cursor-hover;
+    cursor: $radio-label-cursor;
   }
   strong {
     font-weight: $radio-label-font-weight;
@@ -83,7 +83,7 @@ $radio-label-margin: var(--rp-radio-label-margin, 0 0 0 20px) !default;
     border: $radio-border-width solid $radio-border-color-disabled;
   }
   .circle:hover {
-    cursor: default;
+    cursor: $radio-cursor-disabled;
   }
 }
 
