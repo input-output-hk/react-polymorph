@@ -8,7 +8,7 @@ $modal-box-shadow: var(--rp-modal-box-shadow, 0 5px 20px 0 rgba(0, 0, 0, 0.25)) 
 $modal-max-width: var(--rp-modal-max-width, 640px) !default;
 $modal-min-width: var(--rp-modal-min-width, 500px) !default;
 $modal-outline-focus: var(--rp-modal-outline-focus, none) !default;
-$modal-overlay-color: var(--rp-modal-overlay-color, rgba(black, 0.6)) !default;
+$modal-overlay-bg-color: var(--rp-modal-overlay-bg-color, rgba(black, 0.6)) !default;
 $modal-padding: var(--rp-modal-padding, 20px 30px) !default;
 
 .overlay {
@@ -20,7 +20,7 @@ $modal-padding: var(--rp-modal-padding, 20px 30px) !default;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: $modal-overlay-color;
+  background-color: $modal-overlay-bg-color;
 }
 
 .modal {
