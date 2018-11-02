@@ -117,6 +117,7 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
 }
 
 // BEGIN SPECIAL STATES ---------- //
+
 @if calc(#{$options-arrow} == true) {
   .openUpward {
     &.options {
