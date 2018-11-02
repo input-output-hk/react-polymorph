@@ -9,9 +9,9 @@ $bubble-border-width: 0;
 $bubble-border-width-transparent: 0px;
 $bubble-box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.18);
 $bubble-distance: calc(100% + 14px);
+$bubble-padding: 6px;
 $bubble-text-color: #ebf0ff;
 $bubble-text-color-transparent: white;
-$bubble-padding: 6px;
 
 $bubble-border: $bubble-border-width solid $bubble-border-color;
 $bubble-border-transparent: $bubble-border-width-transparent solid
