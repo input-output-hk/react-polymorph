@@ -15,6 +15,7 @@ $formfield-label-margin: var(--rp-formfield-label-margin, 0 0 10px 5px) !default
 
 // error
 $formfield-error-text-color: var(--rp-formfield-error-text-color, rgba(#de3226, 0.5)) !default;
+$formfield-error-text-opacity: var(--rp-formfield-error-text-opacity, 1) !default;
 $formfield-error-font-family: var(--rp-formfield-error-font-family, $theme-font-regular) !default;
 $formfield-error-font-size: var(--rp-formfield-error-font-size, 14px) !default;
 $formfield-error-margin: var(--rp-formfield-error-margin, 1.5px 5px 11.5px 0) !default;
@@ -40,6 +41,7 @@ $formfield-error-margin: var(--rp-formfield-error-margin, 1.5px 5px 11.5px 0) !d
   font-size: $formfield-error-font-size;
   line-height: 1.36;
   margin: $formfield-error-margin;
+  opacity: $formfield-error-text-opacity;
 }
 
 .inputWrapper {
