@@ -12,9 +12,11 @@ $input-border-color-focus: var(--rp-input-border-color-focus, #5e6066) !default;
 $input-border-radius: var(--rp-input-border-radius, 2px) !default;
 $input-font-family: var(--rp-input-font-family, $theme-font-regular, sans-serif) !default;
 $input-font-size: var(--rp-input-font-size, 16px) !default;
+$input-line-height: var(--rp-input-line-height, normal) !default;
 $input-outline-focus: var(--rp-input-outline-focus, none) !default;
 $input-padding: var(--rp-input-padding, 14px 20px) !default;
 $input-text-color: var(--rp-input-text-color, #5e6066) !default;
+$input-text-color-disabled: var(--rp-input-text-color-disabled, rgba(#5e6066, 0.5)) !default;
 $input-width: var(--rp-input-width, 100%) !default;
 
 // placeholder
@@ -30,6 +32,7 @@ $input-placeholder-font-family: var(--rp-input-placeholder-font-family, $theme-f
   color: $input-text-color;
   font-family: $input-font-family;
   font-size: $input-font-size;
+  line-height: $input-line-height;
   padding: $input-padding;
   width: $input-width;
 
@@ -63,6 +66,7 @@ $input-placeholder-font-family: var(--rp-input-placeholder-font-family, $theme-f
 .disabled {
   background-color: $input-bg-color-disabled;
   border-color: $input-border-color-disabled;
+  color: $input-text-color-disabled;
 
   &::-webkit-input-placeholder {
     color: $input-placeholder-color-disabled;
