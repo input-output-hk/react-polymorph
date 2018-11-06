@@ -2,11 +2,16 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
+// root
+$switch-root-margin: var(--rp-switch-root-margin, 0) !default;
+
 // switch
 $switch-bg-color-off: var(--rp-switch-bg-color-off, #b4bdca) !default;
 $switch-bg-color-on: var(--rp-switch-bg-color-on, #2f496e) !default;
 $switch-border-radius: var(--rp-switch-border-radius, 3px) !default;
 $switch-height: var(--rp-switch-height, 23px) !default;
+$switch-opacity-off: var(--rp-switch-opacity-off, 1) !default;
+$switch-opacity-on: var(--rp-switch-opacity-on, 1) !default;
 $switch-width: var(--rp-switch-width, 50px) !default;
 
 // label
@@ -15,8 +20,10 @@ $switch-label-cursor-disabled: var(--rp-switch-label-cursor-disabled, default) !
 $switch-label-font-family: var(--rp-switch-label-font-family, $theme-font-light, sans-serif) !default;
 $switch-label-font-size: var(--rp-switch-label-font-size, 16px) !default;
 $switch-label-margin: var(--rp-switch-label-margin, 0 0 0 20px) !default;
+$switch-label-opacity: var(--rp-switch-label-opacity, 1) !default;
 $switch-label-text-color: var(--rp-switch-label-text-color, #5e6066) !default;
 $switch-label-text-color-disabled: var(--rp-switch-label-text-color-disabled, $theme-color-light-grey) !default;
+$switch-label-width: var(--rp-switch-label-width, auto) !default;
 
 // thumb
 $switch-thumb-bg-color: var(--rp-switch-thumb-bg-color, #ffffff) !default;
@@ -33,6 +40,7 @@ $switch-thumb-width: var(--rp-switch-thumb-width, $switch-width) !default;
 
 .root {
   display: flex;
+  margin: $switch-root-margin;
   position: relative;
 }
 
@@ -56,6 +64,7 @@ $switch-thumb-width: var(--rp-switch-thumb-width, $switch-width) !default;
   &:not(.checked) {
     @extend %switch;
     background-color: $switch-bg-color-off;
+    opacity: $switch-opacity-off;
     .thumb {
       left: 0;
       @include thumbBoxShadow($switch-bg-color-off);
@@ -86,7 +95,9 @@ $switch-thumb-width: var(--rp-switch-thumb-width, $switch-width) !default;
   font-size: $switch-label-font-size;
   line-height: $switch-height;
   margin: $switch-label-margin;
+  opacity: $switch-label-opacity;
   white-space: normal;
+  width: $switch-label-width;
   &:hover {
     cursor: $switch-label-cursor;
   }
@@ -120,6 +131,7 @@ $switch-thumb-width: var(--rp-switch-thumb-width, $switch-width) !default;
   .switch {
     @extend %switch;
     background-color: $switch-bg-color-on;
+    opacity: $switch-opacity-on;
     .thumb {
       left: calc(#{$switch-width} - #{$switch-height});
       @include thumbBoxShadow($switch-bg-color-on);
