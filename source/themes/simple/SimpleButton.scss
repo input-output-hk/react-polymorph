@@ -13,8 +13,11 @@ $button-cursor: var(--rp-button-cursor, pointer) !default;
 $button-cursor-disabled: var(--rp-button-cursor-disabled, default) !default;
 $button-font-family: var(--rp-button-font-family, $theme-font-medium, sans-serif) !default;
 $button-font-size: var(--rp-button-font-size, 14px) !default;
+$button-height: var(--rp-button-height, auto) !default;
+$button-line-height: var(--rp-button-line-height, normal) !default;
 $button-padding: var(--rp-button-padding, 15px 20px) !default;
 $button-text-color: var(--rp-button-text-color, #fff) !default;
+$button-text-transform: var(--rp-button-text-transform, none) !default;
 $button-width: var(--rp-button-width, 100%) !default;
 
 .root {
@@ -25,6 +28,9 @@ $button-width: var(--rp-button-width, 100%) !default;
   color: $button-text-color;
   font-family: $button-font-family;
   font-size: $button-font-size;
+  height: $button-height;
+  line-height: $button-line-height;
+  text-transform: $button-text-transform;
   padding: $button-padding;
   width: $button-width;
 
