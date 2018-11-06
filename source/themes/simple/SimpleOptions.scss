@@ -17,6 +17,7 @@ $option-bg-color-highlighted: var(--rp-option-bg-color-highlighted, #edf0f3) !de
 $option-border-color: var(--rp-option-border-color, #c6cdd6) !default;
 $option-cursor: var(--rp-option-cursor, pointer) !default;
 $option-cursor-disabled: var(--rp-option-cursor-disabled, default) !default;
+$option-line-height: var(--rp-option-line-height, normal) !default;
 $option-padding: var(--rp-option-padding, 14px 20px) !default;
 $option-text-color: var(--rp-option-text-color, #5e6066) !default;
 $option-text-color-disabled: var(--rp-option-text-color-disabled, rgba(#5e6066, 0.5)) !default;
@@ -86,6 +87,7 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
   background-color: $option-bg-color;
   color: $option-text-color;
   cursor: $option-cursor;
+  line-height: $option-line-height;
   padding: $option-padding;
 
   &.selectedOption {
