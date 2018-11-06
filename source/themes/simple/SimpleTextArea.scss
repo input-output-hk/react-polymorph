@@ -11,9 +11,11 @@ $textarea-border-color-focus: var(--rp-textarea-border-color-focus, #5e6066) !de
 $textarea-border-radius: var(--rp-textarea-border-radius, 2px) !default;
 $textarea-font-family: var(--rp-textarea-font-family, $theme-font-light, sans-serif) !default;
 $textarea-font-size: var(--rp-textarea-font-size, 16px) !default;
+$textarea-line-height: var(--rp-textarea-line-height, normal) !default;
 $textarea-outline-focus: var(--rp-textarea-outline-focus, none) !default;
 $textarea-padding: var(--rp-textarea-padding, 14px 20px) !default;
 $textarea-placeholder-color: var(--rp-textarea-placeholder-color, rgba(#5e6066, 0.5)) !default;
+$textarea-resize: var(--rp-textarea-resize, none) !default;
 $textarea-text-color: var(--rp-textarea-text-color, #5e6066) !default;
 $textarea-width: var(--rp-textarea-width, 100%) !default;
 
@@ -26,7 +28,9 @@ $textarea-width: var(--rp-textarea-width, 100%) !default;
   display: block;
   font-family: $textarea-font-family;
   font-size: $textarea-font-size;
+  line-height: $textarea-line-height;
   padding: $textarea-padding;
+  resize: $textarea-resize;
   width: $textarea-width;
 
   &:focus {
