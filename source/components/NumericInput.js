@@ -416,14 +416,17 @@ class NumericInputBase extends Component<Props, State> {
         afterDot += '0';
       }
     }
+    // if maxAfterDot is 0, drop decimal & numbers after decimal, return int
+    if (maxAfterDot === 0) { return beforeDot; }
 
     // return input value w/decimal restrictions as a string
-    const result = beforeDot + '.' + afterDot;
-    return result;
+    return beforeDot + '.' + afterDot;
   }
 
   _separate(value: string) {
     this.setState({ oldValue: value });
+    // value will not contain '.' if maxAfterDot is 0, return early
+    if (value && !value.includes('.')) { return value; }
     if (value) {
       const splitedValue = value.split('.');
       const separatedValue = splitedValue[0]
