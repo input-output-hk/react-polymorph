@@ -3,7 +3,7 @@
 // OVERRIDABLE CONFIGURATION VARIABLES
 
 // checkbox
-$checkbox-bg-color-checked: var(--rp-checkbox-bg-color-checked, #2f496e) !default;
+$checkbox-bg-color-checked: var(--rp-checkbox-bg-color-checked, none) !default;
 $checkbox-border: var(--rp-checkbox-border, 1px solid var(--rp-checkbox-border-color, #2f496e)) !default;
 $checkbox-border-color: var(--rp-checkbox-border-color, #2f496e) !default;
 $checkbox-border-color-disabled: var(--rp-checkbox-border-color-disabled, $theme-color-disabled) !default;
@@ -11,6 +11,7 @@ $checkbox-border-radius: var(--rp-checkbox-border-radius, 2px) !default;
 $checkbox-size: var(--rp-checkbox-size, 23px) !default;
 
 // check
+$checkbox-check-bg-color: var(--rp-checkbox-check-bg-color, #2f496e) !default;
 $checkbox-check-height: var(--rp-checkbox-check-height, calc(23 / 2 * 1px)) !default;
 $checkbox-check-thickness: var(--rp-checkbox-check-thickness, 2px) !default;
 $checkbox-check-vertical-offset: var(--rp-checkbox-check-vertical-offset, -4px) !default;
@@ -85,8 +86,9 @@ $checkbox-label-text-color-disabled: var(--rp-checkbox-label-text-color-disabled
 }
 
 .checked {
+  background-color: $checkbox-bg-color-checked;
   .check {
-    background-color: $checkbox-bg-color-checked;
+    background-color: $checkbox-check-bg-color;
     position: relative;
     display: flex;
     align-items: center;
