@@ -33,6 +33,8 @@ type State = {
 };
 
 class TooltipBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'Tooltip';
   static defaultProps = {
     isOpeningUpward: true,
     isTransparent: true,

@@ -36,6 +36,8 @@ type State = {
 };
 
 class CheckboxBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'Checkbox';
   static defaultProps = {
     checked: false,
     disabled: false,

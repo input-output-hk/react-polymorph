@@ -30,6 +30,8 @@ type State = {
 };
 
 class ProgressBarBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'ProgressBar';
   static defaultProps = {
     progress: 100,
     theme: null,

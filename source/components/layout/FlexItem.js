@@ -15,7 +15,7 @@ type Props = {
 };
 
 export class FlexItem extends Component<Props> {
-
+  // define static properties
   static displayName = 'FlexItem';
   static defaultProps = { theme: {} };
 
@@ -33,4 +33,3 @@ export class FlexItem extends Component<Props> {
     );
   }
 }
-
