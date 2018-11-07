@@ -1,5 +1,6 @@
 // @flow
 import filterReactDomProps from 'filter-react-dom-props';
+import type { ComponentType } from 'react';
 
 // filters out / prevents invalid props from being rendered to the dom
 // which would generate an error/warning
