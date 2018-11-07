@@ -2,6 +2,10 @@
 
 ## vNext
 
+### Chores
+
+- Adds --rp prefixed css variables to all component themes allowing comprehensive custom configuration. Renames existing scss variables using a uniform convention that matches the names of the new --rp css variables. [PR 92](https://github.com/input-output-hk/react-polymorph/pull/92)
+
 ## Fixes
 
 - Fixes NumericInput's value processing logic to only return integer numbers before the decimal when maxAfterDot is 0. Adds a behavior test and a story for this functionality. [PR 91](https://github.com/input-output-hk/react-polymorph/pull/91)
