@@ -15,10 +15,10 @@ import { BubbleSkin } from './BubbleSkin';
 import { pickDOMProps } from '../../utils/props';
 
 type Props = {
-  children: Node,
-  className: string,
-  isAligningRight: boolean,
-  isBounded: boolean,
+  children?: ?Node,
+  className?: string,
+  isAligningRight?: boolean,
+  isBounded?: boolean,
   isOpeningUpward: boolean,
   isTransparent: boolean,
   theme: Object,

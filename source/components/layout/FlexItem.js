@@ -7,7 +7,7 @@ import { Base } from './Base';
 
 type Props = {
   alignSelf?: string,
-  children: Node,
+  children?: ?Node,
   className?: string,
   flex?: number,
   order?: number,

@@ -7,36 +7,32 @@ import type { ComponentType, Element, SyntheticInputEvent } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
-// internal components
-import { withTheme } from './HOC/withTheme';
-
-// internal utility functions
+// utilities
+import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
-// import constants
+// constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   autoFocus: boolean,
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  disabled: boolean,
-  error: string,
-  label: string | Element<any>,
-  onBlur: Function,
-  onChange: Function,
-  onFocus: Function,
-  maxLength: number,
-  minLength: number,
-  onKeyPress: Function,
-  placeholder: string,
+  className?: ?string,
+  context: ThemeContextProp,
+  disabled?: boolean,
+  error: string | Element<any>,
+  label?: string | Element<any>,
+  maxLength?: number,
+  minLength?: number,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  onKeyPress?: Function,
+  placeholder?: string,
   readOnly: boolean,
-  setError: Function,
+  setError?: Function,
   skin: ComponentType<any>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
   value: string
@@ -55,6 +51,7 @@ class InputBase extends Component<Props, State> {
   static displayName = 'Input';
   static defaultProps = {
     autoFocus: false,
+    context: createEmptyContext(),
     error: '',
     readOnly: false,
     theme: null,

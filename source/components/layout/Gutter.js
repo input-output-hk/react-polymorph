@@ -1,27 +1,25 @@
 // @flow
 import React, { Component } from 'react';
-import type { Element } from 'react';
+import type { Node } from 'react';
 
 // components
 import { Base } from './Base';
-import { withTheme } from '../HOC/withTheme';
 
 // utility functions
+import { createEmptyContext, withTheme } from '../HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
 import { numberToPx } from '../../utils/props';
 
 // constants
 import { IDENTIFIERS } from '../../themes/API';
+import type { ThemeContextProp } from '../HOC/withTheme';
 
 type Props = {
-  className: string,
-  children: Element<*>,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  padding: string | number,
-  theme: Object,
+  className?: string,
+  children?: Node,
+  context: ThemeContextProp,
+  padding?: string | number,
+  theme: ?Object,
   themeId: string,
   themeOverrides: Object
 };
@@ -32,6 +30,7 @@ class GutterBase extends Component<Props, State> {
   // define static properties
   static displayName = 'Gutter';
   static defaultProps = {
+    context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.GUTTER,
     themeOverrides: {}

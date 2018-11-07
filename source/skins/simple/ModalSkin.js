@@ -6,7 +6,7 @@ import type { Node, Element } from 'react';
 import ReactModal from 'react-modal';
 
 type Props = {
-  children: Node,
+  children?: ?Node,
   contentLabel: string | Element<any>,
   isOpen: boolean,
   onClose: Function,

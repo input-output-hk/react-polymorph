@@ -10,14 +10,12 @@ exports[`Button is disabled 1`] = `
 exports[`Button renders correctly 1`] = `
 <button
   className="root"
-  disabled={false}
 />
 `;
 
 exports[`Button renders with a label 1`] = `
 <button
   className="root"
-  disabled={false}
   label="send"
 >
   send

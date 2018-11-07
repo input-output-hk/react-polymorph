@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import { pickDOMProps } from '../../utils/props';
 
 type Props = {
-  children: Node,
+  children?: ?Node,
   className: string,
   isFloating: boolean,
   isHidden: boolean,
