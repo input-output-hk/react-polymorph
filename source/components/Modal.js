@@ -31,6 +31,8 @@ type State = {
 };
 
 class ModalBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'Modal';
   static defaultProps = {
     contentLabel: 'Modal Dialog',
     isOpen: false,

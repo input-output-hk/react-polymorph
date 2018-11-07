@@ -34,6 +34,8 @@ type State = {
 };
 
 class FormFieldBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'FormField';
   static defaultProps = {
     disabled: false,
     theme: null,

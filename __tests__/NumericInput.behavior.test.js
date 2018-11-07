@@ -98,6 +98,27 @@ describe('NumericInput onChange simulations', () => {
     expect(component.state.oldValue).toBe('85.9854');
   });
 
+  test('integers only - onChange is passed invalid amount, maxAfterDot is enforced correctly', () => {
+    const wrapper = mountInSimpleTheme(
+      <NumericInput
+        maxAfterDot={0}
+        skin={InputSkin}
+      />
+    );
+
+    const component = wrapper.find('NumericInputBase').instance();
+    const input = wrapper.find('input');
+
+    // simulate onChange with only an integer (valid)
+    input.simulate('change', { target: { value: '1234' } });
+    expect(component.state.oldValue).toBe('1234');
+
+    // simulate onChange with floating point number (invalid)
+    input.simulate('change', { target: { value: '5678.985' } });
+    // should drop decimal & all numbers after decimal: '.985'
+    expect(component.state.oldValue).toBe('5678');
+  });
+
   test('onChange simulates amount exceeding maxValue, enforceMax is enforced', () => {
     const wrapper = mountInSimpleTheme(
       <NumericInput

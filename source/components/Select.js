@@ -46,11 +46,13 @@ type State = {
 };
 
 class SelectBase extends Component<Props, State> {
-
+  // declare ref types
   rootElement: ?Element<*>;
   inputElement: Element<'input'>;
   optionsElement: ?Element<*>;
 
+  // define static properties
+  static displayName = 'Select';
   static defaultProps = {
     allowBlank: true,
     autoFocus: false,

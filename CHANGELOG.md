@@ -4,9 +4,14 @@
 
 ## Fixes
 
+- Fixes NumericInput's value processing logic to only return integer numbers before the decimal when maxAfterDot is 0. Adds a behavior test and a story for this functionality. [PR 91](https://github.com/input-output-hk/react-polymorph/pull/91)
+
 - Fixes a bug where ThemeProvider failed to compose its theme prop with the user's custom styles passed as the themeOverrides prop. Adds a check to all components using context for when themeOverrides or theme changes in context. If there is a change, the component's theme and themeOverrides will be composed again and local state will update. Adds a themeOverrides story to ThemeProvider's stories to show intended functionality of theme composition and dynamic theme switching. [PR 90](https://github.com/input-output-hk/react-polymorph/pull/90)
 
 ## Features
+
+- Adds displayName static property to all components
+  [PR 89](https://github.com/input-output-hk/react-polymorph/pull/89)
 
 - Adds InfiniteScroll component, InfiniteScrollSkin to simple skins, and SimpleInfiniteScroll to SimpleTheme.
   [PR 88](https://github.com/input-output-hk/react-polymorph/pull/88)

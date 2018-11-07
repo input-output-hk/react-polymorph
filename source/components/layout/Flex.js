@@ -35,7 +35,7 @@ type Props = {
 type State = { composedTheme: Object };
 
 class FlexBase extends Component<Props, State> {
-
+  // define static properties
   static displayName = 'Flex';
   static defaultProps = {
     theme: null,

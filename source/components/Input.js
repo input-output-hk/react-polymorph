@@ -48,9 +48,11 @@ type State = {
 };
 
 class InputBase extends Component<Props, State> {
-
+  // declare ref types
   inputElement: Element<'input'>;
 
+  // define static properties
+  static displayName = 'Input';
   static defaultProps = {
     autoFocus: false,
     error: '',

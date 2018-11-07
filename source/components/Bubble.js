@@ -36,9 +36,11 @@ type State = {
 };
 
 class BubbleBase extends Component<Props, State> {
-
+  // declare ref types
   rootElement: ?Element<any>;
 
+  // define static properties
+  static displayName = 'Bubble';
   static defaultProps = {
     isHidden: false,
     isFloating: false,
