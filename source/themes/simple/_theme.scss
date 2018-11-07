@@ -2,11 +2,11 @@ $theme-assets-path: "./assets" !default;
 
 // FONTS
 
-$theme-font-thin: var(--rp-theme-font-thin, "simple-theme-font-thin") !default;
-$theme-font-light: var(--rp-theme-font-light, "simple-theme-font-light") !default;
-$theme-font-regular: var(--rp-theme-font-regular, "simple-theme-font-regular") !default;
-$theme-font-medium: var(--rp-theme-font-medium, "simple-theme-font-medium") !default;
-$theme-font-bold: var(--rp-theme-font-bold, "simple-theme-font-bold") !default;
+$theme-font-thin: var(--rp-theme-font-thin, "NotoSans-Thin, NotoSansCJKjp-Thin") !default;
+$theme-font-light: var(--rp-theme-font-light, "NotoSans-Light, NotoSansCJKjp-Light") !default;
+$theme-font-regular: var(--rp-theme-font-regular, "NotoSans-Regular, NotoSansCJKjp-Regular") !default;
+$theme-font-medium: var(--rp-theme-font-medium, "NotoSans-Medium, NotoSansCJKjp-Medium") !default;
+$theme-font-bold: var(--rp-theme-font-bold, "NotoSans-Bold, NotoSansCJKjp-Bold") !default;
 
 // COLORS
 
