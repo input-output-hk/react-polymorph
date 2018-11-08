@@ -5,10 +5,20 @@ import forwardRef from 'create-react-ref/lib/forwardRef';
 import { ThemeContext } from './ThemeContext';
 import { getDisplayName } from '../../utils/props';
 
+export type ThemeContextProp = {
+  theme: Object,
+  ROOT_THEME_API: Object
+};
+
+export const createEmptyContext = (): ThemeContextProp => ({
+  theme: {},
+  ROOT_THEME_API: {}
+});
+
 // withTheme is a HOC that takes a Component as a parameter
 // and returns that Component wrapped within ThemeContext.Consumer.
 // Any additional props and refs are forwarded to the returned Component.
-export const withTheme = (Component: ComponentType<any>) => {
+export function withTheme<C: ComponentType<any>>(Component: C): C {
   let WrappedComponent;
 
   if (process.env.NODE_ENV === 'test') {
@@ -26,8 +36,8 @@ export const withTheme = (Component: ComponentType<any>) => {
       </ThemeContext.Consumer>
     ));
   }
-
   // create a new displayName for the wrapped component
   WrappedComponent.displayName = `withTheme(${getDisplayName(Component)})`;
-  return WrappedComponent;
-};
+  // Cast type to our desired custom component
+  return ((WrappedComponent: any): C);
+}

@@ -7,39 +7,35 @@ import type { ComponentType, SyntheticInputEvent, Element } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 import { flow } from 'lodash';
 
-// internal components
-import { withTheme } from './HOC/withTheme';
-
 // internal utility functions
+import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  autoFocus: boolean,
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  disabled: boolean,
+  autoFocus?: boolean,
+  className?: string,
+  context: ThemeContextProp,
+  disabled?: boolean,
   enforceMax: boolean,
-  label: string | Element<any>,
+  label?: string | Element<any>,
   enforceMin: boolean,
-  error: string,
-  onBlur: Function,
-  onChange: Function,
-  onFocus: Function,
-  maxAfterDot: number,
-  maxBeforeDot: number,
-  maxValue: number,
-  minValue: number,
-  readOnly: boolean,
-  placeholder: string,
-  setError: Function,
+  error?: string,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  maxAfterDot?: number,
+  maxBeforeDot?: number,
+  maxValue?: number,
+  minValue?: number,
+  readOnly?: boolean,
+  placeholder?: string,
+  setError?: Function,
   skin: ComponentType<any>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
   value: string
@@ -60,8 +56,7 @@ class NumericInputBase extends Component<Props, State> {
   // define static properties
   static displayName = 'NumericInput';
   static defaultProps = {
-    disabled: false,
-    error: '',
+    context: createEmptyContext(),
     enforceMax: false,
     enforceMin: false,
     readOnly: false,
@@ -75,9 +70,9 @@ class NumericInputBase extends Component<Props, State> {
     super(props);
     const { context, minValue, maxBeforeDot, maxAfterDot, themeId, theme, themeOverrides } = props;
 
-    const minValueIsNum = minValue && typeof minValue === 'number';
+    const minValueIsNum = typeof minValue === 'number';
     // if minValue is a number and user supplied maxBeforeDot and/or maxAfterDot
-    if (minValueIsNum && (maxBeforeDot || maxAfterDot)) {
+    if (minValue && minValueIsNum && (maxBeforeDot || maxAfterDot)) {
       // check combination of values for validity
       this._validateLimitProps(minValue, maxBeforeDot, maxAfterDot);
     }
@@ -167,11 +162,12 @@ class NumericInputBase extends Component<Props, State> {
     const { inputElement } = this;
     if (!inputElement.current) return;
     inputElement.current.focus();
-  }
+  };
 
-  _validateLimitProps(minValue: number, maxBeforeDot: number, maxAfterDot: number) {
-    const maxBeforeDotIsNum = maxBeforeDot && typeof maxBeforeDot === 'number';
-    const maxAfterDotIsNum = maxAfterDot && typeof maxAfterDot === 'number';
+  _validateLimitProps(minValue?: number, maxBeforeDot?: number, maxAfterDot?: number) {
+    if (typeof minValue !== 'number') return;
+    const maxBeforeDotIsNum = typeof maxBeforeDot === 'number';
+    const maxAfterDotIsNum = typeof maxAfterDot === 'number';
     // if minValue is a float, it will split at the decimal
     // trailing zeros are dropped with parseFloat
     const minValParts = parseFloat(minValue).toString().split('.');
@@ -182,7 +178,7 @@ class NumericInputBase extends Component<Props, State> {
       const minValAfterDot = minValParts[1];
 
       // if the number of integers in minValue is greater than maxBeforeDot
-      if (maxBeforeDotIsNum && (minValBeforeDot.length > maxBeforeDot)) {
+      if (maxBeforeDot && maxBeforeDotIsNum && (minValBeforeDot.length > maxBeforeDot)) {
         // the combo is incompatible, throw error
         const error = `
           minValue: ${minValue} exceeds the limit of maxBeforeDot: ${maxBeforeDot}.
@@ -190,7 +186,7 @@ class NumericInputBase extends Component<Props, State> {
         `;
         throw new Error(error);
       // if the number of decimal spaces in minValue is greater than maxBeforeDot
-      } else if (maxAfterDotIsNum && (minValAfterDot.length > maxAfterDot)) {
+      } else if (maxAfterDot && maxAfterDotIsNum && (minValAfterDot.length > maxAfterDot)) {
         const error = `
           minValue: ${minValue} exceeds the limit of maxAfterDot: ${maxAfterDot}.
           Adjust the values of these properties.
@@ -223,6 +219,7 @@ class NumericInputBase extends Component<Props, State> {
   _enforceNumericValue(value: string, position: number) {
     const regex = /^[0-9.,]+$/;
     const isValueRegular = regex.test(value);
+    const { maxBeforeDot } = this.props;
     let handledValue;
     const lastValidValue = this.state.oldValue;
     if (!isValueRegular && value !== '') {
@@ -246,7 +243,7 @@ class NumericInputBase extends Component<Props, State> {
           handledValue = beforeDot + '.' + splitedValue[2];
           beforeDot = beforeDot.replace(/,/g, '');
           // prevent replace dot if length before dot is greater then max before dot length
-          if (beforeDot.length > this.props.maxBeforeDot) {
+          if (maxBeforeDot && beforeDot.length > maxBeforeDot) {
             handledValue = lastValidValue;
           }
         } else {

@@ -3,31 +3,27 @@ import React, { Component } from 'react';
 import type { ComponentType, Element, ElementRef, Ref } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
-// internal components
-import { withTheme } from './HOC/withTheme';
-
 // internal utility functions
+import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { addDocumentListeners, removeDocumentListeners } from '../utils/events';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
+  className?: string,
+  context: ThemeContextProp,
   isHidden: boolean,
   isFloating: boolean,
   isOpeningUpward: boolean,
   isTransparent: boolean,
   skin: ComponentType<any>,
-  theme: Object, // takes precedence over them in context if passed
+  theme: ?Object, // takes precedence over them in context if passed
   themeId: string,
   themeOverrides: Object, // custom css/scss from user adhering to component's theme API
-  targetRef: ?Ref<*>, // ref to the target DOM element used for positioning the bubble
+  targetRef?: Ref<*>, // ref to the target DOM element used for positioning the bubble
 };
 
 type State = {
@@ -42,6 +38,7 @@ class BubbleBase extends Component<Props, State> {
   // define static properties
   static displayName = 'Bubble';
   static defaultProps = {
+    context: createEmptyContext(),
     isHidden: false,
     isFloating: false,
     isOpeningUpward: false,

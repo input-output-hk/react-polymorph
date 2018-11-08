@@ -10,7 +10,6 @@ exports[`Toggler is checked 1`] = `
   <input
     checked={true}
     className="input"
-    disabled={false}
     readOnly={true}
     type="checkbox"
   />
@@ -72,7 +71,6 @@ exports[`Toggler renders correctly 1`] = `
   <input
     checked={false}
     className="input"
-    disabled={false}
     readOnly={true}
     type="checkbox"
   />
@@ -107,7 +105,6 @@ exports[`Toggler renders within text 1`] = `
     <input
       checked={false}
       className="input"
-      disabled={false}
       readOnly={true}
       type="checkbox"
     />

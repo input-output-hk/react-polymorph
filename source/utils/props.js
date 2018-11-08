@@ -15,5 +15,6 @@ export const numberToPx = (val: string | number) =>
 export const hasProperty = (obj: Object, property: ?string) =>
   Object.prototype.hasOwnProperty.call(obj, property);
 
-export const getDisplayName = (Component: ComponentType<*>) =>
-  (Component.displayName || Component.name);
+export const getDisplayName = (Component: ComponentType<any>) => (
+  Component.displayName || Component.name
+);

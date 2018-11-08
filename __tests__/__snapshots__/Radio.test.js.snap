@@ -28,7 +28,6 @@ exports[`Radio is selected 1`] = `
 >
   <input
     className="input"
-    disabled={false}
     selected={true}
     type="radio"
   />
@@ -47,7 +46,6 @@ exports[`Radio renders correctly 1`] = `
 >
   <input
     className="input"
-    disabled={false}
     selected={false}
     type="radio"
   />
@@ -66,7 +64,6 @@ exports[`Radio renders with a label 1`] = `
 >
   <input
     className="input"
-    disabled={false}
     label="click here"
     selected={false}
     type="radio"

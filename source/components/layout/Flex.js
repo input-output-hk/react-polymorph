@@ -1,33 +1,31 @@
 // @flow
 import React, { Component } from 'react';
-import type { ChildrenArray } from 'react';
+import type { Node } from 'react';
 import { pickBy } from 'lodash';
 
 // components
 import { Base } from './Base';
-import { withTheme } from '../HOC/withTheme';
 
 // utilities
+import { createEmptyContext, withTheme } from '../HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '../../themes/API';
+import type { ThemeContextProp } from '../HOC/withTheme';
 
 type Props = {
-  alignItems: string,
-  className: string,
-  center: boolean,
-  children: ChildrenArray<*>,
-  column: boolean,
-  columnReverse: boolean,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  justifyContent: string,
-  row: boolean,
-  rowReverse: boolean,
-  theme: Object,
+  alignItems?: string,
+  className?: string,
+  center?: boolean,
+  children?: Node,
+  column?: boolean,
+  columnReverse?: boolean,
+  context: ThemeContextProp,
+  justifyContent?: string,
+  row?: boolean,
+  rowReverse?: boolean,
+  theme: ?Object,
   themeId: string,
   themeOverrides: Object
 };
@@ -38,6 +36,7 @@ class FlexBase extends Component<Props, State> {
   // define static properties
   static displayName = 'Flex';
   static defaultProps = {
+    context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.FLEX,
     themeOverrides: {}

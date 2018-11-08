@@ -1,29 +1,25 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
-
-// internal components
-import { withTheme } from './HOC/withTheme';
+import type { Ref, ComponentType, Element } from 'react';
 
 // internal utility functions
+import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  disabled: boolean,
-  error: string,
-  inputRef: Object,
-  label: string | Element<any>,
+  className?: ?string,
+  context: ThemeContextProp,
+  disabled?: boolean,
+  error?: string | Element<any>,
+  inputRef?: Ref<*>,
+  label?: string | Element<any>,
   render: Function,
   skin: ComponentType<any>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object
 };
@@ -37,7 +33,7 @@ class FormFieldBase extends Component<Props, State> {
   // define static properties
   static displayName = 'FormField';
   static defaultProps = {
-    disabled: false,
+    context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.FORM_FIELD,
     themeOverrides: {}
@@ -66,8 +62,9 @@ class FormFieldBase extends Component<Props, State> {
 
   focusChild = () => {
     const { inputRef } = this.props;
-    if (!inputRef.current) return;
-    inputRef.current.focus();
+    if (inputRef && inputRef.current) {
+      if (typeof inputRef.current.focus === 'function') inputRef.current.focus();
+    }
   };
 
   render() {

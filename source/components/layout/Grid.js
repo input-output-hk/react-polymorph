@@ -1,40 +1,38 @@
 // @flow
 import React, { Component } from 'react';
-import type { ChildrenArray } from 'react';
+import type { Node } from 'react';
 import { pickBy, isEmpty } from 'lodash';
 
 // components
 import { Base } from './Base';
-import { withTheme } from '../HOC/withTheme';
 
 // utilities
+import { createEmptyContext, withTheme } from '../HOC/withTheme';
 import { numberToPx } from '../../utils/props';
 import { formatTemplateAreas } from '../../utils/layout';
 import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '../../themes/API';
+import type { ThemeContextProp } from '../HOC/withTheme';
 
 type Props = {
-  alignItems: string,
-  autoColumns: string,
-  autoRows: string,
-  className: string,
-  center: boolean,
-  children: ChildrenArray<*>,
+  alignItems?: string,
+  autoColumns?: string,
+  autoRows?: string,
+  className?: string,
+  center?: boolean,
+  children?: Node,
   columnGap: string | number,
-  columns: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
+  columns?: string,
+  context: ThemeContextProp,
   gap: string | number,
-  justifyItems: string,
+  justifyItems?: string,
   rowGap: string | number,
-  rows: string,
-  template: string,
-  templateAreas: Array<''>,
-  theme: Object,
+  rows?: string,
+  template?: string,
+  templateAreas: Array<string>,
+  theme: ?Object,
   themeId: string,
   themeOverrides: Object
 };
@@ -46,7 +44,10 @@ class GridBase extends Component<Props, State> {
   static displayName = 'Grid';
   static defaultProps = {
     columnGap: 5,
+    context: createEmptyContext(),
+    gap: 0,
     rowGap: 5,
+    templateAreas: [],
     theme: null,
     themeId: IDENTIFIERS.GRID,
     themeOverrides: {}

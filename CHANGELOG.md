@@ -6,13 +6,15 @@
 
 - Adds --rp prefixed css variables to all component themes allowing comprehensive custom configuration. Renames existing scss variables using a uniform convention that matches the names of the new --rp css variables. [PR 92](https://github.com/input-output-hk/react-polymorph/pull/92)
 
-## Fixes
+- Fixes the implementation of withTheme helper to represent the wrapped components instead of a generic React component. This fix ensures the entire library is type checked correctly and resolves all resulting flow errors. [PR 93](https://github.com/input-output-hk/react-polymorph/pull/93)
+
+### Fixes
 
 - Fixes NumericInput's value processing logic to only return integer numbers before the decimal when maxAfterDot is 0. Adds a behavior test and a story for this functionality. [PR 91](https://github.com/input-output-hk/react-polymorph/pull/91)
 
 - Fixes a bug where ThemeProvider failed to compose its theme prop with the user's custom styles passed as the themeOverrides prop. Adds a check to all components using context for when themeOverrides or theme changes in context. If there is a change, the component's theme and themeOverrides will be composed again and local state will update. Adds a themeOverrides story to ThemeProvider's stories to show intended functionality of theme composition and dynamic theme switching. [PR 90](https://github.com/input-output-hk/react-polymorph/pull/90)
 
-## Features
+### Features
 
 - Adds displayName static property to all components
   [PR 89](https://github.com/input-output-hk/react-polymorph/pull/89)

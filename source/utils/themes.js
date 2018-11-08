@@ -1,6 +1,7 @@
 // @flow
 import { cloneDeep, isEmpty, isEqual } from 'lodash';
 import { hasProperty } from './props';
+import type { ThemeContextProp } from '../components/HOC/withTheme';
 
 export const appendToProperty = (dest: {}, name: string, value: string) => {
   dest[name] === '' ? (dest[name] = value) : (dest[name] += ' ' + value);
@@ -21,12 +22,11 @@ export const composeComponentStyles = (componentStyles: {}, componentTheme: {}) 
 // that matches the value of themeId (string)
 // if the property exists, also checks the type of
 // theme[themeId] to ensure it's an object
-export const addThemeId = (theme: {}, themeId: string) => {
-  if (!isEmpty(theme) && themeId) {
+export const addThemeId = (theme: Object = {}, themeId: string): Object => {
+  if (theme && !isEmpty(theme) && themeId) {
     const themeIdExists = hasProperty(theme, themeId);
     const themeIdIsObj = typeof theme[themeId] === 'object';
-
-    return themeIdExists && themeIdIsObj ? theme : { [themeId]: theme };
+    return (themeIdExists && themeIdIsObj) ? theme : { [themeId]: theme };
   }
   return theme;
 };
@@ -42,9 +42,9 @@ export const addThemeId = (theme: {}, themeId: string) => {
  */
 
 export const composeTheme = (
-  theme: {} = {},
-  themeOverrides: {} = {},
-  themeAPI: {} = {}
+  theme: Object = {},
+  themeOverrides: Object = {},
+  themeAPI: Object = {}
 ) => {
   // Return theme if there are no overrides provided
   if (isEmpty(themeOverrides)) return theme;
@@ -62,13 +62,10 @@ export const composeTheme = (
   return composedTheme;
 };
 
-type ThemeProps = {
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
+type ThemeProps = Object & {
+  context: ThemeContextProp,
   themeId: string,
-  theme: Object,
+  theme: ?Object,
   themeOverrides: Object
 };
 

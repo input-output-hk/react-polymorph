@@ -7,12 +7,10 @@ import { mountInSimpleTheme } from './helpers/theming';
 describe('NumericInput onChange simulations', () => {
   test('onChange updates state with valid amount', () => {
     const wrapper = mountInSimpleTheme(
-      <NumericInput
-        skin={InputSkin}
-      />
+      <NumericInput skin={InputSkin} />
     );
 
-    const component = wrapper.find('NumericInputBase').instance();
+    const component = wrapper.find('NumericInput').instance();
     const input = wrapper.find('input');
 
     // valid input value
@@ -28,7 +26,7 @@ describe('NumericInput onChange simulations', () => {
       />
     );
 
-    const component = wrapper.find('NumericInputBase').instance();
+    const component = wrapper.find('NumericInput').instance();
     const input = wrapper.find('input');
 
     // invalid input value: value > maxValue
@@ -46,7 +44,7 @@ describe('NumericInput onChange simulations', () => {
       />
     );
 
-    const component = wrapper.find('NumericInputBase').instance();
+    const component = wrapper.find('NumericInput').instance();
     const input = wrapper.find('input');
 
     // invalid input value: value < minValue
@@ -64,7 +62,7 @@ describe('NumericInput onChange simulations', () => {
       />
     );
 
-    const component = wrapper.find('NumericInputBase').instance();
+    const component = wrapper.find('NumericInput').instance();
     const input = wrapper.find('input');
 
     // input value is valid: value has 3 integer places
@@ -85,7 +83,7 @@ describe('NumericInput onChange simulations', () => {
       />
     );
 
-    const component = wrapper.find('NumericInputBase').instance();
+    const component = wrapper.find('NumericInput').instance();
     const input = wrapper.find('input');
 
     // simulate onChange with 4 decimal places (valid)
@@ -106,7 +104,7 @@ describe('NumericInput onChange simulations', () => {
       />
     );
 
-    const component = wrapper.find('NumericInputBase').instance();
+    const component = wrapper.find('NumericInput').instance();
     const input = wrapper.find('input');
 
     // simulate onChange with only an integer (valid)
@@ -129,7 +127,7 @@ describe('NumericInput onChange simulations', () => {
       />
     );
 
-    const component = wrapper.find('NumericInputBase').instance();
+    const component = wrapper.find('NumericInput').instance();
     const input = wrapper.find('input');
 
     // valid input value: there should be no error in state or className
@@ -170,7 +168,7 @@ describe('NumericInput onChange simulations', () => {
       />
     );
 
-    const component = wrapper.find('NumericInputBase').instance();
+    const component = wrapper.find('NumericInput').instance();
     const input = wrapper.find('input');
 
     // simulate onChange with valid amount

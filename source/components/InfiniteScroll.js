@@ -4,27 +4,22 @@ import type { ComponentType, Node } from 'react';
 // $FlowFixMe
 import createRef from 'create-react-ref/lib/createRef';
 
-import type { ReactElementRef } from '../utils/types.js';
-
-// internal components
-import { withTheme } from './HOC/withTheme';
-
 // utilities
+import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ReactElementRef } from '../utils/types.js';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
+  className?: string,
+  context: ThemeContextProp,
   fetchData: Function,
-  renderItems: Function,
+  renderItems?: Function,
   skin: ComponentType<any>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
   threshold: number
@@ -45,6 +40,7 @@ class InfiniteScrollBase extends Component<Props, State> {
   // define static properties
   static displayName = 'InfiniteScroll';
   static defaultProps = {
+    context: createEmptyContext(),
     fetchData() {},
     theme: null,
     themeId: IDENTIFIERS.INFINITE_SCROLL,
@@ -96,7 +92,7 @@ class InfiniteScrollBase extends Component<Props, State> {
     // return early for error, loading, or lack of future data
     if (error || isLoading || !hasMoreData) { return; }
     return this._checkForScrollBottom();
-  }
+  };
 
   // prevents new data fetch until user has scrolled near bottom of existing data
   _checkForScrollBottom = () => {
@@ -107,7 +103,7 @@ class InfiniteScrollBase extends Component<Props, State> {
     if (offsetHeight + scrollTop >= scrollHeight - threshold) {
       return this._handleFetchData();
     }
-  }
+  };
 
   _isFunction = (renderProp: ?Function) => (renderProp && typeof renderProp === 'function')
 

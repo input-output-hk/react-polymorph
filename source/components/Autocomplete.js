@@ -2,43 +2,40 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
-
 // external libraries
 import createRef from 'create-react-ref/lib/createRef';
 import _ from 'lodash';
 
 // interal components
 import { GlobalListeners } from './HOC/GlobalListeners';
-import { withTheme } from './HOC/withTheme';
 
 // internal utility functions
+import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { composeFunctions } from '../utils/props';
 
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  error: string,
+  className?: string,
+  context: ThemeContextProp,
+  error: ?string,
   invalidCharsRegex: RegExp,
   isOpeningUpward: boolean,
-  label: string | Element<any>,
-  maxSelections: number,
+  label?: string | Element<any>,
+  maxSelections?: number,
   maxVisibleOptions: number,
   multipleSameSelections: boolean,
-  onChange: Function,
+  onChange?: Function,
   options: Array<any>,
-  preselectedOptions: Array<any>,
-  placeholder: string,
-  renderSelections: Function,
-  renderOptions: Function,
+  preselectedOptions?: Array<any>,
+  placeholder?: string,
+  renderSelections?: Function,
+  renderOptions?: Function,
   skin: ComponentType<any>,
   sortAlphabetically: boolean,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object
 };
@@ -62,6 +59,7 @@ class AutocompleteBase extends Component<Props, State> {
   // define static properties
   static displayName = 'Autocomplete';
   static defaultProps = {
+    context: createEmptyContext(),
     error: null,
     invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
     isOpeningUpward: false,
@@ -161,26 +159,25 @@ class AutocompleteBase extends Component<Props, State> {
     event: SyntheticEvent<>,
     selectedOption: any = null
   ) => {
-    const canMoreOptionsBeSelected =
-      this.state.selectedOptions.length < this.props.maxSelections;
-    const areFilteredOptionsAvailable =
-      this.state.filteredOptions && this.state.filteredOptions.length > 0;
+    const { maxSelections, multipleSameSelections } = this.props;
+    const { selectedOptions, filteredOptions, isOpen } = this.state;
+    const canMoreOptionsBeSelected = (
+      maxSelections != null ? selectedOptions.length < maxSelections : true
+    );
+    const areFilteredOptionsAvailable = filteredOptions && filteredOptions.length > 0;
 
-    if (
-      !this.props.maxSelections ||
-      (canMoreOptionsBeSelected && areFilteredOptionsAvailable)
-    ) {
+    if (!maxSelections || (canMoreOptionsBeSelected && areFilteredOptionsAvailable)) {
       if (!selectedOption) return;
       const option = selectedOption.trim();
-      const optionCanBeSelected =
-        (this.state.selectedOptions.indexOf(option) < 0 &&
-          !this.props.multipleSameSelections) ||
-        this.props.multipleSameSelections;
+      const optionCanBeSelected = (
+        (selectedOptions.indexOf(option) < 0 && !multipleSameSelections) ||
+        multipleSameSelections
+      );
 
-      if (option && optionCanBeSelected && this.state.isOpen) {
-        const selectedOptions = _.concat(this.state.selectedOptions, option);
-        this.selectionChanged(selectedOptions, event);
-        this.setState({ selectedOptions, isOpen: false });
+      if (option && optionCanBeSelected && isOpen) {
+        const newSelectedOptions = _.concat(selectedOptions, option);
+        this.selectionChanged(newSelectedOptions, event);
+        this.setState({ selectedOptions: newSelectedOptions, isOpen: false });
       }
     }
 

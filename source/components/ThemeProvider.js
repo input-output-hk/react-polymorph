@@ -17,7 +17,7 @@ import { appendToProperty } from '../utils/themes';
 import { hasProperty } from '../utils/props';
 
 type Props = {
-  children: Node,
+  children?: ?Node,
   theme: Object,
   themeOverrides: Object // custom css/scss from user that adheres to shape of ROOT_THEME_API
 };

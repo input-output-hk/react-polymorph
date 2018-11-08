@@ -10,7 +10,6 @@ exports[`Switch is checked 1`] = `
   <input
     checked={true}
     className="input"
-    disabled={false}
     readOnly={true}
     type="checkbox"
   />
@@ -88,7 +87,6 @@ exports[`Switch renders correctly 1`] = `
   <input
     checked={false}
     className="input"
-    disabled={false}
     readOnly={true}
     type="checkbox"
   />
@@ -112,7 +110,6 @@ exports[`Switch renders with label 1`] = `
   <input
     checked={false}
     className="input"
-    disabled={false}
     label="click here"
     readOnly={true}
     type="checkbox"
