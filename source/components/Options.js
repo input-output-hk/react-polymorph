@@ -12,41 +12,39 @@ import type {
   Ref
 } from 'react';
 
-// internal components
-import { withTheme } from './HOC/withTheme';
-
 // internal utility functions
+import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { composeFunctions } from '../utils/props';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
+  className?: String,
+  context: ThemeContextProp,
   isOpen: boolean,
   isOpeningUpward: boolean,
-  noResults: boolean,
+  noResults?: boolean,
   noResultsMessage: string | Element<any>,
-  onBlur: Function,
-  onChange: Function,
-  onClose: Function,
+  onBlur?: Function,
+  onChange?: Function,
+  onClose?: Function,
   options: Array<any>,
-  optionRenderer: Function,
-  optionsRef: Ref<any>,
-  render: Function,
+  optionRenderer?: Function,
+  optionsRef?: Ref<any>,
+  render?: Function,
   resetOnClose: boolean,
-  selectedOption: any,
+  // TODO: Why do we have two separate props for selection?
+  selectedOption?: any,
+  selectedOptions?: Array<any>,
   skin: ComponentType<any>,
-  selectedOptions: Array<any>,
-  targetRef: Ref<*>,
-  theme: Object, // if passed by user, it will take precedence over this.props.context.theme
+  targetRef?: Ref<*>,
+  theme: ?Object, // if passed by user, it will take precedence over this.props.context.theme
   themeId: string,
   themeOverrides: Object,
-  toggleOpen: Function
+  toggleOpen?: Function
 };
 
 type State = {
@@ -61,9 +59,11 @@ class OptionsBase extends Component<Props, State> {
   // define static properties
   static displayName = 'Options';
   static defaultProps = {
+    context: createEmptyContext(),
     isOpen: false,
     isOpeningUpward: false,
     noResultsMessage: 'No results',
+    options: [],
     resetOnClose: false,
     theme: null,
     themeId: IDENTIFIERS.OPTIONS,
@@ -107,16 +107,11 @@ class OptionsBase extends Component<Props, State> {
 
   close = () => {
     const { onClose, resetOnClose, toggleOpen, isOpen } = this.props;
-
-    if (isOpen) { toggleOpen(); }
-
+    if (isOpen && toggleOpen) toggleOpen();
     this.setState({
-      highlightedOptionIndex: resetOnClose
-        ? 0
-        : this.state.highlightedOptionIndex
+      highlightedOptionIndex: resetOnClose ? 0 : this.state.highlightedOptionIndex
     });
-
-    if (onClose) { onClose(); }
+    if (onClose) onClose();
   };
 
   getHighlightedOptionIndex = () => {

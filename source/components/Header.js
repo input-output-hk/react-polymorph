@@ -1,42 +1,38 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
+import type { ComponentType, Node } from 'react';
 import { pickBy, isEmpty } from 'lodash';
 
-// components
-import { withTheme } from './HOC/withTheme';
-
 // utility functions
+import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  bold: boolean,
-  center: boolean,
-  children: Element<*>,
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  h1: boolean,
-  h2: boolean,
-  h3: boolean,
-  h4: boolean,
-  light: boolean,
-  lowerCase: boolean,
-  medium: boolean,
-  regular: boolean,
-  right: boolean,
-  left: boolean,
+  bold?: boolean,
+  center?: boolean,
+  children?: Node,
+  className?: string,
+  context: ThemeContextProp,
+  h1?: boolean,
+  h2?: boolean,
+  h3?: boolean,
+  h4?: boolean,
+  light?: boolean,
+  lowerCase?: boolean,
+  medium?: boolean,
+  regular?: boolean,
+  right?: boolean,
+  left?: boolean,
   skin: ComponentType<any>,
-  theme: Object,
+  theme: ?Object,
   themeId: string,
   themeOverrides: Object,
-  thin: boolean,
-  upperCase: boolean
+  thin?: boolean,
+  upperCase?: boolean
 };
 
 type State = { composedTheme: Object };
@@ -45,6 +41,7 @@ class HeaderBase extends Component <Props, State> {
   // define static properties
   static displayName = 'Header';
   static defaultProps = {
+    context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.HEADER,
     themeOverrides: {}

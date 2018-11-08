@@ -1,5 +1,6 @@
 // @flow
 import filterReactDomProps from 'filter-react-dom-props';
+import type { ComponentType } from 'react';
 
 // filters out / prevents invalid props from being rendered to the dom
 // which would generate an error/warning
@@ -14,5 +15,6 @@ export const numberToPx = (val: string | number) =>
 export const hasProperty = (obj: Object, property: ?string) =>
   Object.prototype.hasOwnProperty.call(obj, property);
 
-export const getDisplayName = (Component: ComponentType<*>) =>
-  (Component.displayName || Component.name);
+export const getDisplayName = (Component: ComponentType<any>) => (
+  Component.displayName || Component.name
+);

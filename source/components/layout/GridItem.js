@@ -9,7 +9,7 @@ import { Base } from './Base';
 type Props = {
   alignSelf?: string,
   className?: string,
-  children: Node,
+  children?: ?Node,
   column?: string | number,
   columnStart?: string | number,
   columnEnd?: string | number,

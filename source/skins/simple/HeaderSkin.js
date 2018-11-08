@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
-import type { Element } from 'react';
+import type { Node } from 'react';
 import classnames from 'classnames';
 
 type Props = {
-  children: Element<*>,
+  children?: ?Node,
   className: string,
   inlineStyles: Object,
   theme: Object

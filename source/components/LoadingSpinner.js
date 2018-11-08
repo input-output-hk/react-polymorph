@@ -2,24 +2,20 @@
 import React, { Component } from 'react';
 import type { ComponentType } from 'react';
 
-// internal components
-import { withTheme } from './HOC/withTheme';
-
 // internal utility functions
+import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  big?: boolean,
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
+  big: boolean,
+  className?: string,
+  context: ThemeContextProp,
   skin: ComponentType<any>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
   visible: boolean
@@ -34,6 +30,7 @@ class LoadingSpinnerBase extends Component<Props, State> {
   static displayName = 'LoadingSpinner';
   static defaultProps = {
     big: false,
+    context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.LOADING_SPINNER,
     themeOverrides: {},

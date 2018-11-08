@@ -11,7 +11,7 @@ import { composeBaseStyles } from '../../utils/layout';
 
 type Props = {
   activeClasses: Array<*>,
-  children: Node,
+  children?: ?Node,
   className?: string,
   inlineStyles: Object,
   stylesToAdd?: Object

@@ -42,7 +42,7 @@ describe('Autocomplete onChange simulations', () => {
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.find('AutocompleteBase').instance();
+    const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
     const options = wrapper.find('div.options');
 
@@ -70,7 +70,7 @@ describe('Autocomplete onChange simulations', () => {
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.find('AutocompleteBase').instance();
+    const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -107,7 +107,7 @@ describe('Autocomplete onChange simulations', () => {
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.find('AutocompleteBase').instance();
+    const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
     const options = wrapper.find('div.options');
 
@@ -132,7 +132,7 @@ describe('Autocomplete onChange simulations', () => {
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.find('AutocompleteBase').instance();
+    const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -178,7 +178,7 @@ describe('Autocomplete onChange simulations', () => {
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.find('AutocompleteBase').instance();
+    const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -207,7 +207,7 @@ describe('Autocomplete onChange simulations', () => {
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.find('AutocompleteBase').instance();
+    const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -236,7 +236,7 @@ describe('Autocomplete onChange simulations', () => {
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.find('AutocompleteBase').instance();
+    const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -265,7 +265,7 @@ describe('Autocomplete onChange simulations', () => {
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.find('AutocompleteBase').instance();
+    const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete
@@ -302,7 +302,7 @@ describe('Autocomplete onChange simulations', () => {
         skin={AutocompleteSkin}
       />
     );
-    const component = wrapper.find('AutocompleteBase').instance();
+    const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
 
     // open Autocomplete

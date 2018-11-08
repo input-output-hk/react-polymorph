@@ -15,17 +15,17 @@ import { FormFieldSkin } from './FormFieldSkin';
 import { pickDOMProps } from '../../utils/props';
 
 type Props = {
-  className: string,
-  disabled: boolean,
-  error: string,
-  label: string | Element<any>,
+  className?: ?string,
+  disabled?: boolean,
+  error?: string,
+  label?: string | Element<any>,
   inputRef: Ref<'input'>,
-  onBlur: Function,
-  onChange: Function,
-  onFocus: Function,
-  onKeyPress: Function,
-  placeholder: string,
-  readOnly: boolean,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  onKeyPress?: Function,
+  placeholder?: string,
+  readOnly?: boolean,
   theme: Object,
   themeId: string,
   value: string
@@ -39,6 +39,7 @@ export const InputSkin = (props: Props) => (
     error={props.error}
     inputRef={props.inputRef}
     skin={FormFieldSkin}
+    theme={props.theme}
     render={() => (
       <input
         ref={props.inputRef}
