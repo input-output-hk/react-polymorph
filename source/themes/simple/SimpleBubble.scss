@@ -6,7 +6,7 @@
 // bubble
 $bubble-bg-color: var(--rp-bubble-bg-color, #fafbfc) !default;
 $bubble-bg-color-transparent: var(--rp-bubble-bg-color-transparent, rgba(94, 96, 102, 0.9)) !default;
-$bubble-border: var(--rp-bubble-border, 1px solid #c6cdd6) !default;
+$bubble-border: var(--rp-bubble-border, 1px solid var(--rp-bubble-border-color, #c6cdd6)) !default;
 $bubble-border-color: var(--rp-bubble-border-color, #c6cdd6) !default;
 $bubble-border-color-transparent: var(--rp-bubble-border-color-transparent, transparent) !default;
 $bubble-border-radius: var(--rp-bubble-border-radius, 4px) !default;
