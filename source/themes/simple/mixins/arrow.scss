@@ -25,8 +25,8 @@
     @if $direction == down {
       border-top-color: $bg-color;
     }
-    border-width: $size - 1px;
-    margin-left: -($size - 1px);
+    border-width: calc(#{$size} - 1px);
+    margin-left: calc(0px - calc(#{$size} - 1px));
   }
 
   &:before {
@@ -38,6 +38,6 @@
       border-top-color: $border-color;
     }
     border-width: $size;
-    margin-left: -$size;
+    margin-left: calc(0px - #{$size});
   }
 }

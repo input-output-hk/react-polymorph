@@ -1,17 +1,23 @@
 // Select theme customizations
-$select-input-color: white;
-$select-input-placeholder-color: #495863;
+
+// select-input
 $select-input-bg-color: #212930;
-$select-input-border-focus-color: #33415e;
-$select-input-padding: 10px 20px;
 $select-input-border: none;
-$select-arrow-url: url("./assets/select-arrow.svg");
-$select-arrow-color: green;
-$select-open-arrow-url: url("./assets/select-open-arrow.svg");
-$select-open-arrow-color: red;
-$select-arrow-width: 11px;
+$select-input-border-color-focus: #33415e;
+$select-input-padding: 10px 20px;
+$select-input-placeholder-color: #495863;
+$select-input-text-color: white;
+
+// arrow default
+$select-arrow-bg-color: green;
+$select-arrow-bottom: 16px;
 $select-arrow-height: 4px;
-$select-arrow-position-bottom: 16px;
-$select-arrow-position-left: calc(100% - 32px);
+$select-arrow-left: calc(100% - 32px);
+$select-arrow-url: url("./assets/select-arrow.svg");
+$select-arrow-width: 11px;
+
+// arrow open
+$select-arrow-bg-color-open: red;
+$select-arrow-url-open: url("./assets/select-open-arrow.svg");
 
 @import "../../source/themes/simple/SimpleSelect";
