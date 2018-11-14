@@ -233,7 +233,17 @@ class NumericInputBase extends Component<Props, State> {
         // input value contains more than one dot
         const splitedOldValue = lastValidValue.split('.');
         let beforeDot = splitedValue[0] + splitedValue[1];
-        if (splitedOldValue[0].length < beforeDot.length) {
+        let beforeDotWithoutComma = beforeDot;
+
+        if (beforeDot.includes(',')) {
+          const beforeComma = beforeDot.slice(0, beforeDot.indexOf(','));
+          const afterComma = beforeDot.slice(beforeDot.indexOf(',') + 1);
+          beforeDotWithoutComma = beforeComma + afterComma;
+        }
+        if (
+          (!beforeDot.includes(',') && splitedOldValue[0].length < beforeDot.length) ||
+          (beforeDot.includes(',') && splitedOldValue[0].length < beforeDotWithoutComma.length)
+        ) {
           // dot is in decimal part
           position -= 1;
           handledValue = beforeDot + '.' + splitedValue[2];
