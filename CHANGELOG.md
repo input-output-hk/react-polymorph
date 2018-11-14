@@ -2,6 +2,8 @@
 
 ## vNext
 
+## 0.8.0
+
 ### Chores
 
 - Adds --rp prefixed css variables to all component themes allowing comprehensive custom configuration. Renames existing scss variables using a uniform convention that matches the names of the new --rp css variables. [PR 92](https://github.com/input-output-hk/react-polymorph/pull/92)
