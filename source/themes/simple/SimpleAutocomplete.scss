@@ -1,29 +1,52 @@
-@import "theme";
+ @import "theme";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$autocomplete-bg-color: #fafbfc !default;
-$autocomplete-border: 1px solid #c6cdd6 !default;
-$autocomplete-border-radius: 2px !default;
-$autocomplete-border-focus-color: #5e6066 !default;
-$autocomplete-error-color: $theme-color-error !default;
-$autocomplete-focus-outline: none !default;
-$autocomplete-font-size: 16px !default;
-$autocomplete-input-font-family: $theme-font-light, sans-serif !default;
-$autocomplete-min-height: 90px !default;
-$autocomplete-padding: 5px 20px !default;
-$autocomplete-placeholder-font-family: $theme-font-light, sans-serif !default;
-$autocomplete-search-color: #5e6066 !default;
-$autocomplete-placeholder-color: rgba(#5e6066, 0.5) !default;
-$autocomplete-selected-words-font-family: $theme-font-light, sans-serif !default;
-$autocomplete-selected-word-box-min-height: 28px !default;
-$autocomplete-selected-word-text-color: #fafbfc !default;
-$autocomplete-selected-word-box-background-color: rgba(
-  68,
-  91,
-  124,
-  0.5
+// autocomplete
+$autocomplete-bg-color: var(--rp-autocomplete-bg-color, #fafbfc) !default;
+$autocomplete-border: var(--rp-autocomplete-border, 1px solid #c6cdd6) !default;
+$autocomplete-border-radius: var(--rp-autocomplete-border-radius, 2px) !default;
+$autocomplete-border-color-opened: var(--rp-autocomplete-border-color-opened, #5e6066) !default;
+$autocomplete-border-color-errored: var(--rp-autocomplete-border-color-errored, $theme-color-error) !default;
+$autocomplete-min-height: var(--rp-autocomplete-min-height, 90px) !default;
+$autocomplete-padding: var(--rp-autocomplete-padding, 5px 20px) !default;
+$autocomplete-width: var(--rp-autocomplete-width, 100%) !default;
+
+// input
+$autocomplete-input-bg-color: var(--rp-autocomplete-input-bg-color, transparent) !default;
+$autocomplete-input-border: var(--rp-autocomplete-input-border, 0) !default;
+$autocomplete-input-font-size: var(--rp-autocomplete-input-font-size, 16px) !default;
+$autocomplete-input-font-family: var(--rp-autocomplete-input-font-family, $theme-font-light, sans-serif) !default;
+$autocomplete-input-height: var(--rp-autocomplete-input-height, 28px) !default;
+$autocomplete-input-margin: var(--rp-autocomplete-input-margin, 6px 0) !default;
+$autocomplete-input-max-width: var(--rp-autocomplete-input-max-width, 100%) !default;
+$autocomplete-input-outline: var(--rp-autocomplete-input-outline, none) !default;
+$autocomplete-input-padding: var(--rp-autocomplete-input-padding, 0) !default;
+$autocomplete-input-text-color: var(--rp-autocomplete-input-text-color, #5e6066) !default;
+
+// placeholder
+$autocomplete-placeholder-color: var(--rp-autocomplete-placeholder-color, rgba(#5e6066, 0.5)) !default;
+$autocomplete-placeholder-font-family: var(--rp-autocomplete-placeholder-font-family, $theme-font-light, sans-serif) !default;
+$autocomplete-placeholder-font-size: var(--rp-autocomplete-placeholder-font-size, 16px) !default;
+$autocomplete-selected-word-box-bg-color: var(
+  --rp-autocomplete-selected-word-box-bg-color,
+  rgba(68, 91, 124, 0.5)
 ) !default;
+
+// selected-word-box
+$autocomplete-selected-word-box-border-radius: var(--rp-autocomplete-selected-word-box-border-radius, 5px) !default;
+$autocomplete-selected-word-box-height: var(--rp-autocomplete-selected-word-box-height, 28px) !default;
+$autocomplete-selected-word-box-margin: var(--rp-autocomplete-selected-word-box-margin, 6px 12px 6px 0) !default;
+$autocomplete-selected-word-box-padding: var(--rp-autocomplete-selected-word-box-padding, 3px 9px) !default;
+$autocomplete-selected-word-text-color: var(--rp-autocomplete-selected-word-text-color, #fafbfc) !default;
+$autocomplete-selected-word-font-size: var(--rp-autocomplete-selected-word-font-size, 16px) !default;
+
+// selected-words
+$autocomplete-selected-words-font-family: var(
+  --rp-autocomplete-selected-words-font-family,
+  $theme-font-light, sans-serif
+) !default;
+$autocomplete-selected-words-min-height: var(--rp-autocomplete-selected-words-min-height, 28px) !default;
 
 .autocompleteWrapper {
 }
@@ -33,32 +56,32 @@ $autocomplete-selected-word-box-background-color: rgba(
   border: $autocomplete-border;
   border-radius: $autocomplete-border-radius;
   box-sizing: border-box;
-  font-size: $autocomplete-font-size;
   min-height: $autocomplete-min-height;
   padding: $autocomplete-padding;
-  width: 100%;
+  width: $autocomplete-width;
 
   &:hover {
     cursor: text;
   }
 
   input {
-    background: transparent;
-    border: 0;
-    color: $autocomplete-search-color;
+    background: $autocomplete-input-bg-color;
+    border: $autocomplete-input-border;
+    color: $autocomplete-input-text-color;
     display: block;
     flex: 1;
     font-family: $autocomplete-input-font-family;
-    font-size: $autocomplete-font-size;
-    height: $autocomplete-selected-word-box-min-height;
-    margin: 6px 0;
-    max-width: 100%;
-    outline: none;
-    padding: 0;
+    font-size: $autocomplete-input-font-size;
+    height: $autocomplete-input-height;
+    margin: $autocomplete-input-margin;
+    max-width: $autocomplete-input-max-width;
+    outline: $autocomplete-input-outline;
+    padding: $autocomplete-input-padding;
 
     &::-webkit-input-placeholder {
       color: $autocomplete-placeholder-color;
       font-family: $autocomplete-placeholder-font-family;
+      font-size: $autocomplete-placeholder-font-size;
     }
   }
 }
@@ -66,24 +89,24 @@ $autocomplete-selected-word-box-background-color: rgba(
 .selectedWords {
   display: flex;
   flex-wrap: wrap;
-  min-height: $autocomplete-selected-word-box-min-height;
+  min-height: $autocomplete-selected-words-min-height;
   font-family: $autocomplete-selected-words-font-family;
 }
 
 .selectedWordBox {
-  background-color: $autocomplete-selected-word-box-background-color;
-  border-radius: 5px;
+  background-color: $autocomplete-selected-word-box-bg-color;
+  border-radius: $autocomplete-selected-word-box-border-radius;
   box-sizing: border-box;
   display: flex;
-  height: 28px;
-  margin: 6px 12px 6px 0;
-  padding: 3px 9px;
+  height: $autocomplete-selected-word-box-height;
+  margin: $autocomplete-selected-word-box-margin;
+  padding: $autocomplete-selected-word-box-padding;
   position: relative;
 }
 
 .selectedWordValue {
   color: $autocomplete-selected-word-text-color;
-  font-size: 16px;
+  font-size: $autocomplete-selected-word-font-size;
   line-height: 1.38;
 }
 
@@ -100,11 +123,11 @@ $autocomplete-selected-word-box-background-color: rgba(
 }
 
 .opened {
-  border-color: $autocomplete-border-focus-color;
+  border-color: $autocomplete-border-color-opened;
 }
 
 .errored {
-  border-color: $autocomplete-error-color;
+  border-color: $autocomplete-border-color-errored;
 }
 
 // END SPECIAL STATES ---------- //

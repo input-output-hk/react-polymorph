@@ -1,8 +1,9 @@
 // Radio theme customizations
-$radio-size: 40px;
-$radio-color: #bde3ff;
+
+$radio-bg-color: #bde3ff;
 $radio-border-color: #3b6370;
 $radio-border-width: 1px;
-$radio-label-color: #335466;
+$radio-label-text-color: #335466;
+$radio-size: 40px;
 
 @import "../../source/themes/simple/SimpleRadio";

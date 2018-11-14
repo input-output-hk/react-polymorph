@@ -4,6 +4,8 @@
 
 ### Chores
 
+- Adds --rp prefixed css variables to all component themes allowing comprehensive custom configuration. Renames existing scss variables using a uniform convention that matches the names of the new --rp css variables. [PR 92](https://github.com/input-output-hk/react-polymorph/pull/92)
+
 - Fixes the implementation of withTheme helper to represent the wrapped components instead of a generic React component. This fix ensures the entire library is type checked correctly and resolves all resulting flow errors. [PR 93](https://github.com/input-output-hk/react-polymorph/pull/93)
 
 ### Fixes
