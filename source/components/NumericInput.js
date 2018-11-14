@@ -229,11 +229,24 @@ class NumericInputBase extends Component<Props, State> {
       // e.g. 1,000,000.123456
       // - make sure commas and caret are at correct position
       const splitedValue = value.split('.');
+
+      // check if input value contains more than one decimal
       if (splitedValue.length === 3) {
-        // input value contains more than one dot
         const splitedOldValue = lastValidValue.split('.');
         let beforeDot = splitedValue[0] + splitedValue[1];
-        if (splitedOldValue[0].length < beforeDot.length) {
+        // variable for value before the decimal containing a comma. Ex: 1,425
+        let beforeDotWithoutComma = beforeDot;
+
+        // if comma exists, remove before comparing length in next if-else statement
+        if (beforeDot.includes(',')) {
+          const beforeComma = beforeDot.slice(0, beforeDot.indexOf(','));
+          const afterComma = beforeDot.slice(beforeDot.indexOf(',') + 1);
+          beforeDotWithoutComma = beforeComma + afterComma;
+        }
+        if (
+          (!beforeDot.includes(',') && splitedOldValue[0].length < beforeDot.length) ||
+          (beforeDot.includes(',') && splitedOldValue[0].length < beforeDotWithoutComma.length)
+        ) {
           // dot is in decimal part
           position -= 1;
           handledValue = beforeDot + '.' + splitedValue[2];
@@ -417,6 +430,7 @@ class NumericInputBase extends Component<Props, State> {
 
   _separate(value: string) {
     this.setState({ oldValue: value });
+    if (!value) { this.setState({ separatorsCount: 0 }); }
     if (value) {
       const splitedValue = value.split('.');
       const separatedValue = splitedValue[0]
