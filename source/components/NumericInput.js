@@ -417,6 +417,7 @@ class NumericInputBase extends Component<Props, State> {
 
   _separate(value: string) {
     this.setState({ oldValue: value });
+    if (!value) { this.setState({ separatorsCount: 0 }); }
     if (value) {
       const splitedValue = value.split('.');
       const separatedValue = splitedValue[0]
