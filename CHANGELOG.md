@@ -45,6 +45,12 @@
   page data is loading. Adds new button story to exemplify this skin and functionality.
   [PR 76](https://github.com/input-output-hk/react-polymorph/pull/76)
 
+## 0.7.2
+
+### Fixes
+
+- Fixed two minor issues in the NumericInput component where the carrot didn't move right to the decimal spaces when the entered value contained 4 digits and a comma, and also fixed an issue where integers were displayed in the wrong order after a value is selected and deleted. [PR 94](https://github.com/input-output-hk/react-polymorph/pull/94)
+
 ## 0.7.1
 
 ### Fixes
