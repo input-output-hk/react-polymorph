@@ -2,26 +2,23 @@
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
-// internal components
-import { withTheme } from './HOC/withTheme';
-
 // internal utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  disabled: boolean,
-  label: string | Element<any>,
-  onClick: Function,
+  className?: string,
+  context: ThemeContextProp,
+  disabled?: boolean,
+  label?: string | Element<any>,
+  loading: boolean,
+  onClick?: Function,
   skin: ComponentType<any>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object // custom css/scss from user that adheres to component's theme API
 };
@@ -31,8 +28,11 @@ type State = {
 };
 
 class ButtonBase extends Component<Props, State> {
+  // define static properties
+  static displayName = 'Button';
   static defaultProps = {
-    disabled: false,
+    context: createEmptyContext(),
+    loading: false,
     theme: null,
     themeId: IDENTIFIERS.BUTTON,
     themeOverrides: {}
@@ -50,6 +50,10 @@ class ButtonBase extends Component<Props, State> {
         context.ROOT_THEME_API
       )
     };
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   render() {

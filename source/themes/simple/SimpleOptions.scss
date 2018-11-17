@@ -3,28 +3,43 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$options-border-color: #c6cdd6 !default;
-$options-border: 1px solid $options-border-color !default;
-$options-border-radius: 2px !default;
-$options-font-family: $theme-font-regular, sans-serif !default;
-$options-font-size: 16px !default;
-$options-arrow-size: 10px !default;
-$options-shadow: none !default;
-$option-bg-color: #fafbfc !default;
-$option-font-color: #5e6066 !default;
-$option-font-color-disabled: rgba(#5e6066, 0.5) !default;
-$option-highlight-color: #edf0f3 !default;
-$option-checkmark-color: #5e6066 !default;
-$option-padding: 14px 20px !default;
-// Bubble arrow
-$options-bubble-arrow: true !default;
+// options
+$options-border: var(--rp-options-border, 1px solid #c6cdd6) !default;
+$options-border-color: var(--rp-options-border-color, #c6cdd6) !default;
+$options-border-radius: var(--rp-options-border-radius, 2px) !default;
+$options-font-family: var(--rp-options-font-family, $theme-font-regular, sans-serif) !default;
+$options-font-size: var(--rp-options-font-size, 16px) !default;
+$options-shadow: var(--rp-options-shadow, none) !default;
+
+// option
+$option-bg-color: var(--rp-option-bg-color, #fafbfc) !default;
+$option-bg-color-highlighted: var(--rp-option-bg-color-highlighted, #edf0f3) !default;
+$option-border-color: var(--rp-option-border-color, #c6cdd6) !default;
+$option-cursor: var(--rp-option-cursor, pointer) !default;
+$option-cursor-disabled: var(--rp-option-cursor-disabled, default) !default;
+$option-line-height: var(--rp-option-line-height, normal) !default;
+$option-padding: var(--rp-option-padding, 14px 20px) !default;
+$option-text-color: var(--rp-option-text-color, #5e6066) !default;
+$option-text-color-disabled: var(--rp-option-text-color-disabled, rgba(#5e6066, 0.5)) !default;
+
+// checkmark
+$option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
+$option-checkmark-height: var(--rp-option-checkmark-height, 9px) !default;
+$option-checkmark-margin: var(--rp-option-checkmark-margin, 0 2px 3px auto) !default;
+$option-checkmark-thickness: var(--rp-option-checkmark-thickness, 2px) !default;
+$option-checkmark-width: var(--rp-option-checkmark-width, 5px) !default;
+
+// arrow
+$options-arrow: var(--rp-options-arrow, true) !default;
+$options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
+
 
 .options {
   & > div {
     padding: 0;
   }
 
-  @if $options-bubble-arrow == true {
+  @if calc(#{$options-arrow} == true) {
     [data-bubble-arrow] {
       @include arrow(
         up,
@@ -38,7 +53,7 @@ $options-bubble-arrow: true !default;
       &:not(.openUpward) [data-bubble-arrow] {
         @include arrow(
           up,
-          $option-highlight-color !important,
+          $option-bg-color-highlighted !important,
           $options-border-color,
           $options-arrow-size
         );
@@ -47,7 +62,7 @@ $options-bubble-arrow: true !default;
         height: inherit;
         @include arrow(
           down,
-          $option-highlight-color !important,
+          $option-bg-color-highlighted !important,
           $options-border-color,
           $options-arrow-size
         );
@@ -70,8 +85,9 @@ $options-bubble-arrow: true !default;
 
 .option {
   background-color: $option-bg-color;
-  color: $option-font-color;
-  cursor: pointer;
+  color: $option-text-color;
+  cursor: $option-cursor;
+  line-height: $option-line-height;
   padding: $option-padding;
 
   &.selectedOption {
@@ -83,27 +99,28 @@ $options-bubble-arrow: true !default;
       align-self: center;
       border-color: $option-checkmark-color;
       border-style: solid;
-      border-width: 0 2px 2px 0;
+      border-width: 0 $option-checkmark-thickness $option-checkmark-thickness 0;
       content: '';
-      height: 9px;
-      margin: 0 2px 3px auto;
+      height: $option-checkmark-height;
+      margin: $option-checkmark-margin;
       transform: rotate(45deg);
-      width: 5px;
+      width: $option-checkmark-width;
     }
   }
 
   &.highlightedOption {
-    background-color: $option-highlight-color;
+    background-color: $option-bg-color-highlighted;
   }
 
   &.disabledOption {
-    color: $option-font-color-disabled;
-    cursor: default;
+    color: $option-text-color-disabled;
+    cursor: $option-cursor-disabled;
   }
 }
 
 // BEGIN SPECIAL STATES ---------- //
-@if $options-bubble-arrow == true {
+
+@if calc(#{$options-arrow} == true) {
   .openUpward {
     &.options {
       top: inherit;
@@ -120,7 +137,7 @@ $options-bubble-arrow: true !default;
       &.firstOptionHighlighted [data-bubble-arrow] {
         @include arrow(
           down,
-          $option-highlight-color,
+          $option-bg-color-highlighted,
           $options-border-color,
           $options-arrow-size
         );

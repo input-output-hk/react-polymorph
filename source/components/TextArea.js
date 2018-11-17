@@ -6,35 +6,31 @@ import type { ComponentType, Node, Element } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
-// internal components
-import { withTheme } from './HOC/withTheme';
-
 // internal utility functions
-import { composeTheme, addThemeId } from '../utils/themes';
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '../themes/API';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   autoFocus: boolean,
   autoResize: boolean,
-  className: string,
-  context: {
-    theme: Object,
-    ROOT_THEME_API: Object
-  },
-  disabled: boolean,
-  label: string | Element<any>,
-  error: string | Node,
-  maxLength: number,
-  minLength: number,
-  onBlur: Function,
-  onChange: Function,
-  onFocus: Function,
-  placeholder: string,
-  rows: number,
+  className?: string,
+  context: ThemeContextProp,
+  disabled?: boolean,
+  label?: string | Element<any>,
+  error?: string | Node,
+  maxLength?: number,
+  minLength?: number,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  placeholder?: string,
+  rows?: number,
   skin: ComponentType<any>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
   value: string
@@ -46,11 +42,15 @@ type State = {
 };
 
 class TextAreaBase extends Component<Props, State> {
+  // declare ref types
   textareaElement: Element<'textarea'>;
 
+  // define static properties
+  static displayName = 'TextArea';
   static defaultProps = {
     autoFocus: false,
     autoResize: true,
+    context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.TEXT_AREA,
     themeOverrides: {},
@@ -86,12 +86,14 @@ class TextAreaBase extends Component<Props, State> {
     if (autoFocus) { this.focus(); }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (!this.props.autoResize && nextProps.autoResize) {
       window.addEventListener('resize', this._handleAutoresize);
     } else if (this.props.autoResize && !nextProps.autoResize) {
       window.removeEventListener('resize', this._handleAutoresize);
     }
+
+    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   componentDidUpdate() {

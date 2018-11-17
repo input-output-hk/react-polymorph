@@ -9,6 +9,7 @@ import { Button } from '../source/components/Button';
 
 // skins
 import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
+import { ButtonSpinnerSkin } from '../source/skins/simple/ButtonSpinnerSkin';
 
 // themes
 import CustomButtonTheme from './theme-customizations/Button.custom.scss';
@@ -29,6 +30,10 @@ storiesOf('Button', module)
 
   .add('disabled', () => (
     <Button disabled label="Button label" skin={ButtonSkin} />
+  ))
+
+  .add('with LoadingSpinner', () => (
+    <Button loading label="Done Loading" skin={ButtonSpinnerSkin} />
   ))
 
   .add('theme overrides', () => (

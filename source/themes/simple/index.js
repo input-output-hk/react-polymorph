@@ -7,10 +7,17 @@ import SimpleAutocomplete from './SimpleAutocomplete.scss';
 import SimpleBubble from './SimpleBubble.scss';
 import SimpleButton from './SimpleButton.scss';
 import SimpleCheckbox from './SimpleCheckbox.scss';
+import SimpleFlex from './SimpleFlex.scss';
 import SimpleFormField from './SimpleFormField.scss';
+import SimpleGrid from './SimpleGrid.scss';
+import SimpleGutter from './SimpleGutter.scss';
+import SimpleHeader from './SimpleHeader.scss';
+import SimpleInfiniteScroll from './SimpleInfiniteScroll.scss';
 import SimpleInput from './SimpleInput.scss';
+import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
+import SimpleProgressBar from './SimpleProgressBar.scss';
 import SimpleRadio from './SimpleRadio.scss';
 import SimpleSelect from './SimpleSelect.scss';
 import SimpleSwitch from './SimpleSwitch.scss';
@@ -27,10 +34,17 @@ export const SimpleTheme = {
   [IDENTIFIERS.BUBBLE]: SimpleBubble,
   [IDENTIFIERS.BUTTON]: SimpleButton,
   [IDENTIFIERS.CHECKBOX]: SimpleCheckbox,
+  [IDENTIFIERS.FLEX]: SimpleFlex,
   [IDENTIFIERS.FORM_FIELD]: SimpleFormField,
+  [IDENTIFIERS.GRID]: SimpleGrid,
+  [IDENTIFIERS.GUTTER]: SimpleGutter,
+  [IDENTIFIERS.HEADER]: SimpleHeader,
+  [IDENTIFIERS.INFINITE_SCROLL]: SimpleInfiniteScroll,
   [IDENTIFIERS.INPUT]: SimpleInput,
+  [IDENTIFIERS.LOADING_SPINNER]: SimpleLoadingSpinner,
   [IDENTIFIERS.MODAL]: SimpleModal,
   [IDENTIFIERS.OPTIONS]: SimpleOptions,
+  [IDENTIFIERS.PROGRESS_BAR]: SimpleProgressBar,
   [IDENTIFIERS.RADIO]: SimpleRadio,
   [IDENTIFIERS.SELECT]: SimpleSelect,
   [IDENTIFIERS.SWITCH]: SimpleSwitch,

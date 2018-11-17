@@ -1,0 +1,22 @@
+.root {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  background-color: #fff;
+  border: 2px solid #900000;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #900000;
+  padding: 25px;
+  transition: all 0.2s ease-in-out;
+  width: 150px;
+
+  &:not(.disabled) {
+    &:hover {
+      background-color: #fff;
+      color: #E00000;
+      border: 2px solid #E00000;
+      cursor: pointer;
+    }
+  }
+}

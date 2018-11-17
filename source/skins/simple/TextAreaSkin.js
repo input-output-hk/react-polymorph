@@ -15,16 +15,16 @@ import { FormFieldSkin } from './FormFieldSkin';
 import { pickDOMProps } from '../../utils/props';
 
 type Props = {
-  className: string,
+  className?: string,
   disabled: boolean,
-  error: string | Element<any>,
-  label: string | Element<any>,
-  onBlur: Function,
-  onChange: Function,
-  onFocus: Function,
-  placeholder: string,
+  error?: string | Element<any>,
+  label?: string | Element<any>,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  placeholder?: string,
   rows: number,
-  textareaRef: Ref<*>,
+  textareaRef?: Ref<any>,
   theme: Object,
   themeId: string,
   value: string

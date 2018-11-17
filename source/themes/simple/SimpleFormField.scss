@@ -2,34 +2,46 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$form-field-label-font: $theme-font-medium !default;
-$form-field-label-font-size: 16px !default;
-$form-field-label-color: #5e6066 !default;
-$form-field-label-margin-bottom: 10px !default;
-$form-field-error-font: $theme-font-regular !default;
-$form-field-error-font-size: 14px !default;
-$form-field-error-margin: 1.5px 0 11.5px 0 !default;
+// formfield
+$formfield-bg-color: var(--rp-formfield-bg-color, none) !default;
+$formfield-bg-color-disabled: var(--rp-formfield-bg-color-disabled, none) !default;
+
+// label
+$formfield-label-font-family: var(--rp-formfield-label-font-family, $theme-font-medium, sans-serif) !default;
+$formfield-label-font-size: var(--rp-formfield-label-font-size, 16px) !default;
+$formfield-label-text-color: var(--rp-formfield-label-text-color, #5e6066) !default;
+$formfield-label-text-color-disabled: var(--rp-formfield-label-text-color-disabled, $theme-color-disabled) !default;
+$formfield-label-margin: var(--rp-formfield-label-margin, 0 0 10px 0) !default;
+
+// error
+$formfield-error-text-color: var(--rp-formfield-error-text-color, rgba(#de3226, 0.5)) !default;
+$formfield-error-text-opacity: var(--rp-formfield-error-text-opacity, 1) !default;
+$formfield-error-font-family: var(--rp-formfield-error-font-family, $theme-font-regular) !default;
+$formfield-error-font-size: var(--rp-formfield-error-font-size, 14px) !default;
+$formfield-error-margin: var(--rp-formfield-error-margin, 1.5px 0 11.5px 0) !default;
 
 .root {
+  background-color: $formfield-bg-color;
   position: relative;
 }
 
 .label {
-  color: $form-field-label-color;
+  color: $formfield-label-text-color;
   display: block;
-  font-family: $form-field-label-font, sans-serif;
-  font-size: $form-field-label-font-size;
+  font-family: $formfield-label-font-family, sans-serif;
+  font-size: $formfield-label-font-size;
   line-height: 1.38;
-  margin-bottom: $form-field-label-margin-bottom;
+  margin: $formfield-label-margin;
 }
 
 .error {
-  color: rgba($theme-color-error, 0.5);
+  color: $formfield-error-text-color;
   float: right;
-  font-family: $form-field-error-font, sans-serif;
-  font-size: $form-field-error-font-size;
+  font-family: $formfield-error-font-family, sans-serif;
+  font-size: $formfield-error-font-size;
   line-height: 1.36;
-  margin: $form-field-error-margin;
+  margin: $formfield-error-margin;
+  opacity: $formfield-error-text-opacity;
 }
 
 .inputWrapper {
@@ -39,8 +51,9 @@ $form-field-error-margin: 1.5px 0 11.5px 0 !default;
 // BEGIN SPECIAL STATES ---------- //
 
 .disabled {
+  background-color: $formfield-bg-color-disabled;
   .label {
-    color: $theme-color-disabled;
+    color: $formfield-label-text-color-disabled;
   }
 }
 
