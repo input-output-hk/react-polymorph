@@ -107,6 +107,8 @@ in both cases it is "just" an input field showing some text:
 
 Represents a single-line input field.
 
+![Standard Input](./docs/images/react-polymorph-input-example.png)
+
 ##### Example Usage:
 
 ```js
@@ -122,7 +124,6 @@ const MyStandardInput = () => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-input-example.png)
 
 ##### Input Props:
 
@@ -153,7 +154,9 @@ type InputProps = {
 
 #### Numeric Input
 
-Component specialized in guiding the user to enter correct floating point numbers:
+Component specialized in guiding the user to enter correct floating point numbers.
+
+![Standard Input](./docs/images/react-polymorph-numeric-input-example.png)
 
 ##### Example Usage:
 
@@ -175,7 +178,6 @@ const MyNumericInput = () => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-numeric-input-example.png)
 
 This is a simple example that shows how you can make/use specialized versions
 of basic components by composition - a core idea of `react-polymorph`!
@@ -214,6 +216,8 @@ type NumericInputProps = {
 
 Simple component that represents an input which can receive multiple lines of text. 
 
+![Standard Input](./docs/images/react-polymorph-textarea-example.png)
+
 ##### Example Usage:
 
 ```js
@@ -229,7 +233,6 @@ const MyTextArea = () => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-textarea-example.png)
 
 ##### TextArea Props:
 
@@ -263,6 +266,8 @@ type TextAreaProps = {
 
 Represents a clickable area.
 
+![Standard Input](./docs/images/react-polymorph-button-example.png)
+
 ##### Example Usage:
 
 ```js
@@ -274,7 +279,6 @@ const MyButton = () => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-button-example.png)
 
 ##### Button Props:
 
@@ -296,7 +300,9 @@ type ButtonProps = {
 #### Select
 
 The select component is like standard select but with additional logic for adding custom option 
-renderer and opening directions (upward / downward):
+renderer and opening directions (upward / downward).
+
+![Standard Input](./docs/images/react-polymorph-select-example.png)
 
 ##### Example Usage:
 
@@ -304,14 +310,21 @@ renderer and opening directions (upward / downward):
 import React from "react";
 import { Select } from "react-polymorph/lib/components";
 
+const COUNTRIES_WITH_FLAGS = [
+  { value: 'EN-gb', label: 'England', flag: flagEngland },
+  { value: 'ES-es', label: 'Spain', flag: flagSpain },
+  { value: 'TH-th', label: 'Thailand', flag: flagThailand },
+  { value: 'EN-en', label: 'USA', flag: flagUSA }
+];
+
 const MySelect = () => (
   <Select
     label="Countries"
-    options={OPRIONS_ARRAY}
+    options={COUNTRIES_WITH_FLAGS}
     optionRenderer={option => {
       return (
         <div className={styles.customOptionStyle}>
-          <img src={option.value} />
+          <img src={option.flag} />
           <span>{option.label}</span>
         </div>
       );
@@ -320,7 +333,6 @@ const MySelect = () => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-select-example.png)
 
 ##### Select Props:
 
@@ -349,7 +361,9 @@ type SelectProps = {
 
 #### Checkbox
 
-The checkbox is as simple as possible and does not have much logic:
+Represents a component which can toggle between checked and unchecked state.
+
+![Standard Input](./docs/images/react-polymorph-checkbox-example.png)
 
 ##### Example Usage:
 
@@ -361,8 +375,6 @@ const MyCheckbox = () => (
   <Checkbox label="My checkbox" />
 );
 ```
-
-![Standard Input](./docs/images/react-polymorph-checkbox-example.png)
 
 ##### Checkbox Props:
 
@@ -389,7 +401,9 @@ type CheckboxProps = {
 
 #### Switch
 
-Like checkbox but uses a different skin part:
+Like checkbox but uses a different skin part.
+
+![Standard Input](./docs/images/react-polymorph-switch-example.png)
 
 ##### Example Usage:
 
@@ -402,7 +416,6 @@ const MySwitch = () => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-switch-example.png)
 
 ##### Switch Props -> see Checkbox (above)
 
@@ -410,7 +423,9 @@ const MySwitch = () => (
 
 #### Toggler
 
-Like checkbox but uses a different skin part:
+Like checkbox but uses a different skin part.
+
+![Standard Input](./docs/images/react-polymorph-toggler-example.png)
 
 ##### Example Usage:
 
@@ -426,7 +441,6 @@ const MyToggler = () => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-toggler-example.png)
 
 ##### Toggler Props -> see Checkbox (above)
 
@@ -436,6 +450,8 @@ const MyToggler = () => (
 
 The modal is component which wraps its children as standard dialog.
 As is shown in example, modal can have multiple other polymorph components:
+
+![Standard Input](./docs/images/react-polymorph-modal-example.png)
 
 ##### Example Usage:
 
@@ -462,7 +478,6 @@ const MyModal = props => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-modal-example.png)
 
 ##### Modal Props:
 
@@ -485,6 +500,8 @@ type ModalProps = {
 The autocomplete input is specialized to help users to select between multiple 
 suggested words depending on entered letters:
 
+![Standard Input](./docs/images/react-polymorph-autocomplete-example.png)
+
 ##### Example Usage:
 
 ```js
@@ -504,7 +521,6 @@ const MyAutocomplete = props => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-autocomplete-example.png)
 
 ##### Autocomplete Props:
 
@@ -538,6 +554,8 @@ type AutocompleteProps = {
 The bubble component will open up an absolutely positioned speech bubble.
 This is position in respect to it's closest relatively positioned parent.
 
+![Standard Input](./docs/images/react-polymorph-bubble-example.png)
+
 ##### Example Usage:
 
 ```js
@@ -553,7 +571,6 @@ const MyBubble = props => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-bubble-example.png)
 
 ##### Bubble Props:
 
@@ -577,6 +594,8 @@ type BubbleProps = {
 
 The tooltip opens a bubble relative to it's children, containing text or html to display.
 
+![Standard Input](./docs/images/react-polymorph-tooltip-example.png)
+
 ##### Example Usage:
 
 ```js
@@ -592,7 +611,6 @@ const MyTooltip = props => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-tooltip-example.png)
 
 ##### Tooltip Props:
 
@@ -616,6 +634,8 @@ type TooltipProps = {
 
 The radio is as simple as possible and does not have much logic:
 
+![Standard Input](./docs/images/react-polymorph-radio-example.png)
+
 ##### Example Usage:
 
 ```js
@@ -629,7 +649,6 @@ const MyRadio = props => (
 );
 ```
 
-![Standard Input](./docs/images/react-polymorph-radio-example.png)
 
 ##### Radio Props:
 
