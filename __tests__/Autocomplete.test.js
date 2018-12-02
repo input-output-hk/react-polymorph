@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Autocomplete } from '../source/components/Autocomplete';
-import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
 import { renderInSimpleTheme } from './helpers/theming';
 
 const OPTIONS = [
@@ -13,10 +12,7 @@ const OPTIONS = [
 
 test('Autocomplete renders correctly', () => {
   const component = renderInSimpleTheme(
-    <Autocomplete
-      options={OPTIONS}
-      skin={AutocompleteSkin}
-    />
+    <Autocomplete options={OPTIONS} />
   );
 
   const tree = component.toJSON();
@@ -28,7 +24,6 @@ test('Autocomplete renders with label', () => {
     <Autocomplete
       label="Enter your recovery phrase below"
       options={OPTIONS}
-      skin={AutocompleteSkin}
     />
   );
 
@@ -41,7 +36,6 @@ test('Autocomplete renders with a placeholder', () => {
     <Autocomplete
       placeholder="Enter recovery phrase"
       options={OPTIONS}
-      skin={AutocompleteSkin}
     />
   );
 
@@ -54,7 +48,6 @@ test('Autocomplete renders with an error', () => {
     <Autocomplete
       error="Your mnemonic phrase is incorrect"
       options={OPTIONS}
-      skin={AutocompleteSkin}
     />
   );
 
@@ -66,7 +59,6 @@ test('Autocomplete uses render prop - renderSelections', () => {
   const component = renderInSimpleTheme(
     <Autocomplete
       options={OPTIONS}
-      skin={AutocompleteSkin}
       renderSelections={getSelectionProps => {
         const { selectedOptions, removeSelection } = getSelectionProps();
 
@@ -92,7 +84,6 @@ test('Autocomplete uses render prop - renderOptions', () => {
   const component = renderInSimpleTheme(
     <Autocomplete
       options={OPTIONS}
-      skin={AutocompleteSkin}
       renderOptions={getOptionProps => {
         const { options } = getOptionProps({});
 

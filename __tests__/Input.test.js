@@ -1,12 +1,11 @@
 import React from 'react';
 
 import { Input } from '../source/components/Input';
-import { InputSkin } from '../source/skins/simple/InputSkin';
 import { renderInSimpleTheme } from './helpers/theming';
 
 test('Input renders correctly', () => {
   const component = renderInSimpleTheme(
-    <Input skin={InputSkin} />
+    <Input />
   );
 
   const tree = component.toJSON();
@@ -15,7 +14,7 @@ test('Input renders correctly', () => {
 
 test('Input renders with placeholder', () => {
   const component = renderInSimpleTheme(
-    <Input placeholder="0.0000" skin={InputSkin} />
+    <Input placeholder="0.0000" />
   );
 
   const tree = component.toJSON();
@@ -24,7 +23,7 @@ test('Input renders with placeholder', () => {
 
 test('Input renders with a value', () => {
   const component = renderInSimpleTheme(
-    <Input value="there is value" skin={InputSkin} />
+    <Input value="there is value" />
   );
 
   const tree = component.toJSON();
@@ -33,10 +32,7 @@ test('Input renders with a value', () => {
 
 test('Input is readOnly', () => {
   const component = renderInSimpleTheme(
-    <Input
-      readOnly
-      skin={InputSkin}
-    />
+    <Input readOnly />
   );
 
   const tree = component.toJSON();

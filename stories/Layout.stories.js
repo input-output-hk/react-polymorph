@@ -12,9 +12,6 @@ import { GridItem } from '../source/components/layout/GridItem';
 import { Gutter } from '../source/components/layout/Gutter';
 import { Header } from '../source/components/Header';
 
-// skins
-import { HeaderSkin } from '../source/skins/simple/HeaderSkin';
-
 // styles && themeOverrides
 import styles from './Layout.stories.scss';
 import customFlex from './theme-overrides/customFlex.scss';
@@ -259,23 +256,23 @@ storiesOf('Layout', module)
           gap={10}
         >
           <GridItem gridArea="content">
-            <Header h2 left skin={HeaderSkin}>content</Header>
+            <Header h2 left>content</Header>
           </GridItem>
 
           <GridItem gridArea="sidebar">
-            <Header h2 left skin={HeaderSkin}>sidebar</Header>
+            <Header h2 left>sidebar</Header>
           </GridItem>
 
           <GridItem gridArea="header">
-            <Header h2 left skin={HeaderSkin}>header</Header>
+            <Header h2 left>header</Header>
           </GridItem>
 
           <GridItem gridArea="footer">
-            <Header h2 left skin={HeaderSkin}>footer</Header>
+            <Header h2 left>footer</Header>
           </GridItem>
 
           <GridItem gridArea="aside">
-            <Header h2 left skin={HeaderSkin}>aside</Header>
+            <Header h2 left>aside</Header>
           </GridItem>
         </Grid>
       </Gutter>

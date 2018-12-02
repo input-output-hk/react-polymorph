@@ -11,7 +11,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -28,7 +28,7 @@ type Props = {
   optionRenderer?: Function,
   options: Array<any>,
   placeholder?: string,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
@@ -128,7 +128,7 @@ class SelectBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: SelectSkin,
+      skin,
       theme,
       themeOverrides,
       autoFocus,
@@ -136,6 +136,8 @@ class SelectBase extends Component<Props, State> {
       allowBlank,
       ...rest
     } = this.props;
+
+    const SelectSkin = skin || context.skins[IDENTIFIERS.SELECT];
 
     return (
       <GlobalListeners

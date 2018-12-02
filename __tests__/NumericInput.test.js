@@ -1,14 +1,11 @@
 import React from 'react';
 
 import { NumericInput } from '../source/components/NumericInput';
-import { InputSkin } from '../source/skins/simple/InputSkin';
 import { renderInSimpleTheme } from './helpers/theming';
 
 test('NumericInput renders correctly', () => {
   const component = renderInSimpleTheme(
-    <NumericInput
-      skin={InputSkin}
-    />
+    <NumericInput />
   );
 
   const tree = component.toJSON();
@@ -17,10 +14,7 @@ test('NumericInput renders correctly', () => {
 
 test('NumericInput renders with placeholder', () => {
   const component = renderInSimpleTheme(
-    <NumericInput
-      placeholder="0.0000"
-      skin={InputSkin}
-    />
+    <NumericInput placeholder="0.0000" />
   );
 
   const tree = component.toJSON();
@@ -29,10 +23,7 @@ test('NumericInput renders with placeholder', () => {
 
 test('NumericInput is disabled', () => {
   const component = renderInSimpleTheme(
-    <NumericInput
-      disabled
-      skin={InputSkin}
-    />
+    <NumericInput disabled />
   );
 
   const tree = component.toJSON();
@@ -41,10 +32,7 @@ test('NumericInput is disabled', () => {
 
 test('NumericInput is readOnly', () => {
   const component = renderInSimpleTheme(
-    <NumericInput
-      readOnly
-      skin={InputSkin}
-    />
+    <NumericInput readOnly />
   );
 
   const tree = component.toJSON();
@@ -53,10 +41,7 @@ test('NumericInput is readOnly', () => {
 
 test('NumericInput renders with an error', () => {
   const component = renderInSimpleTheme(
-    <NumericInput
-      error="Invalid Amount"
-      skin={InputSkin}
-    />
+    <NumericInput error="Invalid Amount" />
   );
 
   const tree = component.toJSON();
@@ -65,10 +50,7 @@ test('NumericInput renders with an error', () => {
 
 test('NumericInput renders with a value', () => {
   const component = renderInSimpleTheme(
-    <NumericInput
-      value="555.333"
-      skin={InputSkin}
-    />
+    <NumericInput value="555.333" />
   );
 
   const tree = component.toJSON();

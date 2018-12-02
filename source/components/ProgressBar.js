@@ -7,7 +7,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
   context: ThemeContextProp,
   label?: string,
   progress: number,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object // custom css/scss from user that adheres to component's theme API
@@ -57,12 +57,14 @@ class ProgressBarBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: ProgressBarSkin,
+      skin,
       theme,
       themeOverrides,
       context,
       ...rest
     } = this.props;
+
+    const ProgressBarSkin = skin || context.skins[IDENTIFIERS.PROGRESS_BAR];
 
     return <ProgressBarSkin theme={this.state.composedTheme} {...rest} />;
   }

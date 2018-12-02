@@ -8,15 +8,12 @@ import { withState } from '@dump247/storybook-state';
 // components
 import { Checkbox } from '../source/components/Checkbox';
 
-// skins
-import { TogglerSkin } from '../source/skins/simple/TogglerSkin';
-
 // themes
 import CustomTogglerTheme from './theme-customizations/Toggler.custom.scss';
 
 // theme overrides and identifiers
 import themeOverrides from './theme-overrides/customToggler.scss';
-import { IDENTIFIERS } from '../source/themes/API';
+import { IDENTIFIERS } from '../source/components';
 
 // theme
 import { decorateWithSimpleTheme } from './helpers/theming';
@@ -35,7 +32,6 @@ storiesOf('Toggler', module)
         themeId={IDENTIFIERS.TOGGLER}
         labelLeft="Included"
         labelRight="Excluded"
-        skin={TogglerSkin}
       />
     ))
   )
@@ -50,7 +46,6 @@ storiesOf('Toggler', module)
           themeId={IDENTIFIERS.TOGGLER}
           labelLeft="Included"
           labelRight="Excluded"
-          skin={TogglerSkin}
         />
         <span>&nbsp;from the amount</span>
       </div>
@@ -66,7 +61,6 @@ storiesOf('Toggler', module)
         labelLeft="Included"
         labelRight="Excluded"
         themeId={IDENTIFIERS.TOGGLER}
-        skin={TogglerSkin}
       />
     ))
   )
@@ -80,7 +74,6 @@ storiesOf('Toggler', module)
         themeId={IDENTIFIERS.TOGGLER}
         labelLeft="Included"
         labelRight="Excluded"
-        skin={TogglerSkin}
       />
     ))
   )
@@ -94,7 +87,6 @@ storiesOf('Toggler', module)
         themeId={IDENTIFIERS.TOGGLER}
         labelLeft="Included"
         labelRight="Excluded"
-        skin={TogglerSkin}
       />
     ))
   );

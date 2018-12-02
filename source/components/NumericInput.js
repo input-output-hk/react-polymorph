@@ -12,7 +12,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -34,7 +34,7 @@ type Props = {
   readOnly?: boolean,
   placeholder?: string,
   setError?: Function,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
@@ -464,7 +464,7 @@ class NumericInputBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: InputSkin,
+      skin,
       theme,
       themeOverrides,
       onChange,
@@ -476,6 +476,8 @@ class NumericInputBase extends Component<Props, State> {
       maxAfterDot,
       ...rest
     } = this.props;
+
+    const InputSkin = skin || context.skins[IDENTIFIERS.INPUT];
 
     return (
       <InputSkin

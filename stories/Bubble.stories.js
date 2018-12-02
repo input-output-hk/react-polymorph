@@ -7,9 +7,6 @@ import { storiesOf } from '@storybook/react';
 // components
 import { Bubble } from '../source/components/Bubble';
 
-// skins
-import { BubbleSkin } from '../source/skins/simple/BubbleSkin';
-
 // themes
 import BubbleCustomTheme from './theme-customizations/Bubble.custom.scss';
 
@@ -28,13 +25,13 @@ storiesOf('Bubble', module)
 
   .add('plain', () => (
     <div className={styles.container}>
-      <Bubble skin={BubbleSkin}>plain bubble</Bubble>
+      <Bubble>plain bubble</Bubble>
     </div>
   ))
 
   .add('isOpeningUpward', () => (
     <div className={styles.container}>
-      <Bubble isOpeningUpward skin={BubbleSkin}>
+      <Bubble isOpeningUpward>
         isOpeningUpward bubble
       </Bubble>
     </div>
@@ -42,7 +39,7 @@ storiesOf('Bubble', module)
 
   .add('isTransparent={false}', () => (
     <div className={styles.container}>
-      <Bubble isTransparent={false} skin={BubbleSkin}>
+      <Bubble isTransparent={false}>
         solid bubble
       </Bubble>
     </div>
@@ -50,7 +47,7 @@ storiesOf('Bubble', module)
 
   .add('custom class', () => (
     <div className={styles.container}>
-      <Bubble className={styles.customBubble} skin={BubbleSkin}>
+      <Bubble className={styles.customBubble}>
         this bubble is right aligned;
       </Bubble>
     </div>
@@ -59,7 +56,7 @@ storiesOf('Bubble', module)
   .add('isHidden', () => (
     <div className={styles.container}>
       There should be no bubble shown!
-      <Bubble isHidden skin={BubbleSkin}>
+      <Bubble isHidden>
         should not be visible!
       </Bubble>
     </div>
@@ -68,7 +65,7 @@ storiesOf('Bubble', module)
   .add('isFloating', () => (
     <div className={styles.scrollContainer}>
       <div className={styles.scrollContent}>
-        <Bubble isFloating skin={BubbleSkin}>
+        <Bubble isFloating>
           floating above scroll content
         </Bubble>
       </div>
@@ -84,7 +81,6 @@ storiesOf('Bubble', module)
       <Bubble
         isTransparent={false}
         themeOverrides={themeOverrides}
-        skin={BubbleSkin}
       >
         theme overrides
       </Bubble>
@@ -93,7 +89,7 @@ storiesOf('Bubble', module)
 
   .add('custom theme', () => (
     <div className={styles.container}>
-      <Bubble isTransparent={false} theme={BubbleCustomTheme} skin={BubbleSkin}>
+      <Bubble isTransparent={false} theme={BubbleCustomTheme}>
         custom theme
       </Bubble>
     </div>

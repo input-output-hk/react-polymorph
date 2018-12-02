@@ -22,10 +22,7 @@ const COUNTRIES_DISABLED_OPTIONS = [
 
 test('Select renders correctly', () => {
   const component = renderInSimpleTheme(
-    <Select
-      options={COUNTRIES}
-      skin={SelectSkin}
-    />
+    <Select options={COUNTRIES} />
   );
 
   const tree = component.toJSON();
@@ -37,7 +34,6 @@ test('Select renders with placeholder', () => {
     <Select
       placeholder="Select your country …"
       options={COUNTRIES}
-      skin={SelectSkin}
     />
   );
 
@@ -50,7 +46,6 @@ test('Select renders with an error', () => {
     <Select
       error="Please select a different option"
       options={COUNTRIES}
-      skin={SelectSkin}
     />
   );
 
@@ -60,10 +55,7 @@ test('Select renders with an error', () => {
 
 test('Select renders with disabled options', () => {
   const component = renderInSimpleTheme(
-    <Select
-      options={COUNTRIES_DISABLED_OPTIONS}
-      skin={SelectSkin}
-    />
+    <Select options={COUNTRIES_DISABLED_OPTIONS} />
   );
 
   const tree = component.toJSON();
@@ -75,7 +67,6 @@ test('Select isOpeningUpward={true}', () => {
     <Select
       isOpeningUpward
       options={COUNTRIES}
-      skin={SelectSkin}
     />
   );
 
@@ -88,7 +79,6 @@ test('Select isOpen={true}', () => {
     <Select
       isOpen
       options={COUNTRIES}
-      skin={SelectSkin}
     />
   );
 
@@ -100,7 +90,6 @@ test('Select uses render prop - optionRenderer', () => {
   const component = renderInSimpleTheme(
     <Select
       options={COUNTRIES}
-      skin={SelectSkin}
       optionRenderer={option => (
         <div>
           <span>German: {option.label}</span>

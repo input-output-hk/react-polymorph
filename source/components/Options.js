@@ -18,7 +18,7 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { composeFunctions } from '../utils/props';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -39,7 +39,7 @@ type Props = {
   // TODO: Why do we have two separate props for selection?
   selectedOption?: any,
   selectedOptions?: Array<any>,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   targetRef?: Ref<*>,
   theme: ?Object, // if passed by user, it will take precedence over this.props.context.theme
   themeId: string,
@@ -274,7 +274,7 @@ class OptionsBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: OptionsSkin,
+      skin,
       targetRef,
       theme,
       themeOverrides,
@@ -286,6 +286,8 @@ class OptionsBase extends Component<Props, State> {
     } = this.props;
 
     const { composedTheme, highlightedOptionIndex } = this.state;
+
+    const OptionsSkin = skin || context.skins[IDENTIFIERS.OPTIONS];
 
     return (
       <OptionsSkin

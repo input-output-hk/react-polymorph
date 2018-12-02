@@ -13,7 +13,7 @@ import { LoadingSpinnerSkin } from './LoadingSpinnerSkin';
 import { pickDOMProps } from '../../utils/props';
 
 // constants
-import { IDENTIFIERS } from '../../themes/API';
+import { IDENTIFIERS } from '../../components';
 
 type Props = {
   className: string,

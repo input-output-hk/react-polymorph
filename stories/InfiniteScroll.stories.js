@@ -11,11 +11,6 @@ import { LoadingSpinner } from '../source/components/LoadingSpinner';
 import { Flex } from '../source/components/layout/Flex';
 import { FlexItem } from '../source/components/layout/FlexItem';
 
-// skins
-import { InfiniteScrollSkin } from '../source/skins/simple/InfiniteScrollSkin';
-import { HeaderSkin } from '../source/skins/simple/HeaderSkin';
-import { LoadingSpinnerSkin } from '../source/skins/simple/LoadingSpinnerSkin';
-
 // styles && theme overrides
 import styles from './InfiniteScroll.stories.scss';
 import themeOverrides from './theme-overrides/customInfiniteScroll.scss';
@@ -33,7 +28,6 @@ storiesOf('InfiniteScroll', module)
   .add('simple', () => (
     <Flex center className={full}>
       <InfiniteScroll
-        skin={InfiniteScrollSkin}
         themeOverrides={themeOverrides}
         fetchData={setState => {
           setState({ isLoading: true }, async () => {
@@ -62,10 +56,10 @@ storiesOf('InfiniteScroll', module)
             {data.map((user, index) => (
               <FlexItem key={index} theme={theme}>
                 <div style={{ marginBottom: '5px' }}>
-                  <Header bold h2 left skin={HeaderSkin}>
+                  <Header bold h2 left>
                     {user.name.first} {user.name.last}
                   </Header>
-                  <Header h3 left skin={HeaderSkin}>
+                  <Header h3 left>
                     {user.email}
                   </Header>
                 </div>
@@ -78,7 +72,7 @@ storiesOf('InfiniteScroll', module)
             {!hasMoreData && <div>End of Users</div>}
             {isLoading && (
               <FlexItem className={spinner}>
-                <LoadingSpinner big skin={LoadingSpinnerSkin} />
+                <LoadingSpinner big />
               </FlexItem>
             )}
             {error && <div>Error</div>}
