@@ -49,62 +49,122 @@ module: {
 
 Now you can import and use components like this in your app:
 
-```javascript
+```js
 import React from "react";
 import { Input } from "react-polymorph/lib/components";
-import { InputSkin } from "react-polymorph/lib/skins/simple";
+import { InputSkin } from "react-polymorph/lib/skins/simple/InputSkin";
+import { InputTheme } from "react-polymorph/lib/themes/simple/InputTheme";
 
-// Basic input component:
-const MyInput = () => <Input skin={InputSkin} />;
+const MyInput = () => (
+  <Input // <- Logic
+    skin={InputSkin} // <- Markup
+    theme={InputTheme} // <- Styling
+    label="My Input" // <- Component prop
+  />
+);
 ```
 
-Each component's _skin_ that you apply to your component will receive its styles (css/scss) via a _theme_.
-React-polymorph comes with Simple themes & skins out of the box, but all themes are completely customizable.
+Each component needs a _skin_ to render markup and will receive its styles (css/scss) via a _theme_.
+
+### Theme Provider
+
+Of course this would be a lot of code just to render a simple input. That's why you should always use a theme provider 
+to inject skins and themes into all components below the `ThemeProvider` automatically (components can be arbitrarily
+deep nested).
+
+```js
+import React from "react";
+import { Input } from "react-polymorph/lib/components";
+import { SimpleSkins } from "react-polymorph/lib/skins/simple";
+import { SimpleTheme } from "react-polymorph/lib/themes/simple";
+
+// Notice that we don't have to pass any skin or theme to the inputs:
+const MyForm = () => (
+  <div>
+    <Input label="First Name" />
+    <Input label="Last Name" />
+  </div>
+);
+
+const SimpleFormApp = () => (
+  <ThemeProvider skins={SimpleSkins} theme={SimpleTheme}>
+    <MyForm />
+  </ThemeProvider>
+);
+```
 
 ### Components and Skins
+
+React-polymorph comes with simple themes & skins out of the box, but anything is customizable.
 
 Imagine you need a standard text `Input` component for text and a `NumericInput`
 for floating point numbers. The only difference is the logic of the component,
 in both cases it is "just" an input field showing some text:
 
-#### Standard Input
+---
 
-The standard input is as simple as possible and does not have much logic:
+#### Input
 
-```javascript
+Represents a single-line input field.
+
+##### Example Usage:
+
+```js
 import React from "react";
 import { Input } from "react-polymorph/lib/components";
-import { InputSkin } from "react-polymorph/lib/skins/simple";
-import { InputTheme } from "react-polymorph/lib/themes/simple";
 
 // Standard input component:
-const MyStandardInput = props => (
+const MyStandardInput = () => (
   <Input
     label="Input with max. 5 Characters"
     maxLength={5}
-    skin={InputSkin}
-    theme={InputTheme}
   />
 );
 ```
 
 ![Standard Input](./docs/images/react-polymorph-input-example.png)
 
+##### Input Props:
+
+```js
+type InputProps = {
+  autoFocus: boolean,
+  className?: ?string,
+  disabled?: boolean,
+  error: string | Element<any>,
+  label?: string | Element<any>,
+  maxLength?: number,
+  minLength?: number,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  onKeyPress?: Function,
+  placeholder?: string,
+  readOnly: boolean,
+  setError?: Function,
+  skin?: ComponentType<any>,
+  theme: ?Object,
+  themeOverrides: Object,
+  value: string
+};
+```
+
+---
+
 #### Numeric Input
 
-The numeric input however is specialized in guiding the user to
-enter correct floating point numbers:
+Component specialized in guiding the user to enter correct floating point numbers:
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { NumericInput } from "react-polymorph/lib/components";
 import { InputSkin } from "react-polymorph/lib/skins/simple";
-import { InputTheme } from "react-polymorph/lib/themes/simple";
 
-const MyNumericInput = props => (
+const MyNumericInput = () => (
   <NumericInput // notice the different logic component!
     skin={InputSkin} // but the same skin!
-    theme={InputTheme}
     label="Amount"
     placeholder="0.000000"
     maxBeforeDot={5}
@@ -120,57 +180,131 @@ const MyNumericInput = props => (
 This is a simple example that shows how you can make/use specialized versions
 of basic components by composition - a core idea of `react-polymorph`!
 
+##### NumericInput Props:
+
+```js
+type NumericInputProps = {
+  autoFocus?: boolean,
+  className?: string,
+  disabled?: boolean,
+  enforceMax: boolean,
+  label?: string | Element<any>,
+  enforceMin: boolean,
+  error?: string,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  maxAfterDot?: number,
+  maxBeforeDot?: number,
+  maxValue?: number,
+  minValue?: number,
+  readOnly?: boolean,
+  placeholder?: string,
+  setError?: Function,
+  skin?: ComponentType<any>,
+  theme: ?Object,
+  themeOverrides: Object,
+  value: string
+};
+```
+
+---
+
 #### Textarea
 
-The textarea is as simple as possible and does not have much logic:
+Simple component that represents an input which can receive multiple lines of text. 
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { TextArea } from "react-polymorph/lib/components";
-import { TextAreaSkin } from "react-polymorph/lib/skins/simple";
-import { TextAreaTheme } from "react-polymorph/lib/themes/simple";
 
-const MyTextArea = props => (
+const MyTextArea = () => (
   <TextArea
     label="Textarea with fixed amount of rows to start with"
     placeholder="Your description here"
     rows={5}
-    skin={TextAreaSkin}
-    theme={TextAreaTheme}
   />
 );
 ```
 
 ![Standard Input](./docs/images/react-polymorph-textarea-example.png)
 
+##### TextArea Props:
+
+```js
+type TextAreaProps = {
+  autoFocus: boolean,
+  autoResize: boolean,
+  className?: string,
+  context: ThemeContextProp,
+  disabled?: boolean,
+  label?: string | Element<any>,
+  error?: string | Node,
+  maxLength?: number,
+  minLength?: number,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  placeholder?: string,
+  rows?: number,
+  skin?: ComponentType<any>,
+  theme: ?Object,
+  themeId: string,
+  themeOverrides: Object,
+  value: string
+};
+```
+
+---
+
 #### Button
 
-The button is as simple as possible and does not have much logic:
+Represents a clickable area.
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Button } from "react-polymorph/lib/components";
-import { ButtonSkin } from "react-polymorph/lib/skins/simple";
-import { ButtonTheme } from "react-polymorph/lib/themes/simple";
 
-const MyButton = props => (
-  <Button label="Button label" skin={ButtonSkin} theme={ButtonTheme} />
+const MyButton = () => (
+  <Button label="Button label" />
 );
 ```
 
 ![Standard Input](./docs/images/react-polymorph-button-example.png)
 
+##### Button Props:
+
+```js
+type ButtonProps = {
+  className?: string,
+  disabled?: boolean,
+  label?: string | Element<any>,
+  loading: boolean,
+  onClick?: Function,
+  skin?: ComponentType<any>,
+  theme: ?Object,
+  themeOverrides: Object
+};
+```
+
+---
+
 #### Select
 
-The select component is like standard select but with additional logic for adding custom option renderer and opening directions (upward / downward):
+The select component is like standard select but with additional logic for adding custom option 
+renderer and opening directions (upward / downward):
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Select } from "react-polymorph/lib/components";
-import { SelectSkin } from "react-polymorph/lib/skins/simple";
-import { SelectTheme } from "react-polymorph/lib/themes/simple";
 
-const MySelect = props => (
+const MySelect = () => (
   <Select
     label="Countries"
     options={OPRIONS_ARRAY}
@@ -182,82 +316,135 @@ const MySelect = props => (
         </div>
       );
     }}
-    skin={SelectSkin}
-    theme-{SelectTheme}
   />
 );
 ```
 
 ![Standard Input](./docs/images/react-polymorph-select-example.png)
 
+##### Select Props:
+
+```js
+type SelectProps = {
+  allowBlank: boolean,
+  autoFocus: boolean,
+  className?: string,
+  error?: string | Element<any>,
+  label?: string | Element<any>,
+  isOpeningUpward: boolean,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  optionRenderer?: Function,
+  options: Array<any>,
+  placeholder?: string,
+  skin?: ComponentType<any>,
+  theme: ?Object,
+  themeOverrides: Object,
+  value: string
+};
+```
+
+---
+
 #### Checkbox
 
 The checkbox is as simple as possible and does not have much logic:
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Checkbox } from "react-polymorph/lib/components";
-import { CheckboxSkin } from "react-polymorph/lib/skins/simple";
-import { CheckboxTheme } from "react-polymorph/lib/themes/simple";
 
-const MyCheckbox = props => (
-  <Checkbox label="My checkbox" skin={CheckboxSkin} theme={CheckboxTheme} />
+const MyCheckbox = () => (
+  <Checkbox label="My checkbox" />
 );
 ```
 
 ![Standard Input](./docs/images/react-polymorph-checkbox-example.png)
 
+##### Checkbox Props:
+
+```js
+type CheckboxProps = {
+  checked: boolean,
+  className?: string,
+  context: ThemeContextProp,
+  disabled?: boolean,
+  label?: string | Element<any>,
+  labelLeft?: string | Element<any>,
+  labelRight?: string | Element<any>,
+  onChange?: Function,
+  onBlur?: Function,
+  onFocus?: Function,
+  skin?: ComponentType<any>,
+  theme: ?Object,
+  themeId: string,
+  themeOverrides: Object
+};
+```
+
+---
+
 #### Switch
 
-The switch is as simple as possible and does not have much logic. Like checkbox but uses a different skin part:
+Like checkbox but uses a different skin part:
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Checkbox } from "react-polymorph/lib/components";
-import { SwitchSkin } from "react-polymorph/lib/skins/simple";
-import { SwitchTheme } from "react-polymorph/lib/themes/simple";
 
-const MySwitch = props => (
-  <Checkbox label="My switch" skin={SwitchSkin} theme={SwitchTheme} />
+const MySwitch = () => (
+  <Checkbox label="My switch" />
 );
 ```
 
 ![Standard Input](./docs/images/react-polymorph-switch-example.png)
 
+##### Switch Props -> see Checkbox (above)
+
+---
+
 #### Toggler
 
-The toggler is as simple as possible and does not have much logic. Like checkbox but uses a different skin part:
+Like checkbox but uses a different skin part:
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Checkbox } from "react-polymorph/lib/components";
-import { TogglerSkin } from "react-polymorph/lib/skins/simple";
-import { TogglerTheme } from "react-polymorph/lib/themes/simple";
 
-const MyToggler = props => (
+const MyToggler = () => (
   <Checkbox
     labelLeft="Included"
     labelRight="Excluded"
-    skin={TogglerSkin}
-    theme={TogglerTheme}
   />
 );
 ```
 
 ![Standard Input](./docs/images/react-polymorph-toggler-example.png)
 
+##### Toggler Props -> see Checkbox (above)
+
+---
+
 #### Modal
 
-The modal is component which wraps its children as standard dialog. As is shown in example, modal can have multiple other polymorph components:
+The modal is component which wraps its children as standard dialog.
+As is shown in example, modal can have multiple other polymorph components:
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Modal, Button } from "react-polymorph/lib/components";
-import { ModalSkin, ButtonSkin } from "react-polymorph/lib/skins/simple";
-import { ModalTheme, ButtonTheme } from "react-polymorph/lib/themes/simple";
 
 const MyModal = props => (
-  <Modal triggerCloseOnOverlayClick={false} skin={ModalSkin} theme={ModalTheme}>
+  <Modal triggerCloseOnOverlayClick={false}>
     <h1 className={styles.modalTitle}>
       Are you sure you want to delete this thing?
     </h1>
@@ -265,14 +452,10 @@ const MyModal = props => (
       <Button
         label="Cancel"
         onClick={closeModalCallback}
-        skin={ButtonSkin}
-        theme={ButtonTheme}
       />
       <Button
         label="Delete"
         onClick={closeModalCallback}
-        skin={ButtonSkin}
-        theme={ButtonTheme}
       />
     </div>
   </Modal>
@@ -281,15 +464,32 @@ const MyModal = props => (
 
 ![Standard Input](./docs/images/react-polymorph-modal-example.png)
 
+##### Modal Props:
+
+```js
+type ModalProps = {
+  contentLabel: string | Element<any>,
+  isOpen: boolean,
+  onClose?: Function,
+  skin?: ComponentType<any>,
+  triggerCloseOnOverlayClick: boolean,
+  theme: ?Object,
+  themeOverrides: Object
+};
+```
+
+---
+
 #### Autocomplete
 
-The autocomplete input is specialized to help users to select between multiple suggested words depending on entered letters:
+The autocomplete input is specialized to help users to select between multiple 
+suggested words depending on entered letters:
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Autocomplete } from "react-polymorph/lib/components";
-import { AutocompleteSkin } from "react-polymorph/lib/skins/simple";
-import { AutocompleteTheme } from "react-polymorph/lib/themes/simple";
 
 const MyAutocomplete = props => (
   <Autocomplete
@@ -300,27 +500,53 @@ const MyAutocomplete = props => (
     maxSelections={12}
     maxVisibleSuggestions={5}
     invalidCharsRegex={/[^a-zA-Z]/g}
-    skin={AutocompleteSkin}
-    theme={AutocompleteTheme}
   />
 );
 ```
 
 ![Standard Input](./docs/images/react-polymorph-autocomplete-example.png)
 
+##### Autocomplete Props:
+
+```js
+type AutocompleteProps = {
+  className?: string,
+  error: ?string,
+  invalidCharsRegex: RegExp,
+  isOpeningUpward: boolean,
+  label?: string | Element<any>,
+  maxSelections?: number,
+  maxVisibleOptions: number,
+  multipleSameSelections: boolean,
+  onChange?: Function,
+  options: Array<any>,
+  preselectedOptions?: Array<any>,
+  placeholder?: string,
+  renderSelections?: Function,
+  renderOptions?: Function,
+  skin?: ComponentType<any>,
+  sortAlphabetically: boolean,
+  theme: ?Object,
+  themeOverrides: Object
+};
+```
+
+---
+
 #### Bubble
 
-The bubble component will open up an absolutely positioned speech bubble. This is position in respect to it's closest relatively positioned parent.
+The bubble component will open up an absolutely positioned speech bubble.
+This is position in respect to it's closest relatively positioned parent.
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Bubble } from "react-polymorph/lib/components";
-import { BubbleSkin } from "react-polymorph/lib/skins/simple";
-import { BubbleTheme } from "react-polymorph/lib/themes/simple";
 
 const MyBubble = props => (
   <div className={{ position: "relative" }}>
-    <Bubble skin={BubbleSkin} theme={BubbleTheme}>
+    <Bubble>
       plain bubble
     </Bubble>
   </div>
@@ -329,21 +555,37 @@ const MyBubble = props => (
 
 ![Standard Input](./docs/images/react-polymorph-bubble-example.png)
 
+##### Bubble Props:
+
+```js
+type BubbleProps = {
+  className?: string,
+  isHidden: boolean,
+  isFloating: boolean,
+  isOpeningUpward: boolean,
+  isTransparent: boolean,
+  skin?: ComponentType<any>,
+  theme: ?Object,
+  themeOverrides: Object,
+  targetRef?: Ref<*>, // ref to the target DOM element used for positioning the bubble
+};
+```
+
+---
+
 #### Tooltip
 
 The tooltip opens a bubble relative to it's children, containing text or html to display.
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Tooltip } from "react-polymorph/lib/components";
-import { TooltipSkin } from "react-polymorph/lib/skins/simple";
-import { TooltipTheme } from "react-polymorph/lib/themes/simple";
 
 const MyTooltip = props => (
   <Tooltip
     tip="Description of the child element"
-    skin={TooltipSkin}
-    theme={TooltipTheme}
   >
     hover over me
   </Tooltip>
@@ -352,11 +594,31 @@ const MyTooltip = props => (
 
 ![Standard Input](./docs/images/react-polymorph-tooltip-example.png)
 
+##### Tooltip Props:
+
+```js
+type TooltipProps = {
+  className?: string,
+  isAligningRight?: boolean,
+  isBounded?: boolean,
+  isOpeningUpward: boolean,
+  isTransparent: boolean,
+  skin?: ComponentType<any>,
+  theme: ?Object,
+  themeOverrides: Object,
+  tip?: string | Element<any>
+};
+```
+
+---
+
 #### Radio
 
 The radio is as simple as possible and does not have much logic:
 
-```javascript
+##### Example Usage:
+
+```js
 import React from "react";
 import { Radio } from "react-polymorph/lib/components";
 import { RadioSkin } from "react-polymorph/lib/skins/simple";
@@ -369,22 +631,47 @@ const MyRadio = props => (
 
 ![Standard Input](./docs/images/react-polymorph-radio-example.png)
 
+##### Radio Props:
+
+```js
+type RadioProps = {
+  disabled?: boolean,
+  label?: string | Element<any>,
+  onBlur?: Function,
+  onChange?: Function,
+  onFocus?: Function,
+  selected: boolean,
+  skin?: ComponentType<any>,
+  theme: ?Object,
+  themeOverrides: Object
+};
+```
+
 ### Customizing Component Skins
 
 #### Theme API
 
-Each component has a theme API. This is a plain object which exposes the shape of a component's theme. Each property on the theme API object is a class name assigned to an element within the component's skin and a class definition within the component's theme. Below is the Button's theme API.
+Each component has a theme API. This is a plain object which exposes the shape of a component's theme. Each 
+property on the theme API object is a class name assigned to an element within the component's skin and a class 
+definition within the component's theme. Below is the Button's theme API.
 
-```javascript
+```js
 {
   root: '',
   disabled: ''
 }
 ```
 
-Every component accepts an optional `themeOverrides` property intended to provide a [CSS Module import object](https://github.com/css-modules/css-modules) which is used by the component to assign a user's local classnames to its DOM nodes. If the component has already been passed a theme prop, the css/scss properties passed via themeOverrides will be merged with the injected theme object. This automatic composition saves the user from manually piecing together custom styles with those of the injected theme that the user may wish to retain. If you want to customize a component's theme, the themeOverrides object must contain the appropriate classname mapping to its documented **theme API**. In this way, you can **add** or **override** classnames on the nodes of a specific component.
+Every component accepts an optional `themeOverrides` property intended to provide a 
+[CSS Module import object](https://github.com/css-modules/css-modules) which is used by the component to 
+assign a user's local classnames to its DOM nodes. If the component has already been passed a theme prop, 
+the css/scss properties passed via themeOverrides will be merged with the injected theme object. This automatic 
+composition saves the user from manually piecing together custom styles with those of the injected theme that 
+the user may wish to retain. If you want to customize a component's theme, the themeOverrides object must 
+contain the appropriate classname mapping to its documented **theme API**. In this way, you can **add** or 
+**override** classnames on the nodes of a specific component.
 
-### Overriding a styles in a theme
+### Overriding styles in a theme
 
 For example, if you want to override the background-color of `Button`'s injected theme with green:
 
@@ -472,11 +759,19 @@ will be composed with
 }
 ```
 
-In this case we are **composing** custom styles with an instance of `Button` where the Simple `ButtonTheme` was already injected. If a theme isn't passed to a component, a theme object implementing that component's full theme API is necessary. When implementing a component's full theme, take into account that every classname is there for a reason. You can either provide a component's theme as a prop or pass it through context as described in the next section.
+In this case we are **composing** custom styles with an instance of `Button` where the Simple `ButtonTheme` was 
+already injected. If a theme isn't passed to a component, a theme object implementing that component's full theme 
+API is necessary. When implementing a component's full theme, take into account that every classname is there for 
+a reason. You can either provide a component's theme as a prop or pass it through context as described in the 
+next section.
 
 ### ThemeProvider HOC
 
-`ThemeProvider` allows you to pass a theme to multiple instances of a component without explicitly passing them a theme prop. Wrap your component tree with `ThemeProvider` at the desired level in your component hierarchy. You can maintain different themes and themeOverrides for specific portions of your app's tree.
+`ThemeProvider` allows you to pass a theme to multiple instances of a component without explicitly 
+passing them a theme prop. Wrap your component tree with `ThemeProvider` at the desired level in your 
+component hierarchy. You can maintain different themes and themeOverrides for specific portions of your app's tree.
+
+#### Example Usage:
 
 ```js
 import React, { Component } from "react";
@@ -515,30 +810,35 @@ class App extends Component {
   setValue = value => this.setState({ value });
 
   render() {
+    // Custom Theme
     const SimpleTheme = {
       modal: { ...ModalTheme },
       formfield: { ...FormFieldTheme },
       input: { ...InputTheme },
       button: { ...ButtonTheme }
     };
+    // Custom Skins
+    const SimpleSkins = {
+      modal: ModalSkin,
+      formfield: FormFieldSkin,
+      input: InputSkin,
+      button: ButtonSkin,
+    };
 
     return (
-      <ThemeProvider theme={SimpleTheme}>
+      <ThemeProvider skins={SimpleSkins} theme={SimpleTheme}>
         <Modal
           isOpen={this.state.isOpen}
           triggerCloseOnOverlayClick={false}
-          skin={ModalSkin}
         >
           <div>
             <FormField
               label="FormField in Modal"
-              skin={FormFieldSkin}
               render={props => (
                 <Input
                   {...props}
                   value={this.state.value}
                   onChange={this.setValue}
-                  skin={InputSkin}
                 />
               )}
             />
@@ -549,7 +849,6 @@ class App extends Component {
               onClick={this.props.handleClick}
               className="primary"
               label="Submit"
-              skin={ButtonSkin}
             />
           </div>
         </Modal>
@@ -590,7 +889,11 @@ Create a CSS Module theme file for the component you wish to customize, for exam
 }
 ```
 
-Create a theme file that imports each component's custom styles as CSS-Modules object(s). Apply the styles according to the root theme API structure. The root theme API is simply an object whose keys are named after each component in the react-polymorph library. For example, the styles you assign to the input key will be applied to all instances of the `Input` component nested within `ThemeProvider`. The same goes for the formfield key and all nested instances of the `FormField` component.
+Create a theme file that imports each component's custom styles as CSS-Modules object(s). Apply the styles according 
+to the root theme API structure. The root theme API is simply an object whose keys are named after each component 
+in the react-polymorph library. For example, the styles you assign to the input key will be applied to all 
+instances of the `Input` component nested within `ThemeProvider`. The same goes for the formfield key and all 
+nested instances of the `FormField` component.
 
 ###### customInputs.js
 
@@ -604,7 +907,9 @@ export default {
 };
 ```
 
-Import your custom theme to pass `ThemeProvider`'s themeOverrides property. This will apply your custom css/scss to **all** of its nested react-polymorph components. In this example, all 3 instances of the `Input` and `FormField` components will have the user's custom css definitions composed with Simple InputTheme and FormFieldTheme.
+Import your custom theme to pass `ThemeProvider`'s themeOverrides property. This will apply your custom css/scss 
+to **all** of its nested react-polymorph components. In this example, all 3 instances of the `Input` and `FormField` 
+components will have the user's custom css definitions composed with Simple InputTheme and FormFieldTheme.
 
 ```js
 import React from "react";
@@ -618,7 +923,7 @@ import {
 } from "react-polymorph/lib/components";
 
 // skins
-import { FormFieldSkin, InputSkin } from "react-polymorph/lib/skins/simple";
+import { SimpleSkins } from "react-polymorph/lib/skins/simple";
 
 // themes
 import { FormFieldTheme, InputTheme } from "react-polymorph/lib/themes/simple";
@@ -633,28 +938,25 @@ const CustomInputs = props => {
   };
 
   return (
-    <ThemeProvider themeOverrides={CustomInputsTheme} theme={SimpleTheme}>
+    <ThemeProvider skins={SimpleSkins} themeOverrides={CustomInputsTheme} theme={SimpleTheme}>
       <FormField
         label="Recipient's First Name"
-        skin={FormFieldSkin}
         render={props => (
-          <Input {...props} placeholder="Avery" skin={InputSkin} />
+          <Input {...props} placeholder="Avery" />
         )}
       />
 
       <FormField
         label="Recipient's Last Name"
-        skin={FormFieldSkin}
         render={props => (
-          <Input {...props} placeholder="McKenna" skin={InputSkin} />
+          <Input {...props} placeholder="McKenna" />
         )}
       />
 
       <FormField
         label="Amount to Send"
-        skin={FormFieldSkin}
         render={props => (
-          <NumericInput {...props} placeholder="10.000" skin={InputSkin} />
+          <NumericInput {...props} placeholder="10.000" />
         )}
       />
     </ThemeProvider>
@@ -664,7 +966,8 @@ const CustomInputs = props => {
 export default CustomInputs;
 ```
 
-You may also pass the entire SimpleTheme object to `ThemeProvider` and maintain the same functionality without having to import themes specific to the components you're using.
+You may also pass the entire SimpleTheme object to `ThemeProvider` and maintain the same functionality without 
+having to import themes specific to the components you're using.
 
 ```js
 import React from "react";
@@ -672,11 +975,14 @@ import React from "react";
 // components
 import { ThemeProvider } from "react-polymorph/lib/components";
 
+// skins
+import { SimpleSkins } from "react-polymorph/lib/skins/simple";
+
 // themes
 import { SimpleTheme } from "react-polymorph/lib/themes/simple";
 
 const App = () => (
-  <ThemeProvider theme={SimpleTheme}>
+  <ThemeProvider skins={SimpleSkins} theme={SimpleTheme}>
     <div>...</div>
   </ThemeProvider>
 );
