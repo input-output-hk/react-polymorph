@@ -1,12 +1,11 @@
 import React from 'react';
 
 import { Checkbox } from '../source/components/Checkbox';
-import { CheckboxSkin } from '../source/skins/simple/CheckboxSkin';
 import { renderInSimpleTheme } from './helpers/theming';
 
 test('Checkbox renders correctly', () => {
   const component = renderInSimpleTheme(
-    <Checkbox skin={CheckboxSkin} />
+    <Checkbox />
   );
 
   const tree = component.toJSON();
@@ -15,7 +14,7 @@ test('Checkbox renders correctly', () => {
 
 test('Checkbox renders with a label', () => {
   const component = renderInSimpleTheme(
-    <Checkbox label="check here" skin={CheckboxSkin} />
+    <Checkbox label="check here" />
   );
 
   const tree = component.toJSON();
@@ -24,7 +23,7 @@ test('Checkbox renders with a label', () => {
 
 test('Checkbox is disabled', () => {
   const component = renderInSimpleTheme(
-    <Checkbox disabled skin={CheckboxSkin} />
+    <Checkbox disabled />
   );
 
   const tree = component.toJSON();
@@ -33,7 +32,7 @@ test('Checkbox is disabled', () => {
 
 test('Checkbox is checked', () => {
   const component = renderInSimpleTheme(
-    <Checkbox checked skin={CheckboxSkin} />
+    <Checkbox checked />
   );
 
   const tree = component.toJSON();

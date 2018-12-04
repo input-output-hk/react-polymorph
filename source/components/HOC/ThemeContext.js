@@ -20,10 +20,15 @@ if (React.createContext) {
 }
 
 type Theme = {
+  skins: Object,
   theme: Object,
   ROOT_THEME_API: Object
 };
 
-const defaultContext = { theme: ROOT_THEME_API, ROOT_THEME_API };
+const defaultContext = {
+  skins: {},
+  theme: ROOT_THEME_API,
+  ROOT_THEME_API
+};
 
 export const ThemeContext: Context<Theme> = createContext(defaultContext);

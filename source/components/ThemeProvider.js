@@ -18,18 +18,21 @@ import { hasProperty } from '../utils/props';
 
 type Props = {
   children?: ?Node,
+  skins: Object,
   theme: Object,
   themeOverrides: Object // custom css/scss from user that adheres to shape of ROOT_THEME_API
 };
 
 type State = {
-  theme: Object
+  theme: Object,
 };
 
 export class ThemeProvider extends Component<Props, State> {
   // define static properties
   static displayName = 'ThemeProvider';
   static defaultProps = {
+    skins: {},
+    theme: {},
     themeOverrides: {}
   };
 
@@ -123,7 +126,8 @@ export class ThemeProvider extends Component<Props, State> {
 
   render() {
     const { theme } = this.state;
-    const providerState = { theme, ROOT_THEME_API };
+    const { skins } = this.props;
+    const providerState = { skins, theme, ROOT_THEME_API };
 
     return (
       <ThemeContext.Provider value={providerState}>

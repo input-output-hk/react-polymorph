@@ -7,9 +7,6 @@ import { storiesOf } from '@storybook/react';
 // components
 import { Tooltip } from '../source/components/Tooltip';
 
-// skins
-import { TooltipSkin } from '../source/skins/simple/TooltipSkin';
-
 // themes
 import { SimpleTheme } from '../source/themes/simple';
 import CustomBubbleTheme from './theme-customizations/Bubble.custom.scss';
@@ -17,7 +14,7 @@ import CustomBubbleTheme from './theme-customizations/Bubble.custom.scss';
 // custom styles & theme overrides
 import styles from './Tooltip.stories.scss';
 import themeOverrides from './theme-overrides/customTooltipBubble.scss';
-import { IDENTIFIERS } from '../source/themes/API';
+import { IDENTIFIERS } from '../source/components';
 
 // helpers
 import { decorateWithSimpleTheme } from './helpers/theming';
@@ -30,7 +27,7 @@ storiesOf('Tooltip', module)
 
   .add('plain', () => (
     <div className={styles.container}>
-      <Tooltip skin={TooltipSkin} tip="plain tooltip, nothing special about me">
+      <Tooltip tip="plain tooltip, nothing special about me">
         hover over me
       </Tooltip>
     </div>
@@ -39,7 +36,6 @@ storiesOf('Tooltip', module)
   .add('html', () => (
     <div className={styles.container}>
       <Tooltip
-        skin={TooltipSkin}
         tip={
           <div>
             I can use <span className={styles.htmlTip}>HTML</span>
@@ -53,7 +49,7 @@ storiesOf('Tooltip', module)
 
   .add('isAligningRight', () => (
     <div className={styles.container}>
-      <Tooltip isAligningRight skin={TooltipSkin} tip="I am aligning right">
+      <Tooltip isAligningRight tip="I am aligning right">
         hover over me
       </Tooltip>
     </div>
@@ -63,7 +59,6 @@ storiesOf('Tooltip', module)
     <div className={styles.container}>
       <Tooltip
         isBounded
-        skin={TooltipSkin}
         tip="Help, I am stuck in this small box"
       >
         hover over me
@@ -75,7 +70,6 @@ storiesOf('Tooltip', module)
     <div className={styles.container}>
       <Tooltip
         className={styles.customTooltip}
-        skin={TooltipSkin}
         tip="How did I get all the way over here?"
       >
         hover over me
@@ -87,7 +81,6 @@ storiesOf('Tooltip', module)
     <div className={styles.container}>
       <Tooltip
         isOpeningUpward={false}
-        skin={TooltipSkin}
         tip="I come from a land down under"
       >
         hover over me
@@ -103,7 +96,6 @@ storiesOf('Tooltip', module)
           [IDENTIFIERS.BUBBLE]: themeOverrides
         }}
         isOpeningUpward
-        skin={TooltipSkin}
         isTransparent={false}
         tip="plain tooltip, with theme overrides"
       >
@@ -116,7 +108,6 @@ storiesOf('Tooltip', module)
     <div className={styles.container}>
       <Tooltip
         theme={{ ...SimpleTheme, [IDENTIFIERS.BUBBLE]: CustomBubbleTheme }}
-        skin={TooltipSkin}
         isTransparent={false}
         tip="plain tooltip, with a custom theme"
       >

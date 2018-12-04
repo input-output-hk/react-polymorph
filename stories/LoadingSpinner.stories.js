@@ -7,9 +7,6 @@ import { storiesOf } from '@storybook/react';
 // components
 import { LoadingSpinner } from '../source/components/LoadingSpinner';
 
-// skins
-import { LoadingSpinnerSkin } from '../source/skins/simple/LoadingSpinnerSkin';
-
 // // theme overrides and styles
 import dashedSpinner from './theme-overrides/dashedSpinner.scss';
 import adaSpinner from './theme-overrides/adaSpinner.scss';
@@ -25,13 +22,13 @@ storiesOf('LoadingSpinner', module)
 
   .add('small', () => (
     <div className={styles.marginWrapper}>
-      <LoadingSpinner skin={LoadingSpinnerSkin} />
+      <LoadingSpinner />
     </div>
   ))
 
   .add('big', () => (
     <div className={styles.marginWrapper}>
-      <LoadingSpinner big skin={LoadingSpinnerSkin} />
+      <LoadingSpinner big />
     </div>
   ))
 
@@ -40,7 +37,6 @@ storiesOf('LoadingSpinner', module)
       <LoadingSpinner
         big
         themeOverrides={dashedSpinner}
-        skin={LoadingSpinnerSkin}
       />
     </div>
   ))
@@ -50,7 +46,6 @@ storiesOf('LoadingSpinner', module)
       <LoadingSpinner
         big
         themeOverrides={adaSpinner}
-        skin={LoadingSpinnerSkin}
       />
     </div>
   ))
@@ -60,7 +55,6 @@ storiesOf('LoadingSpinner', module)
       <LoadingSpinner
         big
         themeOverrides={daedalusSpinner}
-        skin={LoadingSpinnerSkin}
       />
     </div>
   ));

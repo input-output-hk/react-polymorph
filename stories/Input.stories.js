@@ -9,9 +9,6 @@ import { withState } from '@dump247/storybook-state';
 // components
 import { Input } from '../source/components/Input';
 
-// skins
-import { InputSkin } from '../source/skins/simple/InputSkin';
-
 // themes
 import CustomInputTheme from './theme-customizations/Input.custom.scss';
 
@@ -32,7 +29,6 @@ storiesOf('Input', module)
       <Input
         value={store.state.value}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -43,7 +39,6 @@ storiesOf('Input', module)
         label="Click Me to Focus"
         value={store.state.value}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -54,7 +49,6 @@ storiesOf('Input', module)
         value={store.state.value}
         placeholder="user name"
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -67,7 +61,6 @@ storiesOf('Input', module)
         value={store.state.value}
         placeholder="autoFocus"
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -77,7 +70,6 @@ storiesOf('Input', module)
       disabled
       label="Disabled Input"
       placeholder="user name"
-      skin={InputSkin}
     />
   ))
 
@@ -88,7 +80,6 @@ storiesOf('Input', module)
         error="Something went wrong"
         value={store.state.value}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -101,7 +92,6 @@ storiesOf('Input', module)
         placeholder="min length"
         minLength={8}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -114,7 +104,6 @@ storiesOf('Input', module)
         placeholder="max length"
         maxLength={5}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -126,7 +115,6 @@ storiesOf('Input', module)
         type="password"
         placeholder="password"
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -140,7 +128,6 @@ storiesOf('Input', module)
         onChange={value => store.set({ value })}
         onFocus={() => store.set({ focused: true, blurred: false })}
         onBlur={() => store.set({ blurred: true, focused: false })}
-        skin={InputSkin}
       />
     ))
   )
@@ -154,7 +141,6 @@ storiesOf('Input', module)
         maxLength={5}
         onKeyPress={action('onKeyPress')}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -168,7 +154,6 @@ storiesOf('Input', module)
         value={store.state.value}
         placeholder="type here..."
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -181,7 +166,6 @@ storiesOf('Input', module)
         value={store.state.value}
         placeholder="type here..."
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   );

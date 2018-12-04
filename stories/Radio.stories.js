@@ -8,9 +8,6 @@ import { withState } from '@dump247/storybook-state';
 // components
 import { Radio } from '../source/components/Radio';
 
-// skins
-import { RadioSkin } from '../source/skins/simple/RadioSkin';
-
 // themes
 import CustomRadioTheme from './theme-customizations/Radio.custom.scss';
 
@@ -33,7 +30,6 @@ storiesOf('Radio', module)
         <Radio
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={RadioSkin}
         />
       </div>
     ))
@@ -41,7 +37,7 @@ storiesOf('Radio', module)
 
   .add('disabled', () => (
     <div className={styles.container}>
-      <Radio disabled skin={RadioSkin} />
+      <Radio disabled />
     </div>
   ))
 
@@ -52,7 +48,6 @@ storiesOf('Radio', module)
           label="My radio"
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={RadioSkin}
         />
       </div>
     ))
@@ -64,7 +59,6 @@ storiesOf('Radio', module)
         className={styles.padding}
         selected={store.state.selected}
         onChange={() => store.set({ selected: !store.state.selected })}
-        skin={RadioSkin}
       />
     ))
   )
@@ -77,7 +71,6 @@ storiesOf('Radio', module)
           label="My radio"
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={RadioSkin}
         />
       </div>
     ))
@@ -92,7 +85,6 @@ storiesOf('Radio', module)
                 which were written down in a secure place"
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={RadioSkin}
         />
       </div>
     ))
@@ -104,7 +96,6 @@ storiesOf('Radio', module)
         <Radio
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={RadioSkin}
           label={
             <div>
               Example for a <strong>bold</strong> word in an html label
@@ -123,7 +114,6 @@ storiesOf('Radio', module)
           label="Radio with a composed theme"
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={RadioSkin}
         />
       </div>
     ))
@@ -137,7 +127,6 @@ storiesOf('Radio', module)
           label="Radio with a custom theme"
           selected={store.state.selected}
           onChange={() => store.set({ selected: !store.state.selected })}
-          skin={RadioSkin}
         />
       </div>
     ))

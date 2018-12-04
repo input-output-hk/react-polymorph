@@ -1,4 +1,5 @@
 // @flow
+import { IDENTIFIERS } from '../../components';
 import { AUTOCOMPLETE_THEME_API } from './autocomplete';
 import { BUBBLE_THEME_API } from './bubble';
 import { BUTTON_THEME_API } from './button';
@@ -20,30 +21,6 @@ import { SWITCH_THEME_API } from './switch';
 import { TEXT_AREA_THEME_API } from './textarea';
 import { TOGGLER_THEME_API } from './toggler';
 import { TOOLTIP_THEME_API } from './tooltip';
-
-export const IDENTIFIERS = {
-  AUTOCOMPLETE: 'autocomplete',
-  BUBBLE: 'bubble',
-  BUTTON: 'button',
-  CHECKBOX: 'checkbox',
-  FLEX: 'flex',
-  FORM_FIELD: 'formfield',
-  GRID: 'grid',
-  GUTTER: 'gutter',
-  HEADER: 'header',
-  INFINITE_SCROLL: 'infinitescroll',
-  INPUT: 'input',
-  LOADING_SPINNER: 'loadingspinner',
-  MODAL: 'modal',
-  OPTIONS: 'options',
-  PROGRESS_BAR: 'progressbar',
-  RADIO: 'radio',
-  SELECT: 'select',
-  SWITCH: 'switch',
-  TEXT_AREA: 'textarea',
-  TOGGLER: 'toggler',
-  TOOLTIP: 'tooltip'
-};
 
 export const ROOT_THEME_API = {
   [IDENTIFIERS.AUTOCOMPLETE]: AUTOCOMPLETE_THEME_API,

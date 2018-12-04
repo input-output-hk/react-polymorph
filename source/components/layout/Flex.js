@@ -11,7 +11,7 @@ import { createEmptyContext, withTheme } from '../HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
 
 // constants
-import { IDENTIFIERS } from '../../themes/API';
+import { IDENTIFIERS } from '..';
 import type { ThemeContextProp } from '../HOC/withTheme';
 
 type Props = {

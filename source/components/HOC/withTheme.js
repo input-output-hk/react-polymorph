@@ -6,11 +6,13 @@ import { ThemeContext } from './ThemeContext';
 import { getDisplayName } from '../../utils/props';
 
 export type ThemeContextProp = {
+  skins: Object,
   theme: Object,
   ROOT_THEME_API: Object
 };
 
 export const createEmptyContext = (): ThemeContextProp => ({
+  skins: {},
   theme: {},
   ROOT_THEME_API: {}
 });

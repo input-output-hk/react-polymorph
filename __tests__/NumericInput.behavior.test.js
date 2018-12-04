@@ -1,13 +1,12 @@
 import React from 'react';
 
 import { NumericInput } from '../source/components/NumericInput';
-import { InputSkin } from '../source/skins/simple/InputSkin';
 import { mountInSimpleTheme } from './helpers/theming';
 
 describe('NumericInput onChange simulations', () => {
   test('onChange updates state with valid amount', () => {
     const wrapper = mountInSimpleTheme(
-      <NumericInput skin={InputSkin} />
+      <NumericInput />
     );
 
     const component = wrapper.find('NumericInput').instance();
@@ -20,10 +19,7 @@ describe('NumericInput onChange simulations', () => {
 
   test('onChange creates error via invalid amount: value > maxValue', () => {
     const wrapper = mountInSimpleTheme(
-      <NumericInput
-        maxValue={1000}
-        skin={InputSkin}
-      />
+      <NumericInput maxValue={1000} />
     );
 
     const component = wrapper.find('NumericInput').instance();
@@ -38,10 +34,7 @@ describe('NumericInput onChange simulations', () => {
 
   test('onChange creates error via invalid amount: value < minValue', () => {
     const wrapper = mountInSimpleTheme(
-      <NumericInput
-        minValue={500}
-        skin={InputSkin}
-      />
+      <NumericInput minValue={500} />
     );
 
     const component = wrapper.find('NumericInput').instance();
@@ -56,10 +49,7 @@ describe('NumericInput onChange simulations', () => {
 
   test('onChange is passed invalid amount, maxBeforeDot is enforced correctly', () => {
     const wrapper = mountInSimpleTheme(
-      <NumericInput
-        maxBeforeDot={3}
-        skin={InputSkin}
-      />
+      <NumericInput maxBeforeDot={3} />
     );
 
     const component = wrapper.find('NumericInput').instance();
@@ -77,10 +67,7 @@ describe('NumericInput onChange simulations', () => {
 
   test('onChange is passed invalid amount, maxAfterDot is enforced correctly', () => {
     const wrapper = mountInSimpleTheme(
-      <NumericInput
-        maxAfterDot={4}
-        skin={InputSkin}
-      />
+      <NumericInput maxAfterDot={4} />
     );
 
     const component = wrapper.find('NumericInput').instance();
@@ -98,10 +85,7 @@ describe('NumericInput onChange simulations', () => {
 
   test('integers only - onChange is passed invalid amount, maxAfterDot is enforced correctly', () => {
     const wrapper = mountInSimpleTheme(
-      <NumericInput
-        maxAfterDot={0}
-        skin={InputSkin}
-      />
+      <NumericInput maxAfterDot={0} />
     );
 
     const component = wrapper.find('NumericInput').instance();
@@ -123,7 +107,6 @@ describe('NumericInput onChange simulations', () => {
         enforceMax
         maxValue={24999}
         maxAfterDot={2}
-        skin={InputSkin}
       />
     );
 
@@ -164,7 +147,6 @@ describe('NumericInput onChange simulations', () => {
         enforceMin
         minValue={99.99}
         maxAfterDot={2}
-        skin={InputSkin}
       />
     );
 

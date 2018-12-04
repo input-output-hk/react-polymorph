@@ -7,7 +7,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
   inputRef?: Ref<*>,
   label?: string | Element<any>,
   render: Function,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object
@@ -70,7 +70,7 @@ class FormFieldBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: FormFieldSkin,
+      skin,
       theme,
       themeOverrides,
       error,
@@ -78,6 +78,8 @@ class FormFieldBase extends Component<Props, State> {
       inputRef,
       ...rest
     } = this.props;
+
+    const FormFieldSkin = skin || context.skins[IDENTIFIERS.FORM_FIELD];
 
     return (
       <FormFieldSkin

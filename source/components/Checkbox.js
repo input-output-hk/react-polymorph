@@ -7,7 +7,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -21,7 +21,7 @@ type Props = {
   onChange?: Function,
   onBlur?: Function,
   onFocus?: Function,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object
@@ -63,12 +63,14 @@ class CheckboxBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: CheckboxSkin,
+      skin,
       theme,
       themeOverrides,
       context,
       ...rest
     } = this.props;
+
+    const CheckboxSkin = skin || context.skins[IDENTIFIERS.CHECKBOX];
 
     return <CheckboxSkin theme={this.state.composedTheme} {...rest} />;
   }

@@ -12,11 +12,6 @@ import { Autocomplete } from '../source/components/Autocomplete';
 import { Modal } from '../source/components/Modal';
 import { Button } from '../source/components/Button';
 
-// skins
-import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
-import { ModalSkin } from '../source/skins/simple/ModalSkin';
-import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
-
 // themes
 import CustomAutocompleteTheme from './theme-customizations/Autocomplete.custom.scss';
 
@@ -50,18 +45,17 @@ storiesOf('Autocomplete', module)
   // ====== Stories ======
 
   .add('Enter mnemonics - plain', () => (
-    <Autocomplete skin={AutocompleteSkin} />
+    <Autocomplete />
   ))
 
   .add('Enter mnemonics - label', () => (
-    <Autocomplete label="Recovery phrase" skin={AutocompleteSkin} />
+    <Autocomplete label="Recovery phrase" />
   ))
 
   .add('Enter mnemonics - placeholder', () => (
     <Autocomplete
       label="Recovery phrase"
       placeholder="Enter recovery phrase"
-      skin={AutocompleteSkin}
     />
   ))
 
@@ -70,7 +64,6 @@ storiesOf('Autocomplete', module)
       label="Recovery phrase"
       placeholder="Enter recovery phrase"
       error="Please enter mnemonics in right order"
-      skin={AutocompleteSkin}
     />
   ))
 
@@ -83,7 +76,6 @@ storiesOf('Autocomplete', module)
         sortAlphabetically={false}
         multipleSameSelections={false}
         maxSelections={9}
-        skin={AutocompleteSkin}
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
@@ -96,7 +88,6 @@ storiesOf('Autocomplete', module)
         options={OPTIONS}
         placeholder="Enter mnemonic..."
         maxSelections={9}
-        skin={AutocompleteSkin}
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
@@ -110,7 +101,6 @@ storiesOf('Autocomplete', module)
         placeholder="Enter mnemonic..."
         maxSelections={12}
         maxVisibleOptions={5}
-        skin={AutocompleteSkin}
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
@@ -126,7 +116,6 @@ storiesOf('Autocomplete', module)
         placeholder="Enter mnemonic..."
         maxSelections={12}
         maxVisibleOptions={5}
-        skin={AutocompleteSkin}
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
@@ -141,7 +130,6 @@ storiesOf('Autocomplete', module)
         maxSelections={12}
         maxVisibleOptions={5}
         invalidCharsRegex={/[^a-zA-Z]/g}
-        skin={AutocompleteSkin}
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
@@ -154,7 +142,6 @@ storiesOf('Autocomplete', module)
           <Modal
             isOpen={store.state.isOpen}
             triggerCloseOnOverlayClick={false}
-            skin={ModalSkin}
             onClose={() => store.set({ isOpen: false })}
           >
             <div className={styles.dialogWrapper}>
@@ -169,7 +156,6 @@ storiesOf('Autocomplete', module)
                   maxSelections={12}
                   maxVisibleOptions={5}
                   invalidCharsRegex={/[^a-zA-Z]/g}
-                  skin={AutocompleteSkin}
                   onChange={selectedOpts => store.set({ selectedOpts })}
                 />
               </div>
@@ -178,7 +164,6 @@ storiesOf('Autocomplete', module)
                   onClick={() => store.set({ isOpen: false })}
                   className="primary"
                   label="Submit"
-                  skin={ButtonSkin}
                 />
               </div>
             </div>
@@ -205,7 +190,6 @@ storiesOf('Autocomplete', module)
           label="Recovery phrase"
           options={OPTIONS}
           placeholder="Enter mnemonic..."
-          skin={AutocompleteSkin}
         />
         <button onClick={() => autocompleteRef.current.clear()}>clear</button>
       </div>
@@ -222,7 +206,6 @@ storiesOf('Autocomplete', module)
         multipleSameSelections={false}
         maxSelections={7}
         maxVisibleOptions={7}
-        skin={AutocompleteSkin}
         onChange={selectedOpts => store.set({ selectedOpts })}
         renderSelections={getSelectionProps => {
           const {
@@ -267,7 +250,6 @@ storiesOf('Autocomplete', module)
         multipleSameSelections
         maxSelections={10}
         maxVisibleOptions={7}
-        skin={AutocompleteSkin}
         onChange={selectedOpts => store.set({ selectedOpts })}
         renderOptions={getOptionProps => {
           const {
@@ -337,7 +319,6 @@ storiesOf('Autocomplete', module)
         maxSelections={12}
         maxVisibleOptions={5}
         invalidCharsRegex={/[^a-zA-Z]/g}
-        skin={AutocompleteSkin}
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))
@@ -353,7 +334,6 @@ storiesOf('Autocomplete', module)
         maxSelections={12}
         maxVisibleOptions={5}
         invalidCharsRegex={/[^a-zA-Z]/g}
-        skin={AutocompleteSkin}
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))

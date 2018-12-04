@@ -11,7 +11,7 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/theme
 import { numberToPx } from '../../utils/props';
 
 // constants
-import { IDENTIFIERS } from '../../themes/API';
+import { IDENTIFIERS } from '..';
 import type { ThemeContextProp } from '../HOC/withTheme';
 
 type Props = {

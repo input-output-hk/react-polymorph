@@ -8,15 +8,12 @@ import { withState } from '@dump247/storybook-state';
 // components
 import { Checkbox } from '../source/components/Checkbox';
 
-// skins
-import { SwitchSkin } from '../source/skins/simple/SwitchSkin';
-
 // themes
 import CustomSwitchTheme from './theme-customizations/Switch.custom.scss';
 
 // custom styles & theme overrides
 import themeOverrides from './theme-overrides/customSwitch.scss';
-import { IDENTIFIERS } from '../source/themes/API';
+import { IDENTIFIERS } from '../source/components';
 
 // helpers
 import { decorateWithSimpleTheme } from './helpers/theming';
@@ -33,13 +30,12 @@ storiesOf('Switch', module)
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
         themeId={IDENTIFIERS.SWITCH}
-        skin={SwitchSkin}
       />
     ))
   )
 
   .add('disabled', () => (
-    <Checkbox disabled themeId={IDENTIFIERS.SWITCH} skin={SwitchSkin} />
+    <Checkbox disabled themeId={IDENTIFIERS.SWITCH} />
   ))
 
   .add('short label',
@@ -49,7 +45,6 @@ storiesOf('Switch', module)
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
         themeId={IDENTIFIERS.SWITCH}
-        skin={SwitchSkin}
       />
     ))
   )
@@ -62,7 +57,6 @@ storiesOf('Switch', module)
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
         themeId={IDENTIFIERS.SWITCH}
-        skin={SwitchSkin}
       />
     ))
   )
@@ -76,7 +70,6 @@ storiesOf('Switch', module)
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
         themeId={IDENTIFIERS.SWITCH}
-        skin={SwitchSkin}
       />
     ))
   )
@@ -90,7 +83,6 @@ storiesOf('Switch', module)
           label="theme overrides"
           checked={store.state.checked}
           onChange={() => store.set({ checked: !store.state.checked })}
-          skin={SwitchSkin}
         />
       </div>
     ))
@@ -105,7 +97,6 @@ storiesOf('Switch', module)
           label="custom theme"
           checked={store.state.checked}
           onChange={() => store.set({ checked: !store.state.checked })}
-          skin={SwitchSkin}
         />
       </div>
     ))

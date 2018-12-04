@@ -5,13 +5,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
-// components & skins
+// components
 import { Select } from '../source/components/Select';
-import { SelectSkin } from '../source/skins/simple/SelectSkin';
 import { Modal } from '../source/components/Modal';
-import { ModalSkin } from '../source/skins/simple/ModalSkin';
 import { Button } from '../source/components/Button';
-import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 
 // themes
 import { SimpleTheme } from '../source/themes/simple';
@@ -27,7 +24,7 @@ import flagThailand from './images/th.png';
 import flagUSA from './images/us.png';
 
 // constants
-import { IDENTIFIERS } from '../source/themes/API';
+import { IDENTIFIERS } from '../source/components';
 
 // helpers
 import { decorateWithSimpleTheme } from './helpers/theming';
@@ -65,7 +62,6 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
-        skin={SelectSkin}
       />
     ))
   )
@@ -77,7 +73,6 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
-        skin={SelectSkin}
       />
     ))
   )
@@ -89,7 +84,6 @@ storiesOf('Select', module)
         onChange={value => store.set({ value })}
         options={COUNTRIES}
         placeholder="Select your country …"
-        skin={SelectSkin}
       />
     ))
   )
@@ -100,7 +94,6 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
-        skin={SelectSkin}
       />
     ))
   )
@@ -113,7 +106,6 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
-        skin={SelectSkin}
       />
     ))
   )
@@ -130,7 +122,6 @@ storiesOf('Select', module)
             <span>{option.label}</span>
           </div>
           )}
-        skin={SelectSkin}
       />
     ))
   )
@@ -145,7 +136,6 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
-        skin={SelectSkin}
       />
     ))
   )
@@ -158,7 +148,6 @@ storiesOf('Select', module)
         label="Countries (has disabled options)"
         options={COUNTRIES_WITH_DISABLED_OPTIONS}
         placeholder="Select your country …"
-        skin={SelectSkin}
       />
     ))
   )
@@ -170,7 +159,6 @@ storiesOf('Select', module)
           value={store.state.value}
           onChange={value => store.set({ value })}
           options={COUNTRIES}
-          skin={SelectSkin}
         />
       </div>
     ))
@@ -185,7 +173,6 @@ storiesOf('Select', module)
         label="Countries (has disabled options)"
         options={COUNTRIES_WITH_DISABLED_OPTIONS}
         placeholder="Select your country …"
-        skin={SelectSkin}
       />
     ))
   )
@@ -197,7 +184,6 @@ storiesOf('Select', module)
           <Modal
             isOpen={store.state.isOpen}
             triggerCloseOnOverlayClick={false}
-            skin={ModalSkin}
             onClose={() => store.set({ isOpen: false })}
           >
             <div className={styles.dialogWrapper}>
@@ -209,7 +195,6 @@ storiesOf('Select', module)
                   value={store.state.value}
                   onChange={value => store.set({ value })}
                   options={COUNTRIES}
-                  skin={SelectSkin}
                 />
               </div>
               <div className={styles.actions}>
@@ -217,7 +202,6 @@ storiesOf('Select', module)
                   onClick={() => store.set({ isOpen: false })}
                   className="primary"
                   label="Submit"
-                  skin={ButtonSkin}
                 />
               </div>
             </div>

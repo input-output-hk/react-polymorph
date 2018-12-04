@@ -7,7 +7,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
   context: ThemeContextProp,
   isOpen: boolean,
   onClose?: Function,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   triggerCloseOnOverlayClick: boolean,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
@@ -60,12 +60,14 @@ class ModalBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: ModalSkin,
+      skin,
       theme,
       themeOverrides,
       context,
       ...rest
     } = this.props;
+
+    const ModalSkin = skin || context.skins[IDENTIFIERS.MODAL];
 
     return <ModalSkin theme={this.state.composedTheme} {...rest} />;
   }
