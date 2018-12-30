@@ -33,6 +33,11 @@ export const CheckboxSkin = (props: Props) => (
       }
     }}
   >
+    {props.label && (
+      <label className={props.theme[props.themeId].label}>
+        {props.label}
+      </label>
+    )}
     <input
       {...pickDOMProps(props)}
       className={props.theme[props.themeId].input}
@@ -44,10 +49,5 @@ export const CheckboxSkin = (props: Props) => (
         props.checked ? props.theme[props.themeId].checked : null
       ])}
     />
-    {props.label && (
-      <label className={props.theme[props.themeId].label}>
-        {props.label}
-      </label>
-    )}
   </div>
 );

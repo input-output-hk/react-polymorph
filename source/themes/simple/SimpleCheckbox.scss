@@ -38,6 +38,7 @@ $checkbox-label-text-color-disabled: var(--rp-checkbox-label-text-color-disabled
 }
 
 .check {
+  order: 1;
   align-self: center;
   border: $checkbox-border;
   border-radius: $checkbox-border-radius;
@@ -52,6 +53,7 @@ $checkbox-label-text-color-disabled: var(--rp-checkbox-label-text-color-disabled
 }
 
 .label {
+  order: 2;
   color: $checkbox-label-text-color;
   font-family: $checkbox-label-font-family;
   font-size: $checkbox-label-font-size;
