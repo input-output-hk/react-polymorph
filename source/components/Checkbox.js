@@ -70,7 +70,7 @@ class CheckboxBase extends Component<Props, State> {
       ...rest
     } = this.props;
 
-    const CheckboxSkin = skin || context.skins[IDENTIFIERS.CHECKBOX];
+    const CheckboxSkin = skin || context.skins[this.props.themeId];
 
     return <CheckboxSkin theme={this.state.composedTheme} {...rest} />;
   }
