@@ -2,7 +2,16 @@
 
 ## vNext
 
+### Fixes
+
+- Updates vulnerable packages found by Github's automatic security audit.
+  Fixes Checkbox component's render method to use the `themeId` prop for 
+  accessing a skin in `context` when one isn't provided via props instead 
+  of hardcoding the fallback to use `CheckboxSkin` 
+  [PR 101](https://github.com/input-output-hk/react-polymorph/pull/101)
+
 ## 0.8.1
+=======
 
 ### Features
 
