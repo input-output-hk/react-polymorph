@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Options } from '../source/components/Options';
-import { OptionsSkin } from '../source/skins/simple/OptionsSkin';
 import { renderInSimpleTheme } from './helpers/theming';
 
 const MNEMONIC_WORDS = [
@@ -29,10 +28,7 @@ const COUNTRIES_OPTIONS = [
 
 test('Options renders correctly', () => {
   const component = renderInSimpleTheme(
-    <Options
-      options={MNEMONIC_WORDS}
-      skin={OptionsSkin}
-    />
+    <Options options={MNEMONIC_WORDS} />
   );
 
   const tree = component.toJSON();
@@ -43,7 +39,6 @@ test('Options uses render prop - render', () => {
   const component = renderInSimpleTheme(
     <Options
       options={MNEMONIC_WORDS}
-      skin={OptionsSkin}
       render={getOptionProps => {
         const { options } = getOptionProps();
         return options.map((option, index) => (
@@ -63,7 +58,6 @@ test('Options uses render prop - optionRenderer', () => {
   const component = renderInSimpleTheme(
     <Options
       options={COUNTRIES_OPTIONS}
-      skin={OptionsSkin}
       optionRenderer={option => (
         <div>
           <span>{option.german}</span>

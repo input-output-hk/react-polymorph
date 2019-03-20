@@ -8,9 +8,6 @@ import { withState } from '@dump247/storybook-state';
 // components
 import { NumericInput } from '../source/components/NumericInput';
 
-// skins
-import { InputSkin } from '../source/skins/simple/InputSkin';
-
 // themes
 import CustomInputTheme from './theme-customizations/Input.custom.scss';
 
@@ -33,7 +30,6 @@ storiesOf('NumericInput', module)
         maxBeforeDot={6}
         maxAfterDot={6}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -46,7 +42,6 @@ storiesOf('NumericInput', module)
         maxBeforeDot={6}
         maxAfterDot={6}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -59,7 +54,6 @@ storiesOf('NumericInput', module)
         maxBeforeDot={6}
         maxAfterDot={6}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -74,7 +68,6 @@ storiesOf('NumericInput', module)
         maxBeforeDot={6}
         maxAfterDot={6}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -89,7 +82,6 @@ storiesOf('NumericInput', module)
         onChange={value => store.set({ value })}
         onFocus={() => store.set({ focused: true, blurred: false })}
         onBlur={() => store.set({ blurred: true, focused: false })}
-        skin={InputSkin}
       />
     ))
   )
@@ -102,7 +94,6 @@ storiesOf('NumericInput', module)
         value={store.state.value}
         placeholder="0.000000"
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -116,7 +107,6 @@ storiesOf('NumericInput', module)
         maxBeforeDot={3}
         maxAfterDot={4}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -130,7 +120,6 @@ storiesOf('NumericInput', module)
         maxBeforeDot={3}
         maxAfterDot={0}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -143,7 +132,6 @@ storiesOf('NumericInput', module)
         placeholder="0.000000"
         maxValue={30000}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -157,7 +145,6 @@ storiesOf('NumericInput', module)
         minValue={50}
         maxAfterDot={6}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -172,7 +159,6 @@ storiesOf('NumericInput', module)
         minValue={50}
         maxAfterDot={6}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -189,7 +175,6 @@ storiesOf('NumericInput', module)
         enforceMax
         enforceMin
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -204,7 +189,6 @@ storiesOf('NumericInput', module)
         placeholder="0.000000"
         maxAfterDot={6}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   )
@@ -218,7 +202,6 @@ storiesOf('NumericInput', module)
         placeholder="0.000000"
         maxAfterDot={6}
         onChange={value => store.set({ value })}
-        skin={InputSkin}
       />
     ))
   );

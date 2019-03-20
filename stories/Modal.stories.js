@@ -9,10 +9,6 @@ import { withState } from '@dump247/storybook-state';
 import { Modal } from '../source/components/Modal';
 import { Button } from '../source/components/Button';
 
-// skins
-import { ModalSkin } from '../source/skins/simple/ModalSkin';
-import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
-
 // themes
 import CustomModalTheme from './theme-customizations/Modal.custom.scss';
 
@@ -35,7 +31,6 @@ storiesOf('Modal', module)
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}
-        skin={ModalSkin}
       >
         <h1 className={styles.modalTitle}>Click outside of modal to cancel</h1>
       </Modal>
@@ -47,7 +42,6 @@ storiesOf('Modal', module)
       <Modal
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick={false}
-        skin={ModalSkin}
       >
         <h1 className={styles.modalTitle}>
           Are you sure you want to delete this thing?
@@ -57,13 +51,11 @@ storiesOf('Modal', module)
             className={styles.cancelButton}
             label="Cancel"
             onClick={() => store.set({ isOpen: !store.state.isOpen })}
-            skin={ButtonSkin}
           />
           <Button
             className={styles.deleteButton}
             label="Delete"
             onClick={() => store.set({ isOpen: !store.state.isOpen })}
-            skin={ButtonSkin}
           />
         </div>
       </Modal>
@@ -77,7 +69,6 @@ storiesOf('Modal', module)
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}
-        skin={ModalSkin}
       >
         <h1 className={styles.modalTitle}>Click outside of modal to cancel</h1>
       </Modal>
@@ -91,7 +82,6 @@ storiesOf('Modal', module)
         isOpen={store.state.isOpen}
         triggerCloseOnOverlayClick
         onClose={() => store.set({ isOpen: !store.state.isOpen })}
-        skin={ModalSkin}
       >
         <h1 className={styles.modalTitle}>Click outside of modal to cancel</h1>
       </Modal>

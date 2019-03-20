@@ -9,7 +9,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ReactElementRef } from '../utils/types.js';
 import type { ThemeContextProp } from './HOC/withTheme';
 
@@ -18,7 +18,7 @@ type Props = {
   context: ThemeContextProp,
   fetchData: Function,
   renderItems?: Function,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
@@ -111,8 +111,9 @@ class InfiniteScrollBase extends Component<Props, State> {
     const {
       props: {
         className,
+        context,
         renderItems,
-        skin: InfiniteScrollSkin,
+        skin,
         themeId
       },
       state: {
@@ -126,6 +127,7 @@ class InfiniteScrollBase extends Component<Props, State> {
     } = this;
 
     if (!this._isFunction(renderItems)) { return null; }
+    const InfiniteScrollSkin = skin || context.skins[IDENTIFIERS.INFINITE_SCROLL];
 
     return (
       <InfiniteScrollSkin

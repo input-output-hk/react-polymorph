@@ -8,7 +8,6 @@ import { storiesOf } from '@storybook/react';
 import { Button } from '../source/components/Button';
 
 // skins
-import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 import { ButtonSpinnerSkin } from '../source/skins/simple/ButtonSpinnerSkin';
 
 // themes
@@ -26,10 +25,10 @@ storiesOf('Button', module)
 
   // ====== Stories ======
 
-  .add('plain', () => <Button label="Button label" skin={ButtonSkin} />)
+  .add('plain', () => <Button label="Button label" />)
 
   .add('disabled', () => (
-    <Button disabled label="Button label" skin={ButtonSkin} />
+    <Button disabled label="Button label" />
   ))
 
   .add('with LoadingSpinner', () => (
@@ -40,10 +39,9 @@ storiesOf('Button', module)
     <Button
       label="theme overrides"
       themeOverrides={themeOverrides}
-      skin={ButtonSkin}
     />
   ))
 
   .add('custom theme', () => (
-    <Button label="Custom theme" theme={CustomButtonTheme} skin={ButtonSkin} />
+    <Button label="Custom theme" theme={CustomButtonTheme} />
   ));

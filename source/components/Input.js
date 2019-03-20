@@ -12,7 +12,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -31,7 +31,7 @@ type Props = {
   placeholder?: string,
   readOnly: boolean,
   setError?: Function,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
@@ -147,7 +147,7 @@ class InputBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: InputSkin,
+      skin,
       context,
       theme,
       themeOverrides,
@@ -159,6 +159,8 @@ class InputBase extends Component<Props, State> {
       autoFocus,
       ...rest
     } = this.props;
+
+    const InputSkin = skin || context.skins[IDENTIFIERS.INPUT];
 
     return (
       <InputSkin

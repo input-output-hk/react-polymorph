@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import { Checkbox } from '../source/components/Checkbox';
 import { SwitchSkin } from '../source/skins/simple/SwitchSkin';
-import { IDENTIFIERS } from '../source/themes/API';
+import { IDENTIFIERS } from '../source/components';
 import { renderInSimpleTheme } from './helpers/theming';
 
 test('Switch renders correctly', () => {

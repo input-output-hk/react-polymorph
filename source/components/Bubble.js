@@ -9,7 +9,7 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { addDocumentListeners, removeDocumentListeners } from '../utils/events';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
   isFloating: boolean,
   isOpeningUpward: boolean,
   isTransparent: boolean,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // takes precedence over them in context if passed
   themeId: string,
   themeOverrides: Object, // custom css/scss from user adhering to component's theme API
@@ -184,12 +184,14 @@ class BubbleBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: BubbleSkin,
+      skin,
       theme,
       themeOverrides,
       context,
       ...rest
     } = this.props;
+
+    const BubbleSkin = skin || context.skins[IDENTIFIERS.BUBBLE];
 
     return (
       <BubbleSkin

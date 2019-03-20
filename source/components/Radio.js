@@ -7,7 +7,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
   onChange?: Function,
   onFocus?: Function,
   selected: boolean,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object
@@ -60,12 +60,14 @@ class RadioBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: RadioSkin,
+      skin,
       theme,
       themeOverrides,
       context,
       ...rest
     } = this.props;
+
+    const RadioSkin = skin || context.skins[IDENTIFIERS.RADIO];
 
     return <RadioSkin theme={this.state.composedTheme} {...rest} />;
   }

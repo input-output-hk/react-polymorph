@@ -11,7 +11,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -29,7 +29,7 @@ type Props = {
   onFocus?: Function,
   placeholder?: string,
   rows?: number,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
@@ -110,7 +110,7 @@ class TextAreaBase extends Component<Props, State> {
     const { textareaElement } = this;
     if (!textareaElement.current) return;
     textareaElement.current.focus();
-  }
+  };
 
   onChange = (event: SyntheticInputEvent<>) => {
     const { onChange, disabled } = this.props;
@@ -177,7 +177,7 @@ class TextAreaBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
-      skin: TextAreaSkin,
+      skin,
       theme,
       themeOverrides,
       onChange,
@@ -187,6 +187,8 @@ class TextAreaBase extends Component<Props, State> {
       autoResize,
       ...rest
     } = this.props;
+
+    const TextAreaSkin = skin || context.skins[IDENTIFIERS.TEXT_AREA];
 
     return (
       <TextAreaSkin

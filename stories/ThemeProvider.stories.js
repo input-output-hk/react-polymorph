@@ -53,7 +53,7 @@ import progressBarOverrides1 from './theme-overrides/progressBarOverrides.scss';
 import progressBarOverrides2 from './theme-overrides/customProgressBar.scss';
 
 // constants
-import { IDENTIFIERS } from '../source/themes/API';
+import { IDENTIFIERS } from '../source/components';
 
 const MNEMONICS = ['home', 'cat', 'dog', 'fish'];
 

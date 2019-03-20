@@ -2,6 +2,13 @@
 
 ## vNext
 
+## 0.8.1
+
+### Features
+
+- Provide simple skins by default via `ThemeProvider` but allow customization
+  [PR 96](https://github.com/input-output-hk/react-polymorph/pull/96)
+
 ## 0.8.0
 
 ### Chores

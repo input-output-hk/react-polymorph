@@ -14,7 +14,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { composeFunctions } from '../utils/props';
 
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -33,7 +33,7 @@ type Props = {
   placeholder?: string,
   renderSelections?: Function,
   renderOptions?: Function,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   sortAlphabetically: boolean,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
@@ -225,13 +225,15 @@ class AutocompleteBase extends Component<Props, State> {
       invalidCharsRegex,
       multipleSameSelections,
       sortAlphabetically,
-      skin: AutocompleteSkin,
+      skin,
       theme,
       themeOverrides,
       onChange,
       error,
       ...rest
     } = this.props;
+
+    const AutocompleteSkin = skin || context.skins[IDENTIFIERS.AUTOCOMPLETE];
 
     return (
       <GlobalListeners

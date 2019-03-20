@@ -10,11 +10,6 @@ import { Autocomplete } from '../source/components/Autocomplete';
 import { Select } from '../source/components/Select';
 import { Options } from '../source/components/Options';
 
-// skins
-import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
-import { SelectSkin } from '../source/skins/simple/SelectSkin';
-import { OptionsSkin } from '../source/skins/simple/OptionsSkin';
-
 // themes
 import CustomOptionsTheme from './theme-customizations/Options.custom.scss';
 
@@ -55,7 +50,6 @@ storiesOf('Options', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={OPTIONS_COLLECTION}
-        skin={SelectSkin}
       />
     ))
   )
@@ -70,7 +64,6 @@ storiesOf('Options', module)
         maxVisibleOptions={5}
         invalidCharsRegex={/[^a-zA-Z]/g}
         onChange={selectedOpts => store.set({ selectedOpts })}
-        skin={AutocompleteSkin}
       />
     ))
   )
@@ -82,6 +75,5 @@ storiesOf('Options', module)
       options={OPTIONS_COLLECTION}
       isOpeningUpward={false}
       noResults={false}
-      skin={OptionsSkin}
     />
   ));

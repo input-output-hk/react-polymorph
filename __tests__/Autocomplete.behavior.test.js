@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Autocomplete } from '../source/components/Autocomplete';
-import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
 import { mountInSimpleTheme } from './helpers/theming';
 
 const MNEMONIC_WORDS = [
@@ -37,10 +36,7 @@ const ABC_SORTED_MNEMONICS = [
 describe('Autocomplete onChange simulations', () => {
   test('Autocomplete is closed by default and when clicked is open and displays options', () => {
     const wrapper = mountInSimpleTheme(
-      <Autocomplete
-        options={MNEMONIC_WORDS}
-        skin={AutocompleteSkin}
-      />
+      <Autocomplete options={MNEMONIC_WORDS}/>
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
@@ -50,7 +46,9 @@ describe('Autocomplete onChange simulations', () => {
     // first, via state
     expect(component.state.isOpen).toBe(false);
     // then, via classnames
-    expect(options.instance().className).toBe('options firstOptionHighlighted root isFloating isHidden');
+    expect(options.instance().className).toBe(
+      'options firstOptionHighlighted root isFloating isHidden'
+    );
 
     // open Autocomplete
     input.simulate('click', {});
@@ -60,15 +58,14 @@ describe('Autocomplete onChange simulations', () => {
     expect(component.state.isOpen).toBe(true);
     expect(component.state.filteredOptions.length).toBe(12);
     // then, via classnames
-    expect(options.instance().className).toBe('options isOpen firstOptionHighlighted root isFloating');
+    expect(options.instance().className).toBe(
+      'options isOpen firstOptionHighlighted root isFloating'
+    );
   });
 
   test('Autocomplete puts options in abc order and highlights first option by default when open', () => {
     const wrapper = mountInSimpleTheme(
-      <Autocomplete
-        options={MNEMONIC_WORDS}
-        skin={AutocompleteSkin}
-      />
+      <Autocomplete options={MNEMONIC_WORDS}/>
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
@@ -102,10 +99,7 @@ describe('Autocomplete onChange simulations', () => {
     });
 
     const wrapper = mountInSimpleTheme(
-      <Autocomplete
-        options={MNEMONIC_WORDS}
-        skin={AutocompleteSkin}
-      />
+      <Autocomplete options={MNEMONIC_WORDS} />
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
@@ -127,10 +121,7 @@ describe('Autocomplete onChange simulations', () => {
 
   test('Autocomplete shows correct options after user input is simulated', () => {
     const wrapper = mountInSimpleTheme(
-      <Autocomplete
-        options={MNEMONIC_WORDS}
-        skin={AutocompleteSkin}
-      />
+      <Autocomplete options={MNEMONIC_WORDS} />
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
@@ -173,10 +164,7 @@ describe('Autocomplete onChange simulations', () => {
     });
 
     const wrapper = mountInSimpleTheme(
-      <Autocomplete
-        options={MNEMONIC_WORDS}
-        skin={AutocompleteSkin}
-      />
+      <Autocomplete options={MNEMONIC_WORDS} />
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
@@ -202,10 +190,7 @@ describe('Autocomplete onChange simulations', () => {
     });
 
     const wrapper = mountInSimpleTheme(
-      <Autocomplete
-        options={MNEMONIC_WORDS}
-        skin={AutocompleteSkin}
-      />
+      <Autocomplete options={MNEMONIC_WORDS} />
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
@@ -231,10 +216,7 @@ describe('Autocomplete onChange simulations', () => {
     });
 
     const wrapper = mountInSimpleTheme(
-      <Autocomplete
-        options={MNEMONIC_WORDS}
-        skin={AutocompleteSkin}
-      />
+      <Autocomplete options={MNEMONIC_WORDS} />
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
@@ -260,10 +242,7 @@ describe('Autocomplete onChange simulations', () => {
     });
 
     const wrapper = mountInSimpleTheme(
-      <Autocomplete
-        options={MNEMONIC_WORDS}
-        skin={AutocompleteSkin}
-      />
+      <Autocomplete options={MNEMONIC_WORDS} />
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
@@ -297,10 +276,7 @@ describe('Autocomplete onChange simulations', () => {
     });
 
     const wrapper = mountInSimpleTheme(
-      <Autocomplete
-        options={MNEMONIC_WORDS}
-        skin={AutocompleteSkin}
-      />
+      <Autocomplete options={MNEMONIC_WORDS} />
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');

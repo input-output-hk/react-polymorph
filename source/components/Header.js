@@ -8,7 +8,7 @@ import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // constants
-import { IDENTIFIERS } from '../themes/API';
+import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
@@ -27,7 +27,7 @@ type Props = {
   regular?: boolean,
   right?: boolean,
   left?: boolean,
-  skin: ComponentType<any>,
+  skin?: ComponentType<any>,
   theme: ?Object,
   themeId: string,
   themeOverrides: Object,
@@ -119,8 +119,9 @@ class HeaderBase extends Component <Props, State> {
   };
 
   render() {
-    const { children, className, skin: HeaderSkin, ...styleProps } = this.props;
+    const { children, className, skin, context, ...styleProps } = this.props;
 
+    const HeaderSkin = skin || context.skins[IDENTIFIERS.HEADER];
     const reducedTheme = this._assembleHeaderTheme(styleProps);
     const inlineStyles = this._assembleInlineStyles(styleProps);
 

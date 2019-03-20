@@ -1,6 +1,6 @@
 // @flow
 // import theme IDENTIFIERS constants
-import { IDENTIFIERS } from '../API';
+import { IDENTIFIERS } from '../../components';
 
 // css modules plugin converts all imports below into plain objects
 import SimpleAutocomplete from './SimpleAutocomplete.scss';
