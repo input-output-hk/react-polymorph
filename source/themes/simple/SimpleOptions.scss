@@ -9,6 +9,7 @@ $options-border-color: var(--rp-options-border-color, #c6cdd6) !default;
 $options-border-radius: var(--rp-options-border-radius, 2px) !default;
 $options-font-family: var(--rp-options-font-family, $theme-font-regular, sans-serif) !default;
 $options-font-size: var(--rp-options-font-size, 16px) !default;
+$options-max-height: var(--rp-options-max-height, var(--rp-options-max-height-default, 300px)) !default;
 $options-shadow: var(--rp-options-shadow, none) !default;
 
 // option
@@ -36,6 +37,9 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
 
 .options {
   & > div {
+    max-height: $options-max-height;
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: 0;
   }
 

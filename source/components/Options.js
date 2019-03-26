@@ -9,6 +9,7 @@ import type {
   // $FlowFixMe
   SyntheticEvent,
   Element,
+  ElementRef,
   Ref
 } from 'react';
 
@@ -40,7 +41,7 @@ type Props = {
   selectedOption?: any,
   selectedOptions?: Array<any>,
   skin?: ComponentType<any>,
-  targetRef?: Ref<*>,
+  targetRef?: ElementRef<*>,
   theme: ?Object, // if passed by user, it will take precedence over this.props.context.theme
   themeId: string,
   themeOverrides: Object,
@@ -90,6 +91,7 @@ class OptionsBase extends Component<Props, State> {
     if (this.props.isOpen) {
       document.addEventListener('keydown', this._handleKeyDown, false);
     }
+    this.calculateOptionsHeight();
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -103,6 +105,20 @@ class OptionsBase extends Component<Props, State> {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this._handleKeyDown, false);
+  }
+
+  calculateOptionsHeight = () => {
+    if (!document.documentElement || !document.documentElement.style) {
+      return;
+    }
+    const { targetRef } = this.props;
+    let optionsMaxHeight = window.innerHeight;
+
+    if (targetRef && targetRef.current) {
+      const { offsetTop, offsetHeight } = targetRef.current;
+      optionsMaxHeight = window.innerHeight - offsetTop + offsetHeight;
+    }
+    document.documentElement.style.setProperty('--rp-options-max-height-default', `${optionsMaxHeight}px`);
   }
 
   close = () => {
