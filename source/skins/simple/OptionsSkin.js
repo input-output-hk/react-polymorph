@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Element, Ref } from 'react';
+import type { Element, ElementRef } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -24,11 +24,11 @@ type Props = {
   noResultsMessage: string | Element<any>,
   optionRenderer: Function,
   options: Array<any>,
-  optionsRef: Ref<*>,
+  optionsRef: ElementRef<*>,
   render: Function,
   selectedOption: any,
   setHighlightedOptionIndex: Function,
-  targetRef: Ref<*>,
+  targetRef: ElementRef<*>,
   theme: Object,
   themeId: string,
 };

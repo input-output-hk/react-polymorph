@@ -10,7 +10,6 @@ import type {
   SyntheticEvent,
   Element,
   ElementRef,
-  Ref
 } from 'react';
 
 // internal utility functions
@@ -34,7 +33,7 @@ type Props = {
   onClose?: Function,
   options: Array<any>,
   optionRenderer?: Function,
-  optionsRef?: Ref<any>,
+  optionsRef?: ElementRef<any>,
   render?: Function,
   resetOnClose: boolean,
   // TODO: Why do we have two separate props for selection?

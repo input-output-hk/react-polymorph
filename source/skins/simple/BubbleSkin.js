@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Node, Ref } from 'react';
+import type { Node, ElementRef } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -16,7 +16,7 @@ type Props = {
   isOpeningUpward: boolean,
   isTransparent: boolean,
   position: Object,
-  rootRef: Ref<*>,
+  rootRef: ElementRef<*>,
   theme: Object,
   themeId: string
 };

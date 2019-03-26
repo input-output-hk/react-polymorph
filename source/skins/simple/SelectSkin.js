@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Element, Ref } from 'react';
+import type { Element, ElementRef } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -20,7 +20,7 @@ type Props = {
   getSelectedOption: Function,
   handleChange: Function,
   handleInputClick: Function,
-  inputRef: Ref<'input'>,
+  inputRef: ElementRef<'input'>,
   isOpen: boolean,
   isOpeningUpward: boolean,
   label: string | Element<any>,
@@ -32,9 +32,9 @@ type Props = {
     value: any
   }>,
   optionRenderer: Function,
-  optionsRef: Ref<any>,
+  optionsRef: ElementRef<any>,
   placeholder: string,
-  rootRef: Ref<*>,
+  rootRef: ElementRef<*>,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
   toggleOpen: Function,
