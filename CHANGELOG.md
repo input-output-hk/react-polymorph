@@ -4,6 +4,9 @@
 
 ### Fixes
 
+- Sets max height of Options drop down based on window height and offset of Options' target ref.
+  Changes flow type Ref to ElementRef in components and skins. [PR 102](https://github.com/input-output-hk/react-polymorph/pull/102)
+
 - Updates vulnerable packages found by Github's automatic security audit.
   Fixes Checkbox component's render method to use the `themeId` prop for 
   accessing a skin in `context` when one isn't provided via props instead 
