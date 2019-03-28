@@ -130,7 +130,7 @@ export class GlobalListeners extends Component<Props, State> {
     const { rootRef, optionsIsOpeningUpward } = this.props;
 
     if (!documentElement || !documentElement.style || !rootRef || !rootRef.current) {
-      return; // --rp-options-max-height-default defaults to 300px
+      return;
     }
 
     const { height, top } = rootRef.current.getBoundingClientRect();
@@ -141,7 +141,7 @@ export class GlobalListeners extends Component<Props, State> {
     }
 
     // opening downwards case
-    const optionsMaxHeight = window.innerHeight - top - height - 25;
+    const optionsMaxHeight = window.innerHeight - top - height - 30;
     if (!optionsIsOpeningUpward && optionsMaxHeight > 0) {
       this.setState({ optionsMaxHeight });
     }
