@@ -32,6 +32,7 @@ type Props = {
   onKeyDown: Function,
   options: Array<any>,
   optionsRef: ElementRef<any>,
+  optionsMaxHeight: number,
   placeholder: string,
   removeOption: Function,
   renderSelections: Function,
@@ -138,6 +139,7 @@ export const AutocompleteSkin = (props: Props) => {
         onChange={props.handleChange}
         options={filteredAndLimitedOptions}
         optionsRef={props.optionsRef}
+        optionsMaxHeight={props.optionsMaxHeight}
         render={props.renderOptions}
         resetOnClose
         selectedOptions={props.selectedOptions}

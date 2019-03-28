@@ -34,6 +34,7 @@ type Props = {
   options: Array<any>,
   optionRenderer?: Function,
   optionsRef?: ElementRef<any>,
+  optionsMaxHeight?: number,
   render?: Function,
   resetOnClose: boolean,
   // TODO: Why do we have two separate props for selection?
@@ -90,7 +91,6 @@ class OptionsBase extends Component<Props, State> {
     if (this.props.isOpen) {
       document.addEventListener('keydown', this._handleKeyDown, false);
     }
-    this.calculateOptionsHeight();
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -104,20 +104,6 @@ class OptionsBase extends Component<Props, State> {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this._handleKeyDown, false);
-  }
-
-  calculateOptionsHeight = () => {
-    if (!document.documentElement || !document.documentElement.style) {
-      return;
-    }
-    const { targetRef } = this.props;
-    let optionsMaxHeight = window.innerHeight;
-
-    if (targetRef && targetRef.current) {
-      const { offsetTop, offsetHeight } = targetRef.current;
-      optionsMaxHeight = window.innerHeight - offsetTop + offsetHeight;
-    }
-    document.documentElement.style.setProperty('--rp-options-max-height-default', `${optionsMaxHeight}px`);
   }
 
   close = () => {

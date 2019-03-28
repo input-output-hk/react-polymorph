@@ -25,6 +25,7 @@ type Props = {
   optionRenderer: Function,
   options: Array<any>,
   optionsRef: ElementRef<*>,
+  optionsMaxHeight: number,
   render: Function,
   selectedOption: any,
   setHighlightedOptionIndex: Function,
@@ -52,6 +53,7 @@ export const OptionsSkin = (props: Props) => {
     targetRef,
     theme,
     themeId,
+    optionsMaxHeight,
   } = props;
 
   const highlightedOptionIndex = getHighlightedOptionIndex();
@@ -123,7 +125,7 @@ export const OptionsSkin = (props: Props) => {
       isFloating
       targetRef={targetRef}
     >
-      <ul ref={optionsRef} className={theme[themeId].ul}>{renderOptions()}</ul>
+      <ul style={{ maxHeight: `${optionsMaxHeight}px` }} ref={optionsRef} className={theme[themeId].ul}>{renderOptions()}</ul>
     </Bubble>
   );
 };

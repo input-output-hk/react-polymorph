@@ -33,6 +33,7 @@ type Props = {
   }>,
   optionRenderer: Function,
   optionsRef: ElementRef<any>,
+  optionsMaxHeight: number,
   placeholder: string,
   rootRef: ElementRef<*>,
   theme: Object, // will take precedence over theme in context if passed
@@ -73,6 +74,7 @@ export const SelectSkin = (props: Props) => {
         theme={theme}
         isOpen={props.isOpen}
         optionsRef={props.optionsRef}
+        optionsMaxHeight={props.optionsMaxHeight}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}
         onChange={props.handleChange}
