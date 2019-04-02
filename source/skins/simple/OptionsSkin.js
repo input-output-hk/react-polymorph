@@ -108,6 +108,11 @@ export const OptionsSkin = (props: Props) => {
     return option;
   };
 
+  // Enforce max height of options dropdown if necessary
+  const optionsStyle = optionsMaxHeight == null ? null : {
+    maxHeight: `${optionsMaxHeight}px`
+  };
+
   return (
     <Bubble
       className={classnames([
@@ -125,7 +130,13 @@ export const OptionsSkin = (props: Props) => {
       isFloating
       targetRef={targetRef}
     >
-      <ul style={{ maxHeight: `${optionsMaxHeight}px` }} ref={optionsRef} className={theme[themeId].ul}>{renderOptions()}</ul>
+      <ul
+        style={optionsStyle}
+        ref={optionsRef}
+        className={theme[themeId].ul}
+      >
+        {renderOptions()}
+      </ul>
     </Bubble>
   );
 };
