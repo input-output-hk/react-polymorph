@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Element, Ref } from 'react';
+import type { Element, ElementRef } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -24,11 +24,12 @@ type Props = {
   noResultsMessage: string | Element<any>,
   optionRenderer: Function,
   options: Array<any>,
-  optionsRef: Ref<*>,
+  optionsRef: ElementRef<*>,
+  optionsMaxHeight: number,
   render: Function,
   selectedOption: any,
   setHighlightedOptionIndex: Function,
-  targetRef: Ref<*>,
+  targetRef: ElementRef<*>,
   theme: Object,
   themeId: string,
 };
@@ -52,6 +53,7 @@ export const OptionsSkin = (props: Props) => {
     targetRef,
     theme,
     themeId,
+    optionsMaxHeight,
   } = props;
 
   const highlightedOptionIndex = getHighlightedOptionIndex();
@@ -106,6 +108,11 @@ export const OptionsSkin = (props: Props) => {
     return option;
   };
 
+  // Enforce max height of options dropdown if necessary
+  const optionsStyle = optionsMaxHeight == null ? null : {
+    maxHeight: `${optionsMaxHeight}px`
+  };
+
   return (
     <Bubble
       className={classnames([
@@ -123,7 +130,13 @@ export const OptionsSkin = (props: Props) => {
       isFloating
       targetRef={targetRef}
     >
-      <ul ref={optionsRef} className={theme[themeId].ul}>{renderOptions()}</ul>
+      <ul
+        style={optionsStyle}
+        ref={optionsRef}
+        className={theme[themeId].ul}
+      >
+        {renderOptions()}
+      </ul>
     </Bubble>
   );
 };

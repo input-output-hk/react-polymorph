@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 // $FlowFixMe
-import type { SyntheticMouseEvent } from 'react';
+import type { SyntheticMouseEvent, ElementRef } from 'react';
+import { debounce } from 'lodash';
 
 import {
   addDocumentListeners,
@@ -14,17 +15,38 @@ import {
 type Props = {
   children: Function,
   optionsIsOpen: boolean,
-  optionsRef: ?Object,
-  rootRef: ?Object,
+  optionsIsOpeningUpward: boolean,
+  optionsRef?: ElementRef<*>,
+  rootRef?: ElementRef<*>,
   toggleOpen: Function
 };
 
-export class GlobalListeners extends Component<Props> {
+type State = {
+  optionsMaxHeight: number
+};
+
+export class GlobalListeners extends Component<Props, State> {
   // define static properties
   static displayName = 'GlobalListeners';
   static defaultProps = {
     optionsIsOpen: false
   };
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      optionsMaxHeight: 300
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.optionsIsOpen) { return; }
+    // adds scroll and resize event listeners for calculating Options max-height
+    this._addCalculateMaxHeightListeners();
+    // runs initial Options max-height calculation
+    this._calculateOptionsMaxHeight();
+  }
 
   componentWillReceiveProps(nextProps: Props) {
     const { optionsIsOpen } = this.props;
@@ -32,10 +54,17 @@ export class GlobalListeners extends Component<Props> {
     // if Options is transferring from closed to open, add listeners
     // if Options is transferring from open to closed, remove listeners
     if (!optionsIsOpen && nextProps.optionsIsOpen) {
+      // first remove max-height calc handler on scroll and resize
+      // then add toggle handler on scroll and resize
+      this._removeGlobalListeners();
       addWindowListeners(this._getWindowListeners());
       addDocumentListeners(this._getDocumentListeners());
+
     } else if (optionsIsOpen && !nextProps.optionsIsOpen) {
+      // remove toggle handler on scroll and resize
+      // then add calc max-height calc handler on scroll and resize
       this._removeGlobalListeners();
+      this._addCalculateMaxHeightListeners();
     }
   }
 
@@ -61,15 +90,15 @@ export class GlobalListeners extends Component<Props> {
   }
 
   _getDocumentListeners = () => ({
-    click: this.handleDocumentClick,
-    scroll: this.handleDocumentScroll
+    click: this._handleDocumentClick,
+    scroll: this._handleDocumentScroll
   });
 
   _getWindowListeners = () => ({
-    resize: this.handleWindowResize
+    resize: this._handleWindowResize
   });
 
-  handleDocumentClick = (event: SyntheticMouseEvent<>) => {
+  _handleDocumentClick = (event: SyntheticMouseEvent<>) => {
     const { optionsIsOpen, rootRef } = this.props;
 
     // ensure Options is open
@@ -83,11 +112,43 @@ export class GlobalListeners extends Component<Props> {
     this._removeListenersAndToggle();
   };
 
-  handleWindowResize = () => this._removeListenersAndToggle();
+  _handleWindowResize = () => this._removeListenersAndToggle();
 
-  handleDocumentScroll = () => this._removeListenersAndToggle();
+  _handleDocumentScroll = () => this._removeListenersAndToggle();
+
+  _addCalculateMaxHeightListeners = () => {
+    const scrollListener = ['scroll', debounce(this._calculateOptionsMaxHeight, 300)];
+    const resizeListener = ['resize', debounce(this._calculateOptionsMaxHeight, 300)];
+    document.addEventListener(...scrollListener);
+    window.addEventListener(...resizeListener);
+  }
+
+  // calculates max-height for Options, max-height shouldn't be greater than distance
+  // from Options rootRef to edge of window (up or down) else Options run off page
+  _calculateOptionsMaxHeight = () => {
+    const { documentElement } = document;
+    const { rootRef, optionsIsOpeningUpward } = this.props;
+
+    if (!documentElement || !documentElement.style || !rootRef || !rootRef.current) {
+      return;
+    }
+
+    const { height, top } = rootRef.current.getBoundingClientRect();
+    // opening upwards case
+    if (optionsIsOpeningUpward && top < window.innerHeight) {
+      this.setState({ optionsMaxHeight: top });
+      return;
+    }
+
+    // opening downwards case
+    const optionsMaxHeight = window.innerHeight - top - height - 30;
+    if (!optionsIsOpeningUpward && optionsMaxHeight > 0) {
+      this.setState({ optionsMaxHeight });
+    }
+  }
 
   render() {
-    return <div>{this.props.children()}</div>;
+    const { optionsMaxHeight } = this.state;
+    return <div>{this.props.children({ optionsMaxHeight })}</div>;
   }
 }

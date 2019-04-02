@@ -55,7 +55,7 @@ import progressBarOverrides2 from './theme-overrides/customProgressBar.scss';
 // constants
 import { IDENTIFIERS } from '../source/components';
 
-const MNEMONICS = ['home', 'cat', 'dog', 'fish'];
+const MNEMONICS = ['home', 'cat', 'dog', 'fish', 'home', 'cat', 'dog', 'fish', 'home', 'cat', 'dog', 'fish'];
 
 const {
   AUTOCOMPLETE,
@@ -177,22 +177,35 @@ storiesOf('ThemeProvider', module)
         </div>
 
         <div style={{ margin: '50px' }}>
-          <Options
+          {/* <Options
             isOpen
             options={MNEMONICS}
             isOpeningUpward={false}
             noResults={false}
             skin={OptionsSkin}
+          /> */}
+        </div>
+
+        <div style={{ margin: '400px 100px 250px 100px', height: '225px' }}>
+          <Autocomplete
+            label="Autocomplete opening upward"
+            options={MNEMONICS}
+            placeholder="Enter mnemonic..."
+            maxSelections={12}
+            maxVisibleOptions={20}
+            invalidCharsRegex={/[^a-zA-Z]/g}
+            skin={AutocompleteSkin}
+            isOpeningUpward
           />
         </div>
 
         <div style={{ margin: '400px 100px 250px 100px', height: '225px' }}>
           <Autocomplete
-            label="Autocomplete with custom theme"
+            label="Autocomplete opening downward"
             options={MNEMONICS}
             placeholder="Enter mnemonic..."
             maxSelections={12}
-            maxVisibleOptions={5}
+            maxVisibleOptions={20}
             invalidCharsRegex={/[^a-zA-Z]/g}
             skin={AutocompleteSkin}
           />

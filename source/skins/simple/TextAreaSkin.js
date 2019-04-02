@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Ref, Element } from 'react';
+import type { ElementRef, Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -24,7 +24,7 @@ type Props = {
   onFocus?: Function,
   placeholder?: string,
   rows: number,
-  textareaRef?: Ref<any>,
+  textareaRef?: ElementRef<'textarea'>,
   theme: Object,
   themeId: string,
   value: string

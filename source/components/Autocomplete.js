@@ -238,11 +238,12 @@ class AutocompleteBase extends Component<Props, State> {
     return (
       <GlobalListeners
         optionsIsOpen={this.state.isOpen}
+        optionsIsOpeningUpward={this.props.isOpeningUpward}
         optionsRef={this.optionsElement}
         rootRef={this.rootElement}
         toggleOpen={this.toggleOpen}
       >
-        {() => (
+        {({ optionsMaxHeight }) => (
           <AutocompleteSkin
             error={error || this.state.error}
             filteredOptions={this.state.filteredOptions}
@@ -254,6 +255,7 @@ class AutocompleteBase extends Component<Props, State> {
             inputValue={this.state.inputValue}
             isOpen={this.state.isOpen}
             onKeyDown={this.onKeyDown}
+            optionsMaxHeight={optionsMaxHeight}
             optionsRef={this.optionsElement}
             removeOption={this.removeOption}
             rootRef={this.rootElement}

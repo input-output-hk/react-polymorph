@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { Ref, ComponentType, Element } from 'react';
+import type { ElementRef, ComponentType, Element } from 'react';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
@@ -15,7 +15,7 @@ type Props = {
   context: ThemeContextProp,
   disabled?: boolean,
   error?: string | Element<any>,
-  inputRef?: Ref<*>,
+  inputRef?: ElementRef<*>,
   label?: string | Element<any>,
   render: Function,
   skin?: ComponentType<any>,

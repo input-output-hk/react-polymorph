@@ -143,15 +143,17 @@ class SelectBase extends Component<Props, State> {
       <GlobalListeners
         toggleOpen={this.toggleOpen}
         optionsIsOpen={this.state.isOpen}
+        optionsIsOpeningUpward={this.props.isOpeningUpward}
         optionsRef={this.optionsElement}
         rootRef={this.rootElement}
       >
-        {() => (
+        {({ optionsMaxHeight }) => (
           <SelectSkin
             isOpen={this.state.isOpen}
             rootRef={this.rootElement}
             inputRef={this.inputElement}
             optionsRef={this.optionsElement}
+            optionsMaxHeight={optionsMaxHeight}
             theme={this.state.composedTheme}
             getSelectedOption={this.getSelectedOption}
             handleInputClick={this.handleInputClick}
