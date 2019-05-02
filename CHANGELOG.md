@@ -2,6 +2,11 @@
 
 ## vNext
 
+### Chores
+
+- Adds CSS variable in SimpleButton's theme allowing configuration of button text color when disabled.
+  [PR 103](https://github.com/input-output-hk/react-polymorph/pull/103)
+
 ### Fixes
 
 - Sets max height of Options drop down based on window height and offset of Options' target ref.
