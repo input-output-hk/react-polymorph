@@ -52,8 +52,8 @@
   "peerDependencies": {
     "classnames": ">=2",
     "lodash": ">=4.17.11",
-    "react": ">=15.0.0 || <=16.4.1",
-    "react-dom": ">=15.0.0 || <=16.4.1"
+    "react": ">=15.0.0 || <=16.8.6",
+    "react-dom": ">=15.0.0 || <=16.8.6"
   },
   "devDependencies": {
     "@dump247/storybook-state": "1.5.0",
@@ -99,8 +99,8 @@
     "node-sass": "4.11.0",
     "nodemon": "1.12.1",
     "prettier-eslint": "8.8.1",
-    "react": "16.4.1",
-    "react-dom": "16.4.1",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "react-test-renderer": "16.4.1",
     "rimraf": "2.6.2",
     "sass-loader": "6.0.6",
