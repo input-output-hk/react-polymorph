@@ -101,7 +101,7 @@
     "prettier-eslint": "8.8.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-test-renderer": "16.4.1",
+    "react-test-renderer": "16.8.6",
     "rimraf": "2.6.2",
     "sass-loader": "6.0.6",
     "style-loader": "0.19.0",
