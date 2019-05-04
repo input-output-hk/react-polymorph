@@ -4,6 +4,9 @@
 
 ### Fixes
 
+- Upgrades react, react-dom, and react-test-renderer to version 16.8.6 and addresses Github warning on repo.
+  [PR 103](https://github.com/input-output-hk/react-polymorph/pull/103)
+
 - Sets max height of Options drop down based on window height and offset of Options' target ref.
   Changes flow type Ref to ElementRef in components and skins. [PR 102](https://github.com/input-output-hk/react-polymorph/pull/102)
 
