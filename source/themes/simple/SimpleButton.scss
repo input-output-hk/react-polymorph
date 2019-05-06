@@ -17,6 +17,7 @@ $button-height: var(--rp-button-height, auto) !default;
 $button-line-height: var(--rp-button-line-height, normal) !default;
 $button-padding: var(--rp-button-padding, 15px 20px) !default;
 $button-text-color: var(--rp-button-text-color, #fff) !default;
+$button-text-color-disabled: var(--rp-button-text-color-disabled, #fff);
 $button-text-transform: var(--rp-button-text-transform, none) !default;
 $button-width: var(--rp-button-width, 100%) !default;
 
@@ -54,6 +55,7 @@ $button-width: var(--rp-button-width, 100%) !default;
 
 .disabled {
   background-color: $button-bg-color-disabled;
+  color: $button-text-color-disabled;
   cursor: $button-cursor-disabled;
 }
 

@@ -2,6 +2,11 @@
 
 ## vNext
 
+### Chores
+
+- Adds CSS variable in SimpleButton's theme allowing configuration of button text color when disabled.
+  [PR 103](https://github.com/input-output-hk/react-polymorph/pull/103)
+
 ### Fixes
 
 - Upgrades react, react-dom, and react-test-renderer to version 16.8.6 and addresses Github warning on repo.

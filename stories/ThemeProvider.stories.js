@@ -13,7 +13,6 @@ import { Modal } from '../source/components/Modal';
 import { TextArea } from '../source/components/TextArea';
 import { Autocomplete } from '../source/components/Autocomplete';
 import { Radio } from '../source/components/Radio';
-import { Options } from '../source/components/Options';
 import { Button } from '../source/components/Button';
 import { ProgressBar } from '../source/components/ProgressBar';
 import { Flex } from '../source/components/layout/Flex';
@@ -28,7 +27,6 @@ import { TextAreaSkin } from '../source/skins/simple/TextAreaSkin';
 import { TogglerSkin } from '../source/skins/simple/TogglerSkin';
 import { AutocompleteSkin } from '../source/skins/simple/AutocompleteSkin';
 import { RadioSkin } from '../source/skins/simple/RadioSkin';
-import { OptionsSkin } from '../source/skins/simple/OptionsSkin';
 import { ButtonSkin } from '../source/skins/simple/ButtonSkin';
 import { CheckboxSkin } from '../source/skins/simple/CheckboxSkin';
 import { ProgressBarSkin } from '../source/skins/simple/ProgressBarSkin';
@@ -176,17 +174,7 @@ storiesOf('ThemeProvider', module)
           />
         </div>
 
-        <div style={{ margin: '50px' }}>
-          {/* <Options
-            isOpen
-            options={MNEMONICS}
-            isOpeningUpward={false}
-            noResults={false}
-            skin={OptionsSkin}
-          /> */}
-        </div>
-
-        <div style={{ margin: '400px 100px 250px 100px', height: '225px' }}>
+        <div style={{ margin: '100px', height: '225px' }}>
           <Autocomplete
             label="Autocomplete opening upward"
             options={MNEMONICS}
@@ -199,7 +187,7 @@ storiesOf('ThemeProvider', module)
           />
         </div>
 
-        <div style={{ margin: '400px 100px 250px 100px', height: '225px' }}>
+        <div style={{ margin: '0 100px 400px 100px', height: '225px' }}>
           <Autocomplete
             label="Autocomplete opening downward"
             options={MNEMONICS}
