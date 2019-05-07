@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 // $FlowFixMe
-import type { ComponentType, SyntheticInputEvent, Element } from 'react';
+import type { ComponentType, SyntheticInputEvent, Element, ElementRef } from 'react';
 
 // external libraries
 import createRef from 'create-react-ref/lib/createRef';
@@ -51,7 +51,7 @@ type State = {
 
 class NumericInputBase extends Component<Props, State> {
   // declare ref types
-  inputElement: Element<'input'>;
+  inputElement: ElementRef<Element<'input'>>;
 
   // define static properties
   static displayName = 'NumericInput';
@@ -110,32 +110,14 @@ class NumericInputBase extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     const { inputElement } = this;
-    if (inputElement && inputElement.current !== document.activeElement) { return; }
-
-    // caret position calculation after separators injection
-    let caretPosition;
-    // prevent unnecessary changes on re-rendering
-    if (
-      this.state.oldValue !== prevState.oldValue ||
-      this.state.caretPosition !== prevState.caretPosition
-    ) {
-      if (
-        this.state.separatorsCount !== prevState.separatorsCount &&
-        this.state.separatorsCount - prevState.separatorsCount <= 1 &&
-        this.state.separatorsCount - prevState.separatorsCount >= -1
-      ) {
-        caretPosition =
-          this.state.caretPosition +
-          (this.state.separatorsCount - prevState.separatorsCount);
-      } else {
-        caretPosition = this.state.caretPosition;
-      }
-      caretPosition = caretPosition >= 0 ? caretPosition : 0;
-
-      if (inputElement && inputElement.current) {
-        inputElement.current.selectionEnd = caretPosition;
-        inputElement.current.selectionStart = caretPosition;
-      }
+    const isInputElementActive = inputElement && inputElement.current === document.activeElement;
+    if (!isInputElementActive) { return; }
+    const input = inputElement.current;
+    const { caretPosition } = this.state;
+    // Update the input selection to match
+    if (input.selectionStart !== caretPosition) {
+      input.selectionStart = caretPosition;
+      input.selectionEnd = caretPosition;
     }
   }
 
@@ -144,11 +126,12 @@ class NumericInputBase extends Component<Props, State> {
     const { onChange, disabled } = this.props;
     if (disabled) { return; }
 
-    // it is crucial to remove whitespace from input value
-    // with String.trim()
+    const { value, selectionStart } = event.target;
+
+    // it is crucial to remove whitespace from input value with String.trim()
     const processedValue = this._processValue(
-      event.target.value.trim(),
-      event.target.selectionStart
+      value.trim(),
+      selectionStart,
     );
 
     // if the processed value is the same, then the user probably entered
