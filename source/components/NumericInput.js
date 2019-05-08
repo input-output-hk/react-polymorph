@@ -51,7 +51,7 @@ type State = {
 
 class NumericInputBase extends Component<Props, State> {
   // declare ref types
-  inputElement: ElementRef<Element<'input'>>;
+  inputElement: { current: null | ElementRef<'input'> }
 
   // define static properties
   static displayName = 'NumericInput';
@@ -115,7 +115,7 @@ class NumericInputBase extends Component<Props, State> {
     const input = inputElement.current;
     const { caretPosition } = this.state;
     // Update the input selection to match
-    if (input.selectionStart !== caretPosition) {
+    if (input && input.selectionStart !== caretPosition) {
       input.selectionStart = caretPosition;
       input.selectionEnd = caretPosition;
     }
