@@ -113,9 +113,20 @@ class NumericInputBase extends Component<Props, State> {
     const isInputElementActive = inputElement && inputElement.current === document.activeElement;
     if (!isInputElementActive) { return; }
     const input = inputElement.current;
-    const { caretPosition } = this.state;
+    let { caretPosition } = this.state;
     // Update the input selection to match
     if (input && input.selectionStart !== caretPosition) {
+      // Take comma separators into account for caret position
+      if (
+        this.state.separatorsCount !== prevState.separatorsCount &&
+        this.state.separatorsCount - prevState.separatorsCount <= 1 &&
+        this.state.separatorsCount - prevState.separatorsCount >= -1
+      ) {
+        caretPosition =
+          this.state.caretPosition +
+          (this.state.separatorsCount - prevState.separatorsCount);
+      }
+      // Update the input selection with the new caretPosition
       input.selectionStart = caretPosition;
       input.selectionEnd = caretPosition;
     }
