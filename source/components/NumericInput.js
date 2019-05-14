@@ -14,6 +14,7 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 // import constants
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
+import { removeCharAtPosition } from '../utils/strings';
 
 type Props = {
   autoFocus?: boolean,
@@ -51,7 +52,7 @@ type State = {
 
 class NumericInputBase extends Component<Props, State> {
   // declare ref types
-  inputElement: { current: null | ElementRef<'input'> }
+  inputElement: { current: null | ElementRef<'input'> };
 
   // define static properties
   static displayName = 'NumericInput';
@@ -212,10 +213,21 @@ class NumericInputBase extends Component<Props, State> {
 
   _enforceNumericValue(value: string, position: number) {
     const regex = /^[0-9.,]+$/;
+    const lastInsertedCharacter = value.substring(position - 1, position);
+
+    // Do not allow manual input of commas
+    if (lastInsertedCharacter === ',') {
+      return {
+        value: removeCharAtPosition(value, position - 1),
+        position: position - 1,
+      };
+    }
+
     const isValueRegular = regex.test(value);
     const { maxBeforeDot } = this.props;
     let handledValue;
     const lastValidValue = this.state.oldValue;
+
     if (!isValueRegular && value !== '') {
       // input contains invalid value
       // e.g. 1,00AAbasdasd.asdasd123123
@@ -275,12 +287,6 @@ class NumericInputBase extends Component<Props, State> {
         // - reject it and show last valid value
         handledValue = lastValidValue;
       }
-    }
-
-    const lastInsertedCharacter = value.substring(position - 1, position);
-    if (lastInsertedCharacter === ',') {
-      // prevent move caret position on hit ','
-      position -= 1;
     }
 
     return !this._isNumeric(value)
