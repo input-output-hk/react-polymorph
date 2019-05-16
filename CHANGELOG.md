@@ -9,6 +9,9 @@
 
 ### Fixes
 
+- Fixes minor bug with caret positioning in `NumericInput` component that happened when entering two decimal points
+  [PR 105](https://github.com/input-output-hk/react-polymorph/pull/105)
+
 - Upgrades react, react-dom, and react-test-renderer to version 16.8.6 and addresses Github warning on repo.
   [PR 103](https://github.com/input-output-hk/react-polymorph/pull/103)
 
