@@ -8,6 +8,13 @@ vNext
 
 Upcoming changes for the next release.
 
+0.8.3
+=====
+
+### Fixes
+
+- Fixed breaking change regression in 0.8.2 where `IDENTIFIERS` was moved from theme to components
+
 0.8.2
 =====
 
