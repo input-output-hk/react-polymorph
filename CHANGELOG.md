@@ -1,15 +1,55 @@
-# Changelog
+Changelog
+=========
 
-## vNext
+The history of all changes to react-polymorph.
 
-## 0.8.1
+vNext
+=====
+
+Upcoming changes for the next release.
+
+0.8.3
+=====
+
+### Fixes
+
+- Fixed breaking change regression in 0.8.2 where `IDENTIFIERS` was moved from theme to components
+
+0.8.2
+=====
+
+### Chores
+
+- Adds CSS variable in SimpleButton's theme allowing configuration of button text color when disabled.
+  [PR 103](https://github.com/input-output-hk/react-polymorph/pull/103)
+
+### Fixes
+
+- Fixes minor bug with caret positioning in `NumericInput` component that happened when entering two decimal points
+  [PR 105](https://github.com/input-output-hk/react-polymorph/pull/105)
+
+- Upgrades react, react-dom, and react-test-renderer to version 16.8.6 and addresses Github warning on repo.
+  [PR 103](https://github.com/input-output-hk/react-polymorph/pull/103)
+
+- Sets max height of Options drop down based on window height and offset of Options' target ref.
+  Changes flow type Ref to ElementRef in components and skins. [PR 102](https://github.com/input-output-hk/react-polymorph/pull/102)
+
+- Updates vulnerable packages found by Github's automatic security audit.
+  Fixes Checkbox component's render method to use the `themeId` prop for 
+  accessing a skin in `context` when one isn't provided via props instead 
+  of hardcoding the fallback to use `CheckboxSkin` 
+  [PR 101](https://github.com/input-output-hk/react-polymorph/pull/101)
+
+0.8.1
+=====
 
 ### Features
 
 - Provide simple skins by default via `ThemeProvider` but allow customization
   [PR 96](https://github.com/input-output-hk/react-polymorph/pull/96)
 
-## 0.8.0
+0.8.0
+=====
 
 ### Chores
 
@@ -56,13 +96,15 @@
   page data is loading. Adds new button story to exemplify this skin and functionality.
   [PR 76](https://github.com/input-output-hk/react-polymorph/pull/76)
 
-## 0.7.2
+0.7.2
+=====
 
 ### Fixes
 
 - Fixed two minor issues in the NumericInput component where the carrot didn't move right to the decimal spaces when the entered value contained 4 digits and a comma, and also fixed an issue where integers were displayed in the wrong order after a value is selected and deleted. [PR 94](https://github.com/input-output-hk/react-polymorph/pull/94)
 
-## 0.7.1
+0.7.1
+=====
 
 ### Fixes
 
@@ -111,7 +153,8 @@
 - Bubble takes an optional `targetRef` for positioning now
   [PR 68](https://github.com/input-output-hk/react-polymorph/pull/68)
 
-## 0.7.0
+0.7.0
+=====
 
 ### Fixes
 
@@ -135,7 +178,8 @@ story for ThemeProvider. [PR 60](https://github.com/input-output-hk/react-polymo
 
 - Add checkmark for selected option [PR 54](https://github.com/input-output-hk/react-polymorph/pull/54)
 
-## 0.6.5
+0.6.5
+=====
 
 Major breaking changes due to large refactoring of component architecture:
 [PR 47](https://github.com/input-output-hk/react-polymorph/pull/47)
@@ -201,19 +245,22 @@ Major breaking changes due to large refactoring of component architecture:
   full theme object for ThemeProvider, or simply one component's theme. Also makes it easier to import
   multiple skins and components on one line.
 
-## 0.6.4
+0.6.4
+=====
 
 ### Fixes
 
 - Add `border-radius` CSS property to Autocomplete component [PR 45](https://github.com/input-output-hk/react-polymorph/pull/45)
 
-## 0.6.3
+0.6.3
+=====
 
 ### Fixes
 
 - Fix Options component window resize event handling, Add `border-radius` CSS property to Textarea component [PR 44](https://github.com/input-output-hk/react-polymorph/pull/44)
 
-## 0.6.2
+0.6.2
+=====
 
 ### Fixes
 
@@ -221,7 +268,8 @@ Major breaking changes due to large refactoring of component architecture:
 - Fixes broken options positioning logic that was accidentally removed when bubble was introduced
   [PR 42](https://github.com/input-output-hk/react-polymorph/pull/42)
 
-## 0.6.1
+0.6.1
+=====
 
 ### Features
 
@@ -231,7 +279,8 @@ Major breaking changes due to large refactoring of component architecture:
 
 - Fix broken theming setup for `InputSkin`, `BubbleSkin` and `SelectSkin` [PR 36](https://github.com/input-output-hk/react-polymorph/pull/36)
 
-## 0.6.0
+0.6.0
+=====
 
 ### Features
 
@@ -243,84 +292,98 @@ Major breaking changes due to large refactoring of component architecture:
 
 - Fix bug causing crash when hitting backspace in an Autocomplete component [PR 31](https://github.com/input-output-hk/react-polymorph/pull/31)
 
-## 0.5.5
+0.5.5
+=====
 
 ### Fixes
 
 - Allow string or element props for `FormField` errors [PR 25](https://github.com/input-output-hk/react-polymorph/pull/25)
 
-## 0.5.4
+0.5.4
+=====
 
 ### Fixes
 
 - Fix `isOpeningUpwards` feature on Select and Autocomplete Options component ([PR 24](https://github.com/input-output-hk/react-polymorph/pull/24))
 
-## 0.5.3
+0.5.3
+=====
 
 ### Chores
 
 - Add noResultsMessage property to Options component, Code cleanup and standardization ([PR 23](https://github.com/input-output-hk/react-polymorph/pull/23))
 
-## 0.5.2
+0.5.2
+=====
 
 ### Features
 
 - Extract Options component ([PR 22](https://github.com/input-output-hk/react-polymorph/pull/22))
 
-## 0.5.1
+0.5.1
+=====
 
 ### Fixes
 
 - Fix autocomplete input issues ([PR 21](https://github.com/input-output-hk/react-polymorph/pull/21))
 
-## 0.5.0
+0.5.0
+=====
 
 ### Features
 
 - Update storybook to latest version ([PR 20](https://github.com/input-output-hk/react-polymorph/pull/20))
 - Also support React 16 ([PR 20](https://github.com/input-output-hk/react-polymorph/pull/20))
 
-## 0.4.1
+0.4.1
+=====
 
 ### Fixes
 
 - Expose raw component skins ([PR 19](https://github.com/input-output-hk/react-polymorph/pull/19))
 
-## 0.4.0
+0.4.0
+=====
 
 ### Features
 
 - Autocomplete input control ([PR 18](https://github.com/input-output-hk/react-polymorph/pull/18))
 
-## 0.3.5
+0.3.5
+=====
 
 ### Features
 
 - Allow React element as `label` for checkboxes and form fields ([PR 17](https://github.com/input-output-hk/react-polymorph/pull/17))
 
-## 0.3.4
+0.3.4
+=====
 
 ### Fixes
 
 - Updated simple theme styled for SimpleSelect ([PR 16](https://github.com/input-output-hk/react-polymorph/pull/16))
 
-### 0.3.3
+0.3.3
+=====
 
 - Toggle dropdown on label clicks ([PR 15](https://github.com/input-output-hk/react-polymorph/pull/15))
 
-## 0.3.2
+0.3.2
+=====
 
 ### Fixes
 
 - Toggle dropdown on label clicks ([PR 15](https://github.com/input-output-hk/react-polymorph/pull/15))
 
-## 0.3.2
+0.3.2
+=====
 
 ### Features
 
 - Add toggler component ([PR 14](https://github.com/input-output-hk/react-polymorph/pull/14))
 
-## 0.3.1
+0.3.1
+=====
 
 ### Fixes
 
@@ -333,7 +396,8 @@ Major breaking changes due to large refactoring of component architecture:
 - Add checkbox component
 - Add switch component
 
-## 0.2.7
+0.2.7
+=====
 
 ### Fixes
 
@@ -341,14 +405,16 @@ Major breaking changes due to large refactoring of component architecture:
 - fixed caret position logic in numeric input
 - fixed selection stealing bug found in Daedalus
 
-## 0.2.6
+0.2.6
+=====
 
 ### Fixes
 
 - Fixed a bug in `NumericInput` when illegal chars have been entered but the
   old valid value was still `null`.
 
-## 0.2.5
+0.2.5
+=====
 
 ### Fixes
 
@@ -358,13 +424,15 @@ Major breaking changes due to large refactoring of component architecture:
 
 - Added `.npmignore` file to remove source and dev files and folders from npm repo.
 
-## 0.2.4
+0.2.4
+=====
 
 ### Fixes
 
 - Fixed broken build step that was missing the new `utils` folder.
 
-## 0.2.3
+0.2.3
+=====
 
 ### Fixes
 
@@ -379,25 +447,29 @@ Major breaking changes due to large refactoring of component architecture:
 
 - Updated readme with better example for the idea of react-polymorph.
 
-## 0.2.2
+0.2.2
+=====
 
 ### Chores
 
 - add new package-lock.json file generated by npm 5
 
-## 0.2.1
+0.2.1
+=====
 
 ### Chores
 
 - Reuse the normal `InputSkin` and `SimpleInput` theme for the `NumericInput` component.
 
-## 0.2.0
+0.2.0
+=====
 
 ### Features
 
 - Allow to render disabled options in select component
 - New `NumericInput` component for floating point numbers.
 
-## 0.1.0
+0.1.0
+=====
 
 Initial release with basic features.

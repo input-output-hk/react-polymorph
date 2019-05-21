@@ -81,6 +81,8 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
   list-style: none;
   font-family: $options-font-family;
   font-size: $options-font-size;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .option {

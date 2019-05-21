@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 // $FlowFixMe
-import type { ComponentType, SyntheticInputEvent, Element } from 'react';
+import type { ComponentType, SyntheticInputEvent, Element, ElementRef } from 'react';
 
 // external libraries
 import createRef from 'create-react-ref/lib/createRef';
@@ -14,6 +14,7 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 // import constants
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
+import { removeCharAtPosition } from '../utils/strings';
 
 type Props = {
   autoFocus?: boolean,
@@ -51,7 +52,7 @@ type State = {
 
 class NumericInputBase extends Component<Props, State> {
   // declare ref types
-  inputElement: Element<'input'>;
+  inputElement: { current: null | ElementRef<'input'> };
 
   // define static properties
   static displayName = 'NumericInput';
@@ -110,15 +111,13 @@ class NumericInputBase extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     const { inputElement } = this;
-    if (inputElement && inputElement.current !== document.activeElement) { return; }
-
-    // caret position calculation after separators injection
-    let caretPosition;
-    // prevent unnecessary changes on re-rendering
-    if (
-      this.state.oldValue !== prevState.oldValue ||
-      this.state.caretPosition !== prevState.caretPosition
-    ) {
+    const isInputElementActive = inputElement && inputElement.current === document.activeElement;
+    if (!isInputElementActive) { return; }
+    const input = inputElement.current;
+    let { caretPosition } = this.state;
+    // Update the input selection to match
+    if (input && input.selectionStart !== caretPosition) {
+      // Take comma separators into account for caret position
       if (
         this.state.separatorsCount !== prevState.separatorsCount &&
         this.state.separatorsCount - prevState.separatorsCount <= 1 &&
@@ -127,15 +126,10 @@ class NumericInputBase extends Component<Props, State> {
         caretPosition =
           this.state.caretPosition +
           (this.state.separatorsCount - prevState.separatorsCount);
-      } else {
-        caretPosition = this.state.caretPosition;
       }
-      caretPosition = caretPosition >= 0 ? caretPosition : 0;
-
-      if (inputElement && inputElement.current) {
-        inputElement.current.selectionEnd = caretPosition;
-        inputElement.current.selectionStart = caretPosition;
-      }
+      // Update the input selection with the new caretPosition
+      input.selectionStart = caretPosition;
+      input.selectionEnd = caretPosition;
     }
   }
 
@@ -144,11 +138,12 @@ class NumericInputBase extends Component<Props, State> {
     const { onChange, disabled } = this.props;
     if (disabled) { return; }
 
-    // it is crucial to remove whitespace from input value
-    // with String.trim()
+    const { value, selectionStart } = event.target;
+
+    // it is crucial to remove whitespace from input value with String.trim()
     const processedValue = this._processValue(
-      event.target.value.trim(),
-      event.target.selectionStart
+      value.trim(),
+      selectionStart,
     );
 
     // if the processed value is the same, then the user probably entered
@@ -218,10 +213,21 @@ class NumericInputBase extends Component<Props, State> {
 
   _enforceNumericValue(value: string, position: number) {
     const regex = /^[0-9.,]+$/;
+    const lastInsertedCharacter = value.substring(position - 1, position);
+
+    // Do not allow manual input of commas
+    if (lastInsertedCharacter === ',') {
+      return {
+        value: removeCharAtPosition(value, position - 1),
+        position: position - 1,
+      };
+    }
+
     const isValueRegular = regex.test(value);
     const { maxBeforeDot } = this.props;
     let handledValue;
     const lastValidValue = this.state.oldValue;
+
     if (!isValueRegular && value !== '') {
       // input contains invalid value
       // e.g. 1,00AAbasdasd.asdasd123123
@@ -281,12 +287,6 @@ class NumericInputBase extends Component<Props, State> {
         // - reject it and show last valid value
         handledValue = lastValidValue;
       }
-    }
-
-    const lastInsertedCharacter = value.substring(position - 1, position);
-    if (lastInsertedCharacter === ',') {
-      // prevent move caret position on hit ','
-      position -= 1;
     }
 
     return !this._isNumeric(value)

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element, ElementRef, Ref } from 'react';
+import type { ComponentType, Element, ElementRef } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
@@ -23,7 +23,7 @@ type Props = {
   theme: ?Object, // takes precedence over them in context if passed
   themeId: string,
   themeOverrides: Object, // custom css/scss from user adhering to component's theme API
-  targetRef?: Ref<*>, // ref to the target DOM element used for positioning the bubble
+  targetRef?: ElementRef<*>, // ref to the target DOM element used for positioning the bubble
 };
 
 type State = {

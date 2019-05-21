@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Ref, Element } from 'react';
+import type { ElementRef, Element } from 'react';
 
 // external libraries
 import _ from 'lodash';
@@ -22,7 +22,7 @@ type Props = {
   handleAutocompleteClick: Function,
   handleChange: Function,
   handleInputChange: Function,
-  inputRef: Ref<'input'>,
+  inputRef: ElementRef<any>,
   inputValue: string,
   isOpeningUpward: boolean,
   isOpen: boolean,
@@ -31,14 +31,15 @@ type Props = {
   maxVisibleOptions: number,
   onKeyDown: Function,
   options: Array<any>,
-  optionsRef: Ref<any>,
+  optionsRef: ElementRef<any>,
+  optionsMaxHeight: number,
   placeholder: string,
   removeOption: Function,
   renderSelections: Function,
   renderOptions: Function,
-  rootRef: Ref<any>,
+  rootRef: ElementRef<any>,
   selectedOptions: Array<any>,
-  suggestionsRef: Ref<*>,
+  suggestionsRef: ElementRef<any>,
   theme: Object,
   themeId: string,
   toggleOpen: Function
@@ -138,6 +139,7 @@ export const AutocompleteSkin = (props: Props) => {
         onChange={props.handleChange}
         options={filteredAndLimitedOptions}
         optionsRef={props.optionsRef}
+        optionsMaxHeight={props.optionsMaxHeight}
         render={props.renderOptions}
         resetOnClose
         selectedOptions={props.selectedOptions}

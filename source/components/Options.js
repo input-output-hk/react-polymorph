@@ -9,7 +9,7 @@ import type {
   // $FlowFixMe
   SyntheticEvent,
   Element,
-  Ref
+  ElementRef,
 } from 'react';
 
 // internal utility functions
@@ -33,14 +33,15 @@ type Props = {
   onClose?: Function,
   options: Array<any>,
   optionRenderer?: Function,
-  optionsRef?: Ref<any>,
+  optionsRef?: ElementRef<any>,
+  optionsMaxHeight?: number,
   render?: Function,
   resetOnClose: boolean,
   // TODO: Why do we have two separate props for selection?
   selectedOption?: any,
   selectedOptions?: Array<any>,
   skin?: ComponentType<any>,
-  targetRef?: Ref<*>,
+  targetRef?: ElementRef<*>,
   theme: ?Object, // if passed by user, it will take precedence over this.props.context.theme
   themeId: string,
   themeOverrides: Object,

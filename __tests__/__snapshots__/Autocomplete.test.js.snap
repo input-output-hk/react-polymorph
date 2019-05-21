@@ -40,6 +40,11 @@ exports[`Autocomplete renders correctly 1`] = `
       >
         <ul
           className="ul"
+          style={
+            Object {
+              "maxHeight": "300px",
+            }
+          }
         >
           <li
             aria-hidden={true}
@@ -129,6 +134,11 @@ exports[`Autocomplete renders with a placeholder 1`] = `
       >
         <ul
           className="ul"
+          style={
+            Object {
+              "maxHeight": "300px",
+            }
+          }
         >
           <li
             aria-hidden={true}
@@ -221,6 +231,11 @@ exports[`Autocomplete renders with an error 1`] = `
       >
         <ul
           className="ul"
+          style={
+            Object {
+              "maxHeight": "300px",
+            }
+          }
         >
           <li
             aria-hidden={true}
@@ -317,6 +332,11 @@ exports[`Autocomplete renders with label 1`] = `
       >
         <ul
           className="ul"
+          style={
+            Object {
+              "maxHeight": "300px",
+            }
+          }
         >
           <li
             aria-hidden={true}
@@ -405,6 +425,11 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
       >
         <ul
           className="ul"
+          style={
+            Object {
+              "maxHeight": "300px",
+            }
+          }
         >
           <li>
             <span>
@@ -477,6 +502,11 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
       >
         <ul
           className="ul"
+          style={
+            Object {
+              "maxHeight": "300px",
+            }
+          }
         >
           <li
             aria-hidden={true}

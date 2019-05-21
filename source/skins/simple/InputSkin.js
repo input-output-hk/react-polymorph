@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Ref, Element } from 'react';
+import type { ElementRef, Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -19,7 +19,7 @@ type Props = {
   disabled?: boolean,
   error?: string,
   label?: string | Element<any>,
-  inputRef: Ref<'input'>,
+  inputRef: ElementRef<'input'>,
   onBlur?: Function,
   onChange?: Function,
   onFocus?: Function,

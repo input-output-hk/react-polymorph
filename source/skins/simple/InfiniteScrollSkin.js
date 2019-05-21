@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Ref, Element } from 'react';
+import type { ElementRef, Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -12,7 +12,7 @@ type Props = {
   hasMoreData: boolean,
   isLoading: boolean,
   renderItems: Function,
-  scrollContainerRef: Ref<*>,
+  scrollContainerRef: ElementRef<*>,
   theme: Object,
   themeId: string
 };
