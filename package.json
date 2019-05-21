@@ -2,46 +2,21 @@
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
   "version": "0.8.3",
-  "author": {
-    "name": "Dominik Guzei",
-    "url": "https://github.com/DominikGuzei"
+  "scripts": {
+    "build": "cross-env npm run clean && npm run sass && npm run js",
+    "clean": "rimraf ./lib",
+    "flow:test": "flow; test $? -eq 0 -o $? -eq 2",
+    "js": "babel source -d lib -s",
+    "lint": "eslint --format=node_modules/eslint-formatter-pretty source stories *.js",
+    "prepare": "npm run clean && npm run build",
+    "postinstall": "postinstall-build lib --only-as-dependency",
+    "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
+    "storybook": "start-storybook -p 6543 -c storybook",
+    "test": "cross-env NODE_ENV=test jest",
+    "test:clean": "cross-env NODE_ENV=test jest -u",
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll",
+    "watch": "nodemon npm run js && npm run sass"
   },
-  "contributors": [
-    {
-      "name": "Dominik Guzei",
-      "email": "dominik.guzei@gmail.com",
-      "url": "https://www.linkedin.com/in/dominik-guzei"
-    },
-    {
-      "name": "Nikola Glumac",
-      "email": "niglumac@gmail.com",
-      "url": "https://www.linkedin.com/in/nikolaglumac"
-    },
-    {
-      "name": "Marcus Hurney",
-      "email": "marcushurney@gmail.com",
-      "url": "https://www.linkedin.com/in/marcus-hurney"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/input-output-hk/react-polymorph.git"
-  },
-  "bugs": {
-    "url": "https://github.com/input-output-hk/react-polymorph/issues"
-  },
-  "keywords": [
-    "react",
-    "components",
-    "composable",
-    "customizable",
-    "extendable",
-    "flexible",
-    "hackable",
-    "render prop",
-    "skins",
-    "themes"
-  ],
   "dependencies": {
     "create-react-context": "0.2.2",
     "create-react-ref": "0.1.0",
@@ -108,21 +83,6 @@
     "url-loader": "0.6.2",
     "webpack": "2.6.1"
   },
-  "scripts": {
-    "build": "cross-env npm run clean && npm run sass && npm run js",
-    "clean": "rimraf ./lib",
-    "flow:test": "flow; test $? -eq 0 -o $? -eq 2",
-    "js": "babel source -d lib -s",
-    "lint": "eslint --format=node_modules/eslint-formatter-pretty source stories *.js",
-    "prepare": "npm run clean && npm run build",
-    "postinstall": "postinstall-build lib --only-as-dependency",
-    "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
-    "storybook": "start-storybook -p 6543 -c storybook",
-    "test": "cross-env NODE_ENV=test jest",
-    "test:clean": "cross-env NODE_ENV=test jest -u",
-    "test:watch": "cross-env NODE_ENV=test jest --watchAll",
-    "watch": "nodemon npm run js && npm run sass"
-  },
   "jest": {
     "verbose": false,
     "snapshotSerializers": [
@@ -161,5 +121,45 @@
       "lodash"
     ]
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Dominik Guzei",
+    "url": "https://github.com/DominikGuzei"
+  },
+  "contributors": [
+    {
+      "name": "Dominik Guzei",
+      "email": "dominik.guzei@gmail.com",
+      "url": "https://www.linkedin.com/in/dominik-guzei"
+    },
+    {
+      "name": "Nikola Glumac",
+      "email": "niglumac@gmail.com",
+      "url": "https://www.linkedin.com/in/nikolaglumac"
+    },
+    {
+      "name": "Marcus Hurney",
+      "email": "marcushurney@gmail.com",
+      "url": "https://www.linkedin.com/in/marcus-hurney"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/input-output-hk/react-polymorph.git"
+  },
+  "bugs": {
+    "url": "https://github.com/input-output-hk/react-polymorph/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "composable",
+    "customizable",
+    "extendable",
+    "flexible",
+    "hackable",
+    "render prop",
+    "skins",
+    "themes"
+  ]
 }
