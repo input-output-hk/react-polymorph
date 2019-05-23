@@ -8,6 +8,14 @@ vNext
 
 Upcoming changes for the next release.
 
+0.8.4
+=====
+
+### Fixes
+
+- Fixed bug in 0.8.3 where Options did not close properly when scroll event occured
+
+
 0.8.3
 =====
 
