@@ -37,7 +37,8 @@ type Props = {
 
 type State = {
   composedTheme: Object,
-  isOpen: boolean
+  isOpen: boolean,
+  mouseIsOverOptions: boolean,
 };
 
 class SelectBase extends Component<Props, State> {
@@ -76,7 +77,8 @@ class SelectBase extends Component<Props, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      isOpen: false
+      isOpen: false,
+      mouseIsOverOptions: false,
     };
   }
 
@@ -98,6 +100,10 @@ class SelectBase extends Component<Props, State> {
   focus = () => this.toggleOpen();
 
   toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
+
+  toggleMouseLocation = () => (
+    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions })
+  );
 
   handleInputClick = (event: SyntheticMouseEvent<>) => {
     event.stopPropagation();
@@ -141,11 +147,12 @@ class SelectBase extends Component<Props, State> {
 
     return (
       <GlobalListeners
-        toggleOpen={this.toggleOpen}
+        mouseIsOverOptions={this.state.mouseIsOverOptions}
         optionsIsOpen={this.state.isOpen}
         optionsIsOpeningUpward={this.props.isOpeningUpward}
         optionsRef={this.optionsElement}
         rootRef={this.rootElement}
+        toggleOpen={this.toggleOpen}
       >
         {({ optionsMaxHeight }) => (
           <SelectSkin
@@ -159,6 +166,7 @@ class SelectBase extends Component<Props, State> {
             handleInputClick={this.handleInputClick}
             handleChange={this.handleChange}
             toggleOpen={this.toggleOpen}
+            toggleMouseLocation={this.toggleMouseLocation}
             {...rest}
           />
         )}

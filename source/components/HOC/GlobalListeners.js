@@ -14,6 +14,7 @@ import {
 
 type Props = {
   children: Function,
+  mouseIsOverOptions: boolean,
   optionsIsOpen: boolean,
   optionsIsOpeningUpward: boolean,
   optionsRef?: ElementRef<*>,
@@ -117,7 +118,7 @@ export class GlobalListeners extends Component<Props, State> {
   _handleDocumentScroll = () => this._removeListenersAndToggle();
 
   _addCalculateMaxHeightListeners = () => {
-    const scrollListener = ['scroll', debounce(this._calculateOptionsMaxHeight, 300)];
+    const scrollListener = ['scroll', debounce(this._calculateOptionsMaxHeight, 300, { leading: true }), true];
     const resizeListener = ['resize', debounce(this._calculateOptionsMaxHeight, 300)];
     document.addEventListener(...scrollListener);
     window.addEventListener(...resizeListener);
@@ -127,7 +128,16 @@ export class GlobalListeners extends Component<Props, State> {
   // from Options rootRef to edge of window (up or down) else Options run off page
   _calculateOptionsMaxHeight = () => {
     const { documentElement } = document;
-    const { rootRef, optionsIsOpeningUpward } = this.props;
+    const {
+      rootRef,
+      optionsIsOpeningUpward,
+      optionsIsOpen,
+      toggleOpen,
+      mouseIsOverOptions,
+    } = this.props;
+
+    // checks if Options are open & being scrolled upon via mouse position prior to toggling closed
+    optionsIsOpen && !mouseIsOverOptions && toggleOpen();
 
     if (!documentElement || !documentElement.style || !rootRef || !rootRef.current) {
       return;

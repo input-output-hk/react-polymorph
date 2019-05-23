@@ -32,6 +32,7 @@ type Props = {
   targetRef: ElementRef<*>,
   theme: Object,
   themeId: string,
+  toggleMouseLocation: Function,
 };
 
 export const OptionsSkin = (props: Props) => {
@@ -45,6 +46,7 @@ export const OptionsSkin = (props: Props) => {
     isSelectedOption,
     noResults,
     noResultsMessage,
+    optionsMaxHeight,
     optionRenderer,
     options,
     optionsRef,
@@ -53,7 +55,7 @@ export const OptionsSkin = (props: Props) => {
     targetRef,
     theme,
     themeId,
-    optionsMaxHeight,
+    toggleMouseLocation,
   } = props;
 
   const highlightedOptionIndex = getHighlightedOptionIndex();
@@ -134,6 +136,8 @@ export const OptionsSkin = (props: Props) => {
         style={optionsStyle}
         ref={optionsRef}
         className={theme[themeId].ul}
+        onMouseEnter={toggleMouseLocation}
+        onMouseLeave={toggleMouseLocation}
       >
         {renderOptions()}
       </ul>

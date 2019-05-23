@@ -40,6 +40,8 @@ exports[`Autocomplete renders correctly 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -134,6 +136,8 @@ exports[`Autocomplete renders with a placeholder 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -231,6 +235,8 @@ exports[`Autocomplete renders with an error 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -332,6 +338,8 @@ exports[`Autocomplete renders with label 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -425,6 +433,8 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -502,6 +512,8 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",

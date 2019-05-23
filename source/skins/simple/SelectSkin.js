@@ -39,6 +39,7 @@ type Props = {
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
   toggleOpen: Function,
+  toggleMouseLocation: Function,
   value: string
 };
 
@@ -82,6 +83,7 @@ export const SelectSkin = (props: Props) => {
         selectedOption={selectedOption}
         noResults={!props.options.length}
         targetRef={props.inputRef}
+        toggleMouseLocation={props.toggleMouseLocation}
         toggleOpen={props.toggleOpen}
       />
     </div>

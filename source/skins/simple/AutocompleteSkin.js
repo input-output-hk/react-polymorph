@@ -42,7 +42,8 @@ type Props = {
   suggestionsRef: ElementRef<any>,
   theme: Object,
   themeId: string,
-  toggleOpen: Function
+  toggleMouseLocation: Function,
+  toggleOpen: Function,
 };
 
 export const AutocompleteSkin = (props: Props) => {
@@ -145,6 +146,7 @@ export const AutocompleteSkin = (props: Props) => {
         selectedOptions={props.selectedOptions}
         skin={OptionsSkin}
         targetRef={props.suggestionsRef}
+        toggleMouseLocation={props.toggleMouseLocation}
         toggleOpen={props.toggleOpen}
       />
     </div>

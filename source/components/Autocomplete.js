@@ -41,12 +41,13 @@ type Props = {
 };
 
 type State = {
-  inputValue: string,
+  composedTheme: Object,
   error: string,
-  selectedOptions: Array<any>,
   filteredOptions: Array<any>,
   isOpen: boolean,
-  composedTheme: Object
+  inputValue: string,
+  mouseIsOverOptions: boolean,
+  selectedOptions: Array<any>,
 };
 
 class AutocompleteBase extends Component<Props, State> {
@@ -98,6 +99,7 @@ class AutocompleteBase extends Component<Props, State> {
       filteredOptions:
         sortAlphabetically && options ? options.sort() : options || [],
       isOpen: false,
+      mouseIsOverOptions: false,
       composedTheme: composeTheme(
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
@@ -119,6 +121,10 @@ class AutocompleteBase extends Component<Props, State> {
   close = () => this.setState({ isOpen: false });
 
   toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
+
+  toggleMouseLocation = () => (
+    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions })
+  );
 
   handleAutocompleteClick = () => {
     const { inputElement } = this;
@@ -237,6 +243,7 @@ class AutocompleteBase extends Component<Props, State> {
 
     return (
       <GlobalListeners
+        mouseIsOverOptions={this.state.mouseIsOverOptions}
         optionsIsOpen={this.state.isOpen}
         optionsIsOpeningUpward={this.props.isOpeningUpward}
         optionsRef={this.optionsElement}
@@ -262,6 +269,7 @@ class AutocompleteBase extends Component<Props, State> {
             selectedOptions={this.state.selectedOptions}
             suggestionsRef={this.suggestionsElement}
             theme={this.state.composedTheme}
+            toggleMouseLocation={this.toggleMouseLocation}
             toggleOpen={this.toggleOpen}
             {...rest}
           />

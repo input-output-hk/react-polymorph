@@ -45,6 +45,7 @@ type Props = {
   theme: ?Object, // if passed by user, it will take precedence over this.props.context.theme
   themeId: string,
   themeOverrides: Object,
+  toggleMouseLocation?: Function,
   toggleOpen?: Function
 };
 

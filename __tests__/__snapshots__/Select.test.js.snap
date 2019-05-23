@@ -35,6 +35,8 @@ exports[`Select isOpen={true} 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -152,6 +154,8 @@ exports[`Select isOpeningUpward={true} 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -269,6 +273,8 @@ exports[`Select renders correctly 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -390,6 +396,8 @@ exports[`Select renders with an error 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -507,6 +515,8 @@ exports[`Select renders with disabled options 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -612,6 +622,8 @@ exports[`Select renders with placeholder 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
@@ -729,6 +741,8 @@ exports[`Select uses render prop - optionRenderer 1`] = `
       >
         <ul
           className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           style={
             Object {
               "maxHeight": "300px",
