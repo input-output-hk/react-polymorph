@@ -99,7 +99,13 @@ class SelectBase extends Component<Props, State> {
   // toggle options open because Select's input is read only
   focus = () => this.toggleOpen();
 
-  toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
+  toggleOpen = () => {
+    if (this.state.isOpen && this.optionsElement && this.optionsElement.current) {
+      // set Options scroll position to top on close
+      this.optionsElement.current.scrollTop = 0;
+    }
+    this.setState({ isOpen: !this.state.isOpen });
+  }
 
   toggleMouseLocation = () => (
     this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions })
