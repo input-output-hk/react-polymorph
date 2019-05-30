@@ -22,6 +22,7 @@ Upcoming changes for the next release.
 ### Fixes
 
 - Fixes bug where Options does not close properly when scroll event occurs.
+  [PR 108](https://github.com/input-output-hk/react-polymorph/pull/108)
 
 0.8.3
 =====
