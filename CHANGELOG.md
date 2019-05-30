@@ -8,6 +8,9 @@ vNext
 
 Upcoming changes for the next release.
 
+0.8.5
+=====
+
 ### Chores
 
 - Automatic storybook builds & previews have been setup with netlify.
