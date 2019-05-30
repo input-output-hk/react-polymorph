@@ -1,3 +1,7 @@
+# Builds
+lib
+dist
+
 # Logs
 logs
 *.log
@@ -35,5 +39,6 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
-lib
+
+# Editors
 .idea
