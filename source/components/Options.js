@@ -108,7 +108,7 @@ class OptionsBase extends Component<Props, State> {
   }
 
   close = () => {
-    const { onClose, resetOnClose, toggleOpen, isOpen } = this.props;
+    const { isOpen, onClose, resetOnClose, toggleOpen  } = this.props;
     if (isOpen && toggleOpen) toggleOpen();
     this.setState({
       highlightedOptionIndex: resetOnClose ? 0 : this.state.highlightedOptionIndex
