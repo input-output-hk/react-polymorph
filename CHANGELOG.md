@@ -11,6 +11,11 @@ Upcoming changes for the next release.
 0.8.5
 =====
 
+### Fixes
+
+- Resets scroll position of Options when Autocomplete or Select transition from opened to closed.
+  [PR 109](https://github.com/input-output-hk/react-polymorph/pull/109)
+
 ### Chores
 
 - Automatic storybook builds & previews have been setup with netlify.
