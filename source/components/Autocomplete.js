@@ -120,7 +120,13 @@ class AutocompleteBase extends Component<Props, State> {
 
   close = () => this.setState({ isOpen: false });
 
-  toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
+  toggleOpen = () => {
+    if (this.state.isOpen && this.optionsElement && this.optionsElement.current) {
+      // set Options scroll position to top on close
+      this.optionsElement.current.scrollTop = 0;
+    }
+    this.setState({ isOpen: !this.state.isOpen });
+  }
 
   toggleMouseLocation = () => (
     this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions })
