@@ -10,8 +10,16 @@ Upcoming changes for the next release.
 
 ### Chores
 
-- Automatic storybook builds & previews have been setup with netlify
+- Automatic storybook builds & previews have been setup with netlify.
   [PR 107](https://github.com/input-output-hk/react-polymorph/pull/107)
+
+0.8.4
+=====
+
+### Fixes
+
+- Fixes bug where Options does not close properly when scroll event occurs.
+  [PR 108](https://github.com/input-output-hk/react-polymorph/pull/108)
 
 0.8.3
 =====
