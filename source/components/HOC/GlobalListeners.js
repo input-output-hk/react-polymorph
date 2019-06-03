@@ -146,7 +146,7 @@ export class GlobalListeners extends Component<Props, State> {
     const { height, top } = rootRef.current.getBoundingClientRect();
     // opening upwards case
     if (optionsIsOpeningUpward && top < window.innerHeight) {
-      this.setState({ optionsMaxHeight: top });
+      this.setState({ optionsMaxHeight: top - 20 });
       return;
     }
 

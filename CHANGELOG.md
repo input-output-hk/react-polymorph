@@ -8,6 +8,15 @@ vNext
 
 Upcoming changes for the next release.
 
+0.8.6
+=====
+
+### Fixes
+
+- Adds 20px extra space between the top of Options pop-up bubble and the top of the window.
+  This prevents the Options bubble from slightly running underneath the application menu bar at the top of the window.
+  [PR 110](https://github.com/input-output-hk/react-polymorph/pull/110)
+
 0.8.5
 =====
 
