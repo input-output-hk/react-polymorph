@@ -50,6 +50,12 @@ const COUNTRIES_WITH_DISABLED_OPTIONS = [
   { value: 'EN-en', label: 'USA' }
 ];
 
+const WALLETS = [
+  { value: '100,100 ADA', label: 'Main wallet' },
+  { value: '10,100.2 ADA', label: 'Spending money' },
+  { value: '500,1000 ADA', label: 'Savings' },
+];
+
 storiesOf('Select', module)
 
   .addDecorator(decorateWithSimpleTheme)
@@ -215,5 +221,30 @@ storiesOf('Select', module)
             Reopen modal
           </button>
         )
+    ))
+  )
+
+  .add('custom value labels template',
+    withState({ value: '' }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={WALLETS}
+        optionRenderer={option => (
+          <div
+            className={styles.customOptionStyle}
+            role="presentation"
+          >
+            <div className={styles.label}>{option.label}</div>
+            <div className={styles.value}>{option.value}</div>
+          </div>
+        )}
+        valueRenderer={option => (
+          <div className={styles.customValueStyle}>
+            <div className={styles.label}>{option.label}</div>
+            <div className={styles.value}>{option.value}</div>
+          </div>
+        )}
+      />
     ))
   );

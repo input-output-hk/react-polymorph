@@ -32,7 +32,8 @@ type Props = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
-  value: string
+  value: string,
+  valueRenderer?: Function,
 };
 
 type State = {
