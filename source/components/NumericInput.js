@@ -38,7 +38,6 @@ type Props = {
 
 type State = {
   composedTheme: Object,
-  error: string,
   minimumFractionDigits: number,
   inputCaretPosition: number,
 };
@@ -63,15 +62,16 @@ class NumericInputBase extends Component<Props, State> {
     super(props);
     const { context, numberLocaleOptions, themeId, theme, themeOverrides } = props;
     this.inputElement = createRef();
-    const minimumFractionDigits = numberLocaleOptions ? numberLocaleOptions.minimumFractionDigits : 0;
+    const minimumFractionDigits = (
+      numberLocaleOptions ? numberLocaleOptions.minimumFractionDigits : 0
+    );
     this.state = {
       composedTheme: composeTheme(
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      error: '',
-      minimumFractionDigits: minimumFractionDigits ? minimumFractionDigits : 0,
+      minimumFractionDigits: minimumFractionDigits || 0,
       inputCaretPosition: 0,
     };
   }
@@ -119,7 +119,7 @@ class NumericInputBase extends Component<Props, State> {
     const { value, locale } = this.props;
 
     // Options
-    let minimumFractionDigits = this.getMinimumFractionDigits();
+    const minimumFractionDigits = this.getMinimumFractionDigits();
     const numberLocaleOptions = this.getDynamicLocaleOptions();
 
     // Current value
@@ -189,7 +189,9 @@ class NumericInputBase extends Component<Props, State> {
     if (newNumber != null) {
       // Take the localized formatting into account for the caret position
       const localizedNewNumber = newNumber.toLocaleString(locale, numberLocaleOptions);
-      const numberOfCommasDiff = getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue);
+      const numberOfCommasDiff = (
+        getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue)
+      );
       return {
         value: newNumber,
         caretPosition: Math.max(newCaretPosition + numberOfCommasDiff, 0),
@@ -207,7 +209,9 @@ class NumericInputBase extends Component<Props, State> {
 
   getMinimumFractionDigits(): number {
     const { numberLocaleOptions } = this.props;
-    const minimumFractionDigitsProp = numberLocaleOptions ? numberLocaleOptions.minimumFractionDigits : null;
+    const minimumFractionDigitsProp = (
+      numberLocaleOptions ? numberLocaleOptions.minimumFractionDigits : null
+    );
     return Math.max(this.state.minimumFractionDigits, minimumFractionDigitsProp || 0);
   }
 
@@ -269,7 +273,9 @@ const NUMERIC_INPUT_REGEX = /^([0-9,]+)?(\.([0-9]+)?)?$/;
 
 const isValidNumericInput = (value: string): boolean => NUMERIC_INPUT_REGEX.test(value);
 
-const isParsableNumberString = (value: string): boolean => !isNaN(parseFloat(value)) && isFinite(value);
+const isParsableNumberString = (value: string): boolean => (
+  !isNaN(parseFloat(value)) && isFinite(value)
+);
 
 const removeCommas = (value: string): string => value.replace(/,/g, '');
 

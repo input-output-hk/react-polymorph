@@ -8,6 +8,11 @@ vNext
 
 Upcoming changes for the next release.
 
+### Breaking Changes
+
+- `NumericInput` component was completely rewritten to be more flexible and straight forward.
+  [PR 114](https://github.com/input-output-hk/react-polymorph/pull/114)
+
 0.8.6
 =====
 
