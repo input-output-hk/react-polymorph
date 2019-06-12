@@ -24,61 +24,72 @@ storiesOf('NumericInput', module)
   // ====== Stories ======
 
   .add('plain',
-    withState({ value: '' }, store => (
+    withState({ value: null }, store => (
       <NumericInput
-        value={store.state.value}
-        maxBeforeDot={6}
-        maxAfterDot={6}
         onChange={value => store.set({ value })}
+        value={store.state.value}
       />
     ))
   )
-
-  .add('label',
-    withState({ value: '' }, store => (
+  .add('value (9999.99)',
+    withState({ value: 9999.99 }, store => (
       <NumericInput
-        label="Amount"
-        value={store.state.value}
-        maxBeforeDot={6}
-        maxAfterDot={6}
         onChange={value => store.set({ value })}
+        value={store.state.value}
       />
     ))
   )
-
-  .add('placeholder',
-    withState({ value: '' }, store => (
+  .add('minimumFractionDigits (6)',
+    withState({ value: 0 }, store => (
       <NumericInput
-        value={store.state.value}
-        placeholder="18.000000"
-        maxBeforeDot={6}
-        maxAfterDot={6}
         onChange={value => store.set({ value })}
+        numberLocaleOptions={{ minimumFractionDigits: 6 }}
+        value={store.state.value}
       />
     ))
   )
-
+  .add('maximumFractionDigits (6)',
+    withState({ value: 0 }, store => (
+      <NumericInput
+        onChange={value => store.set({ value })}
+        numberLocaleOptions={{ maximumFractionDigits: 6 }}
+        value={store.state.value}
+      />
+    ))
+  )
   .add('autoFocus',
-    withState({ value: '' }, store => (
+    withState({ value: null }, store => (
       <NumericInput
         autoFocus
-        label="With autoFocus"
-        value={store.state.value}
-        placeholder="18.000000"
-        maxBeforeDot={6}
-        maxAfterDot={6}
         onChange={value => store.set({ value })}
+        value={store.state.value}
+      />
+    ))
+  )
+  .add('label',
+    withState({ value: null }, store => (
+      <NumericInput
+        label="Amount"
+        onChange={value => store.set({ value })}
+        value={store.state.value}
+      />
+    ))
+  )
+  .add('placeholder',
+    withState({ value: null }, store => (
+      <NumericInput
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        placeholder="18.000000"
       />
     ))
   )
 
   .add('onFocus / onBlur',
-    withState({ value: '', focused: false, blurred: false }, store => (
+    withState({ value: null, focused: false, blurred: false }, store => (
       <NumericInput
         value={store.state.value}
         placeholder="onFocus / onBlur"
-        maxBeforeDot={6}
-        maxAfterDot={6}
         onChange={value => store.set({ value })}
         onFocus={() => store.set({ focused: true, blurred: false })}
         onBlur={() => store.set({ blurred: true, focused: false })}
@@ -87,7 +98,7 @@ storiesOf('NumericInput', module)
   )
 
   .add('with error',
-    withState({ value: '' }, store => (
+    withState({ value: null }, store => (
       <NumericInput
         label="Amount"
         error="Please enter a valid amount"
@@ -98,109 +109,25 @@ storiesOf('NumericInput', module)
     ))
   )
 
-  .add('maxBeforeDot(3) and maxAfterDot(4)',
-    withState({ value: '' }, store => (
-      <NumericInput
-        label="Amount"
-        value={store.state.value}
-        placeholder="000.0000"
-        maxBeforeDot={3}
-        maxAfterDot={4}
-        onChange={value => store.set({ value })}
-      />
-    ))
-  )
-
-  .add('maxBeforeDot(3) and maxAfterDot(0)',
-    withState({ value: '' }, store => (
-      <NumericInput
-        label="Integers Only"
-        value={store.state.value}
-        placeholder="123"
-        maxBeforeDot={3}
-        maxAfterDot={0}
-        onChange={value => store.set({ value })}
-      />
-    ))
-  )
-
-  .add('maxValue(30000) - unenforced',
-    withState({ value: '' }, store => (
-      <NumericInput
-        label="Amount"
-        value={store.state.value}
-        placeholder="0.000000"
-        maxValue={30000}
-        onChange={value => store.set({ value })}
-      />
-    ))
-  )
-
-  .add('minValue(50) - unenforced',
-    withState({ value: '' }, store => (
-      <NumericInput
-        label="Amount"
-        value={store.state.value}
-        placeholder="0.000000"
-        minValue={50}
-        maxAfterDot={6}
-        onChange={value => store.set({ value })}
-      />
-    ))
-  )
-
-  .add('maxValue(30000), minValue(50) - unenforced',
-    withState({ value: '' }, store => (
-      <NumericInput
-        label="Amount"
-        value={store.state.value}
-        placeholder="0.000000"
-        maxValue={30000}
-        minValue={50}
-        maxAfterDot={6}
-        onChange={value => store.set({ value })}
-      />
-    ))
-  )
-
-  .add('maxValue(30000), minValue(50), enforceMax=true, enforceMin=true',
-    withState({ value: '' }, store => (
-      <NumericInput
-        label="Amount"
-        value={store.state.value}
-        placeholder="50.000000"
-        maxValue={30000}
-        minValue={50}
-        maxAfterDot={6}
-        enforceMax
-        enforceMin
-        onChange={value => store.set({ value })}
-      />
-    ))
-  )
-
-  .add('theme overrides, minValue(50)',
-    withState({ value: '' }, store => (
+  .add('theme overrides',
+    withState({ value: null }, store => (
       <NumericInput
         label="Composed Theme"
-        minValue={50}
         themeOverrides={themeOverrides}
         value={store.state.value}
         placeholder="0.000000"
-        maxAfterDot={6}
         onChange={value => store.set({ value })}
       />
     ))
   )
 
   .add('Custom Theme',
-    withState({ value: '' }, store => (
+    withState({ value: null }, store => (
       <NumericInput
         label="Amount"
         theme={CustomInputTheme}
         value={store.state.value}
         placeholder="0.000000"
-        maxAfterDot={6}
         onChange={value => store.set({ value })}
       />
     ))
