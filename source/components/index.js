@@ -17,6 +17,7 @@ export const IDENTIFIERS = {
   PROGRESS_BAR: 'progressbar',
   RADIO: 'radio',
   SELECT: 'select',
+  STEPPER: 'stepper',
   SWITCH: 'switch',
   TEXT_AREA: 'textarea',
   TOGGLER: 'toggler',

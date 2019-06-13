@@ -224,7 +224,7 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('custom value labels template',
+  .add('custom selected value template',
     withState({ value: '' }, store => (
       <Select
         value={store.state.value}
