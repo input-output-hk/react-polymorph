@@ -8,6 +8,12 @@ vNext
 
 Upcoming changes for the next release.
 
+###Features
+
+- Provide custum value renderer on Select component to override default input value format
+  Add Stepper component
+  [PR 115](https://github.com/input-output-hk/react-polymorph/pull/115)
+
 0.8.6
 =====
 
