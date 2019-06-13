@@ -11,17 +11,17 @@ import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
+  activeStep?: number,
   className?: string,
   context: ThemeContextProp,
   label?: string,
   labelDisabled?: boolean,
-  steps: Array<string>,
-  activeStep?: number,
+  onStepClick?: Function,
   skin?: ComponentType<any>,
+  steps: Array<string>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
-  onStepClick?: Function,
 };
 
 type State = {

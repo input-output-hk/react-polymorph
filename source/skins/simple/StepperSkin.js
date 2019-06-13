@@ -6,14 +6,14 @@ import { map } from 'lodash';
 import classnames from 'classnames';
 
 type Props = {
+  activeStep?: number,
   className: string,
   label?: string,
   labelDisabled?: boolean,
+  onStepClick?: Function,
   steps: Array<string>,
-  activeStep?: number,
   theme: Object,
   themeId: string,
-  onStepClick?: Function,
 };
 
 export const StepperSkin = (props: Props) => {

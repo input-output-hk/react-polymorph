@@ -27,11 +27,11 @@ type Props = {
   onKeyPress?: Function,
   placeholder?: string,
   readOnly?: boolean,
+  selectedOption: any,
   theme: Object,
   themeId: string,
   value: string,
   valueRenderer: Function,
-  selectedOption: any,
 };
 
 export const InputSkin = (props: Props) => {

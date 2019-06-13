@@ -229,6 +229,7 @@ storiesOf('Select', module)
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
+        placeholder="Select Wallet"
         options={WALLETS}
         optionRenderer={option => (
           <div
