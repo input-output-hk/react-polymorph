@@ -119,7 +119,7 @@ test('Select uses render prop - valueRenderer', () => {
           <div>{option.value}</div>
         </div>
       )}
-       valueRenderer={option => (
+      selectionRenderer={option => (
         <div>
           <div>{option.label}</div>
           <div>{option.value}</div>
