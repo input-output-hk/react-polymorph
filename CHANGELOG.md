@@ -8,6 +8,9 @@ vNext
 
 Upcoming changes for the next release.
 
+0.8.7
+=====
+
 ### Features
 
 - Adds selected option render prop on Select component to override default input value format.
