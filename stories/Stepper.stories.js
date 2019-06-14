@@ -3,6 +3,7 @@ import React from 'react';
 
 // storybook
 import { storiesOf } from '@storybook/react';
+import { withState } from '@dump247/storybook-state';
 
 // components
 import { Stepper } from '../source/components/Stepper';
@@ -47,6 +48,17 @@ storiesOf('Stepper', module)
       activeStep={2}
     />
   ))
+
+  .add('onStepClick',
+    withState({ activeStep: 1 },
+      store => (
+        <Stepper
+          steps={STEPS}
+          activeStep={store.state.activeStep}
+          onStepClick={(step, index) => store.set({ activeStep: index + 1 })}
+        />
+      ))
+  )
 
   .add('theme overrides', () => (
     <Stepper

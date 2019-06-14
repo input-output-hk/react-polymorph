@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
+// $FlowFixMe
+import type { SyntheticMouseEvent } from 'react';
 
 // external libraries
-import { map } from 'lodash';
 import classnames from 'classnames';
+import { map, isFunction } from 'lodash';
 
 type Props = {
   activeStep?: number,
@@ -53,6 +55,12 @@ export const StepperSkin = (props: Props) => {
               classname = 'disabled';
             }
 
+            const handleStepClick = (event: SyntheticMouseEvent) => {
+              if (props.onStepClick && isFunction(props.onStepClick)) {
+                props.onStepClick(step, index, event);
+              }
+            };
+
             return (
               <li
                 key={index}
@@ -60,11 +68,7 @@ export const StepperSkin = (props: Props) => {
                 style={{ width: `${100 / props.steps.length}%` }}
                 role="presentation"
                 aria-hidden
-                onClick={event => {
-                  if (props.onStepClick) {
-                    props.onStepClick(index, event);
-                  }
-                }}
+                onClick={handleStepClick}
               >
                 {step}
               </li>

@@ -2,20 +2,22 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-// Main
+// main-color
 $stepper-main-color: var(--rp-stepper-main-color, rgba(68, 91, 124, 1)) !default;
 $stepper-main-color-light: var(--rp-stepper-main-color-light, rgba(68, 91, 124, 0.1)) !default;
+
+// label-color
 $stepper-label-color: var(--rp-stepper-label-color, rgba(94, 96, 102, 1)) !default;
 $stepper-label-color-light: var(--rp-stepper-label-color-light, rgba(94, 96, 102, 0.3)) !default;
 
-// Label
+// label
 $stepper-label-font-family: var(--rp-stepper-label-font-family, $theme-font-medium, sans-serif) !default;
 $stepper-label-font-size: var(--rp-stepper-label-font-size, 12px) !default;
 $stepper-label-margin: var(--rp-stepper-label-margin, 0) !default;
 $stepper-label-text-align: var(--rp-stepper-label-text-align, center) !default;
 $stepper-label-text-color: var(--rp-stepper-label-text-color, $stepper-label-color) !default;
 
-// Bullets
+// bullet
 $stepper-bullet-background-color-active: var(--rp-stepper-bullet-background-color-active, $stepper-main-color) !default;
 $stepper-bullet-background-color-disabled: var(--rp-stepper-bullet-background-color-disabled, #fff) !default;
 $stepper-bullet-border: var(--rp-stepper-bullet-border, 2px solid var(--rp-stepper-bullet-border-color, $stepper-main-color-light)) !default;
@@ -25,13 +27,13 @@ $stepper-bullet-border-radius: var(--rp-stepper-bullet-border-radius, 50%) !defa
 $stepper-bullet-height: var(--rpstepper-bullet-height, 16px) !default;
 $stepper-bullet-width: var(--rpstepper-bullet-width, 16px) !default;
 
-// Steps - bar
+// steps-bar
 $stepper-steps-bar-color-active: var(--rpstepper-steps-bar-color-active, $stepper-main-color) !default;
 $stepper-steps-bar-color-disabled: var(--rpstepper-steps-bar-color-disabled, $stepper-main-color-light) !default;
 $stepper-steps-bar-height: var(--rpstepper-steps-bar-height, 4px) !default;
 $stepper-steps-bar-top-position: var(--rpstepper-steps-bar-top-position, 8px) !default;
 
-// Steps - label
+// step-label
 $stepper-step-label-bottom-margin: var(--rpstepper-stepper-step-label-bottom-margin, 10px) !default;
 $stepper-step-label-color: var(--rp-stepper-step-label-color, $stepper-label-color) !default;
 $stepper-step-label-color-light: var(--rp-stepper-step-label-color-light, $stepper-label-color-light) !default;
