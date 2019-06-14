@@ -14,6 +14,7 @@ import { OptionsSkin } from './OptionsSkin';
 import { ProgressBarSkin } from './ProgressBarSkin';
 import { RadioSkin } from './RadioSkin';
 import { SelectSkin } from './SelectSkin';
+import { StepperSkin } from './StepperSkin';
 import { SwitchSkin } from './SwitchSkin';
 import { TextAreaSkin } from './TextAreaSkin';
 import { TogglerSkin } from './TogglerSkin';
@@ -34,6 +35,7 @@ export const SimpleSkins = {
   [IDENTIFIERS.PROGRESS_BAR]: ProgressBarSkin,
   [IDENTIFIERS.RADIO]: RadioSkin,
   [IDENTIFIERS.SELECT]: SelectSkin,
+  [IDENTIFIERS.STEPPER]: StepperSkin,
   [IDENTIFIERS.SWITCH]: SwitchSkin,
   [IDENTIFIERS.TEXT_AREA]: TextAreaSkin,
   [IDENTIFIERS.TOGGLER]: TogglerSkin,

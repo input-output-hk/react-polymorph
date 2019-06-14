@@ -17,6 +17,7 @@ import { OPTIONS_THEME_API } from './options';
 import { PROGRESS_BAR_THEME_API } from './progressbar';
 import { RADIO_THEME_API } from './radio';
 import { SELECT_THEME_API } from './select';
+import { STEPPER_THEME_API } from './stepper';
 import { SWITCH_THEME_API } from './switch';
 import { TEXT_AREA_THEME_API } from './textarea';
 import { TOGGLER_THEME_API } from './toggler';
@@ -40,6 +41,7 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.PROGRESS_BAR]: PROGRESS_BAR_THEME_API,
   [IDENTIFIERS.RADIO]: RADIO_THEME_API,
   [IDENTIFIERS.SELECT]: SELECT_THEME_API,
+  [IDENTIFIERS.STEPPER]: STEPPER_THEME_API,
   [IDENTIFIERS.SWITCH]: SWITCH_THEME_API,
   [IDENTIFIERS.TEXT_AREA]: TEXT_AREA_THEME_API,
   [IDENTIFIERS.TOGGLER]: TOGGLER_THEME_API,

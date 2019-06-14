@@ -36,17 +36,19 @@ type Props = {
   optionsMaxHeight: number,
   placeholder: string,
   rootRef: ElementRef<*>,
+  selectionRenderer?: Function,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
   toggleOpen: Function,
   toggleMouseLocation: Function,
-  value: string
+  value: string,
 };
 
 export const SelectSkin = (props: Props) => {
   const selectedOption = props.getSelectedOption();
   const inputValue = selectedOption ? selectedOption.label : '';
   const { theme, themeId } = props;
+
   return (
     <div
       ref={props.rootRef}
@@ -67,7 +69,9 @@ export const SelectSkin = (props: Props) => {
           onClick={props.handleInputClick}
           placeholder={props.placeholder}
           error={props.error}
+          selectionRenderer={props.selectionRenderer}
           readOnly
+          selectedOption={selectedOption}
         />
       </div>
       <Options

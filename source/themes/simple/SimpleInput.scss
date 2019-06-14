@@ -74,3 +74,27 @@ $input-placeholder-font-family: var(--rp-input-placeholder-font-family, $theme-f
 }
 
 // END SPECIAL STATES ---------- //
+
+// BEGIN CUSTOM VALUE RENDERER ---------- //
+
+.customValueWrapper {
+  input {
+    color: transparent !important;
+    background-color: transparent !important;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .customValueBlock {
+    background-color: $input-bg-color;
+    height: 48px;
+    left: 0;
+    max-height: 48px;
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+}
+
+// END CUSTOM VALUE RENDERER ---------- //

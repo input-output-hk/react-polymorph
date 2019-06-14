@@ -74,3 +74,35 @@
   top: 100px;
 }
 
+.customValueStyle {
+  color: #5e6066;
+  font-family: var(--rp-options-font-family, $theme-font-regular, sans-serif) !important;
+  max-height: inherit;
+  padding: 7px 20px 0;
+
+  .label {
+    font-size: 14px;
+    line-height: 1.43;
+  }
+
+  .value {
+    font-size: 12px;
+    line-height: 1.33;
+    opacity: 0.5;
+  }
+}
+
+.customOptionStyle {
+  color: #5e6066;
+
+  .label {
+    font-size: 14px;
+    line-height: 1.43;
+  }
+
+  .value {
+    font-size: 12px;
+    line-height: 1.33;
+    opacity: 0.5;
+  }
+}

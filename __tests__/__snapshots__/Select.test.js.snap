@@ -849,3 +849,112 @@ exports[`Select uses render prop - optionRenderer 1`] = `
   </div>
 </div>
 `;
+
+exports[`Select uses render prop - valueRenderer 1`] = `
+<div>
+  <div
+    className="select"
+  >
+    <div
+      className="selectInput"
+    >
+      <div
+        className="root"
+      >
+        
+        <div
+          className="inputWrapper"
+        >
+          <div
+            className="customValueWrapper"
+          >
+            <input
+              className="input"
+              onChange={[Function]}
+              onClick={[Function]}
+              readOnly={true}
+              value=""
+            />
+            <div
+              className="customValueBlock"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="options firstOptionHighlighted root isFloating isHidden"
+      style={null}
+    >
+      <div
+        className="bubble"
+        data-bubble-container={true}
+      >
+        <ul
+          className="ul"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          style={
+            Object {
+              "maxHeight": "300px",
+            }
+          }
+        >
+          <li
+            aria-hidden={true}
+            className="option highlightedOption"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            <div>
+              <div>
+                Main wallet
+              </div>
+              <div>
+                100,100 ADA
+              </div>
+            </div>
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            <div>
+              <div>
+                Spending money
+              </div>
+              <div>
+                10,100.2 ADA
+              </div>
+            </div>
+          </li>
+          <li
+            aria-hidden={true}
+            className="option"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            role="presentation"
+          >
+            <div>
+              <div>
+                Savings
+              </div>
+              <div>
+                500,1000 ADA
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <span
+        className="arrow"
+        data-bubble-arrow={true}
+      />
+    </div>
+  </div>
+</div>
+`;

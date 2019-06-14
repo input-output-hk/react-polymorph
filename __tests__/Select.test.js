@@ -20,6 +20,12 @@ const COUNTRIES_DISABLED_OPTIONS = [
   { value: 'EN-en', label: 'USA' }
 ];
 
+const WALLETS = [
+  { value: '100,100 ADA', label: 'Main wallet' },
+  { value: '10,100.2 ADA', label: 'Spending money' },
+  { value: '500,1000 ADA', label: 'Savings' },
+];
+
 test('Select renders correctly', () => {
   const component = renderInSimpleTheme(
     <Select options={COUNTRIES} />
@@ -94,6 +100,29 @@ test('Select uses render prop - optionRenderer', () => {
         <div>
           <span>German: {option.label}</span>
           <span>English: {option.value}</span>
+        </div>
+      )}
+    />
+  );
+
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+test('Select uses render prop - valueRenderer', () => {
+  const component = renderInSimpleTheme(
+    <Select
+      options={WALLETS}
+      optionRenderer={option => (
+        <div>
+          <div>{option.label}</div>
+          <div>{option.value}</div>
+        </div>
+      )}
+      selectionRenderer={option => (
+        <div>
+          <div>{option.label}</div>
+          <div>{option.value}</div>
         </div>
       )}
     />
