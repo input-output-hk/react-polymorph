@@ -8,10 +8,10 @@ vNext
 
 Upcoming changes for the next release.
 
-###Features
+### Features
 
-- Provide custum value renderer on Select component to override default input value format
-  Add Stepper component
+- Adds selected option render prop on Select component to override default input value format.
+  Adds Stepper component, theme, skin, and stories.
   [PR 115](https://github.com/input-output-hk/react-polymorph/pull/115)
 
 0.8.6
