@@ -27,17 +27,15 @@ type Props = {
   onKeyPress?: Function,
   placeholder?: string,
   readOnly?: boolean,
-  selectedOption: any,
+  selectedOption?: any,
   theme: Object,
   themeId: string,
   value: string,
-  valueRenderer: Function,
+  selectionRenderer?: Function,
 };
 
 export const InputSkin = (props: Props) => {
-  const isValueRenderer = props.valueRenderer && isFunction(props.valueRenderer);
-
-  const inputRenderer = () => (
+  const renderInput = () => (
     <input
       ref={props.inputRef}
       {...pickDOMProps(props)}
@@ -50,19 +48,22 @@ export const InputSkin = (props: Props) => {
     />
   );
 
-  const valueRenderer = option => {
-    // check if user has passed render prop "valueRenderer"
-    if (isValueRenderer) {
-      return (
-        <div className={props.theme[props.themeId].customValueWrapper}>
-          {inputRenderer()}
-          <div className={props.theme[props.themeId].customValueBlock}>
-            {option && props.valueRenderer(option)}
-          </div>
-        </div>
-      );
+  const useSelectionRenderer = option => (
+    <div className={props.theme[props.themeId].customValueWrapper}>
+      {renderInput()}
+      <div className={props.theme[props.themeId].customValueBlock}>
+        {option && props.selectionRenderer && props.selectionRenderer(option)}
+      </div>
+    </div>
+  );
+
+  const render = () => {
+    // check if user has passed render prop "selectionRenderer"
+    const hasSelectionRenderer = props.selectionRenderer && isFunction(props.selectionRenderer);
+    if (hasSelectionRenderer) {
+      return useSelectionRenderer(props.selectedOption);
     }
-    return inputRenderer();
+    return renderInput();
   };
 
   return (
@@ -74,9 +75,7 @@ export const InputSkin = (props: Props) => {
       inputRef={props.inputRef}
       skin={FormFieldSkin}
       theme={props.theme}
-      render={() => (
-        valueRenderer(props.selectedOption)
-      )}
+      render={render}
     />
   );
 };

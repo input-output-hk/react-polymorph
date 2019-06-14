@@ -28,12 +28,12 @@ type Props = {
   optionRenderer?: Function,
   options: Array<any>,
   placeholder?: string,
+  selectionRenderer?: Function,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
   value: string,
-  valueRenderer?: Function,
 };
 
 type State = {

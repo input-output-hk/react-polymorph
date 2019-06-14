@@ -36,12 +36,12 @@ type Props = {
   optionsMaxHeight: number,
   placeholder: string,
   rootRef: ElementRef<*>,
+  selectionRenderer?: Function,
   theme: Object, // will take precedence over theme in context if passed
   themeId: string,
   toggleOpen: Function,
   toggleMouseLocation: Function,
   value: string,
-  valueRenderer?: Function,
 };
 
 export const SelectSkin = (props: Props) => {
@@ -69,7 +69,7 @@ export const SelectSkin = (props: Props) => {
           onClick={props.handleInputClick}
           placeholder={props.placeholder}
           error={props.error}
-          valueRenderer={props.valueRenderer}
+          selectionRenderer={props.selectionRenderer}
           readOnly
           selectedOption={selectedOption}
         />

@@ -224,7 +224,7 @@ storiesOf('Select', module)
     ))
   )
 
-  .add('custom selected value template',
+  .add('custom selected option renderer',
     withState({ value: '' }, store => (
       <Select
         value={store.state.value}
@@ -240,7 +240,7 @@ storiesOf('Select', module)
             <div className={styles.value}>{option.value}</div>
           </div>
         )}
-        valueRenderer={option => (
+        selectionRenderer={option => (
           <div className={styles.customValueStyle}>
             <div className={styles.label}>{option.label}</div>
             <div className={styles.value}>{option.value}</div>
