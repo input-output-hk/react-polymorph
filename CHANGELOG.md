@@ -12,6 +12,15 @@ Upcoming changes for the next release.
 
 - `NumericInput` component was completely rewritten to be more flexible and straight forward.
   [PR 114](https://github.com/input-output-hk/react-polymorph/pull/114)
+  
+0.8.7
+=====
+
+### Features
+
+- Adds selected option render prop on Select component to override default input value format.
+  Adds Stepper component, theme, skin, and stories.
+  [PR 115](https://github.com/input-output-hk/react-polymorph/pull/115)
 
 0.8.6
 =====

@@ -1,0 +1,63 @@
+.root {
+  .label {
+    color: rgba(10, 145, 48, 1);
+    font-size: 16px;
+    margin: 15px 0;
+    text-align: center;
+  }
+  
+  .stepsWrapper {
+    li {
+      color: rgba(10, 145, 48, 0.3);
+      float: left;
+      list-style-type: none;
+      position: relative;
+      text-align: center;
+
+      &:before {
+        background-color: #fff;
+        border: 2px solid rgba(10, 145, 48, 1);
+        border-radius: 30%;
+        content: " ";
+        display: block;
+        height: 16px;
+        margin: 0 auto 10px;
+        width: 16px;
+      }
+
+      &:after {
+        background-color: rgba(10, 145, 48, 0.1);
+        content: "";
+        height: 4px;
+        left: -50%;
+        position: absolute;
+        top: 8px;
+        width: 100%;
+        z-index: -1;
+      }
+
+      &:first-child:after {
+        content: none;
+      }
+
+      &.active,
+      &.finished {
+        color: rgba(10, 145, 48, 1);
+        &:before {
+          border-color: rgba(10, 145, 48, 1);
+        }
+        &:after {
+          background-color: rgba(10, 145, 48, 1);
+          border-color: rgba(10, 145, 48, 1);
+        }
+      }
+
+      &.finished {
+        &:before {
+          background-color: rgba(10, 145, 48, 1); 
+        }
+      }
+    }
+  }
+}
+
