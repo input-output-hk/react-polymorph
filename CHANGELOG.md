@@ -8,6 +8,10 @@ vNext
 
 Upcoming changes for the next release.
 
+### Chores
+
+- Updates contributors in package.json [PR 117](https://github.com/input-output-hk/react-polymorph/pull/117)
+
 0.8.7
 =====
 
