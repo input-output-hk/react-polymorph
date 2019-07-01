@@ -104,11 +104,14 @@ class NumericInputBase extends Component<Props, State> {
     const { value, onChange, disabled } = this.props;
     if (disabled) { return; }
     const { selectionStart } = event.target;
-    const result = this.processValueChange(event.target.value, selectionStart);
+    const newValue = event.target.value;
+    const result = this.processValueChange(newValue, selectionStart);
 
     if (result) {
       const hasValueChanged = value !== result.value;
-      if (hasValueChanged && onChange) {
+      const localizedNewValue = this.getLocalizedNumber(result.value);
+      const isStable = normalizeValue(newValue) === normalizeValue(localizedNewValue);
+      if (hasValueChanged && isStable && onChange) {
         onChange(result.value, event);
       }
       this.setState({
@@ -253,6 +256,11 @@ class NumericInputBase extends Component<Props, State> {
     });
   }
 
+  getLocalizedNumber(value: ?number) {
+    const { locale } = this.props;
+    return convertNumberToLocalizedString(value, locale, this.getDynamicLocaleOptions());
+  }
+
   setInputCaretPosition = (position: number) => {
     const { inputElement } = this;
     if (!inputElement.current) return;
@@ -285,7 +293,7 @@ class NumericInputBase extends Component<Props, State> {
     const InputSkin = skin || context.skins[IDENTIFIERS.INPUT];
 
     const inputValue = value != null ?
-      convertNumberToLocalizedString(value, locale, this.getDynamicLocaleOptions()) :
+      this.getLocalizedNumber(value) :
       this.state.fallbackInputValue;
 
     return (
@@ -318,6 +326,10 @@ const isParsableNumberString = (value: string): boolean => (
 
 const removeCommas = (value: string): string => value.replace(/,/g, '');
 
+const removeDots = (value: string): string => value.replace(/\./g, '');
+
+const removeTrailingZeros = (value: string) => value.replace(/0+$/g, '');
+
 function parseStringToNumber(value: string): ?number {
   const cleanedValue = removeCommas(value);
   if (!isValidNumericInput(cleanedValue)) return null;
@@ -346,4 +358,8 @@ function getNumberOfDots(value: string): number {
 function truncateToPrecision(value: string, precision: number): string {
   const decimalPointIndex = value.indexOf('.');
   return decimalPointIndex !== -1 ? value.substring(0, decimalPointIndex + precision + 1) : value;
+}
+
+function normalizeValue(value: string) {
+  return removeTrailingZeros(removeDots(removeCommas(value)));
 }
