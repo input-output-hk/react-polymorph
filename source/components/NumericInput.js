@@ -202,15 +202,6 @@ class NumericInputBase extends Component<Props, State> {
       };
     }
 
-    // Case: A comma was deleted -> jump cursor over comma
-    if (getNumberOfCommas(newValue) < getNumberOfCommas(currentValue)) {
-      return {
-        value: currentNumber,
-        caretPosition: newCaretPosition,
-        minimumFractionDigits
-      };
-    }
-
     // Case: Number digits have been changed
     const newNumber = getValueAsNumber(newValue);
     if (newNumber != null) {
