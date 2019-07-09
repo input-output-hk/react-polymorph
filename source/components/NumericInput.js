@@ -219,9 +219,7 @@ class NumericInputBase extends Component<Props, State> {
      * ========= PROCESS CLEANED INPUT =============
      */
 
-    const newNumber = getValueAsNumber(
-      newValue, getFractionDigits(newValue).length
-    );
+    const newNumber = getValueAsNumber(newValue, maximumFractionDigits);
     const localizedNewValue = this.getLocalizedNumber(newNumber);
     const isStable = normalizeValue(newValue) === normalizeValue(localizedNewValue);
 
