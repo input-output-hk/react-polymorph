@@ -231,12 +231,9 @@ class NumericInputBase extends Component<Props, State> {
     // Case: Invalid change has been made -> ignore it
 
     if (newNumber == null || !isStable) {
-      const numerOfNewDigitsInserted = (
-        normalizeValue(newValue).length - normalizeValue(currentValue).length
-      );
       return {
         value: currentNumber,
-        caretPosition: changedCaretPosition - numerOfNewDigitsInserted,
+        caretPosition: changedCaretPosition - 1,
         minimumFractionDigits
       };
     }
@@ -398,5 +395,5 @@ function truncateToPrecision(value: string, precision: number): string {
 }
 
 function normalizeValue(value: string) {
-  return removeTrailingZeros(removeDots(removeCommas(value)));
+  return removeDots(removeTrailingZeros(removeCommas(value)));
 }
