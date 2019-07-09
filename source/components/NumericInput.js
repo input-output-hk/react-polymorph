@@ -33,6 +33,7 @@ type Props = {
   theme: ?Object,
   themeId: string,
   themeOverrides: Object,
+  useDynamicDigitCalculation: boolean,
   value: ?number,
 };
 
@@ -56,6 +57,7 @@ class NumericInputBase extends Component<Props, State> {
     theme: null,
     themeId: IDENTIFIERS.INPUT,
     themeOverrides: {},
+    useDynamicDigitCalculation: false,
     value: null,
   };
 
@@ -130,7 +132,7 @@ class NumericInputBase extends Component<Props, State> {
     fallbackInputValue?: string,
     minimumFractionDigits: number,
   } {
-    const { value, locale } = this.props;
+    const { value, locale, useDynamicDigitCalculation } = this.props;
 
     /**
      * ========= HANDLE EDGE-CASES =============
@@ -218,8 +220,11 @@ class NumericInputBase extends Component<Props, State> {
     /**
      * ========= PROCESS CLEANED INPUT =============
      */
-
-    const newNumber = getValueAsNumber(newValue, maximumFractionDigits);
+    const dynamicValue = Math.max(
+      minimumFractionDigits, getFractionDigits(removeTrailingZeros(newValue)).length
+    );
+    const fractionDigits = useDynamicDigitCalculation ? dynamicValue : maximumFractionDigits;
+    const newNumber = getValueAsNumber(newValue, fractionDigits);
     const localizedNewValue = this.getLocalizedNumber(newNumber);
     const isStable = normalizeValue(newValue) === normalizeValue(localizedNewValue);
 
@@ -333,9 +338,11 @@ const NUMERIC_INPUT_REGEX = /^([\+|\-])?([0-9,]+)?(\.([0-9]+)?)?$/;
 
 const isValidNumericInput = (value: string): boolean => NUMERIC_INPUT_REGEX.test(value);
 
-const isParsableNumberString = (value: string, maxDecimals: number): boolean => (
-  parseFloat(value) >= (Number.MIN_SAFE_INTEGER / 10 ** maxDecimals) &&
-  parseFloat(value) <= (Number.MAX_SAFE_INTEGER / 10 ** maxDecimals) &&
+const isParsableNumberString = (value: string, requiredPrecision: number): boolean => (
+  // The number of digits is limited in Javascript - so the required precision influence
+  // the possible number of integer digits (only 15 digits can be safely represented in total)
+  parseFloat(value) >= (Number.MIN_SAFE_INTEGER / 10 ** requiredPrecision) &&
+  parseFloat(value) <= (Number.MAX_SAFE_INTEGER / 10 ** requiredPrecision) &&
   !isNaN(parseFloat(value)) &&
   isFinite(value)
 );
@@ -346,10 +353,10 @@ const removeDots = (value: string): string => value.replace(/\./g, '');
 
 const removeTrailingZeros = (value: string) => value.replace(/0+$/g, '');
 
-function parseStringToNumber(value: string, maxDecimals: number): ?number {
+function parseStringToNumber(value: string, requiredPrecision: number): ?number {
   const cleanedValue = removeCommas(value);
   if (!isValidNumericInput(cleanedValue)) return null;
-  if (!isParsableNumberString(cleanedValue, maxDecimals)) return null;
+  if (!isParsableNumberString(cleanedValue, requiredPrecision)) return null;
   return parseFloat(cleanedValue);
 }
 
@@ -359,8 +366,8 @@ function convertNumberToLocalizedString(
   return num != null ? num.toLocaleString(locale, options) : '';
 }
 
-function getValueAsNumber(value: string | number, maxDecimals: number): ?number {
-  return typeof value === 'string' ? parseStringToNumber(value, maxDecimals) : value;
+function getValueAsNumber(value: string | number, requiredPrecision: number): ?number {
+  return typeof value === 'string' ? parseStringToNumber(value, requiredPrecision) : value;
 }
 
 function getNumberOfCommas(value: string): number {
