@@ -106,12 +106,9 @@ class NumericInputBase extends Component<Props, State> {
     const { selectionStart } = event.target;
     const newValue = event.target.value;
     const result = this.processValueChange(newValue, selectionStart);
-
     if (result) {
       const hasValueChanged = value !== result.value;
-      const localizedNewValue = this.getLocalizedNumber(result.value);
-      const isStable = normalizeValue(newValue) === normalizeValue(localizedNewValue);
-      if (hasValueChanged && isStable && onChange) {
+      if (hasValueChanged && onChange) {
         onChange(result.value, event);
       }
       this.setState({
@@ -122,7 +119,12 @@ class NumericInputBase extends Component<Props, State> {
     }
   };
 
-  processValueChange(changedValue: string, newCaretPosition: number): ?{
+  /**
+   * 1. Handle edge cases that don't need further processing
+   * 2. Clean the given value
+   * 3. Final processing
+   */
+  processValueChange(valueToProcess: string, changedCaretPosition: number): ?{
     value: ?number,
     caretPosition: number,
     fallbackInputValue?: string,
@@ -130,10 +132,39 @@ class NumericInputBase extends Component<Props, State> {
   } {
     const { value, locale } = this.props;
 
-    if (changedValue !== '' && changedValue === this.state.fallbackInputValue) return null;
+    /**
+     * ========= HANDLE EDGE-CASES =============
+     */
+
+    // Case: Everything was deleted -> reset state
+    if (valueToProcess === '') {
+      return {
+        value: null,
+        caretPosition: 0,
+        fallbackInputValue: '',
+        minimumFractionDigits: 0,
+      };
+    }
+
+    // Case: value is the same as the fallback (which is always shown if defined)
+    if (valueToProcess === this.state.fallbackInputValue) return null;
+
+    // Case: Just minus sign was entered
+    if (valueToProcess === '-') {
+      return {
+        value: null,
+        caretPosition: 1,
+        fallbackInputValue: valueToProcess, // render standalone minus sign
+        minimumFractionDigits: 0,
+      };
+    }
+
+    /**
+     * ========= CLEAN THE INPUT =============
+     */
 
     // Options
-    const minimumFractionDigits = this.getMinimumFractionDigits();
+    let minimumFractionDigits = this.getMinimumFractionDigits();
     const maximumFractionDigits = this.getMaximumFractionDigits();
     const numberLocaleOptions = this.getDynamicLocaleOptions();
 
@@ -143,84 +174,79 @@ class NumericInputBase extends Component<Props, State> {
     const currentNumberOfDots = getNumberOfDots(currentValue);
     const hadDotBefore = currentNumberOfDots > 0;
 
-    // New value
-    const newValue = truncateToPrecision(changedValue, maximumFractionDigits);
+    // New Value
+    let newValue = valueToProcess;
+    let newCaretPosition = changedCaretPosition;
     const newNumberOfDots = getNumberOfDots(newValue);
     const hasDotsNow = newNumberOfDots > 0;
 
-    // Case: Everything was deleted -> reset everything
-    if (newValue === '') {
-      return {
-        value: null,
-        caretPosition: 0,
-        fallbackInputValue: '',
-        minimumFractionDigits: 0,
-      };
-    }
-
-    // Case: Just minus sign was entered
-    if (newValue === '-') {
-      return {
-        value: null,
-        caretPosition: 1,
-        fallbackInputValue: newValue, // render standalone minus sign
-        minimumFractionDigits: 0,
-      };
-    }
-
-    // Case: One additional decimal point was added somewhere
+    // Case: A second decimal point was added somewhere
     if (hadDotBefore && newNumberOfDots === 2) {
       const oldFirstDotIndex = currentValue.indexOf('.');
       const newFirstDotIndex = newValue.indexOf('.');
       const wasDotAddedBeforeOldOne = newFirstDotIndex < oldFirstDotIndex;
-      const newCleanedValue = removeCharAtPosition(
+      // Remove the second decimal point and set caret position
+      newValue = removeCharAtPosition(
         newValue,
         wasDotAddedBeforeOldOne ? newValue.lastIndexOf('.') : oldFirstDotIndex
       );
-      return {
-        value: getValueAsNumber(newCleanedValue),
-        caretPosition: newCleanedValue.indexOf('.') + 1,
-        minimumFractionDigits
-      };
+      newCaretPosition = newValue.indexOf('.') + 1;
     }
 
-    // Case: Decimal point was deleted -> remove dynamic minimum fraction digits
+    // Case: Decimal point was deleted
     if (hadDotBefore && !hasDotsNow) {
-      return {
-        value: getValueAsNumber(newValue),
-        caretPosition: currentValue.indexOf('.') + 1,
-        minimumFractionDigits: 0,
-      };
+      // Remove dynamic minimum fraction digits
+      minimumFractionDigits = 0;
+      // Jump caret to correct position
+      newCaretPosition = currentValue.indexOf('.') + 1;
     }
 
-    // Case: Dot was added to integer number -> ensure that we show at least one fraction digit
-    if (!hadDotBefore && hasDotsNow) {
-      return {
-        value: getValueAsNumber(newValue),
-        caretPosition: newValue.indexOf('.') + 1,
-        minimumFractionDigits: 1,
-      };
+    // Case: Dot was added to integer number
+    if (!hadDotBefore && newNumberOfDots === 1) {
+      // Ensure that we show at least one fraction digit
+      minimumFractionDigits = 1;
+      newCaretPosition = newValue.indexOf('.') + 1;
     }
 
-    // Case: Number digits have been changed
+    // Add leading zero if dot was inserted at start
+    if (newValue.charAt(0) === '.') {
+      newValue = '0' + newValue;
+    }
+
+    console.log(newValue);
+    newValue = truncateToPrecision(newValue, maximumFractionDigits);
+    console.log(newValue);
+
+    /**
+     * ========= PROCESS CLEANED INPUT =============
+     */
+
     const newNumber = getValueAsNumber(newValue);
-    if (newNumber != null) {
-      // Take the localized formatting into account for the caret position
-      const localizedNewNumber = newNumber.toLocaleString(locale, numberLocaleOptions);
-      const numberOfCommasDiff = (
-        getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue)
-      );
-      return {
-        value: newNumber,
-        caretPosition: Math.max(newCaretPosition + numberOfCommasDiff, 0),
-        minimumFractionDigits
-      };
-    }
+    const localizedNewValue = this.getLocalizedNumber(newNumber);
+    const isStable = normalizeValue(newValue) === normalizeValue(localizedNewValue);
 
     // Case: Invalid change has been made -> ignore it
+
+    if (newNumber == null || !isStable) {
+      const numerOfNewDigitsInserted = (
+        normalizeValue(newValue).length - normalizeValue(currentValue).length
+      );
+      return {
+        value: currentNumber,
+        caretPosition: changedCaretPosition - numerOfNewDigitsInserted,
+        minimumFractionDigits
+      };
+    }
+
+    // Case: Valid change has been made
+
+    const localizedNewNumber = newNumber.toLocaleString(locale, numberLocaleOptions);
+    const numberOfCommasDiff = (
+      getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue)
+    );
     return {
-      value: currentNumber,
-      caretPosition: newCaretPosition,
+      value: newNumber,
+      caretPosition: Math.max(newCaretPosition + numberOfCommasDiff, 0),
       minimumFractionDigits
     };
   }
@@ -235,10 +261,11 @@ class NumericInputBase extends Component<Props, State> {
 
   getMaximumFractionDigits(): number {
     const { numberLocaleOptions } = this.props;
-    if (numberLocaleOptions && numberLocaleOptions.maximumFractionDigits != null) {
-      return numberLocaleOptions.maximumFractionDigits;
-    }
-    return 3; // default
+    const minimumFractionDigits = this.getMinimumFractionDigits();
+    const maximumFractionDigits = (
+      numberLocaleOptions && numberLocaleOptions.maximumFractionDigits != null
+    ) ? numberLocaleOptions.maximumFractionDigits : 3;
+    return Math.max(minimumFractionDigits, maximumFractionDigits);
   }
 
   getDynamicLocaleOptions(): Number$LocaleOptions {
@@ -348,7 +375,10 @@ function getNumberOfDots(value: string): number {
 
 function truncateToPrecision(value: string, precision: number): string {
   const decimalPointIndex = value.indexOf('.');
-  return decimalPointIndex !== -1 ? value.substring(0, decimalPointIndex + precision + 1) : value;
+  if (decimalPointIndex === -1) return value;
+  const digitsBeforeDot = value.substring(0, decimalPointIndex);
+  const digitsAfterDot = removeCommas(value.substring(decimalPointIndex + 1));
+  return digitsBeforeDot + '.' + digitsAfterDot.substring(0, precision);
 }
 
 function normalizeValue(value: string) {
