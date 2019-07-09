@@ -195,10 +195,10 @@ class NumericInputBase extends Component<Props, State> {
 
     // Case: Decimal point was deleted
     if (hadDotBefore && !hasDotsNow) {
-      // Remove dynamic minimum fraction digits
+      if (normalizeValue(newValue) === normalizeValue(currentValue)) {
+        newValue = currentValue;
+      }
       minimumFractionDigits = 0;
-      // Jump caret to correct position
-      newCaretPosition = currentValue.indexOf('.') + 1;
     }
 
     // Case: Dot was added to integer number
@@ -213,15 +213,15 @@ class NumericInputBase extends Component<Props, State> {
       newValue = '0' + newValue;
     }
 
-    console.log(newValue);
     newValue = truncateToPrecision(newValue, maximumFractionDigits);
-    console.log(newValue);
 
     /**
      * ========= PROCESS CLEANED INPUT =============
      */
 
-    const newNumber = getValueAsNumber(newValue);
+    const newNumber = getValueAsNumber(
+      newValue, getFractionDigits(newValue).length
+    );
     const localizedNewValue = this.getLocalizedNumber(newNumber);
     const isStable = normalizeValue(newValue) === normalizeValue(localizedNewValue);
 
@@ -335,9 +335,9 @@ const NUMERIC_INPUT_REGEX = /^([\+|\-])?([0-9,]+)?(\.([0-9]+)?)?$/;
 
 const isValidNumericInput = (value: string): boolean => NUMERIC_INPUT_REGEX.test(value);
 
-const isParsableNumberString = (value: string): boolean => (
-  parseFloat(value) >= Number.MIN_SAFE_INTEGER &&
-  parseFloat(value) <= Number.MAX_SAFE_INTEGER &&
+const isParsableNumberString = (value: string, maxDecimals: number): boolean => (
+  parseFloat(value) >= (Number.MIN_SAFE_INTEGER / 10 ** maxDecimals) &&
+  parseFloat(value) <= (Number.MAX_SAFE_INTEGER / 10 ** maxDecimals) &&
   !isNaN(parseFloat(value)) &&
   isFinite(value)
 );
@@ -348,10 +348,10 @@ const removeDots = (value: string): string => value.replace(/\./g, '');
 
 const removeTrailingZeros = (value: string) => value.replace(/0+$/g, '');
 
-function parseStringToNumber(value: string): ?number {
+function parseStringToNumber(value: string, maxDecimals: number): ?number {
   const cleanedValue = removeCommas(value);
   if (!isValidNumericInput(cleanedValue)) return null;
-  if (!isParsableNumberString(cleanedValue)) return null;
+  if (!isParsableNumberString(cleanedValue, maxDecimals)) return null;
   return parseFloat(cleanedValue);
 }
 
@@ -361,8 +361,8 @@ function convertNumberToLocalizedString(
   return num != null ? num.toLocaleString(locale, options) : '';
 }
 
-function getValueAsNumber(value: string | number): ?number {
-  return typeof value === 'string' ? parseStringToNumber(value) : value;
+function getValueAsNumber(value: string | number, maxDecimals: number): ?number {
+  return typeof value === 'string' ? parseStringToNumber(value, maxDecimals) : value;
 }
 
 function getNumberOfCommas(value: string): number {
@@ -373,12 +373,23 @@ function getNumberOfDots(value: string): number {
   return (value.match(/\./g) || []).length;
 }
 
+function getIntegerDigits(value: string): string {
+  const decimalPointIndex = value.indexOf('.');
+  if (decimalPointIndex === -1) return value;
+  return value.substring(0, decimalPointIndex);
+}
+
+function getFractionDigits(value: string): string {
+  const decimalPointIndex = value.indexOf('.');
+  if (decimalPointIndex === -1) return '';
+  return value.substring(decimalPointIndex + 1);
+}
+
 function truncateToPrecision(value: string, precision: number): string {
   const decimalPointIndex = value.indexOf('.');
   if (decimalPointIndex === -1) return value;
-  const digitsBeforeDot = value.substring(0, decimalPointIndex);
-  const digitsAfterDot = removeCommas(value.substring(decimalPointIndex + 1));
-  return digitsBeforeDot + '.' + digitsAfterDot.substring(0, precision);
+  const fractionDigits = removeCommas(getFractionDigits(value));
+  return getIntegerDigits(value) + '.' + fractionDigits.substring(0, precision);
 }
 
 function normalizeValue(value: string) {
