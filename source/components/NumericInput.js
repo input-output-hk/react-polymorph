@@ -133,6 +133,7 @@ class NumericInputBase extends Component<Props, State> {
     minimumFractionDigits: number,
   } {
     const { value, locale, useDynamicDigitCalculation } = this.props;
+    const { fallbackInputValue } = this.state;
 
     /**
      * ========= HANDLE EDGE-CASES =============
@@ -166,13 +167,15 @@ class NumericInputBase extends Component<Props, State> {
      */
 
     // Options
-    let minimumFractionDigits = this.getMinimumFractionDigits();
+    const propsMinimumFractionDigits = this.getMinimumFractionDigits();
     const maximumFractionDigits = this.getMaximumFractionDigits();
     const numberLocaleOptions = this.getDynamicLocaleOptions();
 
     // Current value
     const currentNumber = value;
-    const currentValue = value != null ? value.toLocaleString(locale, numberLocaleOptions) : '';
+    const currentValue = (
+      value != null ? value.toLocaleString(locale, numberLocaleOptions) : fallbackInputValue
+    );
     const currentNumberOfDots = getNumberOfDots(currentValue);
     const hadDotBefore = currentNumberOfDots > 0;
 
@@ -195,24 +198,25 @@ class NumericInputBase extends Component<Props, State> {
       newCaretPosition = newValue.indexOf('.') + 1;
     }
 
-    // Case: Decimal point was deleted
-    if (hadDotBefore && !hasDotsNow) {
-      if (normalizeValue(newValue) === normalizeValue(currentValue)) {
-        newValue = currentValue;
-      }
-      minimumFractionDigits = 0;
-    }
-
-    // Case: Dot was added to integer number
-    if (!hadDotBefore && newNumberOfDots === 1) {
-      // Ensure that we show at least one fraction digit
-      minimumFractionDigits = 1;
-      newCaretPosition = newValue.indexOf('.') + 1;
-    }
+    console.log(newValue);
+    const numberOfFractionDigits = getFractionDigits(newValue).length;
+    const dynamicMinimumFractionDigits = Math.min(
+      Math.max(propsMinimumFractionDigits, numberOfFractionDigits), maximumFractionDigits
+    );
 
     // Add leading zero if dot was inserted at start
     if (newValue.charAt(0) === '.') {
       newValue = '0' + newValue;
+    }
+
+    // Case: Dot was added at the end of number
+    if (newValue.charAt(newValue.length - 1) === '.') {
+      return {
+        value: null,
+        caretPosition: changedCaretPosition,
+        fallbackInputValue: newValue, // render dot at the end
+        minimumFractionDigits: 0,
+      };
     }
 
     newValue = truncateToPrecision(newValue, maximumFractionDigits);
@@ -220,10 +224,12 @@ class NumericInputBase extends Component<Props, State> {
     /**
      * ========= PROCESS CLEANED INPUT =============
      */
-    const dynamicValue = Math.max(
-      minimumFractionDigits, getFractionDigits(removeTrailingZeros(newValue)).length
+    const dynamicMaxFractionDigits = Math.max(
+      dynamicMinimumFractionDigits, getFractionDigits(removeTrailingZeros(newValue)).length
     );
-    const fractionDigits = useDynamicDigitCalculation ? dynamicValue : maximumFractionDigits;
+    const fractionDigits = (
+      useDynamicDigitCalculation ? dynamicMaxFractionDigits : maximumFractionDigits
+    );
     const newNumber = getValueAsNumber(newValue, fractionDigits);
     const localizedNewValue = this.getLocalizedNumber(newNumber);
     const isStable = normalizeValue(newValue) === normalizeValue(localizedNewValue);
@@ -234,7 +240,7 @@ class NumericInputBase extends Component<Props, State> {
       return {
         value: currentNumber,
         caretPosition: changedCaretPosition - 1,
-        minimumFractionDigits
+        minimumFractionDigits: dynamicMinimumFractionDigits,
       };
     }
 
@@ -247,7 +253,7 @@ class NumericInputBase extends Component<Props, State> {
     return {
       value: newNumber,
       caretPosition: Math.max(newCaretPosition + numberOfCommasDiff, 0),
-      minimumFractionDigits
+      minimumFractionDigits: dynamicMinimumFractionDigits,
     };
   }
 
@@ -256,12 +262,17 @@ class NumericInputBase extends Component<Props, State> {
     const minimumFractionDigitsProp = (
       numberLocaleOptions ? numberLocaleOptions.minimumFractionDigits : null
     );
+    return minimumFractionDigitsProp || 0;
+  }
+
+  getDynamicMinimumFractionDigits(): number {
+    const minimumFractionDigitsProp = this.getMinimumFractionDigits();
     return Math.max(this.state.minimumFractionDigits, minimumFractionDigitsProp || 0);
   }
 
   getMaximumFractionDigits(): number {
     const { numberLocaleOptions } = this.props;
-    const minimumFractionDigits = this.getMinimumFractionDigits();
+    const minimumFractionDigits = this.getDynamicMinimumFractionDigits();
     const maximumFractionDigits = (
       numberLocaleOptions && numberLocaleOptions.maximumFractionDigits != null
     ) ? numberLocaleOptions.maximumFractionDigits : 3;
@@ -270,7 +281,7 @@ class NumericInputBase extends Component<Props, State> {
 
   getDynamicLocaleOptions(): Number$LocaleOptions {
     return Object.assign({}, this.props.numberLocaleOptions, {
-      minimumFractionDigits: this.getMinimumFractionDigits(),
+      minimumFractionDigits: this.getDynamicMinimumFractionDigits(),
     });
   }
 
