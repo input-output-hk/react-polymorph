@@ -116,7 +116,7 @@ class NumericInputBase extends Component<Props, State> {
       this.setState({
         inputCaretPosition: result.caretPosition,
         minimumFractionDigits: result.minimumFractionDigits,
-        fallbackInputValue: result.fallbackInputValue || '',
+        fallbackInputValue: result.fallbackInputValue,
       });
     }
   };
@@ -198,12 +198,6 @@ class NumericInputBase extends Component<Props, State> {
       newCaretPosition = newValue.indexOf('.') + 1;
     }
 
-    console.log(newValue);
-    const numberOfFractionDigits = getFractionDigits(newValue).length;
-    const dynamicMinimumFractionDigits = Math.min(
-      Math.max(propsMinimumFractionDigits, numberOfFractionDigits), maximumFractionDigits
-    );
-
     // Add leading zero if dot was inserted at start
     if (newValue.charAt(0) === '.') {
       newValue = '0' + newValue;
@@ -224,23 +218,26 @@ class NumericInputBase extends Component<Props, State> {
     /**
      * ========= PROCESS CLEANED INPUT =============
      */
+    const numberOfFractionDigits = getFractionDigits(newValue).length;
+    const dynamicMinimumFractionDigits = Math.min(
+      Math.max(propsMinimumFractionDigits, numberOfFractionDigits), maximumFractionDigits
+    );
     const dynamicMaxFractionDigits = Math.max(
-      dynamicMinimumFractionDigits, getFractionDigits(removeTrailingZeros(newValue)).length
+      dynamicMinimumFractionDigits, numberOfFractionDigits
     );
     const fractionDigits = (
       useDynamicDigitCalculation ? dynamicMaxFractionDigits : maximumFractionDigits
     );
     const newNumber = getValueAsNumber(newValue, fractionDigits);
-    const localizedNewValue = this.getLocalizedNumber(newNumber);
-    const isStable = normalizeValue(newValue) === normalizeValue(localizedNewValue);
 
     // Case: Invalid change has been made -> ignore it
 
-    if (newNumber == null || !isStable) {
+    if (newNumber == null) {
       return {
-        value: currentNumber,
         caretPosition: changedCaretPosition - 1,
+        fallbackInputValue,
         minimumFractionDigits: dynamicMinimumFractionDigits,
+        value: currentNumber,
       };
     }
 
@@ -251,9 +248,10 @@ class NumericInputBase extends Component<Props, State> {
       getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue)
     );
     return {
-      value: newNumber,
       caretPosition: Math.max(newCaretPosition + numberOfCommasDiff, 0),
+      fallbackInputValue: '',
       minimumFractionDigits: dynamicMinimumFractionDigits,
+      value: newNumber,
     };
   }
 
