@@ -138,6 +138,15 @@ class NumericInputBase extends Component<Props, State> {
     /**
      * ========= HANDLE HARD EDGE-CASES =============
      */
+    // Case: invalid characters entered -> refuse!
+    if (!isValidNumericInput(valueToProcess)) {
+      return {
+        caretPosition: changedCaretPosition - 1,
+        fallbackInputValue,
+        minimumFractionDigits: this.state.minimumFractionDigits,
+        value,
+      };
+    }
 
     // Case: Everything was deleted -> reset state
     if (valueToProcess === '') {
@@ -202,16 +211,6 @@ class NumericInputBase extends Component<Props, State> {
       newValue = '0' + newValue;
     }
 
-    // Case: Dot was added at the end of number
-    if (newValue.charAt(newValue.length - 1) === '.') {
-      return {
-        value: null,
-        caretPosition: changedCaretPosition,
-        fallbackInputValue: newValue, // render dot at the end
-        minimumFractionDigits: 0,
-      };
-    }
-
     newValue = truncateToPrecision(newValue, maximumFractionDigits);
 
     /**
@@ -237,6 +236,18 @@ class NumericInputBase extends Component<Props, State> {
         fallbackInputValue,
         minimumFractionDigits: dynamicMinimumFractionDigits,
         value: currentNumber,
+      };
+    }
+
+    // Case: Dot was added at the end of number
+
+    const isDotAtTheEnd = newValue.charAt(newValue.length - 1) === '.';
+    if (isDotAtTheEnd) {
+      return {
+        value: null,
+        caretPosition: changedCaretPosition,
+        fallbackInputValue: newValue, // render new value as-is
+        minimumFractionDigits: 0,
       };
     }
 
