@@ -136,7 +136,7 @@ class NumericInputBase extends Component<Props, State> {
     const { fallbackInputValue } = this.state;
 
     /**
-     * ========= HANDLE EDGE-CASES =============
+     * ========= HANDLE HARD EDGE-CASES =============
      */
 
     // Case: Everything was deleted -> reset state
@@ -183,7 +183,6 @@ class NumericInputBase extends Component<Props, State> {
     let newValue = valueToProcess;
     let newCaretPosition = changedCaretPosition;
     const newNumberOfDots = getNumberOfDots(newValue);
-    const hasDotsNow = newNumberOfDots > 0;
 
     // Case: A second decimal point was added somewhere
     if (hadDotBefore && newNumberOfDots === 2) {
@@ -355,10 +354,6 @@ const isParsableNumberString = (value: string, requiredPrecision: number): boole
 
 const removeCommas = (value: string): string => value.replace(/,/g, '');
 
-const removeDots = (value: string): string => value.replace(/\./g, '');
-
-const removeTrailingZeros = (value: string) => value.replace(/0+$/g, '');
-
 function parseStringToNumber(value: string, requiredPrecision: number): ?number {
   const cleanedValue = removeCommas(value);
   if (!isValidNumericInput(cleanedValue)) return null;
@@ -401,8 +396,4 @@ function truncateToPrecision(value: string, precision: number): string {
   if (decimalPointIndex === -1) return value;
   const fractionDigits = removeCommas(getFractionDigits(value));
   return getIntegerDigits(value) + '.' + fractionDigits.substring(0, precision);
-}
-
-function normalizeValue(value: string) {
-  return removeDots(removeTrailingZeros(removeCommas(value)));
 }
