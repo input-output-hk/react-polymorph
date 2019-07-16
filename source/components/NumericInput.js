@@ -14,6 +14,7 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 import { removeCharAtPosition } from '../utils/strings';
+import type { InputEvent } from '../utils/types';
 
 type Props = {
   autoFocus?: boolean,
@@ -105,9 +106,7 @@ class NumericInputBase extends Component<Props, State> {
     event.preventDefault();
     const { value, onChange, disabled } = this.props;
     if (disabled) { return; }
-    const { selectionStart } = event.target;
-    const newValue = event.target.value;
-    const result = this.processValueChange(newValue, selectionStart);
+    const result = this.processValueChange(event.nativeEvent);
     if (result) {
       const hasValueChanged = value !== result.value;
       if (hasValueChanged && onChange) {
@@ -126,12 +125,15 @@ class NumericInputBase extends Component<Props, State> {
    * 2. Clean the given value
    * 3. Final processing
    */
-  processValueChange(valueToProcess: string, changedCaretPosition: number): ?{
+  processValueChange(event: InputEvent): ?{
     value: ?number,
     caretPosition: number,
     fallbackInputValue?: string,
     minimumFractionDigits: number,
   } {
+    const changedCaretPosition = event.target.selectionStart;
+    const valueToProcess = event.target.value;
+    const { inputType } = event;
     const { value, locale, useDynamicDigitCalculation } = this.props;
     const { fallbackInputValue } = this.state;
 
@@ -139,7 +141,7 @@ class NumericInputBase extends Component<Props, State> {
      * ========= HANDLE HARD EDGE-CASES =============
      */
     // Case: invalid characters entered -> refuse!
-    if (!isValidNumericInput(valueToProcess)) {
+    if (!VALID_INPUT_REGEX.test(valueToProcess)) {
       return {
         caretPosition: changedCaretPosition - 1,
         fallbackInputValue,
@@ -206,11 +208,6 @@ class NumericInputBase extends Component<Props, State> {
       newCaretPosition = newValue.indexOf('.') + 1;
     }
 
-    // Add leading zero if dot was inserted at start
-    if (newValue.charAt(0) === '.') {
-      newValue = '0' + newValue;
-    }
-
     newValue = truncateToPrecision(newValue, maximumFractionDigits);
 
     /**
@@ -228,6 +225,17 @@ class NumericInputBase extends Component<Props, State> {
     );
     const newNumber = getValueAsNumber(newValue, fractionDigits);
 
+    // Case: Dot was added at the beginning of number
+
+    if (newValue.charAt(0) === '.') {
+      return {
+        value: null,
+        caretPosition: changedCaretPosition,
+        fallbackInputValue: newValue, // render new value as-is
+        minimumFractionDigits: dynamicMinimumFractionDigits,
+      };
+    }
+
     // Case: Invalid change has been made -> ignore it
 
     if (newNumber == null) {
@@ -241,8 +249,7 @@ class NumericInputBase extends Component<Props, State> {
 
     // Case: Dot was added at the end of number
 
-    const isDotAtTheEnd = newValue.charAt(newValue.length - 1) === '.';
-    if (isDotAtTheEnd) {
+    if (newValue.charAt(newValue.length - 1) === '.') {
       return {
         value: null,
         caretPosition: changedCaretPosition,
@@ -254,11 +261,15 @@ class NumericInputBase extends Component<Props, State> {
     // Case: Valid change has been made
 
     const localizedNewNumber = newNumber.toLocaleString(locale, numberLocaleOptions);
-    const numberOfCommasDiff = (
-      getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue)
-    );
+    const hasNumberChanged = value !== newNumber;
+    const commasDiff = getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue);
+    const haveCommasChanged = commasDiff > 0;
+    const isBackwardDelete = inputType === 'deleteContentBackward';
+    const commaDeleteCaretCorrection = isBackwardDelete ? 0 : 1;
+    const onlyCommasChanged = !hasNumberChanged && haveCommasChanged;
+    const caretCorrection = onlyCommasChanged ? commaDeleteCaretCorrection : commasDiff;
     return {
-      caretPosition: Math.max(newCaretPosition + numberOfCommasDiff, 0),
+      caretPosition: Math.max(newCaretPosition + caretCorrection, 0),
       fallbackInputValue: '',
       minimumFractionDigits: dynamicMinimumFractionDigits,
       value: newNumber,
@@ -350,6 +361,7 @@ export const NumericInput = withTheme(NumericInputBase);
 
 // ========= HELPERS ==========
 
+const VALID_INPUT_REGEX = /^([0-9,\+\-\.]+)?$/;
 const NUMERIC_INPUT_REGEX = /^([\+|\-])?([0-9,]+)?(\.([0-9]+)?)?$/;
 
 const isValidNumericInput = (value: string): boolean => NUMERIC_INPUT_REGEX.test(value);
