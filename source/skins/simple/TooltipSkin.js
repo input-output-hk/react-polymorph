@@ -21,6 +21,7 @@ type Props = {
   isBounded?: boolean,
   isOpeningUpward: boolean,
   isTransparent: boolean,
+  arrowRelativeToTip: boolean,
   theme: Object,
   themeId: string,
   tip: string | Element<any>
@@ -45,6 +46,7 @@ export const TooltipSkin = (props: Props) => {
         isOpeningUpward={props.isOpeningUpward}
         skin={BubbleSkin}
         isTransparent={props.isTransparent}
+        arrowRelativeToTip={props.arrowRelativeToTip}
       >
         {props.tip}
       </Bubble>

@@ -32,6 +32,8 @@ $option-checkmark-width: var(--rp-option-checkmark-width, 5px) !default;
 // arrow
 $options-arrow: var(--rp-options-arrow, true) !default;
 $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
+$options-arrow-width: var(--rp-options-arrow-width, calc(2*#{$options-arrow-size})) !default;
+$options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !default;
 
 
 .options {
@@ -45,7 +47,8 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
         up,
         $option-bg-color,
         $options-border-color,
-        $options-arrow-size
+        $options-arrow-width,
+        $options-arrow-height,
       );
     }
 
@@ -55,7 +58,8 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
           up,
           $option-bg-color-highlighted !important,
           $options-border-color,
-          $options-arrow-size
+          $options-arrow-width,
+          $options-arrow-height,
         );
       }
       &.openUpward [data-bubble-arrow] {
@@ -64,7 +68,8 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
           down,
           $option-bg-color-highlighted !important,
           $options-border-color,
-          $options-arrow-size
+          $options-arrow-width,
+          $options-arrow-height,
         );
       }
     }
@@ -132,7 +137,8 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
           down,
           $option-bg-color,
           $options-border-color,
-          $options-arrow-size
+          $options-arrow-width,
+          $options-arrow-height,
         );
       }
 
@@ -141,7 +147,8 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
           down,
           $option-bg-color-highlighted,
           $options-border-color,
-          $options-arrow-size
+          $options-arrow-width,
+          $options-arrow-height,
         );
       }
     }
