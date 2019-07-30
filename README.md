@@ -170,45 +170,74 @@ const MyNumericInput = () => (
     skin={InputSkin} // but the same skin!
     label="Amount"
     placeholder="0.000000"
-    maxBeforeDot={5}
-    maxAfterDot={6}
-    maxValue={30000}
-    minValue={0.000001}
+    numberLocaleOptions={{ maximumFractionDigits: 6 }}
   />
 );
 ```
 
 
-This is a simple example that shows how you can make/use specialized versions
-of basic components by composition - a core idea of `react-polymorph`!
+_Side Note: this shows how you can make/use specialized versions of basic components by composition 
+(reusing the `InputSkin` with a specialized logic component) - a core idea of react-polymorph!_
 
-##### NumericInput Props:
+##### Expected Behavior & Limitations:
+
+Since there is no web standard on how to build numeric input components, here is the specification we
+came up with that serves our purposes in the best way: 
+
+- Only numeric inputs that are representable by Javascript numbers are valid. This is guarded by `Number.MIN_SAFE_INTEGER` 
+  (-9007199254740991) and `Number.MAX_SAFE_INTEGER` (9007199254740991) but since also fractions need to 
+  represented, the calculation for the maximum integer part goes like this:
+  `Number.MAX_SAFE_INTEGER / 10 ** maximumFractionDigits` (which basically means that one integer digit is lost for
+  each supported fraction digit). For `maximumFractionDigits == 3` this results in 
+  `9007199254740991 / 10 ** 3 == 9007199254740.99` being the biggest number that can be entered.
+- Only numeric digits `[0-9]` and dots `.` can be entered.
+- When a second dot is entered it replaces the existing one and updates the fraction part accordingly
+- Commas cannot be deleted but the cursor should jump over them when DEL or BACKSPACE keys are used
+- The fraction dot can always be deleted (which transforms the fraction part into integer digits)
+  except if the resulting number would exceed the numeric limits!
+- If the fraction dot is deleted but the resulting number is too big the cursor jumps over the dot without deletion
+- If you insert a digit but the resulting number would exceed the numeric limit, nothing happens
+
+##### Props:
 
 ```js
 type NumericInputProps = {
   autoFocus?: boolean,
   className?: string,
+  context: ThemeContextProp,
   disabled?: boolean,
-  enforceMax: boolean,
-  label?: string | Element<any>,
-  enforceMin: boolean,
   error?: string,
+  label?: string | Element<any>,
+  numberLocaleOptions?: Number$LocaleOptions,
   onBlur?: Function,
   onChange?: Function,
   onFocus?: Function,
-  maxAfterDot?: number,
-  maxBeforeDot?: number,
-  maxValue?: number,
-  minValue?: number,
-  readOnly?: boolean,
   placeholder?: string,
-  setError?: Function,
+  readOnly?: boolean,
   skin?: ComponentType<any>,
   theme: ?Object,
+  themeId: string,
   themeOverrides: Object,
-  value: string
+  useDynamicDigitCalculation: boolean,
+  value: ?number,
 };
 ```
+
+###### `numberLocaleOptions`
+
+`Number.toLocaleString()` is used internally to localize the given number value. This method takes options
+explained in greater detail in the 
+[MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) 
+
+The most important parts are `maximumFractionDigits` (defaults to 3 as per web standard) and `minimumFractionDigits`
+which dictate the handling of fraction digits. 
+
+###### `useDynamicDigitCalculation`
+
+This is an optional mode that "sacrifices" simple, clear UX in favor of being able to enter bigger numbers.
+Basically it works the same way but it dynamically calculates how large the integer part of the number can
+be based on the actual fraction digits entered. The less fraction digits, the more integer digits are possible
+and vice versa.
 
 ---
 

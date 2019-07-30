@@ -23,7 +23,6 @@ type Props = {
   disabled?: boolean,
   error?: string,
   label?: string | Element<any>,
-  locale: string,
   numberLocaleOptions?: Number$LocaleOptions,
   onBlur?: Function,
   onChange?: Function,
@@ -45,6 +44,9 @@ type State = {
   fallbackInputValue: string,
 };
 
+// TODO: make this configurable (generalize handling commas and dots in other languages!)
+const LOCALE = 'en-US';
+
 class NumericInputBase extends Component<Props, State> {
 
   inputElement: { current: null | ElementRef<'input'> };
@@ -53,7 +55,6 @@ class NumericInputBase extends Component<Props, State> {
 
   static defaultProps = {
     context: createEmptyContext(),
-    locale: 'en-US',
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
@@ -134,8 +135,10 @@ class NumericInputBase extends Component<Props, State> {
     const changedCaretPosition = event.target.selectionStart;
     const valueToProcess = event.target.value;
     const { inputType } = event;
-    const { value, locale, useDynamicDigitCalculation } = this.props;
+    const { value, useDynamicDigitCalculation } = this.props;
     const { fallbackInputValue } = this.state;
+    const isBackwardDelete = inputType === 'deleteContentBackward';
+    const isForwardDelete = inputType === 'deleteContentForward';
 
     /**
      * ========= HANDLE HARD EDGE-CASES =============
@@ -185,7 +188,7 @@ class NumericInputBase extends Component<Props, State> {
     // Current value
     const currentNumber = value;
     const currentValue = (
-      value != null ? value.toLocaleString(locale, numberLocaleOptions) : fallbackInputValue
+      value != null ? value.toLocaleString(LOCALE, numberLocaleOptions) : fallbackInputValue
     );
     const currentNumberOfDots = getNumberOfDots(currentValue);
     const hadDotBefore = currentNumberOfDots > 0;
@@ -237,10 +240,12 @@ class NumericInputBase extends Component<Props, State> {
     }
 
     // Case: Invalid change has been made -> ignore it
-
     if (newNumber == null) {
+      const isDeletion = isForwardDelete || isBackwardDelete;
+      const deleteAdjustment = isBackwardDelete ? 0 : 1; // special cases when deleting dot
+      const insertAdjustment = -1; // don't move caret if numbers are "inserted"
       return {
-        caretPosition: changedCaretPosition - 1,
+        caretPosition: changedCaretPosition + (isDeletion ? deleteAdjustment : insertAdjustment),
         fallbackInputValue,
         minimumFractionDigits: dynamicMinimumFractionDigits,
         value: currentNumber,
@@ -260,11 +265,10 @@ class NumericInputBase extends Component<Props, State> {
 
     // Case: Valid change has been made
 
-    const localizedNewNumber = newNumber.toLocaleString(locale, numberLocaleOptions);
+    const localizedNewNumber = newNumber.toLocaleString(LOCALE, numberLocaleOptions);
     const hasNumberChanged = value !== newNumber;
     const commasDiff = getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue);
     const haveCommasChanged = commasDiff > 0;
-    const isBackwardDelete = inputType === 'deleteContentBackward';
     const commaDeleteCaretCorrection = isBackwardDelete ? 0 : 1;
     const onlyCommasChanged = !hasNumberChanged && haveCommasChanged;
     const caretCorrection = onlyCommasChanged ? commaDeleteCaretCorrection : commasDiff;
@@ -305,8 +309,7 @@ class NumericInputBase extends Component<Props, State> {
   }
 
   getLocalizedNumber(value: ?number) {
-    const { locale } = this.props;
-    return convertNumberToLocalizedString(value, locale, this.getDynamicLocaleOptions());
+    return convertNumberToLocalizedString(value, LOCALE, this.getDynamicLocaleOptions());
   }
 
   setInputCaretPosition = (position: number) => {
@@ -328,7 +331,6 @@ class NumericInputBase extends Component<Props, State> {
     const {
       context,
       error,
-      locale,
       numberLocaleOptions,
       onChange,
       skin,
