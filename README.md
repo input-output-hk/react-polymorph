@@ -187,9 +187,9 @@ came up with that serves our purposes in the best way:
 - Only numeric inputs that are representable by Javascript numbers are valid. This is guarded by `Number.MIN_SAFE_INTEGER` 
   (-9007199254740991) and `Number.MAX_SAFE_INTEGER` (9007199254740991) but since also fractions need to 
   represented, the calculation for the maximum integer part goes like this:
-  `Number.MAX_SAFE_INTEGER / 10 ** maximumFractionDigits` (which basically means that one integer digit is lost for
+  `Number.MAX_SAFE_INTEGER / 10 ** (maximumFractionDigits + 1)` (which basically means that one integer digit is lost for
   each supported fraction digit). For `maximumFractionDigits == 3` this results in 
-  `9007199254740991 / 10 ** 3 == 9007199254740.99` being the biggest number that can be entered.
+  `9007199254740991 / 10 ** 4 == 900719925474.099` being the biggest number that can be entered.
 - Only numeric digits `[0-9]` and dots `.` can be entered.
 - When a second dot is entered it replaces the existing one and updates the fraction part accordingly
 - Commas cannot be deleted but the cursor should jump over them when DEL or BACKSPACE keys are used

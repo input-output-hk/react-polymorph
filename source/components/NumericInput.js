@@ -371,8 +371,8 @@ const isValidNumericInput = (value: string): boolean => NUMERIC_INPUT_REGEX.test
 const isParsableNumberString = (value: string, requiredPrecision: number): boolean => (
   // The number of digits is limited in Javascript - so the required precision influence
   // the possible number of integer digits (only 15 digits can be safely represented in total)
-  parseFloat(value) >= (Number.MIN_SAFE_INTEGER / 10 ** requiredPrecision) &&
-  parseFloat(value) <= (Number.MAX_SAFE_INTEGER / 10 ** requiredPrecision) &&
+  parseFloat(value) >= (Number.MIN_SAFE_INTEGER / 10 ** (requiredPrecision + 1)) &&
+  parseFloat(value) <= (Number.MAX_SAFE_INTEGER / 10 ** (requiredPrecision + 1)) &&
   !isNaN(parseFloat(value)) &&
   isFinite(value)
 );
