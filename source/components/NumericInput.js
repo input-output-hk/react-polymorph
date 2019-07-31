@@ -139,6 +139,7 @@ class NumericInputBase extends Component<Props, State> {
     const { fallbackInputValue } = this.state;
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
+    const deleteCaretCorrection = isBackwardDelete ? 0 : 1;
 
     /**
      * ========= HANDLE HARD EDGE-CASES =============
@@ -263,15 +264,25 @@ class NumericInputBase extends Component<Props, State> {
       };
     }
 
+    // Case: Dot was deleted with minimum fraction digits constrain defined
+
+    if (propsMinimumFractionDigits != null && hadDotBefore && !newNumberOfDots) {
+      return {
+        caretPosition: newCaretPosition + deleteCaretCorrection,
+        fallbackInputValue: '',
+        minimumFractionDigits: dynamicMinimumFractionDigits,
+        value: currentNumber,
+      };
+    }
+
     // Case: Valid change has been made
 
     const localizedNewNumber = newNumber.toLocaleString(LOCALE, numberLocaleOptions);
     const hasNumberChanged = value !== newNumber;
     const commasDiff = getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue);
     const haveCommasChanged = commasDiff > 0;
-    const commaDeleteCaretCorrection = isBackwardDelete ? 0 : 1;
     const onlyCommasChanged = !hasNumberChanged && haveCommasChanged;
-    const caretCorrection = onlyCommasChanged ? commaDeleteCaretCorrection : commasDiff;
+    const caretCorrection = onlyCommasChanged ? deleteCaretCorrection : commasDiff;
     return {
       caretPosition: Math.max(newCaretPosition + caretCorrection, 0),
       fallbackInputValue: '',
