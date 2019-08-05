@@ -97,8 +97,12 @@ class NumericInputBase extends Component<Props, State> {
     didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
-  componentDidUpdate() {
-    this.setInputCaretPosition(this.state.inputCaretPosition);
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    const { value } = this.props;
+    const { inputCaretPosition } = this.state;
+    if (value !== prevProps.value || inputCaretPosition !== prevState.inputCaretPosition) {
+      this.setInputCaretPosition(inputCaretPosition);
+    }
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
