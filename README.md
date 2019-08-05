@@ -193,8 +193,8 @@ came up with that serves our purposes in the best way:
 - Only numeric digits `[0-9]` and dots `.` can be entered.
 - When a second dot is entered it replaces the existing one and updates the fraction part accordingly
 - Commas cannot be deleted but the cursor should jump over them when DEL or BACKSPACE keys are used
-- The fraction dot can always be deleted (which transforms the fraction part into integer digits)
-  except if the resulting number would exceed the numeric limits!
+- The fraction dot can only be deleted if `minimumFractionDigits` is not defined or
+  if the resulting number does not exceed the numeric limits!
 - If the fraction dot is deleted but the resulting number is too big the cursor jumps over the dot without deletion
 - If you insert a digit but the resulting number would exceed the numeric limit, nothing happens
 

@@ -57,16 +57,6 @@ storiesOf('NumericInput', module)
       />
     ))
   )
-  .add('dynamic maximumFractionDigits (6)',
-    withState({ value: 0 }, store => (
-      <NumericInput
-        onChange={value => store.set({ value })}
-        numberLocaleOptions={{ maximumFractionDigits: 6 }}
-        useDynamicDigitCalculation
-        value={store.state.value}
-      />
-    ))
-  )
   .add('autoFocus',
     withState({ value: null }, store => (
       <NumericInput

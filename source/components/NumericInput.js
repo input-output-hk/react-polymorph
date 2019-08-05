@@ -33,7 +33,6 @@ type Props = {
   theme: ?Object,
   themeId: string,
   themeOverrides: Object,
-  useDynamicDigitCalculation: boolean,
   value: ?number,
 };
 
@@ -59,7 +58,6 @@ class NumericInputBase extends Component<Props, State> {
     theme: null,
     themeId: IDENTIFIERS.INPUT,
     themeOverrides: {},
-    useDynamicDigitCalculation: false,
     value: null,
   };
 
@@ -135,7 +133,7 @@ class NumericInputBase extends Component<Props, State> {
     const changedCaretPosition = event.target.selectionStart;
     const valueToProcess = event.target.value;
     const { inputType } = event;
-    const { value, useDynamicDigitCalculation } = this.props;
+    const { value } = this.props;
     const { fallbackInputValue } = this.state;
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
@@ -221,13 +219,7 @@ class NumericInputBase extends Component<Props, State> {
     const dynamicMinimumFractionDigits = Math.min(
       Math.max(propsMinimumFractionDigits, numberOfFractionDigits), maximumFractionDigits
     );
-    const dynamicMaxFractionDigits = Math.max(
-      dynamicMinimumFractionDigits, numberOfFractionDigits
-    );
-    const fractionDigits = (
-      useDynamicDigitCalculation ? dynamicMaxFractionDigits : maximumFractionDigits
-    );
-    const newNumber = getValueAsNumber(newValue, fractionDigits);
+    const newNumber = getValueAsNumber(newValue, maximumFractionDigits);
 
     // Case: Dot was added at the beginning of number
 
@@ -265,8 +257,7 @@ class NumericInputBase extends Component<Props, State> {
     }
 
     // Case: Dot was deleted with minimum fraction digits constrain defined
-
-    if (propsMinimumFractionDigits != null && hadDotBefore && !newNumberOfDots) {
+    if (this.getMinimumFractionDigitsProp() != null && hadDotBefore && !newNumberOfDots) {
       return {
         caretPosition: newCaretPosition + deleteCaretCorrection,
         fallbackInputValue: '',
@@ -291,12 +282,15 @@ class NumericInputBase extends Component<Props, State> {
     };
   }
 
-  getMinimumFractionDigits(): number {
+  getMinimumFractionDigitsProp(): number | null {
     const { numberLocaleOptions } = this.props;
-    const minimumFractionDigitsProp = (
-      numberLocaleOptions ? numberLocaleOptions.minimumFractionDigits : null
-    );
-    return minimumFractionDigitsProp || 0;
+    if (!numberLocaleOptions) return null;
+    const { minimumFractionDigits } = numberLocaleOptions;
+    return minimumFractionDigits || null;
+  }
+
+  getMinimumFractionDigits(): number {
+    return this.getMinimumFractionDigitsProp() || 0;
   }
 
   getDynamicMinimumFractionDigits(): number {
