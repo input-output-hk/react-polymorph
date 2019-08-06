@@ -5,7 +5,7 @@
     background-color: #fff;
 
     [data-bubble-arrow] {
-      @include arrow(up, #fff, rgba(10, 145, 48, 0.8), 5px);
+      @include arrow(up, #fff, rgba(10, 145, 48, 0.8), 10px, 5px);
     }
 
     .bubble {

@@ -17,6 +17,7 @@ type Props = {
   isBounded?: boolean,
   isOpeningUpward: boolean,
   isTransparent: boolean,
+  arrowRelativeToTip: boolean,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeOverrides: Object, // custom css/scss from user that adheres to component's theme API
@@ -35,6 +36,7 @@ class TooltipBase extends Component<Props, State> {
     context: createEmptyContext(),
     isOpeningUpward: true,
     isTransparent: true,
+    arrowRelativeToTip: false,
     theme: null,
     themeId: IDENTIFIERS.TOOLTIP,
     themeOverrides: {}

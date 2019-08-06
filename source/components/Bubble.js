@@ -19,6 +19,7 @@ type Props = {
   isFloating: boolean,
   isOpeningUpward: boolean,
   isTransparent: boolean,
+  arrowRelativeToTip: boolean,
   skin?: ComponentType<any>,
   theme: ?Object, // takes precedence over them in context if passed
   themeId: string,
@@ -43,6 +44,7 @@ class BubbleBase extends Component<Props, State> {
     isFloating: false,
     isOpeningUpward: false,
     isTransparent: true,
+    arrowRelativeToTip: false,
     theme: null,
     themeId: IDENTIFIERS.BUBBLE,
     themeOverrides: {}

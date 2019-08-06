@@ -12,3 +12,11 @@
   font-style: italic;
   text-decoration: underline;
 }
+
+.fitToSize {
+  padding: 150px;
+  :global(.SimpleBubble_bubble) {
+    // size tooltip to text contained inside
+    min-width: auto;
+  }
+}

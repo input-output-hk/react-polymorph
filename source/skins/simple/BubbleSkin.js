@@ -15,6 +15,7 @@ type Props = {
   isHidden: boolean,
   isOpeningUpward: boolean,
   isTransparent: boolean,
+  arrowRelativeToTip: boolean,
   position: Object,
   rootRef: ElementRef<*>,
   theme: Object,
@@ -22,7 +23,7 @@ type Props = {
 };
 
 export const BubbleSkin = (props: Props) => {
-  const { theme, themeId } = props;
+  const { arrowRelativeToTip, theme, themeId } = props;
 
   return (
     <div
@@ -46,8 +47,9 @@ export const BubbleSkin = (props: Props) => {
     >
       <div className={theme[themeId].bubble} data-bubble-container>
         {props.children}
+        {arrowRelativeToTip && <span className={theme[themeId].arrow} data-bubble-arrow />}
       </div>
-      <span className={theme[themeId].arrow} data-bubble-arrow />
+      {!arrowRelativeToTip && <span className={theme[themeId].arrow} data-bubble-arrow />}
     </div>
   );
 };

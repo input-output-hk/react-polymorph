@@ -27,6 +27,7 @@ $checkbox-label-text-color-disabled: var(--rp-checkbox-label-text-color-disabled
 .root {
   display: flex;
   position: relative;
+  width: fit-content;
 }
 
 .input {

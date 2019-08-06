@@ -650,6 +650,7 @@ type TooltipProps = {
   isBounded?: boolean,
   isOpeningUpward: boolean,
   isTransparent: boolean,
+  arrowRelativeToTip: boolean,
   skin?: ComponentType<any>,
   theme: ?Object,
   themeOverrides: Object,
