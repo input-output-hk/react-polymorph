@@ -88,6 +88,17 @@ storiesOf('Tooltip', module)
     </div>
   ))
 
+  .add('arrowRelativeToTip', () => (
+    <div className={styles.fitToSize}>
+      <Tooltip
+        arrowRelativeToTip
+        tip="small tip"
+      >
+        {'this is a really long string for demonstration purposes'}
+      </Tooltip>
+    </div>
+  ))
+
   .add('theme overrides', () => (
     <div className={styles.container}>
       <Tooltip
