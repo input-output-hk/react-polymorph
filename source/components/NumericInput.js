@@ -261,7 +261,10 @@ class NumericInputBase extends Component<Props, State> {
     }
 
     // Case: Dot was deleted with minimum fraction digits constrain defined
-    if (this.getMinimumFractionDigitsProp() != null && hadDotBefore && !newNumberOfDots) {
+    const isInsert = inputType === 'insertText';
+    const hasFractions = this.getMinimumFractionDigitsProp() != null;
+    const wasDotRemoved = hadDotBefore && !newNumberOfDots;
+    if (wasDotRemoved && hasFractions && !isInsert) {
       return {
         caretPosition: newCaretPosition + deleteCaretCorrection,
         fallbackInputValue: '',
