@@ -195,6 +195,7 @@ came up with that serves our purposes in the best way:
 - Commas cannot be deleted but the cursor should jump over them when DEL or BACKSPACE keys are used
 - The fraction dot can only be deleted if `minimumFractionDigits` is not defined or
   if the resulting number does not exceed the numeric limits!
+- It's possible to replace the whole number or parts of it (even the dot) by inserting another number.
 - If the fraction dot is deleted but the resulting number is too big the cursor jumps over the dot without deletion
 - If you insert a digit but the resulting number would exceed the numeric limit, nothing happens
 
