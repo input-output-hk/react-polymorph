@@ -9,7 +9,7 @@ describe('NumericInput onChange simulations', () => {
     const onChangeMock = jest.fn();
     const wrapper = mountInSimpleTheme(<NumericInput onChange={onChangeMock} />);
     const input = wrapper.find('input');
-    input.simulate('change', { nativeEvent: { target: { value: '19.00' }}});
+    input.simulate('change', { nativeEvent: { target: { value: '19.00' } } });
     expect(onChangeMock.mock.calls[0][0]).toBe(19.00);
   });
 
@@ -17,7 +17,7 @@ describe('NumericInput onChange simulations', () => {
     const onChangeMock = jest.fn();
     const wrapper = mountInSimpleTheme(<NumericInput onChange={onChangeMock} />);
     const input = wrapper.find('input');
-    input.simulate('change', { nativeEvent: { target: { value: '9,999,999.00' }}});
+    input.simulate('change', { nativeEvent: { target: { value: '9,999,999.00' } } });
     expect(onChangeMock.mock.calls[0][0]).toBe(9999999.00);
   });
 
@@ -27,7 +27,7 @@ describe('NumericInput onChange simulations', () => {
       <NumericInput onChange={onChangeMock} />
     );
     const input = wrapper.find('input');
-    input.simulate('change', { nativeEvent: { target: { value: 'A.00' }}});
+    input.simulate('change', { nativeEvent: { target: { value: 'A.00' } } });
     expect(onChangeMock.mock.calls.length).toBe(0);
   });
 
