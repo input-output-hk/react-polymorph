@@ -49,6 +49,7 @@ const LOCALE = 'en-US';
 class NumericInputBase extends Component<Props, State> {
 
   inputElement: { current: null | ElementRef<'input'> };
+  _hasInputBeenChanged: boolean = false;
 
   static displayName = 'NumericInput';
 
@@ -100,9 +101,12 @@ class NumericInputBase extends Component<Props, State> {
   componentDidUpdate(prevProps: Props, prevState: State) {
     const { value } = this.props;
     const { inputCaretPosition } = this.state;
-    if (value !== prevProps.value || inputCaretPosition !== prevState.inputCaretPosition) {
+    const hasValueBeenChanged = value !== prevProps.value;
+    const hasCaretBeenChanged = inputCaretPosition !== prevState.inputCaretPosition;
+    if (this._hasInputBeenChanged || hasValueBeenChanged || hasCaretBeenChanged) {
       this.setInputCaretPosition(inputCaretPosition);
     }
+    this._hasInputBeenChanged = false;
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
@@ -111,6 +115,7 @@ class NumericInputBase extends Component<Props, State> {
     if (disabled) { return; }
     const result = this.processValueChange(event.nativeEvent);
     if (result) {
+      this._hasInputBeenChanged = true;
       const hasValueChanged = value !== result.value;
       if (hasValueChanged && onChange) {
         onChange(result.value, event);
@@ -141,6 +146,7 @@ class NumericInputBase extends Component<Props, State> {
     const { fallbackInputValue } = this.state;
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
+    const isDeletion = isForwardDelete || isBackwardDelete;
     const deleteCaretCorrection = isBackwardDelete ? 0 : 1;
 
     /**
@@ -238,7 +244,6 @@ class NumericInputBase extends Component<Props, State> {
 
     // Case: Invalid change has been made -> ignore it
     if (newNumber == null) {
-      const isDeletion = isForwardDelete || isBackwardDelete;
       const deleteAdjustment = isBackwardDelete ? 0 : 1; // special cases when deleting dot
       const insertAdjustment = -1; // don't move caret if numbers are "inserted"
       return {
@@ -250,12 +255,11 @@ class NumericInputBase extends Component<Props, State> {
     }
 
     // Case: Dot was added at the end of number
-
-    if (newValue.charAt(newValue.length - 1) === '.') {
+    if (!isDeletion && newValue.charAt(newValue.length - 1) === '.') {
       return {
         value: null,
         caretPosition: changedCaretPosition,
-        fallbackInputValue: newValue, // render new value as-is
+        fallbackInputValue: newValue,
         minimumFractionDigits: 0,
       };
     }
