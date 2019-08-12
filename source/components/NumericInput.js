@@ -49,6 +49,7 @@ const LOCALE = 'en-US';
 class NumericInputBase extends Component<Props, State> {
 
   inputElement: { current: null | ElementRef<'input'> };
+  _hasInputBeenChanged: boolean = false;
 
   static displayName = 'NumericInput';
 
@@ -100,9 +101,12 @@ class NumericInputBase extends Component<Props, State> {
   componentDidUpdate(prevProps: Props, prevState: State) {
     const { value } = this.props;
     const { inputCaretPosition } = this.state;
-    if (value !== prevProps.value || inputCaretPosition !== prevState.inputCaretPosition) {
+    const hasValueBeenChanged = value !== prevProps.value;
+    const hasCaretBeenChanged = inputCaretPosition !== prevState.inputCaretPosition;
+    if (this._hasInputBeenChanged || hasValueBeenChanged || hasCaretBeenChanged) {
       this.setInputCaretPosition(inputCaretPosition);
     }
+    this._hasInputBeenChanged = false;
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
@@ -111,6 +115,7 @@ class NumericInputBase extends Component<Props, State> {
     if (disabled) { return; }
     const result = this.processValueChange(event.nativeEvent);
     if (result) {
+      this._hasInputBeenChanged = true;
       const hasValueChanged = value !== result.value;
       if (hasValueChanged && onChange) {
         onChange(result.value, event);
