@@ -146,6 +146,7 @@ class NumericInputBase extends Component<Props, State> {
     const { fallbackInputValue } = this.state;
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
+    const isDeletion = isForwardDelete || isBackwardDelete;
     const deleteCaretCorrection = isBackwardDelete ? 0 : 1;
 
     /**
@@ -243,7 +244,6 @@ class NumericInputBase extends Component<Props, State> {
 
     // Case: Invalid change has been made -> ignore it
     if (newNumber == null) {
-      const isDeletion = isForwardDelete || isBackwardDelete;
       const deleteAdjustment = isBackwardDelete ? 0 : 1; // special cases when deleting dot
       const insertAdjustment = -1; // don't move caret if numbers are "inserted"
       return {
@@ -255,12 +255,11 @@ class NumericInputBase extends Component<Props, State> {
     }
 
     // Case: Dot was added at the end of number
-
-    if (newValue.charAt(newValue.length - 1) === '.') {
+    if (!isDeletion && newValue.charAt(newValue.length - 1) === '.') {
       return {
         value: null,
         caretPosition: changedCaretPosition,
-        fallbackInputValue: newValue, // render new value as-is
+        fallbackInputValue: newValue,
         minimumFractionDigits: 0,
       };
     }
