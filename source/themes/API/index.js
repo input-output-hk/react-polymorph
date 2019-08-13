@@ -4,6 +4,7 @@ import { AUTOCOMPLETE_THEME_API } from './autocomplete';
 import { BUBBLE_THEME_API } from './bubble';
 import { BUTTON_THEME_API } from './button';
 import { CHECKBOX_THEME_API } from './checkbox';
+import { DROPDOWN_THEME_API } from './dropdown';
 import { FLEX_THEME_API } from './flex';
 import { FORM_FIELD_THEME_API } from './formfield';
 import { GRID_THEME_API } from './grid';
@@ -28,6 +29,7 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.BUBBLE]: BUBBLE_THEME_API,
   [IDENTIFIERS.BUTTON]: BUTTON_THEME_API,
   [IDENTIFIERS.CHECKBOX]: CHECKBOX_THEME_API,
+  [IDENTIFIERS.DROPDOWN]: DROPDOWN_THEME_API,
   [IDENTIFIERS.FLEX]: FLEX_THEME_API,
   [IDENTIFIERS.FORM_FIELD]: FORM_FIELD_THEME_API,
   [IDENTIFIERS.GRID]: GRID_THEME_API,

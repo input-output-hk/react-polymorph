@@ -4,6 +4,7 @@ import './Autocomplete.stories';
 import './Bubble.stories';
 import './Button.stories';
 import './Checkbox.stories';
+import './Dropdown.stories';
 import './Header.stories';
 import './InfiniteScroll.stories';
 import './Input.stories';

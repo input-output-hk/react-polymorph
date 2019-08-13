@@ -6,17 +6,21 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
-0.9.0
-=====
+### Features
 
-- Adds a new prop `arrowRelativeToTip` to tooltips which allows to center the arrow relative to the size of the tooltip and not the parent element. [PR 113](https://github.com/input-output-hk/react-polymorph/pull/113)
-  - (BREAKING) `none` is no longer a valid option for `$bubble-border-color` and it should instead be `transparent`
-  - (BREAKING) Any library that directly calls the `arrow` mixin directly has to be updated to take into account the change in parameter to use `width` and `height` instead of a single `size`. If you use Bubble or any component that instead of a direct use of the mixin, no change is needed. 
+- New `Dropdown` component []()
 
 ### Breaking Changes
 
 - `NumericInput` component was completely rewritten to be more flexible and straight forward.
   [PR 114](https://github.com/input-output-hk/react-polymorph/pull/114)
+  
+- Adds a new prop `arrowRelativeToTip` to tooltips which allows to center the arrow relative to the size of the tooltip 
+  and not the parent element. [PR 113](https://github.com/input-output-hk/react-polymorph/pull/113)
+    - (BREAKING) `none` is no longer a valid option for `$bubble-border-color` and it should instead be `transparent`
+    - (BREAKING) Any library that directly calls the `arrow` mixin directly has to be updated to take into account the 
+      change in parameter to use `width` and `height` instead of a single `size`. If you use Bubble or any component 
+      that instead of a direct use of the mixin, no change is needed. 
   
 ### Chores
 

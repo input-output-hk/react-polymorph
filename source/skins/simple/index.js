@@ -4,6 +4,7 @@ import { AutocompleteSkin } from './AutocompleteSkin';
 import { BubbleSkin } from './BubbleSkin';
 import { ButtonSkin } from './ButtonSkin';
 import { CheckboxSkin } from './CheckboxSkin';
+import { DropdownSkin } from './DropdownSkin';
 import { FormFieldSkin } from './FormFieldSkin';
 import { HeaderSkin } from './HeaderSkin';
 import { InfiniteScrollSkin } from './InfiniteScrollSkin';
@@ -25,6 +26,7 @@ export const SimpleSkins = {
   [IDENTIFIERS.BUBBLE]: BubbleSkin,
   [IDENTIFIERS.BUTTON]: ButtonSkin,
   [IDENTIFIERS.CHECKBOX]: CheckboxSkin,
+  [IDENTIFIERS.DROPDOWN]: DropdownSkin,
   [IDENTIFIERS.FORM_FIELD]: FormFieldSkin,
   [IDENTIFIERS.HEADER]: HeaderSkin,
   [IDENTIFIERS.INFINITE_SCROLL]: InfiniteScrollSkin,

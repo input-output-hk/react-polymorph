@@ -4,6 +4,7 @@ export const IDENTIFIERS = {
   BUBBLE: 'bubble',
   BUTTON: 'button',
   CHECKBOX: 'checkbox',
+  DROPDOWN: 'dropdown',
   FLEX: 'flex',
   FORM_FIELD: 'formfield',
   GRID: 'grid',
