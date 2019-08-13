@@ -379,8 +379,8 @@ export const NumericInput = withTheme(NumericInputBase);
 
 // ========= HELPERS ==========
 
-const VALID_INPUT_REGEX = /^([0-9,\+\-\.]+)?$/;
-const NUMERIC_INPUT_REGEX = /^([\+|\-])?([0-9,]+)?(\.([0-9]+)?)?$/;
+const VALID_INPUT_REGEX = /^([0-9,+\-.]+)?$/;
+const NUMERIC_INPUT_REGEX = /^([+|-])?([0-9,]+)?(\.([0-9]+)?)?$/;
 
 const isValidNumericInput = (value: string): boolean => NUMERIC_INPUT_REGEX.test(value);
 
