@@ -191,6 +191,7 @@ came up with that serves our purposes in the best way:
   each supported fraction digit). For `maximumFractionDigits == 3` this results in 
   `9007199254740991 / 10 ** 4 == 900719925474.099` being the biggest number that can be entered.
 - Only numeric digits `[0-9]` and dots `.` can be entered.
+- When invalid characters are pasted as input, nothing happens
 - When a second dot is entered it replaces the existing one and updates the fraction part accordingly
 - Commas cannot be deleted but the cursor should jump over them when DEL or BACKSPACE keys are used
 - The fraction dot can only be deleted if `minimumFractionDigits` is not defined or
