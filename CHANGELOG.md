@@ -6,6 +6,9 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+0.9.0
+=====
+
 ### Features
 
 - New `Dropdown` component []()
