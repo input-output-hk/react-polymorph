@@ -10,6 +10,11 @@ vNext
   - (BREAKING) `none` is no longer a valid option for `$bubble-border-color` and it should instead be `transparent`
   - (BREAKING) Any library that directly calls the `arrow` mixin directly has to be updated to take into account the change in parameter to use `width` and `height` instead of a single `size`. If you use Bubble or any component that instead of a direct use of the mixin, no change is needed. 
 
+### Breaking Changes
+
+- `NumericInput` component was completely rewritten to be more flexible and straight forward.
+  [PR 114](https://github.com/input-output-hk/react-polymorph/pull/114)
+  
 ### Chores
 
 - Updates contributors in package.json [PR 117](https://github.com/input-output-hk/react-polymorph/pull/117)
