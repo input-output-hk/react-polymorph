@@ -10,7 +10,7 @@
   &:after {
     content: "";
     position: absolute;
-    @include arrow_internal($direction, $bg-color, calc(#{$width} - 1px), calc(#{$height} - 1px));
+    @include arrow_internal($direction, $bg-color, calc(#{$width} - 2px), calc(#{$height} - 2px));
   }
 }
 
