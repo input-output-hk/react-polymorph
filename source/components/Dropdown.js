@@ -12,20 +12,23 @@ import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  activeItem: any,
   className?: string,
   context: ThemeContextProp,
   label: string | Element<any>,
-  items: Array<any>,
+  items: Array<{ }>,
   skin?: ComponentType<any>,
   theme: ?Object,
   themeId: string,
   themeOverrides: Object,
+  toggleMouseOverRoot: Function,
+  toggleMouseOverItems: Function,
 };
 
 type State = {
   composedTheme: Object,
   isOpen: boolean,
+  isMouseOverItems: boolean,
+  isMouseOverRoot: boolean,
 };
 
 class DropdownBase extends Component<Props, State> {
@@ -55,6 +58,8 @@ class DropdownBase extends Component<Props, State> {
         context.ROOT_THEME_API
       ),
       isOpen: false,
+      isMouseOverItems: false,
+      isMouseOverRoot: false,
     };
   }
 
@@ -68,6 +73,16 @@ class DropdownBase extends Component<Props, State> {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
+  // ========= PRIVATE SKIN API =========
+
+  _toggleMouseOverItems = () => {
+    this.setState({ isMouseOverItems: !this.state.isMouseOverItems });
+  };
+
+  _toggleMouseOverRoot = () => {
+    this.setState({ isMouseOverRoot: !this.state.isMouseOverRoot });
+  };
+
   render() {
     const {
       skin,
@@ -78,13 +93,15 @@ class DropdownBase extends Component<Props, State> {
     } = this.props;
 
     const DropdownSkin = skin || context.skins[IDENTIFIERS.DROPDOWN];
+    const { isMouseOverItems, isMouseOverRoot, isOpen } = this.state;
 
     return (
       <DropdownSkin
-        isOpen={this.state.isOpen}
+        isOpen={isOpen || isMouseOverItems || isMouseOverRoot}
         rootRef={this.rootElement}
         theme={this.state.composedTheme}
-        toggleOpen={this.toggleOpen}
+        toggleMouseOverItems={this._toggleMouseOverItems}
+        toggleMouseOverRoot={this._toggleMouseOverRoot}
         {...rest}
       />
     );

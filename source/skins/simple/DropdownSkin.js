@@ -18,14 +18,16 @@ type Props = {
   isOpen: boolean,
   items: Array<any>,
   rootRef: ElementRef<*>,
-  theme: Object, // will take precedence over theme in context if passed
+  theme: Object,
   themeId: string,
-  toggleOpen: Function,
+  toggleMouseOverRoot: Function,
+  toggleMouseOverItems: Function,
 };
 
 export const DropdownSkin = (props: Props) => {
-  const { theme, themeId, toggleOpen } = props;
+  const { theme, themeId, toggleMouseOverItems, toggleMouseOverRoot } = props;
   const themeApi = theme[themeId];
+  console.log(props.isOpen);
   return (
     <div
       ref={props.rootRef}
@@ -33,8 +35,8 @@ export const DropdownSkin = (props: Props) => {
         props.className,
         themeApi.dropdown,
       ])}
-      onMouseEnter={toggleOpen}
-      onMouseLeave={toggleOpen}
+      onMouseEnter={toggleMouseOverRoot}
+      onMouseLeave={toggleMouseOverRoot}
     >
       <div className={themeApi.label}>
         {props.label}
@@ -45,7 +47,7 @@ export const DropdownSkin = (props: Props) => {
         isOpen={props.isOpen}
         options={props.items}
         selectedOption={props.activeItem}
-        toggleOpen={toggleOpen}
+        toggleMouseLocation={toggleMouseOverItems}
       />
     </div>
   );
