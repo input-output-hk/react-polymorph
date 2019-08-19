@@ -40,7 +40,7 @@ type State = {
   composedTheme: Object,
   minimumFractionDigits: number,
   inputCaretPosition: number,
-  fallbackInputValue: string,
+  fallbackInputValue: ?string,
 };
 
 // TODO: make this configurable (generalize handling commas and dots in other languages!)
@@ -77,7 +77,7 @@ class NumericInputBase extends Component<Props, State> {
       ),
       minimumFractionDigits: minimumFractionDigits || 0,
       inputCaretPosition: 0,
-      fallbackInputValue: '',
+      fallbackInputValue: null,
     };
   }
 
@@ -136,14 +136,14 @@ class NumericInputBase extends Component<Props, State> {
   processValueChange(event: InputEvent): ?{
     value: ?number,
     caretPosition: number,
-    fallbackInputValue?: string,
+    fallbackInputValue?: ?string,
     minimumFractionDigits: number,
   } {
     const changedCaretPosition = event.target.selectionStart;
     const valueToProcess = event.target.value;
     const { inputType } = event;
     const { value } = this.props;
-    const { fallbackInputValue } = this.state;
+    const fallbackInputValue = this.state.fallbackInputValue || '';
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
     const isDeletion = isForwardDelete || isBackwardDelete;
@@ -167,7 +167,7 @@ class NumericInputBase extends Component<Props, State> {
       return {
         value: null,
         caretPosition: 0,
-        fallbackInputValue: '',
+        fallbackInputValue: null,
         minimumFractionDigits: 0,
       };
     }
@@ -235,9 +235,9 @@ class NumericInputBase extends Component<Props, State> {
     if (valueToProcess === '.') {
       const hasMinFractions = dynamicMinimumFractionDigits > 0;
       return {
-        value: hasMinFractions ? 0 : null,
+        value: 0,
         caretPosition: 2,
-        fallbackInputValue: hasMinFractions ? '' : '0.',
+        fallbackInputValue: hasMinFractions ? null : '0.',
         minimumFractionDigits: dynamicMinimumFractionDigits,
       };
     }
@@ -245,7 +245,7 @@ class NumericInputBase extends Component<Props, State> {
     // Case: Dot was added at the beginning of number
     if (newValue.charAt(0) === '.') {
       return {
-        value: null,
+        value: newNumber,
         caretPosition: changedCaretPosition,
         fallbackInputValue: newValue, // render new value as-is
         minimumFractionDigits: dynamicMinimumFractionDigits,
@@ -267,7 +267,7 @@ class NumericInputBase extends Component<Props, State> {
     // Case: Dot was added at the end of number
     if (!isDeletion && newValue.charAt(newValue.length - 1) === '.') {
       return {
-        value: null,
+        value: newNumber,
         caretPosition: changedCaretPosition,
         fallbackInputValue: newValue,
         minimumFractionDigits: 0,
@@ -281,7 +281,7 @@ class NumericInputBase extends Component<Props, State> {
     if (wasDotRemoved && hasFractions && !isInsert) {
       return {
         caretPosition: newCaretPosition + deleteCaretCorrection,
-        fallbackInputValue: '',
+        fallbackInputValue: null,
         minimumFractionDigits: dynamicMinimumFractionDigits,
         value: currentNumber,
       };
@@ -297,7 +297,7 @@ class NumericInputBase extends Component<Props, State> {
     const caretCorrection = onlyCommasChanged ? deleteCaretCorrection : commasDiff;
     return {
       caretPosition: Math.max(newCaretPosition + caretCorrection, 0),
-      fallbackInputValue: '',
+      fallbackInputValue: null,
       minimumFractionDigits: dynamicMinimumFractionDigits,
       value: newNumber,
     };
@@ -368,9 +368,10 @@ class NumericInputBase extends Component<Props, State> {
 
     const InputSkin = skin || context.skins[IDENTIFIERS.INPUT];
 
-    const inputValue = value != null ?
-      this.getLocalizedNumber(value) :
-      this.state.fallbackInputValue;
+    const localizedInput = value != null ? this.getLocalizedNumber(value) : '';
+    const inputValue = this.state.fallbackInputValue ?
+      this.state.fallbackInputValue :
+      localizedInput;
 
     return (
       <InputSkin
