@@ -180,7 +180,7 @@ class NumericInputBase extends Component<Props, State> {
       return {
         value: null,
         caretPosition: 1,
-        fallbackInputValue: valueToProcess, // render standalone minus sign
+        fallbackInputValue: '-',
         minimumFractionDigits: 0,
       };
     }
@@ -231,8 +231,18 @@ class NumericInputBase extends Component<Props, State> {
     );
     const newNumber = getValueAsNumber(newValue, maximumFractionDigits);
 
-    // Case: Dot was added at the beginning of number
+    // Case: Just a dot was entered
+    if (valueToProcess === '.') {
+      const hasMinFractions = dynamicMinimumFractionDigits > 0;
+      return {
+        value: hasMinFractions ? 0 : null,
+        caretPosition: 2,
+        fallbackInputValue: hasMinFractions ? '' : '0.',
+        minimumFractionDigits: dynamicMinimumFractionDigits,
+      };
+    }
 
+    // Case: Dot was added at the beginning of number
     if (newValue.charAt(0) === '.') {
       return {
         value: null,
