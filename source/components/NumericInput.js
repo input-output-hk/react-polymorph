@@ -247,7 +247,6 @@ class NumericInputBase extends Component<Props, State> {
       return {
         value: newNumber,
         caretPosition: changedCaretPosition,
-        fallbackInputValue: newValue, // render new value as-is
         minimumFractionDigits: dynamicMinimumFractionDigits,
       };
     }
@@ -264,12 +263,16 @@ class NumericInputBase extends Component<Props, State> {
       };
     }
 
+    const localizedNewNumber = newNumber.toLocaleString(LOCALE, {
+      minimumFractionDigits: dynamicMinimumFractionDigits,
+    });
+
     // Case: Dot was added at the end of number
     if (!isDeletion && newValue.charAt(newValue.length - 1) === '.') {
       return {
         value: newNumber,
         caretPosition: changedCaretPosition,
-        fallbackInputValue: newValue,
+        fallbackInputValue: localizedNewNumber + '.',
         minimumFractionDigits: 0,
       };
     }
@@ -289,7 +292,6 @@ class NumericInputBase extends Component<Props, State> {
 
     // Case: Valid change has been made
 
-    const localizedNewNumber = newNumber.toLocaleString(LOCALE, numberLocaleOptions);
     const hasNumberChanged = value !== newNumber;
     const commasDiff = getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue);
     const haveCommasChanged = commasDiff > 0;
