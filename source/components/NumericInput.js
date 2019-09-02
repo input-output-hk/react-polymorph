@@ -246,7 +246,7 @@ class NumericInputBase extends Component<Props, State> {
     if (newValue.charAt(0) === '.') {
       return {
         value: newNumber,
-        caretPosition: changedCaretPosition,
+        caretPosition: 2,
         minimumFractionDigits: dynamicMinimumFractionDigits,
       };
     }
@@ -272,7 +272,7 @@ class NumericInputBase extends Component<Props, State> {
       return {
         value: newNumber,
         caretPosition: changedCaretPosition,
-        fallbackInputValue: localizedNewNumber + '.',
+        fallbackInputValue: propsMinimumFractionDigits > 0 ? null : localizedNewNumber + '.',
         minimumFractionDigits: 0,
       };
     }
