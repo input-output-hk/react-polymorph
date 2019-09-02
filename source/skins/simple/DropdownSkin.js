@@ -27,7 +27,6 @@ type Props = {
 export const DropdownSkin = (props: Props) => {
   const { theme, themeId, toggleMouseOverItems, toggleMouseOverRoot } = props;
   const themeApi = theme[themeId];
-  console.log(props.isOpen);
   return (
     <div
       ref={props.rootRef}
@@ -44,10 +43,11 @@ export const DropdownSkin = (props: Props) => {
       <Options
         skin={OptionsSkin}
         theme={props.theme}
-        isOpen={props.isOpen}
+        isOpen={true /*props.isOpen*/}
         options={props.items}
         selectedOption={props.activeItem}
         toggleMouseLocation={toggleMouseOverItems}
+        noOptionsArrow
       />
     </div>
   );

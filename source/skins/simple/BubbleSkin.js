@@ -16,6 +16,7 @@ type Props = {
   isOpeningUpward: boolean,
   isTransparent: boolean,
   arrowRelativeToTip: boolean,
+  noArrow: boolean,
   position: Object,
   rootRef: ElementRef<*>,
   theme: Object,
@@ -23,7 +24,7 @@ type Props = {
 };
 
 export const BubbleSkin = (props: Props) => {
-  const { arrowRelativeToTip, theme, themeId } = props;
+  const { arrowRelativeToTip, noArrow, theme, themeId } = props;
 
   return (
     <div
@@ -35,7 +36,8 @@ export const BubbleSkin = (props: Props) => {
         props.isOpeningUpward ? theme[themeId].openUpward : null,
         props.isTransparent ? theme[themeId].transparent : null,
         props.isFloating ? theme[themeId].isFloating : null,
-        props.isHidden ? theme[themeId].isHidden : null
+        props.isHidden ? theme[themeId].isHidden : null,
+        noArrow ? theme[themeId].noArrow : null
       ])}
       style={
         props.position && {
@@ -47,9 +49,9 @@ export const BubbleSkin = (props: Props) => {
     >
       <div className={theme[themeId].bubble} data-bubble-container>
         {props.children}
-        {arrowRelativeToTip && <span className={theme[themeId].arrow} data-bubble-arrow />}
+        {arrowRelativeToTip && <span className={theme[themeId].arrow} data-bubble-arrow={noArrow ? undefined : true} />}
       </div>
-      {!arrowRelativeToTip && <span className={theme[themeId].arrow} data-bubble-arrow />}
+      {!arrowRelativeToTip && <span className={theme[themeId].arrow} data-bubble-arrow={noArrow ? undefined : true} />}
     </div>
   );
 };

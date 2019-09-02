@@ -20,6 +20,7 @@ type Props = {
   isOpen: boolean,
   isOpeningUpward: boolean,
   isSelectedOption: Function,
+  noOptionsArrow?: boolean,
   noResults: boolean,
   noResultsMessage: string | Element<any>,
   optionRenderer: Function,
@@ -44,6 +45,7 @@ export const OptionsSkin = (props: Props) => {
     isOpen,
     isOpeningUpward,
     isSelectedOption,
+    noOptionsArrow,
     noResults,
     noResultsMessage,
     optionsMaxHeight,
@@ -130,6 +132,7 @@ export const OptionsSkin = (props: Props) => {
       isOpeningUpward={isOpeningUpward}
       isHidden={!isOpen}
       isFloating
+      noArrow={noOptionsArrow}
       targetRef={targetRef}
     >
       <ul

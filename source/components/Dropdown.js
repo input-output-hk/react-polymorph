@@ -20,8 +20,6 @@ type Props = {
   theme: ?Object,
   themeId: string,
   themeOverrides: Object,
-  toggleMouseOverRoot: Function,
-  toggleMouseOverItems: Function,
 };
 
 type State = {
