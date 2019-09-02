@@ -247,7 +247,6 @@ class NumericInputBase extends Component<Props, State> {
       return {
         value: newNumber,
         caretPosition: changedCaretPosition,
-        fallbackInputValue: newValue, // render new value as-is
         minimumFractionDigits: dynamicMinimumFractionDigits,
       };
     }
