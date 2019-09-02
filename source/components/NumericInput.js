@@ -354,6 +354,12 @@ class NumericInputBase extends Component<Props, State> {
     inputElement.current.focus();
   };
 
+  onBlur = () => {
+    this.setState({
+      fallbackInputValue: null,
+    });
+  };
+
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
@@ -382,6 +388,7 @@ class NumericInputBase extends Component<Props, State> {
         onChange={this.onChange}
         theme={this.state.composedTheme}
         value={inputValue}
+        onBlur={this.onBlur}
         {...rest}
       />
     );
