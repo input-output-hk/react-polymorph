@@ -246,7 +246,7 @@ class NumericInputBase extends Component<Props, State> {
     if (newValue.charAt(0) === '.') {
       return {
         value: newNumber,
-        caretPosition: changedCaretPosition,
+        caretPosition: 2,
         minimumFractionDigits: dynamicMinimumFractionDigits,
       };
     }
@@ -272,7 +272,7 @@ class NumericInputBase extends Component<Props, State> {
       return {
         value: newNumber,
         caretPosition: changedCaretPosition,
-        fallbackInputValue: localizedNewNumber + '.',
+        fallbackInputValue: propsMinimumFractionDigits > 0 ? null : localizedNewNumber + '.',
         minimumFractionDigits: 0,
       };
     }
@@ -354,6 +354,12 @@ class NumericInputBase extends Component<Props, State> {
     inputElement.current.focus();
   };
 
+  onBlur = () => {
+    this.setState({
+      fallbackInputValue: null,
+    });
+  };
+
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
@@ -382,6 +388,7 @@ class NumericInputBase extends Component<Props, State> {
         onChange={this.onChange}
         theme={this.state.composedTheme}
         value={inputValue}
+        onBlur={this.onBlur}
         {...rest}
       />
     );
