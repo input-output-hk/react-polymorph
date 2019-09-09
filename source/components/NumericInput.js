@@ -291,12 +291,14 @@ class NumericInputBase extends Component<Props, State> {
     }
 
     // Case: Valid change has been made
-
     const hasNumberChanged = value !== newNumber;
     const commasDiff = getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue);
     const haveCommasChanged = commasDiff > 0;
     const onlyCommasChanged = !hasNumberChanged && haveCommasChanged;
-    const caretCorrection = onlyCommasChanged ? deleteCaretCorrection : commasDiff;
+    const leadingZeroCorrection = value === 0 ? -1 : 0;
+    const caretCorrection = (
+      onlyCommasChanged ? deleteCaretCorrection : commasDiff
+    ) + leadingZeroCorrection;
     return {
       caretPosition: Math.max(newCaretPosition + caretCorrection, 0),
       fallbackInputValue: null,
