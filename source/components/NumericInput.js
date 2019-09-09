@@ -17,6 +17,7 @@ import { removeCharAtPosition } from '../utils/strings';
 import type { InputEvent } from '../utils/types';
 
 type Props = {
+  allowSigns?: boolean,
   autoFocus?: boolean,
   className?: string,
   context: ThemeContextProp,
@@ -54,6 +55,7 @@ class NumericInputBase extends Component<Props, State> {
   static displayName = 'NumericInput';
 
   static defaultProps = {
+    allowSigns: true,
     context: createEmptyContext(),
     readOnly: false,
     theme: null,
@@ -142,18 +144,20 @@ class NumericInputBase extends Component<Props, State> {
     const changedCaretPosition = event.target.selectionStart;
     const valueToProcess = event.target.value;
     const { inputType } = event;
-    const { value } = this.props;
+    const { value, allowSigns } = this.props;
     const fallbackInputValue = this.state.fallbackInputValue || '';
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
     const isDeletion = isForwardDelete || isBackwardDelete;
     const deleteCaretCorrection = isBackwardDelete ? 0 : 1;
+    const validInputRegex = allowSigns ? VALID_INPUT_SIGNS_REGEX : VALID_INPUT_NO_SIGNS_REGEX;
+    const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
 
     /**
      * ========= HANDLE HARD EDGE-CASES =============
      */
     // Case: invalid characters entered -> refuse!
-    if (!VALID_INPUT_REGEX.test(valueToProcess)) {
+    if (!validInputRegex.test(valueToProcess)) {
       return {
         caretPosition: changedCaretPosition - 1,
         fallbackInputValue,
@@ -295,7 +299,7 @@ class NumericInputBase extends Component<Props, State> {
     const commasDiff = getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue);
     const haveCommasChanged = commasDiff > 0;
     const onlyCommasChanged = !hasNumberChanged && haveCommasChanged;
-    const leadingZeroCorrection = value === 0 ? -1 : 0;
+    const leadingZeroCorrection = valueHasLeadingZero ? -1 : 0;
     const caretCorrection = (
       onlyCommasChanged ? deleteCaretCorrection : commasDiff
     ) + leadingZeroCorrection;
@@ -401,7 +405,8 @@ export const NumericInput = withTheme(NumericInputBase);
 
 // ========= HELPERS ==========
 
-const VALID_INPUT_REGEX = /^([0-9,+\-.]+)?$/;
+const VALID_INPUT_SIGNS_REGEX = /^([0-9,+\-.]+)?$/;
+const VALID_INPUT_NO_SIGNS_REGEX = /^([0-9,.]+)?$/;
 const NUMERIC_INPUT_REGEX = /^([+|-])?([0-9,]+)?(\.([0-9]+)?)?$/;
 
 const isValidNumericInput = (value: string): boolean => NUMERIC_INPUT_REGEX.test(value);

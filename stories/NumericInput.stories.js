@@ -84,7 +84,15 @@ storiesOf('NumericInput', module)
       />
     ))
   )
-
+  .add('allowSigns = false',
+    withState({ value: null }, store => (
+      <NumericInput
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        allowSigns={false}
+      />
+    ))
+  )
   .add('onFocus / onBlur',
     withState({ value: null, focused: false, blurred: false }, store => (
       <NumericInput
