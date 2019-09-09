@@ -149,6 +149,7 @@ class NumericInputBase extends Component<Props, State> {
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
     const isDeletion = isForwardDelete || isBackwardDelete;
+    const isInsert = inputType === 'insertText';
     const deleteCaretCorrection = isBackwardDelete ? 0 : 1;
     const validInputRegex = allowSigns ? VALID_INPUT_SIGNS_REGEX : VALID_INPUT_NO_SIGNS_REGEX;
     const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
@@ -248,9 +249,10 @@ class NumericInputBase extends Component<Props, State> {
 
     // Case: Dot was added at the beginning of number
     if (newValue.charAt(0) === '.') {
+      const newCaretPos = isInsert ? 2 : 1;
       return {
         value: newNumber,
-        caretPosition: 2,
+        caretPosition: newCaretPos,
         minimumFractionDigits: dynamicMinimumFractionDigits,
       };
     }
@@ -282,7 +284,6 @@ class NumericInputBase extends Component<Props, State> {
     }
 
     // Case: Dot was deleted with minimum fraction digits constrain defined
-    const isInsert = inputType === 'insertText';
     const hasFractions = this.getMinimumFractionDigitsProp() != null;
     const wasDotRemoved = hadDotBefore && !newNumberOfDots;
     if (wasDotRemoved && hasFractions && !isInsert) {
