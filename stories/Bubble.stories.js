@@ -85,6 +85,20 @@ storiesOf('Bubble', module)
     </div>
   ))
 
+  .add('isFloating noArrow', () => (
+    <div className={styles.scrollContainer}>
+      <div className={styles.scrollContent}>
+        <Bubble isFloating noArrow>
+          floating noArrow
+        </Bubble>
+      </div>
+      <p>
+        Here is some text that should break<br />
+        and trigger scroll bars<br />
+      </p>
+    </div>
+  ))
+
   .add('isFloating isOpeningUpward', () => (
     <div className={styles.scrollContainer}>
       <p>

@@ -15,7 +15,10 @@ type Props = {
   className?: string,
   context: ThemeContextProp,
   label: string | Element<any>,
-  items: Array<{ }>,
+  activeItem: any,
+  items: Array<any>,
+  noArrow?: boolean,
+  onItemSelected?: Function,
   skin?: ComponentType<any>,
   theme: ?Object,
   themeId: string,
@@ -37,6 +40,7 @@ class DropdownBase extends Component<Props, State> {
   static displayName = 'Dropdown';
   static defaultProps = {
     context: createEmptyContext(),
+    noArrow: false,
     theme: null,
     themeOverrides: {},
     themeId: IDENTIFIERS.DROPDOWN,
@@ -73,20 +77,30 @@ class DropdownBase extends Component<Props, State> {
 
   // ========= PRIVATE SKIN API =========
 
-  _toggleMouseOverItems = () => {
-    this.setState({ isMouseOverItems: !this.state.isMouseOverItems });
+  _setMouseOverItems = (isMouseOverItems: boolean) => {
+    this.setState({ isMouseOverItems });
   };
 
-  _toggleMouseOverRoot = () => {
-    this.setState({ isMouseOverRoot: !this.state.isMouseOverRoot });
+  _setMouseOverRoot = (isMouseOverRoot: boolean) => {
+    this.setState({ isMouseOverRoot });
+  };
+
+  _onItemSelected = (item) => {
+    const { onItemSelected } = this.props;
+    this._setMouseOverRoot(false);
+    this._setMouseOverItems(false);
+    if (onItemSelected) {
+      onItemSelected(item);
+    }
   };
 
   render() {
     const {
+      context,
+      onItemSelected,
       skin,
       theme,
       themeOverrides,
-      context,
       ...rest
     } = this.props;
 
@@ -96,10 +110,11 @@ class DropdownBase extends Component<Props, State> {
     return (
       <DropdownSkin
         isOpen={isOpen || isMouseOverItems || isMouseOverRoot}
+        onItemSelected={this._onItemSelected}
         rootRef={this.rootElement}
         theme={this.state.composedTheme}
-        toggleMouseOverItems={this._toggleMouseOverItems}
-        toggleMouseOverRoot={this._toggleMouseOverRoot}
+        setMouseOverRoot={this._setMouseOverRoot}
+        setMouseOverItems={this._setMouseOverItems}
         {...rest}
       />
     );

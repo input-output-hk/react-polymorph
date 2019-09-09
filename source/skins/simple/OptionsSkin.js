@@ -30,10 +30,10 @@ type Props = {
   render: Function,
   selectedOption: any,
   setHighlightedOptionIndex: Function,
+  setMouseIsOverOptions?: (boolean) => void,
   targetRef: ElementRef<*>,
   theme: Object,
   themeId: string,
-  toggleMouseLocation: Function,
 };
 
 export const OptionsSkin = (props: Props) => {
@@ -54,10 +54,10 @@ export const OptionsSkin = (props: Props) => {
     optionsRef,
     render,
     setHighlightedOptionIndex,
+    setMouseIsOverOptions,
     targetRef,
     theme,
     themeId,
-    toggleMouseLocation,
   } = props;
 
   const highlightedOptionIndex = getHighlightedOptionIndex();
@@ -139,8 +139,8 @@ export const OptionsSkin = (props: Props) => {
         style={optionsStyle}
         ref={optionsRef}
         className={theme[themeId].ul}
-        onMouseEnter={toggleMouseLocation}
-        onMouseLeave={toggleMouseLocation}
+        onMouseEnter={() => setMouseIsOverOptions && setMouseIsOverOptions(true)}
+        onMouseLeave={() => setMouseIsOverOptions && setMouseIsOverOptions(false)}
       >
         {renderOptions()}
       </ul>

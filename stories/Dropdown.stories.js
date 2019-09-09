@@ -8,6 +8,7 @@ import { withState } from '@dump247/storybook-state';
 
 // components
 import { Dropdown } from '../source/components/Dropdown';
+import { Button } from '../source/components/Button';
 
 // assets
 import esIcon from './images/es.png';
@@ -19,27 +20,49 @@ import styles from './Dropdown.stories.scss';
 // helpers
 import { decorateWithSimpleTheme } from './helpers/theming';
 
+const COUNTRY_ITEMS = [
+  {
+    value: 'es',
+    label: <img src={esIcon} />
+  }, {
+    value: 'us',
+    label: <img src={usIcon} />
+  }
+];
+
+const CustomLabel = () => (
+  <Button label="Pick a language" />
+);
+
 storiesOf('Dropdown', module)
 
   .addDecorator(decorateWithSimpleTheme)
 
   // ====== Stories ======
 
-  .add('options',
-    withState({ value: '' }, store => (
+  .add('arrow bubble',
+    withState({ value: COUNTRY_ITEMS[0] }, store => (
       <Dropdown
-        label="languages"
+        label={<CustomLabel />}
         activeItem={store.state.value}
-        onChange={value => store.set({ value })}
-        items={[
-          {
-            value: 'es',
-            label: <img src={esIcon} />
-          }, {
-            value: 'de',
-            label: <img src={usIcon} />
-          }
-        ]}
+        onItemSelected={value => {
+          store.set({ value });
+        }}
+        items={COUNTRY_ITEMS}
+      />
+    ))
+  )
+
+  .add('no arrow',
+    withState({ value: COUNTRY_ITEMS[0] }, store => (
+      <Dropdown
+        label={<CustomLabel />}
+        activeItem={store.state.value}
+        onItemSelected={value => {
+          store.set({ value });
+        }}
+        items={COUNTRY_ITEMS}
+        noArrow
       />
     ))
   );

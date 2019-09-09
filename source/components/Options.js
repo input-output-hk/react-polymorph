@@ -41,6 +41,7 @@ type Props = {
   // TODO: Why do we have two separate props for selection?
   selectedOption?: any,
   selectedOptions?: Array<any>,
+  setMouseIsOverOptions?: (boolean) => void,
   skin?: ComponentType<any>,
   targetRef?: ElementRef<*>,
   theme: ?Object, // if passed by user, it will take precedence over this.props.context.theme
@@ -52,7 +53,8 @@ type Props = {
 
 type State = {
   composedTheme: Object,
-  highlightedOptionIndex: number
+  highlightedOptionIndex: number,
+  isMouseOverOptions: boolean,
 };
 
 class OptionsBase extends Component<Props, State> {
@@ -86,7 +88,8 @@ class OptionsBase extends Component<Props, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      highlightedOptionIndex: 0
+      highlightedOptionIndex: 0,
+      isMouseOverOptions: false,
     };
   }
 
@@ -275,6 +278,19 @@ class OptionsBase extends Component<Props, State> {
     }
   };
 
+  _setMouseIsOverOptions = (isMouseOverOptions: boolean) => {
+    const { toggleMouseLocation, setMouseIsOverOptions } = this.props;
+    if (this.state.isMouseOverOptions !== isMouseOverOptions && toggleMouseLocation) {
+      toggleMouseLocation();
+    }
+    if (setMouseIsOverOptions) {
+      setMouseIsOverOptions(isMouseOverOptions);
+    }
+    this.setState({
+      isMouseOverOptions,
+    });
+  };
+
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
@@ -282,6 +298,7 @@ class OptionsBase extends Component<Props, State> {
       targetRef,
       theme,
       themeOverrides,
+      toggleMouseLocation,
       onChange,
       context,
       optionsRef,
@@ -306,6 +323,7 @@ class OptionsBase extends Component<Props, State> {
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}
         targetRef={targetRef}
         theme={composedTheme}
+        setMouseIsOverOptions={this._setMouseIsOverOptions}
         {...rest}
       />
     );
