@@ -31,7 +31,7 @@ const COUNTRY_ITEMS = [
 ];
 
 const CustomLabel = () => (
-  <Button label="Pick a language" />
+  <Button label="Hover to pick language" />
 );
 
 storiesOf('Dropdown', module)
