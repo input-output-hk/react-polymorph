@@ -41,14 +41,14 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     padding: 0;
   }
 
-  @if calc(#{$options-arrow} == true) {
+  @if ($options-arrow) {
     [data-bubble-arrow] {
       @include arrow(
         up,
         $option-bg-color,
         $options-border-color,
         $options-arrow-width,
-        $options-arrow-height,
+        $options-arrow-height
       );
     }
 
@@ -56,20 +56,20 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
       &:not(.openUpward) [data-bubble-arrow] {
         @include arrow(
           up,
-          $option-bg-color-highlighted !important,
+          $option-bg-color-highlighted,
           $options-border-color,
           $options-arrow-width,
-          $options-arrow-height,
+          $options-arrow-height
         );
       }
       &.openUpward [data-bubble-arrow] {
         height: inherit;
         @include arrow(
           down,
-          $option-bg-color-highlighted !important,
+          $option-bg-color-highlighted,
           $options-border-color,
           $options-arrow-width,
-          $options-arrow-height,
+          $options-arrow-height
         );
       }
     }
