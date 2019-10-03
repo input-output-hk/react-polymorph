@@ -17,6 +17,7 @@ import { removeCharAtPosition } from '../utils/strings';
 import type { InputEvent } from '../utils/types';
 
 type Props = {
+  allowSigns?: boolean,
   autoFocus?: boolean,
   className?: string,
   context: ThemeContextProp,
@@ -54,6 +55,7 @@ class NumericInputBase extends Component<Props, State> {
   static displayName = 'NumericInput';
 
   static defaultProps = {
+    allowSigns: true,
     context: createEmptyContext(),
     readOnly: false,
     theme: null,
@@ -142,18 +144,21 @@ class NumericInputBase extends Component<Props, State> {
     const changedCaretPosition = event.target.selectionStart;
     const valueToProcess = event.target.value;
     const { inputType } = event;
-    const { value } = this.props;
+    const { value, allowSigns } = this.props;
     const fallbackInputValue = this.state.fallbackInputValue || '';
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
     const isDeletion = isForwardDelete || isBackwardDelete;
+    const isInsert = inputType === 'insertText';
     const deleteCaretCorrection = isBackwardDelete ? 0 : 1;
+    const validInputRegex = allowSigns ? VALID_INPUT_SIGNS_REGEX : VALID_INPUT_NO_SIGNS_REGEX;
+    const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
 
     /**
      * ========= HANDLE HARD EDGE-CASES =============
      */
     // Case: invalid characters entered -> refuse!
-    if (!VALID_INPUT_REGEX.test(valueToProcess)) {
+    if (!validInputRegex.test(valueToProcess)) {
       return {
         caretPosition: changedCaretPosition - 1,
         fallbackInputValue,
@@ -244,9 +249,10 @@ class NumericInputBase extends Component<Props, State> {
 
     // Case: Dot was added at the beginning of number
     if (newValue.charAt(0) === '.') {
+      const newCaretPos = isInsert ? 2 : 1;
       return {
         value: newNumber,
-        caretPosition: changedCaretPosition,
+        caretPosition: newCaretPos,
         minimumFractionDigits: dynamicMinimumFractionDigits,
       };
     }
@@ -272,13 +278,12 @@ class NumericInputBase extends Component<Props, State> {
       return {
         value: newNumber,
         caretPosition: changedCaretPosition,
-        fallbackInputValue: localizedNewNumber + '.',
+        fallbackInputValue: propsMinimumFractionDigits > 0 ? null : localizedNewNumber + '.',
         minimumFractionDigits: 0,
       };
     }
 
     // Case: Dot was deleted with minimum fraction digits constrain defined
-    const isInsert = inputType === 'insertText';
     const hasFractions = this.getMinimumFractionDigitsProp() != null;
     const wasDotRemoved = hadDotBefore && !newNumberOfDots;
     if (wasDotRemoved && hasFractions && !isInsert) {
@@ -291,12 +296,14 @@ class NumericInputBase extends Component<Props, State> {
     }
 
     // Case: Valid change has been made
-
     const hasNumberChanged = value !== newNumber;
     const commasDiff = getNumberOfCommas(localizedNewNumber) - getNumberOfCommas(newValue);
     const haveCommasChanged = commasDiff > 0;
     const onlyCommasChanged = !hasNumberChanged && haveCommasChanged;
-    const caretCorrection = onlyCommasChanged ? deleteCaretCorrection : commasDiff;
+    const leadingZeroCorrection = valueHasLeadingZero ? -1 : 0;
+    const caretCorrection = (
+      onlyCommasChanged ? deleteCaretCorrection : commasDiff
+    ) + leadingZeroCorrection;
     return {
       caretPosition: Math.max(newCaretPosition + caretCorrection, 0),
       fallbackInputValue: null,
@@ -354,6 +361,12 @@ class NumericInputBase extends Component<Props, State> {
     inputElement.current.focus();
   };
 
+  onBlur = () => {
+    this.setState({
+      fallbackInputValue: null,
+    });
+  };
+
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
@@ -382,6 +395,7 @@ class NumericInputBase extends Component<Props, State> {
         onChange={this.onChange}
         theme={this.state.composedTheme}
         value={inputValue}
+        onBlur={this.onBlur}
         {...rest}
       />
     );
@@ -392,8 +406,9 @@ export const NumericInput = withTheme(NumericInputBase);
 
 // ========= HELPERS ==========
 
-const VALID_INPUT_REGEX = /^([0-9,+\-.]+)?$/;
-const NUMERIC_INPUT_REGEX = /^([+|-])?([0-9,]+)?(\.([0-9]+)?)?$/;
+const VALID_INPUT_SIGNS_REGEX = /^([-])?([0-9,.]+)?$/;
+const VALID_INPUT_NO_SIGNS_REGEX = /^([0-9,.]+)?$/;
+const NUMERIC_INPUT_REGEX = /^([-])?([0-9,]+)?(\.([0-9]+)?)?$/;
 
 const isValidNumericInput = (value: string): boolean => NUMERIC_INPUT_REGEX.test(value);
 

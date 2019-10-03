@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.9.0-rc.8",
+  "version": "0.9.0-rc.15",
   "scripts": {
     "build": "cross-env npm run clean && npm run sass && npm run js",
     "clean": "rimraf ./lib",
