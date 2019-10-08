@@ -17,6 +17,7 @@ type Props = {
   label: string | Element<any>,
   activeItem: any,
   items: Array<any>,
+  isOpen?: boolean,
   noArrow?: boolean,
   onItemSelected?: Function,
   skin?: ComponentType<any>,
@@ -97,6 +98,7 @@ class DropdownBase extends Component<Props, State> {
   render() {
     const {
       context,
+      isOpen,
       onItemSelected,
       skin,
       theme,
@@ -105,11 +107,11 @@ class DropdownBase extends Component<Props, State> {
     } = this.props;
 
     const DropdownSkin = skin || context.skins[IDENTIFIERS.DROPDOWN];
-    const { isMouseOverItems, isMouseOverRoot, isOpen } = this.state;
+    const { isMouseOverItems, isMouseOverRoot } = this.state;
 
     return (
       <DropdownSkin
-        isOpen={isOpen || isMouseOverItems || isMouseOverRoot}
+        isOpen={this.props.isOpen || this.state.isOpen || isMouseOverItems || isMouseOverRoot}
         onItemSelected={this._onItemSelected}
         rootRef={this.rootElement}
         theme={this.state.composedTheme}
