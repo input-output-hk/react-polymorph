@@ -49,9 +49,13 @@ export const BubbleSkin = (props: Props) => {
     >
       <div className={theme[themeId].bubble} data-bubble-container>
         {props.children}
-        {arrowRelativeToTip && <span className={theme[themeId].arrow} data-bubble-arrow={noArrow ? undefined : true} />}
+        {arrowRelativeToTip && (
+          <span className={theme[themeId].arrow} data-bubble-arrow={noArrow ? undefined : true} />
+        )}
       </div>
-      {!arrowRelativeToTip && <span className={theme[themeId].arrow} data-bubble-arrow={noArrow ? undefined : true} />}
+      {!arrowRelativeToTip && (
+        <span className={theme[themeId].arrow} data-bubble-arrow={noArrow ? undefined : true} />
+      )}
     </div>
   );
 };
