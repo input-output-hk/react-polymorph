@@ -19,6 +19,7 @@ type Props = {
   items: Array<any>,
   noArrow?: boolean,
   onItemSelected?: Function,
+  onRootClick: () => void;
   rootRef: ElementRef<*>,
   theme: Object,
   themeId: string,
@@ -36,6 +37,7 @@ export const DropdownSkin = (props: Props) => {
         props.className,
         themeApi.dropdown,
       ])}
+      onClick={props.onRootClick}
       onMouseEnter={() => setMouseOverRoot(true)}
       onMouseLeave={() => setMouseOverRoot(false)}
     >

@@ -3,7 +3,6 @@ import React from 'react';
 
 // storybook
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { withState } from '@dump247/storybook-state';
 
 // components
@@ -13,9 +12,6 @@ import { Button } from '../source/components/Button';
 // assets
 import esIcon from './images/es.png';
 import usIcon from './images/us.png';
-
-// custom styles
-import styles from './Dropdown.stories.scss';
 
 // helpers
 import { decorateWithSimpleTheme } from './helpers/theming';
@@ -30,20 +26,29 @@ const COUNTRY_ITEMS = [
   }
 ];
 
-const CustomLabel = () => (
-  <Button label="Hover to pick language" />
-);
-
 storiesOf('Dropdown', module)
 
   .addDecorator(decorateWithSimpleTheme)
 
   // ====== Stories ======
 
-  .add('arrow bubble',
+  .add('hover to open',
     withState({ value: COUNTRY_ITEMS[0] }, store => (
       <Dropdown
-        label={<CustomLabel />}
+        label={<Button label="Hover to pick language" />}
+        activeItem={store.state.value}
+        onItemSelected={value => {
+          store.set({ value });
+        }}
+        items={COUNTRY_ITEMS}
+        noArrow
+      />
+    ))
+  )
+  .add('hover to open: arrow',
+    withState({ value: COUNTRY_ITEMS[0] }, store => (
+      <Dropdown
+        label={<Button label="Hover to pick language" />}
         activeItem={store.state.value}
         onItemSelected={value => {
           store.set({ value });
@@ -52,17 +57,30 @@ storiesOf('Dropdown', module)
       />
     ))
   )
-
-  .add('no arrow',
+  .add('click to open',
     withState({ value: COUNTRY_ITEMS[0] }, store => (
       <Dropdown
-        label={<CustomLabel />}
+        noArrow
+        clickToOpen
+        label={<Button label="Click to pick language" />}
         activeItem={store.state.value}
         onItemSelected={value => {
           store.set({ value });
         }}
         items={COUNTRY_ITEMS}
-        noArrow
+      />
+    ))
+  )
+  .add('click to open: arrow',
+    withState({ value: COUNTRY_ITEMS[0] }, store => (
+      <Dropdown
+        clickToOpen
+        label={<Button label="Click to pick language" />}
+        activeItem={store.state.value}
+        onItemSelected={value => {
+          store.set({ value });
+        }}
+        items={COUNTRY_ITEMS}
       />
     ))
   );

@@ -12,12 +12,13 @@ import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  className?: string,
-  context: ThemeContextProp,
-  label: string | Element<any>,
   activeItem: any,
-  items: Array<any>,
+  className?: string,
+  clickToOpen?: boolean,
+  context: ThemeContextProp,
   isOpen?: boolean,
+  items: Array<any>,
+  label: string | Element<any>,
   noArrow?: boolean,
   onItemSelected?: Function,
   skin?: ComponentType<any>,
@@ -41,6 +42,7 @@ class DropdownBase extends Component<Props, State> {
   static displayName = 'Dropdown';
   static defaultProps = {
     context: createEmptyContext(),
+    clickToOpen: false,
     noArrow: false,
     theme: null,
     themeOverrides: {},
@@ -95,8 +97,13 @@ class DropdownBase extends Component<Props, State> {
     }
   };
 
+  _onRootClick = () => {
+    this.toggleOpen();
+  };
+
   render() {
     const {
+      clickToOpen,
       context,
       isOpen,
       onItemSelected,
@@ -108,10 +115,12 @@ class DropdownBase extends Component<Props, State> {
 
     const DropdownSkin = skin || context.skins[IDENTIFIERS.DROPDOWN];
     const { isMouseOverItems, isMouseOverRoot } = this.state;
+    const isOpenBecauseOfHover = clickToOpen ? false : isMouseOverItems || isMouseOverRoot;
 
     return (
       <DropdownSkin
-        isOpen={this.props.isOpen || this.state.isOpen || isMouseOverItems || isMouseOverRoot}
+        isOpen={this.props.isOpen || this.state.isOpen || isOpenBecauseOfHover}
+        onRootClick={this._onRootClick}
         onItemSelected={this._onItemSelected}
         rootRef={this.rootElement}
         theme={this.state.composedTheme}
