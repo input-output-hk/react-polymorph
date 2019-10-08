@@ -11,7 +11,7 @@ vNext
 
 ### Features
 
-- New `Dropdown` component []()
+- New `Dropdown` component [PR 122](https://github.com/input-output-hk/react-polymorph/pull/122)
 
 ### Breaking Changes
 
