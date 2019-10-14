@@ -3,20 +3,22 @@
   "description": "React components with highly customizable logic, markup and styles.",
   "version": "0.9.0-rc.15",
   "scripts": {
-    "build": "cross-env npm run clean && npm run sass && npm run js",
+    "build": "cross-env yarn clean && yarn sass && yarn js",
+    "build:watch": "concurrently 'yarn js:watch' 'yarn sass:watch'",
     "clean": "rimraf ./lib",
     "flow:test": "flow; test $? -eq 0 -o $? -eq 2",
     "js": "babel source -d lib -s",
+    "js:watch": "yarn js --watch",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty source stories *.js",
-    "prepare": "npm run clean && npm run build",
+    "prepare": "yarn clean && yarn build",
     "postinstall": "postinstall-build lib --only-as-dependency",
     "sass": "cpx \"./source/themes/**/*\" ./lib/themes",
+    "sass:watch": "nodemon -e scss --watch source/themes --exec 'yarn sass'",
     "storybook": "start-storybook -p 6543 -c storybook",
     "storybook:build": "build-storybook -c storybook -o dist/storybook",
     "test": "cross-env NODE_ENV=test jest",
     "test:clean": "cross-env NODE_ENV=test jest -u",
-    "test:watch": "cross-env NODE_ENV=test jest --watchAll",
-    "watch": "nodemon npm run js && npm run sass"
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll"
   },
   "dependencies": {
     "create-react-context": "0.2.2",
