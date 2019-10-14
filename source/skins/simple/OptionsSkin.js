@@ -84,6 +84,7 @@ export const OptionsSkin = (props: Props) => {
             aria-hidden
             key={index}
             className={classnames([
+              option.className ? option.className : null,
               theme[themeId].option,
               isHighlightedOption(index) ? theme[themeId].highlightedOption : null,
               isSelectedOption(index) ? theme[themeId].selectedOption : null,
