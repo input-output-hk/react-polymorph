@@ -92,12 +92,13 @@ class DropdownBase extends Component<Props, State> {
     const { onItemSelected } = this.props;
     this._setMouseOverRoot(false);
     this._setMouseOverItems(false);
+    this.setState({ isOpen: false });
     if (onItemSelected) {
       onItemSelected(item);
     }
   };
 
-  _onRootClick = () => {
+  _onLabelClick = () => {
     this.toggleOpen();
   };
 
@@ -119,8 +120,8 @@ class DropdownBase extends Component<Props, State> {
 
     return (
       <DropdownSkin
-        isOpen={this.props.isOpen || this.state.isOpen || isOpenBecauseOfHover}
-        onRootClick={this._onRootClick}
+        isOpen={isOpen || this.state.isOpen || isOpenBecauseOfHover}
+        onLabelClick={this._onLabelClick}
         onItemSelected={this._onItemSelected}
         rootRef={this.rootElement}
         theme={this.state.composedTheme}

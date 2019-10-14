@@ -19,7 +19,7 @@ type Props = {
   items: Array<any>,
   noArrow?: boolean,
   onItemSelected?: Function,
-  onRootClick: () => void;
+  onLabelClick: () => void;
   rootRef: ElementRef<*>,
   theme: Object,
   themeId: string,
@@ -37,11 +37,13 @@ export const DropdownSkin = (props: Props) => {
         props.className,
         themeApi.dropdown,
       ])}
-      onClick={props.onRootClick}
       onMouseEnter={() => setMouseOverRoot(true)}
       onMouseLeave={() => setMouseOverRoot(false)}
     >
-      <div className={themeApi.label}>
+      <div
+        className={themeApi.label}
+        onClick={props.onLabelClick}
+      >
         {props.label}
       </div>
       <Options
