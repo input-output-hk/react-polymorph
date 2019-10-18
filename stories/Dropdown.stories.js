@@ -9,6 +9,9 @@ import { withState } from '@dump247/storybook-state';
 import { Dropdown } from '../source/components/Dropdown';
 import { Button } from '../source/components/Button';
 
+// styles
+import styles from './Dropdown.stories.scss';
+
 // assets
 import esIcon from './images/es.png';
 import usIcon from './images/us.png';
@@ -19,10 +22,20 @@ import { decorateWithSimpleTheme } from './helpers/theming';
 const COUNTRY_ITEMS = [
   {
     value: 'es',
-    label: <img src={esIcon} />
+    label: (
+      <div className={styles.flagLabel}>
+        <img src={esIcon} />
+        <span>Spain</span>
+      </div>
+    ),
   }, {
     value: 'us',
-    label: <img src={usIcon} />
+    label: (
+      <div className={styles.flagLabel}>
+        <img src={usIcon} />
+        <span>USA</span>
+      </div>
+    ),
   }
 ];
 
@@ -35,7 +48,7 @@ storiesOf('Dropdown', module)
   .add('hover to open',
     withState({ value: COUNTRY_ITEMS[0] }, store => (
       <Dropdown
-        label={<Button label="Hover to pick language" />}
+        label={<Button label="Hover to pick location" />}
         activeItem={store.state.value}
         onItemSelected={value => {
           store.set({ value });
@@ -48,7 +61,7 @@ storiesOf('Dropdown', module)
   .add('hover to open: arrow',
     withState({ value: COUNTRY_ITEMS[0] }, store => (
       <Dropdown
-        label={<Button label="Hover to pick language" />}
+        label={<Button label="Hover to pick location" />}
         activeItem={store.state.value}
         onItemSelected={value => {
           store.set({ value });
@@ -62,7 +75,7 @@ storiesOf('Dropdown', module)
       <Dropdown
         noArrow
         clickToOpen
-        label={<Button label="Click to pick language" />}
+        label={<Button label="Click to pick location" />}
         activeItem={store.state.value}
         onItemSelected={value => {
           store.set({ value });
@@ -75,7 +88,7 @@ storiesOf('Dropdown', module)
     withState({ value: COUNTRY_ITEMS[0] }, store => (
       <Dropdown
         clickToOpen
-        label={<Button label="Click to pick language" />}
+        label={<Button label="Click to pick location" />}
         activeItem={store.state.value}
         onItemSelected={value => {
           store.set({ value });
