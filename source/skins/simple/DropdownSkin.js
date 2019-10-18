@@ -40,12 +40,12 @@ export const DropdownSkin = (props: Props) => {
       onMouseLeave={() => setMouseOverRoot(false)}
       ref={props.rootRef}
     >
-      <div
+      <button
         className={themeApi.label}
         onClick={props.onLabelClick}
       >
         {props.label}
-      </div>
+      </button>
       <Options
         isFloating
         isOpen={props.isOpen}
