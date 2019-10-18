@@ -7,6 +7,7 @@ import SimpleAutocomplete from './SimpleAutocomplete.scss';
 import SimpleBubble from './SimpleBubble.scss';
 import SimpleButton from './SimpleButton.scss';
 import SimpleCheckbox from './SimpleCheckbox.scss';
+import SimpleDropdown from './SimpleDropdown.scss';
 import SimpleFlex from './SimpleFlex.scss';
 import SimpleFormField from './SimpleFormField.scss';
 import SimpleGrid from './SimpleGrid.scss';
@@ -35,6 +36,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.BUBBLE]: SimpleBubble,
   [IDENTIFIERS.BUTTON]: SimpleButton,
   [IDENTIFIERS.CHECKBOX]: SimpleCheckbox,
+  [IDENTIFIERS.DROPDOWN]: SimpleDropdown,
   [IDENTIFIERS.FLEX]: SimpleFlex,
   [IDENTIFIERS.FORM_FIELD]: SimpleFormField,
   [IDENTIFIERS.GRID]: SimpleGrid,

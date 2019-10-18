@@ -20,6 +20,7 @@ type Props = {
   isOpen: boolean,
   isOpeningUpward: boolean,
   isSelectedOption: Function,
+  noOptionsArrow?: boolean,
   noResults: boolean,
   noResultsMessage: string | Element<any>,
   optionRenderer: Function,
@@ -29,10 +30,10 @@ type Props = {
   render: Function,
   selectedOption: any,
   setHighlightedOptionIndex: Function,
+  setMouseIsOverOptions?: (boolean) => void,
   targetRef: ElementRef<*>,
   theme: Object,
   themeId: string,
-  toggleMouseLocation: Function,
 };
 
 export const OptionsSkin = (props: Props) => {
@@ -44,6 +45,7 @@ export const OptionsSkin = (props: Props) => {
     isOpen,
     isOpeningUpward,
     isSelectedOption,
+    noOptionsArrow,
     noResults,
     noResultsMessage,
     optionsMaxHeight,
@@ -52,10 +54,10 @@ export const OptionsSkin = (props: Props) => {
     optionsRef,
     render,
     setHighlightedOptionIndex,
+    setMouseIsOverOptions,
     targetRef,
     theme,
     themeId,
-    toggleMouseLocation,
   } = props;
 
   const highlightedOptionIndex = getHighlightedOptionIndex();
@@ -82,6 +84,7 @@ export const OptionsSkin = (props: Props) => {
             aria-hidden
             key={index}
             className={classnames([
+              option.className ? option.className : null,
               theme[themeId].option,
               isHighlightedOption(index) ? theme[themeId].highlightedOption : null,
               isSelectedOption(index) ? theme[themeId].selectedOption : null,
@@ -130,14 +133,15 @@ export const OptionsSkin = (props: Props) => {
       isOpeningUpward={isOpeningUpward}
       isHidden={!isOpen}
       isFloating
+      noArrow={noOptionsArrow}
       targetRef={targetRef}
     >
       <ul
         style={optionsStyle}
         ref={optionsRef}
         className={theme[themeId].ul}
-        onMouseEnter={toggleMouseLocation}
-        onMouseLeave={toggleMouseLocation}
+        onMouseEnter={() => setMouseIsOverOptions && setMouseIsOverOptions(true)}
+        onMouseLeave={() => setMouseIsOverOptions && setMouseIsOverOptions(false)}
       >
         {renderOptions()}
       </ul>
