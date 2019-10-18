@@ -14,17 +14,17 @@ import { OptionsSkin } from './OptionsSkin';
 type Props = {
   activeItem: any,
   className: string,
-  label: string | Element<any>,
   isOpen: boolean,
   items: Array<any>,
+  label: string | Element<any>,
   noArrow?: boolean,
   onItemSelected?: Function,
   onLabelClick: () => void;
   rootRef: ElementRef<*>,
+  setMouseOverItems: Function,
+  setMouseOverRoot: Function,
   theme: Object,
   themeId: string,
-  setMouseOverRoot: Function,
-  setMouseOverItems: Function,
 };
 
 export const DropdownSkin = (props: Props) => {
@@ -32,13 +32,13 @@ export const DropdownSkin = (props: Props) => {
   const themeApi = theme[themeId];
   return (
     <div
-      ref={props.rootRef}
       className={classnames([
         props.className,
         themeApi.dropdown,
       ])}
       onMouseEnter={() => setMouseOverRoot(true)}
       onMouseLeave={() => setMouseOverRoot(false)}
+      ref={props.rootRef}
     >
       <div
         className={themeApi.label}
@@ -47,15 +47,15 @@ export const DropdownSkin = (props: Props) => {
         {props.label}
       </div>
       <Options
-        skin={OptionsSkin}
-        theme={props.theme}
+        isFloating
         isOpen={props.isOpen}
-        options={props.items}
+        noOptionsArrow={props.noArrow}
         onChange={props.onItemSelected}
+        options={props.items}
         selectedOption={props.activeItem}
         setMouseIsOverOptions={setMouseOverItems}
-        noOptionsArrow={props.noArrow}
-        isFloating
+        skin={OptionsSkin}
+        theme={props.theme}
       />
     </div>
   );
