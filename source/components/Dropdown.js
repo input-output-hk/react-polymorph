@@ -29,9 +29,9 @@ type Props = {
 
 type State = {
   composedTheme: Object,
-  isOpen: boolean,
   isMouseOverItems: boolean,
   isMouseOverRoot: boolean,
+  isOpen: boolean,
 };
 
 class DropdownBase extends Component<Props, State> {
@@ -62,9 +62,9 @@ class DropdownBase extends Component<Props, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      isOpen: false,
       isMouseOverItems: false,
       isMouseOverRoot: false,
+      isOpen: false,
     };
   }
 
@@ -121,12 +121,12 @@ class DropdownBase extends Component<Props, State> {
     return (
       <DropdownSkin
         isOpen={isOpen || this.state.isOpen || isOpenBecauseOfHover}
-        onLabelClick={this._onLabelClick}
         onItemSelected={this._onItemSelected}
+        onLabelClick={this._onLabelClick}
         rootRef={this.rootElement}
-        theme={this.state.composedTheme}
-        setMouseOverRoot={this._setMouseOverRoot}
         setMouseOverItems={this._setMouseOverItems}
+        setMouseOverRoot={this._setMouseOverRoot}
+        theme={this.state.composedTheme}
         {...rest}
       />
     );
