@@ -32,7 +32,7 @@ $bubble-arrow-height: var(--rp-bubble-arrow-height, $bubble-arrow-size) !default
   position: absolute;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 3;
 
   // ==== ARROW ====
   // The arrow is referred to as [data-bubble-arrow] so that the component doesn't have a high
