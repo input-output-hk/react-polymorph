@@ -10,6 +10,8 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 // import constants
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
+import { GlobalListeners } from './HOC/GlobalListeners';
+import { Options } from './Options';
 
 type Props = {
   activeItem: any,
@@ -17,6 +19,7 @@ type Props = {
   clickToOpen?: boolean,
   context: ThemeContextProp,
   isOpen?: boolean,
+  isOpeningUpward: boolean,
   items: Array<any>,
   label: string | Element<any>,
   noArrow?: boolean,
@@ -37,12 +40,14 @@ type State = {
 class DropdownBase extends Component<Props, State> {
   // declare ref types
   rootElement: ?Element<*>;
+  optionsElement: ?Element<*>;
 
   // define static properties
   static displayName = 'Dropdown';
   static defaultProps = {
     context: createEmptyContext(),
     clickToOpen: false,
+    isOpeningUpward: false,
     noArrow: false,
     theme: null,
     themeOverrides: {},
@@ -54,6 +59,7 @@ class DropdownBase extends Component<Props, State> {
 
     // define ref
     this.rootElement = createRef();
+    this.optionsElement = createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
     this.state = {
@@ -74,8 +80,25 @@ class DropdownBase extends Component<Props, State> {
 
   // ========= PUBLIC SKIN API =========
 
+  isOpen = () => {
+    const { clickToOpen, isOpen } = this.props;
+    const { isMouseOverItems, isMouseOverRoot } = this.state;
+    const isOpenBecauseOfHover = clickToOpen ? false : isMouseOverItems || isMouseOverRoot;
+    return isOpen || this.state.isOpen || isOpenBecauseOfHover;
+  };
+
   toggleOpen = () => {
-    this.setState({ isOpen: !this.state.isOpen });
+    if (this.isOpen()) {
+      this.close();
+    } else {
+      this.setState({ isOpen: true });
+    }
+  };
+
+  close = () => {
+    this._setMouseOverRoot(false);
+    this._setMouseOverItems(false);
+    this.setState({ isOpen: false });
   };
 
   // ========= PRIVATE SKIN API =========
@@ -90,16 +113,16 @@ class DropdownBase extends Component<Props, State> {
 
   _onItemSelected = (item) => {
     const { onItemSelected } = this.props;
-    this._setMouseOverRoot(false);
-    this._setMouseOverItems(false);
-    this.setState({ isOpen: false });
+    this.close();
     if (onItemSelected) {
       onItemSelected(item);
     }
   };
 
   _onLabelClick = () => {
-    this.toggleOpen();
+    if (this.props.clickToOpen) {
+      this.toggleOpen();
+    }
   };
 
   render() {
@@ -107,6 +130,7 @@ class DropdownBase extends Component<Props, State> {
       clickToOpen,
       context,
       isOpen,
+      isOpeningUpward,
       onItemSelected,
       skin,
       theme,
@@ -115,20 +139,33 @@ class DropdownBase extends Component<Props, State> {
     } = this.props;
 
     const DropdownSkin = skin || context.skins[IDENTIFIERS.DROPDOWN];
-    const { isMouseOverItems, isMouseOverRoot } = this.state;
-    const isOpenBecauseOfHover = clickToOpen ? false : isMouseOverItems || isMouseOverRoot;
+    const { isMouseOverItems } = this.state;
 
     return (
-      <DropdownSkin
-        isOpen={isOpen || this.state.isOpen || isOpenBecauseOfHover}
-        onItemSelected={this._onItemSelected}
-        onLabelClick={this._onLabelClick}
+      <GlobalListeners
+        mouseIsOverOptions={isMouseOverItems}
+        optionsIsOpen={this.isOpen()}
+        optionsIsOpeningUpward={isOpeningUpward}
+        optionsRef={this.optionsElement}
         rootRef={this.rootElement}
-        setMouseOverItems={this._setMouseOverItems}
-        setMouseOverRoot={this._setMouseOverRoot}
-        theme={this.state.composedTheme}
-        {...rest}
-      />
+        toggleOpen={this.toggleOpen}
+      >
+        {({ optionsMaxHeight }) => (
+          <DropdownSkin
+            isOpen={this.isOpen()}
+            isOpeningUpward={isOpeningUpward}
+            onItemSelected={this._onItemSelected}
+            onLabelClick={this._onLabelClick}
+            optionsRef={this.optionsElement}
+            optionsMaxHeight={optionsMaxHeight}
+            rootRef={this.rootElement}
+            setMouseOverItems={this._setMouseOverItems}
+            setMouseOverRoot={this._setMouseOverRoot}
+            theme={this.state.composedTheme}
+            {...rest}
+          />
+        )}
+      </GlobalListeners>
     );
   }
 }

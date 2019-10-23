@@ -15,11 +15,14 @@ type Props = {
   activeItem: any,
   className: string,
   isOpen: boolean,
+  isOpeningUpward: boolean,
   items: Array<any>,
   label: string | Element<any>,
   noArrow?: boolean,
   onItemSelected?: Function,
   onLabelClick: () => void;
+  optionsRef: ElementRef<any>,
+  optionsMaxHeight: number,
   rootRef: ElementRef<*>,
   setMouseOverItems: Function,
   setMouseOverRoot: Function,
@@ -40,18 +43,21 @@ export const DropdownSkin = (props: Props) => {
       onMouseLeave={() => setMouseOverRoot(false)}
       ref={props.rootRef}
     >
-      <button
+      <div
         className={themeApi.label}
         onClick={props.onLabelClick}
       >
         {props.label}
-      </button>
+      </div>
       <Options
         isFloating
         isOpen={props.isOpen}
+        isOpeningUpward={props.isOpeningUpward}
         noOptionsArrow={props.noArrow}
         onChange={props.onItemSelected}
         options={props.items}
+        optionsRef={props.optionsRef}
+        optionsMaxHeight={props.optionsMaxHeight}
         selectedOption={props.activeItem}
         setMouseIsOverOptions={setMouseOverItems}
         skin={OptionsSkin}
