@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 // $FlowFixMe
 import type { SyntheticMouseEvent, ElementRef } from 'react';
 import { debounce } from 'lodash';
@@ -159,6 +159,6 @@ export class GlobalListeners extends Component<Props, State> {
 
   render() {
     const { optionsMaxHeight } = this.state;
-    return <div>{this.props.children({ optionsMaxHeight })}</div>;
+    return <Fragment>{this.props.children({ optionsMaxHeight })}</Fragment>;
   }
 }
