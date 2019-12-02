@@ -16,7 +16,7 @@ import type { ThemeContextProp } from './HOC/withTheme';
 import { removeCharAtPosition } from '../utils/strings';
 import type { InputEvent } from '../utils/types';
 
-type Props = {
+export type NumericInputProps = {
   allowSigns?: boolean,
   autoFocus?: boolean,
   className?: string,
@@ -47,7 +47,7 @@ type State = {
 // TODO: make this configurable (generalize handling commas and dots in other languages!)
 const LOCALE = 'en-US';
 
-class NumericInputBase extends Component<Props, State> {
+class NumericInputBase extends Component<NumericInputProps, State> {
 
   inputElement: { current: null | ElementRef<'input'> };
   _hasInputBeenChanged: boolean = false;
@@ -64,7 +64,7 @@ class NumericInputBase extends Component<Props, State> {
     value: null,
   };
 
-  constructor(props: Props) {
+  constructor(props: NumericInputProps) {
     super(props);
     const { context, numberLocaleOptions, themeId, theme, themeOverrides } = props;
     this.inputElement = createRef();
@@ -96,11 +96,11 @@ class NumericInputBase extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: NumericInputProps) {
     didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps: NumericInputProps, prevState: State) {
     const { value } = this.props;
     const { inputCaretPosition } = this.state;
     const hasValueBeenChanged = value !== prevProps.value;
