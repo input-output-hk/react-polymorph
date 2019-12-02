@@ -106,7 +106,7 @@ class SelectBase extends Component<Props, State> {
       this.optionsElement.current.scrollTop = 0;
     }
     this.setState({ isOpen: !this.state.isOpen });
-  }
+  };
 
   toggleMouseLocation = () => (
     this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions })

@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 // $FlowFixMe
 import type { SyntheticMouseEvent, ElementRef } from 'react';
 import { debounce } from 'lodash';
@@ -18,6 +18,7 @@ type Props = {
   optionsIsOpen: boolean,
   optionsIsOpeningUpward: boolean,
   optionsRef?: ElementRef<*>,
+  optionRenderer?: Function,
   rootRef?: ElementRef<*>,
   toggleOpen: Function
 };
@@ -88,7 +89,7 @@ export class GlobalListeners extends Component<Props, State> {
     // before toggle, ensure options is open and optionsRef exists on DOM
     if (!optionsIsOpen || !optionsRef || !optionsRef.current) { return; }
     this.props.toggleOpen();
-  }
+  };
 
   _getDocumentListeners = () => ({
     click: this._handleDocumentClick,
@@ -122,7 +123,7 @@ export class GlobalListeners extends Component<Props, State> {
     const resizeListener = ['resize', debounce(this._calculateOptionsMaxHeight, 300)];
     document.addEventListener(...scrollListener);
     window.addEventListener(...resizeListener);
-  }
+  };
 
   // calculates max-height for Options, max-height shouldn't be greater than distance
   // from Options rootRef to edge of window (up or down) else Options run off page
@@ -155,10 +156,10 @@ export class GlobalListeners extends Component<Props, State> {
     if (!optionsIsOpeningUpward && optionsMaxHeight > 0) {
       this.setState({ optionsMaxHeight });
     }
-  }
+  };
 
   render() {
     const { optionsMaxHeight } = this.state;
-    return <div>{this.props.children({ optionsMaxHeight })}</div>;
+    return <Fragment>{this.props.children({ optionsMaxHeight })}</Fragment>;
   }
 }

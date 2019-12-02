@@ -1,3 +1,11 @@
+__tests__
+.idea
 .editorconfig
+.eslintrc
+.flowconfig
+.travis.yaml
+dist
+jestSetup.js
+source
 stories
 storybook
