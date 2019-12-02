@@ -18,6 +18,7 @@ type Props = {
   optionsIsOpen: boolean,
   optionsIsOpeningUpward: boolean,
   optionsRef?: ElementRef<*>,
+  optionRenderer?: Function,
   rootRef?: ElementRef<*>,
   toggleOpen: Function
 };

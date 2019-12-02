@@ -11,7 +11,6 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 import { GlobalListeners } from './HOC/GlobalListeners';
-import { Options } from './Options';
 
 type Props = {
   activeItem: any,
@@ -24,6 +23,7 @@ type Props = {
   label: string | Element<any>,
   noArrow?: boolean,
   onItemSelected?: Function,
+  optionRenderer?: Function,
   skin?: ComponentType<any>,
   theme: ?Object,
   themeId: string,

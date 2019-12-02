@@ -96,4 +96,20 @@ storiesOf('Dropdown', module)
         items={COUNTRY_ITEMS}
       />
     ))
+  )
+  .add('custom optionsRenderer',
+    withState({ value: COUNTRY_ITEMS[0] }, store => (
+      <Dropdown
+        clickToOpen
+        label={<Button label="Click to pick location" />}
+        activeItem={store.state.value}
+        onItemSelected={value => {
+          store.set({ value });
+        }}
+        items={COUNTRY_ITEMS}
+        optionRenderer={o => (
+          <div className={styles.customOption}>{o.label}</div>
+        )}
+      />
+    ))
   );

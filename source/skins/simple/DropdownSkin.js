@@ -23,6 +23,7 @@ type Props = {
   onLabelClick: () => void;
   optionsRef: ElementRef<any>,
   optionsMaxHeight: number,
+  optionRenderer?: Function,
   rootRef: ElementRef<*>,
   setMouseOverItems: Function,
   setMouseOverRoot: Function,
@@ -56,8 +57,9 @@ export const DropdownSkin = (props: Props) => {
         noOptionsArrow={props.noArrow}
         onChange={props.onItemSelected}
         options={props.items}
-        optionsRef={props.optionsRef}
         optionsMaxHeight={props.optionsMaxHeight}
+        optionsRef={props.optionsRef}
+        optionRenderer={props.optionRenderer}
         selectedOption={props.activeItem}
         setMouseIsOverOptions={setMouseOverItems}
         skin={OptionsSkin}
