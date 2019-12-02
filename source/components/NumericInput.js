@@ -16,6 +16,16 @@ import type { ThemeContextProp } from './HOC/withTheme';
 import { removeCharAtPosition } from '../utils/strings';
 import type { InputEvent } from '../utils/types';
 
+type NumberFormatOptions = {
+  groupSeparators: string,
+  fractionSeparator: string,
+};
+
+const DEFAULT_NUMBER_FORMAT = {
+  groupSeparators: ',',
+  fractionSeparator: '.',
+};
+
 export type NumericInputProps = {
   allowSigns?: boolean,
   autoFocus?: boolean,
@@ -24,6 +34,7 @@ export type NumericInputProps = {
   disabled?: boolean,
   error?: string,
   label?: string | Element<any>,
+  numberFormat: NumberFormatOptions,
   numberLocaleOptions?: Number$LocaleOptions,
   onBlur?: Function,
   onChange?: Function,
@@ -44,7 +55,7 @@ type State = {
   fallbackInputValue: ?string,
 };
 
-// TODO: make this configurable (generalize handling commas and dots in other languages!)
+// Always use known number format and transform it where necessary
 const LOCALE = 'en-US';
 
 class NumericInputBase extends Component<NumericInputProps, State> {
@@ -57,6 +68,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
   static defaultProps = {
     allowSigns: true,
     context: createEmptyContext(),
+    numberFormat: DEFAULT_NUMBER_FORMAT,
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
@@ -142,16 +154,18 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     minimumFractionDigits: number,
   } {
     const changedCaretPosition = event.target.selectionStart;
-    const valueToProcess = event.target.value;
+    let valueToProcess = event.target.value;
     const { inputType } = event;
-    const { value, allowSigns } = this.props;
+    const { numberFormat, value, allowSigns } = this.props;
     const fallbackInputValue = this.state.fallbackInputValue || '';
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
     const isDeletion = isForwardDelete || isBackwardDelete;
     const isInsert = inputType === 'insertText';
     const deleteCaretCorrection = isBackwardDelete ? 0 : 1;
-    const validInputRegex = allowSigns ? VALID_INPUT_SIGNS_REGEX : VALID_INPUT_NO_SIGNS_REGEX;
+    const validInputSignsRegExp = new RegExp(`^([-])?([0-9${'\\' + numberFormat.groupSeparators}${'\\' + numberFormat.fractionSeparator}]+)?$`);
+    const validInputNoSignsRegExp = new RegExp(`^([0-9${'\\' + numberFormat.groupSeparators}${'\\' + numberFormat.fractionSeparator}]+)?$`);
+    const validInputRegex = allowSigns ? validInputSignsRegExp : validInputNoSignsRegExp;
     const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
 
     /**
@@ -193,6 +207,9 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     /**
      * ========= CLEAN THE INPUT =============
      */
+
+    // Transform value to default number format
+    valueToProcess = transformNumberFormat(valueToProcess, numberFormat, DEFAULT_NUMBER_FORMAT);
 
     // Options
     const propsMinimumFractionDigits = this.getMinimumFractionDigits();
@@ -344,7 +361,11 @@ class NumericInputBase extends Component<NumericInputProps, State> {
   }
 
   getLocalizedNumber(value: ?number) {
-    return convertNumberToLocalizedString(value, LOCALE, this.getDynamicLocaleOptions());
+    return transformNumberFormat(
+      convertNumberToLocalizedString(value, LOCALE, this.getDynamicLocaleOptions()),
+      DEFAULT_NUMBER_FORMAT,
+      this.props.numberFormat
+    );
   }
 
   setInputCaretPosition = (position: number) => {
@@ -406,8 +427,6 @@ export const NumericInput = withTheme(NumericInputBase);
 
 // ========= HELPERS ==========
 
-const VALID_INPUT_SIGNS_REGEX = /^([-])?([0-9,.]+)?$/;
-const VALID_INPUT_NO_SIGNS_REGEX = /^([0-9,.]+)?$/;
 const NUMERIC_INPUT_REGEX = /^([-])?([0-9,]+)?(\.([0-9]+)?)?$/;
 
 const isValidNumericInput = (value: string): boolean => NUMERIC_INPUT_REGEX.test(value);
@@ -448,16 +467,16 @@ function getNumberOfDots(value: string): number {
   return (value.match(/\./g) || []).length;
 }
 
-function getIntegerDigits(value: string): string {
-  const decimalPointIndex = value.indexOf('.');
-  if (decimalPointIndex === -1) return value;
-  return value.substring(0, decimalPointIndex);
+function getIntegerDigits(value: string, fractionSeparator: string = '.'): string {
+  const fractionSeparatorIndex = value.indexOf(fractionSeparator);
+  if (fractionSeparatorIndex === -1) return value;
+  return value.substring(0, fractionSeparatorIndex);
 }
 
-function getFractionDigits(value: string): string {
-  const decimalPointIndex = value.indexOf('.');
-  if (decimalPointIndex === -1) return '';
-  return value.substring(decimalPointIndex + 1);
+function getFractionDigits(value: string, fractionSeparator: string = '.'): string {
+  const fractionSeparatorIndex = value.indexOf(fractionSeparator);
+  if (fractionSeparatorIndex === -1) return '';
+  return value.substring(fractionSeparatorIndex + 1);
 }
 
 function truncateToPrecision(value: string, precision: number): string {
@@ -465,4 +484,15 @@ function truncateToPrecision(value: string, precision: number): string {
   if (decimalPointIndex === -1) return value;
   const fractionDigits = removeCommas(getFractionDigits(value));
   return getIntegerDigits(value) + '.' + fractionDigits.substring(0, precision);
+}
+
+function transformNumberFormat(
+  value: string, inputFormat: NumberFormatOptions, outputFormat: NumberFormatOptions
+) {
+  return (
+    getIntegerDigits(value, inputFormat.fractionSeparator)
+      .replace(new RegExp('\\' + inputFormat.groupSeparators, 'g'), outputFormat.groupSeparators) +
+      outputFormat.fractionSeparator +
+      getFractionDigits(value, inputFormat.fractionSeparator)
+  );
 }
