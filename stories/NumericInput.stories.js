@@ -57,6 +57,30 @@ storiesOf('NumericInput', module)
       />
     ))
   )
+  .add('format: group (dot) fraction (comma)',
+    withState({ value: 0 }, store => (
+      <NumericInput
+        onChange={value => store.set({ value })}
+        numberFormat={{
+          fractionSeparator: ',',
+          groupSeparators: '.',
+        }}
+        value={store.state.value}
+      />
+    ))
+  )
+  .add('format: group (space) fraction (dot)',
+    withState({ value: 0 }, store => (
+      <NumericInput
+        onChange={value => store.set({ value })}
+        numberFormat={{
+          fractionSeparator: '.',
+          groupSeparators: ' ',
+        }}
+        value={store.state.value}
+      />
+    ))
+  )
   .add('autoFocus',
     withState({ value: null }, store => (
       <NumericInput

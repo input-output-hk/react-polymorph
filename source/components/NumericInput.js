@@ -153,18 +153,20 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     fallbackInputValue?: ?string,
     minimumFractionDigits: number,
   } {
-    const changedCaretPosition = event.target.selectionStart;
-    let valueToProcess = event.target.value;
-    const { inputType } = event;
     const { numberFormat, value, allowSigns } = this.props;
+    const changedCaretPosition = event.target.selectionStart;
+    const valueToProcess = transformNumberFormat(
+      event.target.value, numberFormat, DEFAULT_NUMBER_FORMAT
+    );
+    const { inputType } = event;
     const fallbackInputValue = this.state.fallbackInputValue || '';
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
     const isDeletion = isForwardDelete || isBackwardDelete;
     const isInsert = inputType === 'insertText';
     const deleteCaretCorrection = isBackwardDelete ? 0 : 1;
-    const validInputSignsRegExp = new RegExp(`^([-])?([0-9${'\\' + numberFormat.groupSeparators}${'\\' + numberFormat.fractionSeparator}]+)?$`);
-    const validInputNoSignsRegExp = new RegExp(`^([0-9${'\\' + numberFormat.groupSeparators}${'\\' + numberFormat.fractionSeparator}]+)?$`);
+    const validInputSignsRegExp = new RegExp(`^([-])?([0-9,.]+)?$`);
+    const validInputNoSignsRegExp = new RegExp(`^([0-9,.]+)?$`);
     const validInputRegex = allowSigns ? validInputSignsRegExp : validInputNoSignsRegExp;
     const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
 
@@ -207,9 +209,6 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     /**
      * ========= CLEAN THE INPUT =============
      */
-
-    // Transform value to default number format
-    valueToProcess = transformNumberFormat(valueToProcess, numberFormat, DEFAULT_NUMBER_FORMAT);
 
     // Options
     const propsMinimumFractionDigits = this.getMinimumFractionDigits();
@@ -295,7 +294,11 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       return {
         value: newNumber,
         caretPosition: changedCaretPosition,
-        fallbackInputValue: propsMinimumFractionDigits > 0 ? null : localizedNewNumber + '.',
+        fallbackInputValue: (
+          propsMinimumFractionDigits > 0
+            ? null
+            : localizedNewNumber + '.'
+        ),
         minimumFractionDigits: 0,
       };
     }
@@ -361,11 +364,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
   }
 
   getLocalizedNumber(value: ?number) {
-    return transformNumberFormat(
-      convertNumberToLocalizedString(value, LOCALE, this.getDynamicLocaleOptions()),
-      DEFAULT_NUMBER_FORMAT,
-      this.props.numberFormat
-    );
+    return convertNumberToLocalizedString(value, LOCALE, this.getDynamicLocaleOptions());
   }
 
   setInputCaretPosition = (position: number) => {
@@ -415,7 +414,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
         inputRef={this.inputElement}
         onChange={this.onChange}
         theme={this.state.composedTheme}
-        value={inputValue}
+        value={transformNumberFormat(inputValue, DEFAULT_NUMBER_FORMAT, this.props.numberFormat)}
         onBlur={this.onBlur}
         {...rest}
       />
@@ -490,9 +489,10 @@ function transformNumberFormat(
   value: string, inputFormat: NumberFormatOptions, outputFormat: NumberFormatOptions
 ) {
   return (
-    getIntegerDigits(value, inputFormat.fractionSeparator)
-      .replace(new RegExp('\\' + inputFormat.groupSeparators, 'g'), outputFormat.groupSeparators) +
-      outputFormat.fractionSeparator +
-      getFractionDigits(value, inputFormat.fractionSeparator)
+    value
+      .replace(new RegExp('\\' + inputFormat.groupSeparators, 'g'), '#')
+      .replace(new RegExp('\\' + inputFormat.fractionSeparator, 'g'), '@')
+      .replace(new RegExp('#', 'g'), outputFormat.groupSeparators)
+      .replace(new RegExp('@', 'g'), outputFormat.fractionSeparator)
   );
 }
