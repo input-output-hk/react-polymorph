@@ -97,7 +97,7 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
   line-height: $option-line-height;
   padding: $option-padding;
 
-  &.selectedOption {
+  &.selectedOption:not(.hasNoSelectedOptionCheckmark) {
     display: flex;
     .label {
       flex-grow: 1;
