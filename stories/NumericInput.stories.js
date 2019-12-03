@@ -62,8 +62,8 @@ storiesOf('NumericInput', module)
       <NumericInput
         onChange={value => store.set({ value })}
         numberFormat={{
-          fractionSeparator: ',',
-          groupSeparators: '.',
+          decimalSeparator: ',',
+          groupSeparator: '.',
         }}
         value={store.state.value}
       />
@@ -74,8 +74,8 @@ storiesOf('NumericInput', module)
       <NumericInput
         onChange={value => store.set({ value })}
         numberFormat={{
-          fractionSeparator: '.',
-          groupSeparators: ' ',
+          decimalSeparator: '.',
+          groupSeparator: ' ',
         }}
         value={store.state.value}
       />

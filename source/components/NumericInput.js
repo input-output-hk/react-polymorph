@@ -17,13 +17,13 @@ import { removeCharAtPosition } from '../utils/strings';
 import type { InputEvent } from '../utils/types';
 
 type NumberFormatOptions = {
-  groupSeparators: string,
-  fractionSeparator: string,
+  groupSeparator: string,
+  decimalSeparator: string,
 };
 
 const DEFAULT_NUMBER_FORMAT = {
-  groupSeparators: ',',
-  fractionSeparator: '.',
+  groupSeparator: ',',
+  decimalSeparator: '.',
 };
 
 export type NumericInputProps = {
@@ -466,14 +466,14 @@ function getNumberOfDots(value: string): number {
   return (value.match(/\./g) || []).length;
 }
 
-function getIntegerDigits(value: string, fractionSeparator: string = '.'): string {
-  const fractionSeparatorIndex = value.indexOf(fractionSeparator);
+function getIntegerDigits(value: string, decimalSeparator: string = '.'): string {
+  const fractionSeparatorIndex = value.indexOf(decimalSeparator);
   if (fractionSeparatorIndex === -1) return value;
   return value.substring(0, fractionSeparatorIndex);
 }
 
-function getFractionDigits(value: string, fractionSeparator: string = '.'): string {
-  const fractionSeparatorIndex = value.indexOf(fractionSeparator);
+function getFractionDigits(value: string, decimalSeparator: string = '.'): string {
+  const fractionSeparatorIndex = value.indexOf(decimalSeparator);
   if (fractionSeparatorIndex === -1) return '';
   return value.substring(fractionSeparatorIndex + 1);
 }
@@ -490,9 +490,9 @@ function transformNumberFormat(
 ) {
   return (
     value
-      .replace(new RegExp('\\' + inputFormat.groupSeparators, 'g'), '#')
-      .replace(new RegExp('\\' + inputFormat.fractionSeparator, 'g'), '@')
-      .replace(new RegExp('#', 'g'), outputFormat.groupSeparators)
-      .replace(new RegExp('@', 'g'), outputFormat.fractionSeparator)
+      .replace(new RegExp('\\' + inputFormat.groupSeparator, 'g'), '#')
+      .replace(new RegExp('\\' + inputFormat.decimalSeparator, 'g'), '@')
+      .replace(new RegExp('#', 'g'), outputFormat.groupSeparator)
+      .replace(new RegExp('@', 'g'), outputFormat.decimalSeparator)
   );
 }

@@ -38,8 +38,8 @@ describe('NumericInput onChange simulations', () => {
     test('can be configured to handle dots as thousand separators', () => {
       const { input, onChangeMock } = mountNumericInputWithProps({
         numberFormat: {
-          groupSeparators: '.',
-          fractionSeparator: ',',
+          groupSeparator: '.',
+          decimalSeparator: ',',
         }
       });
       input.simulate('change', { nativeEvent: { target: { value: '9.999.999,00' } } });
@@ -48,8 +48,8 @@ describe('NumericInput onChange simulations', () => {
     test('can be configured to handle spaces as thousand separators', () => {
       const { input, onChangeMock } = mountNumericInputWithProps({
         numberFormat: {
-          groupSeparators: ' ',
-          fractionSeparator: '.',
+          groupSeparator: ' ',
+          decimalSeparator: '.',
         }
       });
       input.simulate('change', { nativeEvent: { target: { value: '9 999 999.00' } } });
