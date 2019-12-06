@@ -55,6 +55,7 @@ export const DropdownSkin = (props: Props) => {
         isOpen={props.isOpen}
         isOpeningUpward={props.isOpeningUpward}
         noOptionsArrow={props.noArrow}
+        noSelectedOptionCheckmark
         onChange={props.onItemSelected}
         options={props.items}
         optionsMaxHeight={props.optionsMaxHeight}

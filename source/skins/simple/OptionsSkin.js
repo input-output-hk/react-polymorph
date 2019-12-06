@@ -23,6 +23,7 @@ type Props = {
   noOptionsArrow?: boolean,
   noResults: boolean,
   noResultsMessage: string | Element<any>,
+  noSelectedOptionCheckmark?: boolean,
   optionRenderer: Function,
   options: Array<any>,
   optionsRef: ElementRef<*>,
@@ -48,6 +49,7 @@ export const OptionsSkin = (props: Props) => {
     noOptionsArrow,
     noResults,
     noResultsMessage,
+    noSelectedOptionCheckmark,
     optionsMaxHeight,
     optionRenderer,
     options,
@@ -88,7 +90,8 @@ export const OptionsSkin = (props: Props) => {
               theme[themeId].option,
               isHighlightedOption(index) ? theme[themeId].highlightedOption : null,
               isSelectedOption(index) ? theme[themeId].selectedOption : null,
-              option.isDisabled ? theme[themeId].disabledOption : null
+              option.isDisabled ? theme[themeId].disabledOption : null,
+              noSelectedOptionCheckmark ? theme[themeId].hasNoSelectedOptionCheckmark : null,
             ])}
             onClick={boundHandleClickOnOption}
             onMouseEnter={boundSetHighlightedOptionIndex}

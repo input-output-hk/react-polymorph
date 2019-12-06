@@ -2,6 +2,7 @@
 export const OPTIONS_THEME_API = {
   disabledOption: '',
   firstOptionHighlighted: '',
+  hasNoSelectedOptionCheckmark: '',
   highlightedOption: '',
   isOpen: '',
   openUpward: '',

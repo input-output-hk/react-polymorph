@@ -16,7 +16,8 @@ vNext
 ### Breaking Changes
 
 - `NumericInput` component was completely rewritten to be more flexible and straight forward.
-  [PR 114](https://github.com/input-output-hk/react-polymorph/pull/114)
+  [PR 114](https://github.com/input-output-hk/react-polymorph/pull/114) and allow configurable
+  number formats [PR 123](https://github.com/input-output-hk/react-polymorph/pull/123)
   
 - Adds a new prop `arrowRelativeToTip` to tooltips which allows to center the arrow relative to the size of the tooltip 
   and not the parent element. [PR 113](https://github.com/input-output-hk/react-polymorph/pull/113)

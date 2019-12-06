@@ -5,45 +5,71 @@ import { mountInSimpleTheme } from './helpers/theming';
 
 describe('NumericInput onChange simulations', () => {
 
-  test('valid input triggers onChange listener', () => {
+  const mountNumericInputWithProps = (props) => {
     const onChangeMock = jest.fn();
-    const wrapper = mountInSimpleTheme(<NumericInput onChange={onChangeMock} />);
+    const wrapper = mountInSimpleTheme(<NumericInput {...props} onChange={onChangeMock} />);
     const input = wrapper.find('input');
-    input.simulate('change', { nativeEvent: { target: { value: '19.00' } } });
-    expect(onChangeMock.mock.calls[0][0]).toBe(19.00);
+    return {
+      input,
+      onChangeMock,
+      wrapper,
+    };
+  };
+
+  describe('onChange behavior', () => {
+    test('valid input triggers onChange listener', () => {
+      const { input, onChangeMock } = mountNumericInputWithProps();
+      input.simulate('change', { nativeEvent: { target: { value: '19.00' } } });
+      expect(onChangeMock.mock.calls[0][0]).toBe(19.00);
+    });
+    test('invalid input does not trigger onChange listener', () => {
+      const { input, onChangeMock } = mountNumericInputWithProps();
+      input.simulate('change', { nativeEvent: { target: { value: 'A.00' } } });
+      expect(onChangeMock.mock.calls.length).toBe(0);
+    });
   });
 
-  test('handles en-US localized input values', () => {
-    const onChangeMock = jest.fn();
-    const wrapper = mountInSimpleTheme(<NumericInput onChange={onChangeMock} />);
-    const input = wrapper.find('input');
-    input.simulate('change', { nativeEvent: { target: { value: '9,999,999.00' } } });
-    expect(onChangeMock.mock.calls[0][0]).toBe(9999999.00);
-  });
-
-  test('invalid input does not trigger onChange listener', () => {
-    const onChangeMock = jest.fn();
-    const wrapper = mountInSimpleTheme(
-      <NumericInput onChange={onChangeMock} />
-    );
-    const input = wrapper.find('input');
-    input.simulate('change', { nativeEvent: { target: { value: 'A.00' } } });
-    expect(onChangeMock.mock.calls.length).toBe(0);
+  describe('configurable number formats', () => {
+    test('handles commas as thousand separators by default', () => {
+      const { input, onChangeMock } = mountNumericInputWithProps();
+      input.simulate('change', { nativeEvent: { target: { value: '9,999,999.00' } } });
+      expect(onChangeMock.mock.calls[0][0]).toBe(9999999.00);
+    });
+    test('can be configured to handle dots as thousand separators', () => {
+      const { input, onChangeMock } = mountNumericInputWithProps({
+        numberFormat: {
+          groupSeparator: '.',
+          decimalSeparator: ',',
+        }
+      });
+      input.simulate('change', { nativeEvent: { target: { value: '9.999.999,00' } } });
+      expect(onChangeMock.mock.calls[0][0]).toBe(9999999.00);
+    });
+    test('can be configured to handle spaces as thousand separators', () => {
+      const { input, onChangeMock } = mountNumericInputWithProps({
+        numberFormat: {
+          groupSeparator: ' ',
+          decimalSeparator: '.',
+        }
+      });
+      input.simulate('change', { nativeEvent: { target: { value: '9 999 999.00' } } });
+      expect(onChangeMock.mock.calls[0][0]).toBe(9999999.00);
+    });
   });
 
   test('enforces given minimumFractionDigits', () => {
-    const wrapper = mountInSimpleTheme(
-      <NumericInput numberLocaleOptions={{ minimumFractionDigits: 6 }} value={0} />
-    );
-    const input = wrapper.find('input');
+    const { input } = mountNumericInputWithProps({
+      numberLocaleOptions: { minimumFractionDigits: 6 },
+      value: 0,
+    });
     expect(input.getDOMNode().value).toBe('0.000000');
   });
 
   test('enforces given maximumFractionDigits', () => {
-    const wrapper = mountInSimpleTheme(
-      <NumericInput numberLocaleOptions={{ maximumFractionDigits: 2 }} value={0.123} />
-    );
-    const input = wrapper.find('input');
+    const { input } = mountNumericInputWithProps({
+      numberLocaleOptions: { maximumFractionDigits: 2 },
+      value: 0.123,
+    });
     expect(input.getDOMNode().value).toBe('0.12');
   });
 
