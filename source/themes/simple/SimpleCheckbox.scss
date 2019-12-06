@@ -12,6 +12,7 @@ $checkbox-size: var(--rp-checkbox-size, 23px) !default;
 
 // check
 $checkbox-check-bg-color: var(--rp-checkbox-check-bg-color, #2f496e) !default;
+$checkbox-check-icon-color: var(--rp-checkbox-check-icon-color, #fff) !default;
 $checkbox-check-height: var(--rp-checkbox-check-height, calc(23 / 2 * 1px)) !default;
 $checkbox-check-thickness: var(--rp-checkbox-check-thickness, 2px) !default;
 $checkbox-check-vertical-offset: var(--rp-checkbox-check-vertical-offset, -4px) !default;
@@ -95,7 +96,7 @@ $checkbox-label-text-color-disabled: var(--rp-checkbox-label-text-color-disabled
     align-items: center;
     justify-content: center;
     &:after {
-      border-color: #fff;
+      border-color: $checkbox-check-icon-color;
       border-style: solid;
       border-width: 0 $checkbox-check-thickness $checkbox-check-thickness 0;
       content: "";
