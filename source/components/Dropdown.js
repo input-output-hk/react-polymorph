@@ -78,6 +78,10 @@ class DropdownBase extends Component<Props, State> {
     didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
+  componentWillUnmount() {
+    this.close();
+  }
+
   // ========= PUBLIC SKIN API =========
 
   isOpen = () => {

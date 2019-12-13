@@ -133,17 +133,18 @@ export class GlobalListeners extends Component<Props, State> {
       rootRef,
       optionsIsOpeningUpward,
       optionsIsOpen,
+      optionsRef,
       toggleOpen,
       mouseIsOverOptions,
     } = this.props;
 
     // checks if Options are open & being scrolled upon via mouse position prior to toggling closed
-    optionsIsOpen && !mouseIsOverOptions && toggleOpen();
-
-    if (!documentElement || !documentElement.style || !rootRef || !rootRef.current) {
+    const isOptionsInDOM = optionsRef && optionsRef.current;
+    const doDocumentStylesExist = documentElement && documentElement.style;
+    if (!rootRef || !rootRef.current || !doDocumentStylesExist || !isOptionsInDOM) {
       return;
     }
-
+    optionsIsOpen && !mouseIsOverOptions && toggleOpen();
     const { height, top } = rootRef.current.getBoundingClientRect();
     // opening upwards case
     if (optionsIsOpeningUpward && top < window.innerHeight) {
