@@ -45,6 +45,8 @@ export const DropdownSkin = (props: Props) => {
       ref={props.rootRef}
     >
       <div
+        role="presentation"
+        aria-hidden
         className={themeApi.label}
         onClick={props.onLabelClick}
       >

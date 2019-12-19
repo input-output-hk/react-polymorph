@@ -15,6 +15,7 @@ import SimpleGutter from './SimpleGutter.scss';
 import SimpleHeader from './SimpleHeader.scss';
 import SimpleInfiniteScroll from './SimpleInfiniteScroll.scss';
 import SimpleInput from './SimpleInput.scss';
+import SimpleLink from './SimpleLink.scss';
 import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
@@ -44,6 +45,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.HEADER]: SimpleHeader,
   [IDENTIFIERS.INFINITE_SCROLL]: SimpleInfiniteScroll,
   [IDENTIFIERS.INPUT]: SimpleInput,
+  [IDENTIFIERS.LINK]: SimpleLink,
   [IDENTIFIERS.LOADING_SPINNER]: SimpleLoadingSpinner,
   [IDENTIFIERS.MODAL]: SimpleModal,
   [IDENTIFIERS.OPTIONS]: SimpleOptions,

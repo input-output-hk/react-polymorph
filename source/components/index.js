@@ -12,6 +12,7 @@ export const IDENTIFIERS = {
   HEADER: 'header',
   INFINITE_SCROLL: 'infinitescroll',
   INPUT: 'input',
+  LINK: 'link',
   LOADING_SPINNER: 'loadingspinner',
   MODAL: 'modal',
   OPTIONS: 'options',

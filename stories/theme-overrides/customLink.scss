@@ -1,0 +1,39 @@
+.root {
+  color: rgba(10, 145, 48, 1);
+  font-size: 16px;
+  
+  
+  &.underlined {
+    border-bottom: 1px solid rgba(10, 145, 48, 1);
+  }
+
+  &.underlinedOnHover {
+    &:hover {
+      border-bottom: 1px solid rgba(10, 145, 48, 1);   
+    }
+  }
+
+  &.withIconAfter {
+    &:after {
+      -webkit-mask-size: 14px;
+      mask-size: 14px;
+      background-color: rgba(10, 145, 48, 1);
+      height: 14px;
+      margin-left: 4px;
+      vertical-align: middle;
+      width: 14px;
+    }
+  }
+
+  &.withIconBefore {
+    &:before {
+      -webkit-mask-size: 14px;
+      mask-size: 14px;
+      background-color: rgba(10, 145, 48, 1);
+      height: 14px;
+      margin-right: 4px;
+      vertical-align: middle;
+      width: 14px;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+// Link theme customizations
+
+$link-color: #212930;
+$link-icon-color: red;
+$link-icon-height: 16px;
+$link-icon-width: 16px;
+$link-label-size: 20px;
+$link-space-between-icon-and-label: 6px;
+$link-underline-color: red;
+$link-icon-url: url("./assets/select-arrow.svg");
+
+@import "../../source/themes/simple/SimpleLink";

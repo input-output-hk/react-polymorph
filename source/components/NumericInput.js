@@ -165,8 +165,8 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     const isDeletion = isForwardDelete || isBackwardDelete;
     const isInsert = inputType === 'insertText';
     const deleteCaretCorrection = isBackwardDelete ? 0 : 1;
-    const validInputSignsRegExp = new RegExp(`^([-])?([0-9,.]+)?$`);
-    const validInputNoSignsRegExp = new RegExp(`^([0-9,.]+)?$`);
+    const validInputSignsRegExp = new RegExp(`^([-])?([0-9,.]+)?$`); // eslint-disable-line
+    const validInputNoSignsRegExp = new RegExp(`^([0-9,.]+)?$`); // eslint-disable-line
     const validInputRegex = allowSigns ? validInputSignsRegExp : validInputNoSignsRegExp;
     const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
 
