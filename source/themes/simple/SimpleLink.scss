@@ -3,6 +3,7 @@
 // OVERRIDABLE CONFIGURATION VARIABLES
 
 $link-color: var(--rp-link-color, rgb(41, 111, 208)) !default;
+$link-font-family: var(--rp-link-font-family, $theme-font-medium, sans-serif) !default;
 $link-icon-color: var(--rp-link-icon-color, $link-color) !default;
 $link-icon-height: var(--rp-link-icon-height, 12px) !default;
 $link-icon-url: var(--rp-link-icon-url, url("#{$theme-assets-path}/link-ic.svg")) !default;
@@ -14,6 +15,7 @@ $link-underline-color: var(--rp-link-underline-color, $link-color) !default;
 .root {
   color: $link-color;
   cursor: pointer;
+  font-family: $link-font-family;
   font-size: $link-label-size;
   line-height: 1.36;
   text-decoration: none;
