@@ -11,7 +11,6 @@ import { action } from '@storybook/addon-actions';
 import { Link } from '../source/components/Link';
 
 // themes
-import { SimpleTheme } from '../source/themes/simple';
 import CustomLinkTheme from './theme-customizations/Link.custom.scss';
 
 // custom styles & theme overrides
@@ -82,7 +81,7 @@ storiesOf('Link', module)
   .add('Custom theme', () => (
     <Link
       label="Link label"
-      theme={{ ...SimpleTheme, [IDENTIFIERS.LINK]: CustomLinkTheme }}
+      theme={CustomLinkTheme}
       themeId={IDENTIFIERS.LINK}
       onClick={action('onClick')}
     />
