@@ -6,6 +6,10 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+### Features
+
+- New `Link` component [PR 126](https://github.com/input-output-hk/react-polymorph/pull/126)
+
 0.9.0
 =====
 

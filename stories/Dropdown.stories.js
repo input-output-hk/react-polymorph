@@ -25,7 +25,7 @@ const COUNTRY_ITEMS = [
     label: (
       <div className={styles.flagLabel}>
         <img src={esIcon} />
-        <span>Spain</span>
+        <span>Spain</span>{/* eslint-disable-line */}
       </div>
     ),
   }, {
@@ -33,7 +33,7 @@ const COUNTRY_ITEMS = [
     label: (
       <div className={styles.flagLabel}>
         <img src={usIcon} />
-        <span>USA</span>
+        <span>USA</span>{/* eslint-disable-line */}
       </div>
     ),
   }

@@ -9,6 +9,7 @@ import { FormFieldSkin } from './FormFieldSkin';
 import { HeaderSkin } from './HeaderSkin';
 import { InfiniteScrollSkin } from './InfiniteScrollSkin';
 import { InputSkin } from './InputSkin';
+import { LinkSkin } from './LinkSkin';
 import { LoadingSpinnerSkin } from './LoadingSpinnerSkin';
 import { ModalSkin } from './ModalSkin';
 import { OptionsSkin } from './OptionsSkin';
@@ -31,6 +32,7 @@ export const SimpleSkins = {
   [IDENTIFIERS.HEADER]: HeaderSkin,
   [IDENTIFIERS.INFINITE_SCROLL]: InfiniteScrollSkin,
   [IDENTIFIERS.INPUT]: InputSkin,
+  [IDENTIFIERS.LINK]: LinkSkin,
   [IDENTIFIERS.LOADING_SPINNER]: LoadingSpinnerSkin,
   [IDENTIFIERS.MODAL]: ModalSkin,
   [IDENTIFIERS.OPTIONS]: OptionsSkin,

@@ -8,6 +8,7 @@ import './Dropdown.stories';
 import './Header.stories';
 import './InfiniteScroll.stories';
 import './Input.stories';
+import './Link.stories';
 import './Layout.stories';
 import './LoadingSpinner.stories';
 import './Modal.stories';
