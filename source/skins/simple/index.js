@@ -15,6 +15,7 @@ import { ModalSkin } from './ModalSkin';
 import { OptionsSkin } from './OptionsSkin';
 import { ProgressBarSkin } from './ProgressBarSkin';
 import { RadioSkin } from './RadioSkin';
+import { ScrollBarSkin } from './ScrollBarSkin';
 import { SelectSkin } from './SelectSkin';
 import { StepperSkin } from './StepperSkin';
 import { SwitchSkin } from './SwitchSkin';
@@ -38,6 +39,7 @@ export const SimpleSkins = {
   [IDENTIFIERS.OPTIONS]: OptionsSkin,
   [IDENTIFIERS.PROGRESS_BAR]: ProgressBarSkin,
   [IDENTIFIERS.RADIO]: RadioSkin,
+  [IDENTIFIERS.SCROLLBAR]: ScrollBarSkin,
   [IDENTIFIERS.SELECT]: SelectSkin,
   [IDENTIFIERS.STEPPER]: StepperSkin,
   [IDENTIFIERS.SWITCH]: SwitchSkin,
