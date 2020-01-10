@@ -18,6 +18,7 @@ export const IDENTIFIERS = {
   OPTIONS: 'options',
   PROGRESS_BAR: 'progressbar',
   RADIO: 'radio',
+  SCROLLBAR: 'scrollbar',
   SELECT: 'select',
   STEPPER: 'stepper',
   SWITCH: 'switch',
