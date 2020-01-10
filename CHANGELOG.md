@@ -6,9 +6,16 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+0.9.1
+=====
+
 ### Features
 
 - New `Link` component [PR 126](https://github.com/input-output-hk/react-polymorph/pull/126)
+
+### Fixes
+
+- Fixes error in `GlobalListeners` and `Dropdown` when Daedalus window is resized [PR 125](https://github.com/input-output-hk/react-polymorph/pull/125)
 
 0.9.0
 =====
