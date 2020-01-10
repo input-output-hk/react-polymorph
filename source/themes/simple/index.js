@@ -7,6 +7,7 @@ import SimpleAutocomplete from './SimpleAutocomplete.scss';
 import SimpleBubble from './SimpleBubble.scss';
 import SimpleButton from './SimpleButton.scss';
 import SimpleCheckbox from './SimpleCheckbox.scss';
+import SimpleDropdown from './SimpleDropdown.scss';
 import SimpleFlex from './SimpleFlex.scss';
 import SimpleFormField from './SimpleFormField.scss';
 import SimpleGrid from './SimpleGrid.scss';
@@ -14,12 +15,14 @@ import SimpleGutter from './SimpleGutter.scss';
 import SimpleHeader from './SimpleHeader.scss';
 import SimpleInfiniteScroll from './SimpleInfiniteScroll.scss';
 import SimpleInput from './SimpleInput.scss';
+import SimpleLink from './SimpleLink.scss';
 import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
 import SimpleProgressBar from './SimpleProgressBar.scss';
 import SimpleRadio from './SimpleRadio.scss';
 import SimpleSelect from './SimpleSelect.scss';
+import SimpleStepper from './SimpleStepper.scss';
 import SimpleSwitch from './SimpleSwitch.scss';
 import SimpleTextArea from './SimpleTextArea.scss';
 import SimpleToggler from './SimpleToggler.scss';
@@ -34,6 +37,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.BUBBLE]: SimpleBubble,
   [IDENTIFIERS.BUTTON]: SimpleButton,
   [IDENTIFIERS.CHECKBOX]: SimpleCheckbox,
+  [IDENTIFIERS.DROPDOWN]: SimpleDropdown,
   [IDENTIFIERS.FLEX]: SimpleFlex,
   [IDENTIFIERS.FORM_FIELD]: SimpleFormField,
   [IDENTIFIERS.GRID]: SimpleGrid,
@@ -41,12 +45,14 @@ export const SimpleTheme = {
   [IDENTIFIERS.HEADER]: SimpleHeader,
   [IDENTIFIERS.INFINITE_SCROLL]: SimpleInfiniteScroll,
   [IDENTIFIERS.INPUT]: SimpleInput,
+  [IDENTIFIERS.LINK]: SimpleLink,
   [IDENTIFIERS.LOADING_SPINNER]: SimpleLoadingSpinner,
   [IDENTIFIERS.MODAL]: SimpleModal,
   [IDENTIFIERS.OPTIONS]: SimpleOptions,
   [IDENTIFIERS.PROGRESS_BAR]: SimpleProgressBar,
   [IDENTIFIERS.RADIO]: SimpleRadio,
   [IDENTIFIERS.SELECT]: SimpleSelect,
+  [IDENTIFIERS.STEPPER]: SimpleStepper,
   [IDENTIFIERS.SWITCH]: SimpleSwitch,
   [IDENTIFIERS.TEXT_AREA]: SimpleTextArea,
   [IDENTIFIERS.TOGGLER]: SimpleToggler,

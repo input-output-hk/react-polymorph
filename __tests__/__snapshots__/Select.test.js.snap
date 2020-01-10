@@ -1,725 +1,857 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select isOpen={true} 1`] = `
-<div>
+<div
+  className="select isOpen"
+>
   <div
-    className="select isOpen"
+    className="selectInput"
   >
     <div
-      className="selectInput"
+      className="root"
     >
+      
       <div
-        className="root"
+        className="inputWrapper"
       >
-        
-        <div
-          className="inputWrapper"
-        >
-          <input
-            className="input"
-            onChange={[Function]}
-            onClick={[Function]}
-            readOnly={true}
-            value=""
-          />
-        </div>
+        <input
+          className="input"
+          onChange={[Function]}
+          onClick={[Function]}
+          readOnly={true}
+          value=""
+        />
       </div>
     </div>
+  </div>
+  <div
+    className="options isOpen firstOptionHighlighted root isFloating"
+    style={null}
+  >
     <div
-      className="options isOpen firstOptionHighlighted root isFloating"
-      style={null}
+      className="bubble"
+      data-bubble-container={true}
     >
-      <div
-        className="bubble"
-        data-bubble-container={true}
-      >
-        <ul
-          className="ul"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          style={
-            Object {
-              "maxHeight": "300px",
-            }
+      <ul
+        className="ul"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "maxHeight": "300px",
           }
+        }
+      >
+        <li
+          aria-hidden={true}
+          className="option highlightedOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
         >
-          <li
-            aria-hidden={true}
-            className="option highlightedOption"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Frankreich
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Frankreich
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Spanien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Spanien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Kroatien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Kroatien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Vereinigten Staaten
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Vereinigten Staaten
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Österreich
-            </span>
-          </li>
-        </ul>
-      </div>
-      <span
-        className="arrow"
-        data-bubble-arrow={true}
-      />
+            Österreich
+          </span>
+        </li>
+      </ul>
     </div>
+    <span
+      className="arrow"
+      data-bubble-arrow={true}
+    />
   </div>
 </div>
 `;
 
 exports[`Select isOpeningUpward={true} 1`] = `
-<div>
+<div
+  className="select openUpward"
+>
   <div
-    className="select openUpward"
+    className="selectInput"
   >
     <div
-      className="selectInput"
+      className="root"
     >
+      
       <div
-        className="root"
+        className="inputWrapper"
       >
-        
-        <div
-          className="inputWrapper"
-        >
-          <input
-            className="input"
-            onChange={[Function]}
-            onClick={[Function]}
-            readOnly={true}
-            value=""
-          />
-        </div>
+        <input
+          className="input"
+          onChange={[Function]}
+          onClick={[Function]}
+          readOnly={true}
+          value=""
+        />
       </div>
     </div>
+  </div>
+  <div
+    className="options openUpward root openUpward isFloating isHidden"
+    style={null}
+  >
     <div
-      className="options openUpward root openUpward isFloating isHidden"
-      style={null}
+      className="bubble"
+      data-bubble-container={true}
     >
-      <div
-        className="bubble"
-        data-bubble-container={true}
-      >
-        <ul
-          className="ul"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          style={
-            Object {
-              "maxHeight": "300px",
-            }
+      <ul
+        className="ul"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "maxHeight": "300px",
           }
+        }
+      >
+        <li
+          aria-hidden={true}
+          className="option highlightedOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
         >
-          <li
-            aria-hidden={true}
-            className="option highlightedOption"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Österreich
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Österreich
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Vereinigten Staaten
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Vereinigten Staaten
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Kroatien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Kroatien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Spanien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Spanien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Frankreich
-            </span>
-          </li>
-        </ul>
-      </div>
-      <span
-        className="arrow"
-        data-bubble-arrow={true}
-      />
+            Frankreich
+          </span>
+        </li>
+      </ul>
     </div>
+    <span
+      className="arrow"
+      data-bubble-arrow={true}
+    />
   </div>
 </div>
 `;
 
 exports[`Select renders correctly 1`] = `
-<div>
+<div
+  className="select"
+>
   <div
-    className="select"
+    className="selectInput"
   >
     <div
-      className="selectInput"
+      className="root"
     >
+      
       <div
-        className="root"
+        className="inputWrapper"
       >
-        
-        <div
-          className="inputWrapper"
-        >
-          <input
-            className="input"
-            onChange={[Function]}
-            onClick={[Function]}
-            readOnly={true}
-            value=""
-          />
-        </div>
+        <input
+          className="input"
+          onChange={[Function]}
+          onClick={[Function]}
+          readOnly={true}
+          value=""
+        />
       </div>
     </div>
+  </div>
+  <div
+    className="options firstOptionHighlighted root isFloating isHidden"
+    style={null}
+  >
     <div
-      className="options firstOptionHighlighted root isFloating isHidden"
-      style={null}
+      className="bubble"
+      data-bubble-container={true}
     >
-      <div
-        className="bubble"
-        data-bubble-container={true}
-      >
-        <ul
-          className="ul"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          style={
-            Object {
-              "maxHeight": "300px",
-            }
+      <ul
+        className="ul"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "maxHeight": "300px",
           }
+        }
+      >
+        <li
+          aria-hidden={true}
+          className="option highlightedOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
         >
-          <li
-            aria-hidden={true}
-            className="option highlightedOption"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Frankreich
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Frankreich
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Spanien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Spanien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Kroatien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Kroatien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Vereinigten Staaten
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Vereinigten Staaten
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Österreich
-            </span>
-          </li>
-        </ul>
-      </div>
-      <span
-        className="arrow"
-        data-bubble-arrow={true}
-      />
+            Österreich
+          </span>
+        </li>
+      </ul>
     </div>
+    <span
+      className="arrow"
+      data-bubble-arrow={true}
+    />
   </div>
 </div>
 `;
 
 exports[`Select renders with an error 1`] = `
-<div>
+<div
+  className="select"
+>
   <div
-    className="select"
+    className="selectInput"
   >
     <div
-      className="selectInput"
+      className="root errored"
     >
       <div
-        className="root errored"
+        className="error"
       >
-        <div
-          className="error"
-        >
-          Please select a different option
-        </div>
-        <div
-          className="inputWrapper"
-        >
-          <input
-            className="input errored"
-            onChange={[Function]}
-            onClick={[Function]}
-            readOnly={true}
-            value=""
-          />
-        </div>
+        Please select a different option
+      </div>
+      <div
+        className="inputWrapper"
+      >
+        <input
+          className="input errored"
+          onChange={[Function]}
+          onClick={[Function]}
+          readOnly={true}
+          value=""
+        />
       </div>
     </div>
+  </div>
+  <div
+    className="options firstOptionHighlighted root isFloating isHidden"
+    style={null}
+  >
     <div
-      className="options firstOptionHighlighted root isFloating isHidden"
-      style={null}
+      className="bubble"
+      data-bubble-container={true}
     >
-      <div
-        className="bubble"
-        data-bubble-container={true}
-      >
-        <ul
-          className="ul"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          style={
-            Object {
-              "maxHeight": "300px",
-            }
+      <ul
+        className="ul"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "maxHeight": "300px",
           }
+        }
+      >
+        <li
+          aria-hidden={true}
+          className="option highlightedOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
         >
-          <li
-            aria-hidden={true}
-            className="option highlightedOption"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Frankreich
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Frankreich
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Spanien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Spanien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Kroatien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Kroatien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Vereinigten Staaten
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Vereinigten Staaten
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Österreich
-            </span>
-          </li>
-        </ul>
-      </div>
-      <span
-        className="arrow"
-        data-bubble-arrow={true}
-      />
+            Österreich
+          </span>
+        </li>
+      </ul>
     </div>
+    <span
+      className="arrow"
+      data-bubble-arrow={true}
+    />
   </div>
 </div>
 `;
 
 exports[`Select renders with disabled options 1`] = `
-<div>
+<div
+  className="select"
+>
   <div
-    className="select"
+    className="selectInput"
   >
     <div
-      className="selectInput"
+      className="root"
     >
+      
       <div
-        className="root"
+        className="inputWrapper"
       >
-        
-        <div
-          className="inputWrapper"
-        >
-          <input
-            className="input"
-            onChange={[Function]}
-            onClick={[Function]}
-            readOnly={true}
-            value=""
-          />
-        </div>
+        <input
+          className="input"
+          onChange={[Function]}
+          onClick={[Function]}
+          readOnly={true}
+          value=""
+        />
       </div>
     </div>
+  </div>
+  <div
+    className="options firstOptionHighlighted root isFloating isHidden"
+    style={null}
+  >
     <div
-      className="options firstOptionHighlighted root isFloating isHidden"
-      style={null}
+      className="bubble"
+      data-bubble-container={true}
     >
-      <div
-        className="bubble"
-        data-bubble-container={true}
-      >
-        <ul
-          className="ul"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          style={
-            Object {
-              "maxHeight": "300px",
-            }
+      <ul
+        className="ul"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "maxHeight": "300px",
           }
+        }
+      >
+        <li
+          aria-hidden={true}
+          className="option highlightedOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
         >
-          <li
-            aria-hidden={true}
-            className="option highlightedOption"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              England
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option disabledOption"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            England
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option disabledOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Spain
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option disabledOption"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Spain
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option disabledOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Thailand
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Thailand
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              USA
-            </span>
-          </li>
-        </ul>
-      </div>
-      <span
-        className="arrow"
-        data-bubble-arrow={true}
-      />
+            USA
+          </span>
+        </li>
+      </ul>
     </div>
+    <span
+      className="arrow"
+      data-bubble-arrow={true}
+    />
   </div>
 </div>
 `;
 
 exports[`Select renders with placeholder 1`] = `
-<div>
+<div
+  className="select"
+>
   <div
-    className="select"
+    className="selectInput"
   >
     <div
-      className="selectInput"
+      className="root"
     >
+      
       <div
-        className="root"
+        className="inputWrapper"
       >
-        
-        <div
-          className="inputWrapper"
-        >
-          <input
-            className="input"
-            onChange={[Function]}
-            onClick={[Function]}
-            placeholder="Select your country …"
-            readOnly={true}
-            value=""
-          />
-        </div>
+        <input
+          className="input"
+          onChange={[Function]}
+          onClick={[Function]}
+          placeholder="Select your country …"
+          readOnly={true}
+          value=""
+        />
       </div>
     </div>
+  </div>
+  <div
+    className="options firstOptionHighlighted root isFloating isHidden"
+    style={null}
+  >
     <div
-      className="options firstOptionHighlighted root isFloating isHidden"
-      style={null}
+      className="bubble"
+      data-bubble-container={true}
     >
-      <div
-        className="bubble"
-        data-bubble-container={true}
-      >
-        <ul
-          className="ul"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          style={
-            Object {
-              "maxHeight": "300px",
-            }
+      <ul
+        className="ul"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "maxHeight": "300px",
           }
+        }
+      >
+        <li
+          aria-hidden={true}
+          className="option highlightedOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
         >
-          <li
-            aria-hidden={true}
-            className="option highlightedOption"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Frankreich
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Frankreich
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Spanien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Spanien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Kroatien
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Kroatien
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Vereinigten Staaten
-            </span>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
+            Vereinigten Staaten
+          </span>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <span
+            className="label"
           >
-            <span
-              className="label"
-            >
-              Österreich
-            </span>
-          </li>
-        </ul>
-      </div>
-      <span
-        className="arrow"
-        data-bubble-arrow={true}
-      />
+            Österreich
+          </span>
+        </li>
+      </ul>
     </div>
+    <span
+      className="arrow"
+      data-bubble-arrow={true}
+    />
   </div>
 </div>
 `;
 
 exports[`Select uses render prop - optionRenderer 1`] = `
-<div>
+<div
+  className="select"
+>
   <div
-    className="select"
+    className="selectInput"
   >
     <div
-      className="selectInput"
+      className="root"
     >
+      
       <div
-        className="root"
+        className="inputWrapper"
       >
-        
+        <input
+          className="input"
+          onChange={[Function]}
+          onClick={[Function]}
+          readOnly={true}
+          value=""
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="options firstOptionHighlighted root isFloating isHidden"
+    style={null}
+  >
+    <div
+      className="bubble"
+      data-bubble-container={true}
+    >
+      <ul
+        className="ul"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "maxHeight": "300px",
+          }
+        }
+      >
+        <li
+          aria-hidden={true}
+          className="option highlightedOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <div>
+            <span>
+              German: 
+              Frankreich
+            </span>
+            <span>
+              English: 
+              France
+            </span>
+          </div>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <div>
+            <span>
+              German: 
+              Spanien
+            </span>
+            <span>
+              English: 
+              Spain
+            </span>
+          </div>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <div>
+            <span>
+              German: 
+              Kroatien
+            </span>
+            <span>
+              English: 
+              Croatia
+            </span>
+          </div>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <div>
+            <span>
+              German: 
+              Vereinigten Staaten
+            </span>
+            <span>
+              English: 
+              United States
+            </span>
+          </div>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <div>
+            <span>
+              German: 
+              Österreich
+            </span>
+            <span>
+              English: 
+              Austria
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <span
+      className="arrow"
+      data-bubble-arrow={true}
+    />
+  </div>
+</div>
+`;
+
+exports[`Select uses render prop - valueRenderer 1`] = `
+<div
+  className="select"
+>
+  <div
+    className="selectInput"
+  >
+    <div
+      className="root"
+    >
+      
+      <div
+        className="inputWrapper"
+      >
         <div
-          className="inputWrapper"
+          className="customValueWrapper"
         >
           <input
             className="input"
@@ -728,124 +860,85 @@ exports[`Select uses render prop - optionRenderer 1`] = `
             readOnly={true}
             value=""
           />
+          <div
+            className="customValueBlock"
+          />
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="options firstOptionHighlighted root isFloating isHidden"
+    style={null}
+  >
     <div
-      className="options firstOptionHighlighted root isFloating isHidden"
-      style={null}
+      className="bubble"
+      data-bubble-container={true}
     >
-      <div
-        className="bubble"
-        data-bubble-container={true}
-      >
-        <ul
-          className="ul"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          style={
-            Object {
-              "maxHeight": "300px",
-            }
+      <ul
+        className="ul"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "maxHeight": "300px",
           }
+        }
+      >
+        <li
+          aria-hidden={true}
+          className="option highlightedOption"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
         >
-          <li
-            aria-hidden={true}
-            className="option highlightedOption"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
-          >
+          <div>
             <div>
-              <span>
-                German: 
-                Frankreich
-              </span>
-              <span>
-                English: 
-                France
-              </span>
+              Main wallet
             </div>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
-          >
             <div>
-              <span>
-                German: 
-                Spanien
-              </span>
-              <span>
-                English: 
-                Spain
-              </span>
+              100,100 ADA
             </div>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
-          >
+          </div>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <div>
             <div>
-              <span>
-                German: 
-                Kroatien
-              </span>
-              <span>
-                English: 
-                Croatia
-              </span>
+              Spending money
             </div>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
-          >
             <div>
-              <span>
-                German: 
-                Vereinigten Staaten
-              </span>
-              <span>
-                English: 
-                United States
-              </span>
+              10,100.2 ADA
             </div>
-          </li>
-          <li
-            aria-hidden={true}
-            className="option"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            role="presentation"
-          >
+          </div>
+        </li>
+        <li
+          aria-hidden={true}
+          className="option"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          role="presentation"
+        >
+          <div>
             <div>
-              <span>
-                German: 
-                Österreich
-              </span>
-              <span>
-                English: 
-                Austria
-              </span>
+              Savings
             </div>
-          </li>
-        </ul>
-      </div>
-      <span
-        className="arrow"
-        data-bubble-arrow={true}
-      />
+            <div>
+              500,1000 ADA
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
+    <span
+      className="arrow"
+      data-bubble-arrow={true}
+    />
   </div>
 </div>
 `;

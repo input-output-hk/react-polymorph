@@ -1,47 +1,43 @@
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(?:png|svg)$/,
-        use: 'url-loader'
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: [/(node_modules)/, /react-css-themr/],
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              babelrc: false,
-              presets: [['env', { modules: false }], 'react'],
-              plugins: [
-                'transform-object-rest-spread',
-                'transform-flow-strip-types',
-                'transform-decorators-legacy',
-                'transform-class-properties',
-                'lodash'
-              ]
-            }
+module.exports = async ({ config, mode }) => {
+  config.module.rules.push(
+    {
+      test: /\.jsx?$/,
+      exclude: [/node_modules/],
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react',
+              '@babel/preset-flow'
+            ],
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+              'lodash'
+            ]
           }
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          { loader: 'style-loader', options: { sourceMap: true } },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: true,
+        }
+      ]
+    },
+    {
+      test: /\.scss$/,
+      use: [
+        { loader: 'style-loader' },
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true,
+            modules: {
               localIdentName: '[name]_[local]',
-              importLoaders: true
-            }
-          },
-          { loader: 'sass-loader', options: { sourceMap: true } }
-        ]
-      }
-    ]
-  },
-  devtool: 'source-map'
+            },
+            importLoaders: true
+          }
+        },
+        { loader: 'sass-loader', options: { sourceMap: true } }
+      ]
+    }
+  );
+  return config;
 };

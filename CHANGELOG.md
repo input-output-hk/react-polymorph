@@ -6,7 +6,49 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
-Upcoming changes for the next release.
+0.9.1
+=====
+
+### Features
+
+- New `Link` component [PR 126](https://github.com/input-output-hk/react-polymorph/pull/126)
+
+### Fixes
+
+- Fixes error in `GlobalListeners` and `Dropdown` when Daedalus window is resized [PR 125](https://github.com/input-output-hk/react-polymorph/pull/125)
+
+0.9.0
+=====
+
+### Features
+
+- New `Dropdown` component [PR 122](https://github.com/input-output-hk/react-polymorph/pull/122)
+
+### Breaking Changes
+
+- `NumericInput` component was completely rewritten to be more flexible and straight forward.
+  [PR 114](https://github.com/input-output-hk/react-polymorph/pull/114) and allow configurable
+  number formats [PR 123](https://github.com/input-output-hk/react-polymorph/pull/123)
+  
+- Adds a new prop `arrowRelativeToTip` to tooltips which allows to center the arrow relative to the size of the tooltip 
+  and not the parent element. [PR 113](https://github.com/input-output-hk/react-polymorph/pull/113)
+    - (BREAKING) `none` is no longer a valid option for `$bubble-border-color` and it should instead be `transparent`
+    - (BREAKING) Any library that directly calls the `arrow` mixin directly has to be updated to take into account the 
+      change in parameter to use `width` and `height` instead of a single `size`. If you use Bubble or any component 
+      that instead of a direct use of the mixin, no change is needed. 
+  
+### Chores
+
+- Updates contributors in package.json [PR 117](https://github.com/input-output-hk/react-polymorph/pull/117)
+
+0.8.7
+=====
+
+### Features
+
+- Adds selected option render prop on Select component to override default input value format.
+  Adds Stepper component, theme, skin, and stories.
+  [PR 115](https://github.com/input-output-hk/react-polymorph/pull/115)
 
 0.8.6
 =====

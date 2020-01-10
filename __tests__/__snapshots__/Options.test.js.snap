@@ -11,6 +11,8 @@ exports[`Options renders correctly 1`] = `
   >
     <ul
       className="ul"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       style={null}
     >
       <li
@@ -141,6 +143,8 @@ exports[`Options uses render prop - optionRenderer 1`] = `
   >
     <ul
       className="ul"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       style={null}
     >
       <li
@@ -243,6 +247,8 @@ exports[`Options uses render prop - render 1`] = `
   >
     <ul
       className="ul"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       style={null}
     >
       <li>

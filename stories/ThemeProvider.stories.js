@@ -39,6 +39,7 @@ import CustomSwitchTheme from './theme-customizations/Switch.custom.scss';
 import CustomRadioTheme from './theme-customizations/Radio.custom.scss';
 import CustomOptionsTheme from './theme-customizations/Options.custom.scss';
 import CustomInputTheme from './theme-customizations/Input.custom.scss';
+import CustomLinkTheme from './theme-customizations/Link.custom.scss';
 import CustomModalTheme from './theme-customizations/Modal.custom.scss';
 import CustomButtonTheme from './theme-customizations/Button.custom.scss';
 import CustomCheckboxTheme from './theme-customizations/Checkbox.custom.scss';
@@ -62,6 +63,7 @@ const {
   CHECKBOX,
   FORM_FIELD,
   INPUT,
+  LINK,
   MODAL,
   OPTIONS,
   PROGRESS_BAR,
@@ -78,6 +80,7 @@ const CUSTOM_THEME = {
   [RADIO]: CustomRadioTheme,
   [OPTIONS]: CustomOptionsTheme,
   [INPUT]: CustomInputTheme,
+  [LINK]: CustomLinkTheme,
   [MODAL]: CustomModalTheme,
   [BUTTON]: CustomButtonTheme,
   [CHECKBOX]: CustomCheckboxTheme,

@@ -31,6 +31,8 @@ type Props = {
   placeholder?: string,
   readOnly: boolean,
   setError?: Function,
+  selectedOption?: any,
+  selectionRenderer?: Function,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,

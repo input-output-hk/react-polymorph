@@ -14,7 +14,8 @@ $bubble-border-transparent: var(--rp-bubble-border-transparent, 0px solid transp
 $bubble-border-width: var(--rp-bubble-border-width, -1px) !default;
 $bubble-border-width-transparent: var(--rp-bubble-border-width-transparent, 0px) !default;
 $bubble-box-shadow: var(--rp-bubble-box-shadow, 0 1.5px 5px 0 rgba(0, 0, 0, 0.18)) !default;
-$bubble-distance: var(--rp-bubble-distance, calc(100% + 14px)) !default;
+$bubble-distance: var(--rp-bubble-distance, 14px) !default;
+$bubble-no-arrow-distance: var(--rp-bubble-no-arrow-distance, 0px) !default;
 $bubble-min-width: var(--rp-bubble-min-width, 100%) !default;
 $bubble-padding: var(--rp-bubble-padding, 6px 12px) !default;
 $bubble-text-color: var(--rp-bubble-text-color, #5e6066) !default;
@@ -24,24 +25,41 @@ $bubble-shadow: var(--rp-bubble-shadow, none) !default;
 // arrow
 $bubble-arrow: var(--rp-bubble-arrow, true) !default;
 $bubble-arrow-size: var(--rp-bubble-arrow-size, 10px) !default;
-
+$bubble-arrow-width: var(--rp-bubble-arrow-width, calc(2*#{$bubble-arrow-size})) !default;
+$bubble-arrow-height: var(--rp-bubble-arrow-height, $bubble-arrow-size) !default;
 
 .root {
   position: absolute;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 3;
 
   // ==== ARROW ====
   // The arrow is referred to as [data-bubble-arrow] so that the component doesn't have a high
   // specificity internally, allowing it to be overwritten externally
-  @if calc(#{$bubble-arrow} == true) {
+  @if ($bubble-arrow) {
+    &.isFloating {
+      [data-bubble-arrow] {
+        display: block;
+        position: absolute;
+        width: 100%;
+      }
+      &.openUpward [data-bubble-arrow] {
+        bottom: $bubble-distance;
+      }
+      &:not(.openUpward) [data-bubble-arrow] {
+        top: $bubble-distance;
+      }
+    }
+
+
     &.transparent [data-bubble-arrow] {
       @include arrow(
         up,
         $bubble-bg-color-transparent,
         $bubble-border-color-transparent,
-        $bubble-arrow-size
+        $bubble-arrow-width,
+        $bubble-arrow-height
       );
     }
 
@@ -50,7 +68,8 @@ $bubble-arrow-size: var(--rp-bubble-arrow-size, 10px) !default;
         down,
         $bubble-bg-color-transparent,
         $bubble-border-color-transparent,
-        $bubble-arrow-size
+        $bubble-arrow-width,
+        $bubble-arrow-height
       );
     }
 
@@ -59,7 +78,8 @@ $bubble-arrow-size: var(--rp-bubble-arrow-size, 10px) !default;
         up,
         $bubble-bg-color,
         $bubble-border-color,
-        $bubble-arrow-size
+        $bubble-arrow-width,
+        $bubble-arrow-height
       );
     }
 
@@ -68,7 +88,8 @@ $bubble-arrow-size: var(--rp-bubble-arrow-size, 10px) !default;
         down,
         $bubble-bg-color,
         $bubble-border-color,
-        $bubble-arrow-size
+        $bubble-arrow-width,
+        $bubble-arrow-height
       );
     }
 
@@ -117,18 +138,16 @@ $bubble-arrow-size: var(--rp-bubble-arrow-size, 10px) !default;
 // ==== STATE: openUpward ====
 
 .openUpward {
-  bottom: $bubble-distance;
-
+  bottom: calc(100% + #{$bubble-distance});
   .bubble {
-    bottom: 0;
+    bottom: 100%;
   }
 }
 
 .root:not(.openUpward) {
-  top: $bubble-distance;
-
+  top: calc(100% + #{$bubble-distance});
   .bubble {
-    top: 0;
+    top: 100%;
   }
 }
 
@@ -147,4 +166,28 @@ $bubble-arrow-size: var(--rp-bubble-arrow-size, 10px) !default;
   z-index: 99;
   left: inherit;
   right: inherit;
+
+  &.openUpward {
+    padding-bottom: $bubble-distance;
+    &.noArrow {
+      padding-bottom: $bubble-no-arrow-distance;
+    }
+  }
+
+  &:not(.openUpward) {
+    padding-top: $bubble-distance;
+    &.noArrow {
+      padding-top: $bubble-no-arrow-distance;
+    }
+  }
+}
+
+// ===== STATE: noArrow =====
+.root.noArrow {
+  &.openUpward {
+    bottom: calc(100% + #{$bubble-no-arrow-distance});
+  }
+  &:not(.openUpward) {
+    top: calc(100% + #{$bubble-no-arrow-distance});
+  }
 }

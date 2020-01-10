@@ -32,6 +32,8 @@ $option-checkmark-width: var(--rp-option-checkmark-width, 5px) !default;
 // arrow
 $options-arrow: var(--rp-options-arrow, true) !default;
 $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
+$options-arrow-width: var(--rp-options-arrow-width, calc(2*#{$options-arrow-size})) !default;
+$options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !default;
 
 
 .options {
@@ -39,13 +41,14 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
     padding: 0;
   }
 
-  @if calc(#{$options-arrow} == true) {
+  @if ($options-arrow) {
     [data-bubble-arrow] {
       @include arrow(
         up,
         $option-bg-color,
         $options-border-color,
-        $options-arrow-size
+        $options-arrow-width,
+        $options-arrow-height
       );
     }
 
@@ -53,18 +56,20 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
       &:not(.openUpward) [data-bubble-arrow] {
         @include arrow(
           up,
-          $option-bg-color-highlighted !important,
+          $option-bg-color-highlighted,
           $options-border-color,
-          $options-arrow-size
+          $options-arrow-width,
+          $options-arrow-height
         );
       }
       &.openUpward [data-bubble-arrow] {
         height: inherit;
         @include arrow(
           down,
-          $option-bg-color-highlighted !important,
+          $option-bg-color-highlighted,
           $options-border-color,
-          $options-arrow-size
+          $options-arrow-width,
+          $options-arrow-height
         );
       }
     }
@@ -92,7 +97,7 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
   line-height: $option-line-height;
   padding: $option-padding;
 
-  &.selectedOption {
+  &.selectedOption:not(.hasNoSelectedOptionCheckmark) {
     display: flex;
     .label {
       flex-grow: 1;
@@ -132,7 +137,8 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
           down,
           $option-bg-color,
           $options-border-color,
-          $options-arrow-size
+          $options-arrow-width,
+          $options-arrow-height,
         );
       }
 
@@ -141,7 +147,8 @@ $options-arrow-size: var(--rp-options-arrow-size, 10px) !default;
           down,
           $option-bg-color-highlighted,
           $options-border-color,
-          $options-arrow-size
+          $options-arrow-width,
+          $options-arrow-height,
         );
       }
     }

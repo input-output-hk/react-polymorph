@@ -1,0 +1,14 @@
+.flagLabel {
+ display: flex;
+ flex-direction: row;
+ justify-content: flex-start;
+ align-items: center;
+
+ span {
+  padding-left: 2em;
+ }
+}
+
+.customOption {
+  color: red;
+}
