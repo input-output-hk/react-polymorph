@@ -6,14 +6,14 @@ import classnames from 'classnames';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 type Props = {
+  children: Node,
   className: string,
-  render: Function,
   theme: Object,
   themeId: string
 };
 
 export const ScrollBarSkin = (props: Props) => {
-  const { className, render, themeId } = props;
+  const { children, className, themeId } = props;
   const theme = props.theme[themeId];
 
   const renderThumb = (thumbProps: any) => <div {...thumbProps} className={theme.thumb} />;
@@ -23,7 +23,7 @@ export const ScrollBarSkin = (props: Props) => {
       className={classnames([className, theme.root])}
       renderThumbVertical={renderThumb}
     >
-      {render()}
+      {children}
     </Scrollbars>
   );
 };
