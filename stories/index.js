@@ -16,6 +16,7 @@ import './NumericInput.stories';
 import './Options.stories';
 import './ProgressBar.stories';
 import './Radio.stories';
+import './ScrollBar.stories';
 import './Select.stories';
 import './Stepper.stories';
 import './Switch.stories';
