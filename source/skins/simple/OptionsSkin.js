@@ -8,6 +8,7 @@ import { isFunction, isObject } from 'lodash';
 
 // components
 import { Bubble } from '../../components/Bubble';
+import { ScrollBar } from '../../components/ScrollBar';
 
 // skins
 import { BubbleSkin } from './BubbleSkin';
@@ -120,6 +121,8 @@ export const OptionsSkin = (props: Props) => {
   const optionsStyle = optionsMaxHeight == null ? null : {
     maxHeight: `${optionsMaxHeight}px`
   };
+  const OPTION_HEIGHT = 46; // a single option's height is 46px by default
+  const scrollBarHeight = options.length ? options.length * OPTION_HEIGHT : OPTION_HEIGHT;
 
   return (
     <Bubble
@@ -146,7 +149,9 @@ export const OptionsSkin = (props: Props) => {
         onMouseEnter={() => setMouseIsOverOptions && setMouseIsOverOptions(true)}
         onMouseLeave={() => setMouseIsOverOptions && setMouseIsOverOptions(false)}
       >
-        {renderOptions()}
+        <ScrollBar style={{ height: `${scrollBarHeight}px` }}>
+          {renderOptions()}
+        </ScrollBar>
       </ul>
     </Bubble>
   );

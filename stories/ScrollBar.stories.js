@@ -17,7 +17,7 @@ storiesOf('ScrollBar', module)
   // ====== Stories ======
 
   .add('plain', () => (
-    <ScrollBar style={{ height: '1500px', width: '200px' }}>
+    <ScrollBar style={{ height: '1000px' }}>
       <p>Scroll Me</p>
     </ScrollBar>
   ));
