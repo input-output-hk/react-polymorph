@@ -7,8 +7,6 @@ $scrollbar-thumb-bg-color-active: var(--rp-scrollbar-thumb-bg-color-active, rgba
 $scrollbar-thumb-bg-color-hover: var(--rp-scrollbar-thumb-bg-color-hover, rgba(255, 255, 255, 0.3)) !default;
 $scrollbar-thumb-border-radius: var(--rp-scrollbar-thumb-border-radius, 3px) !default;
 
-.root {}
-
 .thumb {
  background-color: $scrollbar-thumb-bg-color;
  border-radius: $scrollbar-thumb-border-radius;
