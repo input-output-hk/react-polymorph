@@ -6,6 +6,10 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+### Features
+
+- Adds new `ScrollBar` component and integrates it into existing react-polymorph components [PR 129](https://github.com/input-output-hk/react-polymorph/pull/129)
+
 0.9.1
 =====
 
