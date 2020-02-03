@@ -2,7 +2,7 @@
 import React from 'react';
 
 // external libraries
-import { Scrollbars } from 'react-custom-scrollbars';
+import CustomScrollBar from 'react-scrollbars-custom';
 
 type Props = {
   children: Node,
@@ -16,14 +16,11 @@ export const ScrollBarSkin = (props: Props) => {
   const { children, style, themeId } = props;
   const theme = props.theme[themeId];
 
-  const renderThumb = (thumbProps: any) => <div {...thumbProps} className={theme.thumb} />;
-
   return (
-    <Scrollbars
-      style={style}
-      renderThumbVertical={renderThumb}
-    >
-      {children}
-    </Scrollbars>
+    <div className={theme.root}>
+      <CustomScrollBar style={style} noDefaultStyles>
+        {children}
+      </CustomScrollBar>
+    </div>
   );
 };
