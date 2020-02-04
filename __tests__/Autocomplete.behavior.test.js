@@ -36,7 +36,7 @@ const ABC_SORTED_MNEMONICS = [
 describe('Autocomplete onChange simulations', () => {
   test('Autocomplete is closed by default and when clicked is open and displays options', () => {
     const wrapper = mountInSimpleTheme(
-      <Autocomplete options={MNEMONIC_WORDS}/>
+      <Autocomplete options={MNEMONIC_WORDS} />
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
@@ -65,7 +65,7 @@ describe('Autocomplete onChange simulations', () => {
 
   test('Autocomplete puts options in abc order and highlights first option by default when open', () => {
     const wrapper = mountInSimpleTheme(
-      <Autocomplete options={MNEMONIC_WORDS}/>
+      <Autocomplete options={MNEMONIC_WORDS} />
     );
     const component = wrapper.find('Autocomplete').instance();
     const input = wrapper.find('input');
