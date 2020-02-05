@@ -14,6 +14,7 @@ export const IDENTIFIERS = {
   INPUT: 'input',
   LINK: 'link',
   LOADING_SPINNER: 'loadingspinner',
+  MNEMONIC_ENTRY: 'mnemonicentry',
   MODAL: 'modal',
   OPTIONS: 'options',
   PROGRESS_BAR: 'progressbar',
