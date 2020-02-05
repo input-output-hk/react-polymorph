@@ -1,0 +1,26 @@
+@import "theme";
+
+// OVERRIDABLE CONFIGURATION VARIABLES
+
+// mnemonicentry
+$mnemonicentry-bg-color: var(--rp-mnemonicentry-bg-color, none) !default;
+
+// label
+$mnemonicentry-label-font-family: var(--rp-mnemonicentry-label-font-family, $theme-font-medium, sans-serif) !default;
+$mnemonicentry-label-font-size: var(--rp-mnemonicentry-label-font-size, 16px) !default;
+$mnemonicentry-label-text-color: var(--rp-mnemonicentry-label-text-color, #5e6066) !default;
+$mnemonicentry-label-margin: var(--rp-mnemonicentry-label-margin, 0 0 10px 0) !default;
+
+.root {
+ background-color: $mnemonicentry-bg-color;
+ position: relative;
+}
+
+.label {
+ color: $mnemonicentry-label-text-color;
+ display: block;
+ font-family: $mnemonicentry-label-font-family, sans-serif;
+ font-size: $mnemonicentry-label-font-size;
+ line-height: 1.38;
+ margin: $mnemonicentry-label-margin;
+}
