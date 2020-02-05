@@ -17,6 +17,7 @@ import SimpleInfiniteScroll from './SimpleInfiniteScroll.scss';
 import SimpleInput from './SimpleInput.scss';
 import SimpleLink from './SimpleLink.scss';
 import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
+import SimpleMnemonicEntry from './SimpleMnemonicEntry.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
 import SimpleProgressBar from './SimpleProgressBar.scss';
@@ -47,6 +48,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.INPUT]: SimpleInput,
   [IDENTIFIERS.LINK]: SimpleLink,
   [IDENTIFIERS.LOADING_SPINNER]: SimpleLoadingSpinner,
+  [IDENTIFIERS.MNEMONIC_ENTRY]: SimpleMnemonicEntry,
   [IDENTIFIERS.MODAL]: SimpleModal,
   [IDENTIFIERS.OPTIONS]: SimpleOptions,
   [IDENTIFIERS.PROGRESS_BAR]: SimpleProgressBar,
