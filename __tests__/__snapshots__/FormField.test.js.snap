@@ -2,11 +2,10 @@
 
 exports[`FormField is disabled 1`] = `
 <div
-  className="root disabled"
+  class="root disabled"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <span>
       true
@@ -17,14 +16,13 @@ exports[`FormField is disabled 1`] = `
 
 exports[`FormField renders an input element 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="render-prop"
+      class="render-prop"
     />
   </div>
 </div>
@@ -32,14 +30,13 @@ exports[`FormField renders an input element 1`] = `
 
 exports[`FormField renders correctly 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <div
-      className="render-prop"
+      class="render-prop"
     />
   </div>
 </div>
@@ -47,18 +44,18 @@ exports[`FormField renders correctly 1`] = `
 
 exports[`FormField renders with an error 1`] = `
 <div
-  className="root errored"
+  class="root errored"
 >
   <div
-    className="error"
+    class="error"
   >
     Add an Error
   </div>
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <div
-      className="render-prop"
+      class="render-prop"
     />
   </div>
 </div>
@@ -66,22 +63,20 @@ exports[`FormField renders with an error 1`] = `
 
 exports[`FormField renders with label 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <label
-    aria-hidden={true}
-    className="label"
-    onClick={[Function]}
+    aria-hidden="true"
+    class="label"
     role="presentation"
   >
     Add a Label
   </label>
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <div
-      className="render-prop"
+      class="render-prop"
     />
   </div>
 </div>

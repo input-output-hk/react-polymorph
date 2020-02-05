@@ -4,44 +4,29 @@ import { Bubble } from '../source/components/Bubble';
 import { renderInSimpleTheme } from './helpers/theming';
 
 test('Bubble renders correctly', () => {
-  const component = renderInSimpleTheme(<Bubble />);
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  expect(renderInSimpleTheme(<Bubble />)).toMatchSnapshot();
 });
 
 test('Bubble renders isOpeningUpward={true}', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Bubble isOpeningUpward />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Bubble renders isTransparent={false}', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Bubble isTransparent={false} />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Bubble renders isHidden={true}', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Bubble isHidden />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Bubble renders isFloating={true}', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Bubble isFloating />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
