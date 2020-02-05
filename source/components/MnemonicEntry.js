@@ -14,14 +14,19 @@ type Props = {
   className?: string,
   context: ThemeContextProp,
   label?: string | Element<any>,
+  mnemonicWords: Array<string>,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object // custom css/scss from user that adheres to component's theme API
+  themeOverrides: Object, // custom css/scss from user that adheres to component's theme API
+  totalColumns: number,
+  totalWords: number,
 };
 
 type State = {
-  composedTheme: Object
+  activeColumn: number | null,
+  composedTheme: Object,
+  totalWordsEntered: number,
 };
 
 class MnemonicEntryBase extends Component<Props, State> {
@@ -41,11 +46,13 @@ class MnemonicEntryBase extends Component<Props, State> {
     const { context, themeId, theme, themeOverrides } = props;
 
     this.state = {
+      activeColumn: null,
       composedTheme: composeTheme(
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
+      totalWordsEntered: 0,
     };
   }
 
@@ -63,9 +70,22 @@ class MnemonicEntryBase extends Component<Props, State> {
       ...rest
     } = this.props;
 
+    const {
+     activeColumn,
+     composedTheme,
+     totalWordsEntered,
+    } = this.state;
+
     const MnemonicEntrySkin = skin || context.skins[IDENTIFIERS.MNEMONIC_ENTRY];
 
-    return <MnemonicEntrySkin theme={this.state.composedTheme} {...rest} />;
+    return (
+      <MnemonicEntrySkin
+        activeColumn={activeColumn}
+        theme={composedTheme}
+        totalWordsEntered={totalWordsEntered}
+        {...rest}
+      />
+    );
   }
 }
 
