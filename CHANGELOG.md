@@ -6,6 +6,9 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+0.9.2
+=====
+
 ### Features
 
 - Adds new `ScrollBar` component and integrates it into existing react-polymorph components. Refactors all snapshot tests to use enzyme for full DOM node rendering. [PR 129](https://github.com/input-output-hk/react-polymorph/pull/129)
