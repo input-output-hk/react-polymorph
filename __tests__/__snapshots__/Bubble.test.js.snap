@@ -2,80 +2,75 @@
 
 exports[`Bubble renders correctly 1`] = `
 <div
-  className="root transparent"
-  style={null}
+  class="root transparent"
 >
   <div
-    className="bubble"
-    data-bubble-container={true}
+    class="bubble"
+    data-bubble-container="true"
   />
   <span
-    className="arrow"
-    data-bubble-arrow={true}
+    class="arrow"
+    data-bubble-arrow="true"
   />
 </div>
 `;
 
 exports[`Bubble renders isFloating={true} 1`] = `
 <div
-  className="root transparent isFloating"
-  style={null}
+  class="root transparent isFloating"
 >
   <div
-    className="bubble"
-    data-bubble-container={true}
+    class="bubble"
+    data-bubble-container="true"
   />
   <span
-    className="arrow"
-    data-bubble-arrow={true}
+    class="arrow"
+    data-bubble-arrow="true"
   />
 </div>
 `;
 
 exports[`Bubble renders isHidden={true} 1`] = `
 <div
-  className="root transparent isHidden"
-  style={null}
+  class="root transparent isHidden"
 >
   <div
-    className="bubble"
-    data-bubble-container={true}
+    class="bubble"
+    data-bubble-container="true"
   />
   <span
-    className="arrow"
-    data-bubble-arrow={true}
+    class="arrow"
+    data-bubble-arrow="true"
   />
 </div>
 `;
 
 exports[`Bubble renders isOpeningUpward={true} 1`] = `
 <div
-  className="root openUpward transparent"
-  style={null}
+  class="root openUpward transparent"
 >
   <div
-    className="bubble"
-    data-bubble-container={true}
+    class="bubble"
+    data-bubble-container="true"
   />
   <span
-    className="arrow"
-    data-bubble-arrow={true}
+    class="arrow"
+    data-bubble-arrow="true"
   />
 </div>
 `;
 
 exports[`Bubble renders isTransparent={false} 1`] = `
 <div
-  className="root"
-  style={null}
+  class="root"
 >
   <div
-    className="bubble"
-    data-bubble-container={true}
+    class="bubble"
+    data-bubble-container="true"
   />
   <span
-    className="arrow"
-    data-bubble-arrow={true}
+    class="arrow"
+    data-bubble-arrow="true"
   />
 </div>
 `;

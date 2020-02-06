@@ -2,16 +2,14 @@
 
 exports[`Input is readOnly 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input"
-      onChange={[Function]}
-      readOnly={true}
+      class="input"
+      readonly=""
       value=""
     />
   </div>
@@ -20,16 +18,13 @@ exports[`Input is readOnly 1`] = `
 
 exports[`Input renders correctly 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input"
-      onChange={[Function]}
-      readOnly={false}
+      class="input"
       value=""
     />
   </div>
@@ -38,16 +33,13 @@ exports[`Input renders correctly 1`] = `
 
 exports[`Input renders with a value 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input"
-      onChange={[Function]}
-      readOnly={false}
+      class="input"
       value="there is value"
     />
   </div>
@@ -56,17 +48,14 @@ exports[`Input renders with a value 1`] = `
 
 exports[`Input renders with placeholder 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input"
-      onChange={[Function]}
+      class="input"
       placeholder="0.0000"
-      readOnly={false}
       value=""
     />
   </div>

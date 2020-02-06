@@ -18,6 +18,7 @@ import { MODAL_THEME_API } from './modal';
 import { OPTIONS_THEME_API } from './options';
 import { PROGRESS_BAR_THEME_API } from './progressbar';
 import { RADIO_THEME_API } from './radio';
+import { SCROLLBAR_THEME_API } from './scrollbar';
 import { SELECT_THEME_API } from './select';
 import { STEPPER_THEME_API } from './stepper';
 import { SWITCH_THEME_API } from './switch';
@@ -44,6 +45,7 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.OPTIONS]: OPTIONS_THEME_API,
   [IDENTIFIERS.PROGRESS_BAR]: PROGRESS_BAR_THEME_API,
   [IDENTIFIERS.RADIO]: RADIO_THEME_API,
+  [IDENTIFIERS.SCROLLBAR]: SCROLLBAR_THEME_API,
   [IDENTIFIERS.SELECT]: SELECT_THEME_API,
   [IDENTIFIERS.STEPPER]: STEPPER_THEME_API,
   [IDENTIFIERS.SWITCH]: SWITCH_THEME_API,

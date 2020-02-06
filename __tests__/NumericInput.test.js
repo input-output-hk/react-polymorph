@@ -4,55 +4,37 @@ import { NumericInput } from '../source/components/NumericInput';
 import { renderInSimpleTheme } from './helpers/theming';
 
 test('NumericInput renders correctly', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <NumericInput />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('NumericInput renders with placeholder', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <NumericInput placeholder="0.0000" />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('NumericInput is disabled', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <NumericInput disabled />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('NumericInput is readOnly', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <NumericInput readOnly />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('NumericInput renders with an error', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <NumericInput error="Invalid Amount" />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('NumericInput renders with a value', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <NumericInput value="555.333" />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });

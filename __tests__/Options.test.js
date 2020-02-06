@@ -27,16 +27,13 @@ const COUNTRIES_OPTIONS = [
 ];
 
 test('Options renders correctly', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Options options={MNEMONIC_WORDS} />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Options uses render prop - render', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Options
       options={MNEMONIC_WORDS}
       render={getOptionProps => {
@@ -48,14 +45,11 @@ test('Options uses render prop - render', () => {
         ));
       }}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Options uses render prop - optionRenderer', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Options
       options={COUNTRIES_OPTIONS}
       optionRenderer={option => (
@@ -65,8 +59,5 @@ test('Options uses render prop - optionRenderer', () => {
         </div>
       )}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });

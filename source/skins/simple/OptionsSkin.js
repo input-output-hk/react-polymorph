@@ -8,6 +8,7 @@ import { isFunction, isObject } from 'lodash';
 
 // components
 import { Bubble } from '../../components/Bubble';
+import { ScrollBar } from '../../components/ScrollBar';
 
 // skins
 import { BubbleSkin } from './BubbleSkin';
@@ -24,6 +25,7 @@ type Props = {
   noResults: boolean,
   noResultsMessage: string | Element<any>,
   noSelectedOptionCheckmark?: boolean,
+  optionHeight: number,
   optionRenderer: Function,
   options: Array<any>,
   optionsRef: ElementRef<*>,
@@ -50,6 +52,7 @@ export const OptionsSkin = (props: Props) => {
     noResults,
     noResultsMessage,
     noSelectedOptionCheckmark,
+    optionHeight,
     optionsMaxHeight,
     optionRenderer,
     options,
@@ -116,6 +119,14 @@ export const OptionsSkin = (props: Props) => {
     return option;
   };
 
+  const getScrollBarHeight = (): number => {
+    if (!options.length) return optionHeight;
+    if (optionsMaxHeight < options.length * optionHeight) {
+      return optionsMaxHeight;
+    }
+    return options.length * optionHeight;
+  };
+
   // Enforce max height of options dropdown if necessary
   const optionsStyle = optionsMaxHeight == null ? null : {
     maxHeight: `${optionsMaxHeight}px`
@@ -146,7 +157,9 @@ export const OptionsSkin = (props: Props) => {
         onMouseEnter={() => setMouseIsOverOptions && setMouseIsOverOptions(true)}
         onMouseLeave={() => setMouseIsOverOptions && setMouseIsOverOptions(false)}
       >
-        {renderOptions()}
+        <ScrollBar style={{ height: `${getScrollBarHeight()}px` }}>
+          {renderOptions()}
+        </ScrollBar>
       </ul>
     </Bubble>
   );

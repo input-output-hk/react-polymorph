@@ -21,6 +21,7 @@ import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
 import SimpleProgressBar from './SimpleProgressBar.scss';
 import SimpleRadio from './SimpleRadio.scss';
+import SimpleScrollBar from './SimpleScrollBar.scss';
 import SimpleSelect from './SimpleSelect.scss';
 import SimpleStepper from './SimpleStepper.scss';
 import SimpleSwitch from './SimpleSwitch.scss';
@@ -51,6 +52,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.OPTIONS]: SimpleOptions,
   [IDENTIFIERS.PROGRESS_BAR]: SimpleProgressBar,
   [IDENTIFIERS.RADIO]: SimpleRadio,
+  [IDENTIFIERS.SCROLLBAR]: SimpleScrollBar,
   [IDENTIFIERS.SELECT]: SimpleSelect,
   [IDENTIFIERS.STEPPER]: SimpleStepper,
   [IDENTIFIERS.SWITCH]: SimpleSwitch,

@@ -1,8 +1,6 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 
 import { Select } from '../source/components/Select';
-import { SelectSkin } from '../source/skins/simple/SelectSkin';
 import { renderInSimpleTheme } from './helpers/theming';
 
 const COUNTRIES = [
@@ -27,73 +25,55 @@ const WALLETS = [
 ];
 
 test('Select renders correctly', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Select options={COUNTRIES} />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Select renders with placeholder', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Select
       placeholder="Select your country …"
       options={COUNTRIES}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Select renders with an error', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Select
       error="Please select a different option"
       options={COUNTRIES}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Select renders with disabled options', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Select options={COUNTRIES_DISABLED_OPTIONS} />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Select isOpeningUpward={true}', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Select
       isOpeningUpward
       options={COUNTRIES}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Select isOpen={true}', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Select
       isOpen
       options={COUNTRIES}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Select uses render prop - optionRenderer', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Select
       options={COUNTRIES}
       optionRenderer={option => (
@@ -103,14 +83,11 @@ test('Select uses render prop - optionRenderer', () => {
         </div>
       )}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Select uses render prop - valueRenderer', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Select
       options={WALLETS}
       optionRenderer={option => (
@@ -126,8 +103,5 @@ test('Select uses render prop - valueRenderer', () => {
         </div>
       )}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });

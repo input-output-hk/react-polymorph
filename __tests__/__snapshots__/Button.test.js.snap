@@ -2,20 +2,20 @@
 
 exports[`Button is disabled 1`] = `
 <button
-  className="root disabled"
-  disabled={true}
+  class="root disabled"
+  disabled=""
 />
 `;
 
 exports[`Button renders correctly 1`] = `
 <button
-  className="root"
+  class="root"
 />
 `;
 
 exports[`Button renders with a label 1`] = `
 <button
-  className="root"
+  class="root"
   label="send"
 >
   send

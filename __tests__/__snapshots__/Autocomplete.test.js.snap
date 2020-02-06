@@ -2,27 +2,23 @@
 
 exports[`Autocomplete renders correctly 1`] = `
 <div
-  aria-hidden={true}
-  className="autocompleteWrapper"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="autocompleteWrapper"
   role="presentation"
 >
   <div
-    className="root"
+    class="root"
   >
-    
     <div
-      className="inputWrapper"
+      class="inputWrapper"
     >
       <div
-        className="autocompleteContent"
+        class="autocompleteContent"
       >
         <div
-          className="selectedWords"
+          class="selectedWords"
         >
           <input
-            onChange={[Function]}
-            onKeyDown={[Function]}
             value=""
           />
         </div>
@@ -30,64 +26,91 @@ exports[`Autocomplete renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          cat
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          dog
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          fish
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          home
-        </li>
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:184px"
+          >
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    cat
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    dog
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    fish
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    home
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -95,27 +118,23 @@ exports[`Autocomplete renders correctly 1`] = `
 
 exports[`Autocomplete renders with a placeholder 1`] = `
 <div
-  aria-hidden={true}
-  className="autocompleteWrapper"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="autocompleteWrapper"
   role="presentation"
 >
   <div
-    className="root"
+    class="root"
   >
-    
     <div
-      className="inputWrapper"
+      class="inputWrapper"
     >
       <div
-        className="autocompleteContent"
+        class="autocompleteContent"
       >
         <div
-          className="selectedWords"
+          class="selectedWords"
         >
           <input
-            onChange={[Function]}
-            onKeyDown={[Function]}
             placeholder="Enter recovery phrase"
             value=""
           />
@@ -124,64 +143,91 @@ exports[`Autocomplete renders with a placeholder 1`] = `
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          cat
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          dog
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          fish
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          home
-        </li>
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:184px"
+          >
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    cat
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    dog
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    fish
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    home
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -189,31 +235,28 @@ exports[`Autocomplete renders with a placeholder 1`] = `
 
 exports[`Autocomplete renders with an error 1`] = `
 <div
-  aria-hidden={true}
-  className="autocompleteWrapper"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="autocompleteWrapper"
   role="presentation"
 >
   <div
-    className="root errored"
+    class="root errored"
   >
     <div
-      className="error"
+      class="error"
     >
       Your mnemonic phrase is incorrect
     </div>
     <div
-      className="inputWrapper"
+      class="inputWrapper"
     >
       <div
-        className="autocompleteContent errored"
+        class="autocompleteContent errored"
       >
         <div
-          className="selectedWords"
+          class="selectedWords"
         >
           <input
-            onChange={[Function]}
-            onKeyDown={[Function]}
             value=""
           />
         </div>
@@ -221,64 +264,91 @@ exports[`Autocomplete renders with an error 1`] = `
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          cat
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          dog
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          fish
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          home
-        </li>
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:184px"
+          >
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    cat
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    dog
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    fish
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    home
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -286,35 +356,30 @@ exports[`Autocomplete renders with an error 1`] = `
 
 exports[`Autocomplete renders with label 1`] = `
 <div
-  aria-hidden={true}
-  className="autocompleteWrapper"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="autocompleteWrapper"
   role="presentation"
 >
   <div
-    className="root"
+    class="root"
   >
-    
     <label
-      aria-hidden={true}
-      className="label"
-      onClick={[Function]}
+      aria-hidden="true"
+      class="label"
       role="presentation"
     >
       Enter your recovery phrase below
     </label>
     <div
-      className="inputWrapper"
+      class="inputWrapper"
     >
       <div
-        className="autocompleteContent"
+        class="autocompleteContent"
       >
         <div
-          className="selectedWords"
+          class="selectedWords"
         >
           <input
-            onChange={[Function]}
-            onKeyDown={[Function]}
             value=""
           />
         </div>
@@ -322,64 +387,91 @@ exports[`Autocomplete renders with label 1`] = `
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          cat
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          dog
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          fish
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          home
-        </li>
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:184px"
+          >
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    cat
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    dog
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    fish
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    home
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -387,27 +479,23 @@ exports[`Autocomplete renders with label 1`] = `
 
 exports[`Autocomplete uses render prop - renderOptions 1`] = `
 <div
-  aria-hidden={true}
-  className="autocompleteWrapper"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="autocompleteWrapper"
   role="presentation"
 >
   <div
-    className="root"
+    class="root"
   >
-    
     <div
-      className="inputWrapper"
+      class="inputWrapper"
     >
       <div
-        className="autocompleteContent"
+        class="autocompleteContent"
       >
         <div
-          className="selectedWords"
+          class="selectedWords"
         >
           <input
-            onChange={[Function]}
-            onKeyDown={[Function]}
             value=""
           />
         </div>
@@ -415,48 +503,83 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li>
-          <span>
-            #0: cat
-          </span>
-        </li>
-        <li>
-          <span>
-            #1: dog
-          </span>
-        </li>
-        <li>
-          <span>
-            #2: fish
-          </span>
-        </li>
-        <li>
-          <span>
-            #3: home
-          </span>
-        </li>
+        <div
+          class="root"
+        >
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:184px"
+          >
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li>
+                    <span>
+                      #0: cat
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      #1: dog
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      #2: fish
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      #3: home
+                    </span>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -464,27 +587,23 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
 
 exports[`Autocomplete uses render prop - renderSelections 1`] = `
 <div
-  aria-hidden={true}
-  className="autocompleteWrapper"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="autocompleteWrapper"
   role="presentation"
 >
   <div
-    className="root"
+    class="root"
   >
-    
     <div
-      className="inputWrapper"
+      class="inputWrapper"
     >
       <div
-        className="autocompleteContent"
+        class="autocompleteContent"
       >
         <div
-          className="selectedWords"
+          class="selectedWords"
         >
           <input
-            onChange={[Function]}
-            onKeyDown={[Function]}
             value=""
           />
         </div>
@@ -492,64 +611,91 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          cat
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          dog
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          fish
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          home
-        </li>
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:184px"
+          >
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    cat
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    dog
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    fish
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    home
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
