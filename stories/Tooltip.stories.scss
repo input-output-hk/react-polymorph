@@ -14,9 +14,6 @@
 }
 
 .fitToSize {
-  padding: 150px;
-  :global(.SimpleBubble_bubble) {
-    // size tooltip to text contained inside
-    min-width: auto;
-  }
+  margin: 150px;
+  background-color: #eee;
 }

@@ -16,6 +16,7 @@ import { LINK_THEME_API } from './link';
 import { LOADING_SPINNER_API } from './loadingspinner';
 import { MODAL_THEME_API } from './modal';
 import { OPTIONS_THEME_API } from './options';
+import { PASSWORD_INPUT_THEME_API } from './password-input';
 import { PROGRESS_BAR_THEME_API } from './progressbar';
 import { RADIO_THEME_API } from './radio';
 import { SCROLLBAR_THEME_API } from './scrollbar';
@@ -43,6 +44,7 @@ export const ROOT_THEME_API = {
   [IDENTIFIERS.LOADING_SPINNER]: LOADING_SPINNER_API,
   [IDENTIFIERS.MODAL]: MODAL_THEME_API,
   [IDENTIFIERS.OPTIONS]: OPTIONS_THEME_API,
+  [IDENTIFIERS.PASSWORD_INPUT]: PASSWORD_INPUT_THEME_API,
   [IDENTIFIERS.PROGRESS_BAR]: PROGRESS_BAR_THEME_API,
   [IDENTIFIERS.RADIO]: RADIO_THEME_API,
   [IDENTIFIERS.SCROLLBAR]: SCROLLBAR_THEME_API,

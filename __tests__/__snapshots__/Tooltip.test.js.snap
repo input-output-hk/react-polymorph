@@ -1,0 +1,250 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tooltip arrowRelativeToTip (below) 1`] = `
+<span
+  class="root"
+>
+  <div
+    class="bubble alignLeft nowrap root transparent"
+  >
+    <div
+      class="bubble hasAutoWidth"
+      data-bubble-container="true"
+    >
+      small tip from below
+      <span
+        class="arrow"
+        data-bubble-arrow="true"
+      />
+    </div>
+  </div>
+  this is a really long string for demonstration purposes
+</span>
+`;
+
+exports[`tooltip arrowRelativeToTip 1`] = `
+<span
+  class="root"
+>
+  <div
+    class="bubble alignLeft nowrap root openUpward transparent"
+  >
+    <div
+      class="bubble hasAutoWidth"
+      data-bubble-container="true"
+    >
+      small tip
+      <span
+        class="arrow"
+        data-bubble-arrow="true"
+      />
+    </div>
+  </div>
+  this is a really long string for demonstration purposes
+</span>
+`;
+
+exports[`tooltip isAligningRight 1`] = `
+<span
+  class="root"
+>
+  <div
+    class="bubble alignRight nowrap root openUpward transparent"
+  >
+    <div
+      class="bubble"
+      data-bubble-container="true"
+    >
+      I am aligning right
+    </div>
+    <span
+      class="arrow"
+      data-bubble-arrow="true"
+    />
+  </div>
+  hover over me
+</span>
+`;
+
+exports[`tooltip isBounded 1`] = `
+<span
+  class="root"
+>
+  <div
+    class="bubble alignLeft root openUpward transparent"
+  >
+    <div
+      class="bubble"
+      data-bubble-container="true"
+    >
+      Help, I am stuck in this small box
+    </div>
+    <span
+      class="arrow"
+      data-bubble-arrow="true"
+    />
+  </div>
+  hover over me
+</span>
+`;
+
+exports[`tooltip isCentered (below) 1`] = `
+<span
+  class="root isCentered"
+>
+  <div
+    class="bubble alignLeft nowrap root isCentered transparent"
+  >
+    <div
+      class="bubble hasAutoWidth"
+      data-bubble-container="true"
+    >
+      centered below
+      <span
+        class="arrow"
+        data-bubble-arrow="true"
+      />
+    </div>
+  </div>
+  this is a really long string for demonstration purposes
+</span>
+`;
+
+exports[`tooltip isCentered (below) 2`] = `
+<span
+  class="root isCentered"
+>
+  <div
+    class="bubble alignLeft nowrap root isCentered transparent"
+  >
+    <div
+      class="bubble hasAutoWidth"
+      data-bubble-container="true"
+    >
+      centered below
+      <span
+        class="arrow"
+        data-bubble-arrow="true"
+      />
+    </div>
+  </div>
+  this is a really long string for demonstration purposes
+</span>
+`;
+
+exports[`tooltip isCentered 1`] = `
+<span
+  class="root isCentered"
+>
+  <div
+    class="bubble alignLeft nowrap root openUpward isCentered transparent"
+  >
+    <div
+      class="bubble hasAutoWidth"
+      data-bubble-container="true"
+    >
+      centered above
+      <span
+        class="arrow"
+        data-bubble-arrow="true"
+      />
+    </div>
+  </div>
+  this is a really long string for demonstration purposes
+</span>
+`;
+
+exports[`tooltip isOpeningUpward={false} 1`] = `
+<span
+  class="root"
+>
+  <div
+    class="bubble alignLeft nowrap root transparent"
+  >
+    <div
+      class="bubble"
+      data-bubble-container="true"
+    >
+      I come from a land down under
+    </div>
+    <span
+      class="arrow"
+      data-bubble-arrow="true"
+    />
+  </div>
+  hover over me
+</span>
+`;
+
+exports[`tooltip plain 1`] = `
+<span
+  class="root isVisible"
+>
+  <div
+    class="bubble alignLeft nowrap root openUpward transparent"
+  >
+    <div
+      class="bubble"
+      data-bubble-container="true"
+    >
+      plain tooltip, nothing special about me
+    </div>
+    <span
+      class="arrow"
+      data-bubble-arrow="true"
+    />
+  </div>
+  hover over me
+</span>
+`;
+
+exports[`tooltip with custom class 1`] = `
+<span
+  class="customTooltip root"
+>
+  <div
+    class="bubble alignLeft nowrap root openUpward transparent"
+  >
+    <div
+      class="bubble"
+      data-bubble-container="true"
+    >
+      How did I get all the way over here?
+    </div>
+    <span
+      class="arrow"
+      data-bubble-arrow="true"
+    />
+  </div>
+  hover over me
+</span>
+`;
+
+exports[`tooltip with html 1`] = `
+<span
+  class="root isVisible"
+>
+  <div
+    class="bubble alignLeft nowrap root openUpward transparent"
+  >
+    <div
+      class="bubble"
+      data-bubble-container="true"
+    >
+      <div>
+        I can use 
+        <span
+          class="htmlTip"
+        >
+          HTML
+        </span>
+      </div>
+    </div>
+    <span
+      class="arrow"
+      data-bubble-arrow="true"
+    />
+  </div>
+  hover over me
+</span>
+`;

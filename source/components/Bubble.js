@@ -12,9 +12,16 @@ import { addDocumentListeners, removeDocumentListeners } from '../utils/events';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
-type Props = {
+export type BubblePosition = {
+  width: number,
+  positionX: number,
+  positionY: number,
+};
+
+export type BubbleProps = {
   className?: string,
   context: ThemeContextProp,
+  isCentered: boolean,
   isHidden: boolean,
   isFloating: boolean,
   isOpeningUpward: boolean,
@@ -30,7 +37,7 @@ type Props = {
 
 type State = {
   composedTheme: Object,
-  position: ?Object
+  position: ?BubblePosition
 };
 
 class BubbleBase extends Component<Props, State> {
@@ -41,6 +48,7 @@ class BubbleBase extends Component<Props, State> {
   static displayName = 'Bubble';
   static defaultProps = {
     context: createEmptyContext(),
+    isCentered: false,
     isHidden: false,
     isFloating: false,
     isOpeningUpward: false,

@@ -4,5 +4,7 @@ export const TOOLTIP_THEME_API = {
   bubble: '',
   alignRight: '',
   alignLeft: '',
+  isCentered: '',
+  isVisible: '',
   nowrap: ''
 };
