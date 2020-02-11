@@ -40,7 +40,7 @@ type State = {
   position: ?BubblePosition
 };
 
-class BubbleBase extends Component<Props, State> {
+class BubbleBase extends Component<BubbleProps, State> {
   // declare ref types
   rootElement: ?Element<any>;
 
@@ -60,7 +60,7 @@ class BubbleBase extends Component<Props, State> {
     themeOverrides: {}
   };
 
-  constructor(props: Props) {
+  constructor(props: BubbleProps) {
     super(props);
 
     // define ref
@@ -86,7 +86,7 @@ class BubbleBase extends Component<Props, State> {
     }, 0);
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: BubbleProps) {
     didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
