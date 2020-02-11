@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 // $FlowFixMe
-import type { ComponentType, SyntheticInputEvent, Element } from 'react';
+import type { ComponentType, Element } from 'react';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
