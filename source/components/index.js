@@ -16,6 +16,7 @@ export const IDENTIFIERS = {
   LOADING_SPINNER: 'loadingspinner',
   MODAL: 'modal',
   OPTIONS: 'options',
+  PASSWORD_INPUT: 'passwordInput',
   PROGRESS_BAR: 'progressbar',
   RADIO: 'radio',
   SCROLLBAR: 'scrollbar',

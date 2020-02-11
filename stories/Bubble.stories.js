@@ -112,6 +112,15 @@ storiesOf('Bubble', module)
     </div>
   ))
 
+  .add('isCentered', () => (
+    <div className={styles.container} style={{ width: '200px' }}>
+      Bubble should be centered below me without stretching the full width
+      <Bubble isCentered>
+        centered below
+      </Bubble>
+    </div>
+  ))
+
   .add('theme overrides', () => (
     <div className={styles.container}>
       <Bubble

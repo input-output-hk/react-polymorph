@@ -3,7 +3,6 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$tooltip-bg-color: var(--rp-tooltip-bg-color, #fafbfc) !default;
 $tooltip-font-family: var(--rp-tooltip-font-family, $theme-font-light, sans-serif) !default;
 $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
 
@@ -21,7 +20,6 @@ $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
 .bubble {
   font-family: $tooltip-font-family;
   color: $tooltip-text-color;
-  background-color: $tooltip-bg-color;
   display: none;
 }
 
@@ -35,4 +33,22 @@ $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
 
 .nowrap {
   white-space: nowrap;
+}
+
+.isCentered {
+  display: block;
+
+  &:hover .bubble {
+    display: inline-block;
+  }
+
+  .bubble {
+    text-align: center;
+  }
+}
+
+.isVisible {
+  .bubble {
+    display: inline-block;
+  }
 }
