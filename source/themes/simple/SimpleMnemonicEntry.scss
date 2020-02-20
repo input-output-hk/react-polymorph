@@ -16,6 +16,13 @@ $mnemonicentry-label-margin: var(--rp-mnemonicentry-label-margin, 0 0 10px 0) !d
  position: relative;
 }
 
+.labelWrapper {
+ align-items: center;
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+}
+
 .label {
  color: $mnemonicentry-label-text-color;
  display: block;
