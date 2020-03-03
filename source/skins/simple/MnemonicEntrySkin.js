@@ -33,23 +33,23 @@ export const MnemonicEntrySkin = (props: Props) => {
  return (
    <div className={classnames([className, theme.root])}>
      <div className={theme.labelWrapper}>
-      {label && (
-        <label
-          role="presentation"
-          aria-hidden
-          className={theme.label}
-        >
-          {label}
-        </label>
+       {label && (
+         <label
+           role="presentation"
+           aria-hidden
+           className={theme.label}
+         >
+           {label}
+         </label>
       )}
-      {totalWordsEntered && totalWords && (
-        <label
-          role="presentation"
-          aria-hidden
-          className={theme.totalWords}
-        >
-          {totalWordsEntered} of {totalWords} words entered
-        </label>
+       {totalWordsEntered && totalWords && (
+         <label
+           role="presentation"
+           aria-hidden
+           className={theme.totalWords}
+         >
+           {totalWordsEntered} of {totalWords} words entered
+         </label>
       )}
      </div>
    </div>
