@@ -46,7 +46,7 @@ export const MnemonicEntrySkin = (props: Props) => {
          <label
            role="presentation"
            aria-hidden
-           className={theme.totalWords}
+           className={theme.wordsEntered}
          >
            {totalWordsEntered} of {totalWords} words entered
          </label>
