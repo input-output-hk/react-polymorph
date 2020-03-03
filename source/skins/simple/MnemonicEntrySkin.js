@@ -42,7 +42,7 @@ export const MnemonicEntrySkin = (props: Props) => {
            {label}
          </label>
       )}
-       {totalWordsEntered && totalWords && (
+       {totalWords && (
          <label
            role="presentation"
            aria-hidden

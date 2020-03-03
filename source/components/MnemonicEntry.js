@@ -20,7 +20,6 @@ type Props = {
   themeId: string,
   themeOverrides: Object, // custom css/scss from user that adheres to component's theme API
   totalColumns: number,
-  totalWords: number,
 };
 
 type State = {
@@ -77,11 +76,15 @@ class MnemonicEntryBase extends Component<Props, State> {
     } = this.state;
 
     const MnemonicEntrySkin = skin || context.skins[IDENTIFIERS.MNEMONIC_ENTRY];
+    const totalWords = this.props.mnemonicWords.length;
+    console.log(totalWords);
+    console.log(totalWordsEntered);
 
     return (
       <MnemonicEntrySkin
         activeColumn={activeColumn}
         theme={composedTheme}
+        totalWords={totalWords}
         totalWordsEntered={totalWordsEntered}
         {...rest}
       />
