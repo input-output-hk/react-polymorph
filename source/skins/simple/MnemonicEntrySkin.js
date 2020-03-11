@@ -4,6 +4,7 @@ import type { Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
+import { times } from 'lodash';
 
 type Props = {
   activeColumn: number | null,
@@ -51,6 +52,19 @@ export const MnemonicEntrySkin = (props: Props) => {
            {totalWordsEntered} of {totalWords} words entered
          </label>
       )}
+     </div>
+     <div className={theme.columnsWrapper}>
+       {times(totalColumns, () => (
+         <div className={theme.column}>
+           <ol>
+             <li>1.___</li>
+             <li>2.___</li>
+             <li>3.___</li>
+             <li>4.___</li>
+             <li>5.___</li>
+           </ol>
+         </div>
+       ))}
      </div>
    </div>
  );
