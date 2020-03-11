@@ -10,7 +10,7 @@ type Props = {
   activeColumn: number | null,
   className: string,
   label: string | Element<any>,
-  mnemonicWords: Array<string>,
+  mnemonicWords: Object,
   theme: Object,
   themeId: string,
   totalColumns: number,
@@ -30,6 +30,22 @@ export const MnemonicEntrySkin = (props: Props) => {
   totalWordsEntered,
  } = props;
  const theme = props.theme[themeId];
+
+ const renderInnerColumn = (columnNumber: number) => {
+  const wordsPerColumn = totalWords / totalColumns;
+  return (
+    <ul>
+      {times(wordsPerColumn, (iteree) => {
+        const wordNumber = wordsPerColumn * columnNumber + (iteree + 1);
+        return (
+          <li className={theme.word}>
+            {wordNumber}. {mnemonicWords[wordNumber]}
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
 
  return (
    <div className={classnames([className, theme.root])}>
@@ -54,15 +70,9 @@ export const MnemonicEntrySkin = (props: Props) => {
       )}
      </div>
      <div className={theme.columnsWrapper}>
-       {times(totalColumns, () => (
+       {times(totalColumns, (columnNumber) => (
          <div className={theme.column}>
-           <ol>
-             <li>1.___</li>
-             <li>2.___</li>
-             <li>3.___</li>
-             <li>4.___</li>
-             <li>5.___</li>
-           </ol>
+           {renderInnerColumn(columnNumber)}
          </div>
        ))}
      </div>
