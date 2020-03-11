@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
+import { times } from 'lodash';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
@@ -67,6 +68,12 @@ class MnemonicEntryBase extends Component<Props, State> {
     didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
+  transformWordsToObj = () => {
+    const mnemonicWordsObj = {};
+    this.props.mnemonicWords.forEach((word, index) => mnemonicWordsObj[`${index + 1}`] = word);
+    return mnemonicWordsObj;
+  }
+
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
@@ -74,6 +81,7 @@ class MnemonicEntryBase extends Component<Props, State> {
       theme,
       themeOverrides,
       context,
+      mnemonicWords,
       ...rest
     } = this.props;
 
@@ -84,11 +92,13 @@ class MnemonicEntryBase extends Component<Props, State> {
     } = this.state;
 
     const MnemonicEntrySkin = skin || context.skins[IDENTIFIERS.MNEMONIC_ENTRY];
-    const totalWords = this.props.mnemonicWords.length;
+    const totalWords = mnemonicWords.length;
+    const mnemonicWordsObj = this.transformWordsToObj();
 
     return (
       <MnemonicEntrySkin
         activeColumn={activeColumn}
+        mnemonicWords={mnemonicWordsObj}
         theme={composedTheme}
         totalWords={totalWords}
         totalWordsEntered={totalWordsEntered}
