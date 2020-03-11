@@ -77,8 +77,6 @@ class MnemonicEntryBase extends Component<Props, State> {
 
     const MnemonicEntrySkin = skin || context.skins[IDENTIFIERS.MNEMONIC_ENTRY];
     const totalWords = this.props.mnemonicWords.length;
-    console.log(totalWords);
-    console.log(totalWordsEntered);
 
     return (
       <MnemonicEntrySkin
