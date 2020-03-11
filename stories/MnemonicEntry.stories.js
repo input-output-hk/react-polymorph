@@ -36,5 +36,5 @@ storiesOf('MnemonicEntry', module)
   // ======  Stories ======
 
   .add('Mnemonic Entry', () => (
-    <MnemonicEntry label="Enter Your Recovery Phrase" mnemonicWords={MNEMONIC_WORDS} />
+    <MnemonicEntry label="Enter Your Recovery Phrase" mnemonicWords={MNEMONIC_WORDS} totalColumns={3} />
   ));
