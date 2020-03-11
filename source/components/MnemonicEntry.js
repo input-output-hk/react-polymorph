@@ -55,6 +55,14 @@ class MnemonicEntryBase extends Component<Props, State> {
     };
   }
 
+  componentWillMount() {
+    const { totalColumns } = this.props;
+
+    if (document.documentElement && document.documentElement.style) {
+      document.documentElement.style.setProperty('--rp-mnemonicentry-number-of-columns', `${totalColumns}`);
+    }
+  }
+
   componentWillReceiveProps(nextProps: Props) {
     didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
