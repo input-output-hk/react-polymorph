@@ -3,7 +3,7 @@
 // OVERRIDABLE CONFIGURATION VARIABLES
 
 // mnemonicentry
-$mnemonicentry-bg-color: var(--rp-mnemonicentry-bg-color, none) !default;
+$mnemonicentry-bg-color: var(--rp-mnemonicentry-bg-color, #edf0f3) !default;
 
 // label
 $mnemonicentry-label-font-family: var(--rp-mnemonicentry-label-font-family, $theme-font-medium, sans-serif) !default;
@@ -17,8 +17,11 @@ $mnemonicentry-words-entered-font-size: var(--rp-mnemonicentry-words-entered-fon
 $mnemonicentry-words-entered-text-color: var(--rp-mnemonicentry-words-entered-text-color, #5e6066) !default;
 $mnemonicentry-words-entered-margin: var(--rp-mnemonicentry-words-entered-margin, 0 10px 0 0) !default;
 
+// mnemonic word 
+$mnemonicentry-mnemonic-word-font-family: var(--rp-mnemonicentry-mnemonic-word-font-family, $theme-font-medium, sans-serif) !default;
+$mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-text-color, #5e6066) !default;
+
 .root {
- background-color: $mnemonicentry-bg-color;
  position: relative;
 }
 
@@ -48,15 +51,25 @@ $mnemonicentry-words-entered-margin: var(--rp-mnemonicentry-words-entered-margin
 }
 
 .columnsWrapper {
- border: 1px solid blue;
+ background-color: $mnemonicentry-bg-color;
  display: grid;
  grid-template-columns: repeat(var(--rp-mnemonicentry-number-of-columns), 1fr);
+ margin-top: 15px;
+ padding: 15px;
 }
 
 .column {
- border: 1px solid red;
  display: flex;
  flex-direction: column;
  justify-content: center;
  align-items: flex-start;
+}
+
+.word {
+ border-bottom: 1px solid $mnemonicentry-mnemonic-word-text-color;
+ color: $mnemonicentry-mnemonic-word-text-color;
+ font-family: $mnemonicentry-mnemonic-word-font-family;
+ margin-top: 5px;
+ padding-bottom: 3px;
+ width: 100px;
 }
