@@ -48,15 +48,15 @@ $mnemonicentry-words-entered-margin: var(--rp-mnemonicentry-words-entered-margin
 }
 
 .columnsWrapper {
- display: flex;
- flex-direction: row;
- justify-content: space-evenly;
- align-items: center;
+ border: 1px solid blue;
+ display: grid;
+ grid-template-columns: repeat(var(--rp-mnemonicentry-number-of-columns), 1fr);
 }
 
 .column {
+ border: 1px solid red;
  display: flex;
  flex-direction: column;
  justify-content: center;
- align-items: center;
+ align-items: flex-start;
 }
