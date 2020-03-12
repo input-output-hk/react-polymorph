@@ -154,7 +154,7 @@ class DropdownBase extends Component<Props, State> {
         rootRef={this.rootElement}
         toggleOpen={this.toggleOpen}
       >
-        {({ optionsMaxHeight }) => (
+        {({ optionsMaxHeight, optionHeight }) => (
           <DropdownSkin
             isOpen={this.isOpen()}
             isOpeningUpward={isOpeningUpward}
@@ -162,6 +162,7 @@ class DropdownBase extends Component<Props, State> {
             onLabelClick={this._onLabelClick}
             optionsRef={this.optionsElement}
             optionsMaxHeight={optionsMaxHeight}
+            optionHeight={optionHeight}
             rootRef={this.rootElement}
             setMouseOverItems={this._setMouseOverItems}
             setMouseOverRoot={this._setMouseOverRoot}
