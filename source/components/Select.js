@@ -34,6 +34,7 @@ type Props = {
   themeId: string,
   themeOverrides: Object,
   value: string,
+  optionHeight?: number,
 };
 
 type State = {
@@ -147,6 +148,7 @@ class SelectBase extends Component<Props, State> {
       autoFocus,
       context,
       allowBlank,
+      optionHeight,
       ...rest
     } = this.props;
 
@@ -174,6 +176,7 @@ class SelectBase extends Component<Props, State> {
             handleChange={this.handleChange}
             toggleOpen={this.toggleOpen}
             toggleMouseLocation={this.toggleMouseLocation}
+            optionHeight={optionHeight}
             {...rest}
           />
         )}
