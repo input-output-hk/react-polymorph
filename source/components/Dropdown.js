@@ -143,11 +143,12 @@ class DropdownBase extends Component<Props, State> {
     } = this.props;
 
     const DropdownSkin = skin || context.skins[IDENTIFIERS.DROPDOWN];
-    const { isMouseOverItems } = this.state;
+    const { isMouseOverItems, isMouseOverRoot } = this.state;
 
     return (
       <GlobalListeners
         mouseIsOverOptions={isMouseOverItems}
+        mouseIsOverRoot={isMouseOverRoot}
         optionsIsOpen={this.isOpen()}
         optionsIsOpeningUpward={isOpeningUpward}
         optionsRef={this.optionsElement}
