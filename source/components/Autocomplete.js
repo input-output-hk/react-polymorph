@@ -257,7 +257,7 @@ class AutocompleteBase extends Component<Props, State> {
         toggleOpen={this.toggleOpen}
       >
         {({ optionsMaxHeight, optionHeight }) => (
-          <AutocompleteSkins
+          <AutocompleteSkin
             error={error || this.state.error}
             filteredOptions={this.state.filteredOptions}
             getSelectionProps={this.getSelectionProps}
