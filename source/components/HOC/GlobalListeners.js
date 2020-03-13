@@ -15,7 +15,7 @@ import {
 type Props = {
   children: Function,
   mouseIsOverOptions: boolean,
-  mouseIsOverRoot: boolean,
+  mouseIsOverRoot?: boolean,
   optionsIsOpen: boolean,
   optionsIsOpeningUpward: boolean,
   optionsRef?: ElementRef<*>,

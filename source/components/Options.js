@@ -33,7 +33,7 @@ type Props = {
   onBlur?: Function,
   onChange?: Function,
   onClose?: Function,
-  optionHeight: number,
+  optionHeight: ?number,
   options: Array<any>,
   optionRenderer?: Function,
   optionsRef?: ElementRef<any>,
