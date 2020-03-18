@@ -128,6 +128,7 @@ storiesOf('Select', module)
             <span>{option.label}</span>
           </div>
           )}
+        optionHeight={56}
       />
     ))
   )
@@ -246,6 +247,7 @@ storiesOf('Select', module)
             <div className={styles.value}>{option.value}</div>
           </div>
         )}
+        optionHeight={63}
       />
     ))
   );

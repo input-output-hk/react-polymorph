@@ -42,6 +42,7 @@ type Props = {
   toggleOpen: Function,
   toggleMouseLocation: Function,
   value: string,
+  optionHeight: ?number,
 };
 
 export const SelectSkin = (props: Props) => {
@@ -89,6 +90,7 @@ export const SelectSkin = (props: Props) => {
         targetRef={props.inputRef}
         toggleMouseLocation={props.toggleMouseLocation}
         toggleOpen={props.toggleOpen}
+        optionHeight={props.optionHeight}
       />
     </div>
   );
