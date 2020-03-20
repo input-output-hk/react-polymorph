@@ -59,10 +59,32 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
 }
 
 .column {
+ align-items: flex-start;
  display: flex;
  flex-direction: column;
  justify-content: center;
- align-items: flex-start;
+ position: relative;
+}
+
+.columnCover {
+ &.show {
+  align-items: center;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  &:after {
+   content: url("./assets/select-open-arrow.svg");
+  }
+ }
+
+ &.hide {
+  display: none;
+ }
 }
 
 .word {
