@@ -38,7 +38,7 @@ export const MnemonicEntrySkin = (props: Props) => {
       {times(wordsPerColumn, (iteree) => {
         const wordNumber = wordsPerColumn * columnNumber + (iteree + 1);
         return (
-          <li className={theme.word}>
+          <li key={iteree} className={theme.word}>
             {wordNumber}. {mnemonicWords[wordNumber]}
           </li>
         );
@@ -46,6 +46,10 @@ export const MnemonicEntrySkin = (props: Props) => {
     </ul>
   );
 };
+
+const showOrHideColumnCover = (columnNumber: number): string => (
+  columnNumber === activeColumn ? 'hide' : 'show'
+);
 
  return (
    <div className={classnames([className, theme.root])}>
@@ -70,11 +74,15 @@ export const MnemonicEntrySkin = (props: Props) => {
       )}
      </div>
      <div className={theme.columnsWrapper}>
-       {times(totalColumns, (columnNumber) => (
-         <div className={theme.column}>
-           {renderInnerColumn(columnNumber)}
-         </div>
-       ))}
+       {times(totalColumns, (columnNumber) => {
+         const showOrHideCover = showOrHideColumnCover(columnNumber + 1);
+         return (
+           <div key={columnNumber} className={theme.column}>
+             <div className={classnames([theme.columnCover, theme[`${showOrHideCover}`]])} />
+             {renderInnerColumn(columnNumber)}
+           </div>
+         );
+       })}
      </div>
    </div>
  );
