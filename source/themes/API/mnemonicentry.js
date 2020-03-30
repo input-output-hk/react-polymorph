@@ -5,6 +5,7 @@ export const MNEMONIC_ENTRY_THEME_API = {
   label: '',
   wordsEntered: '',
   columnsWrapper: '',
+  columnWrapper: '',
   column: '',
   columnCover: '',
   word: '',

@@ -70,6 +70,8 @@ class MnemonicEntryBase extends Component<Props, State> {
     didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
+  setActiveColumn = (columnNumber: number) => this.setState({ activeColumn: columnNumber });
+
   transformWordsToObj = () => {
     const mnemonicWordsObj = {};
     this.props.mnemonicWords.forEach((word, index) => mnemonicWordsObj[`${index + 1}`] = word);
@@ -101,6 +103,7 @@ class MnemonicEntryBase extends Component<Props, State> {
       <MnemonicEntrySkin
         activeColumn={activeColumn}
         mnemonicWords={mnemonicWordsObj}
+        setActiveColumn={this.setActiveColumn}
         theme={composedTheme}
         totalWords={totalWords}
         totalWordsEntered={totalWordsEntered}

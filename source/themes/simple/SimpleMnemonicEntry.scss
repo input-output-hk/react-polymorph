@@ -58,6 +58,15 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
  padding: 15px;
 }
 
+.columnWrapper {
+ border: 1px solid blue;
+ &:not(.disabled) {
+  &:hover {
+   cursor: pointer;
+  }
+ }
+}
+
 .column {
  align-items: flex-start;
  display: flex;
@@ -69,7 +78,6 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
 .columnCover {
  &.show {
   align-items: center;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: center;

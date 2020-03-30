@@ -11,6 +11,7 @@ type Props = {
   className: string,
   label: string | Element<any>,
   mnemonicWords: Object,
+  setActiveColumn: Function,
   theme: Object,
   themeId: string,
   totalColumns: number,
@@ -24,6 +25,7 @@ export const MnemonicEntrySkin = (props: Props) => {
   className,
   label,
   mnemonicWords,
+  setActiveColumn,
   themeId,
   totalColumns,
   totalWords,
@@ -76,11 +78,20 @@ const showOrHideColumnCover = (columnNumber: number): string => (
      <div className={theme.columnsWrapper}>
        {times(totalColumns, (columnNumber) => {
          const showOrHideCover = showOrHideColumnCover(columnNumber + 1);
+         const disableClick = columnNumber + 1 === activeColumn || false;
+         const handleSetActiveColumn = setActiveColumn.bind(null, columnNumber + 1);
+
          return (
-           <div key={columnNumber} className={theme.column}>
-             <div className={classnames([theme.columnCover, theme[`${showOrHideCover}`]])} />
-             {renderInnerColumn(columnNumber)}
-           </div>
+           <button
+             className={theme.columnWrapper}
+             disabled={disableClick}
+             onClick={handleSetActiveColumn}
+           >
+             <div key={columnNumber} className={theme.column}>
+               <div className={classnames([theme.columnCover, theme[`${showOrHideCover}`]])} />
+               {renderInnerColumn(columnNumber)}
+             </div>
+           </button>
          );
        })}
      </div>
