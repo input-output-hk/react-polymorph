@@ -2,18 +2,14 @@
 
 exports[`NumericInput is disabled 1`] = `
 <div
-  className="root disabled"
+  class="root disabled"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input disabled"
-      disabled={true}
-      onBlur={[Function]}
-      onChange={[Function]}
-      readOnly={false}
+      class="input disabled"
+      disabled=""
       value=""
     />
   </div>
@@ -22,17 +18,14 @@ exports[`NumericInput is disabled 1`] = `
 
 exports[`NumericInput is readOnly 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input"
-      onBlur={[Function]}
-      onChange={[Function]}
-      readOnly={true}
+      class="input"
+      readonly=""
       value=""
     />
   </div>
@@ -41,17 +34,13 @@ exports[`NumericInput is readOnly 1`] = `
 
 exports[`NumericInput renders correctly 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input"
-      onBlur={[Function]}
-      onChange={[Function]}
-      readOnly={false}
+      class="input"
       value=""
     />
   </div>
@@ -60,17 +49,13 @@ exports[`NumericInput renders correctly 1`] = `
 
 exports[`NumericInput renders with a value 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input"
-      onBlur={[Function]}
-      onChange={[Function]}
-      readOnly={false}
+      class="input"
       value="555.333"
     />
   </div>
@@ -79,21 +64,18 @@ exports[`NumericInput renders with a value 1`] = `
 
 exports[`NumericInput renders with an error 1`] = `
 <div
-  className="root errored"
+  class="root errored"
 >
   <div
-    className="error"
+    class="error"
   >
     Invalid Amount
   </div>
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input errored"
-      onBlur={[Function]}
-      onChange={[Function]}
-      readOnly={false}
+      class="input errored"
       value=""
     />
   </div>
@@ -102,18 +84,14 @@ exports[`NumericInput renders with an error 1`] = `
 
 exports[`NumericInput renders with placeholder 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <input
-      className="input"
-      onBlur={[Function]}
-      onChange={[Function]}
+      class="input"
       placeholder="0.0000"
-      readOnly={false}
       value=""
     />
   </div>

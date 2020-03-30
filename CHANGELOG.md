@@ -6,6 +6,22 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+### Features
+
+- Adds new `PasswordInput` component [PR 134](https://github.com/input-output-hk/react-polymorph/pull/134)
+
+### Fixes
+
+- Fixed Option component, `optionHeight` property, override from parent components [PR 135](https://github.com/input-output-hk/react-polymorph/pull/135)
+- Fixed global listener `mouseIsOverRoot`  event handler [PR 135](https://github.com/input-output-hk/react-polymorph/pull/135)
+
+0.9.2
+=====
+
+### Features
+
+- Adds new `ScrollBar` component and integrates it into existing react-polymorph components. Refactors all snapshot tests to use enzyme for full DOM node rendering. [PR 129](https://github.com/input-output-hk/react-polymorph/pull/129)
+
 0.9.1
 =====
 

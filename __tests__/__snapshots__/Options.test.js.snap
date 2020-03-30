@@ -2,320 +2,400 @@
 
 exports[`Options renders correctly 1`] = `
 <div
-  className="options firstOptionHighlighted root isFloating isHidden"
-  style={null}
+  class="options firstOptionHighlighted root isFloating isHidden"
 >
   <div
-    className="bubble"
-    data-bubble-container={true}
+    class="bubble"
+    data-bubble-container="true"
   >
     <ul
-      className="ul"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      style={null}
+      class="ul"
     >
-      <li
-        aria-hidden={true}
-        className="option highlightedOption"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
+      <div
+        class="root"
       >
-        home
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        cat
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        dog
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        fish
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        hide
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        hover
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        duck
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        category
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        join
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        paper
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        box
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        tab
-      </li>
+        <div
+          class="ScrollbarsCustom"
+          style="position:relative;height:552px"
+        >
+          <div
+            class="ScrollbarsCustom-Wrapper"
+            style="position:absolute;overflow:hidden"
+          >
+            <div
+              class="ScrollbarsCustom-Scroller"
+              style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Content"
+                style="padding:0.05px"
+              >
+                <li
+                  aria-hidden="true"
+                  class="option highlightedOption"
+                  role="presentation"
+                >
+                  home
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  cat
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  dog
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  fish
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  hide
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  hover
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  duck
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  category
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  join
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  paper
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  box
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  tab
+                </li>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+            style="display:none"
+          >
+            <div
+              class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+              style="touch-action:none"
+            />
+          </div>
+          <div
+            class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+            style="display:none"
+          >
+            <div
+              class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+              style="touch-action:none"
+            />
+          </div>
+        </div>
+      </div>
     </ul>
   </div>
   <span
-    className="arrow"
-    data-bubble-arrow={true}
+    class="arrow"
+    data-bubble-arrow="true"
   />
 </div>
 `;
 
 exports[`Options uses render prop - optionRenderer 1`] = `
 <div
-  className="options firstOptionHighlighted root isFloating isHidden"
-  style={null}
+  class="options firstOptionHighlighted root isFloating isHidden"
 >
   <div
-    className="bubble"
-    data-bubble-container={true}
+    class="bubble"
+    data-bubble-container="true"
   >
     <ul
-      className="ul"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      style={null}
+      class="ul"
     >
-      <li
-        aria-hidden={true}
-        className="option highlightedOption"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
+      <div
+        class="root"
       >
-        <div>
-          <span>
-            Frankreich
-          </span>
-          <span>
-            France
-          </span>
+        <div
+          class="ScrollbarsCustom"
+          style="position:relative;height:230px"
+        >
+          <div
+            class="ScrollbarsCustom-Wrapper"
+            style="position:absolute;overflow:hidden"
+          >
+            <div
+              class="ScrollbarsCustom-Scroller"
+              style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Content"
+                style="padding:0.05px"
+              >
+                <li
+                  aria-hidden="true"
+                  class="option highlightedOption"
+                  role="presentation"
+                >
+                  <div>
+                    <span>
+                      Frankreich
+                    </span>
+                    <span>
+                      France
+                    </span>
+                  </div>
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  <div>
+                    <span>
+                      Spanien
+                    </span>
+                    <span>
+                      Spain
+                    </span>
+                  </div>
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  <div>
+                    <span>
+                      Kroatien
+                    </span>
+                    <span>
+                      Croatia
+                    </span>
+                  </div>
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  <div>
+                    <span>
+                      Vereinigten Staaten
+                    </span>
+                    <span>
+                      United States
+                    </span>
+                  </div>
+                </li>
+                <li
+                  aria-hidden="true"
+                  class="option"
+                  role="presentation"
+                >
+                  <div>
+                    <span>
+                      Österreich
+                    </span>
+                    <span>
+                      Austria
+                    </span>
+                  </div>
+                </li>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+            style="display:none"
+          >
+            <div
+              class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+              style="touch-action:none"
+            />
+          </div>
+          <div
+            class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+            style="display:none"
+          >
+            <div
+              class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+              style="touch-action:none"
+            />
+          </div>
         </div>
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        <div>
-          <span>
-            Spanien
-          </span>
-          <span>
-            Spain
-          </span>
-        </div>
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        <div>
-          <span>
-            Kroatien
-          </span>
-          <span>
-            Croatia
-          </span>
-        </div>
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        <div>
-          <span>
-            Vereinigten Staaten
-          </span>
-          <span>
-            United States
-          </span>
-        </div>
-      </li>
-      <li
-        aria-hidden={true}
-        className="option"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        role="presentation"
-      >
-        <div>
-          <span>
-            Österreich
-          </span>
-          <span>
-            Austria
-          </span>
-        </div>
-      </li>
+      </div>
     </ul>
   </div>
   <span
-    className="arrow"
-    data-bubble-arrow={true}
+    class="arrow"
+    data-bubble-arrow="true"
   />
 </div>
 `;
 
 exports[`Options uses render prop - render 1`] = `
 <div
-  className="options firstOptionHighlighted root isFloating isHidden"
-  style={null}
+  class="options firstOptionHighlighted root isFloating isHidden"
 >
   <div
-    className="bubble"
-    data-bubble-container={true}
+    class="bubble"
+    data-bubble-container="true"
   >
     <ul
-      className="ul"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      style={null}
+      class="ul"
     >
-      <li>
-        <span>
-          home
-        </span>
-      </li>
-      <li>
-        <span>
-          cat
-        </span>
-      </li>
-      <li>
-        <span>
-          dog
-        </span>
-      </li>
-      <li>
-        <span>
-          fish
-        </span>
-      </li>
-      <li>
-        <span>
-          hide
-        </span>
-      </li>
-      <li>
-        <span>
-          hover
-        </span>
-      </li>
-      <li>
-        <span>
-          duck
-        </span>
-      </li>
-      <li>
-        <span>
-          category
-        </span>
-      </li>
-      <li>
-        <span>
-          join
-        </span>
-      </li>
-      <li>
-        <span>
-          paper
-        </span>
-      </li>
-      <li>
-        <span>
-          box
-        </span>
-      </li>
-      <li>
-        <span>
-          tab
-        </span>
-      </li>
+      <div
+        class="root"
+      >
+        <div
+          class="ScrollbarsCustom"
+          style="position:relative;height:552px"
+        >
+          <div
+            class="ScrollbarsCustom-Wrapper"
+            style="position:absolute;overflow:hidden"
+          >
+            <div
+              class="ScrollbarsCustom-Scroller"
+              style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Content"
+                style="padding:0.05px"
+              >
+                <li>
+                  <span>
+                    home
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    cat
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    dog
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    fish
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    hide
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    hover
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    duck
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    category
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    join
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    paper
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    box
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    tab
+                  </span>
+                </li>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+            style="display:none"
+          >
+            <div
+              class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+              style="touch-action:none"
+            />
+          </div>
+          <div
+            class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+            style="display:none"
+          >
+            <div
+              class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+              style="touch-action:none"
+            />
+          </div>
+        </div>
+      </div>
     </ul>
   </div>
   <span
-    className="arrow"
-    data-bubble-arrow={true}
+    class="arrow"
+    data-bubble-arrow="true"
   />
 </div>
 `;

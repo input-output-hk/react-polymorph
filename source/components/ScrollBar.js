@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType, Element, Node } from 'react';
+import type { ComponentType } from 'react';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
@@ -10,45 +10,30 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
-export type TooltipProps = {
-  children: ?Node,
+type Props = {
   className?: string,
   context: ThemeContextProp,
-  isAligningRight?: boolean,
-  isBounded: boolean,
-  isCentered: boolean,
-  isOpeningUpward: boolean,
-  isTransparent: boolean,
-  isVisible: boolean,
-  arrowRelativeToTip: boolean,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
-  themeOverrides: Object, // custom css/scss from user that adheres to component's theme API
   themeId: string,
-  tip?: string | Element<any>
+  themeOverrides: Object // custom css/scss from user that adheres to component's theme API
 };
 
 type State = {
   composedTheme: Object
 };
 
-class TooltipBase extends Component<TooltipProps, State> {
+class ScrollBarBase extends Component<Props, State> {
   // define static properties
-  static displayName = 'Tooltip';
+  static displayName = 'ScrollBar';
   static defaultProps = {
     context: createEmptyContext(),
-    isBounded: false,
-    isCentered: false,
-    isVisible: false,
-    isOpeningUpward: true,
-    isTransparent: true,
-    arrowRelativeToTip: false,
     theme: null,
-    themeId: IDENTIFIERS.TOOLTIP,
+    themeId: IDENTIFIERS.SCROLLBAR,
     themeOverrides: {}
   };
 
-  constructor(props: TooltipProps) {
+  constructor(props: Props) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
@@ -62,18 +47,24 @@ class TooltipBase extends Component<TooltipProps, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: TooltipProps) {
+  componentWillReceiveProps(nextProps: Props) {
     didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const { skin, theme, themeOverrides, context, ...rest } = this.props;
+    const {
+      skin,
+      theme,
+      themeOverrides,
+      context,
+      ...rest
+    } = this.props;
 
-    const TooltipSkin = skin || context.skins[IDENTIFIERS.TOOLTIP];
+    const ScrollBarSkin = skin || context.skins[IDENTIFIERS.SCROLLBAR];
 
-    return <TooltipSkin theme={this.state.composedTheme} {...rest} />;
+    return <ScrollBarSkin theme={this.state.composedTheme} {...rest} />;
   }
 }
 
-export const Tooltip = withTheme(TooltipBase);
+export const ScrollBar = withTheme(ScrollBarBase);

@@ -2,27 +2,26 @@
 
 exports[`Toggler is checked 1`] = `
 <div
-  aria-hidden={true}
-  className="root"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root"
   role="presentation"
 >
   <input
-    checked={true}
-    className="input"
-    readOnly={true}
+    checked=""
+    class="input"
+    readonly=""
     type="checkbox"
   />
   <div
-    className="toggler"
+    class="toggler"
   >
     <span
-      className="label checked"
+      class="label checked"
     >
       Included
     </span>
     <span
-      className="label"
+      class="label"
     >
       Excluded
     </span>
@@ -32,28 +31,26 @@ exports[`Toggler is checked 1`] = `
 
 exports[`Toggler is disabled 1`] = `
 <div
-  aria-hidden={true}
-  className="root disabled"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root disabled"
   role="presentation"
 >
   <input
-    checked={false}
-    className="input"
-    disabled={true}
-    readOnly={true}
+    class="input"
+    disabled=""
+    readonly=""
     type="checkbox"
   />
   <div
-    className="toggler"
+    class="toggler"
   >
     <span
-      className="label"
+      class="label"
     >
       Included
     </span>
     <span
-      className="label checked"
+      class="label checked"
     >
       Excluded
     </span>
@@ -63,27 +60,25 @@ exports[`Toggler is disabled 1`] = `
 
 exports[`Toggler renders correctly 1`] = `
 <div
-  aria-hidden={true}
-  className="root"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root"
   role="presentation"
 >
   <input
-    checked={false}
-    className="input"
-    readOnly={true}
+    class="input"
+    readonly=""
     type="checkbox"
   />
   <div
-    className="toggler"
+    class="toggler"
   >
     <span
-      className="label"
+      class="label"
     >
       Included
     </span>
     <span
-      className="label checked"
+      class="label checked"
     >
       Excluded
     </span>
@@ -97,27 +92,25 @@ exports[`Toggler renders within text 1`] = `
     Fees 
   </span>
   <div
-    aria-hidden={true}
-    className="root"
-    onClick={[Function]}
+    aria-hidden="true"
+    class="root"
     role="presentation"
   >
     <input
-      checked={false}
-      className="input"
-      readOnly={true}
+      class="input"
+      readonly=""
       type="checkbox"
     />
     <div
-      className="toggler"
+      class="toggler"
     >
       <span
-        className="label"
+        class="label"
       >
         Included
       </span>
       <span
-        className="label checked"
+        class="label checked"
       >
         Excluded
       </span>

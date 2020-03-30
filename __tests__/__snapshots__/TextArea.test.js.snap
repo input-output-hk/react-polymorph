@@ -2,16 +2,13 @@
 
 exports[`TextArea renders correctly 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <textarea
-      className="textarea"
-      onChange={[Function]}
-      value=""
+      class="textarea"
     />
   </div>
 </div>
@@ -19,17 +16,14 @@ exports[`TextArea renders correctly 1`] = `
 
 exports[`TextArea renders with 5 rows 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <textarea
-      className="textarea"
-      onChange={[Function]}
-      rows={5}
-      value=""
+      class="textarea"
+      rows="5"
     />
   </div>
 </div>
@@ -37,37 +31,34 @@ exports[`TextArea renders with 5 rows 1`] = `
 
 exports[`TextArea renders with a value 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <textarea
-      className="textarea"
-      onChange={[Function]}
-      value="this one has a value"
-    />
+      class="textarea"
+    >
+      this one has a value
+    </textarea>
   </div>
 </div>
 `;
 
 exports[`TextArea renders with an error 1`] = `
 <div
-  className="root errored"
+  class="root errored"
 >
   <div
-    className="error"
+    class="error"
   >
     Please enter valid input
   </div>
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <textarea
-      className="textarea errored"
-      onChange={[Function]}
-      value=""
+      class="textarea errored"
     />
   </div>
 </div>
@@ -75,17 +66,14 @@ exports[`TextArea renders with an error 1`] = `
 
 exports[`TextArea renders with placeholder 1`] = `
 <div
-  className="root"
+  class="root"
 >
-  
   <div
-    className="inputWrapper"
+    class="inputWrapper"
   >
     <textarea
-      className="textarea"
-      onChange={[Function]}
+      class="textarea"
       placeholder="0.0000"
-      value=""
     />
   </div>
 </div>
