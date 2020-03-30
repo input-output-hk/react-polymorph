@@ -14,6 +14,7 @@ import type { ThemeContextProp } from './HOC/withTheme';
 type Props = {
   className?: string,
   context: ThemeContextProp,
+  displayOnly: boolean,
   label?: string | Element<any>,
   mnemonicWords: Array<string>,
   skin?: ComponentType<any>,
@@ -34,6 +35,7 @@ class MnemonicEntryBase extends Component<Props, State> {
   static displayName = 'MnemonicEntry';
   static defaultProps = {
     context: createEmptyContext(),
+    displayOnly: true,
     loading: false,
     theme: null,
     themeId: IDENTIFIERS.MNEMONIC_ENTRY,
