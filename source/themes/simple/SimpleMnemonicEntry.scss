@@ -112,7 +112,9 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
  font-size: $mnemonicentry-mnemonic-word-font-size;
  margin-top: 5px;
  padding-bottom: 3px;
- min-width: 125px;
+ min-width: 150px;
+ width: 150px;
+
  &.blurred {
   filter: blur(8px);
   -webkit-filter: blur(8px);
@@ -127,8 +129,7 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
  font-family: $mnemonicentry-mnemonic-word-font-family;
  font-size: $mnemonicentry-mnemonic-word-font-size;
  margin-left: 5px;
- min-width: 125px;
-
+ width: 150px;
  &:focus,
  &:active {
   outline: none;
