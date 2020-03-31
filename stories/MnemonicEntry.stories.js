@@ -44,6 +44,6 @@ storiesOf('MnemonicEntry', module)
       displayOnly={false}
       label="Enter Your Recovery Phrase"
       mnemonicWords={MNEMONIC_WORDS}
-      totalColumns={5}
+      totalColumns={3}
     />
   ));

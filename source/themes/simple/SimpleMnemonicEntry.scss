@@ -19,6 +19,7 @@ $mnemonicentry-words-entered-margin: var(--rp-mnemonicentry-words-entered-margin
 
 // mnemonic word 
 $mnemonicentry-mnemonic-word-font-family: var(--rp-mnemonicentry-mnemonic-word-font-family, $theme-font-medium, sans-serif) !default;
+$mnemonicentry-mnemonic-word-font-size: var(--rp-mnemonicentry-mnemonic-word-font-size, 16px) !default;
 $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-text-color, #5e6066) !default;
 
 .root {
@@ -59,7 +60,11 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
 }
 
 .columnWrapper {
- border: 1px solid blue;
+ &.disabled {
+  &:hover {
+   cursor: default;
+  }
+ }
  &:not(.disabled) {
   &:hover {
    cursor: pointer;
@@ -73,10 +78,11 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
  flex-direction: column;
  justify-content: center;
  position: relative;
+ z-index: 1;
 }
 
 .columnCover {
- &.show {
+ &.blurred {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -84,13 +90,13 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 2;
   &:after {
    content: url("./assets/eye.svg");
   }
  }
 
- &.hide {
+ &.visible {
   display: none;
  }
 }
@@ -98,8 +104,33 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
 .word {
  border-bottom: 1px solid $mnemonicentry-mnemonic-word-text-color;
  color: $mnemonicentry-mnemonic-word-text-color;
+ display: flex;
+ flex-direction: row;
+ justify-content: flex-start;
+ align-items: center;
  font-family: $mnemonicentry-mnemonic-word-font-family;
+ font-size: $mnemonicentry-mnemonic-word-font-size;
  margin-top: 5px;
  padding-bottom: 3px;
- width: 100px;
+ min-width: 125px;
+ &.blurred {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+ }
+}
+
+.wordInput {
+ background-color: transparent;
+ box-shadow: none;
+ border: none;
+ color: $mnemonicentry-mnemonic-word-text-color;
+ font-family: $mnemonicentry-mnemonic-word-font-family;
+ font-size: $mnemonicentry-mnemonic-word-font-size;
+ margin-left: 5px;
+ min-width: 125px;
+
+ &:focus,
+ &:active {
+  outline: none;
+ }
 }

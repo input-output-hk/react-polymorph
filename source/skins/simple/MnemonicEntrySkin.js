@@ -9,6 +9,7 @@ import { times } from 'lodash';
 type Props = {
   activeColumn: number | null,
   className: string,
+  displayOnly: boolean,
   label: string | Element<any>,
   mnemonicWords: Object,
   setActiveColumn: Function,
@@ -23,6 +24,7 @@ export const MnemonicEntrySkin = (props: Props) => {
  const {
   activeColumn,
   className,
+  displayOnly,
   label,
   mnemonicWords,
   setActiveColumn,
@@ -33,25 +35,33 @@ export const MnemonicEntrySkin = (props: Props) => {
  } = props;
  const theme = props.theme[themeId];
 
+ const blurredOrVisible = (columnNumber: number): string => (
+  columnNumber === activeColumn ? 'visible' : 'blurred'
+ );
+
  const renderInnerColumn = (columnNumber: number) => {
   const wordsPerColumn = totalWords / totalColumns;
+  const controlBlurr = theme[`${blurredOrVisible(columnNumber + 1)}`];
   return (
     <ul>
-      {times(wordsPerColumn, (iteree) => {
+      {times(wordsPerColumn, iteree => {
         const wordNumber = wordsPerColumn * columnNumber + (iteree + 1);
+        if (displayOnly) {
+          return (
+            <li key={iteree} className={classnames([theme.word, controlBlurr])}>
+              {wordNumber}. {mnemonicWords[wordNumber]}
+            </li>
+          );
+        }
         return (
-          <li key={iteree} className={theme.word}>
-            {wordNumber}. {mnemonicWords[wordNumber]}
+          <li key={iteree} className={classnames([theme.word, controlBlurr])}>
+            {wordNumber}. <input className={theme.wordInput} />
           </li>
         );
       })}
     </ul>
   );
-};
-
-const showOrHideColumnCover = (columnNumber: number): string => (
-  columnNumber === activeColumn ? 'hide' : 'show'
-);
+ };
 
  return (
    <div className={classnames([className, theme.root])}>
@@ -65,7 +75,7 @@ const showOrHideColumnCover = (columnNumber: number): string => (
            {label}
          </label>
       )}
-       {totalWords && (
+       {totalWords && !displayOnly && (
          <label
            role="presentation"
            aria-hidden
@@ -77,18 +87,19 @@ const showOrHideColumnCover = (columnNumber: number): string => (
      </div>
      <div className={theme.columnsWrapper}>
        {times(totalColumns, (columnNumber) => {
-         const showOrHideCover = showOrHideColumnCover(columnNumber + 1);
+         const controlBlurr = theme[`${blurredOrVisible(columnNumber + 1)}`];
          const disableClick = columnNumber + 1 === activeColumn || false;
+         const disabledClass = columnNumber + 1 === activeColumn && theme.disabled;
          const handleSetActiveColumn = setActiveColumn.bind(null, columnNumber + 1);
 
          return (
            <button
-             className={theme.columnWrapper}
+             className={classnames([theme.columnWrapper, disabledClass])}
              disabled={disableClick}
              onClick={handleSetActiveColumn}
            >
              <div key={columnNumber} className={theme.column}>
-               <div className={classnames([theme.columnCover, theme[`${showOrHideCover}`]])} />
+               <div className={classnames([theme.columnCover, controlBlurr])} />
                {renderInnerColumn(columnNumber)}
              </div>
            </button>
