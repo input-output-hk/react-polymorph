@@ -78,19 +78,18 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
  flex-direction: column;
  justify-content: center;
  position: relative;
- z-index: 1;
 }
 
 .columnCover {
  &.blurred {
-  align-items: center;
+  align-items: flex-start;
+  padding-left: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: absolute;
   height: 100%;
   width: 100%;
-  z-index: 2;
   &:after {
    content: url("./assets/eye.svg");
   }
@@ -116,8 +115,8 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
  width: 150px;
 
  &.blurred {
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
  }
 }
 
@@ -133,5 +132,9 @@ $mnemonicentry-mnemonic-word-text-color: var(--rp-mnemonicentry-mnemonic-word-te
  &:focus,
  &:active {
   outline: none;
+ }
+
+ &.blurred {
+  cursor: pointer;
  }
 }

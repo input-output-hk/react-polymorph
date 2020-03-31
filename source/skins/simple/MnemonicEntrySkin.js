@@ -42,6 +42,7 @@ export const MnemonicEntrySkin = (props: Props) => {
  const renderInnerColumn = (columnNumber: number) => {
   const wordsPerColumn = totalWords / totalColumns;
   const controlBlurr = theme[`${blurredOrVisible(columnNumber + 1)}`];
+  const disableClick = columnNumber + 1 === activeColumn && false;
   return (
     <ul>
       {times(wordsPerColumn, iteree => {
@@ -55,7 +56,7 @@ export const MnemonicEntrySkin = (props: Props) => {
         }
         return (
           <li key={iteree} className={classnames([theme.word, controlBlurr])}>
-            {wordNumber}. <input className={theme.wordInput} />
+            {wordNumber}. <input disabled={disableClick} className={classnames([theme.wordInput, controlBlurr])} />
           </li>
         );
       })}
