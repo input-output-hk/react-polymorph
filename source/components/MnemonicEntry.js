@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
-import { times } from 'lodash';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
