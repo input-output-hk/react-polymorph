@@ -6,6 +6,9 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+0.9.3
+=====
+
 ### Features
 
 - Adds new `PasswordInput` component [PR 134](https://github.com/input-output-hk/react-polymorph/pull/134)
