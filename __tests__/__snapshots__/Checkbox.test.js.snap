@@ -2,77 +2,70 @@
 
 exports[`Checkbox is checked 1`] = `
 <div
-  aria-hidden={true}
-  className="root checked"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root checked"
   role="presentation"
 >
   <input
-    checked={true}
-    className="input"
+    checked=""
+    class="input"
     type="checkbox"
   />
   <div
-    className="check checked"
+    class="check checked"
   />
 </div>
 `;
 
 exports[`Checkbox is disabled 1`] = `
 <div
-  aria-hidden={true}
-  className="root disabled"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root disabled"
   role="presentation"
 >
   <input
-    checked={false}
-    className="input"
-    disabled={true}
+    class="input"
+    disabled=""
     type="checkbox"
   />
   <div
-    className="check"
+    class="check"
   />
 </div>
 `;
 
 exports[`Checkbox renders correctly 1`] = `
 <div
-  aria-hidden={true}
-  className="root"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root"
   role="presentation"
 >
   <input
-    checked={false}
-    className="input"
+    class="input"
     type="checkbox"
   />
   <div
-    className="check"
+    class="check"
   />
 </div>
 `;
 
 exports[`Checkbox renders with a label 1`] = `
 <div
-  aria-hidden={true}
-  className="root"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root"
   role="presentation"
 >
   <input
-    checked={false}
-    className="input"
+    class="input"
     label="check here"
     type="checkbox"
   />
   <div
-    className="check"
+    class="check"
   />
   <label
-    className="label"
+    class="label"
   >
     check here
   </label>

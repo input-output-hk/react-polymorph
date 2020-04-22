@@ -1,5 +1,4 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 
 import { Checkbox } from '../source/components/Checkbox';
 import { TogglerSkin } from '../source/skins/simple/TogglerSkin';
@@ -7,21 +6,18 @@ import { IDENTIFIERS } from '../source/components';
 import { renderInSimpleTheme } from './helpers/theming';
 
 test('Toggler renders correctly', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Checkbox
       labelLeft="Included"
       labelRight="Excluded"
       themeId={IDENTIFIERS.TOGGLER}
       skin={TogglerSkin}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Toggler renders within text', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <div>
       <span>Fees&nbsp;</span>
       <Checkbox
@@ -32,14 +28,11 @@ test('Toggler renders within text', () => {
       />
       <span>&nbsp;from the amount</span>
     </div>
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Toggler is disabled', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Checkbox
       disabled
       labelLeft="Included"
@@ -47,14 +40,11 @@ test('Toggler is disabled', () => {
       themeId={IDENTIFIERS.TOGGLER}
       skin={TogglerSkin}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Toggler is checked', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Checkbox
       checked
       labelLeft="Included"
@@ -62,8 +52,5 @@ test('Toggler is checked', () => {
       themeId={IDENTIFIERS.TOGGLER}
       skin={TogglerSkin}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });

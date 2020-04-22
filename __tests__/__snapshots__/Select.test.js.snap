@@ -2,116 +2,138 @@
 
 exports[`Select isOpen={true} 1`] = `
 <div
-  className="select isOpen"
+  class="select isOpen"
 >
   <div
-    className="selectInput"
+    class="selectInput"
   >
     <div
-      className="root"
+      class="root"
     >
-      
       <div
-        className="inputWrapper"
+        class="inputWrapper"
       >
         <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
+          class="input"
+          readonly=""
           value=""
         />
       </div>
     </div>
   </div>
   <div
-    className="options isOpen firstOptionHighlighted root isFloating"
-    style={null}
+    class="options isOpen firstOptionHighlighted root isFloating"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          <span
-            className="label"
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:230px"
           >
-            Frankreich
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Spanien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Kroatien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Vereinigten Staaten
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Österreich
-          </span>
-        </li>
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Frankreich
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Spanien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Kroatien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Vereinigten Staaten
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Österreich
+                    </span>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -119,116 +141,138 @@ exports[`Select isOpen={true} 1`] = `
 
 exports[`Select isOpeningUpward={true} 1`] = `
 <div
-  className="select openUpward"
+  class="select openUpward"
 >
   <div
-    className="selectInput"
+    class="selectInput"
   >
     <div
-      className="root"
+      class="root"
     >
-      
       <div
-        className="inputWrapper"
+        class="inputWrapper"
       >
         <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
+          class="input"
+          readonly=""
           value=""
         />
       </div>
     </div>
   </div>
   <div
-    className="options openUpward root openUpward isFloating isHidden"
-    style={null}
+    class="options openUpward root openUpward isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          <span
-            className="label"
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:230px"
           >
-            Österreich
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Vereinigten Staaten
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Kroatien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Spanien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Frankreich
-          </span>
-        </li>
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Österreich
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Vereinigten Staaten
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Kroatien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Spanien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Frankreich
+                    </span>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -236,116 +280,138 @@ exports[`Select isOpeningUpward={true} 1`] = `
 
 exports[`Select renders correctly 1`] = `
 <div
-  className="select"
+  class="select"
 >
   <div
-    className="selectInput"
+    class="selectInput"
   >
     <div
-      className="root"
+      class="root"
     >
-      
       <div
-        className="inputWrapper"
+        class="inputWrapper"
       >
         <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
+          class="input"
+          readonly=""
           value=""
         />
       </div>
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          <span
-            className="label"
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:230px"
           >
-            Frankreich
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Spanien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Kroatien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Vereinigten Staaten
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Österreich
-          </span>
-        </li>
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Frankreich
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Spanien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Kroatien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Vereinigten Staaten
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Österreich
+                    </span>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -353,120 +419,143 @@ exports[`Select renders correctly 1`] = `
 
 exports[`Select renders with an error 1`] = `
 <div
-  className="select"
+  class="select"
 >
   <div
-    className="selectInput"
+    class="selectInput"
   >
     <div
-      className="root errored"
+      class="root errored"
     >
       <div
-        className="error"
+        class="error"
       >
         Please select a different option
       </div>
       <div
-        className="inputWrapper"
+        class="inputWrapper"
       >
         <input
-          className="input errored"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
+          class="input errored"
+          readonly=""
           value=""
         />
       </div>
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          <span
-            className="label"
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:230px"
           >
-            Frankreich
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Spanien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Kroatien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Vereinigten Staaten
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Österreich
-          </span>
-        </li>
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Frankreich
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Spanien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Kroatien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Vereinigten Staaten
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Österreich
+                    </span>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -474,103 +563,127 @@ exports[`Select renders with an error 1`] = `
 
 exports[`Select renders with disabled options 1`] = `
 <div
-  className="select"
+  class="select"
 >
   <div
-    className="selectInput"
+    class="selectInput"
   >
     <div
-      className="root"
+      class="root"
     >
-      
       <div
-        className="inputWrapper"
+        class="inputWrapper"
       >
         <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
+          class="input"
+          readonly=""
           value=""
         />
       </div>
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          <span
-            className="label"
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:184px"
           >
-            England
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option disabledOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Spain
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option disabledOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Thailand
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            USA
-          </span>
-        </li>
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      England
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option disabledOption"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Spain
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option disabledOption"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Thailand
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      USA
+                    </span>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -578,117 +691,139 @@ exports[`Select renders with disabled options 1`] = `
 
 exports[`Select renders with placeholder 1`] = `
 <div
-  className="select"
+  class="select"
 >
   <div
-    className="selectInput"
+    class="selectInput"
   >
     <div
-      className="root"
+      class="root"
     >
-      
       <div
-        className="inputWrapper"
+        class="inputWrapper"
       >
         <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
+          class="input"
           placeholder="Select your country …"
-          readOnly={true}
+          readonly=""
           value=""
         />
       </div>
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          <span
-            className="label"
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:230px"
           >
-            Frankreich
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Spanien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Kroatien
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Vereinigten Staaten
-          </span>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <span
-            className="label"
-          >
-            Österreich
-          </span>
-        </li>
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Frankreich
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Spanien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Kroatien
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Vereinigten Staaten
+                    </span>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <span
+                      class="label"
+                    >
+                      Österreich
+                    </span>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
+          </div>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -696,141 +831,153 @@ exports[`Select renders with placeholder 1`] = `
 
 exports[`Select uses render prop - optionRenderer 1`] = `
 <div
-  className="select"
+  class="select"
 >
   <div
-    className="selectInput"
+    class="selectInput"
   >
     <div
-      className="root"
+      class="root"
     >
-      
       <div
-        className="inputWrapper"
+        class="inputWrapper"
       >
         <input
-          className="input"
-          onChange={[Function]}
-          onClick={[Function]}
-          readOnly={true}
+          class="input"
+          readonly=""
           value=""
         />
       </div>
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          <div>
-            <span>
-              German: 
-              Frankreich
-            </span>
-            <span>
-              English: 
-              France
-            </span>
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:230px"
+          >
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    <div>
+                      <span>
+                        German: Frankreich
+                      </span>
+                      <span>
+                        English: France
+                      </span>
+                    </div>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <div>
+                      <span>
+                        German: Spanien
+                      </span>
+                      <span>
+                        English: Spain
+                      </span>
+                    </div>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <div>
+                      <span>
+                        German: Kroatien
+                      </span>
+                      <span>
+                        English: Croatia
+                      </span>
+                    </div>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <div>
+                      <span>
+                        German: Vereinigten Staaten
+                      </span>
+                      <span>
+                        English: United States
+                      </span>
+                    </div>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <div>
+                      <span>
+                        German: Österreich
+                      </span>
+                      <span>
+                        English: Austria
+                      </span>
+                    </div>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
+            </div>
           </div>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <div>
-            <span>
-              German: 
-              Spanien
-            </span>
-            <span>
-              English: 
-              Spain
-            </span>
-          </div>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <div>
-            <span>
-              German: 
-              Kroatien
-            </span>
-            <span>
-              English: 
-              Croatia
-            </span>
-          </div>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <div>
-            <span>
-              German: 
-              Vereinigten Staaten
-            </span>
-            <span>
-              English: 
-              United States
-            </span>
-          </div>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <div>
-            <span>
-              German: 
-              Österreich
-            </span>
-            <span>
-              English: 
-              Austria
-            </span>
-          </div>
-        </li>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>
@@ -838,106 +985,132 @@ exports[`Select uses render prop - optionRenderer 1`] = `
 
 exports[`Select uses render prop - valueRenderer 1`] = `
 <div
-  className="select"
+  class="select"
 >
   <div
-    className="selectInput"
+    class="selectInput"
   >
     <div
-      className="root"
+      class="root"
     >
-      
       <div
-        className="inputWrapper"
+        class="inputWrapper"
       >
         <div
-          className="customValueWrapper"
+          class="customValueWrapper"
         >
           <input
-            className="input"
-            onChange={[Function]}
-            onClick={[Function]}
-            readOnly={true}
+            class="input"
+            readonly=""
             value=""
           />
           <div
-            className="customValueBlock"
+            class="customValueBlock"
           />
         </div>
       </div>
     </div>
   </div>
   <div
-    className="options firstOptionHighlighted root isFloating isHidden"
-    style={null}
+    class="options firstOptionHighlighted root isFloating isHidden"
   >
     <div
-      className="bubble"
-      data-bubble-container={true}
+      class="bubble"
+      data-bubble-container="true"
     >
       <ul
-        className="ul"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        style={
-          Object {
-            "maxHeight": "300px",
-          }
-        }
+        class="ul"
+        style="max-height:300px"
       >
-        <li
-          aria-hidden={true}
-          className="option highlightedOption"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
+        <div
+          class="root"
         >
-          <div>
-            <div>
-              Main wallet
+          <div
+            class="ScrollbarsCustom"
+            style="position:relative;height:138px"
+          >
+            <div
+              class="ScrollbarsCustom-Wrapper"
+              style="position:absolute;overflow:hidden"
+            >
+              <div
+                class="ScrollbarsCustom-Scroller"
+                style="position:absolute;top:0;left:0;bottom:0;right:0;-webkit-overflow-scrolling:touch;overflow-y:hidden;overflow-x:hidden"
+              >
+                <div
+                  class="ScrollbarsCustom-Content"
+                  style="padding:0.05px"
+                >
+                  <li
+                    aria-hidden="true"
+                    class="option highlightedOption"
+                    role="presentation"
+                  >
+                    <div>
+                      <div>
+                        Main wallet
+                      </div>
+                      <div>
+                        100,100 ADA
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <div>
+                      <div>
+                        Spending money
+                      </div>
+                      <div>
+                        10,100.2 ADA
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    aria-hidden="true"
+                    class="option"
+                    role="presentation"
+                  >
+                    <div>
+                      <div>
+                        Savings
+                      </div>
+                      <div>
+                        500,1000 ADA
+                      </div>
+                    </div>
+                  </li>
+                </div>
+              </div>
             </div>
-            <div>
-              100,100 ADA
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackY"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbY"
+                style="touch-action:none"
+              />
+            </div>
+            <div
+              class="ScrollbarsCustom-Track ScrollbarsCustom-TrackX"
+              style="display:none"
+            >
+              <div
+                class="ScrollbarsCustom-Thumb ScrollbarsCustom-ThumbX"
+                style="touch-action:none"
+              />
             </div>
           </div>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <div>
-            <div>
-              Spending money
-            </div>
-            <div>
-              10,100.2 ADA
-            </div>
-          </div>
-        </li>
-        <li
-          aria-hidden={true}
-          className="option"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          role="presentation"
-        >
-          <div>
-            <div>
-              Savings
-            </div>
-            <div>
-              500,1000 ADA
-            </div>
-          </div>
-        </li>
+        </div>
       </ul>
     </div>
     <span
-      className="arrow"
-      data-bubble-arrow={true}
+      class="arrow"
+      data-bubble-arrow="true"
     />
   </div>
 </div>

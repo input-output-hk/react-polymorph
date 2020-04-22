@@ -2,77 +2,70 @@
 
 exports[`Radio is disabled 1`] = `
 <div
-  aria-hidden={true}
-  className="root disabled"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root disabled"
   role="presentation"
 >
   <input
-    className="input"
-    disabled={true}
-    selected={false}
+    class="input"
+    disabled=""
     type="radio"
   />
   <div
-    className="circle"
+    class="circle"
   />
 </div>
 `;
 
 exports[`Radio is selected 1`] = `
 <div
-  aria-hidden={true}
-  className="root selected"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root selected"
   role="presentation"
 >
   <input
-    className="input"
-    selected={true}
+    class="input"
+    selected=""
     type="radio"
   />
   <div
-    className="circle selected"
+    class="circle selected"
   />
 </div>
 `;
 
 exports[`Radio renders correctly 1`] = `
 <div
-  aria-hidden={true}
-  className="root"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root"
   role="presentation"
 >
   <input
-    className="input"
-    selected={false}
+    class="input"
     type="radio"
   />
   <div
-    className="circle"
+    class="circle"
   />
 </div>
 `;
 
 exports[`Radio renders with a label 1`] = `
 <div
-  aria-hidden={true}
-  className="root"
-  onClick={[Function]}
+  aria-hidden="true"
+  class="root"
   role="presentation"
 >
   <input
-    className="input"
+    class="input"
     label="click here"
-    selected={false}
     type="radio"
   />
   <div
-    className="circle"
+    class="circle"
   />
   <label
-    className="label"
+    class="label"
   >
     click here
   </label>

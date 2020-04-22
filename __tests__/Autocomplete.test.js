@@ -11,52 +11,40 @@ const OPTIONS = [
 ];
 
 test('Autocomplete renders correctly', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Autocomplete options={OPTIONS} />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Autocomplete renders with label', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Autocomplete
       label="Enter your recovery phrase below"
       options={OPTIONS}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Autocomplete renders with a placeholder', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Autocomplete
       placeholder="Enter recovery phrase"
       options={OPTIONS}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Autocomplete renders with an error', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Autocomplete
       error="Your mnemonic phrase is incorrect"
       options={OPTIONS}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Autocomplete uses render prop - renderSelections', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Autocomplete
       options={OPTIONS}
       renderSelections={getSelectionProps => {
@@ -74,14 +62,11 @@ test('Autocomplete uses render prop - renderSelections', () => {
         ));
       }}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });
 
 test('Autocomplete uses render prop - renderOptions', () => {
-  const component = renderInSimpleTheme(
+  expect(renderInSimpleTheme(
     <Autocomplete
       options={OPTIONS}
       renderOptions={getOptionProps => {
@@ -94,8 +79,5 @@ test('Autocomplete uses render prop - renderOptions', () => {
         ));
       }}
     />
-  );
-
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  )).toMatchSnapshot();
 });

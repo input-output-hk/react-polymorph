@@ -29,6 +29,7 @@ type Props = {
   setMouseOverRoot: Function,
   theme: Object,
   themeId: string,
+  optionHeight: ?number,
 };
 
 export const DropdownSkin = (props: Props) => {
@@ -61,6 +62,7 @@ export const DropdownSkin = (props: Props) => {
         onChange={props.onItemSelected}
         options={props.items}
         optionsMaxHeight={props.optionsMaxHeight}
+        optionHeight={props.optionHeight}
         optionsRef={props.optionsRef}
         optionRenderer={props.optionRenderer}
         selectedOption={props.activeItem}

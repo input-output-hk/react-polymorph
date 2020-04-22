@@ -13,8 +13,10 @@ import { LinkSkin } from './LinkSkin';
 import { LoadingSpinnerSkin } from './LoadingSpinnerSkin';
 import { ModalSkin } from './ModalSkin';
 import { OptionsSkin } from './OptionsSkin';
+import { PasswordInputSkin } from './PasswordInputSkin';
 import { ProgressBarSkin } from './ProgressBarSkin';
 import { RadioSkin } from './RadioSkin';
+import { ScrollBarSkin } from './ScrollBarSkin';
 import { SelectSkin } from './SelectSkin';
 import { StepperSkin } from './StepperSkin';
 import { SwitchSkin } from './SwitchSkin';
@@ -36,8 +38,10 @@ export const SimpleSkins = {
   [IDENTIFIERS.LOADING_SPINNER]: LoadingSpinnerSkin,
   [IDENTIFIERS.MODAL]: ModalSkin,
   [IDENTIFIERS.OPTIONS]: OptionsSkin,
+  [IDENTIFIERS.PASSWORD_INPUT]: PasswordInputSkin,
   [IDENTIFIERS.PROGRESS_BAR]: ProgressBarSkin,
   [IDENTIFIERS.RADIO]: RadioSkin,
+  [IDENTIFIERS.SCROLLBAR]: ScrollBarSkin,
   [IDENTIFIERS.SELECT]: SelectSkin,
   [IDENTIFIERS.STEPPER]: StepperSkin,
   [IDENTIFIERS.SWITCH]: SwitchSkin,

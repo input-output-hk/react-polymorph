@@ -55,6 +55,7 @@ storiesOf('Dropdown', module)
         }}
         items={COUNTRY_ITEMS}
         noArrow
+        optionHeight={52}
       />
     ))
   )
@@ -67,6 +68,7 @@ storiesOf('Dropdown', module)
           store.set({ value });
         }}
         items={COUNTRY_ITEMS}
+        optionHeight={52}
       />
     ))
   )
@@ -81,6 +83,7 @@ storiesOf('Dropdown', module)
           store.set({ value });
         }}
         items={COUNTRY_ITEMS}
+        optionHeight={52}
       />
     ))
   )
@@ -94,6 +97,7 @@ storiesOf('Dropdown', module)
           store.set({ value });
         }}
         items={COUNTRY_ITEMS}
+        optionHeight={52}
       />
     ))
   )
@@ -110,6 +114,7 @@ storiesOf('Dropdown', module)
         optionRenderer={o => (
           <div className={styles.customOption}>{o.label}</div>
         )}
+        optionHeight={52}
       />
     ))
   );

@@ -99,6 +99,43 @@ storiesOf('Tooltip', module)
     </div>
   ))
 
+  .add('arrowRelativeToTip (below)', () => (
+    <div className={styles.fitToSize}>
+      <Tooltip
+        arrowRelativeToTip
+        isOpeningUpward={false}
+        tip="small tip from below"
+      >
+        {'this is a really long string for demonstration purposes'}
+      </Tooltip>
+    </div>
+  ))
+
+  .add('centered', () => (
+    <div className={styles.fitToSize}>
+      <Tooltip
+        arrowRelativeToTip
+        isCentered
+        tip="centered above"
+      >
+        {'this is a really long string for demonstration purposes'}
+      </Tooltip>
+    </div>
+  ))
+
+  .add('centered (below)', () => (
+    <div className={styles.fitToSize}>
+      <Tooltip
+        arrowRelativeToTip
+        isCentered
+        isOpeningUpward={false}
+        tip="centered below"
+      >
+        {'this is a really long string for demonstration purposes'}
+      </Tooltip>
+    </div>
+  ))
+
   .add('theme overrides', () => (
     <div className={styles.container}>
       <Tooltip

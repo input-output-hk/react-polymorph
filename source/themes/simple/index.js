@@ -19,8 +19,10 @@ import SimpleLink from './SimpleLink.scss';
 import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
+import SimplePasswordInput from './SimplePasswordInput.scss';
 import SimpleProgressBar from './SimpleProgressBar.scss';
 import SimpleRadio from './SimpleRadio.scss';
+import SimpleScrollBar from './SimpleScrollBar.scss';
 import SimpleSelect from './SimpleSelect.scss';
 import SimpleStepper from './SimpleStepper.scss';
 import SimpleSwitch from './SimpleSwitch.scss';
@@ -49,8 +51,10 @@ export const SimpleTheme = {
   [IDENTIFIERS.LOADING_SPINNER]: SimpleLoadingSpinner,
   [IDENTIFIERS.MODAL]: SimpleModal,
   [IDENTIFIERS.OPTIONS]: SimpleOptions,
+  [IDENTIFIERS.PASSWORD_INPUT]: SimplePasswordInput,
   [IDENTIFIERS.PROGRESS_BAR]: SimpleProgressBar,
   [IDENTIFIERS.RADIO]: SimpleRadio,
+  [IDENTIFIERS.SCROLLBAR]: SimpleScrollBar,
   [IDENTIFIERS.SELECT]: SimpleSelect,
   [IDENTIFIERS.STEPPER]: SimpleStepper,
   [IDENTIFIERS.SWITCH]: SimpleSwitch,

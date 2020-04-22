@@ -256,7 +256,7 @@ class AutocompleteBase extends Component<Props, State> {
         rootRef={this.rootElement}
         toggleOpen={this.toggleOpen}
       >
-        {({ optionsMaxHeight }) => (
+        {({ optionsMaxHeight, optionHeight }) => (
           <AutocompleteSkin
             error={error || this.state.error}
             filteredOptions={this.state.filteredOptions}
@@ -277,6 +277,7 @@ class AutocompleteBase extends Component<Props, State> {
             theme={this.state.composedTheme}
             toggleMouseLocation={this.toggleMouseLocation}
             toggleOpen={this.toggleOpen}
+            optionHeight={optionHeight}
             {...rest}
           />
         )}

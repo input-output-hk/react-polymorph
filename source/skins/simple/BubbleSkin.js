@@ -7,17 +7,11 @@ import classnames from 'classnames';
 
 // internal utility functions
 import { pickDOMProps } from '../../utils/props';
+import type { BubblePosition, BubbleProps } from '../../components/Bubble';
 
-type Props = {
+type Props = BubbleProps & {
   children?: ?Node,
-  className: string,
-  isFloating: boolean,
-  isHidden: boolean,
-  isOpeningUpward: boolean,
-  isTransparent: boolean,
-  arrowRelativeToTip: boolean,
-  noArrow: boolean,
-  position: Object,
+  position: BubblePosition,
   rootRef: ElementRef<*>,
   theme: Object,
   themeId: string
@@ -25,7 +19,7 @@ type Props = {
 
 export const BubbleSkin = (props: Props) => {
   const { arrowRelativeToTip, noArrow, theme, themeId } = props;
-
+  const autoWidthClass = arrowRelativeToTip ? theme[themeId].hasAutoWidth : null;
   return (
     <div
       ref={props.rootRef}
@@ -34,6 +28,7 @@ export const BubbleSkin = (props: Props) => {
         props.className,
         theme[themeId].root,
         props.isOpeningUpward ? theme[themeId].openUpward : null,
+        props.isCentered ? theme[themeId].isCentered : null,
         props.isTransparent ? theme[themeId].transparent : null,
         props.isFloating ? theme[themeId].isFloating : null,
         props.isHidden ? theme[themeId].isHidden : null,
@@ -47,14 +42,23 @@ export const BubbleSkin = (props: Props) => {
         }
       }
     >
-      <div className={theme[themeId].bubble} data-bubble-container>
+      <div
+        className={classnames([theme[themeId].bubble, autoWidthClass])}
+        data-bubble-container="true"
+      >
         {props.children}
         {arrowRelativeToTip && (
-          <span className={theme[themeId].arrow} data-bubble-arrow={noArrow ? undefined : true} />
+          <span
+            className={theme[themeId].arrow}
+            data-bubble-arrow={noArrow ? undefined : true}
+          />
         )}
       </div>
       {!arrowRelativeToTip && (
-        <span className={theme[themeId].arrow} data-bubble-arrow={noArrow ? undefined : true} />
+        <span
+          className={theme[themeId].arrow}
+          data-bubble-arrow={noArrow ? undefined : true}
+        />
       )}
     </div>
   );

@@ -143,18 +143,19 @@ class DropdownBase extends Component<Props, State> {
     } = this.props;
 
     const DropdownSkin = skin || context.skins[IDENTIFIERS.DROPDOWN];
-    const { isMouseOverItems } = this.state;
+    const { isMouseOverItems, isMouseOverRoot } = this.state;
 
     return (
       <GlobalListeners
         mouseIsOverOptions={isMouseOverItems}
+        mouseIsOverRoot={isMouseOverRoot}
         optionsIsOpen={this.isOpen()}
         optionsIsOpeningUpward={isOpeningUpward}
         optionsRef={this.optionsElement}
         rootRef={this.rootElement}
         toggleOpen={this.toggleOpen}
       >
-        {({ optionsMaxHeight }) => (
+        {({ optionsMaxHeight, optionHeight }) => (
           <DropdownSkin
             isOpen={this.isOpen()}
             isOpeningUpward={isOpeningUpward}
@@ -162,6 +163,7 @@ class DropdownBase extends Component<Props, State> {
             onLabelClick={this._onLabelClick}
             optionsRef={this.optionsElement}
             optionsMaxHeight={optionsMaxHeight}
+            optionHeight={optionHeight}
             rootRef={this.rootElement}
             setMouseOverItems={this._setMouseOverItems}
             setMouseOverRoot={this._setMouseOverRoot}

@@ -15,6 +15,7 @@ import {
 type Props = {
   children: Function,
   mouseIsOverOptions: boolean,
+  mouseIsOverRoot?: boolean,
   optionsIsOpen: boolean,
   optionsIsOpeningUpward: boolean,
   optionsRef?: ElementRef<*>,
@@ -136,6 +137,7 @@ export class GlobalListeners extends Component<Props, State> {
       optionsRef,
       toggleOpen,
       mouseIsOverOptions,
+      mouseIsOverRoot,
     } = this.props;
 
     // checks if Options are open & being scrolled upon via mouse position prior to toggling closed
@@ -144,7 +146,7 @@ export class GlobalListeners extends Component<Props, State> {
     if (!rootRef || !rootRef.current || !doDocumentStylesExist || !isOptionsInDOM) {
       return;
     }
-    optionsIsOpen && !mouseIsOverOptions && toggleOpen();
+    optionsIsOpen && !mouseIsOverOptions && !mouseIsOverRoot && toggleOpen();
     const { height, top } = rootRef.current.getBoundingClientRect();
     // opening upwards case
     if (optionsIsOpeningUpward && top < window.innerHeight) {
