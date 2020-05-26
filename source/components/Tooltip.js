@@ -62,7 +62,7 @@ class TooltipBase extends Component<TooltipProps, State> {
     };
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: TooltipProps) {
     if (prevProps !== this.props) {
       didThemePropsChange(prevProps, this.props, this.setState.bind(this));
     }
