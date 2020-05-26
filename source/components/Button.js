@@ -1,14 +1,14 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType, Element } from "react";
+import React, { Component } from 'react';
+import type { ComponentType, Element } from 'react';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   className?: string,
@@ -20,22 +20,22 @@ type Props = {
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object, // custom css/scss from user that adheres to component's theme API
+  themeOverrides: Object // custom css/scss from user that adheres to component's theme API
 };
 
 type State = {
-  composedTheme: Object,
+  composedTheme: Object
 };
 
 class ButtonBase extends Component<Props, State> {
   // define static properties
-  static displayName = "Button";
+  static displayName = 'Button';
   static defaultProps = {
     context: createEmptyContext(),
     loading: false,
     theme: null,
     themeId: IDENTIFIERS.BUTTON,
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: Props) {
@@ -48,7 +48,7 @@ class ButtonBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
+      )
     };
   }
 

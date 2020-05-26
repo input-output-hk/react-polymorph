@@ -1,14 +1,14 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType } from "react";
+import React, { Component } from 'react';
+import type { ComponentType } from 'react';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   activeStep?: number,
@@ -21,21 +21,21 @@ type Props = {
   steps: Array<string>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object,
+  themeOverrides: Object
 };
 
 type State = {
-  composedTheme: Object,
+  composedTheme: Object
 };
 
 class StepperBase extends Component<Props, State> {
   // define static properties
-  static displayName = "Stepper";
+  static displayName = 'Stepper';
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.STEPPER,
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: Props) {
@@ -48,7 +48,7 @@ class StepperBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
+      )
     };
   }
 

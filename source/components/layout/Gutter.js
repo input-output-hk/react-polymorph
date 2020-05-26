@@ -1,22 +1,22 @@
 // @flow
-import React, { Component } from "react";
-import type { Node } from "react";
+import React, { Component } from 'react';
+import type { Node } from 'react';
 
 // components
-import { Base } from "./Base";
+import { Base } from './Base';
 
 // utility functions
-import { createEmptyContext, withTheme } from "../HOC/withTheme";
+import { createEmptyContext, withTheme } from '../HOC/withTheme';
 import {
   composeTheme,
   addThemeId,
-  didThemePropsChange,
-} from "../../utils/themes";
-import { numberToPx } from "../../utils/props";
+  didThemePropsChange
+} from '../../utils/themes';
+import { numberToPx } from '../../utils/props';
 
 // constants
-import { IDENTIFIERS } from "..";
-import type { ThemeContextProp } from "../HOC/withTheme";
+import { IDENTIFIERS } from '..';
+import type { ThemeContextProp } from '../HOC/withTheme';
 
 type Props = {
   className?: string,
@@ -25,19 +25,19 @@ type Props = {
   padding?: string | number,
   theme: ?Object,
   themeId: string,
-  themeOverrides: Object,
+  themeOverrides: Object
 };
 
 type State = { composedTheme: Object };
 
 class GutterBase extends Component<Props, State> {
   // define static properties
-  static displayName = "Gutter";
+  static displayName = 'Gutter';
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.GUTTER,
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: Props) {
@@ -50,7 +50,7 @@ class GutterBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
+      )
     };
   }
 
@@ -67,7 +67,7 @@ class GutterBase extends Component<Props, State> {
 
     return (
       <Base
-        activeClasses={["gutter"]}
+        activeClasses={['gutter']}
         className={className}
         inlineStyles={{ padding }}
         stylesToAdd={theme}

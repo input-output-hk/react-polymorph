@@ -1,21 +1,21 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType, Element, ElementRef } from "react";
-import createRef from "create-react-ref/lib/createRef";
+import React, { Component } from 'react';
+import type { ComponentType, Element, ElementRef } from 'react';
+import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
-import { addDocumentListeners, removeDocumentListeners } from "../utils/events";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { addDocumentListeners, removeDocumentListeners } from '../utils/events';
 
 // import constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 export type BubblePosition = {
   width: number,
   positionX: number,
-  positionY: number,
+  positionY: number
 };
 
 export type BubbleProps = {
@@ -32,12 +32,12 @@ export type BubbleProps = {
   theme: ?Object, // takes precedence over them in context if passed
   themeId: string,
   themeOverrides: Object, // custom css/scss from user adhering to component's theme API
-  targetRef?: ElementRef<*>, // ref to the target DOM element used for positioning the bubble
+  targetRef?: ElementRef<*> // ref to the target DOM element used for positioning the bubble
 };
 
 type State = {
   composedTheme: Object,
-  position: ?BubblePosition,
+  position: ?BubblePosition
 };
 
 class BubbleBase extends Component<BubbleProps, State> {
@@ -45,7 +45,7 @@ class BubbleBase extends Component<BubbleProps, State> {
   rootElement: ?Element<any>;
 
   // define static properties
-  static displayName = "Bubble";
+  static displayName = 'Bubble';
   static defaultProps = {
     context: createEmptyContext(),
     isCentered: false,
@@ -57,7 +57,7 @@ class BubbleBase extends Component<BubbleProps, State> {
     noArrow: false,
     theme: null,
     themeId: IDENTIFIERS.BUBBLE,
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: BubbleProps) {
@@ -74,7 +74,7 @@ class BubbleBase extends Component<BubbleProps, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      position: null,
+      position: null
     };
   }
 
@@ -92,9 +92,9 @@ class BubbleBase extends Component<BubbleProps, State> {
     const wasBubbleHidden = !prevProps.isHidden && isHidden;
 
     if (prevProps.isFloating && !isHidden && !this._hasEventListeners) {
-      this._handleScrollEventListener("add");
+      this._handleScrollEventListener('add');
       addDocumentListeners(this._getDocumentEvents());
-      window.addEventListener("resize", this._updatePosition);
+      window.addEventListener('resize', this._updatePosition);
       this._hasEventListeners = true;
     }
     if (wasBubbleHidden) this._removeAllEventListeners();
@@ -117,10 +117,10 @@ class BubbleBase extends Component<BubbleProps, State> {
     if (rootElement) {
       const scrollableNode = this._getFirstScrollableParent(rootElement);
       if (scrollableNode) {
-        if (action === "add") {
-          scrollableNode.addEventListener("scroll", this._updatePosition);
-        } else if (action === "remove") {
-          scrollableNode.removeEventListener("scroll", this._updatePosition);
+        if (action === 'add') {
+          scrollableNode.addEventListener('scroll', this._updatePosition);
+        } else if (action === 'remove') {
+          scrollableNode.removeEventListener('scroll', this._updatePosition);
         }
       }
     }
@@ -129,8 +129,8 @@ class BubbleBase extends Component<BubbleProps, State> {
   _removeAllEventListeners() {
     if (this._hasEventListeners) {
       removeDocumentListeners(this._getDocumentEvents());
-      this._handleScrollEventListener("remove");
-      window.removeEventListener("resize", this._updatePosition);
+      this._handleScrollEventListener('remove');
+      window.removeEventListener('resize', this._updatePosition);
       this._hasEventListeners = false;
     }
   }
@@ -138,7 +138,7 @@ class BubbleBase extends Component<BubbleProps, State> {
   _getFirstScrollableParent = (element: ElementRef<*>) => {
     if (element == null) return null;
     const { rootElement } = this;
-    const node = {}.hasOwnProperty.call(element, "current")
+    const node = {}.hasOwnProperty.call(element, 'current')
       ? element.current
       : element;
 
@@ -159,7 +159,7 @@ class BubbleBase extends Component<BubbleProps, State> {
     const { rootElement } = this;
 
     let target =
-      targetRef && typeof targetRef !== "string" ? targetRef.current : null;
+      targetRef && typeof targetRef !== 'string' ? targetRef.current : null;
 
     // Without a target, try to fallback to the parent node
     if (!target) {
@@ -182,7 +182,7 @@ class BubbleBase extends Component<BubbleProps, State> {
     const position = {
       width: targetRect.width,
       positionX: targetRect.left,
-      positionY,
+      positionY
     };
     this.setState({ position });
   };
@@ -190,7 +190,7 @@ class BubbleBase extends Component<BubbleProps, State> {
   _getDocumentEvents() {
     return {
       resize: this._updatePosition,
-      scroll: this._updatePosition,
+      scroll: this._updatePosition
     };
   }
 

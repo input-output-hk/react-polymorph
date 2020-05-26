@@ -1,14 +1,14 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType } from "react";
+import React, { Component } from 'react';
+import type { ComponentType } from 'react';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   label: string,
@@ -22,16 +22,16 @@ type Props = {
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object,
+  themeOverrides: Object
 };
 
 type State = {
-  composedTheme: Object,
+  composedTheme: Object
 };
 
 class LinkBase extends Component<Props, State> {
   // define static properties
-  static displayName = "Link";
+  static displayName = 'Link';
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
@@ -40,7 +40,7 @@ class LinkBase extends Component<Props, State> {
     hasIconBefore: false,
     hasIconAfter: true,
     isUnderlined: true,
-    underlineOnHover: false,
+    underlineOnHover: false
   };
 
   constructor(props: Props) {
@@ -53,7 +53,7 @@ class LinkBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
+      )
     };
   }
 

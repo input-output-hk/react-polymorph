@@ -1,16 +1,16 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType, Element } from "react";
-import createRef from "create-react-ref/lib/createRef";
+import React, { Component } from 'react';
+import type { ComponentType, Element } from 'react';
+import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
-import { GlobalListeners } from "./HOC/GlobalListeners";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
+import { GlobalListeners } from './HOC/GlobalListeners';
 
 type Props = {
   activeItem: any,
@@ -27,14 +27,14 @@ type Props = {
   skin?: ComponentType<any>,
   theme: ?Object,
   themeId: string,
-  themeOverrides: Object,
+  themeOverrides: Object
 };
 
 type State = {
   composedTheme: Object,
   isMouseOverItems: boolean,
   isMouseOverRoot: boolean,
-  isOpen: boolean,
+  isOpen: boolean
 };
 
 class DropdownBase extends Component<Props, State> {
@@ -43,7 +43,7 @@ class DropdownBase extends Component<Props, State> {
   optionsElement: ?Element<*>;
 
   // define static properties
-  static displayName = "Dropdown";
+  static displayName = 'Dropdown';
   static defaultProps = {
     context: createEmptyContext(),
     clickToOpen: false,
@@ -51,7 +51,7 @@ class DropdownBase extends Component<Props, State> {
     noArrow: false,
     theme: null,
     themeOverrides: {},
-    themeId: IDENTIFIERS.DROPDOWN,
+    themeId: IDENTIFIERS.DROPDOWN
   };
 
   constructor(props: Props) {
@@ -70,7 +70,7 @@ class DropdownBase extends Component<Props, State> {
       ),
       isMouseOverItems: false,
       isMouseOverRoot: false,
-      isOpen: false,
+      isOpen: false
     };
   }
 

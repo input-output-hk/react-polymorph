@@ -1,17 +1,17 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType, Node } from "react";
+import React, { Component } from 'react';
+import type { ComponentType, Node } from 'react';
 // $FlowFixMe
-import createRef from "create-react-ref/lib/createRef";
+import createRef from 'create-react-ref/lib/createRef';
 
 // utilities
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // constants
-import { IDENTIFIERS } from ".";
-import type { ReactElementRef } from "../utils/types.js";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ReactElementRef } from '../utils/types.js';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   className?: string,
@@ -22,7 +22,7 @@ type Props = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
-  threshold: number,
+  threshold: number
 };
 
 type State = {
@@ -30,7 +30,7 @@ type State = {
   data: Object | Array<{}>,
   error: boolean | string | Node,
   hasMoreData: boolean,
-  isLoading: boolean,
+  isLoading: boolean
 };
 
 class InfiniteScrollBase extends Component<Props, State> {
@@ -38,14 +38,14 @@ class InfiniteScrollBase extends Component<Props, State> {
   scrollContainer: ReactElementRef<typeof HTMLElement>;
 
   // define static properties
-  static displayName = "InfiniteScroll";
+  static displayName = 'InfiniteScroll';
   static defaultProps = {
     context: createEmptyContext(),
     fetchData() {},
     theme: null,
     themeId: IDENTIFIERS.INFINITE_SCROLL,
     themeOverrides: {},
-    threshold: 250,
+    threshold: 250
   };
 
   constructor(props: Props) {
@@ -64,7 +64,7 @@ class InfiniteScrollBase extends Component<Props, State> {
       data: [],
       error: false,
       isLoading: false,
-      hasMoreData: true,
+      hasMoreData: true
     };
   }
 
@@ -73,7 +73,7 @@ class InfiniteScrollBase extends Component<Props, State> {
 
     this._handleFetchData();
     if (!scrollContainer.current) return;
-    scrollContainer.current.addEventListener("scroll", this._handleScroll);
+    scrollContainer.current.addEventListener('scroll', this._handleScroll);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -100,7 +100,7 @@ class InfiniteScrollBase extends Component<Props, State> {
   _checkForScrollBottom = () => {
     const {
       scrollContainer,
-      props: { threshold },
+      props: { threshold }
     } = this;
     if (!scrollContainer.current) return;
     const { offsetHeight, scrollTop, scrollHeight } = scrollContainer.current;
@@ -111,13 +111,13 @@ class InfiniteScrollBase extends Component<Props, State> {
   };
 
   _isFunction = (renderProp: ?Function) =>
-    renderProp && typeof renderProp === "function";
+    renderProp && typeof renderProp === 'function';
 
   render() {
     const {
       props: { className, context, renderItems, skin, themeId },
       state: { composedTheme, data, error, hasMoreData, isLoading },
-      scrollContainer,
+      scrollContainer
     } = this;
 
     if (!this._isFunction(renderItems)) {

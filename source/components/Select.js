@@ -1,18 +1,18 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType, Element } from "react";
-import createRef from "create-react-ref/lib/createRef";
+import React, { Component } from 'react';
+import type { ComponentType, Element } from 'react';
+import createRef from 'create-react-ref/lib/createRef';
 
 // internal components
-import { GlobalListeners } from "./HOC/GlobalListeners";
+import { GlobalListeners } from './HOC/GlobalListeners';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   allowBlank: boolean,
@@ -34,23 +34,23 @@ type Props = {
   themeId: string,
   themeOverrides: Object,
   value: string,
-  optionHeight?: number,
+  optionHeight?: number
 };
 
 type State = {
   composedTheme: Object,
   isOpen: boolean,
-  mouseIsOverOptions: boolean,
+  mouseIsOverOptions: boolean
 };
 
 class SelectBase extends Component<Props, State> {
   // declare ref types
   rootElement: ?Element<*>;
-  inputElement: Element<"input">;
+  inputElement: Element<'input'>;
   optionsElement: ?Element<*>;
 
   // define static properties
-  static displayName = "Select";
+  static displayName = 'Select';
   static defaultProps = {
     allowBlank: true,
     autoFocus: false,
@@ -60,7 +60,7 @@ class SelectBase extends Component<Props, State> {
     theme: null,
     themeOverrides: {},
     themeId: IDENTIFIERS.SELECT,
-    value: "",
+    value: ''
   };
 
   constructor(props: Props) {
@@ -80,7 +80,7 @@ class SelectBase extends Component<Props, State> {
         context.ROOT_THEME_API
       ),
       isOpen: false,
-      mouseIsOverOptions: false,
+      mouseIsOverOptions: false
     };
   }
 

@@ -1,39 +1,39 @@
 // @flow
-import React, { Component } from "react";
-import type { Node } from "react";
+import React, { Component } from 'react';
+import type { Node } from 'react';
 
 // external libraries
-import { isEmpty, isEqual, cloneDeep } from "lodash";
+import { isEmpty, isEqual, cloneDeep } from 'lodash';
 
 // contains default theme and context provider
-import { ThemeContext } from "./HOC/ThemeContext";
+import { ThemeContext } from './HOC/ThemeContext';
 
 // imports the Root Theme API object which specifies the shape
 // of a complete theme for every component in this library, used in this.composeLibraryTheme
-import { ROOT_THEME_API } from "../themes/API";
+import { ROOT_THEME_API } from '../themes/API';
 
 // internal utility functions
-import { appendToProperty } from "../utils/themes";
-import { hasProperty } from "../utils/props";
+import { appendToProperty } from '../utils/themes';
+import { hasProperty } from '../utils/props';
 
 type Props = {
   children?: ?Node,
   skins: Object,
   theme: Object,
-  themeOverrides: Object, // custom css/scss from user that adheres to shape of ROOT_THEME_API
+  themeOverrides: Object // custom css/scss from user that adheres to shape of ROOT_THEME_API
 };
 
 type State = {
-  theme: Object,
+  theme: Object
 };
 
 export class ThemeProvider extends Component<Props, State> {
   // define static properties
-  static displayName = "ThemeProvider";
+  static displayName = 'ThemeProvider';
   static defaultProps = {
     skins: {},
     theme: {},
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: Props) {
@@ -42,7 +42,7 @@ export class ThemeProvider extends Component<Props, State> {
     const { theme, themeOverrides } = props;
 
     this.state = {
-      theme: this._composeLibraryTheme(theme, themeOverrides),
+      theme: this._composeLibraryTheme(theme, themeOverrides)
     };
   }
 
@@ -55,7 +55,7 @@ export class ThemeProvider extends Component<Props, State> {
       !isEqual(prevThemeOverrides, themeOverrides)
     ) {
       this.setState(() => ({
-        theme: this._composeLibraryTheme(theme, themeOverrides),
+        theme: this._composeLibraryTheme(theme, themeOverrides)
       }));
     }
   }

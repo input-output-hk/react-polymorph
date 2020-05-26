@@ -1,22 +1,22 @@
 // @flow
-import React, { Component } from "react";
-import type { Node } from "react";
-import { pickBy } from "lodash";
+import React, { Component } from 'react';
+import type { Node } from 'react';
+import { pickBy } from 'lodash';
 
 // components
-import { Base } from "./Base";
+import { Base } from './Base';
 
 // utilities
-import { createEmptyContext, withTheme } from "../HOC/withTheme";
+import { createEmptyContext, withTheme } from '../HOC/withTheme';
 import {
   composeTheme,
   addThemeId,
-  didThemePropsChange,
-} from "../../utils/themes";
+  didThemePropsChange
+} from '../../utils/themes';
 
 // constants
-import { IDENTIFIERS } from "..";
-import type { ThemeContextProp } from "../HOC/withTheme";
+import { IDENTIFIERS } from '..';
+import type { ThemeContextProp } from '../HOC/withTheme';
 
 type Props = {
   alignItems?: string,
@@ -31,19 +31,19 @@ type Props = {
   rowReverse?: boolean,
   theme: ?Object,
   themeId: string,
-  themeOverrides: Object,
+  themeOverrides: Object
 };
 
 type State = { composedTheme: Object };
 
 class FlexBase extends Component<Props, State> {
   // define static properties
-  static displayName = "Flex";
+  static displayName = 'Flex';
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.FLEX,
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: Props) {
@@ -56,7 +56,7 @@ class FlexBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
+      )
     };
   }
 
@@ -67,13 +67,13 @@ class FlexBase extends Component<Props, State> {
   }
 
   _getActiveClasses = ({ center, column, columnReverse, row, rowReverse }) => {
-    const activeClasses = ["container"];
+    const activeClasses = ['container'];
     const activeProps = pickBy({
       center,
       column,
       columnReverse,
       row,
-      rowReverse,
+      rowReverse
     });
     return [...activeClasses, ...Object.keys(activeProps)].filter((val) => val);
   };
@@ -91,7 +91,7 @@ class FlexBase extends Component<Props, State> {
 
   renderChildren(theme: Object) {
     return React.Children.map(this.props.children, (child) => {
-      if (child.type.displayName === "FlexItem") {
+      if (child.type.displayName === 'FlexItem') {
         return React.cloneElement(child, { theme });
       }
       return child;

@@ -1,18 +1,18 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType, Node, Element } from "react";
+import React, { Component } from 'react';
+import type { ComponentType, Node, Element } from 'react';
 
 // external libraries
-import createRef from "create-react-ref/lib/createRef";
-import { isString, flow } from "lodash";
+import createRef from 'create-react-ref/lib/createRef';
+import { isString, flow } from 'lodash';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   autoFocus: boolean,
@@ -33,20 +33,20 @@ type Props = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
-  value: string,
+  value: string
 };
 
 type State = {
   error: string,
-  composedTheme: Object,
+  composedTheme: Object
 };
 
 class TextAreaBase extends Component<Props, State> {
   // declare ref types
-  textareaElement: Element<"textarea">;
+  textareaElement: Element<'textarea'>;
 
   // define static properties
-  static displayName = "TextArea";
+  static displayName = 'TextArea';
   static defaultProps = {
     autoFocus: false,
     autoResize: true,
@@ -54,7 +54,7 @@ class TextAreaBase extends Component<Props, State> {
     theme: null,
     themeId: IDENTIFIERS.TEXT_AREA,
     themeOverrides: {},
-    value: "",
+    value: ''
   };
 
   constructor(props: Props) {
@@ -71,7 +71,7 @@ class TextAreaBase extends Component<Props, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      error: "",
+      error: ''
     };
   }
 
@@ -79,7 +79,7 @@ class TextAreaBase extends Component<Props, State> {
     const { autoResize, autoFocus } = this.props;
 
     if (autoResize) {
-      window.addEventListener("resize", this._handleAutoresize);
+      window.addEventListener('resize', this._handleAutoresize);
       this._handleAutoresize();
     }
 
@@ -93,9 +93,9 @@ class TextAreaBase extends Component<Props, State> {
 
     if (prevProps !== this.props) {
       if (!prevProps.autoResize && this.props.autoResize) {
-        window.addEventListener("resize", this._handleAutoresize);
+        window.addEventListener('resize', this._handleAutoresize);
       } else if (prevProps.autoResize && !this.props.autoResize) {
-        window.removeEventListener("resize", this._handleAutoresize);
+        window.removeEventListener('resize', this._handleAutoresize);
       }
 
       didThemePropsChange(prevProps, this.props, this.setState.bind(this));
@@ -104,7 +104,7 @@ class TextAreaBase extends Component<Props, State> {
 
   componentWillUnmount() {
     if (this.props.autoResize) {
-      window.removeEventListener("resize", this._handleAutoresize);
+      window.removeEventListener('resize', this._handleAutoresize);
     }
   }
 
@@ -127,13 +127,13 @@ class TextAreaBase extends Component<Props, State> {
     return flow([
       this._enforceStringValue,
       this._enforceMaxLength,
-      this._enforceMinLength,
+      this._enforceMinLength
     ]).call(this, value);
   }
 
   _enforceStringValue(value: string) {
     if (!isString(value)) {
-      throw new Error("Values passed to TextArea::onChange must be strings");
+      throw new Error('Values passed to TextArea::onChange must be strings');
     }
     return value;
   }
@@ -149,9 +149,9 @@ class TextAreaBase extends Component<Props, State> {
     const isTooShort = minLength != null && value.length < minLength;
 
     if (isTooShort) {
-      this._setError("Please enter a valid input");
-    } else if (this.state.error !== "") {
-      this._setError("");
+      this._setError('Please enter a valid input');
+    } else if (this.state.error !== '') {
+      this._setError('');
     }
 
     return value;
@@ -163,15 +163,15 @@ class TextAreaBase extends Component<Props, State> {
     if (!textareaElement.current) return;
 
     // compute the height difference between inner height and outer height
-    const style = getComputedStyle(textareaElement.current, "");
+    const style = getComputedStyle(textareaElement.current, '');
     const heightOffset =
-      style.boxSizing === "content-box"
+      style.boxSizing === 'content-box'
         ? -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom))
         : parseFloat(style.borderTopWidth) +
           parseFloat(style.borderBottomWidth);
 
     // resize the input to its content size
-    textareaElement.current.style.height = "auto";
+    textareaElement.current.style.height = 'auto';
     textareaElement.current.style.height = `${
       textareaElement.current.scrollHeight + heightOffset
     }px`;

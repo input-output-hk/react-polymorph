@@ -1,14 +1,14 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType, Element, Node } from "react";
+import React, { Component } from 'react';
+import type { ComponentType, Element, Node } from 'react';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 export type TooltipProps = {
   children: ?Node,
@@ -25,16 +25,16 @@ export type TooltipProps = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeOverrides: Object, // custom css/scss from user that adheres to component's theme API
   themeId: string,
-  tip?: string | Element<any>,
+  tip?: string | Element<any>
 };
 
 type State = {
-  composedTheme: Object,
+  composedTheme: Object
 };
 
 class TooltipBase extends Component<TooltipProps, State> {
   // define static properties
-  static displayName = "Tooltip";
+  static displayName = 'Tooltip';
   static defaultProps = {
     context: createEmptyContext(),
     isBounded: false,
@@ -45,7 +45,7 @@ class TooltipBase extends Component<TooltipProps, State> {
     arrowRelativeToTip: false,
     theme: null,
     themeId: IDENTIFIERS.TOOLTIP,
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: TooltipProps) {
@@ -58,7 +58,7 @@ class TooltipBase extends Component<TooltipProps, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
+      )
     };
   }
 

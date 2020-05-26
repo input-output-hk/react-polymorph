@@ -1,14 +1,14 @@
 // @flow
-import React, { Component } from "react";
-import type { ElementRef, ComponentType, Element } from "react";
+import React, { Component } from 'react';
+import type { ElementRef, ComponentType, Element } from 'react';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   className?: ?string,
@@ -21,22 +21,22 @@ type Props = {
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object,
+  themeOverrides: Object
 };
 
 type State = {
   error: string,
-  composedTheme: Object,
+  composedTheme: Object
 };
 
 class FormFieldBase extends Component<Props, State> {
   // define static properties
-  static displayName = "FormField";
+  static displayName = 'FormField';
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.FORM_FIELD,
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: Props) {
@@ -45,12 +45,12 @@ class FormFieldBase extends Component<Props, State> {
     const { context, themeId, theme, themeOverrides } = props;
 
     this.state = {
-      error: "",
+      error: '',
       composedTheme: composeTheme(
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
+      )
     };
   }
 
@@ -65,7 +65,7 @@ class FormFieldBase extends Component<Props, State> {
   focusChild = () => {
     const { inputRef } = this.props;
     if (inputRef && inputRef.current) {
-      if (typeof inputRef.current.focus === "function")
+      if (typeof inputRef.current.focus === 'function')
         inputRef.current.focus();
     }
   };

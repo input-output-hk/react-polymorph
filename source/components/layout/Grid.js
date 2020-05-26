@@ -1,24 +1,24 @@
 // @flow
-import React, { Component } from "react";
-import type { Node } from "react";
-import { pickBy, isEmpty } from "lodash";
+import React, { Component } from 'react';
+import type { Node } from 'react';
+import { pickBy, isEmpty } from 'lodash';
 
 // components
-import { Base } from "./Base";
+import { Base } from './Base';
 
 // utilities
-import { createEmptyContext, withTheme } from "../HOC/withTheme";
-import { numberToPx } from "../../utils/props";
-import { formatTemplateAreas } from "../../utils/layout";
+import { createEmptyContext, withTheme } from '../HOC/withTheme';
+import { numberToPx } from '../../utils/props';
+import { formatTemplateAreas } from '../../utils/layout';
 import {
   composeTheme,
   addThemeId,
-  didThemePropsChange,
-} from "../../utils/themes";
+  didThemePropsChange
+} from '../../utils/themes';
 
 // constants
-import { IDENTIFIERS } from "..";
-import type { ThemeContextProp } from "../HOC/withTheme";
+import { IDENTIFIERS } from '..';
+import type { ThemeContextProp } from '../HOC/withTheme';
 
 type Props = {
   alignItems?: string,
@@ -38,14 +38,14 @@ type Props = {
   templateAreas: Array<string>,
   theme: ?Object,
   themeId: string,
-  themeOverrides: Object,
+  themeOverrides: Object
 };
 
 type State = { composedTheme: Object };
 
 class GridBase extends Component<Props, State> {
   // define static properties
-  static displayName = "Grid";
+  static displayName = 'Grid';
   static defaultProps = {
     columnGap: 5,
     context: createEmptyContext(),
@@ -54,7 +54,7 @@ class GridBase extends Component<Props, State> {
     templateAreas: [],
     theme: null,
     themeId: IDENTIFIERS.GRID,
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: Props) {
@@ -67,7 +67,7 @@ class GridBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
+      )
     };
   }
 
@@ -98,12 +98,12 @@ class GridBase extends Component<Props, State> {
       rowGap,
       rows,
       template,
-      templateAreas,
+      templateAreas
     } = gridProps;
 
     // obj with correct css grid class names
     const inlineClasses = {
-      alignItems: center ? "center" : alignItems,
+      alignItems: center ? 'center' : alignItems,
       gridAutoColumns: autoColumns,
       gridAutoRows: autoRows,
       gridTemplateColumns: columns,
@@ -113,7 +113,7 @@ class GridBase extends Component<Props, State> {
       gridRowGap: gap ? false : numberToPx(rowGap),
       gridTemplate: template,
       gridTemplateAreas: formatTemplateAreas(templateAreas),
-      justifyItems: center ? "center" : justifyItems,
+      justifyItems: center ? 'center' : justifyItems
     };
 
     // filters out keys with false(sy) values
@@ -122,7 +122,7 @@ class GridBase extends Component<Props, State> {
 
   renderChildren(theme: Object) {
     return React.Children.map(this.props.children, (child) => {
-      if (child.type.displayName === "GridItem") {
+      if (child.type.displayName === 'GridItem') {
         return React.cloneElement(child, { theme });
       }
       return child;
@@ -139,7 +139,7 @@ class GridBase extends Component<Props, State> {
       <Base
         className={className}
         stylesToAdd={theme}
-        activeClasses={["container"]}
+        activeClasses={['container']}
         inlineStyles={inlineGrid}
       >
         {this.renderChildren(theme)}

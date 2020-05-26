@@ -1,15 +1,15 @@
 // @flow
-import React, { Component } from "react";
-import type { ComponentType, Node } from "react";
-import { pickBy, isEmpty } from "lodash";
+import React, { Component } from 'react';
+import type { ComponentType, Node } from 'react';
+import { pickBy, isEmpty } from 'lodash';
 
 // utility functions
-import { createEmptyContext, withTheme } from "./HOC/withTheme";
-import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { createEmptyContext, withTheme } from './HOC/withTheme';
+import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // constants
-import { IDENTIFIERS } from ".";
-import type { ThemeContextProp } from "./HOC/withTheme";
+import { IDENTIFIERS } from '.';
+import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
   bold?: boolean,
@@ -32,19 +32,19 @@ type Props = {
   themeId: string,
   themeOverrides: Object,
   thin?: boolean,
-  upperCase?: boolean,
+  upperCase?: boolean
 };
 
 type State = { composedTheme: Object };
 
 class HeaderBase extends Component<Props, State> {
   // define static properties
-  static displayName = "Header";
+  static displayName = 'Header';
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.HEADER,
-    themeOverrides: {},
+    themeOverrides: {}
   };
 
   constructor(props: Props) {
@@ -57,7 +57,7 @@ class HeaderBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      ),
+      )
     };
   }
 
@@ -114,7 +114,7 @@ class HeaderBase extends Component<Props, State> {
   };
 
   _getActiveClasses = (styleProps: Object) => {
-    const activeClasses = ["header"];
+    const activeClasses = ['header'];
     const activeTheme = this._getActiveTheme(styleProps);
     const activeFont = this._getActiveFont(styleProps);
 
