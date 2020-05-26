@@ -1,13 +1,16 @@
 // @flow
-import { cloneDeep, isEmpty, isEqual } from 'lodash';
-import { hasProperty } from './props';
-import type { ThemeContextProp } from '../components/HOC/withTheme';
+import { cloneDeep, isEmpty, isEqual } from "lodash";
+import { hasProperty } from "./props";
+import type { ThemeContextProp } from "../components/HOC/withTheme";
 
 export const appendToProperty = (dest: {}, name: string, value: string) => {
-  dest[name] === '' ? (dest[name] = value) : (dest[name] += ' ' + value);
+  dest[name] === "" ? (dest[name] = value) : (dest[name] += " " + value);
 };
 
-export const composeComponentStyles = (componentStyles: {}, componentTheme: {}) => {
+export const composeComponentStyles = (
+  componentStyles: {},
+  componentTheme: {}
+) => {
   if (!componentTheme) return;
   for (const property in componentStyles) {
     if (hasProperty(componentStyles, property)) {
@@ -25,8 +28,8 @@ export const composeComponentStyles = (componentStyles: {}, componentTheme: {}) 
 export const addThemeId = (theme: Object = {}, themeId: string): Object => {
   if (theme && !isEmpty(theme) && themeId) {
     const themeIdExists = hasProperty(theme, themeId);
-    const themeIdIsObj = typeof theme[themeId] === 'object';
-    return (themeIdExists && themeIdIsObj) ? theme : { [themeId]: theme };
+    const themeIdIsObj = typeof theme[themeId] === "object";
+    return themeIdExists && themeIdIsObj ? theme : { [themeId]: theme };
   }
   return theme;
 };
@@ -66,24 +69,19 @@ type ThemeProps = Object & {
   context: ThemeContextProp,
   themeId: string,
   theme: ?Object,
-  themeOverrides: Object
+  themeOverrides: Object,
 };
 
-// Used in componentWillReceiveProps, this function compares the current
+// Used in componentDidUpdate, this function compares the current
 // set of theme related props against the next set to see if any have changed.
 // If true, a component's theme is recomposed and local state is updated
 export const didThemePropsChange = (
-  {
-    context,
-    themeId,
-    theme,
-    themeOverrides
-  }: ThemeProps,
+  { context, themeId, theme, themeOverrides }: ThemeProps,
   {
     context: nextContext,
     themeId: nextThemeId,
     theme: nextTheme,
-    themeOverrides: nextOverrides
+    themeOverrides: nextOverrides,
   }: ThemeProps,
   setState: Function
 ) => {
@@ -98,7 +96,7 @@ export const didThemePropsChange = (
         addThemeId(nextTheme || nextContext.theme, nextThemeId),
         addThemeId(nextOverrides, nextThemeId),
         nextContext.ROOT_THEME_API
-      )
+      ),
     }));
   }
 };

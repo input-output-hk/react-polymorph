@@ -1,14 +1,14 @@
 // @flow
-import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import React, { Component } from "react";
+import type { ComponentType } from "react";
 
 // internal utility functions
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
 
 // import constants
-import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
+import { IDENTIFIERS } from ".";
+import type { ThemeContextProp } from "./HOC/withTheme";
 
 type Props = {
   activeStep?: number,
@@ -25,17 +25,17 @@ type Props = {
 };
 
 type State = {
-  composedTheme: Object
+  composedTheme: Object,
 };
 
 class StepperBase extends Component<Props, State> {
   // define static properties
-  static displayName = 'Stepper';
+  static displayName = "Stepper";
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.STEPPER,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
   constructor(props: Props) {
@@ -48,23 +48,19 @@ class StepperBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin,
-      theme,
-      themeOverrides,
-      context,
-      ...rest
-    } = this.props;
+    const { skin, theme, themeOverrides, context, ...rest } = this.props;
 
     const StepperSkin = skin || context.skins[this.props.themeId];
 

@@ -1,14 +1,14 @@
 // @flow
-import React, { Component } from 'react';
-import type { ComponentType } from 'react';
+import React, { Component } from "react";
+import type { ComponentType } from "react";
 
 // internal utility functions
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
 
 // import constants
-import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
+import { IDENTIFIERS } from ".";
+import type { ThemeContextProp } from "./HOC/withTheme";
 
 type Props = {
   big: boolean,
@@ -18,23 +18,23 @@ type Props = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
-  visible: boolean
+  visible: boolean,
 };
 
 type State = {
-  composedTheme: Object
+  composedTheme: Object,
 };
 
 class LoadingSpinnerBase extends Component<Props, State> {
   // define static properties
-  static displayName = 'LoadingSpinner';
+  static displayName = "LoadingSpinner";
   static defaultProps = {
     big: false,
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.LOADING_SPINNER,
     themeOverrides: {},
-    visible: true
+    visible: true,
   };
 
   constructor(props: Props) {
@@ -47,25 +47,22 @@ class LoadingSpinnerBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin,
-      theme,
-      themeOverrides,
-      context,
-      ...rest
-    } = this.props;
+    const { skin, theme, themeOverrides, context, ...rest } = this.props;
 
-    const LoadingSpinnerSkin = skin || context.skins[IDENTIFIERS.LOADING_SPINNER];
+    const LoadingSpinnerSkin =
+      skin || context.skins[IDENTIFIERS.LOADING_SPINNER];
 
     return <LoadingSpinnerSkin theme={this.state.composedTheme} {...rest} />;
   }

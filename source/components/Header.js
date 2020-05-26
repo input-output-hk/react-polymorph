@@ -1,15 +1,15 @@
 // @flow
-import React, { Component } from 'react';
-import type { ComponentType, Node } from 'react';
-import { pickBy, isEmpty } from 'lodash';
+import React, { Component } from "react";
+import type { ComponentType, Node } from "react";
+import { pickBy, isEmpty } from "lodash";
 
 // utility functions
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
 
 // constants
-import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
+import { IDENTIFIERS } from ".";
+import type { ThemeContextProp } from "./HOC/withTheme";
 
 type Props = {
   bold?: boolean,
@@ -32,19 +32,19 @@ type Props = {
   themeId: string,
   themeOverrides: Object,
   thin?: boolean,
-  upperCase?: boolean
+  upperCase?: boolean,
 };
 
 type State = { composedTheme: Object };
 
-class HeaderBase extends Component <Props, State> {
+class HeaderBase extends Component<Props, State> {
   // define static properties
-  static displayName = 'Header';
+  static displayName = "Header";
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.HEADER,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
   constructor(props: Props) {
@@ -57,12 +57,14 @@ class HeaderBase extends Component <Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   _assembleInlineStyles = ({ center, lowerCase, left, right, upperCase }) => {
@@ -95,27 +97,35 @@ class HeaderBase extends Component <Props, State> {
 
   _getActiveFont = ({ light, medium, regular, thin, bold }) => {
     const fontProps = pickBy({ light, medium, regular, thin, bold });
-    if (isEmpty(fontProps)) { return; }
+    if (isEmpty(fontProps)) {
+      return;
+    }
     // returns the first active font if more than 1 is passed
     return Object.keys(fontProps)[0];
   };
 
   _getActiveTheme = ({ h1, h2, h3, h4 }) => {
     const themeProps = pickBy({ h1, h2, h3, h4 });
-    if (isEmpty(themeProps)) { return; }
+    if (isEmpty(themeProps)) {
+      return;
+    }
     // returns the first active theme if more than 1 is passed
     return Object.keys(themeProps)[0];
   };
 
   _getActiveClasses = (styleProps: Object) => {
-    const activeClasses = ['header'];
+    const activeClasses = ["header"];
     const activeTheme = this._getActiveTheme(styleProps);
     const activeFont = this._getActiveFont(styleProps);
 
-    if (activeTheme) { return [...activeClasses, activeTheme]; }
-    if (activeFont) { return [...activeClasses, activeFont]; }
+    if (activeTheme) {
+      return [...activeClasses, activeTheme];
+    }
+    if (activeFont) {
+      return [...activeClasses, activeFont];
+    }
 
-    return [...activeClasses, activeTheme, activeFont].filter(val => val);
+    return [...activeClasses, activeTheme, activeFont].filter((val) => val);
   };
 
   render() {

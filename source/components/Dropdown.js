@@ -1,16 +1,16 @@
 // @flow
-import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
-import createRef from 'create-react-ref/lib/createRef';
+import React, { Component } from "react";
+import type { ComponentType, Element } from "react";
+import createRef from "create-react-ref/lib/createRef";
 
 // internal utility functions
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
 
 // import constants
-import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
-import { GlobalListeners } from './HOC/GlobalListeners';
+import { IDENTIFIERS } from ".";
+import type { ThemeContextProp } from "./HOC/withTheme";
+import { GlobalListeners } from "./HOC/GlobalListeners";
 
 type Props = {
   activeItem: any,
@@ -43,7 +43,7 @@ class DropdownBase extends Component<Props, State> {
   optionsElement: ?Element<*>;
 
   // define static properties
-  static displayName = 'Dropdown';
+  static displayName = "Dropdown";
   static defaultProps = {
     context: createEmptyContext(),
     clickToOpen: false,
@@ -74,8 +74,10 @@ class DropdownBase extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   componentWillUnmount() {
@@ -87,7 +89,9 @@ class DropdownBase extends Component<Props, State> {
   isOpen = () => {
     const { clickToOpen, isOpen } = this.props;
     const { isMouseOverItems, isMouseOverRoot } = this.state;
-    const isOpenBecauseOfHover = clickToOpen ? false : isMouseOverItems || isMouseOverRoot;
+    const isOpenBecauseOfHover = clickToOpen
+      ? false
+      : isMouseOverItems || isMouseOverRoot;
     return isOpen || this.state.isOpen || isOpenBecauseOfHover;
   };
 

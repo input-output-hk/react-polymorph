@@ -1,18 +1,18 @@
 // @flow
-import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
-import createRef from 'create-react-ref/lib/createRef';
+import React, { Component } from "react";
+import type { ComponentType, Element } from "react";
+import createRef from "create-react-ref/lib/createRef";
 
 // internal components
-import { GlobalListeners } from './HOC/GlobalListeners';
+import { GlobalListeners } from "./HOC/GlobalListeners";
 
 // internal utility functions
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
 
 // import constants
-import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
+import { IDENTIFIERS } from ".";
+import type { ThemeContextProp } from "./HOC/withTheme";
 
 type Props = {
   allowBlank: boolean,
@@ -46,11 +46,11 @@ type State = {
 class SelectBase extends Component<Props, State> {
   // declare ref types
   rootElement: ?Element<*>;
-  inputElement: Element<'input'>;
+  inputElement: Element<"input">;
   optionsElement: ?Element<*>;
 
   // define static properties
-  static displayName = 'Select';
+  static displayName = "Select";
   static defaultProps = {
     allowBlank: true,
     autoFocus: false,
@@ -60,7 +60,7 @@ class SelectBase extends Component<Props, State> {
     theme: null,
     themeOverrides: {},
     themeId: IDENTIFIERS.SELECT,
-    value: ''
+    value: "",
   };
 
   constructor(props: Props) {
@@ -91,8 +91,10 @@ class SelectBase extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   // ========= PUBLIC SKIN API =========
@@ -102,23 +104,29 @@ class SelectBase extends Component<Props, State> {
   focus = () => this.toggleOpen();
 
   toggleOpen = () => {
-    if (this.state.isOpen && this.optionsElement && this.optionsElement.current) {
+    if (
+      this.state.isOpen &&
+      this.optionsElement &&
+      this.optionsElement.current
+    ) {
       // set Options scroll position to top on close
       this.optionsElement.current.scrollTop = 0;
     }
     this.setState({ isOpen: !this.state.isOpen });
   };
 
-  toggleMouseLocation = () => (
-    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions })
-  );
+  toggleMouseLocation = () =>
+    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions });
 
   handleInputClick = (event: SyntheticMouseEvent<>) => {
     event.stopPropagation();
     event.preventDefault();
 
     const { inputElement } = this;
-    if (inputElement.current && document.activeElement === inputElement.current) {
+    if (
+      inputElement.current &&
+      document.activeElement === inputElement.current
+    ) {
       inputElement.current.blur();
     }
     this.toggleOpen();

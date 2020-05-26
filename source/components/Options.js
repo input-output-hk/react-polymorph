@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import type {
   ComponentType,
   // $FlowFixMe
@@ -10,16 +10,16 @@ import type {
   SyntheticEvent,
   Element,
   ElementRef,
-} from 'react';
+} from "react";
 
 // internal utility functions
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
-import { composeFunctions } from '../utils/props';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { composeFunctions } from "../utils/props";
 
 // import constants
-import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
+import { IDENTIFIERS } from ".";
+import type { ThemeContextProp } from "./HOC/withTheme";
 
 type Props = {
   className?: String,
@@ -50,7 +50,7 @@ type Props = {
   themeId: string,
   themeOverrides: Object,
   toggleMouseLocation?: Function,
-  toggleOpen?: Function
+  toggleOpen?: Function,
 };
 
 type State = {
@@ -64,21 +64,21 @@ class OptionsBase extends Component<Props, State> {
   optionsElement: ?Element<any>; // TODO: Does this get used? Don't think so.
 
   // define static properties
-  static displayName = 'Options';
+  static displayName = "Options";
   static defaultProps = {
     context: createEmptyContext(),
     isOpen: false,
     isOpeningUpward: false,
     noOptionsArrow: false,
     noOptionsCheckmark: false,
-    noResultsMessage: 'No results',
+    noResultsMessage: "No results",
     optionHeight: 46,
     options: [],
     resetOnClose: false,
     theme: null,
     themeId: IDENTIFIERS.OPTIONS,
     themeOverrides: {},
-    toggleOpen() {}
+    toggleOpen() {},
   };
 
   constructor(props: Props) {
@@ -99,28 +99,32 @@ class OptionsBase extends Component<Props, State> {
 
   componentDidMount() {
     if (this.props.isOpen) {
-      document.addEventListener('keydown', this._handleKeyDown, false);
+      document.addEventListener("keydown", this._handleKeyDown, false);
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (!this.props.isOpen && nextProps.isOpen) {
-      document.addEventListener('keydown', this._handleKeyDown, false);
-    } else if (this.props.isOpen && !nextProps.isOpen) {
-      document.removeEventListener('keydown', this._handleKeyDown, false);
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      if (!prevProps.isOpen && this.props.isOpen) {
+        document.addEventListener("keydown", this._handleKeyDown, false);
+      } else if (prevProps.isOpen && !this.props.isOpen) {
+        document.removeEventListener("keydown", this._handleKeyDown, false);
+      }
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
     }
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this._handleKeyDown, false);
+    document.removeEventListener("keydown", this._handleKeyDown, false);
   }
 
   close = () => {
     const { isOpen, onClose, resetOnClose, toggleOpen } = this.props;
     if (isOpen && toggleOpen) toggleOpen();
     this.setState({
-      highlightedOptionIndex: resetOnClose ? 0 : this.state.highlightedOptionIndex
+      highlightedOptionIndex: resetOnClose
+        ? 0
+        : this.state.highlightedOptionIndex,
     });
     if (onClose) onClose();
   };
@@ -151,12 +155,15 @@ class OptionsBase extends Component<Props, State> {
 
   isSelectedOption = (optionIndex: number) => {
     const { options, isOpeningUpward } = this.props;
-    const index = isOpeningUpward ? options.length - 1 - optionIndex : optionIndex;
+    const index = isOpeningUpward
+      ? options.length - 1 - optionIndex
+      : optionIndex;
     const option = options[index];
     return option && this.props.selectedOption === option;
   };
 
-  isHighlightedOption = (optionIndex: number) => this.state.highlightedOptionIndex === optionIndex;
+  isHighlightedOption = (optionIndex: number) =>
+    this.state.highlightedOptionIndex === optionIndex;
 
   isDisabledOption = (optionIndex: number) => {
     const { options } = this.props;
@@ -187,7 +194,7 @@ class OptionsBase extends Component<Props, State> {
       isHighlightedOption,
       isDisabledOption,
       handleClickOnOption,
-      setHighlightedOptionIndex
+      setHighlightedOptionIndex,
     } = this;
 
     return {
@@ -204,7 +211,7 @@ class OptionsBase extends Component<Props, State> {
       onMouseEnter: (index: number, event: SyntheticMouseEvent<>) =>
         // user's custom onMouseEnter is composed with this.setHighlightedOptionIndex
         composeFunctions(onMouseEnter, setHighlightedOptionIndex)(index, event),
-      ...rest
+      ...rest,
     };
   };
 
@@ -229,7 +236,7 @@ class OptionsBase extends Component<Props, State> {
     if (options.length) {
       const lowerIndexBound = 0;
       const upperIndexBound = options.length - 1;
-      let newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+      let newIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
 
       // Make sure new index is within options bounds
       newIndex = Math.max(lowerIndexBound, Math.min(newIndex, upperIndexBound));
@@ -239,8 +246,8 @@ class OptionsBase extends Component<Props, State> {
         const canMoveUp = newIndex > lowerIndexBound;
         const canMoveDown = newIndex < upperIndexBound;
         if (
-          (direction === 'up' && canMoveUp) ||
-          (direction === 'down' && canMoveDown)
+          (direction === "up" && canMoveUp) ||
+          (direction === "down" && canMoveDown)
         ) {
           this._handleHighlightMove(newIndex, direction);
         }
@@ -271,11 +278,11 @@ class OptionsBase extends Component<Props, State> {
         break;
       case 38: // Up Arrow key: moves highlighted selection 'up' 1 index
         event.preventDefault(); // prevent caret move
-        this._handleHighlightMove(highlightOptionIndex, 'up');
+        this._handleHighlightMove(highlightOptionIndex, "up");
         break;
       case 40: // Down Arrow key: moves highlighted selection 'down' 1 index
         event.preventDefault(); // prevent caret move
-        this._handleHighlightMove(highlightOptionIndex, 'down');
+        this._handleHighlightMove(highlightOptionIndex, "down");
         break;
       default:
         this.props.resetOnClose && this.setHighlightedOptionIndex(0);
@@ -284,7 +291,10 @@ class OptionsBase extends Component<Props, State> {
 
   _setMouseIsOverOptions = (isMouseOverOptions: boolean) => {
     const { toggleMouseLocation, setMouseIsOverOptions } = this.props;
-    if (this.state.isMouseOverOptions !== isMouseOverOptions && toggleMouseLocation) {
+    if (
+      this.state.isMouseOverOptions !== isMouseOverOptions &&
+      toggleMouseLocation
+    ) {
       toggleMouseLocation();
     }
     if (setMouseIsOverOptions) {

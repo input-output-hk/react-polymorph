@@ -1,14 +1,14 @@
 // @flow
-import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
+import React, { Component } from "react";
+import type { ComponentType, Element } from "react";
 
 // internal utility functions
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
 
 // import constants
-import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
+import { IDENTIFIERS } from ".";
+import type { ThemeContextProp } from "./HOC/withTheme";
 
 type Props = {
   checked: boolean,
@@ -24,22 +24,22 @@ type Props = {
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
 };
 
 type State = {
-  composedTheme: Object
+  composedTheme: Object,
 };
 
 class CheckboxBase extends Component<Props, State> {
   // define static properties
-  static displayName = 'Checkbox';
+  static displayName = "Checkbox";
   static defaultProps = {
     checked: false,
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.CHECKBOX,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
   constructor(props: Props) {
@@ -52,23 +52,19 @@ class CheckboxBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin,
-      theme,
-      themeOverrides,
-      context,
-      ...rest
-    } = this.props;
+    const { skin, theme, themeOverrides, context, ...rest } = this.props;
 
     const CheckboxSkin = skin || context.skins[this.props.themeId];
 

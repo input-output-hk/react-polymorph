@@ -1,19 +1,19 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // $FlowFixMe
-import type { ComponentType, Element, SyntheticInputEvent } from 'react';
+import type { ComponentType, Element, SyntheticInputEvent } from "react";
 
 // external libraries
-import createRef from 'create-react-ref/lib/createRef';
-import { isString, flow } from 'lodash';
+import createRef from "create-react-ref/lib/createRef";
+import { isString, flow } from "lodash";
 
 // utilities
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
 
 // constants
-import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
+import { IDENTIFIERS } from ".";
+import type { ThemeContextProp } from "./HOC/withTheme";
 
 type Props = {
   autoFocus: boolean,
@@ -37,29 +37,29 @@ type Props = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
-  value: string
+  value: string,
 };
 
 type State = {
   error: string,
-  composedTheme: Object
+  composedTheme: Object,
 };
 
 class InputBase extends Component<Props, State> {
   // declare ref types
-  inputElement: Element<'input'>;
+  inputElement: Element<"input">;
 
   // define static properties
-  static displayName = 'Input';
+  static displayName = "Input";
   static defaultProps = {
     autoFocus: false,
     context: createEmptyContext(),
-    error: '',
+    error: "",
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
     themeOverrides: {},
-    value: ''
+    value: "",
   };
 
   constructor(props: Props) {
@@ -76,7 +76,7 @@ class InputBase extends Component<Props, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      error: ''
+      error: "",
     };
   }
 
@@ -84,11 +84,13 @@ class InputBase extends Component<Props, State> {
     if (this.props.autoFocus) this.focus();
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
-  onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
+  onChange = (event: SyntheticInputEvent<Element<"input">>) => {
     const { onChange, disabled } = this.props;
     if (disabled) return;
 
@@ -116,13 +118,13 @@ class InputBase extends Component<Props, State> {
     return flow([
       this._enforceStringValue,
       this._enforceMaxLength,
-      this._enforceMinLength
+      this._enforceMinLength,
     ]).call(this, value);
   }
 
   _enforceStringValue(value) {
     if (!isString(value)) {
-      throw new Error('Values passed to Input::onChange must be strings');
+      throw new Error("Values passed to Input::onChange must be strings");
     }
     return value;
   }
@@ -138,9 +140,9 @@ class InputBase extends Component<Props, State> {
     const isTooShort = minLength != null && value.length < minLength;
 
     if (isTooShort) {
-      this._setError('Please enter a valid input');
-    } else if (this.state.error !== '') {
-      this._setError('');
+      this._setError("Please enter a valid input");
+    } else if (this.state.error !== "") {
+      this._setError("");
     }
 
     return value;

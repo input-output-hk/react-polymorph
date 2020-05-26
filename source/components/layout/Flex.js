@@ -1,18 +1,22 @@
 // @flow
-import React, { Component } from 'react';
-import type { Node } from 'react';
-import { pickBy } from 'lodash';
+import React, { Component } from "react";
+import type { Node } from "react";
+import { pickBy } from "lodash";
 
 // components
-import { Base } from './Base';
+import { Base } from "./Base";
 
 // utilities
-import { createEmptyContext, withTheme } from '../HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
+import { createEmptyContext, withTheme } from "../HOC/withTheme";
+import {
+  composeTheme,
+  addThemeId,
+  didThemePropsChange,
+} from "../../utils/themes";
 
 // constants
-import { IDENTIFIERS } from '..';
-import type { ThemeContextProp } from '../HOC/withTheme';
+import { IDENTIFIERS } from "..";
+import type { ThemeContextProp } from "../HOC/withTheme";
 
 type Props = {
   alignItems?: string,
@@ -27,19 +31,19 @@ type Props = {
   rowReverse?: boolean,
   theme: ?Object,
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
 };
 
 type State = { composedTheme: Object };
 
 class FlexBase extends Component<Props, State> {
   // define static properties
-  static displayName = 'Flex';
+  static displayName = "Flex";
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.FLEX,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
   constructor(props: Props) {
@@ -52,18 +56,26 @@ class FlexBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   _getActiveClasses = ({ center, column, columnReverse, row, rowReverse }) => {
-    const activeClasses = ['container'];
-    const activeProps = pickBy({ center, column, columnReverse, row, rowReverse });
-    return [...activeClasses, ...Object.keys(activeProps)].filter(val => val);
+    const activeClasses = ["container"];
+    const activeProps = pickBy({
+      center,
+      column,
+      columnReverse,
+      row,
+      rowReverse,
+    });
+    return [...activeClasses, ...Object.keys(activeProps)].filter((val) => val);
   };
 
   _assembleFlexTheme = (activeClasses: Array<string>) => {
@@ -78,8 +90,8 @@ class FlexBase extends Component<Props, State> {
   };
 
   renderChildren(theme: Object) {
-    return React.Children.map(this.props.children, child => {
-      if (child.type.displayName === 'FlexItem') {
+    return React.Children.map(this.props.children, (child) => {
+      if (child.type.displayName === "FlexItem") {
         return React.cloneElement(child, { theme });
       }
       return child;
@@ -87,7 +99,13 @@ class FlexBase extends Component<Props, State> {
   }
 
   render() {
-    const { alignItems, className, justifyContent, themeId, ...directionProps } = this.props;
+    const {
+      alignItems,
+      className,
+      justifyContent,
+      themeId,
+      ...directionProps
+    } = this.props;
 
     const inlineStyles = pickBy({ alignItems, justifyContent });
     const activeClasses = this._getActiveClasses(directionProps);

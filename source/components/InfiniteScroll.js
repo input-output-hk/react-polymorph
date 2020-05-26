@@ -1,17 +1,17 @@
 // @flow
-import React, { Component } from 'react';
-import type { ComponentType, Node } from 'react';
+import React, { Component } from "react";
+import type { ComponentType, Node } from "react";
 // $FlowFixMe
-import createRef from 'create-react-ref/lib/createRef';
+import createRef from "create-react-ref/lib/createRef";
 
 // utilities
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
 
 // constants
-import { IDENTIFIERS } from '.';
-import type { ReactElementRef } from '../utils/types.js';
-import type { ThemeContextProp } from './HOC/withTheme';
+import { IDENTIFIERS } from ".";
+import type { ReactElementRef } from "../utils/types.js";
+import type { ThemeContextProp } from "./HOC/withTheme";
 
 type Props = {
   className?: string,
@@ -22,7 +22,7 @@ type Props = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
-  threshold: number
+  threshold: number,
 };
 
 type State = {
@@ -30,7 +30,7 @@ type State = {
   data: Object | Array<{}>,
   error: boolean | string | Node,
   hasMoreData: boolean,
-  isLoading: boolean
+  isLoading: boolean,
 };
 
 class InfiniteScrollBase extends Component<Props, State> {
@@ -38,14 +38,14 @@ class InfiniteScrollBase extends Component<Props, State> {
   scrollContainer: ReactElementRef<typeof HTMLElement>;
 
   // define static properties
-  static displayName = 'InfiniteScroll';
+  static displayName = "InfiniteScroll";
   static defaultProps = {
     context: createEmptyContext(),
     fetchData() {},
     theme: null,
     themeId: IDENTIFIERS.INFINITE_SCROLL,
     themeOverrides: {},
-    threshold: 250
+    threshold: 250,
   };
 
   constructor(props: Props) {
@@ -64,39 +64,44 @@ class InfiniteScrollBase extends Component<Props, State> {
       data: [],
       error: false,
       isLoading: false,
-      hasMoreData: true
+      hasMoreData: true,
     };
-  }
-
-  componentWillMount() {
-    this._handleFetchData();
   }
 
   componentDidMount() {
     const { scrollContainer } = this;
+
+    this._handleFetchData();
     if (!scrollContainer.current) return;
-    scrollContainer.current.addEventListener('scroll', this._handleScroll);
+    scrollContainer.current.addEventListener("scroll", this._handleScroll);
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   // calls user's fetchData function from props
-  _handleFetchData = () => this.props.fetchData(this.setState.bind(this))
+  _handleFetchData = () => this.props.fetchData(this.setState.bind(this));
 
   // scroll event listener attached to scrollContainer element
   _handleScroll = () => {
     const { error, isLoading, hasMoreData } = this.state;
 
     // return early for error, loading, or lack of future data
-    if (error || isLoading || !hasMoreData) { return; }
+    if (error || isLoading || !hasMoreData) {
+      return;
+    }
     return this._checkForScrollBottom();
   };
 
   // prevents new data fetch until user has scrolled near bottom of existing data
   _checkForScrollBottom = () => {
-    const { scrollContainer, props: { threshold } } = this;
+    const {
+      scrollContainer,
+      props: { threshold },
+    } = this;
     if (!scrollContainer.current) return;
     const { offsetHeight, scrollTop, scrollHeight } = scrollContainer.current;
 
@@ -105,29 +110,21 @@ class InfiniteScrollBase extends Component<Props, State> {
     }
   };
 
-  _isFunction = (renderProp: ?Function) => (renderProp && typeof renderProp === 'function')
+  _isFunction = (renderProp: ?Function) =>
+    renderProp && typeof renderProp === "function";
 
   render() {
     const {
-      props: {
-        className,
-        context,
-        renderItems,
-        skin,
-        themeId
-      },
-      state: {
-        composedTheme,
-        data,
-        error,
-        hasMoreData,
-        isLoading
-      },
-      scrollContainer
+      props: { className, context, renderItems, skin, themeId },
+      state: { composedTheme, data, error, hasMoreData, isLoading },
+      scrollContainer,
     } = this;
 
-    if (!this._isFunction(renderItems)) { return null; }
-    const InfiniteScrollSkin = skin || context.skins[IDENTIFIERS.INFINITE_SCROLL];
+    if (!this._isFunction(renderItems)) {
+      return null;
+    }
+    const InfiniteScrollSkin =
+      skin || context.skins[IDENTIFIERS.INFINITE_SCROLL];
 
     return (
       <InfiniteScrollSkin

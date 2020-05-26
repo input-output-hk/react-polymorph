@@ -1,21 +1,21 @@
 // @flow
-import React, { Component } from 'react';
-import type { ComponentType, Element } from 'react';
+import React, { Component } from "react";
+import type { ComponentType, Element } from "react";
 
 // external libraries
-import createRef from 'create-react-ref/lib/createRef';
-import _ from 'lodash';
+import createRef from "create-react-ref/lib/createRef";
+import _ from "lodash";
 
 // interal components
-import { GlobalListeners } from './HOC/GlobalListeners';
+import { GlobalListeners } from "./HOC/GlobalListeners";
 
 // internal utility functions
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
-import { composeFunctions } from '../utils/props';
+import { createEmptyContext, withTheme } from "./HOC/withTheme";
+import { composeTheme, addThemeId, didThemePropsChange } from "../utils/themes";
+import { composeFunctions } from "../utils/props";
 
-import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
+import { IDENTIFIERS } from ".";
+import type { ThemeContextProp } from "./HOC/withTheme";
 
 type Props = {
   className?: string,
@@ -37,7 +37,7 @@ type Props = {
   sortAlphabetically: boolean,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
 };
 
 type State = {
@@ -53,12 +53,12 @@ type State = {
 class AutocompleteBase extends Component<Props, State> {
   // declare ref types
   rootElement: ?Element<any>;
-  inputElement: ?Element<'input'>;
+  inputElement: ?Element<"input">;
   suggestionsElement: ?Element<any>;
   optionsElement: ?Element<any>;
 
   // define static properties
-  static displayName = 'Autocomplete';
+  static displayName = "Autocomplete";
   static defaultProps = {
     context: createEmptyContext(),
     error: null,
@@ -70,7 +70,7 @@ class AutocompleteBase extends Component<Props, State> {
     sortAlphabetically: true, // options are sorted alphabetically by default
     theme: null,
     themeId: IDENTIFIERS.AUTOCOMPLETE,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
   constructor(props: Props) {
@@ -89,12 +89,12 @@ class AutocompleteBase extends Component<Props, State> {
       themeOverrides,
       sortAlphabetically,
       options,
-      preselectedOptions
+      preselectedOptions,
     } = props;
 
     this.state = {
-      inputValue: '',
-      error: '',
+      inputValue: "",
+      error: "",
       selectedOptions: preselectedOptions || [],
       filteredOptions:
         sortAlphabetically && options ? options.sort() : options || [],
@@ -104,12 +104,14 @@ class AutocompleteBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   clear = () => this._removeOptions();
@@ -121,16 +123,19 @@ class AutocompleteBase extends Component<Props, State> {
   close = () => this.setState({ isOpen: false });
 
   toggleOpen = () => {
-    if (this.state.isOpen && this.optionsElement && this.optionsElement.current) {
+    if (
+      this.state.isOpen &&
+      this.optionsElement &&
+      this.optionsElement.current
+    ) {
       // set Options scroll position to top on close
       this.optionsElement.current.scrollTop = 0;
     }
     this.setState({ isOpen: !this.state.isOpen });
-  }
+  };
 
-  toggleMouseLocation = () => (
-    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions })
-  );
+  toggleMouseLocation = () =>
+    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions });
 
   handleAutocompleteClick = () => {
     const { inputElement } = this;
@@ -142,17 +147,19 @@ class AutocompleteBase extends Component<Props, State> {
   };
 
   onKeyDown = (event: SyntheticKeyboardEvent<>) => {
-
-    if ( // Check for backspace in order to delete the last selected option
+    if (
+      // Check for backspace in order to delete the last selected option
       event.keyCode === 8 &&
       !event.target.value &&
       this.state.selectedOptions.length
     ) {
       // Remove last selected option
       this.removeOption(this.state.selectedOptions.length - 1, event);
-    } else if (event.keyCode === 27) { // ESCAPE key: Stops propagation & modal closing
+    } else if (event.keyCode === 27) {
+      // ESCAPE key: Stops propagation & modal closing
       event.stopPropagation();
-    } else if (event.keyCode === 13) { // ENTER key: Opens suggestions
+    } else if (event.keyCode === 13) {
+      // ENTER key: Opens suggestions
       this.open();
     }
   };
@@ -173,18 +180,20 @@ class AutocompleteBase extends Component<Props, State> {
   ) => {
     const { maxSelections, multipleSameSelections } = this.props;
     const { selectedOptions, filteredOptions, isOpen } = this.state;
-    const canMoreOptionsBeSelected = (
-      maxSelections != null ? selectedOptions.length < maxSelections : true
-    );
-    const areFilteredOptionsAvailable = filteredOptions && filteredOptions.length > 0;
+    const canMoreOptionsBeSelected =
+      maxSelections != null ? selectedOptions.length < maxSelections : true;
+    const areFilteredOptionsAvailable =
+      filteredOptions && filteredOptions.length > 0;
 
-    if (!maxSelections || (canMoreOptionsBeSelected && areFilteredOptionsAvailable)) {
+    if (
+      !maxSelections ||
+      (canMoreOptionsBeSelected && areFilteredOptionsAvailable)
+    ) {
       if (!selectedOption) return;
       const option = selectedOption.trim();
-      const optionCanBeSelected = (
+      const optionCanBeSelected =
         (selectedOptions.indexOf(option) < 0 && !multipleSameSelections) ||
-        multipleSameSelections
-      );
+        multipleSameSelections;
 
       if (option && optionCanBeSelected && isOpen) {
         const newSelectedOptions = _.concat(selectedOptions, option);
@@ -193,7 +202,7 @@ class AutocompleteBase extends Component<Props, State> {
       }
     }
 
-    this._setInputValue('');
+    this._setInputValue("");
   };
 
   removeOption = (index: number, event: SyntheticEvent<>) => {
@@ -214,7 +223,7 @@ class AutocompleteBase extends Component<Props, State> {
   // associated with rendering this.state.selectedOptions, the user can call
   // this in the body of the renderSelections function
   getSelectionProps = ({
-    removeSelection
+    removeSelection,
   }: { removeSelection: Function } = {}) => {
     const { themeId } = this.props;
     const { inputValue, isOpen, selectedOptions, composedTheme } = this.state;
@@ -226,7 +235,7 @@ class AutocompleteBase extends Component<Props, State> {
       removeSelection: (index: number, event: SyntheticEvent<>) =>
         // the user's custom removeSelection event handler is composed with
         // the internal functionality of Autocomplete (this.removeOption)
-        composeFunctions(removeSelection, this.removeOption)(index, event)
+        composeFunctions(removeSelection, this.removeOption)(index, event),
     };
   };
 
@@ -290,13 +299,13 @@ class AutocompleteBase extends Component<Props, State> {
   _removeOptions = () => {
     const { onChange } = this.props;
     onChange ? onChange([]) : null;
-    this.setState({ selectedOptions: [], inputValue: '' });
+    this.setState({ selectedOptions: [], inputValue: "" });
   };
 
   _filterOptions = (value: string) => {
     let filteredOptions = [];
 
-    if (value !== '') {
+    if (value !== "") {
       _.some(this.props.options, (option) => {
         if (_.startsWith(option, value)) {
           filteredOptions.push(option);
@@ -310,10 +319,10 @@ class AutocompleteBase extends Component<Props, State> {
   };
 
   _filterInvalidChars = (value: string) => {
-    let filteredValue = '';
+    let filteredValue = "";
 
     if (this.props.invalidCharsRegex.test(value)) {
-      filteredValue = value.replace(this.props.invalidCharsRegex, '');
+      filteredValue = value.replace(this.props.invalidCharsRegex, "");
     } else {
       filteredValue = value;
     }
@@ -327,9 +336,9 @@ class AutocompleteBase extends Component<Props, State> {
     this.setState({
       isOpen: true,
       inputValue: filteredValue,
-      filteredOptions
+      filteredOptions,
     });
-  }
+  };
 }
 
 export const Autocomplete = withTheme(AutocompleteBase);
