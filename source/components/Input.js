@@ -15,12 +15,13 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
-type Props = {
+export type InputProps = {
   autoFocus: boolean,
   className?: ?string,
   context: ThemeContextProp,
   disabled?: boolean,
-  error: string | Element<any>,
+  error?: string | Element<any>,
+  showErrorState?: boolean,
   label?: string | Element<any>,
   maxLength?: number,
   minLength?: number,
@@ -37,15 +38,15 @@ type Props = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
-  value: string
+  value: string,
 };
 
 type State = {
   error: string,
-  composedTheme: Object
+  composedTheme: Object,
 };
 
-class InputBase extends Component<Props, State> {
+class InputBase extends Component<InputProps, State> {
   // declare ref types
   inputElement: Element<'input'>;
 
@@ -59,10 +60,10 @@ class InputBase extends Component<Props, State> {
     theme: null,
     themeId: IDENTIFIERS.INPUT,
     themeOverrides: {},
-    value: ''
+    value: '',
   };
 
-  constructor(props: Props) {
+  constructor(props: InputProps) {
     super(props);
 
     // define ref
@@ -76,7 +77,7 @@ class InputBase extends Component<Props, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      error: ''
+      error: '',
     };
   }
 
@@ -118,7 +119,7 @@ class InputBase extends Component<Props, State> {
     return flow([
       this._enforceStringValue,
       this._enforceMaxLength,
-      this._enforceMinLength
+      this._enforceMinLength,
     ]).call(this, value);
   }
 
