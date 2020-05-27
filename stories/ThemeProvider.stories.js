@@ -18,6 +18,7 @@ import { ProgressBar } from '../source/components/ProgressBar';
 import { Flex } from '../source/components/layout/Flex';
 import { FlexItem } from '../source/components/layout/FlexItem';
 import { Gutter } from '../source/components/layout/Gutter';
+import { SimpleSkins } from '../source/skins/simple';
 
 // skins
 import { InputSkin } from '../source/skins/simple/InputSkin';
@@ -54,7 +55,20 @@ import progressBarOverrides2 from './theme-overrides/customProgressBar.scss';
 // constants
 import { IDENTIFIERS } from '../source/components';
 
-const MNEMONICS = ['home', 'cat', 'dog', 'fish', 'home', 'cat', 'dog', 'fish', 'home', 'cat', 'dog', 'fish'];
+const MNEMONICS = [
+  'home',
+  'cat',
+  'dog',
+  'fish',
+  'home',
+  'cat',
+  'dog',
+  'fish',
+  'home',
+  'cat',
+  'dog',
+  'fish',
+];
 
 const {
   AUTOCOMPLETE,
@@ -68,9 +82,10 @@ const {
   OPTIONS,
   PROGRESS_BAR,
   RADIO,
+  SCROLLBAR,
   SWITCH,
   TEXT_AREA,
-  TOGGLER
+  TOGGLER,
 } = IDENTIFIERS;
 
 const CUSTOM_THEME = {
@@ -86,198 +101,224 @@ const CUSTOM_THEME = {
   [CHECKBOX]: CustomCheckboxTheme,
   [AUTOCOMPLETE]: CustomAutocompleteTheme,
   [BUBBLE]: SimpleTheme[BUBBLE],
-  [FORM_FIELD]: SimpleTheme[FORM_FIELD]
+  [FORM_FIELD]: SimpleTheme[FORM_FIELD],
+  [SCROLLBAR]: SimpleTheme[SCROLLBAR],
 };
 
 storiesOf('ThemeProvider', module)
   // ====== ThemeProvider Stories ======
 
-  .add('custom theme',
-    withState({
-      textAreaValue: '',
-      numericInputValue: '',
-      togglerChecked: false,
-      switchChecked: false,
-      radioSelected: false,
-      modalIsOpen: false
-    }, store => (
-      <ThemeProvider theme={CUSTOM_THEME}>
-        <div style={{ margin: '100px' }}>
-          <TextArea
-            value={store.state.textAreaValue}
-            onChange={textAreaValue => store.set({ textAreaValue })}
-            placeholder="type here..."
-            skin={TextAreaSkin}
-          />
-        </div>
+  .add(
+    'custom theme',
+    withState(
+      {
+        textAreaValue: '',
+        numericInputValue: '',
+        togglerChecked: false,
+        switchChecked: false,
+        radioSelected: false,
+        modalIsOpen: false,
+      },
+      (store) => (
+        <ThemeProvider theme={CUSTOM_THEME} skins={SimpleSkins}>
+          <div style={{ margin: '100px' }}>
+            <TextArea
+              value={store.state.textAreaValue}
+              onChange={(textAreaValue) => store.set({ textAreaValue })}
+              placeholder="type here..."
+              skin={TextAreaSkin}
+            />
+          </div>
 
-        <div style={{ margin: '100px' }}>
-          <Checkbox
-            checked={store.state.togglerChecked}
-            onChange={() => store.set({ togglerChecked: !store.state.togglerChecked })}
-            themeId={IDENTIFIERS.TOGGLER}
-            labelLeft="Included"
-            labelRight="Excluded"
-            skin={TogglerSkin}
-          />
-        </div>
+          <div style={{ margin: '100px' }}>
+            <Checkbox
+              checked={store.state.togglerChecked}
+              onChange={() =>
+                store.set({ togglerChecked: !store.state.togglerChecked })
+              }
+              themeId={IDENTIFIERS.TOGGLER}
+              labelLeft="Included"
+              labelRight="Excluded"
+              skin={TogglerSkin}
+            />
+          </div>
 
-        <div style={{ margin: '100px' }}>
-          <Checkbox
-            label="Switch with custom theme"
-            themeId={IDENTIFIERS.SWITCH}
-            checked={store.state.switchChecked}
-            onChange={() => store.set({ switchChecked: !store.state.switchChecked })}
-            skin={SwitchSkin}
-          />
-        </div>
+          <div style={{ margin: '100px' }}>
+            <Checkbox
+              label="Switch with custom theme"
+              themeId={IDENTIFIERS.SWITCH}
+              checked={store.state.switchChecked}
+              onChange={() =>
+                store.set({ switchChecked: !store.state.switchChecked })
+              }
+              skin={SwitchSkin}
+            />
+          </div>
 
-        <div style={{ margin: '100px' }}>
-          <Radio
-            label="Radio with custom theme"
-            selected={store.state.radioSelected}
-            onChange={() => store.set({ radioSelected: !store.state.radioSelected })}
-            skin={RadioSkin}
-          />
-        </div>
+          <div style={{ margin: '100px' }}>
+            <Radio
+              label="Radio with custom theme"
+              selected={store.state.radioSelected}
+              onChange={() =>
+                store.set({ radioSelected: !store.state.radioSelected })
+              }
+              skin={RadioSkin}
+            />
+          </div>
 
-        <div style={{ margin: '100px' }}>
-          <NumericInput
-            label="NumericInput with custom theme"
-            value={store.state.numericInputValue}
-            placeholder="0.000000"
-            maxAfterDot={6}
-            onChange={numericInputValue => store.set({ numericInputValue })}
-            skin={InputSkin}
-          />
-        </div>
+          <div style={{ margin: '100px' }}>
+            <NumericInput
+              label="NumericInput with custom theme"
+              value={store.state.numericInputValue}
+              placeholder="0.000000"
+              maxAfterDot={6}
+              onChange={(numericInputValue) => store.set({ numericInputValue })}
+              skin={InputSkin}
+            />
+          </div>
 
-        <div style={{ margin: '100px' }}>
-          <Button
-            label="click here to open modal"
-            onClick={() => store.set({ modalIsOpen: true })}
-            skin={ButtonSkin}
-          />
-          <Modal
-            isOpen={store.state.modalIsOpen}
-            triggerCloseOnOverlayClick
-            onClose={() => store.set({ modalIsOpen: !store.state.modalIsOpen })}
-            skin={ModalSkin}
-          >
-            <h1>Click outside of modal to close</h1>
-          </Modal>
-        </div>
+          <div style={{ margin: '100px' }}>
+            <Button
+              label="click here to open modal"
+              onClick={() => store.set({ modalIsOpen: true })}
+              skin={ButtonSkin}
+            />
+            <Modal
+              isOpen={store.state.modalIsOpen}
+              triggerCloseOnOverlayClick
+              onClose={() =>
+                store.set({ modalIsOpen: !store.state.modalIsOpen })
+              }
+              skin={ModalSkin}
+            >
+              <h1>Click outside of modal to close</h1>
+            </Modal>
+          </div>
 
-        <div style={{ margin: '100px' }}>
-          <Checkbox
-            label="Checkbox with custom theme"
-            checked={store.state.checkboxChecked}
-            onChange={() => store.set({ checkboxChecked: !store.state.checkboxChecked })}
-            skin={CheckboxSkin}
-          />
-        </div>
+          <div style={{ margin: '100px' }}>
+            <Checkbox
+              label="Checkbox with custom theme"
+              checked={store.state.checkboxChecked}
+              onChange={() =>
+                store.set({ checkboxChecked: !store.state.checkboxChecked })
+              }
+              skin={CheckboxSkin}
+            />
+          </div>
 
-        <div style={{ margin: '100px', height: '225px' }}>
-          <Autocomplete
-            label="Autocomplete opening upward"
-            options={MNEMONICS}
-            placeholder="Enter mnemonic..."
-            maxSelections={12}
-            maxVisibleOptions={20}
-            invalidCharsRegex={/[^a-zA-Z]/g}
-            skin={AutocompleteSkin}
-            isOpeningUpward
-          />
-        </div>
+          <div style={{ margin: '100px', height: '225px' }}>
+            <Autocomplete
+              label="Autocomplete opening upward"
+              options={MNEMONICS}
+              placeholder="Enter mnemonic..."
+              maxSelections={12}
+              maxVisibleOptions={20}
+              invalidCharsRegex={/[^a-zA-Z]/g}
+              skin={AutocompleteSkin}
+              isOpeningUpward
+            />
+          </div>
 
-        <div style={{ margin: '0 100px 400px 100px', height: '225px' }}>
-          <Autocomplete
-            label="Autocomplete opening downward"
-            options={MNEMONICS}
-            placeholder="Enter mnemonic..."
-            maxSelections={12}
-            maxVisibleOptions={20}
-            invalidCharsRegex={/[^a-zA-Z]/g}
-            skin={AutocompleteSkin}
-          />
-        </div>
-      </ThemeProvider>
-    ))
+          <div style={{ margin: '0 100px 400px 100px', height: '225px' }}>
+            <Autocomplete
+              label="Autocomplete opening downward"
+              options={MNEMONICS}
+              placeholder="Enter mnemonic..."
+              maxSelections={12}
+              maxVisibleOptions={20}
+              invalidCharsRegex={/[^a-zA-Z]/g}
+              skin={AutocompleteSkin}
+            />
+          </div>
+        </ThemeProvider>
+      )
+    )
   )
 
-  .add('themeOverrides',
-    withState({
-      checked: false,
-      progress: 0,
-      previousOverrides: {
-        [BUTTON]: buttonOverrides,
-        [CHECKBOX]: checkboxOverrides,
-        [PROGRESS_BAR]: progressBarOverrides2
+  .add(
+    'themeOverrides',
+    withState(
+      {
+        checked: false,
+        progress: 0,
+        previousOverrides: {
+          [BUTTON]: buttonOverrides,
+          [CHECKBOX]: checkboxOverrides,
+          [PROGRESS_BAR]: progressBarOverrides2,
+        },
+        themeOverrides: {
+          [BUTTON]: buttonOverrides,
+          [CHECKBOX]: checkboxOverrides,
+          [PROGRESS_BAR]: progressBarOverrides1,
+        },
       },
-      themeOverrides: {
-        [BUTTON]: buttonOverrides,
-        [CHECKBOX]: checkboxOverrides,
-        [PROGRESS_BAR]: progressBarOverrides1
+      (store) => {
+        const switchOverrides = () => {
+          const { previousOverrides, themeOverrides } = store.state;
+          store.set({
+            previousOverrides: themeOverrides,
+            themeOverrides: previousOverrides,
+          });
+        };
+
+        return (
+          <ThemeProvider
+            theme={SimpleTheme}
+            themeOverrides={store.state.themeOverrides}
+          >
+            <Gutter padding="30vh 20vw">
+              <Flex row justifyContent="space-around" alignItems="center">
+                <FlexItem>
+                  <Button
+                    label="Switch ProgressBar's Theme"
+                    onClick={switchOverrides}
+                    skin={ButtonSkin}
+                  />
+                </FlexItem>
+
+                <FlexItem>
+                  <Button
+                    label="+ 10%"
+                    onClick={() =>
+                      store.set({ progress: store.state.progress + 10 })
+                    }
+                    skin={ButtonSkin}
+                  />
+                </FlexItem>
+
+                <FlexItem>
+                  <Button
+                    label="- 10%"
+                    onClick={() =>
+                      store.set({ progress: store.state.progress - 10 })
+                    }
+                    skin={ButtonSkin}
+                  />
+                </FlexItem>
+
+                <FlexItem>
+                  <Checkbox
+                    label="Reset"
+                    checked={store.state.checked}
+                    onChange={() => {
+                      store.set({ checked: true, progress: 0 });
+                      setTimeout(() => store.set({ checked: false }), 2000);
+                    }}
+                    skin={CheckboxSkin}
+                  />
+                </FlexItem>
+              </Flex>
+
+              <div style={{ margin: '50px' }}>
+                <ProgressBar
+                  label="100% Complete"
+                  progress={store.state.progress}
+                  skin={ProgressBarSkin}
+                />
+              </div>
+            </Gutter>
+          </ThemeProvider>
+        );
       }
-    }, store => {
-      const switchOverrides = () => {
-        const { previousOverrides, themeOverrides } = store.state;
-        store.set({
-          previousOverrides: themeOverrides,
-          themeOverrides: previousOverrides
-        });
-      };
-
-      return (
-        <ThemeProvider theme={SimpleTheme} themeOverrides={store.state.themeOverrides}>
-          <Gutter padding="30vh 20vw">
-            <Flex row justifyContent="space-around" alignItems="center">
-              <FlexItem>
-                <Button
-                  label="Switch ProgressBar's Theme"
-                  onClick={switchOverrides}
-                  skin={ButtonSkin}
-                />
-              </FlexItem>
-
-              <FlexItem>
-                <Button
-                  label="+ 10%"
-                  onClick={() => store.set({ progress: store.state.progress + 10 })}
-                  skin={ButtonSkin}
-                />
-              </FlexItem>
-
-              <FlexItem>
-                <Button
-                  label="- 10%"
-                  onClick={() => store.set({ progress: store.state.progress - 10 })}
-                  skin={ButtonSkin}
-                />
-              </FlexItem>
-
-              <FlexItem>
-                <Checkbox
-                  label="Reset"
-                  checked={store.state.checked}
-                  onChange={() => {
-                    store.set({ checked: true, progress: 0 });
-                    setTimeout(() => store.set({ checked: false }), 2000);
-                  }}
-                  skin={CheckboxSkin}
-                />
-              </FlexItem>
-            </Flex>
-
-            <div style={{ margin: '50px' }}>
-              <ProgressBar
-                label="100% Complete"
-                progress={store.state.progress}
-                skin={ProgressBarSkin}
-              />
-            </div>
-          </Gutter>
-        </ThemeProvider>
-      );
-    })
+    )
   );
