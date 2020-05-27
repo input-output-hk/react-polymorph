@@ -22,7 +22,7 @@ type Props = {
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object,
+  themeOverrides: Object
 };
 
 type State = {
@@ -40,7 +40,7 @@ class LinkBase extends Component<Props, State> {
     hasIconBefore: false,
     hasIconAfter: true,
     isUnderlined: true,
-    underlineOnHover: false,
+    underlineOnHover: false
   };
 
   constructor(props: Props) {
@@ -57,19 +57,15 @@ class LinkBase extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin,
-      theme,
-      themeOverrides,
-      context,
-      ...rest
-    } = this.props;
+    const { skin, theme, themeOverrides, context, ...rest } = this.props;
 
     const LinkSkin = skin || context.skins[this.props.themeId];
 

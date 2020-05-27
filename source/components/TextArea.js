@@ -83,21 +83,23 @@ class TextAreaBase extends Component<Props, State> {
       this._handleAutoresize();
     }
 
-    if (autoFocus) { this.focus(); }
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    if (!this.props.autoResize && nextProps.autoResize) {
-      window.addEventListener('resize', this._handleAutoresize);
-    } else if (this.props.autoResize && !nextProps.autoResize) {
-      window.removeEventListener('resize', this._handleAutoresize);
+    if (autoFocus) {
+      this.focus();
     }
-
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: Props) {
     if (this.props.autoResize) this._handleAutoresize();
+
+    if (prevProps !== this.props) {
+      if (!prevProps.autoResize && this.props.autoResize) {
+        window.addEventListener('resize', this._handleAutoresize);
+      } else if (prevProps.autoResize && !this.props.autoResize) {
+        window.removeEventListener('resize', this._handleAutoresize);
+      }
+
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   componentWillUnmount() {
@@ -170,8 +172,9 @@ class TextAreaBase extends Component<Props, State> {
 
     // resize the input to its content size
     textareaElement.current.style.height = 'auto';
-    textareaElement.current.style.height = `${textareaElement.current.scrollHeight +
-      heightOffset}px`;
+    textareaElement.current.style.height = `${
+      textareaElement.current.scrollHeight + heightOffset
+    }px`;
   }
 
   render() {

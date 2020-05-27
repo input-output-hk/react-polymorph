@@ -9,7 +9,7 @@ import type {
   // $FlowFixMe
   SyntheticEvent,
   Element,
-  ElementRef,
+  ElementRef
 } from 'react';
 
 // internal utility functions
@@ -56,7 +56,7 @@ type Props = {
 type State = {
   composedTheme: Object,
   highlightedOptionIndex: number,
-  isMouseOverOptions: boolean,
+  isMouseOverOptions: boolean
 };
 
 class OptionsBase extends Component<Props, State> {
@@ -93,7 +93,7 @@ class OptionsBase extends Component<Props, State> {
         context.ROOT_THEME_API
       ),
       highlightedOptionIndex: 0,
-      isMouseOverOptions: false,
+      isMouseOverOptions: false
     };
   }
 
@@ -103,13 +103,15 @@ class OptionsBase extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (!this.props.isOpen && nextProps.isOpen) {
-      document.addEventListener('keydown', this._handleKeyDown, false);
-    } else if (this.props.isOpen && !nextProps.isOpen) {
-      document.removeEventListener('keydown', this._handleKeyDown, false);
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      if (!prevProps.isOpen && this.props.isOpen) {
+        document.addEventListener('keydown', this._handleKeyDown, false);
+      } else if (prevProps.isOpen && !this.props.isOpen) {
+        document.removeEventListener('keydown', this._handleKeyDown, false);
+      }
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
     }
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
   }
 
   componentWillUnmount() {
@@ -120,7 +122,9 @@ class OptionsBase extends Component<Props, State> {
     const { isOpen, onClose, resetOnClose, toggleOpen } = this.props;
     if (isOpen && toggleOpen) toggleOpen();
     this.setState({
-      highlightedOptionIndex: resetOnClose ? 0 : this.state.highlightedOptionIndex
+      highlightedOptionIndex: resetOnClose
+        ? 0
+        : this.state.highlightedOptionIndex
     });
     if (onClose) onClose();
   };
@@ -151,12 +155,15 @@ class OptionsBase extends Component<Props, State> {
 
   isSelectedOption = (optionIndex: number) => {
     const { options, isOpeningUpward } = this.props;
-    const index = isOpeningUpward ? options.length - 1 - optionIndex : optionIndex;
+    const index = isOpeningUpward
+      ? options.length - 1 - optionIndex
+      : optionIndex;
     const option = options[index];
     return option && this.props.selectedOption === option;
   };
 
-  isHighlightedOption = (optionIndex: number) => this.state.highlightedOptionIndex === optionIndex;
+  isHighlightedOption = (optionIndex: number) =>
+    this.state.highlightedOptionIndex === optionIndex;
 
   isDisabledOption = (optionIndex: number) => {
     const { options } = this.props;
@@ -284,14 +291,17 @@ class OptionsBase extends Component<Props, State> {
 
   _setMouseIsOverOptions = (isMouseOverOptions: boolean) => {
     const { toggleMouseLocation, setMouseIsOverOptions } = this.props;
-    if (this.state.isMouseOverOptions !== isMouseOverOptions && toggleMouseLocation) {
+    if (
+      this.state.isMouseOverOptions !== isMouseOverOptions &&
+      toggleMouseLocation
+    ) {
       toggleMouseLocation();
     }
     if (setMouseIsOverOptions) {
       setMouseIsOverOptions(isMouseOverOptions);
     }
     this.setState({
-      isMouseOverOptions,
+      isMouseOverOptions
     });
   };
 

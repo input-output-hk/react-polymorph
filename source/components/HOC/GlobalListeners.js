@@ -44,26 +44,27 @@ export class GlobalListeners extends Component<Props, State> {
   }
 
   componentDidMount() {
-    if (this.props.optionsIsOpen) { return; }
+    if (this.props.optionsIsOpen) {
+      return;
+    }
     // adds scroll and resize event listeners for calculating Options max-height
     this._addCalculateMaxHeightListeners();
     // runs initial Options max-height calculation
     this._calculateOptionsMaxHeight();
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentDidUpdate(prevProps: Props) {
     const { optionsIsOpen } = this.props;
 
     // if Options is transferring from closed to open, add listeners
     // if Options is transferring from open to closed, remove listeners
-    if (!optionsIsOpen && nextProps.optionsIsOpen) {
+    if (!prevProps.optionsIsOpen && optionsIsOpen) {
       // first remove max-height calc handler on scroll and resize
       // then add toggle handler on scroll and resize
       this._removeGlobalListeners();
       addWindowListeners(this._getWindowListeners());
       addDocumentListeners(this._getDocumentListeners());
-
-    } else if (optionsIsOpen && !nextProps.optionsIsOpen) {
+    } else if (prevProps.optionsIsOpen && !optionsIsOpen) {
       // remove toggle handler on scroll and resize
       // then add calc max-height calc handler on scroll and resize
       this._removeGlobalListeners();
@@ -88,7 +89,9 @@ export class GlobalListeners extends Component<Props, State> {
     this._removeGlobalListeners();
 
     // before toggle, ensure options is open and optionsRef exists on DOM
-    if (!optionsIsOpen || !optionsRef || !optionsRef.current) { return; }
+    if (!optionsIsOpen || !optionsRef || !optionsRef.current) {
+      return;
+    }
     this.props.toggleOpen();
   };
 
@@ -105,11 +108,15 @@ export class GlobalListeners extends Component<Props, State> {
     const { optionsIsOpen, rootRef } = this.props;
 
     // ensure Options is open
-    if (!optionsIsOpen || !rootRef || !rootRef.current) { return; }
+    if (!optionsIsOpen || !rootRef || !rootRef.current) {
+      return;
+    }
 
     // return early if the user clicked an element within the parent component
     // for example, the parent component could be Autocomplete or Select
-    if (targetIsDescendant(event, rootRef.current)) { return; }
+    if (targetIsDescendant(event, rootRef.current)) {
+      return;
+    }
 
     // otherwise, remove all listeners and close Options
     this._removeListenersAndToggle();
@@ -120,8 +127,15 @@ export class GlobalListeners extends Component<Props, State> {
   _handleDocumentScroll = () => this._removeListenersAndToggle();
 
   _addCalculateMaxHeightListeners = () => {
-    const scrollListener = ['scroll', debounce(this._calculateOptionsMaxHeight, 300, { leading: true }), true];
-    const resizeListener = ['resize', debounce(this._calculateOptionsMaxHeight, 300)];
+    const scrollListener = [
+      'scroll',
+      debounce(this._calculateOptionsMaxHeight, 300, { leading: true }),
+      true
+    ];
+    const resizeListener = [
+      'resize',
+      debounce(this._calculateOptionsMaxHeight, 300)
+    ];
     document.addEventListener(...scrollListener);
     window.addEventListener(...resizeListener);
   };
@@ -137,13 +151,18 @@ export class GlobalListeners extends Component<Props, State> {
       optionsRef,
       toggleOpen,
       mouseIsOverOptions,
-      mouseIsOverRoot,
+      mouseIsOverRoot
     } = this.props;
 
     // checks if Options are open & being scrolled upon via mouse position prior to toggling closed
     const isOptionsInDOM = optionsRef && optionsRef.current;
     const doDocumentStylesExist = documentElement && documentElement.style;
-    if (!rootRef || !rootRef.current || !doDocumentStylesExist || !isOptionsInDOM) {
+    if (
+      !rootRef ||
+      !rootRef.current ||
+      !doDocumentStylesExist ||
+      !isOptionsInDOM
+    ) {
       return;
     }
     optionsIsOpen && !mouseIsOverOptions && !mouseIsOverRoot && toggleOpen();
