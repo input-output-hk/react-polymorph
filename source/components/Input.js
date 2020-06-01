@@ -84,8 +84,10 @@ class InputBase extends Component<Props, State> {
     if (this.props.autoFocus) this.focus();
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {

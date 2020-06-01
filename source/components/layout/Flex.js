@@ -8,7 +8,11 @@ import { Base } from './Base';
 
 // utilities
 import { createEmptyContext, withTheme } from '../HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
+import {
+  composeTheme,
+  addThemeId,
+  didThemePropsChange
+} from '../../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '..';
@@ -56,14 +60,22 @@ class FlexBase extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   _getActiveClasses = ({ center, column, columnReverse, row, rowReverse }) => {
     const activeClasses = ['container'];
-    const activeProps = pickBy({ center, column, columnReverse, row, rowReverse });
-    return [...activeClasses, ...Object.keys(activeProps)].filter(val => val);
+    const activeProps = pickBy({
+      center,
+      column,
+      columnReverse,
+      row,
+      rowReverse
+    });
+    return [...activeClasses, ...Object.keys(activeProps)].filter((val) => val);
   };
 
   _assembleFlexTheme = (activeClasses: Array<string>) => {
@@ -78,7 +90,7 @@ class FlexBase extends Component<Props, State> {
   };
 
   renderChildren(theme: Object) {
-    return React.Children.map(this.props.children, child => {
+    return React.Children.map(this.props.children, (child) => {
       if (child.type.displayName === 'FlexItem') {
         return React.cloneElement(child, { theme });
       }
@@ -87,7 +99,13 @@ class FlexBase extends Component<Props, State> {
   }
 
   render() {
-    const { alignItems, className, justifyContent, themeId, ...directionProps } = this.props;
+    const {
+      alignItems,
+      className,
+      justifyContent,
+      themeId,
+      ...directionProps
+    } = this.props;
 
     const inlineStyles = pickBy({ alignItems, justifyContent });
     const activeClasses = this._getActiveClasses(directionProps);

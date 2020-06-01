@@ -34,13 +34,13 @@ type Props = {
   themeId: string,
   themeOverrides: Object,
   value: string,
-  optionHeight?: number,
+  optionHeight?: number
 };
 
 type State = {
   composedTheme: Object,
   isOpen: boolean,
-  mouseIsOverOptions: boolean,
+  mouseIsOverOptions: boolean
 };
 
 class SelectBase extends Component<Props, State> {
@@ -80,7 +80,7 @@ class SelectBase extends Component<Props, State> {
         context.ROOT_THEME_API
       ),
       isOpen: false,
-      mouseIsOverOptions: false,
+      mouseIsOverOptions: false
     };
   }
 
@@ -91,8 +91,10 @@ class SelectBase extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   // ========= PUBLIC SKIN API =========
@@ -102,23 +104,29 @@ class SelectBase extends Component<Props, State> {
   focus = () => this.toggleOpen();
 
   toggleOpen = () => {
-    if (this.state.isOpen && this.optionsElement && this.optionsElement.current) {
+    if (
+      this.state.isOpen &&
+      this.optionsElement &&
+      this.optionsElement.current
+    ) {
       // set Options scroll position to top on close
       this.optionsElement.current.scrollTop = 0;
     }
     this.setState({ isOpen: !this.state.isOpen });
   };
 
-  toggleMouseLocation = () => (
-    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions })
-  );
+  toggleMouseLocation = () =>
+    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions });
 
   handleInputClick = (event: SyntheticMouseEvent<>) => {
     event.stopPropagation();
     event.preventDefault();
 
     const { inputElement } = this;
-    if (inputElement.current && document.activeElement === inputElement.current) {
+    if (
+      inputElement.current &&
+      document.activeElement === inputElement.current
+    ) {
       inputElement.current.blur();
     }
     this.toggleOpen();
