@@ -3,7 +3,7 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$tooltip-font-family: var(--rp-tooltip-font-family, $theme-font-light, sans-serif) !default;
+$tooltip-font-family: var(--rp-tooltip-font-family, $theme-font-medium), sans-serif !default;
 $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
 
 .root {
