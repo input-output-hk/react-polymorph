@@ -20,7 +20,6 @@ import { IDENTIFIERS } from '../source/components';
 import { decorateWithSimpleTheme } from './helpers/theming';
 
 storiesOf('Tooltip', module)
-
   .addDecorator(decorateWithSimpleTheme)
 
   // ====== Stories ======
@@ -57,10 +56,7 @@ storiesOf('Tooltip', module)
 
   .add('isBounded', () => (
     <div className={styles.container}>
-      <Tooltip
-        isBounded
-        tip="Help, I am stuck in this small box"
-      >
+      <Tooltip isBounded tip="Help, I am stuck in this small box">
         hover over me
       </Tooltip>
     </div>
@@ -79,10 +75,7 @@ storiesOf('Tooltip', module)
 
   .add('isOpeningUpward={false}', () => (
     <div className={styles.container}>
-      <Tooltip
-        isOpeningUpward={false}
-        tip="I come from a land down under"
-      >
+      <Tooltip isOpeningUpward={false} tip="I come from a land down under">
         hover over me
       </Tooltip>
     </div>
@@ -90,10 +83,7 @@ storiesOf('Tooltip', module)
 
   .add('arrowRelativeToTip', () => (
     <div className={styles.fitToSize}>
-      <Tooltip
-        arrowRelativeToTip
-        tip="small tip"
-      >
+      <Tooltip arrowRelativeToTip tip="small tip">
         {'this is a really long string for demonstration purposes'}
       </Tooltip>
     </div>
@@ -113,11 +103,7 @@ storiesOf('Tooltip', module)
 
   .add('centered', () => (
     <div className={styles.fitToSize}>
-      <Tooltip
-        arrowRelativeToTip
-        isCentered
-        tip="centered above"
-      >
+      <Tooltip arrowRelativeToTip isCentered tip="centered above">
         {'this is a really long string for demonstration purposes'}
       </Tooltip>
     </div>
@@ -136,12 +122,20 @@ storiesOf('Tooltip', module)
     </div>
   ))
 
+  .add('hidden', () => (
+    <div className={styles.fitToSize}>
+      <Tooltip isShowingOnHover={false} isVisible={false} tip="never shown">
+        Tooltip should not be shown on hover!
+      </Tooltip>
+    </div>
+  ))
+
   .add('theme overrides', () => (
     <div className={styles.container}>
       <Tooltip
         themeOverrides={{
           ...SimpleTheme,
-          [IDENTIFIERS.BUBBLE]: themeOverrides
+          [IDENTIFIERS.BUBBLE]: themeOverrides,
         }}
         isOpeningUpward
         isTransparent={false}

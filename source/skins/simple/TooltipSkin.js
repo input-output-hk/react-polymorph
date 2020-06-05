@@ -21,13 +21,16 @@ type Props = TooltipProps & {
 
 export const TooltipSkin = (props: Props) => {
   const { theme, themeId } = props;
+  const isEmpty = props.tip == null || props.tip === '';
   return (
     <span
       {...pickDOMProps(props)}
       className={classnames([
         props.className,
         theme[themeId].root,
+        isEmpty ? theme[themeId].isEmpty : null,
         props.isVisible ? theme[themeId].isVisible : null,
+        props.isShowingOnHover ? theme[themeId].isShowingOnHover : null,
         props.isCentered ? theme[themeId].isCentered : null,
       ])}
     >
@@ -37,7 +40,7 @@ export const TooltipSkin = (props: Props) => {
           props.isAligningRight
             ? theme[themeId].alignRight
             : theme[themeId].alignLeft,
-          props.isBounded ? null : theme[themeId].nowrap
+          props.isBounded ? null : theme[themeId].nowrap,
         ])}
         theme={theme}
         isCentered={props.isCentered}

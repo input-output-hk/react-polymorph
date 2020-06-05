@@ -3,24 +3,27 @@
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
-$tooltip-font-family: var(--rp-tooltip-font-family, $theme-font-light, sans-serif) !default;
+$tooltip-font-family: var(--rp-tooltip-font-family, $theme-font-light), sans-serif !default;
 $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
 
 .root {
   position: relative;
 
   // ======= SPECIAL STATES =======
-  &:hover {
+  &.isShowingOnHover:hover {
     .bubble {
-      display: block;
+      opacity: 1;
     }
   }
 }
 
 .bubble {
   font-family: $tooltip-font-family;
+  font-size: 12px;
   color: $tooltip-text-color;
-  display: none;
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 400ms ease;
 }
 
 .alignRight [data-bubble-container] {
@@ -38,7 +41,7 @@ $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
 .isCentered {
   display: block;
 
-  &:hover .bubble {
+  &.isShowingOnHover:hover .bubble {
     display: inline-block;
   }
 
@@ -49,6 +52,13 @@ $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
 
 .isVisible {
   .bubble {
-    display: inline-block;
+    opacity: 1;
+  }
+}
+
+.isEmpty {
+  .bubble {
+    transition: none;
+    display: none;
   }
 }
