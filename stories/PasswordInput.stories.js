@@ -6,7 +6,6 @@ import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 
 // components
-import { Input } from '../source/components/Input';
 import { PasswordInput } from '../source/components/PasswordInput';
 
 // helpers
@@ -88,10 +87,11 @@ storiesOf('PasswordInput | Skin', module)
     withState({ value: '' }, (store) => (
       <div className={styles.container}>
         <PasswordInput
-          strengthFeedbacks={{
+          passwordFeedbacks={{
             insecure: 'unsicher!',
             weak: 'schwach',
             strong: 'genial!',
+            noMatch: 'Stimmt nicht überein',
           }}
           label="Label"
           value={store.state.value}
@@ -235,17 +235,7 @@ storiesOf('PasswordInput | Integration', module)
           placeholder="Repeat your password …"
           type="password"
           onChange={(value) => store.set({ repeat: value })}
-          state={
-            // eslint-disable-next-line no-nested-ternary
-            store.state.password === store.state.repeat
-              ? PasswordInput.STATE.DEFAULT
-              : PasswordInput.STATE.ERROR
-          }
-          tooltip={
-            store.state.password === store.state.repeat
-              ? false
-              : 'Passwords must match'
-          }
+          repeatPassword={store.state.password}
         />
       </div>
     ))
