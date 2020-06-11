@@ -11,7 +11,7 @@ vNext
 
 ### Features
 
-- Adds new `PasswordInput` component [PR 134](https://github.com/input-output-hk/react-polymorph/pull/134)
+- Adds new `PasswordInput` component ([PR 134](https://github.com/input-output-hk/react-polymorph/pull/134), [PR 140](https://github.com/input-output-hk/react-polymorph/pull/140), [PR 141](https://github.com/input-output-hk/react-polymorph/pull/141))
 
 ### Fixes
 
