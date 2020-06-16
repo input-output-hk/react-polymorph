@@ -16,6 +16,7 @@ type Props = PasswordInputProps & {
 export const PasswordInputSkin = (props: Props) => {
   const [hasInputFocus, setHasInputFocus] = useState(false);
   const {
+    className,
     error,
     debounceDelay,
     isShowingTooltipOnFocus,
@@ -35,7 +36,13 @@ export const PasswordInputSkin = (props: Props) => {
     : true;
   const hasTooltip = hasInitialValueChanged && tooltip != null;
   return (
-    <div className={classnames([theme[themeId].root, theme[themeId][state]])}>
+    <div
+      className={classnames([
+        theme[themeId].root,
+        theme[themeId][state],
+        className,
+      ])}
+    >
       <Tooltip
         arrowRelativeToTip
         isCentered
