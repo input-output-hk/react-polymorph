@@ -13,6 +13,7 @@ $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
   &.isShowingOnHover:hover {
     .bubble {
       opacity: 1;
+      visibility: inherit;
     }
   }
 }
@@ -23,6 +24,7 @@ $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
   color: $tooltip-text-color;
   display: inline-block;
   opacity: 0;
+  visibility: hidden;
   transition: opacity 400ms ease;
 }
 
