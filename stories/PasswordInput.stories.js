@@ -224,6 +224,7 @@ storiesOf('PasswordInput | Integration', module)
     withState({ password: '', repeat: '' }, (store) => (
       <div className={styles.container}>
         <PasswordInput
+          className={styles.firstField}
           label="New Password"
           value={store.state.password}
           placeholder="Enter your password …"
