@@ -85,6 +85,8 @@ export const PasswordInput: StatelessFunctionalComponent<PasswordInputProps> = (
   if (error) {
     dynamicState = PasswordInput.STATE.ERROR;
     passwordFeedback = error;
+  } else if (tooltip) {
+    passwordFeedback = tooltip;
   } else if (isRepeat) {
     if (repeatPassword === props.value) {
       dynamicState = PasswordInput.STATE.DEFAULT;
@@ -111,7 +113,7 @@ export const PasswordInput: StatelessFunctionalComponent<PasswordInputProps> = (
       theme={composedTheme}
       score={score}
       state={state || dynamicState}
-      tooltip={error || tooltip === false ? null : tooltip || passwordFeedback}
+      tooltip={passwordFeedback}
       {...rest}
     />
   );
