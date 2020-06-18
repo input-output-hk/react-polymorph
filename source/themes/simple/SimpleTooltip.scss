@@ -55,6 +55,7 @@ $tooltip-text-color: var(--rp-tooltip-text-color, white) !default;
 .isVisible {
   .bubble {
     opacity: 1;
+    visibility: inherit;
   }
 }
 
