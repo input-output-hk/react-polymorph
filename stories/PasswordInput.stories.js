@@ -237,6 +237,7 @@ storiesOf('PasswordInput | Integration', module)
           type="password"
           onChange={(value) => store.set({ repeat: value })}
           repeatPassword={store.state.password}
+          isPasswordRepeat
         />
       </div>
     ))

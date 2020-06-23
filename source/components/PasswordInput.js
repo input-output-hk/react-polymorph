@@ -26,6 +26,7 @@ const STATE = {
 export type PasswordInputProps = InputProps & {
   debounceDelay?: number,
   entropyFactor?: number,
+  isPasswordRepeat?: boolean,
   isShowingTooltipOnFocus: boolean,
   isShowingTooltipOnHover: boolean,
   isTooltipOpen: boolean,
@@ -53,6 +54,7 @@ export const PasswordInput: StatelessFunctionalComponent<PasswordInputProps> = (
     error,
     minLength,
     minStrongScore,
+    isPasswordRepeat,
     repeatPassword,
     skin,
     state,
@@ -80,14 +82,13 @@ export const PasswordInput: StatelessFunctionalComponent<PasswordInputProps> = (
   const score = calculatePasswordScore(password, entropyFactor);
   const isValidPassword = password.length >= minLength;
   const isNotEmpty = password.length > 0;
-  const isRepeat = !!repeatPassword;
 
   if (error) {
     dynamicState = PasswordInput.STATE.ERROR;
     passwordFeedback = error;
   } else if (tooltip) {
     passwordFeedback = tooltip;
-  } else if (isRepeat) {
+  } else if (isPasswordRepeat) {
     if (repeatPassword === props.value) {
       dynamicState = PasswordInput.STATE.DEFAULT;
       passwordFeedback = null;
@@ -134,6 +135,7 @@ PasswordInput.defaultProps = {
     strong: 'strong',
     noMatch: "doesn't match",
   },
+  isPasswordRepeat: false,
   isTooltipOpen: false,
   isShowingTooltipOnFocus: true,
   isShowingTooltipOnHover: true,
