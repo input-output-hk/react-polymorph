@@ -15,7 +15,7 @@ import type { ThemeContextProp } from './HOC/withTheme';
 export type BubblePosition = {
   width: number,
   positionX: number,
-  positionY: number
+  positionY: number,
 };
 
 export type BubbleProps = {
@@ -32,12 +32,12 @@ export type BubbleProps = {
   theme: ?Object, // takes precedence over them in context if passed
   themeId: string,
   themeOverrides: Object, // custom css/scss from user adhering to component's theme API
-  targetRef?: ElementRef<*> // ref to the target DOM element used for positioning the bubble
+  targetRef?: ElementRef<*>, // ref to the target DOM element used for positioning the bubble
 };
 
 type State = {
   composedTheme: Object,
-  position: ?BubblePosition
+  position: ?BubblePosition,
 };
 
 class BubbleBase extends Component<BubbleProps, State> {
@@ -57,7 +57,7 @@ class BubbleBase extends Component<BubbleProps, State> {
     noArrow: false,
     theme: null,
     themeId: IDENTIFIERS.BUBBLE,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
   constructor(props: BubbleProps) {
@@ -74,7 +74,7 @@ class BubbleBase extends Component<BubbleProps, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      position: null
+      position: null,
     };
   }
 
@@ -182,7 +182,7 @@ class BubbleBase extends Component<BubbleProps, State> {
     const position = {
       width: targetRect.width,
       positionX: targetRect.left,
-      positionY
+      positionY,
     };
     this.setState({ position });
   };
@@ -190,7 +190,7 @@ class BubbleBase extends Component<BubbleProps, State> {
   _getDocumentEvents() {
     return {
       resize: this._updatePosition,
-      scroll: this._updatePosition
+      scroll: this._updatePosition,
     };
   }
 
