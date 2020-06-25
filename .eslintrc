@@ -83,7 +83,7 @@
     "import/extensions": 0,
     // TODO: Remove when is https://github.com/babel/babel-eslint/issues/530 fixed
     "template-curly-spacing" : "off",
-    "indent" : "off",
+    "indent" : "off"
   },
   "plugins": [
     "import",
