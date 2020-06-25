@@ -10,7 +10,11 @@ import { Base } from './Base';
 import { createEmptyContext, withTheme } from '../HOC/withTheme';
 import { numberToPx } from '../../utils/props';
 import { formatTemplateAreas } from '../../utils/layout';
-import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
+import {
+  composeTheme,
+  addThemeId,
+  didThemePropsChange
+} from '../../utils/themes';
 
 // constants
 import { IDENTIFIERS } from '..';
@@ -67,8 +71,10 @@ class GridBase extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   // creates obj passed Base component's inline styles (see render)
@@ -76,7 +82,9 @@ class GridBase extends Component<Props, State> {
     const { className, ...gridProps } = this.props;
 
     // return early if gridProps are empty
-    if (isEmpty(pickBy({ ...gridProps }))) { return; }
+    if (isEmpty(pickBy({ ...gridProps }))) {
+      return;
+    }
 
     const {
       alignItems,
@@ -110,10 +118,10 @@ class GridBase extends Component<Props, State> {
 
     // filters out keys with false(sy) values
     return pickBy(inlineClasses);
-  }
+  };
 
   renderChildren(theme: Object) {
-    return React.Children.map(this.props.children, child => {
+    return React.Children.map(this.props.children, (child) => {
       if (child.type.displayName === 'GridItem') {
         return React.cloneElement(child, { theme });
       }

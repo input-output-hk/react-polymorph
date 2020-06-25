@@ -5,6 +5,8 @@ export const TOOLTIP_THEME_API = {
   alignRight: '',
   alignLeft: '',
   isCentered: '',
+  isEmpty: '',
+  isShowingOnHover: '',
   isVisible: '',
-  nowrap: ''
+  nowrap: '',
 };

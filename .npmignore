@@ -5,7 +5,7 @@ __tests__
 .flowconfig
 .travis.yaml
 dist
-jestSetup.js
+jest.setup.js
 source
 stories
 storybook

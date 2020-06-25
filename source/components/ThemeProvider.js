@@ -24,7 +24,7 @@ type Props = {
 };
 
 type State = {
-  theme: Object,
+  theme: Object
 };
 
 export class ThemeProvider extends Component<Props, State> {
@@ -46,13 +46,16 @@ export class ThemeProvider extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentDidUpdate(prevProps: Props) {
+    const { theme: prevTheme, themeOverrides: prevThemeOverrides } = prevProps;
     const { theme, themeOverrides } = this.props;
-    const { theme: nextTheme, themeOverrides: nextOverrides } = nextProps;
 
-    if (!isEqual(theme, nextTheme) || !isEqual(themeOverrides, nextOverrides)) {
+    if (
+      !isEqual(prevTheme, theme) ||
+      !isEqual(prevThemeOverrides, themeOverrides)
+    ) {
       this.setState(() => ({
-        theme: this._composeLibraryTheme(nextTheme, nextOverrides)
+        theme: this._composeLibraryTheme(theme, themeOverrides)
       }));
     }
   }
@@ -70,7 +73,9 @@ export class ThemeProvider extends Component<Props, State> {
   //  }
   _composeLibraryTheme = (theme: Object, themeOverrides: Object) => {
     // if themeOverrides is empty, no need for composition
-    if (isEmpty(themeOverrides)) { return theme; }
+    if (isEmpty(themeOverrides)) {
+      return theme;
+    }
 
     // final object to be returned
     const composedTheme = {};
@@ -78,7 +83,6 @@ export class ThemeProvider extends Component<Props, State> {
     for (const componentName in ROOT_THEME_API) {
       // check if ROOT_THEME_API contains the key of componentName
       if (hasProperty(ROOT_THEME_API, componentName)) {
-
         // check if theme contains a key of componentName
         if (hasProperty(theme, componentName)) {
           // add componentName as a key to final return obj
@@ -105,7 +109,9 @@ export class ThemeProvider extends Component<Props, State> {
     componentThemeAPI: Object
   ) => {
     // Return componentTheme if there are no overrides provided
-    if (isEmpty(componentThemeOverrides)) { return componentTheme; }
+    if (isEmpty(componentThemeOverrides)) {
+      return componentTheme;
+    }
 
     // final composed theme obj to be returned at end
     const composedComponentTheme = cloneDeep(componentThemeAPI);
@@ -113,16 +119,24 @@ export class ThemeProvider extends Component<Props, State> {
     for (const className in componentThemeAPI) {
       if (hasProperty(componentThemeAPI, className)) {
         if (hasProperty(componentTheme, className)) {
-          appendToProperty(composedComponentTheme, className, componentTheme[className]);
+          appendToProperty(
+            composedComponentTheme,
+            className,
+            componentTheme[className]
+          );
         }
 
         if (hasProperty(componentThemeOverrides, className)) {
-          appendToProperty(composedComponentTheme, className, componentThemeOverrides[className]);
+          appendToProperty(
+            composedComponentTheme,
+            className,
+            componentThemeOverrides[className]
+          );
         }
       }
     }
     return composedComponentTheme;
-  }
+  };
 
   render() {
     const { theme } = this.state;

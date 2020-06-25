@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "scripts": {
     "build": "cross-env yarn clean && yarn sass && yarn js",
     "build:watch": "concurrently 'yarn js:watch' 'yarn sass:watch'",
@@ -23,6 +23,7 @@
   "dependencies": {
     "create-react-context": "0.2.2",
     "create-react-ref": "0.1.0",
+    "fast-password-entropy": "1.1.1",
     "filter-react-dom-props": "0.0.2",
     "postinstall-build": "5.0.1",
     "react-modal": "3.1.12",
@@ -49,6 +50,7 @@
     "babel-loader": "8.0.6",
     "babel-plugin-lodash": "3.3.4",
     "classnames": "2.2.5",
+    "concurrently": "5.2.0",
     "cpy": "8.0.0",
     "cross-env": "5.2.0",
     "css-loader": "3.2.0",
@@ -73,39 +75,14 @@
     "lodash": "4.17.15",
     "node-sass": "4.13.0",
     "nodemon": "1.12.1",
-    "prettier-eslint": "8.8.1",
+    "prettier": "2.0.5",
+    "prettier-eslint": "9.0.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "rimraf": "2.6.2",
     "sass-loader": "8.0.0",
     "style-loader": "1.0.1",
     "url-loader": "3.0.0"
-  },
-  "jest": {
-    "verbose": false,
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__tests__/__mocks__/fileMock.js",
-      "\\.(css|scss|sass)$": "identity-obj-proxy"
-    },
-    "testPathIgnorePatterns": [
-      "<rootDir>/__tests__/__snapshots__",
-      "<rootDir>/__tests__/__mocks__",
-      "<rootDir>/__tests__/helpers"
-    ],
-    "testEnvironment": "jsdom",
-    "setupFiles": [
-      "<rootDir>/jestSetup.js"
-    ]
   },
   "babel": {
     "presets": [

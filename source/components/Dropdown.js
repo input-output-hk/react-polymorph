@@ -27,14 +27,14 @@ type Props = {
   skin?: ComponentType<any>,
   theme: ?Object,
   themeId: string,
-  themeOverrides: Object,
+  themeOverrides: Object
 };
 
 type State = {
   composedTheme: Object,
   isMouseOverItems: boolean,
   isMouseOverRoot: boolean,
-  isOpen: boolean,
+  isOpen: boolean
 };
 
 class DropdownBase extends Component<Props, State> {
@@ -51,7 +51,7 @@ class DropdownBase extends Component<Props, State> {
     noArrow: false,
     theme: null,
     themeOverrides: {},
-    themeId: IDENTIFIERS.DROPDOWN,
+    themeId: IDENTIFIERS.DROPDOWN
   };
 
   constructor(props: Props) {
@@ -70,12 +70,14 @@ class DropdownBase extends Component<Props, State> {
       ),
       isMouseOverItems: false,
       isMouseOverRoot: false,
-      isOpen: false,
+      isOpen: false
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   componentWillUnmount() {
@@ -87,7 +89,9 @@ class DropdownBase extends Component<Props, State> {
   isOpen = () => {
     const { clickToOpen, isOpen } = this.props;
     const { isMouseOverItems, isMouseOverRoot } = this.state;
-    const isOpenBecauseOfHover = clickToOpen ? false : isMouseOverItems || isMouseOverRoot;
+    const isOpenBecauseOfHover = clickToOpen
+      ? false
+      : isMouseOverItems || isMouseOverRoot;
     return isOpen || this.state.isOpen || isOpenBecauseOfHover;
   };
 

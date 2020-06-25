@@ -37,7 +37,7 @@ export type BubbleProps = {
 
 type State = {
   composedTheme: Object,
-  position: ?BubblePosition
+  position: ?BubblePosition,
 };
 
 class BubbleBase extends Component<BubbleProps, State> {
@@ -57,7 +57,7 @@ class BubbleBase extends Component<BubbleProps, State> {
     noArrow: false,
     theme: null,
     themeId: IDENTIFIERS.BUBBLE,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
   constructor(props: BubbleProps) {
@@ -74,7 +74,7 @@ class BubbleBase extends Component<BubbleProps, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      position: null
+      position: null,
     };
   }
 
@@ -86,28 +86,23 @@ class BubbleBase extends Component<BubbleProps, State> {
     }, 0);
   }
 
-  componentWillReceiveProps(nextProps: BubbleProps) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
-  }
+  componentDidUpdate(prevProps: BubbleProps) {
+    const { isHidden } = this.props;
+    const didVisibilityChange = isHidden !== prevProps.isHidden;
+    const wasBubbleHidden = !prevProps.isHidden && isHidden;
 
-  componentWillUpdate(nextProps) {
-    const { isFloating } = this.props;
-    // Add listeners when the bubble
-    if (isFloating && !nextProps.isHidden && !this._hasEventListeners) {
+    if (prevProps.isFloating && !isHidden && !this._hasEventListeners) {
       this._handleScrollEventListener('add');
       addDocumentListeners(this._getDocumentEvents());
       window.addEventListener('resize', this._updatePosition);
       this._hasEventListeners = true;
     }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { isHidden } = this.props;
-    const didVisibilityChange = isHidden !== prevProps.isHidden;
-    const wasBubbleHidden = !prevProps.isHidden && isHidden;
-
     if (wasBubbleHidden) this._removeAllEventListeners();
     if (didVisibilityChange) this._updatePosition();
+
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   componentWillUnmount() {
@@ -143,10 +138,15 @@ class BubbleBase extends Component<BubbleProps, State> {
   _getFirstScrollableParent = (element: ElementRef<*>) => {
     if (element == null) return null;
     const { rootElement } = this;
-    const node = {}.hasOwnProperty.call(element, 'current') ? element.current : element;
+    const node = {}.hasOwnProperty.call(element, 'current')
+      ? element.current
+      : element;
 
     if (rootElement) {
-      if (node === rootElement.current || node.scrollHeight <= node.clientHeight) {
+      if (
+        node === rootElement.current ||
+        node.scrollHeight <= node.clientHeight
+      ) {
         return this._getFirstScrollableParent(node.parentElement);
       }
     }
@@ -158,7 +158,8 @@ class BubbleBase extends Component<BubbleProps, State> {
     const { isOpeningUpward, targetRef } = this.props;
     const { rootElement } = this;
 
-    let target = targetRef && typeof targetRef !== 'string' ? targetRef.current : null;
+    let target =
+      targetRef && typeof targetRef !== 'string' ? targetRef.current : null;
 
     // Without a target, try to fallback to the parent node
     if (!target) {
@@ -181,7 +182,7 @@ class BubbleBase extends Component<BubbleProps, State> {
     const position = {
       width: targetRect.width,
       positionX: targetRect.left,
-      positionY
+      positionY,
     };
     this.setState({ position });
   };
@@ -189,19 +190,13 @@ class BubbleBase extends Component<BubbleProps, State> {
   _getDocumentEvents() {
     return {
       resize: this._updatePosition,
-      scroll: this._updatePosition
+      scroll: this._updatePosition,
     };
   }
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin,
-      theme,
-      themeOverrides,
-      context,
-      ...rest
-    } = this.props;
+    const { skin, theme, themeOverrides, context, ...rest } = this.props;
 
     const BubbleSkin = skin || context.skins[IDENTIFIERS.BUBBLE];
 

@@ -47,7 +47,7 @@ type State = {
   isOpen: boolean,
   inputValue: string,
   mouseIsOverOptions: boolean,
-  selectedOptions: Array<any>,
+  selectedOptions: Array<any>
 };
 
 class AutocompleteBase extends Component<Props, State> {
@@ -108,8 +108,10 @@ class AutocompleteBase extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   clear = () => this._removeOptions();
@@ -121,16 +123,19 @@ class AutocompleteBase extends Component<Props, State> {
   close = () => this.setState({ isOpen: false });
 
   toggleOpen = () => {
-    if (this.state.isOpen && this.optionsElement && this.optionsElement.current) {
+    if (
+      this.state.isOpen &&
+      this.optionsElement &&
+      this.optionsElement.current
+    ) {
       // set Options scroll position to top on close
       this.optionsElement.current.scrollTop = 0;
     }
     this.setState({ isOpen: !this.state.isOpen });
-  }
+  };
 
-  toggleMouseLocation = () => (
-    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions })
-  );
+  toggleMouseLocation = () =>
+    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions });
 
   handleAutocompleteClick = () => {
     const { inputElement } = this;
@@ -142,17 +147,19 @@ class AutocompleteBase extends Component<Props, State> {
   };
 
   onKeyDown = (event: SyntheticKeyboardEvent<>) => {
-
-    if ( // Check for backspace in order to delete the last selected option
+    if (
+      // Check for backspace in order to delete the last selected option
       event.keyCode === 8 &&
       !event.target.value &&
       this.state.selectedOptions.length
     ) {
       // Remove last selected option
       this.removeOption(this.state.selectedOptions.length - 1, event);
-    } else if (event.keyCode === 27) { // ESCAPE key: Stops propagation & modal closing
+    } else if (event.keyCode === 27) {
+      // ESCAPE key: Stops propagation & modal closing
       event.stopPropagation();
-    } else if (event.keyCode === 13) { // ENTER key: Opens suggestions
+    } else if (event.keyCode === 13) {
+      // ENTER key: Opens suggestions
       this.open();
     }
   };
@@ -173,18 +180,20 @@ class AutocompleteBase extends Component<Props, State> {
   ) => {
     const { maxSelections, multipleSameSelections } = this.props;
     const { selectedOptions, filteredOptions, isOpen } = this.state;
-    const canMoreOptionsBeSelected = (
-      maxSelections != null ? selectedOptions.length < maxSelections : true
-    );
-    const areFilteredOptionsAvailable = filteredOptions && filteredOptions.length > 0;
+    const canMoreOptionsBeSelected =
+      maxSelections != null ? selectedOptions.length < maxSelections : true;
+    const areFilteredOptionsAvailable =
+      filteredOptions && filteredOptions.length > 0;
 
-    if (!maxSelections || (canMoreOptionsBeSelected && areFilteredOptionsAvailable)) {
+    if (
+      !maxSelections ||
+      (canMoreOptionsBeSelected && areFilteredOptionsAvailable)
+    ) {
       if (!selectedOption) return;
       const option = selectedOption.trim();
-      const optionCanBeSelected = (
+      const optionCanBeSelected =
         (selectedOptions.indexOf(option) < 0 && !multipleSameSelections) ||
-        multipleSameSelections
-      );
+        multipleSameSelections;
 
       if (option && optionCanBeSelected && isOpen) {
         const newSelectedOptions = _.concat(selectedOptions, option);
@@ -329,7 +338,7 @@ class AutocompleteBase extends Component<Props, State> {
       inputValue: filteredValue,
       filteredOptions
     });
-  }
+  };
 }
 
 export const Autocomplete = withTheme(AutocompleteBase);

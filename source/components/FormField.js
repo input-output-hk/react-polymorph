@@ -54,8 +54,10 @@ class FormFieldBase extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   setError = (error: string) => this.setState({ error });
@@ -63,7 +65,8 @@ class FormFieldBase extends Component<Props, State> {
   focusChild = () => {
     const { inputRef } = this.props;
     if (inputRef && inputRef.current) {
-      if (typeof inputRef.current.focus === 'function') inputRef.current.focus();
+      if (typeof inputRef.current.focus === 'function')
+        inputRef.current.focus();
     }
   };
 
