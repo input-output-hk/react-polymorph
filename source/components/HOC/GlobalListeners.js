@@ -9,7 +9,7 @@ import {
   addWindowListeners,
   removeDocumentListeners,
   removeWindowListeners,
-  targetIsDescendant
+  targetIsDescendant,
 } from '../../utils/events';
 
 type Props = {
@@ -21,25 +21,25 @@ type Props = {
   optionsRef?: ElementRef<*>,
   optionRenderer?: Function,
   rootRef?: ElementRef<*>,
-  toggleOpen: Function
+  toggleOpen: Function,
 };
 
 type State = {
-  optionsMaxHeight: number
+  optionsMaxHeight: number,
 };
 
 export class GlobalListeners extends Component<Props, State> {
   // define static properties
   static displayName = 'GlobalListeners';
   static defaultProps = {
-    optionsIsOpen: false
+    optionsIsOpen: false,
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      optionsMaxHeight: 300
+      optionsMaxHeight: 300,
     };
   }
 
@@ -97,11 +97,11 @@ export class GlobalListeners extends Component<Props, State> {
 
   _getDocumentListeners = () => ({
     click: this._handleDocumentClick,
-    scroll: this._handleDocumentScroll
+    scroll: this._handleDocumentScroll,
   });
 
   _getWindowListeners = () => ({
-    resize: this._handleWindowResize
+    resize: this._handleWindowResize,
   });
 
   _handleDocumentClick = (event: SyntheticMouseEvent<>) => {
@@ -130,11 +130,11 @@ export class GlobalListeners extends Component<Props, State> {
     const scrollListener = [
       'scroll',
       debounce(this._calculateOptionsMaxHeight, 300, { leading: true }),
-      true
+      true,
     ];
     const resizeListener = [
       'resize',
-      debounce(this._calculateOptionsMaxHeight, 300)
+      debounce(this._calculateOptionsMaxHeight, 300),
     ];
     document.addEventListener(...scrollListener);
     window.addEventListener(...resizeListener);
@@ -151,7 +151,7 @@ export class GlobalListeners extends Component<Props, State> {
       optionsRef,
       toggleOpen,
       mouseIsOverOptions,
-      mouseIsOverRoot
+      mouseIsOverRoot,
     } = this.props;
 
     // checks if Options are open & being scrolled upon via mouse position prior to toggling closed
