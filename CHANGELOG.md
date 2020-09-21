@@ -6,6 +6,12 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+0.9.5
+=====
+
+### Fixes
+- Replaced deprecated postinstall-build package with npm `prepare` lifecycle [PR 146](https://github.com/input-output-hk/react-polymorph/pull/146) 
+
 0.9.4
 =====
 
