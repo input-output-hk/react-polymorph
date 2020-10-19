@@ -15,6 +15,7 @@ import './Modal.stories';
 import './NumericInput.stories';
 import './Options.stories';
 import './PasswordInput.stories';
+import './PopOver.stories';
 import './ProgressBar.stories';
 import './Radio.stories';
 import './ScrollBar.stories';
