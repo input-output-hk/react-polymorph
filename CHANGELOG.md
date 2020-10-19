@@ -6,6 +6,13 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+0.9.6-rc.1
+=====
+
+### Features
+
+- Added `PopOver` component (aka Smart Tooltips) ([PR 150](https://github.com/input-output-hk/react-polymorph/pull/150)
+
 0.9.5
 =====
 
