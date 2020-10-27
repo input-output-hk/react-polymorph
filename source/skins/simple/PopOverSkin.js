@@ -1,6 +1,6 @@
 // @flow
 import Tippy from '@tippyjs/react';
-import { isString } from 'lodash';
+import { isString, merge } from 'lodash';
 import classnames from 'classnames';
 import Popper from 'popper.js';
 import React, { forwardRef, Node } from 'react';
@@ -30,6 +30,7 @@ export function PopOverSkin(props: PopOverProps) {
     content,
     contentClassName,
     isVisible,
+    popperOptions,
     theme,
     themeId,
     themeOverrides,
@@ -38,6 +39,7 @@ export function PopOverSkin(props: PopOverProps) {
   } = props;
   return (
     <Tippy
+      offset={[0, 14]}
       {...tippyProps}
       visible={isVisible}
       content={
@@ -67,6 +69,7 @@ export function PopOverSkin(props: PopOverProps) {
         },
       ]}
       popperOptions={{
+        ...popperOptions,
         modifiers: [
           {
             name: 'computeStyles',
@@ -75,7 +78,14 @@ export function PopOverSkin(props: PopOverProps) {
               gpuAcceleration: false, // true by default
             },
           },
-        ],
+          {
+            name: 'preventOverflow',
+            options: {
+              // Keep a 4px distance from the viewport edges
+              padding: 4,
+            },
+          },
+        ].concat(popperOptions.modifiers ?? []),
       }}
       cssVariables={themeVariables}
     >

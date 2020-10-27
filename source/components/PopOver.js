@@ -1,4 +1,5 @@
 // @flow
+import { PopperOptions } from 'popper.js';
 import React, {
   ComponentType,
   ReactElement,
@@ -34,6 +35,7 @@ export type PopOverProps = {
   content: ReactNode,
   context?: ThemeContextProp,
   isVisible?: boolean,
+  popperOptions: PopperOptions,
   skin?: ComponentType<any>,
   theme?: ?Object,
   themeId?: string,
@@ -68,4 +70,5 @@ PopOver.defaultProps = {
   themeId: IDENTIFIERS.POP_OVER,
   themeOverrides: {},
   themeVariables: {},
+  popperOptions: {},
 };

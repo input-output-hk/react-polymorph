@@ -42,11 +42,7 @@ storiesOf('PopOver', module)
 
   .add('allowHTML', () => (
     <div className={styles.container}>
-      <PopOver
-        isVisible
-        allowHTML
-        content="this is a tip containing <b>HTML</b>"
-      >
+      <PopOver allowHTML content="this is a tip containing <b>HTML</b>">
         HTML tip
       </PopOver>
     </div>
@@ -67,6 +63,25 @@ storiesOf('PopOver', module)
         }}
       >
         HTML tip
+      </PopOver>
+    </div>
+  ))
+  .add('popperOptions', () => (
+    <div className={styles.container}>
+      <PopOver
+        popperOptions={{
+          modifiers: [
+            {
+              name: 'preventOverflow',
+              options: {
+                padding: 20,
+              },
+            },
+          ],
+        }}
+        content="This tip should keep a 20px distance from the viewport edges"
+      >
+        distanced tip
       </PopOver>
     </div>
   ));
