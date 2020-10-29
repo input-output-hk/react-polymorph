@@ -6,7 +6,7 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
-0.9.6-rc.1
+0.9.6
 =====
 
 ### Features
