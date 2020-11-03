@@ -34,6 +34,7 @@ export type PopOverProps = {
   contentClassName?: string,
   content: ReactNode,
   context?: ThemeContextProp,
+  isShowingOnHover?: boolean,
   isVisible?: boolean,
   popperOptions: PopperOptions,
   skin?: ComponentType<any>,
@@ -66,6 +67,7 @@ export function PopOver(
 
 PopOver.defaultProps = {
   allowHTML: false,
+  isShowingOnHover: false,
   theme: null,
   themeId: IDENTIFIERS.POP_OVER,
   themeOverrides: {},
