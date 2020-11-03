@@ -8,14 +8,16 @@ import { getDisplayName } from '../../utils/props';
 export type ThemeContextProp = {
   skins: Object,
   theme: Object,
-  ROOT_THEME_API: Object
+  ROOT_THEME_API: Object,
 };
 
-export const createEmptyContext = (): ThemeContextProp => ({
-  skins: {},
-  theme: {},
-  ROOT_THEME_API: {}
-});
+export function createEmptyContext(): ThemeContextProp {
+  return {
+    skins: {},
+    theme: {},
+    ROOT_THEME_API: {},
+  };
+}
 
 // withTheme is a HOC that takes a Component as a parameter
 // and returns that Component wrapped within ThemeContext.Consumer.
@@ -27,14 +29,14 @@ export function withTheme<C: ComponentType<any>>(Component: C): C {
     // wraps component in context only
     WrappedComponent = (props: {}) => (
       <ThemeContext.Consumer>
-        {context => <Component context={context} {...props} />}
+        {(context) => <Component context={context} {...props} />}
       </ThemeContext.Consumer>
     );
   } else {
     // wraps component in context AND forwardRef
     WrappedComponent = forwardRef((props: {}, ref: Ref<any>) => (
       <ThemeContext.Consumer>
-        {context => <Component context={context} ref={ref} {...props} />}
+        {(context) => <Component context={context} ref={ref} {...props} />}
       </ThemeContext.Consumer>
     ));
   }
