@@ -26,7 +26,7 @@ storiesOf('Tooltip', module)
 
   .add('plain', () => (
     <div className={styles.container}>
-      <Tooltip tip="plain tooltip, nothing special about me">
+      <Tooltip isVisible tip="plain tooltip, nothing special about me">
         hover over me
       </Tooltip>
     </div>
