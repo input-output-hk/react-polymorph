@@ -4,14 +4,30 @@ import React, { useState } from 'react';
 
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
-import { Tooltip } from '../../components/Tooltip';
+import { PopOver } from '../../components/PopOver';
 import type { PasswordInputProps } from '../../components/PasswordInput';
+import { SimplePasswordInputVariables } from '../../themes/simple/SimplePasswordInput';
 import useDebouncedValueChangeIndicator from '../../utils/hooks';
 
 type Props = PasswordInputProps & {
   score: number,
   theme: Object,
 };
+
+function getPopOverBgColorForState(state: PasswordInput.STATE): string {
+  switch (state) {
+    case PasswordInput.STATE.ERROR:
+    case PasswordInput.STATE.INSECURE:
+      return `var(${SimplePasswordInputVariables.errorColor})`;
+    case PasswordInput.STATE.WEAK:
+      return `var(${SimplePasswordInputVariables.warningColor})`;
+    case PasswordInput.STATE.STRONG:
+      return `var(${SimplePasswordInputVariables.successColor})`;
+    case PasswordInput.STATE.DEFAULT:
+    default:
+      return 'var(--rp-pop-over-bg-color)';
+  }
+}
 
 export const PasswordInputSkin = (props: Props) => {
   const [hasInputFocus, setHasInputFocus] = useState(false);
@@ -43,17 +59,19 @@ export const PasswordInputSkin = (props: Props) => {
         className,
       ])}
     >
-      <Tooltip
-        arrowRelativeToTip
-        isCentered
-        isOpeningUpward={false}
+      <PopOver
         isShowingOnHover={hasTooltip && isShowingTooltipOnHover}
         isVisible={
           hasTooltip &&
           (isTooltipOpen || (isShowingTooltipOnFocus && hasInputFocus))
         }
-        tip={tooltip}
-        theme={props.theme}
+        content={tooltip}
+        themeVariables={{
+          '--rp-pop-over-bg-color': getPopOverBgColorForState(state),
+        }}
+        placement="bottom"
+        popperOptions={{ modifiers: [{ name: 'flip', enabled: false }] }}
+        duration={[300, 0]}
       >
         <Input
           {...inputProps}
@@ -65,7 +83,7 @@ export const PasswordInputSkin = (props: Props) => {
           onBlur={() => setHasInputFocus(false)}
           onFocus={() => setHasInputFocus(true)}
         />
-      </Tooltip>
+      </PopOver>
       <div className={theme[themeId].indicator}>
         <div
           className={theme[themeId].score}

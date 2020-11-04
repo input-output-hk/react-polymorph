@@ -68,7 +68,7 @@ export function PopOverSkin(props: PopOverProps) {
           defaultValue: {},
           fn(instance: Popper) {
             return {
-              onCreate() {
+              onAfterUpdate() {
                 const { cssVariables } = instance.props;
                 Object.keys(cssVariables).forEach((key) => {
                   instance.popper.style.setProperty(key, cssVariables[key]);

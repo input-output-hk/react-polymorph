@@ -19,6 +19,7 @@ import SimpleLink from './SimpleLink.scss';
 import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
+import { SimplePasswordInputDefaults } from './SimplePasswordInput';
 import SimplePasswordInput from './SimplePasswordInput.scss';
 import SimplePopOver from './SimplePopOver.scss';
 import SimpleProgressBar from './SimpleProgressBar.scss';
@@ -63,4 +64,8 @@ export const SimpleTheme = {
   [IDENTIFIERS.TEXT_AREA]: SimpleTextArea,
   [IDENTIFIERS.TOGGLER]: SimpleToggler,
   [IDENTIFIERS.TOOLTIP]: SimpleTooltip,
+};
+
+export const SimpleDefaults = {
+  ...SimplePasswordInputDefaults,
 };

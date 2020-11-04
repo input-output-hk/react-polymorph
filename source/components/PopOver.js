@@ -30,7 +30,7 @@ import { IDENTIFIERS } from './index';
 
 export type PopOverProps = {
   allowHTML?: boolean,
-  children: ReactElement<any>,
+  children?: ReactElement<any>,
   contentClassName?: string,
   content: ReactNode,
   context?: ThemeContextProp,

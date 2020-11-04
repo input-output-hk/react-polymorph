@@ -82,7 +82,6 @@ export const PasswordInput: StatelessFunctionalComponent<PasswordInputProps> = (
   const score = calculatePasswordScore(password, entropyFactor);
   const isValidPassword = password.length >= minLength;
   const isNotEmpty = password.length > 0;
-  const isRepeat = !!repeatPassword;
 
   if (error) {
     dynamicState = PasswordInput.STATE.ERROR;
