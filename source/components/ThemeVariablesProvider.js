@@ -19,5 +19,9 @@ export function ThemeVariablesProvider(props: ThemeVariablesProps) {
       });
     }
   });
-  return <div style={isRoot ? {} : props.variables}>{props.children}</div>;
+  return isRoot ? (
+    <>{props.children}</>
+  ) : (
+    <div style={props.variables}>{props.children}</div>
+  );
 }
