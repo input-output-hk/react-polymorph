@@ -32,8 +32,8 @@
   "peerDependencies": {
     "classnames": ">=2",
     "lodash": ">=4.17.11",
-    "react": ">=15.0.0 || <=16.8.6",
-    "react-dom": ">=15.0.0 || <=16.8.6"
+    "react": ">=16.8.6",
+    "react-dom": ">=16.8.6"
   },
   "devDependencies": {
     "@babel/cli": "7.7.4",
@@ -77,8 +77,8 @@
     "nodemon": "1.12.1",
     "prettier": "2.0.5",
     "prettier-eslint": "9.0.1",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "rimraf": "2.6.2",
     "sass-loader": "8.0.0",
     "style-loader": "1.0.1",
