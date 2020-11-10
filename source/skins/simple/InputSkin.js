@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import type { ElementRef, Element } from 'react';
+import React, { useState } from 'react';
+import type { ElementRef } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -9,9 +9,6 @@ import { isFunction } from 'lodash';
 // components
 import { FormField } from '../../components/FormField';
 import type { InputProps } from '../../components/Input';
-
-// skins
-import { FormFieldSkin } from './FormFieldSkin';
 
 // internal utility functions
 import { pickDOMProps } from '../../utils/props';
@@ -23,10 +20,19 @@ type Props = InputProps & {
 };
 
 export const InputSkin = (props: Props) => {
+  const [hasInputFocus, setHasInputFocus] = useState(false);
   const renderInput = () => (
     <input
       ref={props.inputRef}
       {...pickDOMProps(props)}
+      onBlur={(event) => {
+        setHasInputFocus(false);
+        props.onBlur?.(event);
+      }}
+      onFocus={(event) => {
+        setHasInputFocus(true);
+        props.onFocus?.(event);
+      }}
       className={classnames([
         props.theme[props.themeId].input,
         props.disabled ? props.theme[props.themeId].disabled : null,
@@ -62,9 +68,9 @@ export const InputSkin = (props: Props) => {
       className={props.className}
       disabled={props.disabled}
       label={props.label}
+      hasFocus={hasInputFocus}
       error={props.error}
       inputRef={props.inputRef}
-      skin={FormFieldSkin}
       theme={props.theme}
       render={render}
     />

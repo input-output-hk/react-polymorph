@@ -9,6 +9,7 @@ import SimpleButton from './SimpleButton.scss';
 import SimpleCheckbox from './SimpleCheckbox.scss';
 import SimpleDropdown from './SimpleDropdown.scss';
 import SimpleFlex from './SimpleFlex.scss';
+import { SimpleFormFieldDefaults } from './SimpleFormField';
 import SimpleFormField from './SimpleFormField.scss';
 import SimpleGrid from './SimpleGrid.scss';
 import SimpleGutter from './SimpleGutter.scss';
@@ -68,4 +69,5 @@ export const SimpleTheme = {
 
 export const SimpleDefaults = {
   ...SimplePasswordInputDefaults,
+  ...SimpleFormFieldDefaults,
 };

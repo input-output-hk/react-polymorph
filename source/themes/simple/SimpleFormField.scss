@@ -13,13 +13,6 @@ $formfield-label-text-color: var(--rp-formfield-label-text-color, #5e6066) !defa
 $formfield-label-text-color-disabled: var(--rp-formfield-label-text-color-disabled, $theme-color-disabled) !default;
 $formfield-label-margin: var(--rp-formfield-label-margin, 0 0 10px 0) !default;
 
-// error
-$formfield-error-text-color: var(--rp-formfield-error-text-color, rgba(#de3226, 0.5)) !default;
-$formfield-error-text-opacity: var(--rp-formfield-error-text-opacity, 1) !default;
-$formfield-error-font-family: var(--rp-formfield-error-font-family, $theme-font-regular) !default;
-$formfield-error-font-size: var(--rp-formfield-error-font-size, 14px) !default;
-$formfield-error-margin: var(--rp-formfield-error-margin, 1.5px 0 11.5px 0) !default;
-
 .root {
   background-color: $formfield-bg-color;
   position: relative;
@@ -32,16 +25,6 @@ $formfield-error-margin: var(--rp-formfield-error-margin, 1.5px 0 11.5px 0) !def
   font-size: $formfield-label-font-size;
   line-height: 1.38;
   margin: $formfield-label-margin;
-}
-
-.error {
-  color: $formfield-error-text-color;
-  float: right;
-  font-family: $formfield-error-font-family, sans-serif;
-  font-size: $formfield-error-font-size;
-  line-height: 1.36;
-  margin: $formfield-error-margin;
-  opacity: $formfield-error-text-opacity;
 }
 
 .inputWrapper {

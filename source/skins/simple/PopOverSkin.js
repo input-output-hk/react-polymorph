@@ -21,8 +21,6 @@ const PopOverWrapper = forwardRef(
         onMouseEnter={props.onMouseEnter}
         onMouseLeave={props.onMouseLeave}
         className={props.className}
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex="0"
         ref={ref}
       >
         {props.children}
@@ -50,6 +48,7 @@ export function PopOverSkin(props: PopOverProps) {
   return (
     <Tippy
       offset={[0, 14]}
+      maxWidth="none"
       {...tippyProps}
       visible={isVisible || (isShowingOnHover && isHovered)}
       content={

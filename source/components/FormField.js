@@ -15,28 +15,31 @@ type Props = {
   context: ThemeContextProp,
   disabled?: boolean,
   error?: string | Element<any>,
+  errorDebounceDelay?: number,
   inputRef?: ElementRef<*>,
   label?: string | Element<any>,
   render: Function,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
 };
 
 type State = {
   error: string,
-  composedTheme: Object
+  composedTheme: Object,
 };
 
 class FormFieldBase extends Component<Props, State> {
   // define static properties
   static displayName = 'FormField';
+
   static defaultProps = {
     context: createEmptyContext(),
+    errorDebounceDelay: 1000,
     theme: null,
     themeId: IDENTIFIERS.FORM_FIELD,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
   constructor(props: Props) {
@@ -50,7 +53,7 @@ class FormFieldBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
@@ -65,8 +68,9 @@ class FormFieldBase extends Component<Props, State> {
   focusChild = () => {
     const { inputRef } = this.props;
     if (inputRef && inputRef.current) {
-      if (typeof inputRef.current.focus === 'function')
+      if (typeof inputRef.current.focus === 'function') {
         inputRef.current.focus();
+      }
     }
   };
 

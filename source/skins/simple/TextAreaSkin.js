@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import type { ElementRef, Element } from 'react';
 
 // external libraries
@@ -27,16 +27,18 @@ type Props = {
   textareaRef?: ElementRef<'textarea'>,
   theme: Object,
   themeId: string,
-  value: string
+  value: string,
 };
 
 export const TextAreaSkin = (props: Props) => {
   const { theme, themeId } = props;
+  const [hasFocus, setHasFocus] = useState(false);
   return (
     <FormField
       className={props.className}
       disabled={props.disabled}
       label={props.label}
+      hasFocus={hasFocus}
       error={props.error}
       inputRef={props.textareaRef}
       skin={FormFieldSkin}
@@ -44,10 +46,18 @@ export const TextAreaSkin = (props: Props) => {
         <textarea
           ref={props.textareaRef}
           {...pickDOMProps(props)}
+          onBlur={(event) => {
+            setHasFocus(false);
+            props.onBlur?.(event);
+          }}
+          onFocus={(event) => {
+            setHasFocus(true);
+            props.onFocus?.(event);
+          }}
           className={classnames([
             theme[themeId].textarea,
             props.disabled ? theme[themeId].disabled : null,
-            props.error ? theme[themeId].errored : null
+            props.error ? theme[themeId].errored : null,
           ])}
         />
       )}

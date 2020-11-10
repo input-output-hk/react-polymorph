@@ -67,7 +67,7 @@ export function PopOver(
 
 PopOver.defaultProps = {
   allowHTML: false,
-  isShowingOnHover: false,
+  isShowingOnHover: true,
   theme: null,
   themeId: IDENTIFIERS.POP_OVER,
   themeOverrides: {},
