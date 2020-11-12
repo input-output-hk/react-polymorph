@@ -45,12 +45,13 @@ export function PopOverSkin(props: PopOverProps) {
     ...tippyProps
   } = props;
   const [isHovered, setIsHovered] = useState(false);
+  const hasContent = !!content && content !== '';
   return (
     <Tippy
       offset={[0, 14]}
       maxWidth="none"
       {...tippyProps}
-      visible={isVisible || (isShowingOnHover && isHovered)}
+      visible={hasContent && (isVisible || (isShowingOnHover && isHovered))}
       content={
         isString(content) && allowHTML ? (
           <span dangerouslySetInnerHTML={{ __html: content }} />

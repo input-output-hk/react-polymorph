@@ -47,6 +47,13 @@ storiesOf('PopOver', module)
       </PopOver>
     </div>
   ))
+
+  .add('empty', () => (
+    <div className={styles.container}>
+      <PopOver content="">Empty tooltips should not display</PopOver>
+    </div>
+  ))
+
   .add('theme variables', () => (
     <div className={styles.container}>
       <PopOver
