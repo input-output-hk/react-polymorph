@@ -17,7 +17,7 @@ import { composeFunctions } from '../utils/props';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
-type Props = {
+export type AutocompleteProps = {
   className?: string,
   context: ThemeContextProp,
   error: ?string,
@@ -25,6 +25,7 @@ type Props = {
   isOpeningUpward: boolean,
   label?: string | Element<any>,
   maxSelections?: number,
+  requiredSelections?: number,
   maxVisibleOptions: number,
   multipleSameSelections: boolean,
   onChange?: Function,
@@ -37,7 +38,7 @@ type Props = {
   sortAlphabetically: boolean,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
 };
 
 type State = {
@@ -47,10 +48,10 @@ type State = {
   isOpen: boolean,
   inputValue: string,
   mouseIsOverOptions: boolean,
-  selectedOptions: Array<any>
+  selectedOptions: Array<any>,
 };
 
-class AutocompleteBase extends Component<Props, State> {
+class AutocompleteBase extends Component<AutocompleteProps, State> {
   // declare ref types
   rootElement: ?Element<any>;
   inputElement: ?Element<'input'>;
@@ -67,13 +68,14 @@ class AutocompleteBase extends Component<Props, State> {
     maxVisibleOptions: 10, // max number of visible options
     multipleSameSelections: true, // if true then same word can be selected multiple times
     options: [],
+    requiredSelections: 0,
     sortAlphabetically: true, // options are sorted alphabetically by default
     theme: null,
     themeId: IDENTIFIERS.AUTOCOMPLETE,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
-  constructor(props: Props) {
+  constructor(props: AutocompleteProps) {
     super(props);
 
     // define refs
@@ -89,7 +91,7 @@ class AutocompleteBase extends Component<Props, State> {
       themeOverrides,
       sortAlphabetically,
       options,
-      preselectedOptions
+      preselectedOptions,
     } = props;
 
     this.state = {
@@ -104,11 +106,11 @@ class AutocompleteBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: AutocompleteProps) {
     if (prevProps !== this.props) {
       didThemePropsChange(prevProps, this.props, this.setState.bind(this));
     }
@@ -223,7 +225,7 @@ class AutocompleteBase extends Component<Props, State> {
   // associated with rendering this.state.selectedOptions, the user can call
   // this in the body of the renderSelections function
   getSelectionProps = ({
-    removeSelection
+    removeSelection,
   }: { removeSelection: Function } = {}) => {
     const { themeId } = this.props;
     const { inputValue, isOpen, selectedOptions, composedTheme } = this.state;
@@ -235,7 +237,7 @@ class AutocompleteBase extends Component<Props, State> {
       removeSelection: (index: number, event: SyntheticEvent<>) =>
         // the user's custom removeSelection event handler is composed with
         // the internal functionality of Autocomplete (this.removeOption)
-        composeFunctions(removeSelection, this.removeOption)(index, event)
+        composeFunctions(removeSelection, this.removeOption)(index, event),
     };
   };
 
@@ -336,7 +338,7 @@ class AutocompleteBase extends Component<Props, State> {
     this.setState({
       isOpen: true,
       inputValue: filteredValue,
-      filteredOptions
+      filteredOptions,
     });
   };
 }
