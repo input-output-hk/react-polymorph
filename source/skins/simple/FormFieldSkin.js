@@ -41,8 +41,8 @@ export function FormFieldSkin(props: Props) {
         </label>
       )}
       <PopOver
-        isShowingOnHover={hasError}
-        isVisible={hasError && isInputFocused}
+        isShowingOnHover={hasError && !props.isErrorHidden}
+        isVisible={hasError && isInputFocused && !props.isErrorHidden}
         content={props.error}
         themeVariables={{
           '--rp-pop-over-bg-color': `var(${SimpleFormFieldVariables.errorColor}`,

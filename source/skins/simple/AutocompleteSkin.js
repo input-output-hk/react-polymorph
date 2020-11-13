@@ -95,6 +95,7 @@ export const AutocompleteSkin = (props: Props) => {
       error={props.error}
       inputRef={props.inputRef}
       label={props.label}
+      isErrorHidden={props.isOpen}
       render={() => (
         <div
           className={classnames([
