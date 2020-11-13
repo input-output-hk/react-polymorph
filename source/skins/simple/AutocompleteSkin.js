@@ -95,16 +95,13 @@ export const AutocompleteSkin = (props: Props) => {
       error={props.error}
       inputRef={props.inputRef}
       label={props.label}
-      skin={FormFieldSkin}
       render={() => (
         <div
           className={classnames([
             theme.autocompleteContent,
             props.isOpen ? theme.opened : null,
-            props.selectedOptions.length
-              ? theme.hasSelectedWords
-              : null,
-            props.error ? theme.errored : null
+            props.selectedOptions.length ? theme.hasSelectedWords : null,
+            props.error ? theme.errored : null,
           ])}
           ref={props.suggestionsRef}
         >
@@ -131,7 +128,6 @@ export const AutocompleteSkin = (props: Props) => {
       ref={props.rootRef}
       role="presentation"
     >
-
       {renderContent()}
 
       <Options

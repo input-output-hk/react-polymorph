@@ -7,7 +7,7 @@ import { PasswordInput } from '../../components/PasswordInput';
 import { PopOver } from '../../components/PopOver';
 import type { PasswordInputProps } from '../../components/PasswordInput';
 import { SimplePasswordInputVariables } from '../../themes/simple/SimplePasswordInput';
-import useDebouncedValueChangeIndicator from '../../utils/hooks';
+import { useDebouncedValueChangedIndicator } from '../../utils/hooks';
 
 type Props = PasswordInputProps & {
   score: number,
@@ -48,7 +48,7 @@ export const PasswordInputSkin = (props: Props) => {
     ...inputProps
   } = props;
   const hasInitialValueChanged = useDebounce
-    ? useDebouncedValueChangeIndicator(value, debounceDelay)
+    ? useDebouncedValueChangedIndicator(value, debounceDelay)
     : true;
   const hasTooltip = hasInitialValueChanged && tooltip != null;
   return (

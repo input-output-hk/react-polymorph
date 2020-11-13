@@ -20,19 +20,10 @@ type Props = InputProps & {
 };
 
 export const InputSkin = (props: Props) => {
-  const [hasInputFocus, setHasInputFocus] = useState(false);
   const renderInput = () => (
     <input
       ref={props.inputRef}
       {...pickDOMProps(props)}
-      onBlur={(event) => {
-        setHasInputFocus(false);
-        props.onBlur?.(event);
-      }}
-      onFocus={(event) => {
-        setHasInputFocus(true);
-        props.onFocus?.(event);
-      }}
       className={classnames([
         props.theme[props.themeId].input,
         props.disabled ? props.theme[props.themeId].disabled : null,
@@ -68,7 +59,6 @@ export const InputSkin = (props: Props) => {
       className={props.className}
       disabled={props.disabled}
       label={props.label}
-      hasFocus={hasInputFocus}
       error={props.error}
       inputRef={props.inputRef}
       theme={props.theme}

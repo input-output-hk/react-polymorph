@@ -1,10 +1,7 @@
 // @flow
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Ref } from 'react';
 
-export default function useDebouncedValueChangedIndicator(
-  value: any,
-  delay: number
-) {
+export function useDebouncedValueChangedIndicator(value: any, delay: number) {
   const [isDirty, setIsDirty] = useState(false);
   useEffect(() => {
     if (value === '') {
@@ -22,4 +19,25 @@ export default function useDebouncedValueChangedIndicator(
   }, [value]);
 
   return isDirty;
+}
+
+export function isRefFocused(ref: Ref<*>) {
+  const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || !element.addEventListener) {
+      return;
+    }
+    const focusListener = () => setIsFocused(true);
+    const blurListener = () => setIsFocused(false);
+    element.addEventListener('focus', focusListener);
+    element.addEventListener('blur', blurListener);
+    return () => {
+      element.removeEventListener('focus', focusListener);
+      element.removeEventListener('blur', blurListener);
+    };
+  }, [ref.current]);
+
+  return isFocused;
 }

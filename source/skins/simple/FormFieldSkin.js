@@ -1,31 +1,26 @@
 // @flow
 import React from 'react';
-import type { Element } from 'react';
 import classnames from 'classnames';
+import type { FormFieldProps } from '../../components/FormField';
 import { PopOver } from '../../components/PopOver';
 import { SimpleFormFieldVariables } from '../../themes/simple/SimpleFormField';
-import useDebouncedValueChangeIndicator from '../../utils/hooks';
+import {
+  isRefFocused,
+  useDebouncedValueChangedIndicator,
+} from '../../utils/hooks';
 
-type Props = {
-  className: string,
-  disabled: boolean,
-  error: string | Element<any>,
-  hasFocus?: boolean,
+type Props = FormFieldProps & {
   focusChild: Function,
-  label: string | Element<any>,
-  onChange: Function,
-  render: Function,
   setError: Function,
-  theme: Object,
-  themeId: string,
 };
 
 export function FormFieldSkin(props: Props) {
-  const hasErrorChanged = useDebouncedValueChangeIndicator(
+  const hasErrorChanged = useDebouncedValueChangedIndicator(
     props.error,
     props.errorDebounceDelay
   );
   const hasError = hasErrorChanged && props.error != null;
+  const isInputFocused = isRefFocused(props.inputRef);
   return (
     <div
       className={classnames([
@@ -47,7 +42,7 @@ export function FormFieldSkin(props: Props) {
       )}
       <PopOver
         isShowingOnHover={hasError}
-        isVisible={hasError && props.hasFocus}
+        isVisible={hasError && isInputFocused}
         content={props.error}
         themeVariables={{
           '--rp-pop-over-bg-color': `var(${SimpleFormFieldVariables.errorColor}`,
