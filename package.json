@@ -59,6 +59,7 @@
     "enzyme-to-json": "3.3.4",
     "eslint": "7.9.0",
     "eslint-config-airbnb": "18.2.0",
+    "eslint-config-prettier": "6.15.0",
     "eslint-formatter-pretty": "4.0.0",
     "eslint-plugin-flowtype": "5.2.0",
     "eslint-plugin-flowtype-errors": "4.3.0",
