@@ -45,7 +45,9 @@ export function PopOverSkin(props: PopOverProps) {
     ...tippyProps
   } = props;
   const [isHovered, setIsHovered] = useState(false);
-  const hasContent = !!content && content !== '';
+  console.log(content);
+  const hasContent =
+    React.isValidElement(content) || (isString(content) && content !== '');
   return (
     <Tippy
       offset={[0, 14]}
