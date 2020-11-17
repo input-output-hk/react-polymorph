@@ -15,7 +15,6 @@ export type FormFieldProps = {
   context: ThemeContextProp,
   disabled?: boolean,
   error?: string | Element<any>,
-  errorDebounceDelay?: number,
   isErrorHidden?: boolean,
   inputRef?: ElementRef<*>,
   label?: string | Element<any>,
@@ -38,7 +37,6 @@ class FormFieldBase extends Component<FormFieldProps, State> {
 
   static defaultProps = {
     context: createEmptyContext(),
-    errorDebounceDelay: 1000,
     theme: null,
     themeId: IDENTIFIERS.FORM_FIELD,
     themeOverrides: {},

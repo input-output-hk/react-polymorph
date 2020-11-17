@@ -4,10 +4,7 @@ import classnames from 'classnames';
 import type { FormFieldProps } from '../../components/FormField';
 import { PopOver } from '../../components/PopOver';
 import { SimpleFormFieldVariables } from '../../themes/simple/SimpleFormField';
-import {
-  isRefFocused,
-  useDebouncedValueChangedIndicator,
-} from '../../utils/hooks';
+import { isRefFocused } from '../../utils/hooks';
 
 type Props = FormFieldProps & {
   focusChild: Function,
@@ -15,12 +12,8 @@ type Props = FormFieldProps & {
 };
 
 export function FormFieldSkin(props: Props) {
-  const hasErrorChanged = useDebouncedValueChangedIndicator(
-    props.error,
-    props.errorDebounceDelay
-  );
-  const hasError = hasErrorChanged && props.error != null;
   const isInputFocused = isRefFocused(props.inputRef);
+  const hasError = props.error != null;
   return (
     <div
       className={classnames([
