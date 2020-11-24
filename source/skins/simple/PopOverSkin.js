@@ -50,7 +50,6 @@ export function PopOverSkin(props: PopOverProps) {
   return (
     <Tippy
       offset={[0, 14]}
-      maxWidth="none"
       {...tippyProps}
       visible={hasContent && (isVisible || (isShowingOnHover && isHovered))}
       content={
