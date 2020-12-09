@@ -56,7 +56,8 @@ export const AutocompleteSkin = (props: Props) => {
     if (props.selectedOptions && props.renderSelections) {
       // call custom renderSelections function
       return props.renderSelections(props.getSelectionProps);
-    } else if (props.selectedOptions && !props.renderSelections) {
+    }
+    if (props.selectedOptions && !props.renderSelections) {
       // render default skin
       return props.selectedOptions.map((selectedOption, index) => (
         <span className={theme.selectedWordBox} key={index}>
@@ -90,6 +91,14 @@ export const AutocompleteSkin = (props: Props) => {
       ref={props.rootRef}
       role="presentation"
     >
+      {props.requiredSelections > 0 && props.requiredSelectionsInfo != null && (
+        <div className={theme.requiredWordsInfo}>
+          {props.requiredSelectionsInfo(
+            props.requiredSelections,
+            selectedOptionsCount
+          )}
+        </div>
+      )}
       <FormField
         error={error}
         inputRef={props.inputRef}

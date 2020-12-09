@@ -8,5 +8,6 @@ export const AUTOCOMPLETE_THEME_API = {
   selectedWordRemoveButton: '',
   hasSelectedWords: '',
   opened: '',
-  errored: ''
+  errored: '',
+  requiredWordsInfo: '',
 };

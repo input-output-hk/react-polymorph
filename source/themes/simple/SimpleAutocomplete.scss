@@ -11,6 +11,9 @@ $autocomplete-border-color-errored: var(--rp-autocomplete-border-color-errored, 
 $autocomplete-min-height: var(--rp-autocomplete-min-height, 90px) !default;
 $autocomplete-padding: var(--rp-autocomplete-padding, 5px 20px) !default;
 $autocomplete-width: var(--rp-autocomplete-width, 100%) !default;
+$autocomplete-required-words-font-family: var(--rp-autocomplete-required-words-font-family, $theme-font-regular, sans-serif) !default;
+$autocomplete-required-words-font-size: var(--rp-autocomplete-required-words-color, 14px) !default;
+$autocomplete-required-words-color: var(--rp-autocomplete-required-words-color, rgba(94, 96, 102, 0.5)) !default;
 
 // input
 $autocomplete-input-bg-color: var(--rp-autocomplete-input-bg-color, transparent) !default;
@@ -49,6 +52,7 @@ $autocomplete-selected-words-font-family: var(
 $autocomplete-selected-words-min-height: var(--rp-autocomplete-selected-words-min-height, 28px) !default;
 
 .autocompleteWrapper {
+  position: relative;
 }
 
 .autocompleteContent {
@@ -115,6 +119,15 @@ $autocomplete-selected-words-min-height: var(--rp-autocomplete-selected-words-mi
   cursor: pointer;
   margin-left: 8px;
   color: inherit;
+}
+
+.requiredWordsInfo {
+  position: absolute;
+  right: 0;
+  top: 9px;
+  font-family: $autocomplete-required-words-font-family;
+  font-size: $autocomplete-required-words-font-size;
+  color: $autocomplete-required-words-color;
 }
 
 // BEGIN SPECIAL STATES ---------- //

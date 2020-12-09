@@ -26,6 +26,7 @@ export type AutocompleteProps = {
   label?: string | Element<any>,
   maxSelections?: number,
   requiredSelections?: number,
+  requiredSelectionsInfo?: (required: number, actual: number) => string,
   maxVisibleOptions: number,
   multipleSameSelections: boolean,
   onChange?: Function,
