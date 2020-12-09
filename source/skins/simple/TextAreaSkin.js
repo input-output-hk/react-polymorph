@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import type { ElementRef, Element } from 'react';
 
 // external libraries
@@ -27,7 +27,7 @@ type Props = {
   textareaRef?: ElementRef<'textarea'>,
   theme: Object,
   themeId: string,
-  value: string
+  value: string,
 };
 
 export const TextAreaSkin = (props: Props) => {
@@ -47,7 +47,7 @@ export const TextAreaSkin = (props: Props) => {
           className={classnames([
             theme[themeId].textarea,
             props.disabled ? theme[themeId].disabled : null,
-            props.error ? theme[themeId].errored : null
+            props.error ? theme[themeId].errored : null,
           ])}
         />
       )}

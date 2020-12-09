@@ -3,7 +3,11 @@
   "extends": [
     "airbnb",
     "plugin:flowtype/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/babel",
+    "prettier/flowtype",
+    "prettier/react"
   ],
   "env": {
     "browser": true,
@@ -44,6 +48,7 @@
     "react/sort-comp": 0,
     "react/display-name": ["off", { "ignoreTranspilerName": false }],
     "react/default-props-match-prop-types": ["error", { "allowRequiredDefaults": true }],
+    "react/static-property-placement": 0,
     "class-methods-use-this": 0,
     "no-duplicate-imports": 0,
     "no-param-reassign": 0,

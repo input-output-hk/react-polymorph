@@ -9,6 +9,7 @@ $pop-over-padding: var(--rp-bubble-padding, 6px 12px) !default;
 $pop-over-arrow-size: var(--rp-pop-over-arrow-size, 16px) !default;
 $pop-over-bg-color: var(--rp-pop-over-bg-color, rgba(94, 96, 102, 0.9)) !default;
 $pop-over-text-color: var(--rp-pop-over-text-color, white) !default;
+$pop-over-line-height: var(--rp-pop-over-line-height, 19px) !default;
 $pop-over-border-width: var(--rp-pop-over-border-width, 1px) !default;
 $pop-over-border-radius: var(--rp-pop-over-border-radius, 4px) !default;
 $pop-over-border-style: var(--rp-pop-over-border-style, none) !default;
@@ -35,6 +36,7 @@ $pop-over-border-color: var(--rp-pop-over-border-color, transparent) !default;
 
   .tippy-content {
     position: relative;
+    line-height: $pop-over-line-height;
     z-index: 1
   }
 }

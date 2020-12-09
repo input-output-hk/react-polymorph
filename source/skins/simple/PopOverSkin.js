@@ -1,9 +1,9 @@
 // @flow
 import Tippy from '@tippyjs/react';
-import { isString, merge } from 'lodash';
+import { isString } from 'lodash';
 import classnames from 'classnames';
 import Popper from 'popper.js';
-import React, { forwardRef, Node } from 'react';
+import React, { forwardRef, Node, useState } from 'react';
 import type { PopOverProps } from '../../components/PopOver';
 
 const PopOverWrapper = forwardRef(
@@ -11,12 +11,18 @@ const PopOverWrapper = forwardRef(
     props: {
       children?: ?Node,
       className?: string,
+      onMouseEnter: () => void,
+      onMouseLeave: () => void,
     },
     ref
   ) => {
     return (
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-      <span className={props.className} tabIndex="0" ref={ref}>
+      <span
+        onMouseEnter={props.onMouseEnter}
+        onMouseLeave={props.onMouseLeave}
+        className={props.className}
+        ref={ref}
+      >
         {props.children}
       </span>
     );
@@ -29,6 +35,7 @@ export function PopOverSkin(props: PopOverProps) {
     children,
     content,
     contentClassName,
+    isShowingOnHover,
     isVisible,
     popperOptions,
     theme,
@@ -37,11 +44,14 @@ export function PopOverSkin(props: PopOverProps) {
     themeVariables,
     ...tippyProps
   } = props;
+  const [isHovered, setIsHovered] = useState(false);
+  const hasContent =
+    React.isValidElement(content) || (isString(content) && content !== '');
   return (
     <Tippy
       offset={[0, 14]}
       {...tippyProps}
-      visible={isVisible}
+      visible={hasContent && (isVisible || (isShowingOnHover && isHovered))}
       content={
         isString(content) && allowHTML ? (
           <span dangerouslySetInnerHTML={{ __html: content }} />
@@ -58,7 +68,7 @@ export function PopOverSkin(props: PopOverProps) {
           defaultValue: {},
           fn(instance: Popper) {
             return {
-              onCreate() {
+              onAfterUpdate() {
                 const { cssVariables } = instance.props;
                 Object.keys(cssVariables).forEach((key) => {
                   instance.popper.style.setProperty(key, cssVariables[key]);
@@ -89,7 +99,13 @@ export function PopOverSkin(props: PopOverProps) {
       }}
       cssVariables={themeVariables}
     >
-      <PopOverWrapper className={contentClassName}>{children}</PopOverWrapper>
+      <PopOverWrapper
+        className={contentClassName}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {children}
+      </PopOverWrapper>
     </Tippy>
   );
 }

@@ -10,36 +10,39 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
-type Props = {
+export type FormFieldProps = {
   className?: ?string,
   context: ThemeContextProp,
   disabled?: boolean,
   error?: string | Element<any>,
+  isErrorHidden?: boolean,
   inputRef?: ElementRef<*>,
   label?: string | Element<any>,
+  onChange: Function,
   render: Function,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
 };
 
 type State = {
   error: string,
-  composedTheme: Object
+  composedTheme: Object,
 };
 
-class FormFieldBase extends Component<Props, State> {
+class FormFieldBase extends Component<FormFieldProps, State> {
   // define static properties
   static displayName = 'FormField';
+
   static defaultProps = {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.FORM_FIELD,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
-  constructor(props: Props) {
+  constructor(props: FormFieldProps) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
@@ -50,11 +53,11 @@ class FormFieldBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: FormFieldProps) {
     if (prevProps !== this.props) {
       didThemePropsChange(prevProps, this.props, this.setState.bind(this));
     }
@@ -65,22 +68,15 @@ class FormFieldBase extends Component<Props, State> {
   focusChild = () => {
     const { inputRef } = this.props;
     if (inputRef && inputRef.current) {
-      if (typeof inputRef.current.focus === 'function')
+      if (typeof inputRef.current.focus === 'function') {
         inputRef.current.focus();
+      }
     }
   };
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin,
-      theme,
-      themeOverrides,
-      error,
-      context,
-      inputRef,
-      ...rest
-    } = this.props;
+    const { skin, theme, themeOverrides, error, context, ...rest } = this.props;
 
     const FormFieldSkin = skin || context.skins[IDENTIFIERS.FORM_FIELD];
 

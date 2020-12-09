@@ -30,10 +30,11 @@ import { IDENTIFIERS } from './index';
 
 export type PopOverProps = {
   allowHTML?: boolean,
-  children: ReactElement<any>,
+  children?: ReactElement<any>,
   contentClassName?: string,
   content: ReactNode,
   context?: ThemeContextProp,
+  isShowingOnHover?: boolean,
   isVisible?: boolean,
   popperOptions: PopperOptions,
   skin?: ComponentType<any>,
@@ -66,6 +67,7 @@ export function PopOver(
 
 PopOver.defaultProps = {
   allowHTML: false,
+  isShowingOnHover: true,
   theme: null,
   themeId: IDENTIFIERS.POP_OVER,
   themeOverrides: {},

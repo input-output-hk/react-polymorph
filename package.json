@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.9.6",
+  "version": "0.9.7-rc.6",
   "scripts": {
     "build": "cross-env yarn clean && yarn sass && yarn js",
     "build:watch": "concurrently 'yarn js:watch' 'yarn sass:watch'",
@@ -32,8 +32,8 @@
   "peerDependencies": {
     "classnames": ">=2",
     "lodash": ">=4.17.11",
-    "react": ">=15.0.0 || <=16.8.6",
-    "react-dom": ">=15.0.0 || <=16.8.6"
+    "react": ">=16.8.6",
+    "react-dom": ">=16.8.6"
   },
   "devDependencies": {
     "@babel/cli": "7.7.4",
@@ -59,6 +59,7 @@
     "enzyme-to-json": "3.3.4",
     "eslint": "7.9.0",
     "eslint-config-airbnb": "18.2.0",
+    "eslint-config-prettier": "6.15.0",
     "eslint-formatter-pretty": "4.0.0",
     "eslint-plugin-flowtype": "5.2.0",
     "eslint-plugin-flowtype-errors": "4.3.0",
@@ -77,8 +78,8 @@
     "nodemon": "1.12.1",
     "prettier": "2.0.5",
     "prettier-eslint": "9.0.1",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "rimraf": "2.6.2",
     "sass-loader": "8.0.0",
     "style-loader": "1.0.1",

@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import type { ElementRef, Element } from 'react';
+import React, { useState } from 'react';
+import type { ElementRef } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -9,9 +9,6 @@ import { isFunction } from 'lodash';
 // components
 import { FormField } from '../../components/FormField';
 import type { InputProps } from '../../components/Input';
-
-// skins
-import { FormFieldSkin } from './FormFieldSkin';
 
 // internal utility functions
 import { pickDOMProps } from '../../utils/props';
@@ -64,7 +61,6 @@ export const InputSkin = (props: Props) => {
       label={props.label}
       error={props.error}
       inputRef={props.inputRef}
-      skin={FormFieldSkin}
       theme={props.theme}
       render={render}
     />

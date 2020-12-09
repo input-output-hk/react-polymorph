@@ -6,6 +6,13 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+0.9.7
+=====
+
+### Features
+
+- Improve `FormField` UX by using pop overs to show errors ([PR 151](https://github.com/input-output-hk/react-polymorph/pull/151)
+
 0.9.6
 =====
 
