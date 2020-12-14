@@ -1,4 +1,5 @@
 // @flow
+import { some } from 'lodash';
 import React from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 import classnames from 'classnames';
@@ -195,13 +196,13 @@ storiesOf('Autocomplete', module)
   })
 
   .add(
-    'requiredSelections',
+    'requiredSelections [3]',
     withState({ error: null }, (store) => (
       <Autocomplete
         label="Required Selections"
         options={OPTIONS}
         placeholder="Enter mnemonic..."
-        requiredSelections={3}
+        requiredSelections={[3]}
         requiredSelectionsInfo={(required, actual) =>
           `${Math.min(actual, required)} of ${required} words selected`
         }
@@ -209,6 +210,31 @@ storiesOf('Autocomplete', module)
         error={store.state.error}
         onChange={(options) =>
           store.set({ error: options.length === 3 ? 'invalid mnemonic' : null })
+        }
+      />
+    ))
+  )
+
+  .add(
+    'requiredSelections [3, 5, 7]',
+    withState({ error: null }, (store) => (
+      <Autocomplete
+        label="Required Selections"
+        options={OPTIONS}
+        placeholder="Enter mnemonic..."
+        requiredSelections={[3, 5, 7]}
+        requiredSelectionsInfo={(required, actual) => `${actual} words entered`}
+        maxSelections={7}
+        error={store.state.error}
+        onChange={(options) =>
+          store.set({
+            error: some(
+              [3, 5, 7],
+              (requiredCount) => options.length === requiredCount
+            )
+              ? 'invalid mnemonic'
+              : null,
+          })
         }
       />
     ))

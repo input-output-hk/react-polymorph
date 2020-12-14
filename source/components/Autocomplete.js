@@ -25,7 +25,7 @@ export type AutocompleteProps = {
   isOpeningUpward: boolean,
   label?: string | Element<any>,
   maxSelections?: number,
-  requiredSelections?: number,
+  requiredSelections: [number],
   requiredSelectionsInfo?: (required: number, actual: number) => string,
   maxVisibleOptions: number,
   multipleSameSelections: boolean,
@@ -69,7 +69,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     maxVisibleOptions: 10, // max number of visible options
     multipleSameSelections: true, // if true then same word can be selected multiple times
     options: [],
-    requiredSelections: 0,
+    requiredSelections: [],
     sortAlphabetically: true, // options are sorted alphabetically by default
     theme: null,
     themeId: IDENTIFIERS.AUTOCOMPLETE,
