@@ -140,6 +140,7 @@ PasswordInput.defaultProps = {
   isShowingTooltipOnFocus: true,
   isShowingTooltipOnHover: true,
   minLength: 10,
+  maxLength: 255,
   minStrongScore: 0.75,
   readOnly: false,
   theme: null,
