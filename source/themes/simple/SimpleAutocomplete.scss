@@ -14,6 +14,7 @@ $autocomplete-width: var(--rp-autocomplete-width, 100%) !default;
 $autocomplete-required-words-font-family: var(--rp-autocomplete-required-words-font-family, $theme-font-regular, sans-serif) !default;
 $autocomplete-required-words-font-size: var(--rp-autocomplete-required-words-font-size, 14px) !default;
 $autocomplete-required-words-color: var(--rp-autocomplete-required-words-color, rgba(94, 96, 102, 0.5)) !default;
+$autocomplete-required-words-offset-top: var(--rp-autocomplete-required-words-offset-top, 9px) !default;
 
 // input
 $autocomplete-input-bg-color: var(--rp-autocomplete-input-bg-color, transparent) !default;
@@ -124,7 +125,7 @@ $autocomplete-selected-words-min-height: var(--rp-autocomplete-selected-words-mi
 .requiredWordsInfo {
   position: absolute;
   right: 0;
-  top: 9px;
+  top: $autocomplete-required-words-offset-top;
   font-family: $autocomplete-required-words-font-family;
   font-size: $autocomplete-required-words-font-size;
   color: $autocomplete-required-words-color;
