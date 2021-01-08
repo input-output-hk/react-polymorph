@@ -53,6 +53,7 @@ export const PasswordInput: StatelessFunctionalComponent<PasswordInputProps> = (
     entropyFactor,
     error,
     minLength,
+    maxLength,
     minStrongScore,
     isPasswordRepeat,
     repeatPassword,
@@ -80,7 +81,8 @@ export const PasswordInput: StatelessFunctionalComponent<PasswordInputProps> = (
   let passwordFeedback = null;
   const password = props.value;
   const score = calculatePasswordScore(password, entropyFactor);
-  const isValidPassword = password.length >= minLength;
+  const isValidPassword =
+    password.length >= minLength && password.length <= maxLength;
   const isNotEmpty = password.length > 0;
 
   if (error) {
