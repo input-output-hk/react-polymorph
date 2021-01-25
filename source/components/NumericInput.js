@@ -292,7 +292,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       };
     }
 
-    // Case: Dot was deleted with minimum fraction digits constrain defined
+    // Case: Decimal separator was deleted while number of decimal places specified
     const hasDecimalPlaces = decimalPlaces != null;
     const wasDecimalSeparatorRemoved =
       hadDecimalSeparatorBefore && !newNumberOfDecimalSeparators;
@@ -305,7 +305,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     }
 
     // Case: Valid change has been made
-    const hasNumberChanged = this.isDifferentValue(currentNumber, newNumber);
+    const hasNumberChanged = !this.isSameValue(currentNumber, newNumber);
     const groupSeparatorsDiff =
       this.getNumberOfGroupSeparators(formattedNewNumber) -
       this.getNumberOfGroupSeparators(newValue);
@@ -377,7 +377,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     return (value.match(escapedGlobalRegExp(decimalSeparator)) || []).length;
   }
 
-  isDifferentValue(first: ?BigNumber.Instance, second: ?BigNumber.Instance) {
+  isSameValue(first: ?BigNumber.Instance, second: ?BigNumber.Instance) {
     return BigNumber.isBigNumber(first)
       ? first.isEqualTo(second)
       : first === second;
