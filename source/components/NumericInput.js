@@ -153,7 +153,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     const { decimalSeparator, groupSeparator } = this.getBigNumberFormat();
     const changedCaretPosition = target.selectionStart;
     const valueToProcess = target.value;
-    const fallbackInputValue = this.state.fallbackInputValue || '';
+    const fallbackInputValue = this.state.fallbackInputValue;
     const isBackwardDelete = inputType === 'deleteContentBackward';
     const isForwardDelete = inputType === 'deleteContentForward';
     const isDeletion = isForwardDelete || isBackwardDelete;
@@ -209,9 +209,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
     const currentNumber = value;
     const currentValue =
-      currentNumber != null
-        ? this.bigNumberToFormattedString(currentNumber)
-        : fallbackInputValue;
+      fallbackInputValue ?? this.bigNumberToFormattedString(currentNumber);
 
     const currentNumberOfDecimalSeparators = this.getNumberOfDecimalSeparators(
       currentValue
@@ -261,6 +259,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       return {
         value: newNumber,
         caretPosition: newCaretPos,
+        fallbackInputValue: null,
       };
     }
 
@@ -363,21 +362,19 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     const { decimalSeparator, groupSeparator } = this.getBigNumberFormat();
     return new BigNumber(
       value
-        .replace(new RegExp(escapeRegExp(groupSeparator), 'g'), '')
-        .replace(new RegExp(escapeRegExp(decimalSeparator), 'g'), '.')
+        .replace(escapedGlobalRegExp(groupSeparator), '')
+        .replace(escapedGlobalRegExp(decimalSeparator), '.')
     );
   }
 
   getNumberOfGroupSeparators(value: string): number {
     const { groupSeparator } = this.getBigNumberFormat();
-    return (value.match(new RegExp(escapeRegExp(groupSeparator), 'g')) || [])
-      .length;
+    return (value.match(escapedGlobalRegExp(groupSeparator)) || []).length;
   }
 
   getNumberOfDecimalSeparators(value: string): number {
     const { decimalSeparator } = this.getBigNumberFormat();
-    return (value.match(new RegExp(escapeRegExp(decimalSeparator), 'g')) || [])
-      .length;
+    return (value.match(escapedGlobalRegExp(decimalSeparator)) || []).length;
   }
 
   isDifferentValue(first: ?BigNumber.Instance, second: ?BigNumber.Instance) {
@@ -425,3 +422,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 }
 
 export const NumericInput = withTheme(NumericInputBase);
+
+function escapedGlobalRegExp(regex) {
+  return new RegExp(escapeRegExp(regex), 'g');
+}
