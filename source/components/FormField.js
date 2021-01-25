@@ -16,6 +16,7 @@ export type FormFieldProps = {
   disabled?: boolean,
   error?: string | Element<any>,
   isErrorHidden?: boolean,
+  isErrorShown?: boolean,
   inputRef?: ElementRef<*>,
   label?: string | Element<any>,
   onChange: Function,

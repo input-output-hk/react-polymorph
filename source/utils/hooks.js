@@ -25,10 +25,10 @@ export function isRefFocused(ref: Ref<*>) {
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
-    const element = ref.current;
-    if (!element || !element.addEventListener) {
+    if (!ref || ref.current || !ref.current.addEventListener) {
       return;
     }
+    const element = ref.current;
     const focusListener = () => setIsFocused(true);
     const blurListener = () => setIsFocused(false);
     element.addEventListener('focus', focusListener);
@@ -37,7 +37,7 @@ export function isRefFocused(ref: Ref<*>) {
       element.removeEventListener('focus', focusListener);
       element.removeEventListener('blur', blurListener);
     };
-  }, [ref.current]);
+  }, [ref]);
 
   return isFocused;
 }

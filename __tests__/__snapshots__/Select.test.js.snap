@@ -10,15 +10,17 @@ exports[`Select isOpen={true} 1`] = `
     <div
       class="root"
     >
-      <div
-        class="inputWrapper"
-      >
-        <input
-          class="input"
-          readonly=""
-          value=""
-        />
-      </div>
+      <span>
+        <div
+          class="inputWrapper"
+        >
+          <input
+            class="input"
+            readonly=""
+            value=""
+          />
+        </div>
+      </span>
     </div>
   </div>
   <div
@@ -149,15 +151,17 @@ exports[`Select isOpeningUpward={true} 1`] = `
     <div
       class="root"
     >
-      <div
-        class="inputWrapper"
-      >
-        <input
-          class="input"
-          readonly=""
-          value=""
-        />
-      </div>
+      <span>
+        <div
+          class="inputWrapper"
+        >
+          <input
+            class="input"
+            readonly=""
+            value=""
+          />
+        </div>
+      </span>
     </div>
   </div>
   <div
@@ -288,15 +292,17 @@ exports[`Select renders correctly 1`] = `
     <div
       class="root"
     >
-      <div
-        class="inputWrapper"
-      >
-        <input
-          class="input"
-          readonly=""
-          value=""
-        />
-      </div>
+      <span>
+        <div
+          class="inputWrapper"
+        >
+          <input
+            class="input"
+            readonly=""
+            value=""
+          />
+        </div>
+      </span>
     </div>
   </div>
   <div
@@ -427,20 +433,17 @@ exports[`Select renders with an error 1`] = `
     <div
       class="root errored"
     >
-      <div
-        class="error"
-      >
-        Please select a different option
-      </div>
-      <div
-        class="inputWrapper"
-      >
-        <input
-          class="input errored"
-          readonly=""
-          value=""
-        />
-      </div>
+      <span>
+        <div
+          class="inputWrapper"
+        >
+          <input
+            class="input errored"
+            readonly=""
+            value=""
+          />
+        </div>
+      </span>
     </div>
   </div>
   <div
@@ -571,15 +574,17 @@ exports[`Select renders with disabled options 1`] = `
     <div
       class="root"
     >
-      <div
-        class="inputWrapper"
-      >
-        <input
-          class="input"
-          readonly=""
-          value=""
-        />
-      </div>
+      <span>
+        <div
+          class="inputWrapper"
+        >
+          <input
+            class="input"
+            readonly=""
+            value=""
+          />
+        </div>
+      </span>
     </div>
   </div>
   <div
@@ -699,16 +704,18 @@ exports[`Select renders with placeholder 1`] = `
     <div
       class="root"
     >
-      <div
-        class="inputWrapper"
-      >
-        <input
-          class="input"
-          placeholder="Select your country …"
-          readonly=""
-          value=""
-        />
-      </div>
+      <span>
+        <div
+          class="inputWrapper"
+        >
+          <input
+            class="input"
+            placeholder="Select your country …"
+            readonly=""
+            value=""
+          />
+        </div>
+      </span>
     </div>
   </div>
   <div
@@ -839,15 +846,17 @@ exports[`Select uses render prop - optionRenderer 1`] = `
     <div
       class="root"
     >
-      <div
-        class="inputWrapper"
-      >
-        <input
-          class="input"
-          readonly=""
-          value=""
-        />
-      </div>
+      <span>
+        <div
+          class="inputWrapper"
+        >
+          <input
+            class="input"
+            readonly=""
+            value=""
+          />
+        </div>
+      </span>
     </div>
   </div>
   <div
@@ -993,22 +1002,24 @@ exports[`Select uses render prop - valueRenderer 1`] = `
     <div
       class="root"
     >
-      <div
-        class="inputWrapper"
-      >
+      <span>
         <div
-          class="customValueWrapper"
+          class="inputWrapper"
         >
-          <input
-            class="input"
-            readonly=""
-            value=""
-          />
           <div
-            class="customValueBlock"
-          />
+            class="customValueWrapper"
+          >
+            <input
+              class="input"
+              readonly=""
+              value=""
+            />
+            <div
+              class="customValueBlock"
+            />
+          </div>
         </div>
-      </div>
+      </span>
     </div>
   </div>
   <div

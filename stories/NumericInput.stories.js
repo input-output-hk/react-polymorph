@@ -112,6 +112,16 @@ storiesOf('NumericInput', module)
     ))
   )
   .add(
+    'readOnly',
+    withState({ value: new BigNumber(2) }, (store) => (
+      <NumericInput
+        value={store.state.value}
+        onChange={(value) => store.set({ value })}
+        readOnly
+      />
+    ))
+  )
+  .add(
     'allowSigns = false',
     withState({ value: null }, (store) => (
       <NumericInput

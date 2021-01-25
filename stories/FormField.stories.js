@@ -4,6 +4,7 @@ import React from 'react';
 
 // storybook
 import { storiesOf } from '@storybook/react';
+import { FormField } from '../source/components/FormField';
 import { Input } from '../source/components/Input';
 
 // components
@@ -19,6 +20,15 @@ storiesOf('FormField', module)
 
   // ====== Stories ======
 
+  .add('error', () => (
+    <div style={{ width: '100px', border: '1px solid black', padding: '10px' }}>
+      <FormField
+        error="An error is shown"
+        render={() => <span>simple form field test</span>}
+        isErrorShown
+      />
+    </div>
+  ))
   .add(
     'input error',
     withState({ value: '' }, (store) => (

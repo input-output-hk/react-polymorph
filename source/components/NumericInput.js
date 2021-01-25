@@ -4,12 +4,7 @@ import React, { Component } from 'react';
 import BigNumber from 'bignumber.js';
 
 // $FlowFixMe
-import type {
-  ComponentType,
-  SyntheticInputEvent,
-  Element,
-  ElementRef,
-} from 'react';
+import type { SyntheticInputEvent, Element, ElementRef } from 'react';
 
 // external libraries
 import createRef from 'create-react-ref/lib/createRef';
@@ -20,30 +15,16 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 
 // import constants
 import { IDENTIFIERS } from '.';
-import type { ThemeContextProp } from './HOC/withTheme';
 import { removeCharAtPosition } from '../utils/strings';
 import type { InputEvent } from '../utils/types';
+import { Input } from './Input';
+import type { InputProps } from './Input';
 
-export type NumericInputProps = {
+export type NumericInputProps = InputProps & {
   allowSigns?: boolean,
-  autoFocus?: boolean,
   bigNumberFormat?: BigNumber.Format,
   decimalPlaces?: number,
   roundingMode?: BigNumber.RoundingMode,
-  className?: string,
-  context: ThemeContextProp,
-  disabled?: boolean,
-  error?: string,
-  label?: string | Element<any>,
-  onBlur?: Function,
-  onChange?: Function,
-  onFocus?: Function,
-  placeholder?: string,
-  readOnly?: boolean,
-  skin?: ComponentType<any>,
-  theme: ?Object,
-  themeId: string,
-  themeOverrides: Object,
   value: ?BigNumber.Instance,
 };
 
@@ -116,12 +97,8 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     }
   }
 
-  onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
-    event.preventDefault();
-    const { value, onChange, disabled } = this.props;
-    if (disabled) {
-      return;
-    }
+  onChange = (newValue, event: SyntheticInputEvent<Element<'input'>>) => {
+    const { value, onChange } = this.props;
     const result = this.processValueChange(event.nativeEvent);
     if (result) {
       this._hasInputBeenChanged = true;
@@ -338,10 +315,11 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     inputElement.current.focus();
   };
 
-  onBlur = () => {
+  onBlur = (event) => {
     this.setState({
       fallbackInputValue: null,
     });
+    this.props.onBlur?.(event);
   };
 
   getBigNumberFormat(): BigNumber.Config {
@@ -387,8 +365,6 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     // destructuring props ensures only the "...rest" get passed down
     const {
       context,
-      error,
-      numberLocaleOptions,
       onChange,
       skin,
       theme,
@@ -401,15 +377,12 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       throw new Error('Prop "value" must be of type BigNumber or null.');
     }
 
-    const InputSkin = skin || context.skins[IDENTIFIERS.INPUT];
-
     const inputValue = this.state.fallbackInputValue
       ? this.state.fallbackInputValue
       : this.bigNumberToFormattedString(value);
 
     return (
-      <InputSkin
-        error={error}
+      <Input
         inputRef={this.inputElement}
         onChange={this.onChange}
         theme={this.state.composedTheme}

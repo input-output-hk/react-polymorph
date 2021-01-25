@@ -4,13 +4,15 @@ exports[`FormField is disabled 1`] = `
 <div
   class="root disabled"
 >
-  <div
-    class="inputWrapper"
-  >
-    <span>
-      true
-    </span>
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <span>
+        true
+      </span>
+    </div>
+  </span>
 </div>
 `;
 
@@ -18,13 +20,15 @@ exports[`FormField renders an input element 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="render-prop"
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="render-prop"
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -32,13 +36,15 @@ exports[`FormField renders correctly 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
+  <span>
     <div
-      class="render-prop"
-    />
-  </div>
+      class="inputWrapper"
+    >
+      <div
+        class="render-prop"
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -46,18 +52,15 @@ exports[`FormField renders with an error 1`] = `
 <div
   class="root errored"
 >
-  <div
-    class="error"
-  >
-    Add an Error
-  </div>
-  <div
-    class="inputWrapper"
-  >
+  <span>
     <div
-      class="render-prop"
-    />
-  </div>
+      class="inputWrapper"
+    >
+      <div
+        class="render-prop"
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -72,12 +75,14 @@ exports[`FormField renders with label 1`] = `
   >
     Add a Label
   </label>
-  <div
-    class="inputWrapper"
-  >
+  <span>
     <div
-      class="render-prop"
-    />
-  </div>
+      class="inputWrapper"
+    >
+      <div
+        class="render-prop"
+      />
+    </div>
+  </span>
 </div>
 `;

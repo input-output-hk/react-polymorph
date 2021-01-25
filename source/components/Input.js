@@ -89,9 +89,8 @@ class InputBase extends Component<InputProps, State> {
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
-    const { onChange, disabled } = this.props;
-    if (disabled) return;
-
+    const { onChange, disabled, readOnly } = this.props;
+    if (disabled || readOnly) return;
     if (onChange) onChange(this._processValue(event.target.value), event);
   };
 
