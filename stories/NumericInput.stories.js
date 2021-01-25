@@ -62,6 +62,7 @@ storiesOf('NumericInput', module)
         }}
         decimalPlaces={2}
         value={store.state.value}
+        label="Numeric Input (2 decimal places, ',' as decimal separator, '.' as group separator)"
       />
     ))
   )
@@ -76,6 +77,7 @@ storiesOf('NumericInput', module)
         }}
         decimalPlaces={2}
         value={store.state.value}
+        label="Numeric Input (2 decimal places, '.' as decimal separator, space as group separator)"
       />
     ))
   )
