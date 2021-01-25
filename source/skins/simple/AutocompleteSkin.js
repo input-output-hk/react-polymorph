@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import type { ElementRef, Element } from 'react';
+import type { ElementRef } from 'react';
 
 // external libraries
-import _ from 'lodash';
+import { slice, some } from 'lodash';
 import classnames from 'classnames';
 import type { AutocompleteProps } from '../../components/Autocomplete';
 
@@ -38,7 +38,7 @@ type Props = AutocompleteProps & {
 export const AutocompleteSkin = (props: Props) => {
   const theme = props.theme[props.themeId];
 
-  const filteredAndLimitedOptions = _.slice(
+  const filteredAndLimitedOptions = slice(
     props.filteredOptions,
     0,
     props.maxVisibleOptions
@@ -56,7 +56,8 @@ export const AutocompleteSkin = (props: Props) => {
     if (props.selectedOptions && props.renderSelections) {
       // call custom renderSelections function
       return props.renderSelections(props.getSelectionProps);
-    } else if (props.selectedOptions && !props.renderSelections) {
+    }
+    if (props.selectedOptions && !props.renderSelections) {
       // render default skin
       return props.selectedOptions.map((selectedOption, index) => (
         <span className={theme.selectedWordBox} key={index}>
@@ -78,8 +79,10 @@ export const AutocompleteSkin = (props: Props) => {
   };
 
   const selectedOptionsCount = props.selectedOptions.length;
-  const hasSelectedRequiredNumberOfOptions =
-    selectedOptionsCount >= props.requiredSelections;
+  const hasSelectedRequiredNumberOfOptions = some(
+    props.requiredSelections,
+    (requiredCount) => selectedOptionsCount === requiredCount
+  );
   const error = hasSelectedRequiredNumberOfOptions ? props.error : null;
 
   return (
@@ -90,6 +93,15 @@ export const AutocompleteSkin = (props: Props) => {
       ref={props.rootRef}
       role="presentation"
     >
+      {props.requiredSelections.length > 0 &&
+        props.requiredSelectionsInfo != null && (
+          <div className={theme.requiredWordsInfo}>
+            {props.requiredSelectionsInfo(
+              props.requiredSelections,
+              selectedOptionsCount
+            )}
+          </div>
+        )}
       <FormField
         error={error}
         inputRef={props.inputRef}
