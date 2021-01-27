@@ -44,6 +44,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     allowSigns: true,
     context: createEmptyContext(),
     readOnly: false,
+    roundingMode: BigNumber.ROUND_FLOOR,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
     themeOverrides: {},
@@ -326,13 +327,13 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     return this.props.bigNumberFormat ?? BigNumber.config().FORMAT;
   }
 
-  bigNumberToFormattedString(number: BigNumber.Instance) {
+  bigNumberToFormattedString(number: ?BigNumber.Instance) {
     const { bigNumberFormat, decimalPlaces, roundingMode } = this.props;
-    const result = number.toFormat(decimalPlaces, roundingMode, {
+    const result = new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
       ...BigNumber.config().FORMAT, // defaults
       ...bigNumberFormat, // custom overrides
     });
-    return result === 'NaN' ? null : result;
+    return result === 'NaN' ? '' : result;
   }
 
   formattedValueToBigNumber(value: string) {
