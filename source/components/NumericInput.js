@@ -10,11 +10,9 @@ import type { SyntheticInputEvent, Element, ElementRef } from 'react';
 import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
-import { createEmptyContext, withTheme } from './HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
+import { withTheme } from './HOC/withTheme';
 
 // import constants
-import { IDENTIFIERS } from '.';
 import { removeCharAtPosition } from '../utils/strings';
 import type { InputEvent } from '../utils/types';
 import { Input } from './Input';
@@ -42,25 +40,15 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
   static defaultProps = {
     allowSigns: true,
-    context: createEmptyContext(),
     readOnly: false,
     roundingMode: BigNumber.ROUND_FLOOR,
-    theme: null,
-    themeId: IDENTIFIERS.INPUT,
-    themeOverrides: {},
     value: null,
   };
 
   constructor(props: NumericInputProps) {
     super(props);
-    const { context, themeId, theme, themeOverrides } = props;
     this.inputElement = createRef();
     this.state = {
-      composedTheme: composeTheme(
-        addThemeId(theme || context.theme, themeId),
-        addThemeId(themeOverrides, themeId),
-        context.ROOT_THEME_API
-      ),
       inputCaretPosition: 0,
       fallbackInputValue: null,
     };
@@ -93,9 +81,6 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       this.setInputCaretPosition(inputCaretPosition);
     }
     this._hasInputBeenChanged = false;
-    if (prevProps !== this.props) {
-      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
-    }
   }
 
   onChange = (newValue, event: SyntheticInputEvent<Element<'input'>>) => {
@@ -363,15 +348,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      context,
-      onChange,
-      skin,
-      theme,
-      themeOverrides,
-      value,
-      ...rest
-    } = this.props;
+    const { onChange, value, ...rest } = this.props;
 
     const inputValue = this.state.fallbackInputValue
       ? this.state.fallbackInputValue
@@ -381,9 +358,8 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       <Input
         inputRef={this.inputElement}
         onChange={this.onChange}
-        theme={this.state.composedTheme}
-        value={inputValue}
         onBlur={this.onBlur}
+        value={inputValue}
         {...rest}
       />
     );
