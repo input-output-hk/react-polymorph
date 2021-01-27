@@ -143,7 +143,17 @@ storiesOf('NumericInput', module)
       />
     ))
   )
-
+  .add(
+    'invalid value',
+    withState({ value: '' }, (store) => (
+      <NumericInput
+        value={store.state.value}
+        onChange={(value) => store.set({ value })}
+        placeholder="placeholder …"
+        label="Invalid values are ignored"
+      />
+    ))
+  )
   .add(
     'with error',
     withState({ value: null }, (store) => (
