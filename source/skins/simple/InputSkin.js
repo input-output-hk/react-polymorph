@@ -59,7 +59,7 @@ export const InputSkin = (props: Props) => {
       disabled={props.disabled}
       label={props.label}
       error={props.error}
-      inputRef={props.inputRef}
+      formFieldRef={props.inputRef}
       theme={props.theme}
       render={render}
     />

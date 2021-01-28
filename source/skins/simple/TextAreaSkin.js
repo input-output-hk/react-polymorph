@@ -38,7 +38,7 @@ export const TextAreaSkin = (props: Props) => {
       disabled={props.disabled}
       label={props.label}
       error={props.error}
-      inputRef={props.textareaRef}
+      formFieldRef={props.textareaRef}
       skin={FormFieldSkin}
       render={(setFormFieldRef) => (
         <textarea

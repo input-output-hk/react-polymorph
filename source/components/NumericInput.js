@@ -18,12 +18,14 @@ import type { InputEvent } from '../utils/types';
 import { Input } from './Input';
 import type { InputProps } from './Input';
 
+type NumericInputValue = null | number | string | BigNumber.Instance;
+
 export type NumericInputProps = InputProps & {
   allowSigns?: boolean,
   bigNumberFormat?: BigNumber.Format,
   decimalPlaces?: number,
   roundingMode?: BigNumber.RoundingMode,
-  value: ?BigNumber.Instance,
+  value: NumericInputValue,
 };
 
 type State = {
@@ -107,7 +109,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
   processValueChange(
     event: InputEvent
   ): ?{
-    value: ?BigNumber.Instance,
+    value: NumericInputValue,
     caretPosition: number,
     fallbackInputValue?: ?string,
   } {
@@ -148,7 +150,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     // Case: Everything was deleted -> reset state
     if (valueToProcess === '') {
       return {
-        value: null,
+        value: '',
         caretPosition: 0,
         fallbackInputValue: null,
       };
@@ -160,7 +162,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     // Case: Just minus sign was entered
     if (valueToProcess === '-') {
       return {
-        value: null,
+        value: '',
         caretPosition: 1,
         fallbackInputValue: '-',
       };
@@ -170,7 +172,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
      * ========= CLEAN THE INPUT =============
      */
 
-    const currentNumber = value;
+    const currentNumber = new BigNumber(value);
     const currentValue =
       fallbackInputValue ?? this.bigNumberToFormattedString(currentNumber);
 
@@ -210,7 +212,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     // Case: Just a decimal separator was entered
     if (valueToProcess === decimalSeparator) {
       return {
-        value: new BigNumber(0),
+        value: '0',
         caretPosition: 2,
         fallbackInputValue: decimalPlaces > 0 ? null : `0${decimalSeparator}`,
       };
@@ -220,7 +222,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     if (newValue.charAt(0) === decimalSeparator) {
       const newCaretPos = isInsert ? 2 : 1;
       return {
-        value: newNumber,
+        value: this.bigNumberToFixed(newNumber),
         caretPosition: newCaretPos,
         fallbackInputValue: null,
       };
@@ -235,7 +237,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
           changedCaretPosition +
           (isDeletion ? deleteAdjustment : insertAdjustment),
         fallbackInputValue,
-        value: currentNumber,
+        value: this.bigNumberToFixed(currentNumber),
       };
     }
 
@@ -247,7 +249,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       newValue.charAt(newValue.length - 1) === decimalSeparator
     ) {
       return {
-        value: newNumber,
+        value: this.bigNumberToFixed(newNumber),
         caretPosition: changedCaretPosition,
         fallbackInputValue:
           decimalPlaces > 0 ? null : formattedNewNumber + decimalSeparator,
@@ -263,7 +265,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       return {
         caretPosition: newCaretPosition + deleteCaretCorrection,
         fallbackInputValue: null,
-        value: currentNumber,
+        value: this.bigNumberToFixed(currentNumber),
       };
     }
 
@@ -283,7 +285,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     return {
       caretPosition: Math.max(newCaretPosition + caretCorrection, 0),
       fallbackInputValue: null,
-      value: newNumber,
+      value: this.bigNumberToFixed(newNumber),
     };
   }
 
@@ -319,6 +321,11 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       ...bigNumberFormat, // custom overrides
     });
     return result === 'NaN' ? '' : result;
+  }
+
+  bigNumberToFixed(number: BigNumber.Instance) {
+    const { decimalPlaces, roundingMode } = this.props;
+    return number.toFixed(decimalPlaces, roundingMode);
   }
 
   formattedValueToBigNumber(value: string) {

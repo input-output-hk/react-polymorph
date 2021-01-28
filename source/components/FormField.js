@@ -15,6 +15,7 @@ export type FormFieldProps = {
   context: ThemeContextProp,
   disabled?: boolean,
   error?: string | Element<any>,
+  formFieldRef: ElementRef<*>,
   isErrorHidden?: boolean,
   isErrorShown?: boolean,
   label?: string | Element<any>,
@@ -42,12 +43,14 @@ class FormFieldBase extends Component<FormFieldProps, State> {
     themeOverrides: {},
   };
 
-  formFieldRef: ElementRef<*> = React.createRef;
+  formFieldRef: ElementRef<*>;
 
   constructor(props: FormFieldProps) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
+
+    this.formFieldRef = props.formFieldRef ?? React.createRef();
 
     this.state = {
       error: '',
