@@ -17,10 +17,9 @@ export type FormFieldProps = {
   error?: string | Element<any>,
   isErrorHidden?: boolean,
   isErrorShown?: boolean,
-  inputRef?: ElementRef<*>,
   label?: string | Element<any>,
   onChange: Function,
-  render: Function,
+  render: (setFormFieldRef: (ElementRef<*>) => void) => React$Node,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
@@ -42,6 +41,8 @@ class FormFieldBase extends Component<FormFieldProps, State> {
     themeId: IDENTIFIERS.FORM_FIELD,
     themeOverrides: {},
   };
+
+  formFieldRef: ElementRef<*> = React.createRef;
 
   constructor(props: FormFieldProps) {
     super(props);
@@ -67,10 +68,10 @@ class FormFieldBase extends Component<FormFieldProps, State> {
   setError = (error: string) => this.setState({ error });
 
   focusChild = () => {
-    const { inputRef } = this.props;
-    if (inputRef && inputRef.current) {
-      if (typeof inputRef.current.focus === 'function') {
-        inputRef.current.focus();
+    const { formFieldRef } = this;
+    if (formFieldRef && formFieldRef.current) {
+      if (typeof formFieldRef.current.focus === 'function') {
+        formFieldRef.current.focus();
       }
     }
   };
@@ -86,6 +87,7 @@ class FormFieldBase extends Component<FormFieldProps, State> {
         error={error || this.state.error}
         setError={this.setError}
         theme={this.state.composedTheme}
+        formFieldRef={this.formFieldRef}
         focusChild={this.focusChild}
         {...rest}
       />

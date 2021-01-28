@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React from 'react';
 import type { ElementRef, Element } from 'react';
 
 // external libraries
@@ -40,9 +40,9 @@ export const TextAreaSkin = (props: Props) => {
       error={props.error}
       inputRef={props.textareaRef}
       skin={FormFieldSkin}
-      render={() => (
+      render={(setFormFieldRef) => (
         <textarea
-          ref={props.textareaRef}
+          ref={setFormFieldRef}
           {...pickDOMProps(props)}
           className={classnames([
             theme[themeId].textarea,

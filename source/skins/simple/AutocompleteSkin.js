@@ -79,10 +79,12 @@ export const AutocompleteSkin = (props: Props) => {
   };
 
   const selectedOptionsCount = props.selectedOptions.length;
-  const hasSelectedRequiredNumberOfOptions = some(
-    props.requiredSelections,
-    (requiredCount) => selectedOptionsCount === requiredCount
-  );
+  const hasSelectedRequiredNumberOfOptions =
+    props.requiredSelections.length === 0 ||
+    some(
+      props.requiredSelections,
+      (requiredCount) => selectedOptionsCount === requiredCount
+    );
   const error = hasSelectedRequiredNumberOfOptions ? props.error : null;
 
   return (
@@ -107,7 +109,7 @@ export const AutocompleteSkin = (props: Props) => {
         inputRef={props.inputRef}
         label={props.label}
         isErrorHidden={props.isOpen}
-        render={() => (
+        render={(setFormFieldRef) => (
           <div
             className={classnames([
               theme.autocompleteContent,
@@ -120,7 +122,7 @@ export const AutocompleteSkin = (props: Props) => {
             <div className={theme.selectedWords}>
               {renderSelectedOptions()}
               <input
-                ref={props.inputRef}
+                ref={setFormFieldRef}
                 placeholder={placeholder}
                 value={props.inputValue}
                 onChange={props.handleInputChange}
