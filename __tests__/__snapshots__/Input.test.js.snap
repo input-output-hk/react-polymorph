@@ -4,15 +4,17 @@ exports[`Input is readOnly 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input"
-      readonly=""
-      value=""
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input"
+        readonly=""
+        value=""
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -20,14 +22,16 @@ exports[`Input renders correctly 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input"
-      value=""
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input"
+        value=""
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -35,14 +39,16 @@ exports[`Input renders with a value 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input"
-      value="there is value"
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input"
+        value="there is value"
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -50,14 +56,16 @@ exports[`Input renders with placeholder 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input"
-      placeholder="0.0000"
-      value=""
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input"
+        placeholder="0.0000"
+        value=""
+      />
+    </div>
+  </span>
 </div>
 `;

@@ -4,15 +4,17 @@ exports[`NumericInput is disabled 1`] = `
 <div
   class="root disabled"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input disabled"
-      disabled=""
-      value=""
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input disabled"
+        disabled=""
+        value=""
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -20,15 +22,17 @@ exports[`NumericInput is readOnly 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input"
-      readonly=""
-      value=""
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input"
+        readonly=""
+        value=""
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -36,14 +40,16 @@ exports[`NumericInput renders correctly 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input"
-      value=""
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input"
+        value=""
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -51,14 +57,16 @@ exports[`NumericInput renders with a value 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input"
-      value="555.333"
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input"
+        value="555.333"
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -66,19 +74,16 @@ exports[`NumericInput renders with an error 1`] = `
 <div
   class="root errored"
 >
-  <div
-    class="error"
-  >
-    Invalid Amount
-  </div>
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input errored"
-      value=""
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input errored"
+        value=""
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -86,14 +91,16 @@ exports[`NumericInput renders with placeholder 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <input
-      class="input"
-      placeholder="0.0000"
-      value=""
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <input
+        class="input"
+        placeholder="0.0000"
+        value=""
+      />
+    </div>
+  </span>
 </div>
 `;

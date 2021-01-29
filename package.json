@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.9.7-rc.11",
+  "version": "0.9.7-rc.16",
   "scripts": {
     "build": "cross-env yarn clean && yarn sass && yarn js",
     "build:watch": "concurrently 'yarn js:watch' 'yarn sass:watch'",
@@ -49,6 +49,7 @@
     "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
     "babel-plugin-lodash": "3.3.4",
+    "bignumber.js": "9.0.1",
     "classnames": "2.2.5",
     "concurrently": "5.2.0",
     "cpy": "8.0.0",

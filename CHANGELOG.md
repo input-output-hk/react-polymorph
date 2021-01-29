@@ -8,6 +8,7 @@ vNext
 
 ### Features
 
+- Improve `NumericInput` component to support big numbers ([PR 152](https://github.com/input-output-hk/react-polymorph/pull/152))
 - Improve autocomplete required selections ux ([PR 154](https://github.com/input-output-hk/react-polymorph/pull/154))
 - Improve `FormField` UX by using pop overs to show errors ([PR 151](https://github.com/input-output-hk/react-polymorph/pull/151)
 

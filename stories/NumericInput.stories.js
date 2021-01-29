@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import BigNumber from 'bignumber.js';
 
 // storybook
 import { storiesOf } from '@storybook/react';
@@ -18,149 +19,176 @@ import themeOverrides from './theme-overrides/customInput.scss';
 import { decorateWithSimpleTheme } from './helpers/theming';
 
 storiesOf('NumericInput', module)
-
   .addDecorator(decorateWithSimpleTheme)
 
   // ====== Stories ======
 
-  .add('plain',
-    withState({ value: null }, store => (
+  .add(
+    'plain',
+    withState({ value: null }, (store) => (
       <NumericInput
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
         value={store.state.value}
       />
     ))
   )
-  .add('value (9999.99)',
-    withState({ value: 9999.99 }, store => (
+  .add(
+    'value (9999.99)',
+    withState({ value: new BigNumber(9999.99) }, (store) => (
       <NumericInput
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
         value={store.state.value}
       />
     ))
   )
-  .add('minimumFractionDigits (6)',
-    withState({ value: 0 }, store => (
+  .add(
+    'decimalPlaces (6)',
+    withState({ value: new BigNumber(0) }, (store) => (
       <NumericInput
-        onChange={value => store.set({ value })}
-        numberLocaleOptions={{ minimumFractionDigits: 6 }}
+        onChange={(value) => store.set({ value })}
+        decimalPlaces={6}
         value={store.state.value}
       />
     ))
   )
-  .add('maximumFractionDigits (6)',
-    withState({ value: 0 }, store => (
+  .add(
+    'format: decimal (comma) group (dot)',
+    withState({ value: new BigNumber(0) }, (store) => (
       <NumericInput
-        onChange={value => store.set({ value })}
-        numberLocaleOptions={{ maximumFractionDigits: 6 }}
-        value={store.state.value}
-      />
-    ))
-  )
-  .add('format: group (dot) fraction (comma)',
-    withState({ value: 0 }, store => (
-      <NumericInput
-        onChange={value => store.set({ value })}
-        numberFormat={{
+        onChange={(value) => store.set({ value })}
+        bigNumberFormat={{
           decimalSeparator: ',',
           groupSeparator: '.',
         }}
+        decimalPlaces={2}
         value={store.state.value}
+        label="Numeric Input (2 decimal places, ',' as decimal separator, '.' as group separator)"
       />
     ))
   )
-  .add('format: group (space) fraction (dot)',
-    withState({ value: 0 }, store => (
+  .add(
+    'format: decimal (dot) group (space)',
+    withState({ value: new BigNumber(0) }, (store) => (
       <NumericInput
-        onChange={value => store.set({ value })}
-        numberFormat={{
+        onChange={(value) => store.set({ value })}
+        bigNumberFormat={{
           decimalSeparator: '.',
           groupSeparator: ' ',
         }}
+        decimalPlaces={2}
         value={store.state.value}
+        label="Numeric Input (2 decimal places, '.' as decimal separator, space as group separator)"
       />
     ))
   )
-  .add('autoFocus',
-    withState({ value: null }, store => (
+  .add(
+    'autoFocus',
+    withState({ value: null }, (store) => (
       <NumericInput
         autoFocus
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
         value={store.state.value}
       />
     ))
   )
-  .add('label',
-    withState({ value: null }, store => (
+  .add(
+    'label',
+    withState({ value: null }, (store) => (
       <NumericInput
         label="Amount"
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
         value={store.state.value}
       />
     ))
   )
-  .add('placeholder',
-    withState({ value: null }, store => (
+  .add(
+    'placeholder',
+    withState({ value: null }, (store) => (
       <NumericInput
         value={store.state.value}
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
         placeholder="18.000000"
       />
     ))
   )
-  .add('allowSigns = false',
-    withState({ value: null }, store => (
+  .add(
+    'readOnly',
+    withState({ value: new BigNumber(2) }, (store) => (
       <NumericInput
         value={store.state.value}
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
+        readOnly
+      />
+    ))
+  )
+  .add(
+    'allowSigns = false',
+    withState({ value: null }, (store) => (
+      <NumericInput
+        value={store.state.value}
+        onChange={(value) => store.set({ value })}
         allowSigns={false}
       />
     ))
   )
-  .add('onFocus / onBlur',
-    withState({ value: null, focused: false, blurred: false }, store => (
+  .add(
+    'onFocus / onBlur',
+    withState({ value: null, focused: false, blurred: false }, (store) => (
       <NumericInput
         value={store.state.value}
         placeholder="onFocus / onBlur"
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
         onFocus={() => store.set({ focused: true, blurred: false })}
         onBlur={() => store.set({ blurred: true, focused: false })}
       />
     ))
   )
-
-  .add('with error',
-    withState({ value: null }, store => (
+  .add(
+    'invalid value',
+    withState({ value: '' }, (store) => (
+      <NumericInput
+        value={store.state.value}
+        onChange={(value) => store.set({ value })}
+        placeholder="placeholder …"
+        label="Invalid values are ignored"
+      />
+    ))
+  )
+  .add(
+    'with error',
+    withState({ value: null }, (store) => (
       <NumericInput
         label="Amount"
         error="Please enter a valid amount"
         value={store.state.value}
         placeholder="0.000000"
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
       />
     ))
   )
 
-  .add('theme overrides',
-    withState({ value: null }, store => (
+  .add(
+    'theme overrides',
+    withState({ value: null }, (store) => (
       <NumericInput
         label="Composed Theme"
         themeOverrides={themeOverrides}
         value={store.state.value}
         placeholder="0.000000"
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
       />
     ))
   )
 
-  .add('Custom Theme',
-    withState({ value: null }, store => (
+  .add(
+    'Custom Theme',
+    withState({ value: null }, (store) => (
       <NumericInput
         label="Amount"
         theme={CustomInputTheme}
         value={store.state.value}
         placeholder="0.000000"
-        onChange={value => store.set({ value })}
+        onChange={(value) => store.set({ value })}
       />
     ))
   );

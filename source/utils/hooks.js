@@ -1,5 +1,6 @@
 // @flow
-import { useEffect, useState, Ref } from 'react';
+import type { ElementRef } from 'react';
+import { useEffect, useState, Ref, useCallback } from 'react';
 
 export function useDebouncedValueChangedIndicator(value: any, delay: number) {
   const [isDirty, setIsDirty] = useState(false);
@@ -21,23 +22,24 @@ export function useDebouncedValueChangedIndicator(value: any, delay: number) {
   return isDirty;
 }
 
-export function isRefFocused(ref: Ref<*>) {
-  const [isFocused, setIsFocused] = useState(false);
+// Inspired by https://medium.com/@teh_builder/ref-objects-inside-useeffect-hooks-eb7c15198780
+export function handleRefFocusState(
+  ref: ElementRef<*>,
+  setIsFocused: React.SetStateAction
+) {
+  const focusListener = () => setIsFocused(true);
+  const blurListener = () => setIsFocused(false);
 
-  useEffect(() => {
-    const element = ref.current;
-    if (!element || !element.addEventListener) {
-      return;
+  return useCallback((node) => {
+    if (ref.current) {
+      const { current } = ref;
+      current.removeEventListener('focus', focusListener);
+      current.removeEventListener('blur', blurListener);
     }
-    const focusListener = () => setIsFocused(true);
-    const blurListener = () => setIsFocused(false);
-    element.addEventListener('focus', focusListener);
-    element.addEventListener('blur', blurListener);
-    return () => {
-      element.removeEventListener('focus', focusListener);
-      element.removeEventListener('blur', blurListener);
-    };
-  }, [ref.current]);
-
-  return isFocused;
+    if (node) {
+      node.addEventListener('focus', focusListener);
+      node.addEventListener('blur', blurListener);
+    }
+    ref.current = node;
+  }, []);
 }
