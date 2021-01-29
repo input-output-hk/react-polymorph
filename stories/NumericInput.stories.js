@@ -34,7 +34,7 @@ storiesOf('NumericInput', module)
   )
   .add(
     'value (9999.99)',
-    withState({ value: new BigNumber(9999.99) }, (store) => (
+    withState({ value: 9999.99 }, (store) => (
       <NumericInput
         onChange={(value) => store.set({ value })}
         value={store.state.value}
@@ -43,7 +43,7 @@ storiesOf('NumericInput', module)
   )
   .add(
     'decimalPlaces (6)',
-    withState({ value: new BigNumber(0) }, (store) => (
+    withState({ value: 0 }, (store) => (
       <NumericInput
         onChange={(value) => store.set({ value })}
         decimalPlaces={6}
@@ -53,7 +53,7 @@ storiesOf('NumericInput', module)
   )
   .add(
     'format: decimal (comma) group (dot)',
-    withState({ value: new BigNumber(0) }, (store) => (
+    withState({ value: 0 }, (store) => (
       <NumericInput
         onChange={(value) => store.set({ value })}
         bigNumberFormat={{
@@ -68,7 +68,7 @@ storiesOf('NumericInput', module)
   )
   .add(
     'format: decimal (dot) group (space)',
-    withState({ value: new BigNumber(0) }, (store) => (
+    withState({ value: 0 }, (store) => (
       <NumericInput
         onChange={(value) => store.set({ value })}
         bigNumberFormat={{
@@ -113,7 +113,7 @@ storiesOf('NumericInput', module)
   )
   .add(
     'readOnly',
-    withState({ value: new BigNumber(2) }, (store) => (
+    withState({ value: 2 }, (store) => (
       <NumericInput
         value={store.state.value}
         onChange={(value) => store.set({ value })}

@@ -106,7 +106,7 @@ export const AutocompleteSkin = (props: Props) => {
         )}
       <FormField
         error={error}
-        inputRef={props.inputRef}
+        formFieldRef={props.inputRef}
         label={props.label}
         isErrorHidden={props.isOpen}
         render={(setFormFieldRef) => (
