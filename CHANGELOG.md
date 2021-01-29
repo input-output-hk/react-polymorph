@@ -6,6 +6,9 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+0.9.7
+=====
+
 ### Features
 
 - Improve `NumericInput` component to support big numbers ([PR 152](https://github.com/input-output-hk/react-polymorph/pull/152))
