@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react';
 import { isString } from 'lodash';
 import classnames from 'classnames';
 import Popper from 'popper.js';
-import React, { forwardRef, Node, useState } from 'react';
+import React, { forwardRef, Node } from 'react';
 import type { PopOverProps } from '../../components/PopOver';
 
 const PopOverWrapper = forwardRef(
@@ -11,18 +11,11 @@ const PopOverWrapper = forwardRef(
     props: {
       children?: ?Node,
       className?: string,
-      onMouseEnter: () => void,
-      onMouseLeave: () => void,
     },
     ref
   ) => {
     return (
-      <span
-        onMouseEnter={props.onMouseEnter}
-        onMouseLeave={props.onMouseLeave}
-        className={props.className}
-        ref={ref}
-      >
+      <span className={props.className} ref={ref}>
         {props.children}
       </span>
     );
@@ -36,7 +29,6 @@ export function PopOverSkin(props: PopOverProps) {
     className,
     content,
     contentClassName,
-    isShowingOnHover,
     isVisible,
     popperOptions,
     theme,
@@ -45,14 +37,10 @@ export function PopOverSkin(props: PopOverProps) {
     themeVariables,
     ...tippyProps
   } = props;
-  const [isHovered, setIsHovered] = useState(false);
-  const hasContent =
-    React.isValidElement(content) || (isString(content) && content !== '');
   return (
     <Tippy
       offset={[0, 14]}
       {...tippyProps}
-      visible={hasContent && (isVisible || (isShowingOnHover && isHovered))}
       content={
         isString(content) && allowHTML ? (
           <span dangerouslySetInnerHTML={{ __html: content }} />
@@ -100,13 +88,7 @@ export function PopOverSkin(props: PopOverProps) {
       }}
       cssVariables={themeVariables}
     >
-      <PopOverWrapper
-        className={contentClassName}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {children}
-      </PopOverWrapper>
+      <PopOverWrapper className={contentClassName}>{children}</PopOverWrapper>
     </Tippy>
   );
 }

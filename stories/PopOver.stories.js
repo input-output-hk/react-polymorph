@@ -40,6 +40,14 @@ storiesOf('PopOver', module)
     </div>
   ))
 
+  .add('trigger: click', () => (
+    <div className={styles.container}>
+      <PopOver trigger="click" content="click again to hide me">
+        click me
+      </PopOver>
+    </div>
+  ))
+
   .add('allowHTML', () => (
     <div className={styles.container}>
       <PopOver allowHTML content="this is a tip containing <b>HTML</b>">
