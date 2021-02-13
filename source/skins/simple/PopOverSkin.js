@@ -37,10 +37,13 @@ export function PopOverSkin(props: PopOverProps) {
     themeVariables,
     ...tippyProps
   } = props;
+  const hasContent =
+    React.isValidElement(content) || (isString(content) && content !== '');
   return (
     <Tippy
       offset={[0, 14]}
       {...tippyProps}
+      visible={hasContent ? undefined : false}
       content={
         isString(content) && allowHTML ? (
           <span dangerouslySetInnerHTML={{ __html: content }} />
