@@ -18,8 +18,6 @@ import themeOverrides from './theme-overrides/customInput.scss';
 // helpers
 import { decorateWithSimpleTheme } from './helpers/theming';
 
-BigNumber.DEBUG = true;
-
 storiesOf('NumericInput', module)
   .addDecorator(decorateWithSimpleTheme)
 

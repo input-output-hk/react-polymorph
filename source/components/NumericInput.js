@@ -19,6 +19,7 @@ import { Input } from './Input';
 import type { InputProps } from './Input';
 
 type NumericInputValue = null | number | string | BigNumber.Instance;
+BigNumber.DEBUG = true;
 
 export type NumericInputProps = InputProps & {
   allowSigns?: boolean,
@@ -150,7 +151,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     // Case: Everything was deleted -> reset state
     if (valueToProcess === '') {
       return {
-        value: '',
+        value: null,
         caretPosition: 0,
         fallbackInputValue: null,
       };
@@ -162,7 +163,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     // Case: Just minus sign was entered
     if (valueToProcess === '-') {
       return {
-        value: '',
+        value: null,
         caretPosition: 1,
         fallbackInputValue: '-',
       };
@@ -172,9 +173,10 @@ class NumericInputBase extends Component<NumericInputProps, State> {
      * ========= CLEAN THE INPUT =============
      */
 
-    const currentNumber = value == null ? new BigNumber('0') : new BigNumber(value);
+    const currentNumber =
+      value == null ? new BigNumber('0') : new BigNumber(value);
     const currentValue =
-      fallbackInputValue ?? this.bigNumberToFormattedString(currentNumber);
+      fallbackInputValue ?? this.valueToFormattedString(currentNumber);
 
     const currentNumberOfDecimalSeparators = this.getNumberOfDecimalSeparators(
       currentValue
@@ -206,11 +208,9 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     /**
      * ========= PROCESS CLEANED INPUT =============
      */
-    const newNumber =
-      newValue === '' ? null : this.formattedValueToBigNumber(newValue);
 
     // Case: Just a decimal separator was entered
-    if (valueToProcess === decimalSeparator) {
+    if (newValue === decimalSeparator) {
       return {
         value: '0',
         caretPosition: 2,
@@ -228,6 +228,9 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       };
     }
 
+    const newNumber =
+      newValue === '' ? null : this.formattedValueToBigNumber(newValue);
+
     // Case: Invalid change has been made -> ignore it
     if (newNumber == null) {
       const deleteAdjustment = isBackwardDelete ? 0 : 1; // special cases when deleting dot
@@ -241,7 +244,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       };
     }
 
-    const formattedNewNumber = this.bigNumberToFormattedString(newNumber);
+    const formattedNewNumber = this.valueToFormattedString(newNumber);
 
     // Case: Dot was added at the end of number
     if (
@@ -314,14 +317,16 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     return this.props.bigNumberFormat ?? BigNumber.config().FORMAT;
   }
 
-  bigNumberToFormattedString(number: ?BigNumber.Instance) {
+  valueToFormattedString(number: NumericInputValue) {
     const { bigNumberFormat, decimalPlaces, roundingMode } = this.props;
-    if (number == null) return '';
-    const result = new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
-      ...BigNumber.config().FORMAT, // defaults
-      ...bigNumberFormat, // custom overrides
-    });
-    return result === 'NaN' ? '' : result;
+    try {
+      return new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
+        ...BigNumber.config().FORMAT, // defaults
+        ...bigNumberFormat, // custom overrides
+      });
+    } catch (e) {
+      return '';
+    }
   }
 
   bigNumberToFixed(number: BigNumber.Instance) {
@@ -360,10 +365,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
     const inputValue = this.state.fallbackInputValue
       ? this.state.fallbackInputValue
-      : this.bigNumberToFormattedString(value == null
-        ? null
-        : new BigNumber(value)
-      );
+      : this.valueToFormattedString(value);
 
     return (
       <Input
