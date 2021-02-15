@@ -172,7 +172,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
      * ========= CLEAN THE INPUT =============
      */
 
-    const currentNumber = new BigNumber(value);
+    const currentNumber = value == null ? new BigNumber('0') : new BigNumber(value);
     const currentValue =
       fallbackInputValue ?? this.bigNumberToFormattedString(currentNumber);
 
@@ -316,6 +316,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
   bigNumberToFormattedString(number: ?BigNumber.Instance) {
     const { bigNumberFormat, decimalPlaces, roundingMode } = this.props;
+    if (number == null) return '';
     const result = new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
       ...BigNumber.config().FORMAT, // defaults
       ...bigNumberFormat, // custom overrides
@@ -359,7 +360,10 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
     const inputValue = this.state.fallbackInputValue
       ? this.state.fallbackInputValue
-      : this.bigNumberToFormattedString(new BigNumber(value));
+      : this.bigNumberToFormattedString(value == null
+        ? null
+        : new BigNumber(value)
+      );
 
     return (
       <Input
