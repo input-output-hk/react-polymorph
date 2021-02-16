@@ -59,14 +59,14 @@ storiesOf('PopOver', module)
   .add('content element', () => (
     <div className={styles.container}>
       <PopOver
-        isVisible
+        visible
         content={
           <div style={{ border: '1px solid red' }}>
             This is tooltip is a react component
           </div>
         }
       >
-        Empty tooltips should not display
+        always visible with styled content element
       </PopOver>
     </div>
   ))

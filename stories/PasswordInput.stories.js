@@ -159,7 +159,6 @@ storiesOf('PasswordInput | Skin', module)
         <PasswordInput
           isShowingTooltipOnFocus
           isShowingTooltipOnHover
-          isTooltipOpen={false}
           label="Label"
           value={store.state.value}
           placeholder="Hint"

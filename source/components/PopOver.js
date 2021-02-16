@@ -35,7 +35,6 @@ export type PopOverProps = {
   contentClassName?: string,
   content: ReactNode,
   context?: ThemeContextProp,
-  isVisible?: boolean,
   popperOptions: PopperOptions,
   skin?: ComponentType<any>,
   theme?: ?Object,

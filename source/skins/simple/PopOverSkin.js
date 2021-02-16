@@ -29,12 +29,12 @@ export function PopOverSkin(props: PopOverProps) {
     className,
     content,
     contentClassName,
-    isVisible,
     popperOptions,
     theme,
     themeId,
     themeOverrides,
     themeVariables,
+    visible,
     ...tippyProps
   } = props;
   const hasContent =
@@ -42,8 +42,8 @@ export function PopOverSkin(props: PopOverProps) {
   return (
     <Tippy
       offset={[0, 14]}
-      visible={hasContent ? undefined : false}
       {...tippyProps}
+      visible={hasContent ? visible : false}
       content={
         isString(content) && allowHTML ? (
           <span dangerouslySetInnerHTML={{ __html: content }} />
