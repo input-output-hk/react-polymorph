@@ -6,6 +6,11 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+### Fixes
+
+- Fixed issues related to controlled/uncontrolled Tippy state ([PR 160](https://github.com/input-output-hk/react-polymorph/pull/160))
+- Fixed `NumericInput` to support DEBUG mode ([PR 159](https://github.com/input-output-hk/react-polymorph/pull/159))
+
 0.9.7
 =====
 
