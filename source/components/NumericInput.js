@@ -19,7 +19,6 @@ import { Input } from './Input';
 import type { InputProps } from './Input';
 
 type NumericInputValue = null | number | string | BigNumber.Instance;
-BigNumber.DEBUG = true;
 
 export type NumericInputProps = InputProps & {
   allowSigns?: boolean,
@@ -319,13 +318,17 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
   valueToFormattedString(number: NumericInputValue) {
     const { bigNumberFormat, decimalPlaces, roundingMode } = this.props;
+    const debugSetting = BigNumber.DEBUG;
     try {
+      BigNumber.DEBUG = true;
       return new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
         ...BigNumber.config().FORMAT, // defaults
         ...bigNumberFormat, // custom overrides
       });
     } catch (e) {
       return '';
+    } finally {
+      BigNumber.DEBUG = debugSetting;
     }
   }
 
