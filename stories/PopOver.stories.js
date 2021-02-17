@@ -77,6 +77,14 @@ storiesOf('PopOver', module)
     </div>
   ))
 
+  .add('delay', () => (
+    <div className={styles.container}>
+      <PopOver delay="500" content="This tooltip should be delayed by 500ms">
+        Hover me
+      </PopOver>
+    </div>
+  ))
+
   .add('theme variables', () => (
     <div className={styles.container}>
       <PopOver
