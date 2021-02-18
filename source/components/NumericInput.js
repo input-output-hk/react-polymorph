@@ -319,6 +319,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
   valueToFormattedString(number: NumericInputValue) {
     const { bigNumberFormat, decimalPlaces, roundingMode } = this.props;
     const debugSetting = BigNumber.DEBUG;
+    if (BigNumber.isBigNumber(number) && number.isNaN()) return '';
     try {
       BigNumber.DEBUG = true;
       return new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
