@@ -221,7 +221,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     if (newValue.charAt(0) === decimalSeparator) {
       const newCaretPos = isInsert ? 2 : 1;
       return {
-        value: this.bigNumberToFixed(newNumber),
+        value: this.bigNumberToFixed(new BigNumber(`0.${newValue.substr(1)}`)),
         caretPosition: newCaretPos,
         fallbackInputValue: null,
       };
