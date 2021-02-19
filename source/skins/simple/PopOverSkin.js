@@ -33,6 +33,7 @@ export function PopOverSkin(props: PopOverProps) {
   const {
     allowHTML,
     children,
+    className,
     content,
     contentClassName,
     isShowingOnHover,
@@ -59,7 +60,7 @@ export function PopOverSkin(props: PopOverProps) {
           content
         )
       }
-      className={classnames([theme[themeId].root])}
+      className={classnames([theme[themeId].root, className])}
       theme="polymorph"
       plugins={[
         {
