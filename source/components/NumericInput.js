@@ -168,6 +168,15 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       };
     }
 
+    // Case: Just minus sign was entered
+    if (valueToProcess === groupSeparator) {
+      return {
+        value: null,
+        caretPosition: 0,
+        fallbackInputValue: null,
+      };
+    }
+
     /**
      * ========= CLEAN THE INPUT =============
      */
