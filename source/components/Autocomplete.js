@@ -134,11 +134,11 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       // set Options scroll position to top on close
       this.optionsElement.current.scrollTop = 0;
     }
-    this.setState({ isOpen: !this.state.isOpen });
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
   };
 
   toggleMouseLocation = () =>
-    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions });
+    this.setState((prevState) => ({ mouseIsOverOptions: !prevState.mouseIsOverOptions }));
 
   handleAutocompleteClick = () => {
     const { inputElement } = this;
@@ -233,7 +233,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   };
 
   removeOption = (index: number, event: SyntheticEvent<>) => {
-    const selectedOptions = this.state.selectedOptions;
+    const { selectedOptions } = this.state;
     _.pullAt(selectedOptions, index);
     this.selectionChanged(selectedOptions, event);
     this.setState({ selectedOptions });
