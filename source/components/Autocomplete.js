@@ -64,7 +64,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   static defaultProps = {
     context: createEmptyContext(),
     error: null,
-    invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
+    invalidCharsRegex: /[^a-zA-Z0-9\s]/g, // only allow letters and numbers by default
     isOpeningUpward: false,
     maxVisibleOptions: 10, // max number of visible options
     multipleSameSelections: true, // if true then same word can be selected multiple times
@@ -170,6 +170,10 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   // onChange handler for input element in AutocompleteSkin
   handleInputChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
     this._setInputValue(event.target.value);
+    const multipleValues = event.target.value.split(' ');
+    if (multipleValues && multipleValues.length) {
+      this.updateSelectedOptions(event, multipleValues);
+    }
   };
 
   // passed to Options onChange handler in AutocompleteSkin
@@ -192,17 +196,29 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       !maxSelections ||
       (canMoreOptionsBeSelected && areFilteredOptionsAvailable)
     ) {
-      if (!selectedOption) return;
-      const option = selectedOption.trim();
-      const optionCanBeSelected =
-        (selectedOptions.indexOf(option) < 0 && !multipleSameSelections) ||
-        multipleSameSelections;
-
-      if (option && optionCanBeSelected && isOpen) {
-        const newSelectedOptions = _.concat(selectedOptions, option);
-        this.selectionChanged(newSelectedOptions, event);
-        this.setState({ selectedOptions: newSelectedOptions, isOpen: false });
+      if (!selectedOption || !selectedOption.length) return;
+      const option = _.isString(selectedOption) ? selectedOption.trim() : selectedOption;
+      let newSelectedOptions = [];
+      if (option && Array.isArray(option)) {
+        newSelectedOptions = selectedOptions;
+        option.forEach(item => {
+          const optionCanBeSelected =
+            (selectedOptions.indexOf(item) < 0 && !multipleSameSelections) ||
+            multipleSameSelections;
+          if (item && optionCanBeSelected && isOpen) {
+            newSelectedOptions = _.concat(newSelectedOptions, item);
+          }
+        });
+      } else {
+        const optionCanBeSelected =
+          (selectedOptions.indexOf(option) < 0 && !multipleSameSelections) ||
+          multipleSameSelections;
+        if (option && optionCanBeSelected && isOpen) {
+          newSelectedOptions = _.concat(selectedOptions, option);
+        }
       }
+      this.selectionChanged(newSelectedOptions, event);
+      this.setState({ selectedOptions: newSelectedOptions, isOpen: false });
     }
 
     this._setInputValue('');
@@ -334,13 +350,27 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   };
 
   _setInputValue = (value: string) => {
-    const filteredValue = this._filterInvalidChars(value);
-    const filteredOptions = this._filterOptions(filteredValue);
-    this.setState({
-      isOpen: true,
-      inputValue: filteredValue,
-      filteredOptions,
-    });
+    const multipleValues = value.split(' ');
+    if (multipleValues && multipleValues.length > 1) {
+      let filteredOptions = [];
+      multipleValues.forEach(itemValue => {
+        const filteredValue = this._filterInvalidChars(itemValue);
+        filteredOptions = _.concat(filteredOptions, this._filterOptions(filteredValue));
+      });
+      this.setState({
+        isOpen: true,
+        inputValue: '',
+        filteredOptions,
+      });
+    } else {
+      const filteredValue = this._filterInvalidChars(value);
+      const filteredOptions = this._filterOptions(filteredValue);
+      this.setState({
+        isOpen: true,
+        inputValue: filteredValue,
+        filteredOptions,
+      });
+    }
   };
 }
 
