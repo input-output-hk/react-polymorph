@@ -171,7 +171,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   handleInputChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
     this._setInputValue(event.target.value);
     const multipleValues = event.target.value.split(' ');
-    if (multipleValues && multipleValues.length) {
+    if (multipleValues && multipleValues.length > 1) {
       this.updateSelectedOptions(event, multipleValues);
     }
   };
