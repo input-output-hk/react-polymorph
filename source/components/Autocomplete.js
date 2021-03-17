@@ -199,13 +199,21 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       if (!selectedOption || !selectedOption.length) return;
       const option = _.isString(selectedOption) ? selectedOption.trim() : selectedOption;
       let newSelectedOptions = [];
+      let skipValuesSelection = false;
       if (option && Array.isArray(option)) {
         newSelectedOptions = selectedOptions;
         option.forEach(item => {
           const optionCanBeSelected =
-            (selectedOptions.indexOf(item) < 0 && !multipleSameSelections) ||
+            (selectedOptions.indexOf(item) < 0 &&
+              newSelectedOptions.indexOf(item) < 0 &&
+              filteredOptions.indexOf(item) &&
+              !multipleSameSelections) ||
             multipleSameSelections;
-          if (item && optionCanBeSelected && isOpen) {
+          if (filteredOptions.indexOf(item) < 0) {
+            skipValuesSelection = true;
+            return;
+          }
+          if (item && optionCanBeSelected && isOpen && !skipValuesSelection) {
             newSelectedOptions = _.concat(newSelectedOptions, item);
           }
         });
