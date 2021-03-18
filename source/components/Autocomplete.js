@@ -198,11 +198,12 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     ) {
       if (!selectedOption || !selectedOption.length) return;
       const option = _.isString(selectedOption) ? selectedOption.trim() : selectedOption;
-      let newSelectedOptions: Array<any> = [];
+      let newSelectedOptions: Array<string> = [];
       if (option && Array.isArray(option)) {
         newSelectedOptions = [...selectedOptions];
         option.forEach(item => {
-          const optionCanBeSelected = filteredOptions.includes(item) &&
+          const optionCanBeSelected = multipleSameSelections ||
+            filteredOptions.includes(item) &&
             !selectedOptions.includes(item) &&
             !newSelectedOptions.includes(item);
           if (!optionCanBeSelected && !skipValueSelection) {
