@@ -191,45 +191,42 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       maxSelections != null ? selectedOptions.length < maxSelections : true;
     const areFilteredOptionsAvailable =
       filteredOptions && filteredOptions.length > 0;
-
+    let skipValueSelection = false;
     if (
       !maxSelections ||
       (canMoreOptionsBeSelected && areFilteredOptionsAvailable)
     ) {
       if (!selectedOption || !selectedOption.length) return;
       const option = _.isString(selectedOption) ? selectedOption.trim() : selectedOption;
-      let newSelectedOptions = [];
-      let skipValuesSelection = false;
+      let newSelectedOptions: Array<any> = [];
       if (option && Array.isArray(option)) {
-        newSelectedOptions = selectedOptions;
+        newSelectedOptions = [...selectedOptions];
         option.forEach(item => {
-          const optionCanBeSelected =
-            (selectedOptions.indexOf(item) < 0 &&
-              newSelectedOptions.indexOf(item) < 0 &&
-              filteredOptions.indexOf(item) &&
-              !multipleSameSelections) ||
-            multipleSameSelections;
-          if (filteredOptions.indexOf(item) < 0) {
-            skipValuesSelection = true;
+          const optionCanBeSelected = filteredOptions.includes(item) &&
+            !selectedOptions.includes(item) &&
+            !newSelectedOptions.includes(item);
+          if (!optionCanBeSelected && !skipValueSelection) {
+            this._setInputValue(item, true);
+            skipValueSelection = true;
             return;
           }
-          if (item && optionCanBeSelected && isOpen && !skipValuesSelection) {
-            newSelectedOptions = _.concat(newSelectedOptions, item);
+          if (item && optionCanBeSelected && isOpen && !skipValueSelection) {
+            newSelectedOptions.push(item);
           }
         });
       } else {
-        const optionCanBeSelected =
-          (selectedOptions.indexOf(option) < 0 && !multipleSameSelections) ||
-          multipleSameSelections;
+        const optionCanBeSelected = multipleSameSelections ||
+          !selectedOptions.includes(option);
         if (option && optionCanBeSelected && isOpen) {
-          newSelectedOptions = _.concat(selectedOptions, option);
+          newSelectedOptions.push(option);
         }
       }
       this.selectionChanged(newSelectedOptions, event);
       this.setState({ selectedOptions: newSelectedOptions, isOpen: false });
     }
-
-    this._setInputValue('');
+    if (!skipValueSelection) {
+      this._setInputValue('');
+    }
   };
 
   removeOption = (index: number, event: SyntheticEvent<>) => {
@@ -357,13 +354,13 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     return filteredValue;
   };
 
-  _setInputValue = (value: string) => {
+  _setInputValue = (value: string, shouldFocus?: boolean) => {
     const multipleValues = value.split(' ');
     if (multipleValues && multipleValues.length > 1) {
-      let filteredOptions = [];
+      const filteredOptions = [];
       multipleValues.forEach(itemValue => {
         const filteredValue = this._filterInvalidChars(itemValue);
-        filteredOptions = _.concat(filteredOptions, this._filterOptions(filteredValue));
+        filteredOptions.push(this._filterOptions(filteredValue));
       });
       this.setState({
         isOpen: true,
@@ -378,6 +375,9 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
         inputValue: filteredValue,
         filteredOptions,
       });
+      setTimeout(() => {
+        if (shouldFocus) this.focus();
+      }, 0);
     }
   };
 }
