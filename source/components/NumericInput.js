@@ -19,7 +19,6 @@ import { Input } from './Input';
 import type { InputProps } from './Input';
 
 type NumericInputValue = null | number | string | BigNumber.Instance;
-BigNumber.DEBUG = true;
 
 export type NumericInputProps = InputProps & {
   allowSigns?: boolean,
@@ -169,6 +168,15 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       };
     }
 
+    // Case: Just minus sign was entered
+    if (valueToProcess === groupSeparator) {
+      return {
+        value: null,
+        caretPosition: 0,
+        fallbackInputValue: null,
+      };
+    }
+
     /**
      * ========= CLEAN THE INPUT =============
      */
@@ -222,7 +230,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     if (newValue.charAt(0) === decimalSeparator) {
       const newCaretPos = isInsert ? 2 : 1;
       return {
-        value: this.bigNumberToFixed(newNumber),
+        value: this.bigNumberToFixed(new BigNumber(`0.${newValue.substr(1)}`)),
         caretPosition: newCaretPos,
         fallbackInputValue: null,
       };
@@ -319,13 +327,18 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
   valueToFormattedString(number: NumericInputValue) {
     const { bigNumberFormat, decimalPlaces, roundingMode } = this.props;
+    const debugSetting = BigNumber.DEBUG;
+    if (BigNumber.isBigNumber(number) && number.isNaN()) return '';
     try {
+      BigNumber.DEBUG = true;
       return new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
         ...BigNumber.config().FORMAT, // defaults
         ...bigNumberFormat, // custom overrides
       });
     } catch (e) {
       return '';
+    } finally {
+      BigNumber.DEBUG = debugSetting;
     }
   }
 

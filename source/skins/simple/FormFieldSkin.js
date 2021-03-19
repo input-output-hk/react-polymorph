@@ -40,8 +40,7 @@ export function FormFieldSkin(props: Props) {
         </label>
       )}
       <PopOver
-        isShowingOnHover={hasError && !props.isErrorHidden}
-        isVisible={
+        visible={
           props.isErrorShown ||
           (hasError && isFormFieldFocused && !props.isErrorHidden)
         }

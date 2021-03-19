@@ -40,6 +40,14 @@ storiesOf('PopOver', module)
     </div>
   ))
 
+  .add('trigger: click', () => (
+    <div className={styles.container}>
+      <PopOver trigger="click" content="click again to hide me">
+        click me
+      </PopOver>
+    </div>
+  ))
+
   .add('allowHTML', () => (
     <div className={styles.container}>
       <PopOver allowHTML content="this is a tip containing <b>HTML</b>">
@@ -51,14 +59,14 @@ storiesOf('PopOver', module)
   .add('content element', () => (
     <div className={styles.container}>
       <PopOver
-        isVisible
+        visible
         content={
           <div style={{ border: '1px solid red' }}>
             This is tooltip is a react component
           </div>
         }
       >
-        Empty tooltips should not display
+        always visible with styled content element
       </PopOver>
     </div>
   ))
@@ -66,6 +74,14 @@ storiesOf('PopOver', module)
   .add('empty', () => (
     <div className={styles.container}>
       <PopOver content="">Empty tooltips should not display</PopOver>
+    </div>
+  ))
+
+  .add('delay', () => (
+    <div className={styles.container}>
+      <PopOver delay="500" content="This tooltip should be delayed by 500ms">
+        Hover me
+      </PopOver>
     </div>
   ))
 

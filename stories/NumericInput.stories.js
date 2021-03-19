@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
 import BigNumber from 'bignumber.js';
+import React from 'react';
 
 // storybook
 import { storiesOf } from '@storybook/react';
@@ -34,7 +34,7 @@ storiesOf('NumericInput', module)
   )
   .add(
     'value (9999.99)',
-    withState({ value: 9999.99 }, (store) => (
+    withState({ value: '9999.99' }, (store) => (
       <NumericInput
         onChange={(value) => store.set({ value })}
         value={store.state.value}
@@ -44,6 +44,16 @@ storiesOf('NumericInput', module)
   .add(
     'decimalPlaces (6)',
     withState({ value: 0 }, (store) => (
+      <NumericInput
+        onChange={(value) => store.set({ value })}
+        decimalPlaces={6}
+        value={store.state.value}
+      />
+    ))
+  )
+  .add(
+    'invalid BigNumber value',
+    withState({ value: new BigNumber('') }, (store) => (
       <NumericInput
         onChange={(value) => store.set({ value })}
         decimalPlaces={6}
