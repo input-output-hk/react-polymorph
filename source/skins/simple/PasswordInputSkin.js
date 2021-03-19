@@ -31,6 +31,7 @@ function getPopOverBgColorForState(state: PasswordInput.STATE): string {
 
 export const PasswordInputSkin = (props: Props) => {
   const [hasInputFocus, setHasInputFocus] = useState(false);
+  const [isInputHovered, setIsInputHovered] = useState(false);
   const {
     className,
     error,
@@ -60,10 +61,11 @@ export const PasswordInputSkin = (props: Props) => {
       ])}
     >
       <PopOver
-        isShowingOnHover={hasTooltip && isShowingTooltipOnHover}
-        isVisible={
+        visible={
           hasTooltip &&
-          (isTooltipOpen || (isShowingTooltipOnFocus && hasInputFocus))
+          (isTooltipOpen ||
+            (isShowingTooltipOnHover && isInputHovered) ||
+            (isShowingTooltipOnFocus && hasInputFocus))
         }
         content={tooltip}
         themeVariables={{
@@ -82,6 +84,8 @@ export const PasswordInputSkin = (props: Props) => {
           type="password"
           onBlur={() => setHasInputFocus(false)}
           onFocus={() => setHasInputFocus(true)}
+          onMouseEnter={() => setIsInputHovered(true)}
+          onMouseOut={() => setIsInputHovered(false)}
         />
       </PopOver>
       <div className={theme[themeId].indicator}>
