@@ -6,6 +6,10 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+### Features
+
+- Enabled pasting of multiple words into Autocomplete ([PR 163](https://github.com/input-output-hk/react-polymorph/pull/163))
+
 ### Fixes
 
 - Fixed issues related to controlled/uncontrolled Tippy state ([PR 160](https://github.com/input-output-hk/react-polymorph/pull/160))
