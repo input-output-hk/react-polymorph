@@ -169,9 +169,12 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
 
   // onChange handler for input element in AutocompleteSkin
   handleInputChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    this._setInputValue(event.target.value);
-    const multipleValues = event.target.value.split(' ');
-    if (multipleValues && multipleValues.length > 1) {
+    const { value } = event.target;
+    const multipleValues = value.split(' ');
+    const hasMultipleValues = multipleValues.length > 1;
+    this._setInputValue(value);
+    if (hasMultipleValues) {
+      this.open();
       this.updateSelectedOptions(event, multipleValues);
     }
   };
@@ -185,8 +188,9 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     event: SyntheticEvent<>,
     selectedOption: any = null
   ) => {
-    const { maxSelections, multipleSameSelections } = this.props;
-    const { selectedOptions, filteredOptions, isOpen } = this.state;
+    const { maxSelections, multipleSameSelections, options } = this.props;
+    const { selectedOptions, isOpen } = this.state;
+    let { filteredOptions } = this.state;
     const canMoreOptionsBeSelected =
       maxSelections != null ? selectedOptions.length < maxSelections : true;
     const areFilteredOptionsAvailable =
@@ -200,6 +204,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       const option = _.isString(selectedOption) ? selectedOption.trim() : selectedOption;
       const newSelectedOptions: Array<string> = [...selectedOptions];
       if (option && Array.isArray(option)) {
+        filteredOptions = options;
         option.forEach(item => {
           const optionCanBeSelected = multipleSameSelections &&
             filteredOptions.includes(item) ||
@@ -361,7 +366,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       const filteredOptions = [];
       multipleValues.forEach(itemValue => {
         const filteredValue = this._filterInvalidChars(itemValue);
-        filteredOptions.push(this._filterOptions(filteredValue));
+        filteredOptions.push(...this._filterOptions(filteredValue));
       });
       this.setState({
         isOpen: true,
