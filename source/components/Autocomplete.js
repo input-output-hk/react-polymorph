@@ -175,7 +175,9 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     this._setInputValue(value);
     if (hasMultipleValues) {
       this.open();
-      this.updateSelectedOptions(event, multipleValues);
+      setTimeout(() => {
+        this.updateSelectedOptions(event, multipleValues);
+      }, 0);
     }
   };
 
@@ -363,15 +365,15 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   _setInputValue = (value: string, shouldFocus?: boolean) => {
     const multipleValues = value.split(' ');
     if (multipleValues && multipleValues.length > 1) {
-      const filteredOptions = [];
+      let selectedOptions = [];
       multipleValues.forEach(itemValue => {
         const filteredValue = this._filterInvalidChars(itemValue);
-        filteredOptions.push(...this._filterOptions(filteredValue));
+        selectedOptions = [...selectedOptions, ...this._filterOptions(filteredValue)];
       });
       this.setState({
         isOpen: true,
         inputValue: '',
-        filteredOptions,
+        filteredOptions: Array.from(new Set(selectedOptions)),
       });
     } else {
       const filteredValue = this._filterInvalidChars(value);
