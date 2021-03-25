@@ -203,7 +203,8 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       (canMoreOptionsBeSelected && areFilteredOptionsAvailable)
     ) {
       if (!selectedOption || !selectedOption.length) return;
-      const option = _.isString(selectedOption) ? selectedOption.trim() : selectedOption;
+      const option = _.isString(selectedOption) ?
+        selectedOption.trim() : selectedOption.filter(item => item);
       const newSelectedOptions: Array<string> = [...selectedOptions];
       if (option && Array.isArray(option)) {
         filteredOptions = options;
