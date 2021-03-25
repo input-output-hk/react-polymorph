@@ -218,7 +218,10 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
             skipValueSelection = true;
             return;
           }
-          if (item && optionCanBeSelected && isOpen && !skipValueSelection) {
+          if (item &&
+            optionCanBeSelected &&
+            isOpen && !skipValueSelection &&
+            newSelectedOptions.length < maxSelections) {
             newSelectedOptions.push(item);
           }
         });
