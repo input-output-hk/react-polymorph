@@ -383,7 +383,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       const filteredValue = this._filterInvalidChars(value);
       const filteredOptions = this._filterOptions(filteredValue);
       this.setState({
-        isOpen: true,
+        isOpen: !!value,
         inputValue: filteredValue,
         filteredOptions,
       });
