@@ -129,7 +129,7 @@ storiesOf('Autocomplete', module)
         placeholder="Enter mnemonic..."
         maxSelections={12}
         maxVisibleOptions={5}
-        invalidCharsRegex={/[^a-zA-Z]/g}
+        invalidCharsRegex={/[^a-zA-Z\s]/g}
         onChange={(selectedOpts) => store.set({ selectedOpts })}
       />
     ))
@@ -155,7 +155,7 @@ storiesOf('Autocomplete', module)
                 options={OPTIONS}
                 maxSelections={12}
                 maxVisibleOptions={5}
-                invalidCharsRegex={/[^a-zA-Z]/g}
+                invalidCharsRegex={/[^a-zA-Z\s]/g}
                 onChange={(selectedOpts) => store.set({ selectedOpts })}
               />
             </div>
@@ -366,7 +366,7 @@ storiesOf('Autocomplete', module)
         placeholder="Enter mnemonic..."
         maxSelections={12}
         maxVisibleOptions={5}
-        invalidCharsRegex={/[^a-zA-Z]/g}
+        invalidCharsRegex={/[^a-zA-Z\s]/g}
         onChange={(selectedOpts) => store.set({ selectedOpts })}
       />
     ))
@@ -382,7 +382,7 @@ storiesOf('Autocomplete', module)
         placeholder="Enter mnemonic..."
         maxSelections={12}
         maxVisibleOptions={5}
-        invalidCharsRegex={/[^a-zA-Z]/g}
+        invalidCharsRegex={/[^a-zA-Z\s]/g}
         onChange={(selectedOpts) => store.set({ selectedOpts })}
       />
     ))

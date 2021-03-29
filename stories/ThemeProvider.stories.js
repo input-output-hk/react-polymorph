@@ -213,7 +213,7 @@ storiesOf('ThemeProvider', module)
               placeholder="Enter mnemonic..."
               maxSelections={12}
               maxVisibleOptions={20}
-              invalidCharsRegex={/[^a-zA-Z]/g}
+              invalidCharsRegex={/[^a-zA-Z\s]/g}
               skin={AutocompleteSkin}
               isOpeningUpward
             />
@@ -226,7 +226,7 @@ storiesOf('ThemeProvider', module)
               placeholder="Enter mnemonic..."
               maxSelections={12}
               maxVisibleOptions={20}
-              invalidCharsRegex={/[^a-zA-Z]/g}
+              invalidCharsRegex={/[^a-zA-Z\s]/g}
               skin={AutocompleteSkin}
             />
           </div>
