@@ -33,11 +33,6 @@ export const InputSkin = (props: Props) => {
     />
   );
 
-  const renderInputWithSearch = (setFormFieldRef) => (
-    <div>COMING SOON</div>
-  );
-
-
   const useSelectionRenderer = (setFormFieldRef, option) => (
     <div className={props.theme[props.themeId].customValueWrapper}>
       {renderInput(setFormFieldRef)}
@@ -53,11 +48,6 @@ export const InputSkin = (props: Props) => {
       props.selectionRenderer && isFunction(props.selectionRenderer);
     if (hasSelectionRenderer) {
       return useSelectionRenderer(setFormFieldRef, props.selectedOption);
-    }
-    // check if user has passed the `hasSearch` prop
-    const { hasSearch} = props;
-    if (hasSearch) {
-      return renderInputWithSearch(setFormFieldRef);
     }
     return renderInput(setFormFieldRef);
   };

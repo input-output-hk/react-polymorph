@@ -21,20 +21,17 @@ export type InputProps = {
   context: ThemeContextProp,
   disabled?: boolean,
   error?: string | Element<any>,
-  hasSearch?: boolean,
   inputRef?: RefObject,
+  showErrorState?: boolean,
   label?: string | Element<any>,
   maxLength?: number,
   minLength?: number,
   onChange?: Function,
-  onSearch?: Function,
   placeholder?: string,
   readOnly: boolean,
-  searchList: Array<string>,
+  setError?: Function,
   selectedOption?: any,
   selectionRenderer?: Function,
-  setError?: Function,
-  showErrorState?: boolean,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
@@ -92,10 +89,6 @@ class InputBase extends Component<InputProps, State> {
     const { onChange, disabled, readOnly } = this.props;
     if (disabled || readOnly) return;
     if (onChange) onChange(this._processValue(event.target.value), event);
-  };
-
-  onSearch = (value: string) => {
-    console.log('search: ', value);
   };
 
   focus = () => {
@@ -157,7 +150,6 @@ class InputBase extends Component<InputProps, State> {
       theme,
       themeOverrides,
       onChange,
-      onSearch,
       error,
       maxLength,
       minLength,
@@ -172,7 +164,6 @@ class InputBase extends Component<InputProps, State> {
       <InputSkin
         error={error || this.state.error}
         onChange={this.onChange}
-        onSearch={this.onSearch}
         inputRef={this.inputElement}
         theme={this.state.composedTheme}
         {...rest}

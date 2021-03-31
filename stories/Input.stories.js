@@ -65,36 +65,6 @@ storiesOf('Input', module)
     ))
   )
 
-  .add('with search',
-    withState({ value: '' }, store => (
-      <Input
-        autoFocus
-        label="With autoFocus"
-        value={store.state.value}
-        placeholder="autoFocus"
-        onChange={value => store.set({ value })}
-        hasSearch
-      />
-    ))
-  )
-
-  .add('with search - custom search',
-    withState({ value: '' }, store => (
-      <Input
-        autoFocus
-        label="With autoFocus"
-        value={store.state.value}
-        placeholder="autoFocus"
-        onChange={value => store.set({ value })}
-        hasSearch
-        onSearch={(value) => {
-          console.log('onSearch');
-          console.log('value', value);
-        }}
-      />
-    ))
-  )
-
   .add('disabled', () => (
     <Input
       disabled

@@ -20,6 +20,7 @@ type Props = {
   getSelectedOption: Function,
   handleChange: Function,
   handleInputClick: Function,
+  hasSearch?: boolean,
   inputRef: ElementRef<'input'>,
   isOpen: boolean,
   isOpeningUpward: boolean,
@@ -27,6 +28,7 @@ type Props = {
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
+  onSearch?: Function,
   options: Array<{
     isDisabled: boolean,
     value: any

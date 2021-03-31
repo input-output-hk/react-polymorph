@@ -104,6 +104,26 @@ storiesOf('Select', module)
     ))
   )
 
+  .add('with search',
+    withState({ value: '' }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES}
+      />
+    ))
+  )
+
+  .add('with custom search',
+    withState({ value: '' }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES}
+      />
+    ))
+  )
+
   .add('with error',
     withState({ value: COUNTRIES[0].value }, store => (
       <Select
