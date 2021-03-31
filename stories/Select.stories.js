@@ -30,10 +30,12 @@ import { IDENTIFIERS } from '../source/components';
 import { decorateWithSimpleTheme } from './helpers/theming';
 
 const COUNTRIES = [
+  { value: 'PT-br', label: 'Brazil' },
   { value: 'EN-gb', label: 'England' },
+  { value: 'PT-pt', label: 'Portugal' },
   { value: 'ES-es', label: 'Spain' },
   { value: 'TH-th', label: 'Thailand' },
-  { value: 'EN-en', label: 'USA' }
+  { value: 'EN-en', label: 'USA' },
 ];
 
 const COUNTRIES_WITH_FLAGS = [
