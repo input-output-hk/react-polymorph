@@ -21,22 +21,23 @@ type Props = {
   context: ThemeContextProp,
   error?: string | Element<any>,
   hasSearch?: boolean,
-  label?: string | Element<any>,
   isOpeningUpward: boolean,
+  label?: string | Element<any>,
   onBlur?: Function,
   onChange?: Function,
   onFocus?: Function,
   onSearch?: Function,
+  optionHeight?: number,
   optionRenderer?: Function,
   options: Array<any>,
   placeholder?: string,
   selectionRenderer?: Function,
+  searchHeight?: number,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
   value: string,
-  optionHeight?: number
 };
 
 type State = {
@@ -159,6 +160,7 @@ class SelectBase extends Component<Props, State> {
       context,
       allowBlank,
       optionHeight,
+      searchHeight,
       ...rest
     } = this.props;
 
@@ -187,6 +189,7 @@ class SelectBase extends Component<Props, State> {
             toggleOpen={this.toggleOpen}
             toggleMouseLocation={this.toggleMouseLocation}
             optionHeight={optionHeight}
+            searchHeight={searchHeight}
             {...rest}
           />
         )}

@@ -21,6 +21,11 @@ $option-line-height: var(--rp-option-line-height, normal) !default;
 $option-padding: var(--rp-option-padding, 14px 20px) !default;
 $option-text-color: var(--rp-option-text-color, #5e6066) !default;
 $option-text-color-disabled: var(--rp-option-text-color-disabled, rgba(#5e6066, 0.5)) !default;
+$option-search-border-radius: var(--rp-option-search-border-radius, 0) !default;
+$option-search-border: var(--rp-option-search-border, none) !default;
+$option-search-box-shadow: var(--rp-option-search-box-shadow, 0 10px 10px -5px rgba(0, 0, 0, 0.12)) !default;
+$option-search-height: var(--rp-option-search-height, 50px) !default;
+
 
 // checkmark
 $option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
@@ -122,6 +127,15 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
   &.disabledOption {
     color: $option-text-color-disabled;
     cursor: $option-cursor-disabled;
+  }
+}
+
+.search {
+  input {
+    border-radius: $option-search-border-radius;
+    border: $option-search-border;
+    box-shadow: $option-search-box-shadow;
+    height: $option-search-height;
   }
 }
 

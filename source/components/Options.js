@@ -12,6 +12,9 @@ import type {
   ElementRef
 } from 'react';
 
+// external libraries
+import { isFunction } from 'lodash';
+
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
@@ -24,6 +27,7 @@ import type { ThemeContextProp } from './HOC/withTheme';
 type Props = {
   className?: String,
   context: ThemeContextProp,
+  hasSearch?: boolean,
   isOpen: boolean,
   isOpeningUpward: boolean,
   noOptionsArrow?: boolean,
@@ -33,6 +37,7 @@ type Props = {
   onBlur?: Function,
   onChange?: Function,
   onClose?: Function,
+  onSearch?: Function,
   optionHeight: ?number,
   options: Array<any>,
   optionRenderer?: Function,
@@ -40,6 +45,7 @@ type Props = {
   optionsMaxHeight?: number,
   render?: Function,
   resetOnClose: boolean,
+  searchHeight: ?number,
   // TODO: Why do we have two separate props for selection?
   selectedOption?: any,
   selectedOptions?: Array<any>,
@@ -56,7 +62,8 @@ type Props = {
 type State = {
   composedTheme: Object,
   highlightedOptionIndex: number,
-  isMouseOverOptions: boolean
+  isMouseOverOptions: boolean,
+  searchValue: string,
 };
 
 class OptionsBase extends Component<Props, State> {
@@ -75,6 +82,7 @@ class OptionsBase extends Component<Props, State> {
     optionHeight: 46,
     options: [],
     resetOnClose: false,
+    searchHeight: 52,
     theme: null,
     themeId: IDENTIFIERS.OPTIONS,
     themeOverrides: {},
@@ -179,6 +187,28 @@ class OptionsBase extends Component<Props, State> {
     if (this.props.onBlur) this.props.onBlur(event);
     this.close();
   };
+
+  handleSearch = (searchValue: string) => {
+    this.setState({
+      searchValue
+    });
+  }
+
+  getFilteredOptions = () => {
+    const { hasSearch, onSearch, options } = this.props;
+    const { searchValue } = this.state;
+    if (!hasSearch || !searchValue) {
+      return options;
+    }
+    if (hasSearch && isFunction(onSearch)) {
+      return onSearch(searchValue, options);
+    }
+    return options.filter((option) => {
+      const { label } = option;
+      const regex = new RegExp(searchValue, "i");
+      return regex.test(label);
+    });
+  }
 
   // returns an object containing props, theme, and method handlers
   // associated with rendering this.props.options, the user can call
@@ -314,13 +344,15 @@ class OptionsBase extends Component<Props, State> {
       themeOverrides,
       toggleMouseLocation,
       onChange,
+      onSearch,
+      options,
       context,
       optionsRef,
       isOpen,
       ...rest
     } = this.props;
 
-    const { composedTheme, highlightedOptionIndex } = this.state;
+    const { composedTheme, highlightedOptionIndex, searchValue } = this.state;
 
     const OptionsSkin = skin || context.skins[IDENTIFIERS.OPTIONS];
 
@@ -333,11 +365,14 @@ class OptionsBase extends Component<Props, State> {
         isHighlightedOption={this.isHighlightedOption}
         isOpen={isOpen}
         isSelectedOption={this.isSelectedOption}
+        options={this.getFilteredOptions()}
         optionsRef={optionsRef}
+        searchValue={searchValue}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}
         targetRef={targetRef}
         theme={composedTheme}
         setMouseIsOverOptions={this._setMouseIsOverOptions}
+        onSearch={this.handleSearch}
         {...rest}
       />
     );

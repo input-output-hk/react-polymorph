@@ -110,6 +110,7 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
+        hasSearch
       />
     ))
   )
@@ -120,6 +121,20 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
+        hasSearch
+        onSearch={(searchValue: string) => {
+          const regex = new RegExp(searchValue, "i");
+          return COUNTRIES
+            .filter((option) => {
+              const { label, value } = option;
+              const regex = new RegExp(searchValue, "i");
+              return regex.test(label) || regex.test(value);
+            })
+            .map((option) => {
+              const { label, value } = option;
+              return `${label} (${value})`
+            })
+        }}
       />
     ))
   )

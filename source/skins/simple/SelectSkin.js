@@ -45,6 +45,7 @@ type Props = {
   toggleMouseLocation: Function,
   value: string,
   optionHeight: ?number,
+  searchHeight: ?number,
 };
 
 export const SelectSkin = (props: Props) => {
@@ -80,12 +81,14 @@ export const SelectSkin = (props: Props) => {
       <Options
         skin={OptionsSkin}
         theme={theme}
+        hasSearch={props.hasSearch}
         isOpen={props.isOpen}
         optionsRef={props.optionsRef}
         optionsMaxHeight={props.optionsMaxHeight}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}
         onChange={props.handleChange}
+        onSearch={props.onSearch}
         optionRenderer={props.optionRenderer}
         selectedOption={selectedOption}
         noResults={!props.options.length}
@@ -93,6 +96,7 @@ export const SelectSkin = (props: Props) => {
         toggleMouseLocation={props.toggleMouseLocation}
         toggleOpen={props.toggleOpen}
         optionHeight={props.optionHeight}
+        searchHeight={props.searchHeight}
       />
     </div>
   );

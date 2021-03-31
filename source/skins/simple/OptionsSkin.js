@@ -8,15 +8,18 @@ import { isFunction, isObject } from 'lodash';
 
 // components
 import { Bubble } from '../../components/Bubble';
+import { Input } from '../../components/Input';
 import { ScrollBar } from '../../components/ScrollBar';
 
 // skins
 import { BubbleSkin } from './BubbleSkin';
+import { InputSkin } from './InputSkin';
 
 type Props = {
   getOptionProps: Function,
   getHighlightedOptionIndex: Function,
   handleClickOnOption: Function,
+  hasSearch?: boolean,
   isHighlightedOption: Function,
   isOpen: boolean,
   isOpeningUpward: boolean,
@@ -25,12 +28,15 @@ type Props = {
   noResults: boolean,
   noResultsMessage: string | Element<any>,
   noSelectedOptionCheckmark?: boolean,
+  onSearch: Function,
   optionHeight: number,
   optionRenderer: Function,
   options: Array<any>,
   optionsRef: ElementRef<*>,
   optionsMaxHeight: number,
   render: Function,
+  searchHeight: number,
+  searchValue: string,
   selectedOption: any,
   setHighlightedOptionIndex: Function,
   setMouseIsOverOptions?: (boolean) => void,
@@ -44,6 +50,7 @@ export const OptionsSkin = (props: Props) => {
     getOptionProps,
     getHighlightedOptionIndex,
     handleClickOnOption,
+    hasSearch,
     isHighlightedOption,
     isOpen,
     isOpeningUpward,
@@ -58,6 +65,7 @@ export const OptionsSkin = (props: Props) => {
     options,
     optionsRef,
     render,
+    searchHeight,
     setHighlightedOptionIndex,
     setMouseIsOverOptions,
     targetRef,
@@ -119,12 +127,31 @@ export const OptionsSkin = (props: Props) => {
     return option;
   };
 
+  const renderSearch = () => {
+    return (
+      <div className={theme[themeId].search}>
+        <Input
+          skin={InputSkin}
+          theme={theme}
+          value={props.searchValue}
+          onChange={props.onSearch}
+          autoFocus={true}
+        />
+      </div>
+    )
+  }
+
   const getScrollBarHeight = (): number => {
-    if (!options.length) return optionHeight;
-    if (optionsMaxHeight < options.length * optionHeight) {
-      return optionsMaxHeight;
+    let height = options.length
+      ? options.length * optionHeight
+      : optionHeight;
+    if (height > optionsMaxHeight) {
+      height = optionsMaxHeight;
     }
-    return options.length * optionHeight;
+    if (hasSearch) {
+      height += searchHeight;
+    }
+    return height;
   };
 
   // Enforce max height of options dropdown if necessary
@@ -158,6 +185,7 @@ export const OptionsSkin = (props: Props) => {
         onMouseLeave={() => setMouseIsOverOptions && setMouseIsOverOptions(false)}
       >
         <ScrollBar style={{ height: `${getScrollBarHeight()}px` }}>
+          {hasSearch && renderSearch()}
           {renderOptions()}
         </ScrollBar>
       </ul>
