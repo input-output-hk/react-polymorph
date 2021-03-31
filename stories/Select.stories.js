@@ -173,6 +173,58 @@ storiesOf('Select', module)
     ))
   )
 
+  .add('custom options template and search',
+    withState({ value: '' }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES_WITH_FLAGS}
+        optionRenderer={option => (
+          <div className={styles.customOption}>
+            <img src={option.flag} />
+            <span>{option.label}</span>
+          </div>
+          )}
+        optionHeight={56}
+        hasSearch
+      />
+    ))
+  )
+  .add('custom options template and custom search',
+    withState({ value: '' }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES_WITH_FLAGS}
+        optionRenderer={option => (
+          <div className={styles.customOption}>
+            <img src={option.flag} />
+            <span>{option.label}</span>
+          </div>
+        )}
+        optionHeight={56}
+        hasSearch
+        onSearch={(searchValue: string) => {
+          const regex = new RegExp(searchValue, "i");
+          return COUNTRIES_WITH_FLAGS
+            .filter((option) => {
+              const { label, value } = option;
+              const regex = new RegExp(searchValue, "i");
+              return regex.test(label) || regex.test(value);
+            })
+            .map((option) => {
+              const { label, value, ...rest } = option;
+              return {
+                ...rest,
+                value,
+                label: `${label} (${value})`,
+              }
+            })
+        }}
+      />
+    ))
+  )
+
   .add('isOpeningUpward',
     withState({ value: '' }, store => (
       <Select
