@@ -132,7 +132,10 @@ storiesOf('Select', module)
             })
             .map((option) => {
               const { label, value } = option;
-              return `${label} (${value})`
+              return {
+                value,
+                label: `${label} (${value})`,
+              }
             })
         }}
       />
