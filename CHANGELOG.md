@@ -8,6 +8,7 @@ vNext
 
 ### Features
 
+- Implemented the search functionality to the Dropdown component ([PR 165](https://github.com/input-output-hk/daedalus/pull/165))
 - Enabled pasting of multiple words into Autocomplete ([PR 163](https://github.com/input-output-hk/react-polymorph/pull/163))
 
 ### Fixes
