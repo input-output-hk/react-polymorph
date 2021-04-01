@@ -120,7 +120,6 @@ storiesOf('Select', module)
           ...COUNTRIES.slice(2)
         ]}
         hasSearch
-        highlightSearch
       />
     ))
   )

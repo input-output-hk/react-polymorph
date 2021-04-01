@@ -84,8 +84,7 @@ export const SelectSkin = (props: Props) => {
         theme={theme}
         hasSearch={props.hasSearch}
         highlightSearch={props.highlightSearch}
-        isOpen1={props.isOpen}
-        isOpen
+        isOpen={props.isOpen}
         optionsRef={props.optionsRef}
         optionsMaxHeight={props.optionsMaxHeight}
         options={props.options}

@@ -127,7 +127,7 @@ export const OptionsSkin = (props: Props) => {
     } else if (isObject(option)) {
       let { label } = option;
       // in case `highlightSearch` then `searchValue` is wrapped in an `em` tag
-      if (highlightSearch) {
+      if (highlightSearch !== false) {
         const splitter = new RegExp(`(${searchValue})`,'i');
         const parts = label.split(splitter);
         for (let i = 1; i < parts.length; i += 2) {
