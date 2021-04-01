@@ -28,6 +28,7 @@ type Props = {
   className?: String,
   context: ThemeContextProp,
   hasSearch?: boolean,
+  highlightSearch?: boolean,
   isOpen: boolean,
   isOpeningUpward: boolean,
   noOptionsArrow?: boolean,
@@ -195,7 +196,7 @@ class OptionsBase extends Component<Props, State> {
   }
 
   getFilteredOptions = () => {
-    const { hasSearch, onSearch, options } = this.props;
+    const { hasSearch, onSearch, options, highlightSearch, optionRenderer } = this.props;
     const { searchValue } = this.state;
     if (!hasSearch || !searchValue) {
       return options;
@@ -203,11 +204,12 @@ class OptionsBase extends Component<Props, State> {
     if (hasSearch && isFunction(onSearch)) {
       return onSearch(searchValue, options);
     }
-    return options.filter((option) => {
+    const filteredOptions = options.filter((option) => {
       const { label } = option;
-      const regex = new RegExp(searchValue, "i");
+      const regex = new RegExp(searchValue, 'i');
       return regex.test(label);
     });
+    return filteredOptions;
   }
 
   // returns an object containing props, theme, and method handlers
@@ -338,6 +340,7 @@ class OptionsBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
+      highlightSearch,
       skin,
       targetRef,
       theme,
@@ -361,6 +364,7 @@ class OptionsBase extends Component<Props, State> {
         getHighlightedOptionIndex={this.getHighlightedOptionIndex}
         getOptionProps={this.getOptionProps}
         handleClickOnOption={this.handleClickOnOption}
+        highlightSearch={highlightSearch}
         highlightedOptionIndex={highlightedOptionIndex}
         isHighlightedOption={this.isHighlightedOption}
         isOpen={isOpen}

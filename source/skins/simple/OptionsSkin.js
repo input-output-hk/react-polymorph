@@ -20,6 +20,7 @@ type Props = {
   getHighlightedOptionIndex: Function,
   handleClickOnOption: Function,
   hasSearch?: boolean,
+  highlightSearch?: boolean,
   isHighlightedOption: Function,
   isOpen: boolean,
   isOpeningUpward: boolean,
@@ -51,6 +52,7 @@ export const OptionsSkin = (props: Props) => {
     getHighlightedOptionIndex,
     handleClickOnOption,
     hasSearch,
+    highlightSearch,
     isHighlightedOption,
     isOpen,
     isOpeningUpward,
@@ -66,6 +68,7 @@ export const OptionsSkin = (props: Props) => {
     optionsRef,
     render,
     searchHeight,
+    searchValue,
     setHighlightedOptionIndex,
     setMouseIsOverOptions,
     targetRef,
@@ -122,7 +125,18 @@ export const OptionsSkin = (props: Props) => {
       // call user's custom rendering logic
       return optionRenderer(option);
     } else if (isObject(option)) {
-      return <span className={theme[themeId].label}>{option.label}</span>;
+      let { label } = option;
+      // in case `highlightSearch` then `searchValue` is wrapped in an `em` tag
+      if (highlightSearch) {
+        const splitter = new RegExp(`(${searchValue})`,'i');
+        const parts = label.split(splitter);
+        for (let i = 1; i < parts.length; i += 2) {
+          if (parts[i].toLowerCase() === searchValue.toLowerCase())
+            parts[i] = <em>{parts[i]}</em>;
+          label = parts;
+        }
+      }
+      return <span className={theme[themeId].label}>{label}</span>;
     }
     return option;
   };
@@ -133,7 +147,7 @@ export const OptionsSkin = (props: Props) => {
         <Input
           skin={InputSkin}
           theme={theme}
-          value={props.searchValue}
+          value={searchValue}
           onChange={props.onSearch}
           autoFocus={true}
         />

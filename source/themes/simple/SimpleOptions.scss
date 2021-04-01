@@ -30,6 +30,8 @@ $option-search-height: var(--rp-option-search-height, 50px) !default;
 $option-search-icon-margin: var(--rp-option-icon-size, 19px) !default;
 $option-search-icon-size: var(--rp-option-icon-size, 15px) !default;
 $option-search-icon-url: var(--rp-option-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
+$option-search-icon-color: var(--rp-option-icon-url, rgba(94, 96, 102, 65%)) !default;
+$option-search-highlight-background-color: var(--rp-option-icon-url, #f2a218) !default;
 
 // checkmark
 $option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
@@ -132,6 +134,10 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     color: $option-text-color-disabled;
     cursor: $option-cursor-disabled;
   }
+
+  em {
+    background-color: $option-search-highlight-background-color;
+  }
 }
 
 .search {
@@ -150,8 +156,7 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     -webkit-mask: $option-search-icon-url;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: $option-search-icon-size $option-search-icon-size;
-    background-color: transparent;
-    background: black;
+    background: $option-search-icon-color;
     content: "";
     display: inline-flex;
     height: $option-search-icon-size;

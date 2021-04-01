@@ -21,6 +21,7 @@ type Props = {
   handleChange: Function,
   handleInputClick: Function,
   hasSearch?: boolean,
+  highlightSearch?: boolean,
   inputRef: ElementRef<'input'>,
   isOpen: boolean,
   isOpeningUpward: boolean,
@@ -82,7 +83,9 @@ export const SelectSkin = (props: Props) => {
         skin={OptionsSkin}
         theme={theme}
         hasSearch={props.hasSearch}
-        isOpen={props.isOpen}
+        highlightSearch={props.highlightSearch}
+        isOpen1={props.isOpen}
+        isOpen
         optionsRef={props.optionsRef}
         optionsMaxHeight={props.optionsMaxHeight}
         options={props.options}

@@ -111,8 +111,16 @@ storiesOf('Select', module)
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
-        options={COUNTRIES}
+        options={[
+          ...COUNTRIES.slice(0,1),
+          {
+            ...COUNTRIES[2],
+            label: 'The United Kingdom of Great Britain',
+          },
+          ...COUNTRIES.slice(2)
+        ]}
         hasSearch
+        highlightSearch
       />
     ))
   )
@@ -137,8 +145,8 @@ storiesOf('Select', module)
               return {
                 value,
                 label: `${label} (${value})`,
-              }
-            })
+              };
+            });
         }}
       />
     ))
