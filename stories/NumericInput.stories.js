@@ -142,13 +142,13 @@ storiesOf('NumericInput', module)
     ))
   )
   .add(
-    'allowSigns = false | PinCode',
+    'allowOnlyIntegers',
     withState({ value: null }, (store) => (
       <NumericInput
         value={store.state.value}
         onChange={(value) => store.set({ value })}
         allowSigns={false}
-        pinCodeSigns={false}
+        allowOnlyIntegers
       />
     ))
   )

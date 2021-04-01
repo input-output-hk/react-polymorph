@@ -22,7 +22,7 @@ type NumericInputValue = null | number | string | BigNumber.Instance;
 
 export type NumericInputProps = InputProps & {
   allowSigns?: boolean,
-  pinCodeSigns?: boolean,
+  allowOnlyIntegers?: boolean,
   bigNumberFormat?: BigNumber.Format,
   decimalPlaces?: number,
   roundingMode?: BigNumber.RoundingMode,
@@ -43,7 +43,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
   static defaultProps = {
     allowSigns: true,
-    pinCodeSigns: true,
+    allowOnlyIntegers: false,
     readOnly: false,
     roundingMode: BigNumber.ROUND_FLOOR,
     value: null,
@@ -115,7 +115,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     caretPosition: number,
     fallbackInputValue?: ?string,
   } {
-    const { allowSigns, pinCodeSigns, decimalPlaces, value } = this.props;
+    const { allowSigns, allowOnlyIntegers, decimalPlaces, value } = this.props;
     const { inputType, target } = event;
     const { decimalSeparator, groupSeparator } = this.getBigNumberFormat();
     const changedCaretPosition = target.selectionStart;
@@ -132,15 +132,15 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     const validInputNoSignsRegExp = new RegExp(
       `^([0-9${decimalSeparator}${groupSeparator}]+)?$`
     );
-    const validPinInputNoSignsRegExp = new RegExp(
-      `^([0-9]+)?$`
+    const validInputOnlyIntegersRegExp = new RegExp(
+      `^[0-9]*$`
     );
     let validInputRegex = allowSigns
       ? validInputSignsRegExp
       : validInputNoSignsRegExp;
-    validInputRegex = pinCodeSigns
-        ? validInputRegex
-        : validPinInputNoSignsRegExp;
+    validInputRegex = allowOnlyIntegers
+        ? validInputOnlyIntegersRegExp
+        : validInputRegex;
     const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
 
     /**
