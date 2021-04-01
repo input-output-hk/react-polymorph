@@ -21,11 +21,15 @@ $option-line-height: var(--rp-option-line-height, normal) !default;
 $option-padding: var(--rp-option-padding, 14px 20px) !default;
 $option-text-color: var(--rp-option-text-color, #5e6066) !default;
 $option-text-color-disabled: var(--rp-option-text-color-disabled, rgba(#5e6066, 0.5)) !default;
+
+// search
 $option-search-border-radius: var(--rp-option-search-border-radius, 0) !default;
 $option-search-border: var(--rp-option-search-border, none) !default;
 $option-search-box-shadow: var(--rp-option-search-box-shadow, 0 10px 10px -5px rgba(0, 0, 0, 0.12)) !default;
 $option-search-height: var(--rp-option-search-height, 50px) !default;
-
+$option-search-icon-margin: var(--rp-option-icon-size, 19px) !default;
+$option-search-icon-size: var(--rp-option-icon-size, 15px) !default;
+$option-search-icon-url: var(--rp-option-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
 
 // checkmark
 $option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
@@ -134,8 +138,31 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
   input {
     border-radius: $option-search-border-radius;
     border: $option-search-border;
-    box-shadow: $option-search-box-shadow;
     height: $option-search-height;
+    padding-left: 55px;
+  }
+  :global {
+    .SimpleFormField_root {
+      box-shadow: $option-search-box-shadow;
+    }
+  }
+  &:before {
+    -webkit-mask: $option-search-icon-url;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: $option-search-icon-size $option-search-icon-size;
+    background-color: transparent;
+    background: black;
+    content: "";
+    display: inline-flex;
+    height: $option-search-icon-size;
+    margin: $option-search-icon-margin 0 0 $option-search-icon-margin;
+    mask: $option-search-icon-url;
+    mask-repeat: no-repeat;
+    mask-size: $option-search-icon-size $option-search-icon-size;
+    position: absolute;
+    vertical-align: middle;
+    width: $option-search-icon-size;
+    z-index: 1;
   }
 }
 

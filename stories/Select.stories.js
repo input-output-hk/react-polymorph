@@ -190,6 +190,7 @@ storiesOf('Select', module)
       />
     ))
   )
+
   .add('custom options template and custom search',
     withState({ value: '' }, store => (
       <Select
