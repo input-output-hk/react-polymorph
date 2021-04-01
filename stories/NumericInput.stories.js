@@ -142,6 +142,17 @@ storiesOf('NumericInput', module)
     ))
   )
   .add(
+    'allowSigns = false | PinCode',
+    withState({ value: null }, (store) => (
+      <NumericInput
+        value={store.state.value}
+        onChange={(value) => store.set({ value })}
+        allowSigns={false}
+        pinCodeSigns={false}
+      />
+    ))
+  )
+  .add(
     'onFocus / onBlur',
     withState({ value: null, focused: false, blurred: false }, (store) => (
       <NumericInput
