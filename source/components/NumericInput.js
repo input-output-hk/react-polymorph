@@ -334,14 +334,16 @@ class NumericInputBase extends Component<NumericInputProps, State> {
   }
 
   valueToFormattedString(number: NumericInputValue) {
-    const { bigNumberFormat, decimalPlaces, roundingMode } = this.props;
+    const { bigNumberFormat, decimalPlaces, roundingMode, allowOnlyIntegers } = this.props;
     const debugSetting = BigNumber.DEBUG;
     if (BigNumber.isBigNumber(number) && number.isNaN()) return '';
     try {
       BigNumber.DEBUG = true;
-      return new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
+      return allowOnlyIntegers ?
+        new BigNumber(number).toString()
+        : new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
         ...BigNumber.config().FORMAT, // defaults
-        ...bigNumberFormat, // custom overrides
+        ...bigNumberFormat, // custom overrides;
       });
     } catch (e) {
       return '';
