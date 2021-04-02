@@ -213,6 +213,19 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       newCaretPosition = newValue.indexOf(decimalSeparator) + 1;
     }
 
+    // Case: Decimal separator was replaced with a number
+    if (
+      hadDecimalSeparatorBefore &&
+      newNumberOfDecimalSeparators === 0 &&
+      isInsert
+    ) {
+      return {
+        caretPosition: changedCaretPosition - 1,
+        fallbackInputValue,
+        value,
+      };
+    }
+
     /**
      * ========= PROCESS CLEANED INPUT =============
      */
