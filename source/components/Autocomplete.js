@@ -231,6 +231,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
           !selectedOptions.includes(option);
         if (option && optionCanBeSelected && isOpen) {
           newSelectedOptions.push(option);
+          skipValueSelection = true;
         }
       }
       this.selectionChanged(newSelectedOptions, event);
@@ -375,7 +376,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
         selectedOptions = [...selectedOptions, ...this._filterOptions(filteredValue)];
       });
       this.setState({
-        isOpen: true,
+        isOpen: !!multipleValues.length,
         inputValue: '',
         filteredOptions: Array.from(new Set(selectedOptions)),
       });
@@ -383,7 +384,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       const filteredValue = this._filterInvalidChars(value);
       const filteredOptions = this._filterOptions(filteredValue);
       this.setState({
-        isOpen: !!value,
+        isOpen: value === '' ? false : !!value,
         inputValue: filteredValue,
         filteredOptions,
       });
