@@ -175,10 +175,10 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     this._setInputValue(value);
     if (hasMultipleValues) {
       this.open();
-      setTimeout(() => {
-        this.updateSelectedOptions(event, multipleValues);
-      }, 0);
     }
+    setTimeout(() => {
+      this.updateSelectedOptions(event, multipleValues);
+    }, 0);
   };
 
   // passed to Options onChange handler in AutocompleteSkin
