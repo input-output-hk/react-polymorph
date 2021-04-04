@@ -132,15 +132,20 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     const validInputNoSignsRegExp = new RegExp(
       `^([0-9${decimalSeparator}${groupSeparator}]+)?$`
     );
-    const validInputOnlyIntegersRegExp = new RegExp(
+    const validInputOnlyIntegersSignsRegExp = new RegExp(
+      `^([-])?([0-9]+)?$`
+    );
+    const validInputOnlyIntegersNoSignsRegExp = new RegExp(
       `^([0-9]+)?$`
     );
     let validInputRegex = allowSigns
       ? validInputSignsRegExp
       : validInputNoSignsRegExp;
-    validInputRegex = allowOnlyIntegers
-        ? validInputOnlyIntegersRegExp
-        : validInputRegex;
+    if (allowOnlyIntegers && allowSigns) {
+      validInputRegex = validInputOnlyIntegersSignsRegExp;
+    } else if (allowOnlyIntegers && !allowSigns) {
+      validInputRegex = validInputOnlyIntegersNoSignsRegExp;
+    }
     const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
 
     /**
