@@ -133,7 +133,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
       `^([0-9${decimalSeparator}${groupSeparator}]+)?$`
     );
     const validInputOnlyIntegersRegExp = new RegExp(
-      `^([-])?([0-9]+)?$`
+      `^([0-9]+)?$`
     );
     let validInputRegex = allowSigns
       ? validInputSignsRegExp
