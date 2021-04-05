@@ -27,11 +27,12 @@ $option-search-border-radius: var(--rp-option-search-border-radius, 0) !default;
 $option-search-border: var(--rp-option-search-border, none) !default;
 $option-search-box-shadow: var(--rp-option-search-box-shadow, 0 10px 10px -5px rgba(0, 0, 0, 0.12)) !default;
 $option-search-height: var(--rp-option-search-height, 50px) !default;
-$option-search-icon-margin: var(--rp-option-icon-size, 19px) !default;
-$option-search-icon-size: var(--rp-option-icon-size, 15px) !default;
-$option-search-icon-url: var(--rp-option-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
-$option-search-icon-color: var(--rp-option-icon-url, rgba(94, 96, 102, 65%)) !default;
-$option-search-highlight-background-color: var(--rp-option-icon-url, #f2a218) !default;
+$option-search-padding: var(--rp-option-search-padding, 55px) !default;
+$option-search-icon-margin: var(--rp-option-search-icon-size, 19px) !default;
+$option-search-icon-size: var(--rp-option-search-icon-size, 15px) !default;
+$option-search-icon-url: var(--rp-option-search-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
+$option-search-icon-color: var(--rp-option-search-icon-url, rgba(94, 96, 102, 65%)) !default;
+$option-search-highlight-background-color: var(--rp-option-search-icon-url, #f2a218) !default;
 
 // checkmark
 $option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
@@ -145,7 +146,6 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     border-radius: $option-search-border-radius;
     border: $option-search-border;
     height: $option-search-height;
-    padding-left: 55px;
   }
   :global {
     .SimpleFormField_root {
@@ -160,7 +160,7 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     content: "";
     display: inline-flex;
     height: $option-search-icon-size;
-    margin: $option-search-icon-margin 0 0 $option-search-icon-margin;
+    margin: $option-search-icon-margin $option-search-icon-margin 0 $option-search-icon-margin;
     mask: $option-search-icon-url;
     mask-repeat: no-repeat;
     mask-size: $option-search-icon-size $option-search-icon-size;
@@ -168,6 +168,16 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     vertical-align: middle;
     width: $option-search-icon-size;
     z-index: 1;
+  }
+  :not([dir='rtl']) & {
+    input {
+      padding-left: $option-search-padding;
+    }
+  }
+  [dir='rtl'] & {
+    input {
+      padding-right: $option-search-padding;
+    }
   }
 }
 
