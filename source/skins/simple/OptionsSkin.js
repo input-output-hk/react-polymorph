@@ -77,7 +77,7 @@ export const OptionsSkin = (props: Props) => {
   } = props;
 
   const highlightedOptionIndex = getHighlightedOptionIndex();
-  const isFirstOptionHighlighted = highlightedOptionIndex === 0;
+  const isFirstOptionHighlighted = !hasSearch && highlightedOptionIndex === 0;
   const sortedOptions = isOpeningUpward ? options.slice().reverse() : options;
 
   const renderOptions = () => {
