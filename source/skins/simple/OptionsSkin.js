@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Element, ElementRef } from 'react';
+import type { Element, ElementRef, RefObject } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -37,6 +37,7 @@ type Props = {
   optionsMaxHeight: number,
   render: Function,
   searchHeight: number,
+  searchInputRef?: RefObject,
   searchValue: string,
   selectedOption: any,
   setHighlightedOptionIndex: Function,
@@ -150,6 +151,7 @@ export const OptionsSkin = (props: Props) => {
           value={searchValue}
           onChange={props.onSearch}
           autoFocus={true}
+          inputRef={props.searchInputRef || null}
         />
       </div>
     )

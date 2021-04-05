@@ -14,6 +14,7 @@ import type {
 
 // external libraries
 import { isFunction } from 'lodash';
+import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
@@ -95,6 +96,8 @@ class OptionsBase extends Component<Props, State> {
 
     const { context, themeId, theme, themeOverrides } = props;
 
+    this.searchInputRef = createRef();
+
     this.state = {
       composedTheme: composeTheme(
         addThemeId(theme || context.theme, themeId),
@@ -115,15 +118,25 @@ class OptionsBase extends Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps !== this.props) {
       if (!prevProps.isOpen && this.props.isOpen) {
-        document.addEventListener('keydown', this._handleKeyDown, false);
+        this.onOpen();
       } else if (prevProps.isOpen && !this.props.isOpen) {
-        document.removeEventListener('keydown', this._handleKeyDown, false);
+        this.onClose();
       }
       didThemePropsChange(prevProps, this.props, this.setState.bind(this));
     }
   }
 
   componentWillUnmount() {
+    document.removeEventListener('keydown', this._handleKeyDown, false);
+  }
+
+  onOpen = () => {
+    document.addEventListener('keydown', this._handleKeyDown, false);
+    const { current: input } = this.searchInputRef;
+    if (input && input.focus) input.focus();
+  }
+
+  onClose = () => {
     document.removeEventListener('keydown', this._handleKeyDown, false);
   }
 
@@ -250,7 +263,7 @@ class OptionsBase extends Component<Props, State> {
   // ========= PRIVATE HELPERS =========
 
   _handleSelectionOnKeyDown = (event: SyntheticKeyboardEvent<>) => {
-    const { options } = this.props;
+    const options = this.getFilteredOptions();
     if (options.length) {
       const { isOpeningUpward } = this.props;
       const currentIndex = this.state.highlightedOptionIndex;
@@ -371,6 +384,7 @@ class OptionsBase extends Component<Props, State> {
         isSelectedOption={this.isSelectedOption}
         options={this.getFilteredOptions()}
         optionsRef={optionsRef}
+        searchInputRef={this.searchInputRef}
         searchValue={searchValue}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}
         targetRef={targetRef}
