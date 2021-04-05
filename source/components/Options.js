@@ -133,8 +133,11 @@ class OptionsBase extends Component<Props, State> {
   onOpen = () => {
     document.addEventListener('keydown', this._handleKeyDown, false);
     const { current: input } = this.searchInputRef;
-    if (input && input.focus) input.focus();
-  }
+    if (input) {
+      input.focus && input.focus();
+      input.select && input.select();
+    }
+  };
 
   onClose = () => {
     document.removeEventListener('keydown', this._handleKeyDown, false);
