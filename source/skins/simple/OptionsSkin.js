@@ -20,6 +20,7 @@ type Props = {
   getHighlightedOptionIndex: Function,
   handleClickOnOption: Function,
   hasSearch?: boolean,
+  hideSearchClearButton?: boolean,
   highlightSearch?: boolean,
   isHighlightedOption: Function,
   isOpen: boolean,
@@ -29,6 +30,7 @@ type Props = {
   noResults: boolean,
   noResultsMessage: string | Element<any>,
   noSelectedOptionCheckmark?: boolean,
+  onClearSearchValue: Function,
   onSearch: Function,
   optionHeight: number,
   optionRenderer: Function,
@@ -153,6 +155,12 @@ export const OptionsSkin = (props: Props) => {
           autoFocus={true}
           inputRef={props.searchInputRef || null}
         />
+        {!props.hideSearchClearButton && (
+          <button
+            className={searchValue ? theme[themeId].active : null}
+            onClick={props.onClearSearchValue}
+          />
+        )}
       </div>
     )
   }

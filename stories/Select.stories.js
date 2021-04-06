@@ -266,6 +266,7 @@ storiesOf('Select', module)
           value={store.state.value}
           onChange={value => store.set({ value })}
           options={COUNTRIES}
+          hasSearch
         />
       </div>
     ))

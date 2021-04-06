@@ -26,13 +26,19 @@ $option-text-color-disabled: var(--rp-option-text-color-disabled, rgba(#5e6066, 
 $option-search-border-radius: var(--rp-option-search-border-radius, 0) !default;
 $option-search-border: var(--rp-option-search-border, none) !default;
 $option-search-box-shadow: var(--rp-option-search-box-shadow, 0 10px 10px -5px rgba(0, 0, 0, 0.12)) !default;
+$option-search-clear-button-bg-color: var(--rp-option-bg-color-highlighted, rgba(68, 91, 124, 0.1)) !default;
+$option-search-clear-icon-color: var(--rp-input-text-color, #5e6066) !default;
+$option-search-clear-icon-size: var(--rp-option-search-clear-icon-size, 8px) !default;
+$option-search-clear-icon-url: var(--rp-option-search-clear-icon-url, url("#{$theme-assets-path}/cross.svg")) !default;
 $option-search-height: var(--rp-option-search-height, 50px) !default;
-$option-search-padding: var(--rp-option-search-padding, 55px) !default;
-$option-search-icon-margin: var(--rp-option-search-icon-size, 19px) !default;
+$option-search-highlight-background-color: var(--rp-option-search-icon-url, #f2a218) !default;
+$option-search-icon-color: var(--rp-input-text-color, #5e6066) !default;
+$option-search-icon-margin: var(--rp-option-search-icon-size, 18.5px) !default;
+$option-search-icon-opacity: var(--rp-option-search-icon-opacity, 0.65) !default;
 $option-search-icon-size: var(--rp-option-search-icon-size, 15px) !default;
 $option-search-icon-url: var(--rp-option-search-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
-$option-search-icon-color: var(--rp-option-search-icon-url, rgba(94, 96, 102, 65%)) !default;
-$option-search-highlight-background-color: var(--rp-option-search-icon-url, #f2a218) !default;
+$option-search-padding-clear-btn: var(--rp-option-search-padding-clear-btn, 60px) !default;
+$option-search-padding-magnifier: var(--rp-option-search-padding-magnifier, 43px) !default;
 
 // checkmark
 $option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
@@ -142,10 +148,42 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
 }
 
 .search {
+  position: relative;
   input {
     border-radius: $option-search-border-radius;
     border: $option-search-border;
     height: $option-search-height;
+  }
+  button {
+    background-color: $option-search-clear-button-bg-color;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 28px;
+    opacity: 0;
+    padding: 10px;
+    position: absolute;
+    top: 12px;
+    transition: opacity .25s ease-out;
+    width: 28px;
+    z-index: 1;
+
+    &.active {
+      opacity: 1;
+    }
+    &:before {
+      -webkit-mask-image: $option-search-clear-icon-url;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: $option-search-clear-icon-size $option-search-clear-icon-size;
+      background-color: $option-search-clear-icon-color;
+      content: "";
+      display: block;
+      height: $option-search-clear-icon-size;
+      mask-image:$option-search-clear-icon-url;
+      mask-repeat: no-repeat;
+      mask-size: $option-search-clear-icon-size $option-search-clear-icon-size;
+      width: $option-search-clear-icon-size;
+    }
+
   }
   :global {
     .SimpleFormField_root {
@@ -153,17 +191,17 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     }
   }
   &:before {
-    -webkit-mask: $option-search-icon-url;
+    -webkit-mask-image: $option-search-icon-url;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: $option-search-icon-size $option-search-icon-size;
     background: $option-search-icon-color;
     content: "";
-    display: inline-flex;
     height: $option-search-icon-size;
     margin: $option-search-icon-margin $option-search-icon-margin 0 $option-search-icon-margin;
-    mask: $option-search-icon-url;
+    mask-image: $option-search-icon-url;
     mask-repeat: no-repeat;
     mask-size: $option-search-icon-size $option-search-icon-size;
+    opacity: $option-search-icon-opacity;
     position: absolute;
     vertical-align: middle;
     width: $option-search-icon-size;
@@ -171,12 +209,21 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
   }
   :not([dir='rtl']) & {
     input {
-      padding-left: $option-search-padding;
+      padding-left: $option-search-padding-magnifier;
+      padding-right: $option-search-padding-clear-btn;
+    }
+    button {
+      right: 12px;
     }
   }
   [dir='rtl'] & {
     input {
-      padding-right: $option-search-padding;
+      padding-left: $option-search-padding-clear-btn;
+      padding-right: $option-search-padding-magnifier;
+    }
+    button {
+      left: 12px;
+      right: auto;
     }
   }
 }

@@ -21,6 +21,7 @@ type Props = {
   handleChange: Function,
   handleInputClick: Function,
   hasSearch?: boolean,
+  hideSearchClearButton?: boolean,
   highlightSearch?: boolean,
   inputRef: ElementRef<'input'>,
   isOpen: boolean,
@@ -83,6 +84,7 @@ export const SelectSkin = (props: Props) => {
         skin={OptionsSkin}
         theme={theme}
         hasSearch={props.hasSearch}
+        hideSearchClearButton={props.hideSearchClearButton}
         highlightSearch={props.highlightSearch}
         isOpen={props.isOpen}
         optionsRef={props.optionsRef}

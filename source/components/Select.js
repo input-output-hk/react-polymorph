@@ -21,6 +21,7 @@ type Props = {
   context: ThemeContextProp,
   error?: string | Element<any>,
   hasSearch?: boolean,
+  hideSearchClearButton?: boolean,
   highlightSearch?: boolean,
   isOpeningUpward: boolean,
   label?: string | Element<any>,

@@ -29,6 +29,7 @@ type Props = {
   className?: String,
   context: ThemeContextProp,
   hasSearch?: boolean,
+  hideSearchClearButton?: boolean,
   highlightSearch?: boolean,
   isOpen: boolean,
   isOpeningUpward: boolean,
@@ -211,6 +212,12 @@ class OptionsBase extends Component<Props, State> {
     });
   }
 
+  handleClearSearchValue = () => {
+    this.setState({
+      searchValue: '',
+    });
+  }
+
   getFilteredOptions = () => {
     const { hasSearch, onSearch, options, highlightSearch, optionRenderer } = this.props;
     const { searchValue } = this.state;
@@ -387,6 +394,7 @@ class OptionsBase extends Component<Props, State> {
         isSelectedOption={this.isSelectedOption}
         options={this.getFilteredOptions()}
         optionsRef={optionsRef}
+        onClearSearchValue={this.handleClearSearchValue}
         searchInputRef={this.searchInputRef}
         searchValue={searchValue}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}
