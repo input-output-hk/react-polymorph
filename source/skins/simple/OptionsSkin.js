@@ -173,7 +173,11 @@ export const OptionsSkin = (props: Props) => {
       height = optionsMaxHeight;
     }
     if (hasSearch) {
-      height += searchHeight;
+      if (options.length) {
+        height += searchHeight;
+      } else {
+        height = searchHeight;
+      }
     }
     return height;
   };
