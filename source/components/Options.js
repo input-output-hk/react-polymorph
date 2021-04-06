@@ -206,11 +206,7 @@ class OptionsBase extends Component<Props, State> {
     this.close();
   };
 
-// handleSearch = (event: SyntheticKeyboardEvent<>, test) => {
-
-  handleSearch = (searchValue: string, event: SyntheticKeyboardEvent<>) => {
-    event.preventDefault();
-    event.stopPropagation();
+  handleSearch = (searchValue: string) => {
     this.setState({
       searchValue
     });
