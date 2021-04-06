@@ -13,7 +13,7 @@ import type {
 } from 'react';
 
 // external libraries
-import { isFunction } from 'lodash';
+import { isFunction, get } from 'lodash';
 import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
@@ -206,7 +206,11 @@ class OptionsBase extends Component<Props, State> {
     this.close();
   };
 
-  handleSearch = (searchValue: string) => {
+// handleSearch = (event: SyntheticKeyboardEvent<>, test) => {
+
+  handleSearch = (searchValue: string, event: SyntheticKeyboardEvent<>) => {
+    event.preventDefault();
+    event.stopPropagation();
     this.setState({
       searchValue
     });
@@ -314,6 +318,7 @@ class OptionsBase extends Component<Props, State> {
 
   // this needs to get passed to OptionsSkin and attached to each Option Li
   _handleKeyDown = (event: SyntheticKeyboardEvent<>) => {
+    const targetTagName = get(event, 'target.tagName');
     const highlightOptionIndex = this.state.highlightedOptionIndex;
     switch (event.keyCode) {
       case 9: // Tab key: selects currently highlighted option
@@ -325,8 +330,10 @@ class OptionsBase extends Component<Props, State> {
         this._handleSelectionOnKeyDown(event);
         break;
       case 32: // Space key: selects currently highlighted option
-        event.preventDefault();
-        this._handleSelectionOnKeyDown(event);
+        if (targetTagName !== 'INPUT') {
+          event.preventDefault();
+          this._handleSelectionOnKeyDown(event);
+        }
         break;
       case 27: // Escape key: closes options if open
         this.close();
