@@ -13,7 +13,6 @@ import { ScrollBar } from '../../components/ScrollBar';
 
 // skins
 import { BubbleSkin } from './BubbleSkin';
-import { InputSkin } from './InputSkin';
 
 type Props = {
   getOptionProps: Function,
@@ -148,7 +147,6 @@ export const OptionsSkin = (props: Props) => {
     return (
       <div className={theme[themeId].search}>
         <Input
-          skin={InputSkin}
           theme={theme}
           value={searchValue}
           onChange={props.onSearch}
