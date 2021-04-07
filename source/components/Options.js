@@ -118,9 +118,9 @@ class OptionsBase extends Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps !== this.props) {
       if (!prevProps.isOpen && this.props.isOpen) {
-        this.onOpen();
+        this.setupOnOpenListeners();
       } else if (prevProps.isOpen && !this.props.isOpen) {
-        this.onClose();
+        this.setupOnCloseListeners();
       }
       didThemePropsChange(prevProps, this.props, this.setState.bind(this));
     }
@@ -130,7 +130,7 @@ class OptionsBase extends Component<Props, State> {
     document.removeEventListener('keydown', this._handleKeyDown, false);
   }
 
-  onOpen = () => {
+  setupOnOpenListeners = () => {
     document.addEventListener('keydown', this._handleKeyDown, false);
     const { current: input } = this.searchInputRef;
     if (input) {
@@ -139,7 +139,7 @@ class OptionsBase extends Component<Props, State> {
     }
   };
 
-  onClose = () => {
+  setupOnCloseListeners = () => {
     document.removeEventListener('keydown', this._handleKeyDown, false);
   }
 
