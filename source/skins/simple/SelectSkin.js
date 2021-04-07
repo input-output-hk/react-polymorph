@@ -27,6 +27,7 @@ type Props = {
   isOpen: boolean,
   isOpeningUpward: boolean,
   label: string | Element<any>,
+  noResultsMessage?: string,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,

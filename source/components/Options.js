@@ -269,6 +269,12 @@ class OptionsBase extends Component<Props, State> {
     };
   };
 
+  getNoResults = () => {
+    const { noResults, hasSearch } = this.props;
+    const options = this.getFilteredOptions();
+    return noResults || (hasSearch && !options.length);
+  }
+
   // ========= PRIVATE HELPERS =========
 
   _handleSelectionOnKeyDown = (event: SyntheticKeyboardEvent<>) => {
@@ -371,6 +377,7 @@ class OptionsBase extends Component<Props, State> {
       theme,
       themeOverrides,
       toggleMouseLocation,
+      noResults,
       onChange,
       onSearch,
       options,
@@ -404,6 +411,7 @@ class OptionsBase extends Component<Props, State> {
         theme={composedTheme}
         setMouseIsOverOptions={this._setMouseIsOverOptions}
         onSearch={this.handleSearch}
+        noResults={this.getNoResults()}
         {...rest}
       />
     );
