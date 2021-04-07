@@ -4,7 +4,6 @@ import React, { Component, RefObject } from 'react';
 import type { ComponentType, Element, SyntheticInputEvent } from 'react';
 
 // external libraries
-import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
 // utilities

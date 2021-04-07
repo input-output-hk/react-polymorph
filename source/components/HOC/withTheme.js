@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import type { ComponentType, Ref } from 'react';
-import forwardRef from 'create-react-ref/lib/forwardRef';
 import { ThemeContext } from './ThemeContext';
 import { getDisplayName } from '../../utils/props';
 
@@ -34,7 +33,7 @@ export function withTheme<C: ComponentType<any>>(Component: C): C {
     );
   } else {
     // wraps component in context AND forwardRef
-    WrappedComponent = forwardRef((props: {}, ref: Ref<any>) => (
+    WrappedComponent = React.forwardRef((props: {}, ref: Ref<any>) => (
       <ThemeContext.Consumer>
         {(context) => <Component context={context} ref={ref} {...props} />}
       </ThemeContext.Consumer>

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import type { ComponentType, Node, Element } from 'react';
 
 // external libraries
-import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
 // internal utility functions
@@ -61,7 +60,7 @@ class TextAreaBase extends Component<Props, State> {
     super(props);
 
     // define ref
-    this.textareaElement = createRef();
+    this.textareaElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 

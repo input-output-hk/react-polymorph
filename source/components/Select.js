@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
-import createRef from 'create-react-ref/lib/createRef';
 
 // internal components
 import { GlobalListeners } from './HOC/GlobalListeners';
@@ -72,9 +71,9 @@ class SelectBase extends Component<Props, State> {
     super(props);
 
     // define ref
-    this.rootElement = createRef();
-    this.inputElement = createRef();
-    this.optionsElement = createRef();
+    this.rootElement = React.createRef();
+    this.inputElement = React.createRef();
+    this.optionsElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 

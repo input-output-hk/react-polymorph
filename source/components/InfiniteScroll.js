@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import type { ComponentType, Node } from 'react';
 // $FlowFixMe
-import createRef from 'create-react-ref/lib/createRef';
 
 // utilities
 import { createEmptyContext, withTheme } from './HOC/withTheme';
@@ -53,7 +52,7 @@ class InfiniteScrollBase extends Component<Props, State> {
     const { context, themeId, theme, themeOverrides } = props;
 
     // refs
-    this.scrollContainer = createRef();
+    this.scrollContainer = React.createRef();
 
     this.state = {
       composedTheme: composeTheme(

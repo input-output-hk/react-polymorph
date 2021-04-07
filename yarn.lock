@@ -5420,13 +5420,6 @@ create-react-context@^0.3.0:
     gud "^1.0.0"
     warning "^4.0.3"
 
-create-react-ref@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/create-react-ref/-/create-react-ref-0.1.0.tgz#0aa42aae4e66d8b164207ac8c468c35ce7bbd8eb"
-  integrity sha512-w/DDeTaFSaDVtlfLs4q9FVFcFq1jPZ62dBUAV24OKXrobtDlnXeJ5EsnK+z98Kmh9Zyxv24Edc26z8f7APVUYg==
-  dependencies:
-    fbjs "^0.8.16"
-
 cross-env@5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.2.0.tgz#6ecd4c015d5773e614039ee529076669b9d126f2"

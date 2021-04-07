@@ -14,7 +14,6 @@ import type {
 
 // external libraries
 import { isFunction, get } from 'lodash';
-import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
@@ -97,7 +96,7 @@ class OptionsBase extends Component<Props, State> {
 
     const { context, themeId, theme, themeOverrides } = props;
 
-    this.searchInputRef = createRef();
+    this.searchInputRef = React.createRef();
 
     this.state = {
       composedTheme: composeTheme(
