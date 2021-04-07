@@ -184,16 +184,18 @@ export const OptionsSkin = (props: Props) => {
         isOpeningUpward ? theme[themeId].openUpward : null,
         isFirstOptionHighlighted && !noResults
           ? theme[themeId].firstOptionHighlighted
-          : null
+          : null,
+        hasSearch ? theme[themeId].hasSearch : null,
       ])}
       isTransparent={false}
       skin={BubbleSkin}
       isOpeningUpward={isOpeningUpward}
       isHidden={!isOpen}
       isFloating
-      noArrow={noOptionsArrow}
+      noArrow={noOptionsArrow || hasSearch}
       targetRef={targetRef}
     >
+      {hasSearch && renderSearch()}
       <ul
         style={optionsStyle}
         ref={optionsRef}
@@ -201,7 +203,6 @@ export const OptionsSkin = (props: Props) => {
         onMouseEnter={() => setMouseIsOverOptions && setMouseIsOverOptions(true)}
         onMouseLeave={() => setMouseIsOverOptions && setMouseIsOverOptions(false)}
       >
-        {hasSearch && renderSearch()}
         <ScrollBar style={{ height: `${getScrollBarHeight()}px` }}>
           {renderOptions()}
         </ScrollBar>

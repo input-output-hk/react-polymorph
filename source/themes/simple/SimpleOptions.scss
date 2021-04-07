@@ -33,7 +33,8 @@ $option-search-clear-icon-url: var(--rp-option-search-clear-icon-url, url("#{$th
 $option-search-height: var(--rp-option-search-height, 50px) !default;
 $option-search-highlight-background-color: var(--rp-option-search-icon-url, #f2a218) !default;
 $option-search-icon-color: var(--rp-input-text-color, #5e6066) !default;
-$option-search-icon-margin: var(--rp-option-search-icon-size, 18.5px) !default;
+$option-search-icon-top-margin: var(--rp-option-search-icon-size, 16.5px) !default;
+$option-search-icon-side-margin: var(--rp-option-search-icon-size, 18.5px) !default;
 $option-search-icon-opacity: var(--rp-option-search-icon-opacity, 0.65) !default;
 $option-search-icon-size: var(--rp-option-search-icon-size, 15px) !default;
 $option-search-icon-url: var(--rp-option-search-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
@@ -57,6 +58,10 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
 .options {
   & > div {
     padding: 0;
+  }
+
+  &.hasSearch {
+    margin-top: 10px;
   }
 
   @if ($options-arrow) {
@@ -148,7 +153,9 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
 }
 
 .search {
+  box-shadow: $option-search-box-shadow;
   position: relative;
+  z-index: 1;
   input {
     border-radius: $option-search-border-radius;
     border: $option-search-border;
@@ -183,12 +190,6 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
       mask-size: $option-search-clear-icon-size $option-search-clear-icon-size;
       width: $option-search-clear-icon-size;
     }
-
-  }
-  :global {
-    .SimpleFormField_root {
-      box-shadow: $option-search-box-shadow;
-    }
   }
   &:before {
     -webkit-mask-image: $option-search-icon-url;
@@ -197,7 +198,7 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     background: $option-search-icon-color;
     content: "";
     height: $option-search-icon-size;
-    margin: $option-search-icon-margin $option-search-icon-margin 0 $option-search-icon-margin;
+    margin: $option-search-icon-top-margin $option-search-icon-side-margin 0 $option-search-icon-side-margin;
     mask-image: $option-search-icon-url;
     mask-repeat: no-repeat;
     mask-size: $option-search-icon-size $option-search-icon-size;

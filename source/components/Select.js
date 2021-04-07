@@ -175,6 +175,8 @@ class SelectBase extends Component<Props, State> {
         optionsRef={this.optionsElement}
         rootRef={this.rootElement}
         toggleOpen={this.toggleOpen}
+        hasSearch={this.props.hasSearch}
+        optionsLength={this.props.options.length}
       >
         {({ optionsMaxHeight }) => (
           <SelectSkin
