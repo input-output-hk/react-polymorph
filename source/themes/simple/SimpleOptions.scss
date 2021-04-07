@@ -23,23 +23,24 @@ $option-text-color: var(--rp-option-text-color, #5e6066) !default;
 $option-text-color-disabled: var(--rp-option-text-color-disabled, rgba(#5e6066, 0.5)) !default;
 
 // search
-$option-search-border-radius: var(--rp-option-search-border-radius, 0) !default;
-$option-search-border: var(--rp-option-search-border, none) !default;
 $option-search-box-shadow: var(--rp-option-search-box-shadow, 0 10px 10px -5px rgba(0, 0, 0, 0.12)) !default;
 $option-search-clear-button-bg-color: var(--rp-option-bg-color-highlighted, rgba(68, 91, 124, 0.1)) !default;
 $option-search-clear-icon-color: var(--rp-input-text-color, #5e6066) !default;
 $option-search-clear-icon-size: var(--rp-option-search-clear-icon-size, 8px) !default;
 $option-search-clear-icon-url: var(--rp-option-search-clear-icon-url, url("#{$theme-assets-path}/cross.svg")) !default;
-$option-search-height: var(--rp-option-search-height, 50px) !default;
 $option-search-highlight-background-color: var(--rp-option-search-icon-url, #f2a218) !default;
 $option-search-icon-color: var(--rp-input-text-color, #5e6066) !default;
-$option-search-icon-top-margin: var(--rp-option-search-icon-size, 16.5px) !default;
-$option-search-icon-side-margin: var(--rp-option-search-icon-size, 18.5px) !default;
 $option-search-icon-opacity: var(--rp-option-search-icon-opacity, 0.65) !default;
+$option-search-icon-side-margin: var(--rp-option-search-icon-size, 18.5px) !default;
 $option-search-icon-size: var(--rp-option-search-icon-size, 15px) !default;
+$option-search-icon-top-margin: var(--rp-option-search-icon-size, 16.5px) !default;
 $option-search-icon-url: var(--rp-option-search-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
-$option-search-padding-clear-btn: var(--rp-option-search-padding-clear-btn, 60px) !default;
-$option-search-padding-magnifier: var(--rp-option-search-padding-magnifier, 43px) !default;
+$option-search-input-background-color: var(--rp-option-search-input-bg-color, #fafbfc);
+$option-search-input-border-radius: var(--rp-option-search-input-border-radius, 1px);
+$option-search-input-border: var(--rp-option-search-input-border, none);
+$option-search-input-height: var(--rp-option-search-height, 50px) !default;
+$option-search-input-padding-clear-btn: var(--rp-option-search-input-padding-clear-btn, 60px) !default;
+$option-search-input-padding-magnifier: var(--rp-option-search-input-padding-magnifier, 43px) !default;
 
 // checkmark
 $option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
@@ -157,9 +158,12 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
   position: relative;
   z-index: 1;
   input {
-    border-radius: $option-search-border-radius;
-    border: $option-search-border;
-    height: $option-search-height;
+    border-radius: $option-search-input-border-radius;
+    border: $option-search-input-border;
+    height: $option-search-input-height;
+    background-color: $option-search-input-background-color;
+    border:  $option-search-input-border;
+    border-radius:  $option-search-input-border-radius;
   }
   button {
     background-color: $option-search-clear-button-bg-color;
@@ -210,8 +214,8 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
   }
   :not([dir='rtl']) & {
     input {
-      padding-left: $option-search-padding-magnifier;
-      padding-right: $option-search-padding-clear-btn;
+      padding-left: $option-search-input-padding-magnifier;
+      padding-right: $option-search-input-padding-clear-btn;
     }
     button {
       right: 12px;
@@ -219,8 +223,8 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
   }
   [dir='rtl'] & {
     input {
-      padding-left: $option-search-padding-clear-btn;
-      padding-right: $option-search-padding-magnifier;
+      padding-left: $option-search-input-padding-clear-btn;
+      padding-right: $option-search-input-padding-magnifier;
     }
     button {
       left: 12px;
