@@ -22,6 +22,7 @@ type NumericInputValue = null | number | string | BigNumber.Instance;
 
 export type NumericInputProps = InputProps & {
   allowSigns?: boolean,
+  allowOnlyIntegers?: boolean,
   bigNumberFormat?: BigNumber.Format,
   decimalPlaces?: number,
   roundingMode?: BigNumber.RoundingMode,
@@ -42,6 +43,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
   static defaultProps = {
     allowSigns: true,
+    allowOnlyIntegers: false,
     readOnly: false,
     roundingMode: BigNumber.ROUND_FLOOR,
     value: null,
@@ -113,7 +115,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     caretPosition: number,
     fallbackInputValue?: ?string,
   } {
-    const { allowSigns, decimalPlaces, value } = this.props;
+    const { allowSigns, allowOnlyIntegers, decimalPlaces, value } = this.props;
     const { inputType, target } = event;
     const { decimalSeparator, groupSeparator } = this.getBigNumberFormat();
     const changedCaretPosition = target.selectionStart;
@@ -130,9 +132,15 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     const validInputNoSignsRegExp = new RegExp(
       `^([0-9${decimalSeparator}${groupSeparator}]+)?$`
     );
-    const validInputRegex = allowSigns
+    const validInputOnlyIntegersRegExp = new RegExp(
+      `^([0-9]+)?$`
+    );
+    let validInputRegex = allowSigns
       ? validInputSignsRegExp
       : validInputNoSignsRegExp;
+    validInputRegex = allowOnlyIntegers
+        ? validInputOnlyIntegersRegExp
+        : validInputRegex;
     const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
 
     /**
@@ -340,14 +348,16 @@ class NumericInputBase extends Component<NumericInputProps, State> {
   }
 
   valueToFormattedString(number: NumericInputValue) {
-    const { bigNumberFormat, decimalPlaces, roundingMode } = this.props;
+    const { bigNumberFormat, decimalPlaces, roundingMode, allowOnlyIntegers } = this.props;
     const debugSetting = BigNumber.DEBUG;
     if (BigNumber.isBigNumber(number) && number.isNaN()) return '';
     try {
       BigNumber.DEBUG = true;
-      return new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
+      return allowOnlyIntegers ?
+        new BigNumber(number).toString()
+        : new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
         ...BigNumber.config().FORMAT, // defaults
-        ...bigNumberFormat, // custom overrides
+        ...bigNumberFormat, // custom overrides;
       });
     } catch (e) {
       return '';

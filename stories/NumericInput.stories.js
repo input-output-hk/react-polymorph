@@ -132,12 +132,33 @@ storiesOf('NumericInput', module)
     ))
   )
   .add(
-    'allowSigns = false',
+    'allowSigns = false | allowOnlyIntegers = false',
     withState({ value: null }, (store) => (
       <NumericInput
         value={store.state.value}
         onChange={(value) => store.set({ value })}
         allowSigns={false}
+      />
+    ))
+  )
+  .add(
+    'allowSigns = true | allowOnlyIntegers = false',
+    withState({ value: null }, (store) => (
+      <NumericInput
+        value={store.state.value}
+        onChange={(value) => store.set({ value })}
+        allowOnlyIntegers={false}
+      />
+    ))
+  )
+  .add(
+    'allowSigns = false | allowOnlyIntegers = true',
+    withState({ value: null }, (store) => (
+      <NumericInput
+        value={store.state.value}
+        onChange={(value) => store.set({ value })}
+        allowSigns={false}
+        allowOnlyIntegers
       />
     ))
   )
