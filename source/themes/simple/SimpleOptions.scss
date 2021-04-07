@@ -158,12 +158,10 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
   position: relative;
   z-index: 1;
   input {
-    border-radius: $option-search-input-border-radius;
+    background-color: $option-search-input-background-color;
+    border-radius:  $option-search-input-border-radius;
     border: $option-search-input-border;
     height: $option-search-input-height;
-    background-color: $option-search-input-background-color;
-    border:  $option-search-input-border;
-    border-radius:  $option-search-input-border-radius;
   }
   button {
     background-color: $option-search-clear-button-bg-color;
