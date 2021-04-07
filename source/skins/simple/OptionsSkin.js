@@ -166,20 +166,11 @@ export const OptionsSkin = (props: Props) => {
   }
 
   const getScrollBarHeight = (): number => {
-    let height = options.length
-      ? options.length * optionHeight
-      : optionHeight;
-    if (height > optionsMaxHeight) {
-      height = optionsMaxHeight;
+    if (!options.length) return optionHeight;
+    if (optionsMaxHeight < options.length * optionHeight) {
+      return optionsMaxHeight;
     }
-    if (hasSearch) {
-      if (options.length) {
-        height += searchHeight;
-      } else {
-        height = searchHeight;
-      }
-    }
-    return height;
+    return options.length * optionHeight;
   };
 
   // Enforce max height of options dropdown if necessary
@@ -212,8 +203,8 @@ export const OptionsSkin = (props: Props) => {
         onMouseEnter={() => setMouseIsOverOptions && setMouseIsOverOptions(true)}
         onMouseLeave={() => setMouseIsOverOptions && setMouseIsOverOptions(false)}
       >
+        {hasSearch && renderSearch()}
         <ScrollBar style={{ height: `${getScrollBarHeight()}px` }}>
-          {hasSearch && renderSearch()}
           {renderOptions()}
         </ScrollBar>
       </ul>

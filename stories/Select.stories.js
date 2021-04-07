@@ -28,6 +28,7 @@ import { IDENTIFIERS } from '../source/components';
 
 // helpers
 import { decorateWithSimpleTheme } from './helpers/theming';
+import countries from './helpers/countries.json'
 
 const COUNTRIES = [
   { value: 'PT-br', label: 'Brazil' },
@@ -119,6 +120,17 @@ storiesOf('Select', module)
           },
           ...COUNTRIES.slice(2)
         ]}
+        hasSearch
+      />
+    ))
+  )
+
+  .add('with search and long list',
+    withState({ value: '' }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={countries}
         hasSearch
       />
     ))
