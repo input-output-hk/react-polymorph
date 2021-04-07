@@ -150,7 +150,6 @@ export class GlobalListeners extends Component<Props, State> {
   // calculates max-height for Options, max-height shouldn't be greater than distance
   // from Options rootRef to edge of window (up or down) else Options run off page
   _calculateOptionsMaxHeight = () => {
-    console.log('_calculateOptionsMaxHeight');
     const { documentElement } = document;
     const {
       rootRef,
