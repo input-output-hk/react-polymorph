@@ -61,7 +61,7 @@ class InputBase extends Component<InputProps, State> {
 
   constructor(props: InputProps) {
     super(props);
-    this.inputElement = props.inputRef ?? createRef();
+    this.inputElement = props.inputRef ?? React.createRef();
     const { context, themeId, theme, themeOverrides } = props;
 
     this.state = {
