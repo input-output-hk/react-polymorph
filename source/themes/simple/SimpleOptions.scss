@@ -175,7 +175,6 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     transition: opacity .25s ease-out;
     width: 28px;
     z-index: 1;
-
     &.active {
       opacity: 1;
     }

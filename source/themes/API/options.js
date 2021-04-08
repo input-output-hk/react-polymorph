@@ -1,5 +1,6 @@
 // @flow
 export const OPTIONS_THEME_API = {
+  active: '',
   disabledOption: '',
   firstOptionHighlighted: '',
   hasNoSelectedOptionCheckmark: '',
