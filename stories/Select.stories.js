@@ -1,10 +1,14 @@
 // @flow
 import React from 'react';
 
+// Pkgs
+import { escapeRegExp } from 'lodash';
+
 // storybook
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
+
 // components
 import { Select } from '../source/components/Select';
 import { Modal } from '../source/components/Modal';
@@ -114,11 +118,10 @@ storiesOf('Select', module)
         ]}
         hasSearch
         onSearch={(searchValue: string, list: Array<any>) => {
-          const regex = new RegExp(searchValue, "i");
+          const regex = new RegExp(escapeRegExp(searchValue), "i");
           return list
             .filter((option) => {
               const { label, value } = option;
-              const regex = new RegExp(searchValue, "i");
               return regex.test(label) || regex.test(value);
             })
             .map((option) => {

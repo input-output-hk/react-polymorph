@@ -123,7 +123,6 @@ export const OptionsSkin = (props: Props) => {
 
   const renderOption = option => {
     const escapedSearchValue = escapeRegExp(searchValue) || '';
-    console.log('escapedSearchValue', escapedSearchValue);
     // check if user has passed render prop "optionRenderer"
     if (optionRenderer && isFunction(optionRenderer)) {
       // call user's custom rendering logic
