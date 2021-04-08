@@ -4,7 +4,7 @@ import type { Element, ElementRef, RefObject } from 'react';
 
 // external libraries
 import classnames from 'classnames';
-import { isFunction, isObject } from 'lodash';
+import { isFunction, isObject, escapeRegExp } from 'lodash';
 
 // components
 import { Bubble } from '../../components/Bubble';
@@ -122,6 +122,8 @@ export const OptionsSkin = (props: Props) => {
   };
 
   const renderOption = option => {
+    const escapedSearchValue = escapeRegExp(searchValue) || '';
+    console.log('escapedSearchValue', escapedSearchValue);
     // check if user has passed render prop "optionRenderer"
     if (optionRenderer && isFunction(optionRenderer)) {
       // call user's custom rendering logic
@@ -130,10 +132,10 @@ export const OptionsSkin = (props: Props) => {
       let { label } = option;
       // in case `highlightSearch` then `searchValue` is wrapped in an `em` tag
       if (highlightSearch !== false) {
-        const splitter = new RegExp(`(${searchValue})`,'i');
+        const splitter = new RegExp(`(${escapedSearchValue})`,'i');
         const parts = label.split(splitter);
         for (let i = 1; i < parts.length; i += 2) {
-          if (parts[i].toLowerCase() === searchValue.toLowerCase())
+          if (parts[i].toLowerCase() === `${escapedSearchValue}`.toLowerCase())
             parts[i] = <em>{parts[i]}</em>;
           label = parts;
         }
@@ -148,7 +150,6 @@ export const OptionsSkin = (props: Props) => {
       <div className={classnames([theme[themeId].search, 'test'])}>
         <Input
           theme={theme}
-          value1={searchValue}
           value={searchValue}
           onChange={props.onSearch}
           autoFocus={true}

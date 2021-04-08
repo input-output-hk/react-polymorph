@@ -96,21 +96,26 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES_LONG_LIST}
-        hasS earch
+        hasSearch
       />
     ))
   )
 
-  .add('with custom search',
+  .add('with custom search and escaped value',
     withState({ value: '' }, store => (
       <Select
         value={store.state.value}
         onChange={value => store.set({ value })}
-        options={COUNTRIES}
+        options={[
+          {
+            label: 'Escaped values: /.*+?|,()[]{}\\'
+          },
+          ...COUNTRIES
+        ]}
         hasSearch
-        onSearch={(searchValue: string) => {
+        onSearch={(searchValue: string, list: Array<any>) => {
           const regex = new RegExp(searchValue, "i");
-          return COUNTRIES
+          return list
             .filter((option) => {
               const { label, value } = option;
               const regex = new RegExp(searchValue, "i");

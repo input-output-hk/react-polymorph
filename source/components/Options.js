@@ -13,7 +13,7 @@ import type {
 } from 'react';
 
 // external libraries
-import { isFunction, get } from 'lodash';
+import { isFunction, get, escapeRegExp } from 'lodash';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
@@ -228,7 +228,7 @@ class OptionsBase extends Component<Props, State> {
     }
     const filteredOptions = options.filter((option) => {
       const { label } = option;
-      const regex = new RegExp(searchValue, 'i');
+      const regex = new RegExp(escapeRegExp(searchValue), 'i');
       return regex.test(label);
     });
     return filteredOptions;
