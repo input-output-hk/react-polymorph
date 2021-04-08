@@ -20,13 +20,18 @@ type Props = {
   getSelectedOption: Function,
   handleChange: Function,
   handleInputClick: Function,
+  hasSearch?: boolean,
+  hideSearchClearButton?: boolean,
+  highlightSearch?: boolean,
   inputRef: ElementRef<'input'>,
   isOpen: boolean,
   isOpeningUpward: boolean,
   label: string | Element<any>,
+  noResultsMessage?: string,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
+  onSearch?: Function,
   options: Array<{
     isDisabled: boolean,
     value: any
@@ -43,6 +48,7 @@ type Props = {
   toggleMouseLocation: Function,
   value: string,
   optionHeight: ?number,
+  searchHeight: ?number,
 };
 
 export const SelectSkin = (props: Props) => {
@@ -78,12 +84,16 @@ export const SelectSkin = (props: Props) => {
       <Options
         skin={OptionsSkin}
         theme={theme}
+        hasSearch={props.hasSearch}
+        hideSearchClearButton={props.hideSearchClearButton}
+        highlightSearch={props.highlightSearch}
         isOpen={props.isOpen}
         optionsRef={props.optionsRef}
         optionsMaxHeight={props.optionsMaxHeight}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}
         onChange={props.handleChange}
+        onSearch={props.onSearch}
         optionRenderer={props.optionRenderer}
         selectedOption={selectedOption}
         noResults={!props.options.length}
@@ -91,6 +101,7 @@ export const SelectSkin = (props: Props) => {
         toggleMouseLocation={props.toggleMouseLocation}
         toggleOpen={props.toggleOpen}
         optionHeight={props.optionHeight}
+        searchHeight={props.searchHeight}
       />
     </div>
   );

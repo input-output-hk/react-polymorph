@@ -12,6 +12,9 @@ import type {
   ElementRef
 } from 'react';
 
+// external libraries
+import { isFunction, get, escapeRegExp } from 'lodash';
+
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
 import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
@@ -24,6 +27,9 @@ import type { ThemeContextProp } from './HOC/withTheme';
 type Props = {
   className?: String,
   context: ThemeContextProp,
+  hasSearch?: boolean,
+  hideSearchClearButton?: boolean,
+  highlightSearch?: boolean,
   isOpen: boolean,
   isOpeningUpward: boolean,
   noOptionsArrow?: boolean,
@@ -33,6 +39,7 @@ type Props = {
   onBlur?: Function,
   onChange?: Function,
   onClose?: Function,
+  onSearch?: Function,
   optionHeight: ?number,
   options: Array<any>,
   optionRenderer?: Function,
@@ -40,6 +47,7 @@ type Props = {
   optionsMaxHeight?: number,
   render?: Function,
   resetOnClose: boolean,
+  searchHeight: ?number,
   // TODO: Why do we have two separate props for selection?
   selectedOption?: any,
   selectedOptions?: Array<any>,
@@ -56,7 +64,8 @@ type Props = {
 type State = {
   composedTheme: Object,
   highlightedOptionIndex: number,
-  isMouseOverOptions: boolean
+  isMouseOverOptions: boolean,
+  searchValue: string,
 };
 
 class OptionsBase extends Component<Props, State> {
@@ -75,6 +84,7 @@ class OptionsBase extends Component<Props, State> {
     optionHeight: 46,
     options: [],
     resetOnClose: false,
+    searchHeight: 52,
     theme: null,
     themeId: IDENTIFIERS.OPTIONS,
     themeOverrides: {},
@@ -85,6 +95,8 @@ class OptionsBase extends Component<Props, State> {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
+
+    this.searchInputRef = React.createRef();
 
     this.state = {
       composedTheme: composeTheme(
@@ -106,15 +118,28 @@ class OptionsBase extends Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps !== this.props) {
       if (!prevProps.isOpen && this.props.isOpen) {
-        document.addEventListener('keydown', this._handleKeyDown, false);
+        this.setupOnOpenListeners();
       } else if (prevProps.isOpen && !this.props.isOpen) {
-        document.removeEventListener('keydown', this._handleKeyDown, false);
+        this.setupOnCloseListeners();
       }
       didThemePropsChange(prevProps, this.props, this.setState.bind(this));
     }
   }
 
   componentWillUnmount() {
+    document.removeEventListener('keydown', this._handleKeyDown, false);
+  }
+
+  setupOnOpenListeners = () => {
+    document.addEventListener('keydown', this._handleKeyDown, false);
+    const { current: input } = this.searchInputRef;
+    if (input) {
+      input.focus && input.focus();
+      input.select && input.select();
+    }
+  };
+
+  setupOnCloseListeners = () => {
     document.removeEventListener('keydown', this._handleKeyDown, false);
   }
 
@@ -180,6 +205,35 @@ class OptionsBase extends Component<Props, State> {
     this.close();
   };
 
+  handleSearch = (searchValue: string) => {
+    this.setState({
+      searchValue
+    });
+  }
+
+  handleClearSearchValue = () => {
+    this.setState({
+      searchValue: '',
+    });
+  }
+
+  getFilteredOptions = () => {
+    const { hasSearch, onSearch, options, highlightSearch, optionRenderer } = this.props;
+    const { searchValue } = this.state;
+    if (!hasSearch || !searchValue) {
+      return options;
+    }
+    if (hasSearch && isFunction(onSearch)) {
+      return onSearch(searchValue, options);
+    }
+    const filteredOptions = options.filter((option) => {
+      const { label } = option;
+      const regex = new RegExp(escapeRegExp(searchValue), 'i');
+      return regex.test(label);
+    });
+    return filteredOptions;
+  }
+
   // returns an object containing props, theme, and method handlers
   // associated with rendering this.props.options, the user can call
   // this in the body of the renderOptions function
@@ -215,10 +269,16 @@ class OptionsBase extends Component<Props, State> {
     };
   };
 
+  getNoResults = () => {
+    const { noResults, hasSearch } = this.props;
+    const options = this.getFilteredOptions();
+    return noResults || (hasSearch && !options.length);
+  }
+
   // ========= PRIVATE HELPERS =========
 
   _handleSelectionOnKeyDown = (event: SyntheticKeyboardEvent<>) => {
-    const { options } = this.props;
+    const options = this.getFilteredOptions();
     if (options.length) {
       const { isOpeningUpward } = this.props;
       const currentIndex = this.state.highlightedOptionIndex;
@@ -259,6 +319,7 @@ class OptionsBase extends Component<Props, State> {
 
   // this needs to get passed to OptionsSkin and attached to each Option Li
   _handleKeyDown = (event: SyntheticKeyboardEvent<>) => {
+    const targetTagName = get(event, 'target.tagName');
     const highlightOptionIndex = this.state.highlightedOptionIndex;
     switch (event.keyCode) {
       case 9: // Tab key: selects currently highlighted option
@@ -270,8 +331,10 @@ class OptionsBase extends Component<Props, State> {
         this._handleSelectionOnKeyDown(event);
         break;
       case 32: // Space key: selects currently highlighted option
-        event.preventDefault();
-        this._handleSelectionOnKeyDown(event);
+        if (targetTagName !== 'INPUT') {
+          event.preventDefault();
+          this._handleSelectionOnKeyDown(event);
+        }
         break;
       case 27: // Escape key: closes options if open
         this.close();
@@ -308,19 +371,23 @@ class OptionsBase extends Component<Props, State> {
   render() {
     // destructuring props ensures only the "...rest" get passed down
     const {
+      highlightSearch,
       skin,
       targetRef,
       theme,
       themeOverrides,
       toggleMouseLocation,
+      noResults,
       onChange,
+      onSearch,
+      options,
       context,
       optionsRef,
       isOpen,
       ...rest
     } = this.props;
 
-    const { composedTheme, highlightedOptionIndex } = this.state;
+    const { composedTheme, highlightedOptionIndex, searchValue } = this.state;
 
     const OptionsSkin = skin || context.skins[IDENTIFIERS.OPTIONS];
 
@@ -329,15 +396,22 @@ class OptionsBase extends Component<Props, State> {
         getHighlightedOptionIndex={this.getHighlightedOptionIndex}
         getOptionProps={this.getOptionProps}
         handleClickOnOption={this.handleClickOnOption}
+        highlightSearch={highlightSearch}
         highlightedOptionIndex={highlightedOptionIndex}
         isHighlightedOption={this.isHighlightedOption}
         isOpen={isOpen}
         isSelectedOption={this.isSelectedOption}
+        options={this.getFilteredOptions()}
         optionsRef={optionsRef}
+        onClearSearchValue={this.handleClearSearchValue}
+        searchInputRef={this.searchInputRef}
+        searchValue={searchValue}
         setHighlightedOptionIndex={this.setHighlightedOptionIndex}
         targetRef={targetRef}
         theme={composedTheme}
         setMouseIsOverOptions={this._setMouseIsOverOptions}
+        onSearch={this.handleSearch}
+        noResults={this.getNoResults()}
         {...rest}
       />
     );

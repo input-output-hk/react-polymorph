@@ -20,9 +20,9 @@
     "test:watch": "yarn test --watchAll"
   },
   "dependencies": {
+    "@storybook/addon-knobs": "^6.2.5",
     "@tippyjs/react": "4.2.1",
     "create-react-context": "0.2.2",
-    "create-react-ref": "0.1.0",
     "fast-password-entropy": "1.1.1",
     "filter-react-dom-props": "0.0.2",
     "popper.js": "1.16.1",
