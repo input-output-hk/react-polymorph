@@ -145,9 +145,10 @@ export const OptionsSkin = (props: Props) => {
 
   const renderSearch = () => {
     return (
-      <div className={theme[themeId].search}>
+      <div className={classnames([theme[themeId].search, 'test'])}>
         <Input
           theme={theme}
+          value1={searchValue}
           value={searchValue}
           onChange={props.onSearch}
           autoFocus={true}

@@ -35,7 +35,7 @@ $option-search-icon-side-margin: var(--rp-option-search-icon-size, 18.5px) !defa
 $option-search-icon-size: var(--rp-option-search-icon-size, 15px) !default;
 $option-search-icon-top-margin: var(--rp-option-search-icon-size, 16.5px) !default;
 $option-search-icon-url: var(--rp-option-search-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
-$option-search-input-background-color: var(--rp-select-input-text-color, #fafbfc);
+$option-search-input-background-color: var(--rp-select-input-bg-color, #fafbfc);
 $option-search-input-border-radius: var(--rp-option-search-input-border-radius, 1px);
 $option-search-input-border: var(--rp-option-search-input-border, none);
 $option-search-input-height: var(--rp-option-search-height, 50px) !default;
