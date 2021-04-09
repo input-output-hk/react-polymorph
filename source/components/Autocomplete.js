@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
 // external libraries
-import createRef from 'create-react-ref/lib/createRef';
 import _ from 'lodash';
 
 // interal components
@@ -80,10 +79,10 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     super(props);
 
     // define refs
-    this.rootElement = createRef();
-    this.inputElement = createRef();
-    this.suggestionsElement = createRef();
-    this.optionsElement = createRef();
+    this.rootElement = React.createRef();
+    this.inputElement = React.createRef();
+    this.suggestionsElement = React.createRef();
+    this.optionsElement = React.createRef();
 
     const {
       context,

@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
-import type { Element, ElementRef } from 'react';
+import type { Element, ElementRef, RefObject } from 'react';
 
 // external libraries
 import classnames from 'classnames';
-import { isFunction, isObject } from 'lodash';
+import { isFunction, isObject, escapeRegExp } from 'lodash';
 
 // components
 import { Bubble } from '../../components/Bubble';
+import { Input } from '../../components/Input';
 import { ScrollBar } from '../../components/ScrollBar';
 
 // skins
@@ -17,6 +18,9 @@ type Props = {
   getOptionProps: Function,
   getHighlightedOptionIndex: Function,
   handleClickOnOption: Function,
+  hasSearch?: boolean,
+  hideSearchClearButton?: boolean,
+  highlightSearch?: boolean,
   isHighlightedOption: Function,
   isOpen: boolean,
   isOpeningUpward: boolean,
@@ -25,12 +29,17 @@ type Props = {
   noResults: boolean,
   noResultsMessage: string | Element<any>,
   noSelectedOptionCheckmark?: boolean,
+  onClearSearchValue: Function,
+  onSearch: Function,
   optionHeight: number,
   optionRenderer: Function,
   options: Array<any>,
   optionsRef: ElementRef<*>,
   optionsMaxHeight: number,
   render: Function,
+  searchHeight: number,
+  searchInputRef?: RefObject,
+  searchValue: string,
   selectedOption: any,
   setHighlightedOptionIndex: Function,
   setMouseIsOverOptions?: (boolean) => void,
@@ -44,6 +53,8 @@ export const OptionsSkin = (props: Props) => {
     getOptionProps,
     getHighlightedOptionIndex,
     handleClickOnOption,
+    hasSearch,
+    highlightSearch,
     isHighlightedOption,
     isOpen,
     isOpeningUpward,
@@ -58,6 +69,8 @@ export const OptionsSkin = (props: Props) => {
     options,
     optionsRef,
     render,
+    searchHeight,
+    searchValue,
     setHighlightedOptionIndex,
     setMouseIsOverOptions,
     targetRef,
@@ -66,7 +79,7 @@ export const OptionsSkin = (props: Props) => {
   } = props;
 
   const highlightedOptionIndex = getHighlightedOptionIndex();
-  const isFirstOptionHighlighted = highlightedOptionIndex === 0;
+  const isFirstOptionHighlighted = !hasSearch && highlightedOptionIndex === 0;
   const sortedOptions = isOpeningUpward ? options.slice().reverse() : options;
 
   const renderOptions = () => {
@@ -109,15 +122,47 @@ export const OptionsSkin = (props: Props) => {
   };
 
   const renderOption = option => {
+    const escapedSearchValue = escapeRegExp(searchValue) || '';
     // check if user has passed render prop "optionRenderer"
     if (optionRenderer && isFunction(optionRenderer)) {
       // call user's custom rendering logic
       return optionRenderer(option);
     } else if (isObject(option)) {
-      return <span className={theme[themeId].label}>{option.label}</span>;
+      let { label } = option;
+      // in case `highlightSearch` then `searchValue` is wrapped in an `em` tag
+      if (highlightSearch !== false) {
+        const splitter = new RegExp(`(${escapedSearchValue})`,'i');
+        const parts = label.split(splitter);
+        for (let i = 1; i < parts.length; i += 2) {
+          if (parts[i].toLowerCase() === `${escapedSearchValue}`.toLowerCase())
+            parts[i] = <em>{parts[i]}</em>;
+          label = parts;
+        }
+      }
+      return <span className={theme[themeId].label}>{label}</span>;
     }
     return option;
   };
+
+  const renderSearch = () => {
+    return (
+      <div className={classnames([theme[themeId].search, 'test'])}>
+        <Input
+          theme={theme}
+          value={searchValue}
+          onChange={props.onSearch}
+          autoFocus={true}
+          inputRef={props.searchInputRef || null}
+        />
+        {!props.hideSearchClearButton && (
+          <button
+            className={searchValue ? theme[themeId].active : null}
+            onClick={props.onClearSearchValue}
+          />
+        )}
+      </div>
+    )
+  }
 
   const getScrollBarHeight = (): number => {
     if (!options.length) return optionHeight;
@@ -140,16 +185,18 @@ export const OptionsSkin = (props: Props) => {
         isOpeningUpward ? theme[themeId].openUpward : null,
         isFirstOptionHighlighted && !noResults
           ? theme[themeId].firstOptionHighlighted
-          : null
+          : null,
+        hasSearch ? theme[themeId].hasSearch : null,
       ])}
       isTransparent={false}
       skin={BubbleSkin}
       isOpeningUpward={isOpeningUpward}
       isHidden={!isOpen}
       isFloating
-      noArrow={noOptionsArrow}
+      noArrow={noOptionsArrow || hasSearch}
       targetRef={targetRef}
     >
+      {hasSearch && renderSearch()}
       <ul
         style={optionsStyle}
         ref={optionsRef}

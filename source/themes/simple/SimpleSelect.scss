@@ -70,8 +70,10 @@ $select-arrow-url-open: var(--rp-select-arrow-url-open, url("#{$theme-assets-pat
 
 // ==== STATE: isOpen ====
 .isOpen {
-  input {
-    border-color: $select-input-border-color-focus;
+  .selectInput {
+    input {
+      border-color: $select-input-border-color-focus;
+    }
   }
 
   .selectInput:after {

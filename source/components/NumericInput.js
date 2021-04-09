@@ -7,7 +7,6 @@ import BigNumber from 'bignumber.js';
 import type { SyntheticInputEvent, Element, ElementRef } from 'react';
 
 // external libraries
-import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
 import { withTheme } from './HOC/withTheme';
@@ -51,7 +50,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
   constructor(props: NumericInputProps) {
     super(props);
-    this.inputElement = createRef();
+    this.inputElement = React.createRef();
     this.state = {
       inputCaretPosition: 0,
       fallbackInputValue: null,

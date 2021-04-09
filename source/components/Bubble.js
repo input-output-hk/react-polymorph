@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element, ElementRef } from 'react';
-import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
@@ -64,7 +63,7 @@ class BubbleBase extends Component<BubbleProps, State> {
     super(props);
 
     // define ref
-    this.rootElement = createRef();
+    this.rootElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 

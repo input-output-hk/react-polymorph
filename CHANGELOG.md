@@ -8,6 +8,7 @@ vNext
 
 ### Features
 
+- Implemented the search functionality to the Options component ([PR 165](https://github.com/input-output-hk/daedalus/pull/165))
 - Improved PIN entry component UX ([PR 166](https://github.com/input-output-hk/react-polymorph/pull/166))
 - Enabled pasting of multiple words into Autocomplete ([PR 163](https://github.com/input-output-hk/react-polymorph/pull/163))
 

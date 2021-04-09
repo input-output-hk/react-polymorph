@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
-import createRef from 'create-react-ref/lib/createRef';
 
 // internal utility functions
 import { createEmptyContext, withTheme } from './HOC/withTheme';
@@ -58,8 +57,8 @@ class DropdownBase extends Component<Props, State> {
     super(props);
 
     // define ref
-    this.rootElement = createRef();
-    this.optionsElement = createRef();
+    this.rootElement = React.createRef();
+    this.optionsElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
     this.state = {
