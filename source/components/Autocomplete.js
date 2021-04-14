@@ -176,7 +176,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       this.open();
     }
     setTimeout(() => {
-      this.updateSelectedOptions(event, multipleValues);
+      this.updateSelectedOptions(event, multipleValues, multipleValues.length === 1);
     }, 0);
   };
 
@@ -187,11 +187,12 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
 
   updateSelectedOptions = (
     event: SyntheticEvent<>,
-    selectedOption: any = null
+    selectedOption: any = null,
+    singleInput?: boolean,
   ) => {
     const { maxSelections, multipleSameSelections, options } = this.props;
     const { selectedOptions, isOpen } = this.state;
-    let { filteredOptions } = this.state;
+    const { filteredOptions } = this.state;
     const canMoreOptionsBeSelected =
       maxSelections != null ? selectedOptions.length < maxSelections : true;
     const areFilteredOptionsAvailable =
@@ -206,14 +207,14 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
         selectedOption.trim() : selectedOption.filter(item => item);
       const newSelectedOptions: Array<string> = [...selectedOptions];
       if (option && Array.isArray(option)) {
-        filteredOptions = options;
         option.forEach(item => {
-          const optionCanBeSelected = multipleSameSelections &&
-            filteredOptions.includes(item) ||
-            (filteredOptions.includes(item) &&
+          const optionCanBeSelected = (multipleSameSelections &&
+            options.includes(item) && !singleInput) ||
+            (options.includes(item) &&
             !selectedOptions.includes(item) &&
             !newSelectedOptions.includes(item));
-          if (!optionCanBeSelected && !skipValueSelection) {
+          if ((!optionCanBeSelected && !skipValueSelection) ||
+            (singleInput && !selectedOptions.length)) {
             this._setInputValue(item, true);
             skipValueSelection = true;
             return;
