@@ -230,7 +230,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
           !selectedOptions.includes(option);
         if (option && optionCanBeSelected && isOpen) {
           newSelectedOptions.push(option);
-          skipValueSelection = true;
+          skipValueSelection = false;
         }
       }
       this.selectionChanged(newSelectedOptions, event);
