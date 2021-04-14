@@ -8,11 +8,14 @@ vNext
 
 ### Features
 
+- Implemented the search functionality to the Options component ([PR 165](https://github.com/input-output-hk/daedalus/pull/165))
 - Improved PIN entry component UX ([PR 166](https://github.com/input-output-hk/react-polymorph/pull/166))
 - Enabled pasting of multiple words into Autocomplete ([PR 163](https://github.com/input-output-hk/react-polymorph/pull/163))
 
 ### Fixes
 
+- Fixed a wrong variable name for the select search highlight color ([PR 170](https://github.com/input-output-hk/react-polymorph/pull/170))
+- Fixed an issue related to Numeric Input when entering numbers after having selected the decimal separator ([PR 167](https://github.com/input-output-hk/react-polymorph/pull/167))
 - Fixed issues related to controlled/uncontrolled Tippy state ([PR 160](https://github.com/input-output-hk/react-polymorph/pull/160))
 - Fixed `NumericInput` to support DEBUG mode ([PR 159](https://github.com/input-output-hk/react-polymorph/pull/159))
 
