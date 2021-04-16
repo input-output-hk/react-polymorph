@@ -18,6 +18,8 @@ export type FormFieldProps = {
   formFieldRef: ElementRef<*>,
   isErrorHidden?: boolean,
   isErrorShown?: boolean,
+  isShowingErrorOnFocus: boolean,
+  isShowingErrorOnHover: boolean,
   label?: string | Element<any>,
   onChange: Function,
   render: (setFormFieldRef: (ElementRef<*>) => void) => React$Node,
@@ -25,6 +27,7 @@ export type FormFieldProps = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
+  themeVariables?: Object,
 };
 
 type State = {
@@ -38,6 +41,8 @@ class FormFieldBase extends Component<FormFieldProps, State> {
 
   static defaultProps = {
     context: createEmptyContext(),
+    isShowingErrorOnFocus: true,
+    isShowingErrorOnHover: true,
     theme: null,
     themeId: IDENTIFIERS.FORM_FIELD,
     themeOverrides: {},

@@ -1,6 +1,5 @@
 // @flow
-import React, { useState } from 'react';
-import type { ElementRef } from 'react';
+import React from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -26,7 +25,7 @@ export const InputSkin = (props: Props) => {
       className={classnames([
         props.theme[props.themeId].input,
         props.disabled ? props.theme[props.themeId].disabled : null,
-        props.error || props.showErrorState
+        !props.hideErrorState && (props.error || props.showErrorState)
           ? props.theme[props.themeId].errored
           : null,
       ])}
@@ -58,9 +57,12 @@ export const InputSkin = (props: Props) => {
       disabled={props.disabled}
       label={props.label}
       error={props.error}
+      isShowingErrorOnHover={props.isShowingErrorOnHover}
+      isShowingErrorOnFocus={props.isShowingErrorOnFocus}
       formFieldRef={props.inputRef}
       theme={props.theme}
       render={render}
+      themeVariables={props.themeVariables}
     />
   );
 };
