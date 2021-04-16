@@ -89,7 +89,7 @@ export const OptionsSkin = (props: Props) => {
     if (!noResults && render) {
       // call user's custom render function
       return render(getOptionProps);
-    } else if (!noResults && !render) {
+    } if (!noResults && !render) {
       // render default simple skin
       return sortedOptions.map((option, index) => {
         // set reference of event handlers in memory to prevent excess re-renders
@@ -127,14 +127,14 @@ export const OptionsSkin = (props: Props) => {
     if (optionRenderer && isFunction(optionRenderer)) {
       // call user's custom rendering logic
       return optionRenderer(option);
-    } else if (isObject(option)) {
+    } if (isObject(option)) {
       let { label } = option;
       // in case `highlightSearch` then `searchValue` is wrapped in an `em` tag
       if (highlightSearch !== false) {
         const splitter = new RegExp(`(${escapedSearchValue})`,'i');
-        const parts = label.split(splitter);
+        const parts = typeof label === 'string' ? label.split(splitter) : label;
         for (let i = 1; i < parts.length; i += 2) {
-          if (parts[i].toLowerCase() === `${escapedSearchValue}`.toLowerCase())
+          if (escapeRegExp(parts[i].toLowerCase()) === `${escapedSearchValue}`.toLowerCase())
             parts[i] = <em>{parts[i]}</em>;
           label = parts;
         }
@@ -151,7 +151,7 @@ export const OptionsSkin = (props: Props) => {
           theme={theme}
           value={searchValue}
           onChange={props.onSearch}
-          autoFocus={true}
+          autoFocus
           inputRef={props.searchInputRef || null}
         />
         {!props.hideSearchClearButton && (
