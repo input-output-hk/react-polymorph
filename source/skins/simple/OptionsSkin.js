@@ -135,7 +135,7 @@ export const OptionsSkin = (props: Props) => {
         const parts = typeof label === 'string' ? label.split(splitter) : label;
         for (let i = 1; i < parts.length; i += 2) {
           if (escapeRegExp(parts[i].toLowerCase()) === `${escapedSearchValue}`.toLowerCase())
-            parts[i] = <em>{parts[i]}</em>;
+            parts[i] = <em key={i}>{parts[i]}</em>;
           label = parts;
         }
       }
