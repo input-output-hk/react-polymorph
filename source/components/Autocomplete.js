@@ -156,6 +156,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       this.state.selectedOptions.length
     ) {
       // Remove last selected option
+      this.close();
       this.removeOption(this.state.selectedOptions.length - 1, event);
     } else if (event.keyCode === 27) {
       // ESCAPE key: Stops propagation & modal closing
@@ -245,6 +246,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   removeOption = (index: number, event: SyntheticEvent<>) => {
     const { selectedOptions } = this.state;
     _.pullAt(selectedOptions, index);
+    this.close();
     this.selectionChanged(selectedOptions, event);
     this.setState({ selectedOptions });
   };
