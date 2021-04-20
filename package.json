@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.9.8-rc.17",
+  "version": "0.9.8-rc.18",
   "scripts": {
     "build": "cross-env yarn clean && yarn sass && yarn js",
     "build:watch": "concurrently 'yarn js:watch' 'yarn sass:watch'",
@@ -20,7 +20,6 @@
     "test:watch": "yarn test --watchAll"
   },
   "dependencies": {
-    "@storybook/addon-knobs": "^6.2.5",
     "@tippyjs/react": "4.2.1",
     "create-react-context": "0.2.2",
     "fast-password-entropy": "1.1.1",
@@ -44,6 +43,7 @@
     "@babel/preset-react": "7.10.4",
     "@dump247/storybook-state": "1.6.1",
     "@storybook/addon-actions": "5.2.8",
+    "@storybook/addon-knobs": "5.3.14",
     "@storybook/react": "5.2.8",
     "babel-eslint": "10.0.3",
     "babel-jest": "24.9.0",

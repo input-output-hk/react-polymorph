@@ -26,7 +26,7 @@ $option-text-color-disabled: var(--rp-option-text-color-disabled, rgba(#5e6066, 
 $option-search-box-shadow: var(--rp-option-search-box-shadow, 0 10px 10px -5px rgba(0, 0, 0, 0.12)) !default;
 $option-search-clear-button-bg-color: var(--rp-option-bg-color-highlighted, rgba(68, 91, 124, 0.1)) !default;
 $option-search-clear-icon-color: var(--rp-input-text-color, #5e6066) !default;
-$option-search-clear-icon-size: var(--rp-option-search-clear-icon-size, 8px) !default;
+$option-search-clear-icon-size: var(--rp-option-search-clear-icon-size, 10px) !default;
 $option-search-clear-icon-url: var(--rp-option-search-clear-icon-url, url("#{$theme-assets-path}/cross.svg")) !default;
 $option-search-highlight-background-color: var(--rp-option-search-highlight-background-color, #f2a218) !default;
 $option-search-icon-color: var(--rp-input-text-color, #5e6066) !default;
@@ -169,9 +169,9 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     cursor: pointer;
     height: 28px;
     opacity: 0;
-    padding: 10px;
+    padding: 9px;
     position: absolute;
-    top: 12px;
+    top: 11px;
     transition: opacity .25s ease-out;
     width: 28px;
     z-index: 1;
