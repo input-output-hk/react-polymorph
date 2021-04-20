@@ -239,6 +239,8 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       }
       this.selectionChanged(newSelectedOptions, event);
       this.setState({ selectedOptions: newSelectedOptions, isOpen: false });
+    } else {
+      skipValueSelection = true;
     }
     if (!skipValueSelection) {
       this._setInputValue('');
