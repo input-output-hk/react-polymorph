@@ -149,21 +149,23 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   };
 
   onKeyDown = (event: SyntheticKeyboardEvent<>) => {
-    if (
-      // Check for backspace in order to delete the last selected option
-      event.keyCode === 8 &&
-      !event.target.value &&
-      this.state.selectedOptions.length
-    ) {
-      // Remove last selected option
-      this.close();
-      this.removeOption(this.state.selectedOptions.length - 1, event);
-    } else if (event.keyCode === 27) {
-      // ESCAPE key: Stops propagation & modal closing
-      event.stopPropagation();
-    } else if (event.keyCode === 13) {
-      // ENTER key: Opens suggestions
-      this.open();
+    if (event) {
+      if (
+        // Check for backspace in order to delete the last selected option
+        event.keyCode === 8 &&
+        !event.target.value &&
+        this.state.selectedOptions.length
+      ) {
+        // Remove last selected option
+        this.close();
+        this.removeOption(this.state.selectedOptions.length - 1, event);
+      } else if (event.keyCode === 27) {
+        // ESCAPE key: Stops propagation & modal closing
+        event.stopPropagation();
+      } else if (event.keyCode === 13) {
+        // ENTER key: Opens suggestions
+        this.open();
+      }
     }
   };
 
