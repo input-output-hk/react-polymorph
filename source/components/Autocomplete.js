@@ -317,8 +317,8 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
             getSelectionProps={this.getSelectionProps}
             handleAutocompleteClick={() => {
               setTimeout(() => {
-                const { removeWordClick } = this.state;
-                if (!removeWordClick) {
+                const { isRemoveWordClicked } = this.state;
+                if (!isRemoveWordClicked) {
                   this.handleAutocompleteClick();
                 } else {
                   this.setState((prevState) => ({ isRemoveWordClicked: !prevState.isRemoveWordClicked }));
