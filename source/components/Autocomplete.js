@@ -214,10 +214,10 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       if (option && Array.isArray(option)) {
         option.forEach(item => {
           const optionCanBeSelected = (multipleSameSelections &&
-            options.includes(item) && !singleInput) ||
+            options.includes(item) && !singleInput && option.length > 1) ||
             (options.includes(item) &&
             !selectedOptions.includes(item) &&
-            !newSelectedOptions.includes(item));
+            !newSelectedOptions.includes(item) && option.length > 1);
           if ((!optionCanBeSelected && !skipValueSelection) ||
             (singleInput && !selectedOptions.length)) {
             this._setInputValue(item, true);
