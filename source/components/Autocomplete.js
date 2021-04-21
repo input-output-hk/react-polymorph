@@ -49,6 +49,7 @@ type State = {
   inputValue: string,
   mouseIsOverOptions: boolean,
   selectedOptions: Array<any>,
+  isRemoveWordClicked: boolean,
 };
 
 class AutocompleteBase extends Component<AutocompleteProps, State> {
@@ -101,6 +102,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       filteredOptions:
         sortAlphabetically && options ? options.sort() : options || [],
       isOpen: false,
+      isRemoveWordClicked: false,
       mouseIsOverOptions: false,
       composedTheme: composeTheme(
         addThemeId(theme || context.theme, themeId),
@@ -252,7 +254,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     _.pullAt(selectedOptions, index);
     this.close();
     this.selectionChanged(selectedOptions, event);
-    this.setState({ selectedOptions });
+    this.setState({ selectedOptions, isRemoveWordClicked: true });
   };
 
   selectionChanged = (
@@ -313,7 +315,16 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
             error={error || this.state.error}
             filteredOptions={this.state.filteredOptions}
             getSelectionProps={this.getSelectionProps}
-            handleAutocompleteClick={this.handleAutocompleteClick}
+            handleAutocompleteClick={() => {
+              setTimeout(() => {
+                const { removeWordClick } = this.state;
+                if (!removeWordClick) {
+                  this.handleAutocompleteClick();
+                } else {
+                  this.setState((prevState) => ({ isRemoveWordClicked: !prevState.isRemoveWordClicked }));
+                }
+              }, 0);
+            }}
             handleChange={this.handleChange}
             handleInputChange={this.handleInputChange}
             inputRef={this.inputElement}
