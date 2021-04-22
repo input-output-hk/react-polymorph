@@ -6,13 +6,23 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
-### Features
+### Breaking Changes :boom:
 
+- `Input` now shows errors on hover and focus by default which can be configured via two new props:
+
+```ts
+  isShowingErrorOnFocus: boolean,
+  isShowingErrorOnHover: boolean,
+```
+
+### Features :sparkles:
+
+- `Input` now accepts a new prop `themeVariables` which can be used to override css variables ([PR 173](https://github.com/input-output-hk/react-polymorph/pull/173))
 - Implemented the search functionality to the Options component ([PR 165](https://github.com/input-output-hk/daedalus/pull/165))
 - Improved PIN entry component UX ([PR 166](https://github.com/input-output-hk/react-polymorph/pull/166))
 - Enabled pasting of multiple words into Autocomplete ([PR 163](https://github.com/input-output-hk/react-polymorph/pull/163))
 
-### Fixes
+### Fixes :muscle:
 
 - Fixed Select Search styles and minor code issues ([PR 175](https://github.com/input-output-hk/react-polymorph/pull/175))
 - Fixed a wrong variable name for the select search highlight color ([PR 170](https://github.com/input-output-hk/react-polymorph/pull/170))
