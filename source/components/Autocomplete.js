@@ -160,7 +160,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       ) {
         // Remove last selected option
         this.close();
-        this.removeOption(this.state.selectedOptions.length - 1, event);
+        this.removeOption(this.state.selectedOptions.length - 1);
       } else if (event.keyCode === 27) {
         // ESCAPE key: Stops propagation & modal closing
         event.stopPropagation();
@@ -181,17 +181,16 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       this.open();
     }
     setTimeout(() => {
-      this.updateSelectedOptions(event, multipleValues, multipleValues.length === 1);
+      this.updateSelectedOptions(multipleValues, multipleValues.length === 1);
     }, 0);
   };
 
   // passed to Options onChange handler in AutocompleteSkin
-  handleChange = (option: any, event: SyntheticEvent<>) => {
-    this.updateSelectedOptions(event, option);
+  handleChange = (option: any) => {
+    this.updateSelectedOptions(option);
   };
 
   updateSelectedOptions = (
-    event: SyntheticEvent<>,
     selectedOption: any = null,
     singleInput?: boolean,
   ) => {
@@ -239,7 +238,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
           skipValueSelection = false;
         }
       }
-      this.selectionChanged(newSelectedOptions, event);
+      this.selectionChanged(newSelectedOptions);
       this.setState({ selectedOptions: newSelectedOptions, isOpen: false });
     } else {
       skipValueSelection = true;
@@ -249,19 +248,18 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     }
   };
 
-  removeOption = (index: number, event: SyntheticEvent<>) => {
+  removeOption = (index: number) => {
     const { selectedOptions } = this.state;
     _.pullAt(selectedOptions, index);
     this.close();
-    this.selectionChanged(selectedOptions, event);
+    this.selectionChanged(selectedOptions);
     this.setState({ selectedOptions, isRemoveWordClicked: true });
   };
 
   selectionChanged = (
-    selectedOptions: Array<any>,
-    event: SyntheticEvent<any>
+    selectedOptions: Array<any>
   ) => {
-    if (this.props.onChange) this.props.onChange(selectedOptions, event);
+    if (this.props.onChange) this.props.onChange(selectedOptions);
   };
 
   // returns an object containing props, theme, and method handlers
@@ -277,10 +275,10 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       isOpen,
       selectedOptions,
       theme: composedTheme[themeId],
-      removeSelection: (index: number, event: SyntheticEvent<>) =>
+      removeSelection: (index: number) =>
         // the user's custom removeSelection event handler is composed with
         // the internal functionality of Autocomplete (this.removeOption)
-        composeFunctions(removeSelection, this.removeOption)(index, event),
+        composeFunctions(removeSelection, this.removeOption)(index),
     };
   };
 
