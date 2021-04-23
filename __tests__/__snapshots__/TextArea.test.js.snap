@@ -51,22 +51,6 @@ exports[`TextArea renders with a value 1`] = `
 </div>
 `;
 
-exports[`TextArea renders with an error 1`] = `
-<div
-  class="root errored"
->
-  <span>
-    <div
-      class="inputWrapper"
-    >
-      <textarea
-        class="textarea errored"
-      />
-    </div>
-  </span>
-</div>
-`;
-
 exports[`TextArea renders with placeholder 1`] = `
 <div
   class="root"

@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FormField is disabled 1`] = `
-<div
-  class="root disabled"
->
-  <span>
-    <div
-      class="inputWrapper"
-    >
-      <span>
-        true
-      </span>
-    </div>
-  </span>
-</div>
-`;
-
 exports[`FormField renders an input element 1`] = `
 <div
   class="root"
@@ -35,22 +19,6 @@ exports[`FormField renders an input element 1`] = `
 exports[`FormField renders correctly 1`] = `
 <div
   class="root"
->
-  <span>
-    <div
-      class="inputWrapper"
-    >
-      <div
-        class="render-prop"
-      />
-    </div>
-  </span>
-</div>
-`;
-
-exports[`FormField renders with an error 1`] = `
-<div
-  class="root errored"
 >
   <span>
     <div
