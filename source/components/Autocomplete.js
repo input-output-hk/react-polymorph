@@ -120,7 +120,12 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
 
   clear = () => this._removeOptions();
 
-  focus = () => this.handleAutocompleteClick();
+  focus = () => {
+    const { inputElement } = this;
+    if (inputElement && inputElement.current) {
+      inputElement.current.focus();
+    }
+  };
 
   open = () => this.setState({ isOpen: true });
 
@@ -139,15 +144,12 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   };
 
   toggleMouseLocation = () =>
-    this.setState((prevState) => ({ mouseIsOverOptions: !prevState.mouseIsOverOptions }));
+    this.setState((prevState) => ({
+      mouseIsOverOptions: !prevState.mouseIsOverOptions,
+    }));
 
   handleAutocompleteClick = () => {
-    const { inputElement } = this;
-    if (inputElement && inputElement.current) {
-      inputElement.current.focus();
-    }
-    // toggle options open/closed
-    this.toggleOpen();
+    this.focus();
   };
 
   onKeyDown = (event: SyntheticKeyboardEvent<>) => {
@@ -180,9 +182,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     if (hasMultipleValues) {
       this.open();
     }
-    setTimeout(() => {
-      this.updateSelectedOptions(multipleValues, multipleValues.length === 1);
-    }, 0);
+    this.updateSelectedOptions(multipleValues, multipleValues.length === 1);
   };
 
   // passed to Options onChange handler in AutocompleteSkin
@@ -191,8 +191,8 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   };
 
   updateSelectedOptions = (
-    selectedOption: any = null,
-    singleInput?: boolean,
+    addedOption: string | Array<string>,
+    singleInput?: boolean
   ) => {
     const { maxSelections, multipleSameSelections, options } = this.props;
     const { selectedOptions, isOpen } = this.state;
@@ -206,40 +206,51 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
       !maxSelections ||
       (canMoreOptionsBeSelected && areFilteredOptionsAvailable)
     ) {
-      if (!selectedOption || !selectedOption.length) return;
-      const option = _.isString(selectedOption) ?
-        selectedOption.trim() : selectedOption.filter(item => item);
+      if (!addedOption || !addedOption.length) return;
+      const option = _.isString(addedOption)
+        ? addedOption.trim()
+        : addedOption.filter((item) => item !== '');
       const newSelectedOptions: Array<string> = [...selectedOptions];
+
       if (option && Array.isArray(option)) {
-        option.forEach(item => {
-          const optionCanBeSelected = (multipleSameSelections &&
-            options.includes(item) && !singleInput && option.length > 1) ||
+        option.forEach((item) => {
+          const optionCanBeSelected =
+            (multipleSameSelections &&
+              options.includes(item) &&
+              !singleInput &&
+              option.length > 1) ||
             (options.includes(item) &&
-            !selectedOptions.includes(item) &&
-            !newSelectedOptions.includes(item) && option.length > 1);
-          if ((!optionCanBeSelected && !skipValueSelection) ||
-            (singleInput && !selectedOptions.length)) {
+              !selectedOptions.includes(item) &&
+              !newSelectedOptions.includes(item) &&
+              option.length > 1);
+          if (
+            (!optionCanBeSelected && !skipValueSelection) ||
+            (singleInput && !selectedOptions.length)
+          ) {
             this._setInputValue(item, true);
             skipValueSelection = true;
             return;
           }
-          if (item &&
+          if (
+            item &&
             optionCanBeSelected &&
-            isOpen && !skipValueSelection &&
-            newSelectedOptions.length < maxSelections) {
+            isOpen &&
+            !skipValueSelection &&
+            newSelectedOptions.length < maxSelections
+          ) {
             newSelectedOptions.push(item);
           }
         });
       } else {
-        const optionCanBeSelected = multipleSameSelections ||
-          !selectedOptions.includes(option);
+        const optionCanBeSelected =
+          multipleSameSelections || !selectedOptions.includes(option);
         if (option && optionCanBeSelected && isOpen) {
           newSelectedOptions.push(option);
           skipValueSelection = false;
         }
       }
       this.selectionChanged(newSelectedOptions);
-      this.setState({ selectedOptions: newSelectedOptions, isOpen: false });
+      this.setState({ selectedOptions: newSelectedOptions });
     } else {
       skipValueSelection = true;
     }
@@ -249,16 +260,16 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
   };
 
   removeOption = (index: number) => {
+    console.log(index);
     const { selectedOptions } = this.state;
     _.pullAt(selectedOptions, index);
     this.close();
     this.selectionChanged(selectedOptions);
-    this.setState({ selectedOptions, isRemoveWordClicked: true });
+    this.setState({ selectedOptions });
+    this.focus();
   };
 
-  selectionChanged = (
-    selectedOptions: Array<any>
-  ) => {
+  selectionChanged = (selectedOptions: Array<any>) => {
     if (this.props.onChange) this.props.onChange(selectedOptions);
   };
 
@@ -313,16 +324,7 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
             error={error || this.state.error}
             filteredOptions={this.state.filteredOptions}
             getSelectionProps={this.getSelectionProps}
-            handleAutocompleteClick={() => {
-              setTimeout(() => {
-                const { isRemoveWordClicked } = this.state;
-                if (!isRemoveWordClicked) {
-                  this.handleAutocompleteClick();
-                } else {
-                  this.setState((prevState) => ({ isRemoveWordClicked: !prevState.isRemoveWordClicked }));
-                }
-              }, 0);
-            }}
+            handleAutocompleteClick={this.handleAutocompleteClick}
             handleChange={this.handleChange}
             handleInputChange={this.handleInputChange}
             inputRef={this.inputElement}
@@ -386,9 +388,12 @@ class AutocompleteBase extends Component<AutocompleteProps, State> {
     const multipleValues = value.split(' ');
     if (multipleValues && multipleValues.length > 1) {
       let selectedOptions = [];
-      multipleValues.forEach(itemValue => {
+      multipleValues.forEach((itemValue) => {
         const filteredValue = this._filterInvalidChars(itemValue);
-        selectedOptions = [...selectedOptions, ...this._filterOptions(filteredValue)];
+        selectedOptions = [
+          ...selectedOptions,
+          ...this._filterOptions(filteredValue),
+        ];
       });
       this.setState({
         isOpen: !!multipleValues.length,
