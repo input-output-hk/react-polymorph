@@ -109,10 +109,10 @@ const SimpleFormApp = () => (
   - All temporary releases should be published with the `next` npm dist tag via: `npm publish --tag next` 
     so that they are not automatically tagged with the default `latest` npm tag.
     
-- The `stable` branch only includes commits of final releases
+- The `master` branch only includes commits of final releases
   
 - `release/x.x.x` branches are created as soon as we cut a release and know the correct semver - they 
-  are always targeting the `stable` branch + should be well documented. They can include many release
+  are always targeting the `master` branch + should be well documented. They can include many release
   candidates which should be tagged like `[next releaes]-rc.X` where you increment X per release candidate
   until we are confident that the release is ready to be published under its normal version.
 
@@ -136,13 +136,13 @@ releases into a semver based release:
 1. Create a new `release/x.x.x` branch based on `develop` (following semver based on changelog)
 2. Update the version in `package.json` to the planned release version (do not tag it)
 3. Update the `CHANGELOG.md` to assign the new release version to the last changes and upcoming changes
-3. Setup a PR targetting `stable` for the relase branch on Github and document the changes since last release
+3. Setup a PR targetting `master` for the relase branch on Github and document the changes since last release
 4. Publish a release candidate to npm (e.g: `1.0.1-rc.1`)
 5. Integrate and test the release candidate
 6. Iterate on the release via release candidates until its ready to be merged
-7. Merge the release PR into `stable` on Github and then `stable` back into `develop`
+7. Merge the release PR into `master` on Github and then `master` back into `develop`
 
-### Components and Skins
+## Components and Skins
 
 React-polymorph comes with simple themes & skins out of the box, but anything is customizable.
 
