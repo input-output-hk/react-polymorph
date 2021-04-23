@@ -93,7 +93,56 @@ const SimpleFormApp = () => (
 );
 ```
 
-### Components and Skins
+## Release Managament
+
+- Starting with `1.0.0` all future releases will follow semver semantics:
+  - `patch` (eg: 1.0.x) for **API compatible bug fixes**
+  - `minor` (eg.: 1.x.0) for **API compatible new features**
+  - `major` (eg: 2.0.0) for **API breaking changes**
+  
+- For early integration of upcoming release changes we use the following conventions:
+  
+  - `[current version]-next.x` to tag changes for upcoming releases (as we cannot know the necessary 
+    semver for the final release including all the changes). `x` in this case is simply a number that 
+    is increased and can be thought of like "slots" for temporary releases
+    
+  - All temporary releases should be published with the `next` npm dist tag via: `npm publish --tag next` 
+    so that they are not automatically tagged with the default `latest` npm tag.
+    
+- The `master` branch only includes commits of final releases
+  
+- `release/x.x.x` branches are created as soon as we cut a release and know the correct semver - they 
+  are always targeting the `master` branch + should be well documented. They can include many release
+  candidates which should be tagged like `[next releaes]-rc.X` where you increment X per release candidate
+  until we are confident that the release is ready to be published under its normal version.
+
+### How to publish a temporary release
+
+Temporary releases are useful for testing specific changes in your project PRs without making public
+releases that might confuse others and are not following semver.
+
+1. Create a dedicated branch for your bug/feature/chore
+2. Run `npm:view:next` to see the latest release version the `next` npm dist-tag is currently pointing to
+   (this will look something like this: `1.0.0-next.1`)
+3. Increase the `next.X` number by one (e.g: `npm version 1.0.0-next.2`) to create a new git tag via.
+4. Publish the release candidate with `npm:publish:next` (this automatically assigns the `next` dist-tag)
+5. Reference your release candidate version in your project PR
+
+### How to publish a stable release
+
+Stable releases are the next public version change of react-polymorph combining all previous temporary
+releases into a semver based release:
+
+1. Create a new `release/x.x.x` branch based on `develop` (following semver based on changelog)
+2. Update the version in `package.json` to the planned release version (do not tag it)
+3. Update the `CHANGELOG.md` to assign the new release version to the last changes and upcoming changes
+3. Setup a PR targetting `master` for the relase branch on Github and document the changes since last release
+4. Publish a release candidate to npm (e.g: `1.0.1-rc.1`)
+5. Integrate and test the release candidate
+6. Iterate on the release via release candidates until its ready to be merged
+7. Merge the release PR into `master` on Github and then `master` back into `develop`
+
+## Components and Skins
 
 React-polymorph comes with simple themes & skins out of the box, but anything is customizable.
 
