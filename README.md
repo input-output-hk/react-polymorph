@@ -122,10 +122,10 @@ Temporary releases are useful for testing specific changes in your project PRs w
 releases that might confuse others and are not following semver.
 
 1. Create a dedicated branch for your bug/feature/chore
-2. Run `npm:view:next` to see the latest release version the `next` npm dist-tag is currently pointing to
+2. Run `npm view react-polymorph dist-tags.next` to see the latest release version the `next` npm dist-tag is currently pointing to
    (this will look something like this: `1.0.0-next.1`)
 3. Increase the `next.X` number by one (e.g: `npm version 1.0.0-next.2`) to create a new git tag via.
-4. Publish the release candidate with `npm:publish:next` (this automatically assigns the `next` dist-tag)
+4. Publish the release candidate with `npm publish --tag next` (to assign the `next` dist-tag instead of `latest`)
 5. Reference your release candidate version in your project PR
 
 ### How to publish a stable release
