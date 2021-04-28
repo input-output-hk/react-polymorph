@@ -22,6 +22,9 @@ export type InputProps = {
   error?: string | Element<any>,
   inputRef?: RefObject,
   showErrorState?: boolean,
+  hideErrorState?: boolean,
+  isShowingErrorOnFocus: boolean,
+  isShowingErrorOnHover: boolean,
   label?: string | Element<any>,
   maxLength?: number,
   minLength?: number,
@@ -35,6 +38,7 @@ export type InputProps = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
+  themeVariables?: Object,
   value: string,
 };
 
@@ -52,6 +56,8 @@ class InputBase extends Component<InputProps, State> {
     autoFocus: false,
     context: createEmptyContext(),
     error: '',
+    isShowingErrorOnFocus: true,
+    isShowingErrorOnHover: true,
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,

@@ -89,11 +89,15 @@ export const OptionsSkin = (props: Props) => {
     if (!noResults && render) {
       // call user's custom render function
       return render(getOptionProps);
-    } if (!noResults && !render) {
+    }
+    if (!noResults && !render) {
       // render default simple skin
       return sortedOptions.map((option, index) => {
         // set reference of event handlers in memory to prevent excess re-renders
-        const boundSetHighlightedOptionIndex = setHighlightedOptionIndex.bind(null, index);
+        const boundSetHighlightedOptionIndex = setHighlightedOptionIndex.bind(
+          null,
+          index
+        );
         const boundHandleClickOnOption = handleClickOnOption.bind(null, option);
 
         return (
@@ -104,10 +108,14 @@ export const OptionsSkin = (props: Props) => {
             className={classnames([
               option.className ? option.className : null,
               theme[themeId].option,
-              isHighlightedOption(index) ? theme[themeId].highlightedOption : null,
+              isHighlightedOption(index)
+                ? theme[themeId].highlightedOption
+                : null,
               isSelectedOption(index) ? theme[themeId].selectedOption : null,
               option.isDisabled ? theme[themeId].disabledOption : null,
-              noSelectedOptionCheckmark ? theme[themeId].hasNoSelectedOptionCheckmark : null,
+              noSelectedOptionCheckmark
+                ? theme[themeId].hasNoSelectedOptionCheckmark
+                : null,
             ])}
             onClick={boundHandleClickOnOption}
             onMouseEnter={boundSetHighlightedOptionIndex}
@@ -121,20 +129,24 @@ export const OptionsSkin = (props: Props) => {
     return <li className={theme[themeId].option}>{noResultsMessage}</li>;
   };
 
-  const renderOption = option => {
+  const renderOption = (option) => {
     const escapedSearchValue = escapeRegExp(searchValue) || '';
     // check if user has passed render prop "optionRenderer"
     if (optionRenderer && isFunction(optionRenderer)) {
       // call user's custom rendering logic
       return optionRenderer(option);
-    } if (isObject(option)) {
+    }
+    if (isObject(option)) {
       let { label } = option;
       // in case `highlightSearch` then `searchValue` is wrapped in an `em` tag
-      if (highlightSearch !== false) {
-        const splitter = new RegExp(`(${escapedSearchValue})`,'i');
+      if (highlightSearch !== false && escapedSearchValue !== '') {
+        const splitter = new RegExp(`(${escapedSearchValue})`, 'i');
         const parts = typeof label === 'string' ? label.split(splitter) : label;
         for (let i = 1; i < parts.length; i += 2) {
-          if (escapeRegExp(parts[i].toLowerCase()) === `${escapedSearchValue}`.toLowerCase())
+          if (
+            escapeRegExp(parts[i].toLowerCase()) ===
+            `${escapedSearchValue}`.toLowerCase()
+          )
             parts[i] = <em key={i}>{parts[i]}</em>;
           label = parts;
         }
@@ -161,8 +173,8 @@ export const OptionsSkin = (props: Props) => {
           />
         )}
       </div>
-    )
-  }
+    );
+  };
 
   const getScrollBarHeight = (): number => {
     if (!options.length) return optionHeight;
@@ -173,9 +185,12 @@ export const OptionsSkin = (props: Props) => {
   };
 
   // Enforce max height of options dropdown if necessary
-  const optionsStyle = optionsMaxHeight == null ? null : {
-    maxHeight: `${optionsMaxHeight}px`
-  };
+  const optionsStyle =
+    optionsMaxHeight == null
+      ? null
+      : {
+          maxHeight: `${optionsMaxHeight}px`,
+        };
 
   return (
     <Bubble
@@ -201,8 +216,12 @@ export const OptionsSkin = (props: Props) => {
         style={optionsStyle}
         ref={optionsRef}
         className={theme[themeId].ul}
-        onMouseEnter={() => setMouseIsOverOptions && setMouseIsOverOptions(true)}
-        onMouseLeave={() => setMouseIsOverOptions && setMouseIsOverOptions(false)}
+        onMouseEnter={() =>
+          setMouseIsOverOptions && setMouseIsOverOptions(true)
+        }
+        onMouseLeave={() =>
+          setMouseIsOverOptions && setMouseIsOverOptions(false)
+        }
       >
         <ScrollBar style={{ height: `${getScrollBarHeight()}px` }}>
           {renderOptions()}
