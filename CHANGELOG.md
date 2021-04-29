@@ -24,6 +24,7 @@ vNext
 
 ### Fixes :muscle:
 
+- Fixed Select search issues([PR 179](https://github.com/input-output-hk/react-polymorph/pull/179))
 - Fixed Select Search styles and minor code issues ([PR 175](https://github.com/input-output-hk/react-polymorph/pull/175))
 - Fixed a wrong variable name for the select search highlight color ([PR 170](https://github.com/input-output-hk/react-polymorph/pull/170))
 - Fixed an issue related to Numeric Input when entering numbers after having selected the decimal separator ([PR 167](https://github.com/input-output-hk/react-polymorph/pull/167))
