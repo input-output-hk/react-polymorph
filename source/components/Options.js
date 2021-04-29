@@ -45,6 +45,7 @@ type Props = {
   optionRenderer?: Function,
   optionsRef?: ElementRef<any>,
   optionsMaxHeight?: number,
+  persistSearchValue?: boolean,
   render?: Function,
   resetOnClose: boolean,
   searchHeight: ?number,
@@ -179,7 +180,8 @@ class OptionsBase extends Component<Props, State> {
   };
 
   isSelectedOption = (optionIndex: number) => {
-    const { options, isOpeningUpward } = this.props;
+    const { isOpeningUpward } = this.props;
+    const options = this.getFilteredOptions() || []
     const index = isOpeningUpward
       ? options.length - 1 - optionIndex
       : optionIndex;
@@ -197,11 +199,15 @@ class OptionsBase extends Component<Props, State> {
   };
 
   handleClickOnOption = (option: ?Object, event: SyntheticEvent<>) => {
+    const { onChange, onBlur, persistSearchValue } = this.props;
     if (option) {
       if (option.isDisabled) return;
-      if (this.props.onChange) this.props.onChange(option, event);
+      if (onChange) onChange(option, event);
     }
-    if (this.props.onBlur) this.props.onBlur(event);
+    if (onBlur) onBlur(event);
+    if (!persistSearchValue) {
+      this.handleClearSearchValue();
+    }
     this.close();
   };
 
@@ -209,13 +215,13 @@ class OptionsBase extends Component<Props, State> {
     this.setState({
       searchValue
     });
-  }
+  };
 
   handleClearSearchValue = () => {
     this.setState({
       searchValue: '',
     });
-  }
+  };
 
   getFilteredOptions = () => {
     const { hasSearch, onSearch, options, highlightSearch, optionRenderer } = this.props;
@@ -232,7 +238,7 @@ class OptionsBase extends Component<Props, State> {
       return regex.test(label);
     });
     return filteredOptions;
-  }
+  };
 
   // returns an object containing props, theme, and method handlers
   // associated with rendering this.props.options, the user can call
