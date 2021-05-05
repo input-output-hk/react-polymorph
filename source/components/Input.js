@@ -1,10 +1,9 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 // $FlowFixMe
 import type { ComponentType, Element, SyntheticInputEvent } from 'react';
 
 // external libraries
-import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
 // utilities
@@ -21,14 +20,15 @@ export type InputProps = {
   context: ThemeContextProp,
   disabled?: boolean,
   error?: string | Element<any>,
+  inputRef?: RefObject,
   showErrorState?: boolean,
+  hideErrorState?: boolean,
+  isShowingErrorOnFocus: boolean,
+  isShowingErrorOnHover: boolean,
   label?: string | Element<any>,
   maxLength?: number,
   minLength?: number,
-  onBlur?: Function,
   onChange?: Function,
-  onFocus?: Function,
-  onKeyPress?: Function,
   placeholder?: string,
   readOnly: boolean,
   setError?: Function,
@@ -38,6 +38,7 @@ export type InputProps = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
+  themeVariables?: Object,
   value: string,
 };
 
@@ -47,15 +48,16 @@ type State = {
 };
 
 class InputBase extends Component<InputProps, State> {
-  // declare ref types
-  inputElement: Element<'input'>;
+  inputElement: RefObject;
 
-  // define static properties
   static displayName = 'Input';
+
   static defaultProps = {
     autoFocus: false,
     context: createEmptyContext(),
     error: '',
+    isShowingErrorOnFocus: true,
+    isShowingErrorOnHover: true,
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
@@ -65,10 +67,7 @@ class InputBase extends Component<InputProps, State> {
 
   constructor(props: InputProps) {
     super(props);
-
-    // define ref
-    this.inputElement = createRef();
-
+    this.inputElement = props.inputRef ?? React.createRef();
     const { context, themeId, theme, themeOverrides } = props;
 
     this.state = {
@@ -92,9 +91,8 @@ class InputBase extends Component<InputProps, State> {
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
-    const { onChange, disabled } = this.props;
-    if (disabled) return;
-
+    const { onChange, disabled, readOnly } = this.props;
+    if (disabled || readOnly) return;
     if (onChange) onChange(this._processValue(event.target.value), event);
   };
 

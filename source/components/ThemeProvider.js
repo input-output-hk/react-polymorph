@@ -15,34 +15,28 @@ import { ROOT_THEME_API } from '../themes/API';
 // internal utility functions
 import { appendToProperty } from '../utils/themes';
 import { hasProperty } from '../utils/props';
+import { ThemeVariablesProvider } from './ThemeVariablesProvider';
+import type { ThemeVariables } from './ThemeVariablesProvider';
 
 type Props = {
   children?: ?Node,
   skins: Object,
   theme: Object,
-  themeOverrides: Object // custom css/scss from user that adheres to shape of ROOT_THEME_API
+  variables: ThemeVariables,
+  isRoot: boolean,
+  themeOverrides: Object, // custom css/scss from user that adheres to shape of ROOT_THEME_API
 };
 
 type State = {
-  theme: Object
+  theme: Object,
 };
 
 export class ThemeProvider extends Component<Props, State> {
-  // define static properties
-  static displayName = 'ThemeProvider';
-  static defaultProps = {
-    skins: {},
-    theme: {},
-    themeOverrides: {}
-  };
-
   constructor(props: Props) {
     super(props);
-
     const { theme, themeOverrides } = props;
-
     this.state = {
-      theme: this._composeLibraryTheme(theme, themeOverrides)
+      theme: this._composeLibraryTheme(theme, themeOverrides),
     };
   }
 
@@ -55,7 +49,7 @@ export class ThemeProvider extends Component<Props, State> {
       !isEqual(prevThemeOverrides, themeOverrides)
     ) {
       this.setState(() => ({
-        theme: this._composeLibraryTheme(theme, themeOverrides)
+        theme: this._composeLibraryTheme(theme, themeOverrides),
       }));
     }
   }
@@ -140,13 +134,22 @@ export class ThemeProvider extends Component<Props, State> {
 
   render() {
     const { theme } = this.state;
-    const { skins } = this.props;
+    const { isRoot, skins, variables } = this.props;
     const providerState = { skins, theme, ROOT_THEME_API };
-
     return (
       <ThemeContext.Provider value={providerState}>
-        {this.props.children}
+        <ThemeVariablesProvider isRoot={isRoot} variables={variables}>
+          {this.props.children}
+        </ThemeVariablesProvider>
       </ThemeContext.Provider>
     );
   }
 }
+
+ThemeProvider.defaultProps = {
+  isRoot: true,
+  skins: {},
+  theme: {},
+  variables: {},
+  themeOverrides: {},
+};

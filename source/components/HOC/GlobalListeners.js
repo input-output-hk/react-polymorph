@@ -20,8 +20,10 @@ type Props = {
   optionsIsOpeningUpward: boolean,
   optionsRef?: ElementRef<*>,
   optionRenderer?: Function,
+  optionsLength?: number,
   rootRef?: ElementRef<*>,
   toggleOpen: Function,
+  hasSearch?: boolean,
 };
 
 type State = {
@@ -54,7 +56,7 @@ export class GlobalListeners extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    const { optionsIsOpen } = this.props;
+    const { optionsIsOpen, hasSearch, optionsLength } = this.props;
 
     // if Options is transferring from closed to open, add listeners
     // if Options is transferring from open to closed, remove listeners
@@ -69,6 +71,11 @@ export class GlobalListeners extends Component<Props, State> {
       // then add calc max-height calc handler on scroll and resize
       this._removeGlobalListeners();
       this._addCalculateMaxHeightListeners();
+    }
+
+    // if hasSearch prop or options.length  changed, re-calculates max-height
+    if (prevProps.hasSearch !== hasSearch || prevProps.optionsLength !== optionsLength) {
+      this._calculateOptionsMaxHeight();
     }
   }
 
@@ -152,6 +159,7 @@ export class GlobalListeners extends Component<Props, State> {
       toggleOpen,
       mouseIsOverOptions,
       mouseIsOverRoot,
+      hasSearch,
     } = this.props;
 
     // checks if Options are open & being scrolled upon via mouse position prior to toggling closed
@@ -167,6 +175,7 @@ export class GlobalListeners extends Component<Props, State> {
     }
     optionsIsOpen && !mouseIsOverOptions && !mouseIsOverRoot && toggleOpen();
     const { height, top } = rootRef.current.getBoundingClientRect();
+    const searchHeight = hasSearch ? 52 : 0;
     // opening upwards case
     if (optionsIsOpeningUpward && top < window.innerHeight) {
       this.setState({ optionsMaxHeight: top - 20 });
@@ -174,7 +183,7 @@ export class GlobalListeners extends Component<Props, State> {
     }
 
     // opening downwards case
-    const optionsMaxHeight = window.innerHeight - top - height - 30;
+    const optionsMaxHeight = window.innerHeight - top - height - 30 - searchHeight;
     if (!optionsIsOpeningUpward && optionsMaxHeight > 0) {
       this.setState({ optionsMaxHeight });
     }

@@ -93,7 +93,56 @@ const SimpleFormApp = () => (
 );
 ```
 
-### Components and Skins
+## Release Managament
+
+- Starting with `1.0.0` all future releases will follow semver semantics:
+  - `patch` (eg: 1.0.x) for **API compatible bug fixes**
+  - `minor` (eg.: 1.x.0) for **API compatible new features**
+  - `major` (eg: 2.0.0) for **API breaking changes**
+  
+- For early integration of upcoming release changes we use the following conventions:
+  
+  - `[current version]-next.x` to tag changes for upcoming releases (as we cannot know the necessary 
+    semver for the final release including all the changes). `x` in this case is simply a number that 
+    is increased and can be thought of like "slots" for temporary releases
+    
+  - All temporary releases should be published with the `next` npm dist tag via: `npm publish --tag next` 
+    so that they are not automatically tagged with the default `latest` npm tag.
+    
+- The `master` branch only includes commits of final releases
+  
+- `release/x.x.x` branches are created as soon as we cut a release and know the correct semver - they 
+  are always targeting the `master` branch + should be well documented. They can include many release
+  candidates which should be tagged like `[next releaes]-rc.X` where you increment X per release candidate
+  until we are confident that the release is ready to be published under its normal version.
+
+### How to publish a temporary release
+
+Temporary releases are useful for testing specific changes in your project PRs without making public
+releases that might confuse others and are not following semver.
+
+1. Create a dedicated branch for your bug/feature/chore
+2. Run `npm view react-polymorph dist-tags.next` to see the latest release version the `next` npm dist-tag is currently pointing to
+   (this will look something like this: `1.0.0-next.1`)
+3. Increase the `next.X` number by one (e.g: `npm version 1.0.0-next.2`) to create a new git tag via.
+4. Publish the release candidate with `npm publish --tag next` (to assign the `next` dist-tag instead of `latest`)
+5. Reference your release candidate version in your project PR
+
+### How to publish a stable release
+
+Stable releases are the next public version change of react-polymorph combining all previous temporary
+releases into a semver based release:
+
+1. Create a new `release/x.x.x` branch based on `develop` (following semver based on changelog)
+2. Update the version in `package.json` to the planned release version (do not tag it)
+3. Update the `CHANGELOG.md` to assign the new release version to the last changes and upcoming changes
+3. Setup a PR targetting `master` for the relase branch on Github and document the changes since last release
+4. Publish a release candidate to npm (e.g: `1.0.1-rc.1`)
+5. Integrate and test the release candidate
+6. Iterate on the release via release candidates until its ready to be merged
+7. Merge the release PR into `master` on Github and then `master` back into `develop`
+
+## Components and Skins
 
 React-polymorph comes with simple themes & skins out of the box, but anything is customizable.
 
@@ -166,51 +215,39 @@ import { NumericInput } from "react-polymorph/lib/components";
 import { InputSkin } from "react-polymorph/lib/skins/simple";
 
 const MyNumericInput = () => (
-  <NumericInput // notice the different logic component!
-    skin={InputSkin} // but the same skin!
+  <NumericInput
     label="Amount"
     placeholder="0.000000"
-    numberLocaleOptions={{ maximumFractionDigits: 6 }}
+    decimalPlaces={6}
+    bigNumberFormat={{ decimalSeparator: '.', groupSeparator: ',' }}
   />
 );
 ```
 
-
-_Side Note: this shows how you can make/use specialized versions of basic components by composition 
-(reusing the `InputSkin` with a specialized logic component) - a core idea of react-polymorph!_
-
-##### Expected Behavior & Limitations:
+##### Expected Behavior:
 
 Since there is no web standard on how to build numeric input components, here is the specification we
 came up with that serves our purposes in the best way: 
 
-- Only numeric inputs that are representable by Javascript numbers are valid. This is guarded by `Number.MIN_SAFE_INTEGER` 
-  (-9007199254740991) and `Number.MAX_SAFE_INTEGER` (9007199254740991) but since also fractions need to 
-  represented, the calculation for the maximum integer part goes like this:
-  `Number.MAX_SAFE_INTEGER / 10 ** (maximumFractionDigits + 1)` (which basically means that one integer digit is lost for
-  each supported fraction digit). For `maximumFractionDigits == 3` this results in 
-  `9007199254740991 / 10 ** 4 == 900719925474.099` being the biggest number that can be entered.
-- Only numeric digits `[0-9]` and dots `.` can be entered.
+- Only numeric digits `[0-9]` and decimal separators (configurable via `bigNumberFormat` prop) can be entered.
 - When invalid characters are pasted as input, nothing happens
-- When a second dot is entered it replaces the existing one and updates the fraction part accordingly
-- Commas cannot be deleted but the cursor should jump over them when DEL or BACKSPACE keys are used
-- The fraction dot can only be deleted if `minimumFractionDigits` is not defined or
-  if the resulting number does not exceed the numeric limits!
-- It's possible to replace the whole number or parts of it (even the dot) by inserting another number.
-- If the fraction dot is deleted but the resulting number is too big the cursor jumps over the dot without deletion
-- If you insert a digit but the resulting number would exceed the numeric limit, nothing happens
+- When a second decimal separators is entered it replaces the existing one and updates the fraction part accordingly
+- Group separators cannot be deleted but the cursor should jump over them when DEL or BACKSPACE keys are used
+- It's possible to replace the whole number or parts of it (even the decimal separator) by inserting another number.
 
 ##### Props:
 
+The `NumericInput` is based on the `Input` component and extends it's functionality:
+
 ```js
 type NumericInputProps = {
+  // Input props:
   autoFocus?: boolean,
   className?: string,
   context: ThemeContextProp,
   disabled?: boolean,
   error?: string,
   label?: string | Element<any>,
-  numberLocaleOptions?: Number$LocaleOptions,
   onBlur?: Function,
   onChange?: Function,
   onFocus?: Function,
@@ -220,26 +257,36 @@ type NumericInputProps = {
   theme: ?Object,
   themeId: string,
   themeOverrides: Object,
-  useDynamicDigitCalculation: boolean,
-  value: ?number,
+  // Numeric input specific props:
+  allowSigns?: boolean,
+  bigNumberFormat?: BigNumber.Format,
+  decimalPlaces?: number,
+  roundingMode?: BigNumber.RoundingMode,
+  value: ?BigNumber.Instance,
 };
 ```
 
-###### `numberLocaleOptions`
+###### `value`
 
-`Number.toLocaleString()` is used internally to localize the given number value. This method takes options
-explained in greater detail in the 
-[MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) 
+Must be an instance of [BigNumber](https://mikemcl.github.io/bignumber.js)
+`onChange` also returns an instance of `BigNumber` after any user changes.
 
-The most important parts are `maximumFractionDigits` (defaults to 3 as per web standard) and `minimumFractionDigits`
-which dictate the handling of fraction digits. 
+###### `allowSigns`
 
-###### `useDynamicDigitCalculation`
+Is `true` by default, if `false` the user cannot enter negative numbers.
 
-This is an optional mode that "sacrifices" simple, clear UX in favor of being able to enter bigger numbers.
-Basically it works the same way but it dynamically calculates how large the integer part of the number can
-be based on the actual fraction digits entered. The less fraction digits, the more integer digits are possible
-and vice versa.
+###### `decimalPlaces`
+
+No restriction by default (any number of decimal places allowed).
+Can be set to fix the decimal places to a specific amount.
+
+###### `bigNumberFormat`
+
+You can configure the number format by passing in any valid [bignumber.js FORMAT option](https://mikemcl.github.io/bignumber.js/#format)
+
+###### `roundingMode`
+
+You can configure the rounding mode by passing in any valid [bignumber.js ROUNDING_MODE option](https://mikemcl.github.io/bignumber.js/#rounding-mode)
 
 ---
 

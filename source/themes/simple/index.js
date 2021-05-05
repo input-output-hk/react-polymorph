@@ -9,6 +9,7 @@ import SimpleButton from './SimpleButton.scss';
 import SimpleCheckbox from './SimpleCheckbox.scss';
 import SimpleDropdown from './SimpleDropdown.scss';
 import SimpleFlex from './SimpleFlex.scss';
+import { SimpleFormFieldDefaults } from './SimpleFormField';
 import SimpleFormField from './SimpleFormField.scss';
 import SimpleGrid from './SimpleGrid.scss';
 import SimpleGutter from './SimpleGutter.scss';
@@ -19,7 +20,9 @@ import SimpleLink from './SimpleLink.scss';
 import SimpleLoadingSpinner from './SimpleLoadingSpinner.scss';
 import SimpleModal from './SimpleModal.scss';
 import SimpleOptions from './SimpleOptions.scss';
+import { SimplePasswordInputDefaults } from './SimplePasswordInput';
 import SimplePasswordInput from './SimplePasswordInput.scss';
+import SimplePopOver from './SimplePopOver.scss';
 import SimpleProgressBar from './SimpleProgressBar.scss';
 import SimpleRadio from './SimpleRadio.scss';
 import SimpleScrollBar from './SimpleScrollBar.scss';
@@ -52,6 +55,7 @@ export const SimpleTheme = {
   [IDENTIFIERS.MODAL]: SimpleModal,
   [IDENTIFIERS.OPTIONS]: SimpleOptions,
   [IDENTIFIERS.PASSWORD_INPUT]: SimplePasswordInput,
+  [IDENTIFIERS.POP_OVER]: SimplePopOver,
   [IDENTIFIERS.PROGRESS_BAR]: SimpleProgressBar,
   [IDENTIFIERS.RADIO]: SimpleRadio,
   [IDENTIFIERS.SCROLLBAR]: SimpleScrollBar,
@@ -60,5 +64,10 @@ export const SimpleTheme = {
   [IDENTIFIERS.SWITCH]: SimpleSwitch,
   [IDENTIFIERS.TEXT_AREA]: SimpleTextArea,
   [IDENTIFIERS.TOGGLER]: SimpleToggler,
-  [IDENTIFIERS.TOOLTIP]: SimpleTooltip
+  [IDENTIFIERS.TOOLTIP]: SimpleTooltip,
+};
+
+export const SimpleDefaults = {
+  ...SimplePasswordInputDefaults,
+  ...SimpleFormFieldDefaults,
 };

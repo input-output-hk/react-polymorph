@@ -22,6 +22,26 @@ $option-padding: var(--rp-option-padding, 14px 20px) !default;
 $option-text-color: var(--rp-option-text-color, #5e6066) !default;
 $option-text-color-disabled: var(--rp-option-text-color-disabled, rgba(#5e6066, 0.5)) !default;
 
+// search
+$option-search-box-shadow: var(--rp-option-search-box-shadow, 0 10px 10px -5px rgba(0, 0, 0, 0.12)) !default;
+$option-search-clear-button-bg-color: var(--rp-option-bg-color-highlighted, rgba(68, 91, 124, 0.1)) !default;
+$option-search-clear-icon-color: var(--rp-input-text-color, #5e6066) !default;
+$option-search-clear-icon-size: var(--rp-option-search-clear-icon-size, 10px) !default;
+$option-search-clear-icon-url: var(--rp-option-search-clear-icon-url, url("#{$theme-assets-path}/cross.svg")) !default;
+$option-search-highlight-background-color: var(--rp-option-search-highlight-background-color, #f2a218) !default;
+$option-search-icon-color: var(--rp-input-text-color, #5e6066) !default;
+$option-search-icon-opacity: var(--rp-option-search-icon-opacity, 0.65) !default;
+$option-search-icon-side-margin: var(--rp-option-search-icon-size, 18.5px) !default;
+$option-search-icon-size: var(--rp-option-search-icon-size, 15px) !default;
+$option-search-icon-top-margin: var(--rp-option-search-icon-size, 16.5px) !default;
+$option-search-icon-url: var(--rp-option-search-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
+$option-search-input-background-color: var(--rp-select-input-bg-color, #fafbfc);
+$option-search-input-border-radius: var(--rp-option-search-input-border-radius, 1px);
+$option-search-input-border: var(--rp-option-search-input-border, none);
+$option-search-input-height: var(--rp-option-search-height, 50px) !default;
+$option-search-input-padding-clear-btn: var(--rp-option-search-input-padding-clear-btn, 60px) !default;
+$option-search-input-padding-magnifier: var(--rp-option-search-input-padding-magnifier, 43px) !default;
+
 // checkmark
 $option-checkmark-color: var(--rp-option-checkmark-color, #5e6066) !default;
 $option-checkmark-height: var(--rp-option-checkmark-height, 9px) !default;
@@ -39,6 +59,10 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
 .options {
   & > div {
     padding: 0;
+  }
+
+  &.hasSearch {
+    margin-top: 10px;
   }
 
   @if ($options-arrow) {
@@ -122,6 +146,87 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
   &.disabledOption {
     color: $option-text-color-disabled;
     cursor: $option-cursor-disabled;
+  }
+
+  em {
+    background-color: $option-search-highlight-background-color;
+  }
+}
+
+.search {
+  box-shadow: $option-search-box-shadow;
+  position: relative;
+  z-index: 1;
+  input {
+    background-color: $option-search-input-background-color;
+    border-radius:  $option-search-input-border-radius;
+    border: $option-search-input-border;
+    height: $option-search-input-height;
+  }
+  button {
+    background-color: $option-search-clear-button-bg-color;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 28px;
+    opacity: 0;
+    padding: 9px;
+    position: absolute;
+    top: 11px;
+    transition: opacity .25s ease-out;
+    width: 28px;
+    z-index: 1;
+    &.active {
+      opacity: 1;
+    }
+    &:before {
+      -webkit-mask-image: $option-search-clear-icon-url;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: $option-search-clear-icon-size $option-search-clear-icon-size;
+      background-color: $option-search-clear-icon-color;
+      content: "";
+      display: block;
+      height: $option-search-clear-icon-size;
+      mask-image:$option-search-clear-icon-url;
+      mask-repeat: no-repeat;
+      mask-size: $option-search-clear-icon-size $option-search-clear-icon-size;
+      width: $option-search-clear-icon-size;
+    }
+  }
+  &:before {
+    -webkit-mask-image: $option-search-icon-url;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: $option-search-icon-size $option-search-icon-size;
+    background: $option-search-icon-color;
+    content: "";
+    height: $option-search-icon-size;
+    margin: $option-search-icon-top-margin $option-search-icon-side-margin 0 $option-search-icon-side-margin;
+    mask-image: $option-search-icon-url;
+    mask-repeat: no-repeat;
+    mask-size: $option-search-icon-size $option-search-icon-size;
+    opacity: $option-search-icon-opacity;
+    position: absolute;
+    vertical-align: middle;
+    width: $option-search-icon-size;
+    z-index: 1;
+  }
+  :not([dir='rtl']) & {
+    input {
+      padding-left: $option-search-input-padding-magnifier;
+      padding-right: $option-search-input-padding-clear-btn;
+    }
+    button {
+      right: 12px;
+    }
+  }
+  [dir='rtl'] & {
+    input {
+      padding-left: $option-search-input-padding-clear-btn;
+      padding-right: $option-search-input-padding-magnifier;
+    }
+    button {
+      left: 12px;
+      right: auto;
+    }
   }
 }
 

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
 
 // external libraries
-import createRef from 'create-react-ref/lib/createRef';
 import _ from 'lodash';
 
 // interal components
@@ -17,7 +16,7 @@ import { composeFunctions } from '../utils/props';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
-type Props = {
+export type AutocompleteProps = {
   className?: string,
   context: ThemeContextProp,
   error: ?string,
@@ -25,6 +24,8 @@ type Props = {
   isOpeningUpward: boolean,
   label?: string | Element<any>,
   maxSelections?: number,
+  requiredSelections: [number],
+  requiredSelectionsInfo?: (required: number, actual: number) => string,
   maxVisibleOptions: number,
   multipleSameSelections: boolean,
   onChange?: Function,
@@ -37,7 +38,7 @@ type Props = {
   sortAlphabetically: boolean,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
 };
 
 type State = {
@@ -47,10 +48,10 @@ type State = {
   isOpen: boolean,
   inputValue: string,
   mouseIsOverOptions: boolean,
-  selectedOptions: Array<any>
+  selectedOptions: Array<any>,
 };
 
-class AutocompleteBase extends Component<Props, State> {
+class AutocompleteBase extends Component<AutocompleteProps, State> {
   // declare ref types
   rootElement: ?Element<any>;
   inputElement: ?Element<'input'>;
@@ -62,25 +63,26 @@ class AutocompleteBase extends Component<Props, State> {
   static defaultProps = {
     context: createEmptyContext(),
     error: null,
-    invalidCharsRegex: /[^a-zA-Z0-9]/g, // only allow letters and numbers by default
+    invalidCharsRegex: /[^a-zA-Z0-9\s]/g, // only allow letters and numbers by default
     isOpeningUpward: false,
     maxVisibleOptions: 10, // max number of visible options
     multipleSameSelections: true, // if true then same word can be selected multiple times
     options: [],
+    requiredSelections: [],
     sortAlphabetically: true, // options are sorted alphabetically by default
     theme: null,
     themeId: IDENTIFIERS.AUTOCOMPLETE,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
-  constructor(props: Props) {
+  constructor(props: AutocompleteProps) {
     super(props);
 
     // define refs
-    this.rootElement = createRef();
-    this.inputElement = createRef();
-    this.suggestionsElement = createRef();
-    this.optionsElement = createRef();
+    this.rootElement = React.createRef();
+    this.inputElement = React.createRef();
+    this.suggestionsElement = React.createRef();
+    this.optionsElement = React.createRef();
 
     const {
       context,
@@ -89,7 +91,7 @@ class AutocompleteBase extends Component<Props, State> {
       themeOverrides,
       sortAlphabetically,
       options,
-      preselectedOptions
+      preselectedOptions,
     } = props;
 
     this.state = {
@@ -104,11 +106,11 @@ class AutocompleteBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: AutocompleteProps) {
     if (prevProps !== this.props) {
       didThemePropsChange(prevProps, this.props, this.setState.bind(this));
     }
@@ -131,11 +133,11 @@ class AutocompleteBase extends Component<Props, State> {
       // set Options scroll position to top on close
       this.optionsElement.current.scrollTop = 0;
     }
-    this.setState({ isOpen: !this.state.isOpen });
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
   };
 
   toggleMouseLocation = () =>
-    this.setState({ mouseIsOverOptions: !this.state.mouseIsOverOptions });
+    this.setState((prevState) => ({ mouseIsOverOptions: !prevState.mouseIsOverOptions }));
 
   handleAutocompleteClick = () => {
     const { inputElement } = this;
@@ -166,7 +168,16 @@ class AutocompleteBase extends Component<Props, State> {
 
   // onChange handler for input element in AutocompleteSkin
   handleInputChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    this._setInputValue(event.target.value);
+    const { value } = event.target;
+    const multipleValues = value.split(' ');
+    const hasMultipleValues = multipleValues.length > 1;
+    this._setInputValue(value);
+    if (hasMultipleValues) {
+      this.open();
+      setTimeout(() => {
+        this.updateSelectedOptions(event, multipleValues);
+      }, 0);
+    }
   };
 
   // passed to Options onChange handler in AutocompleteSkin
@@ -178,35 +189,59 @@ class AutocompleteBase extends Component<Props, State> {
     event: SyntheticEvent<>,
     selectedOption: any = null
   ) => {
-    const { maxSelections, multipleSameSelections } = this.props;
-    const { selectedOptions, filteredOptions, isOpen } = this.state;
+    const { maxSelections, multipleSameSelections, options } = this.props;
+    const { selectedOptions, isOpen } = this.state;
+    let { filteredOptions } = this.state;
     const canMoreOptionsBeSelected =
       maxSelections != null ? selectedOptions.length < maxSelections : true;
     const areFilteredOptionsAvailable =
       filteredOptions && filteredOptions.length > 0;
-
+    let skipValueSelection = false;
     if (
       !maxSelections ||
       (canMoreOptionsBeSelected && areFilteredOptionsAvailable)
     ) {
-      if (!selectedOption) return;
-      const option = selectedOption.trim();
-      const optionCanBeSelected =
-        (selectedOptions.indexOf(option) < 0 && !multipleSameSelections) ||
-        multipleSameSelections;
-
-      if (option && optionCanBeSelected && isOpen) {
-        const newSelectedOptions = _.concat(selectedOptions, option);
-        this.selectionChanged(newSelectedOptions, event);
-        this.setState({ selectedOptions: newSelectedOptions, isOpen: false });
+      if (!selectedOption || !selectedOption.length) return;
+      const option = _.isString(selectedOption) ?
+        selectedOption.trim() : selectedOption.filter(item => item);
+      const newSelectedOptions: Array<string> = [...selectedOptions];
+      if (option && Array.isArray(option)) {
+        filteredOptions = options;
+        option.forEach(item => {
+          const optionCanBeSelected = multipleSameSelections &&
+            filteredOptions.includes(item) ||
+            (filteredOptions.includes(item) &&
+            !selectedOptions.includes(item) &&
+            !newSelectedOptions.includes(item));
+          if (!optionCanBeSelected && !skipValueSelection) {
+            this._setInputValue(item, true);
+            skipValueSelection = true;
+            return;
+          }
+          if (item &&
+            optionCanBeSelected &&
+            isOpen && !skipValueSelection &&
+            newSelectedOptions.length < maxSelections) {
+            newSelectedOptions.push(item);
+          }
+        });
+      } else {
+        const optionCanBeSelected = multipleSameSelections ||
+          !selectedOptions.includes(option);
+        if (option && optionCanBeSelected && isOpen) {
+          newSelectedOptions.push(option);
+        }
       }
+      this.selectionChanged(newSelectedOptions, event);
+      this.setState({ selectedOptions: newSelectedOptions, isOpen: false });
     }
-
-    this._setInputValue('');
+    if (!skipValueSelection) {
+      this._setInputValue('');
+    }
   };
 
   removeOption = (index: number, event: SyntheticEvent<>) => {
-    const selectedOptions = this.state.selectedOptions;
+    const { selectedOptions } = this.state;
     _.pullAt(selectedOptions, index);
     this.selectionChanged(selectedOptions, event);
     this.setState({ selectedOptions });
@@ -223,7 +258,7 @@ class AutocompleteBase extends Component<Props, State> {
   // associated with rendering this.state.selectedOptions, the user can call
   // this in the body of the renderSelections function
   getSelectionProps = ({
-    removeSelection
+    removeSelection,
   }: { removeSelection: Function } = {}) => {
     const { themeId } = this.props;
     const { inputValue, isOpen, selectedOptions, composedTheme } = this.state;
@@ -235,7 +270,7 @@ class AutocompleteBase extends Component<Props, State> {
       removeSelection: (index: number, event: SyntheticEvent<>) =>
         // the user's custom removeSelection event handler is composed with
         // the internal functionality of Autocomplete (this.removeOption)
-        composeFunctions(removeSelection, this.removeOption)(index, event)
+        composeFunctions(removeSelection, this.removeOption)(index, event),
     };
   };
 
@@ -330,14 +365,31 @@ class AutocompleteBase extends Component<Props, State> {
     return filteredValue;
   };
 
-  _setInputValue = (value: string) => {
-    const filteredValue = this._filterInvalidChars(value);
-    const filteredOptions = this._filterOptions(filteredValue);
-    this.setState({
-      isOpen: true,
-      inputValue: filteredValue,
-      filteredOptions
-    });
+  _setInputValue = (value: string, shouldFocus?: boolean) => {
+    const multipleValues = value.split(' ');
+    if (multipleValues && multipleValues.length > 1) {
+      let selectedOptions = [];
+      multipleValues.forEach(itemValue => {
+        const filteredValue = this._filterInvalidChars(itemValue);
+        selectedOptions = [...selectedOptions, ...this._filterOptions(filteredValue)];
+      });
+      this.setState({
+        isOpen: true,
+        inputValue: '',
+        filteredOptions: Array.from(new Set(selectedOptions)),
+      });
+    } else {
+      const filteredValue = this._filterInvalidChars(value);
+      const filteredOptions = this._filterOptions(filteredValue);
+      this.setState({
+        isOpen: !!value,
+        inputValue: filteredValue,
+        filteredOptions,
+      });
+      setTimeout(() => {
+        if (shouldFocus) this.focus();
+      }, 0);
+    }
   };
 }
 

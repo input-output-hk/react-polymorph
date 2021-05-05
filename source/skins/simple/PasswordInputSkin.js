@@ -1,20 +1,34 @@
 // @flow
 import classnames from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
-import { Tooltip } from '../../components/Tooltip';
 import type { PasswordInputProps } from '../../components/PasswordInput';
-import useDebouncedValueChangeIndicator from '../../utils/hooks';
+import { SimplePasswordInputVariables } from '../../themes/simple/SimplePasswordInput';
+import { useDebouncedValueChangedIndicator } from '../../utils/hooks';
 
 type Props = PasswordInputProps & {
   score: number,
   theme: Object,
 };
 
+function getPopOverBgColorForState(state: PasswordInput.STATE): string {
+  switch (state) {
+    case PasswordInput.STATE.ERROR:
+    case PasswordInput.STATE.INSECURE:
+      return `var(${SimplePasswordInputVariables.errorColor})`;
+    case PasswordInput.STATE.WEAK:
+      return `var(${SimplePasswordInputVariables.warningColor})`;
+    case PasswordInput.STATE.STRONG:
+      return `var(${SimplePasswordInputVariables.successColor})`;
+    case PasswordInput.STATE.DEFAULT:
+    default:
+      return 'var(--rp-pop-over-bg-color)';
+  }
+}
+
 export const PasswordInputSkin = (props: Props) => {
-  const [hasInputFocus, setHasInputFocus] = useState(false);
   const {
     className,
     error,
@@ -32,9 +46,11 @@ export const PasswordInputSkin = (props: Props) => {
     ...inputProps
   } = props;
   const hasInitialValueChanged = useDebounce
-    ? useDebouncedValueChangeIndicator(value, debounceDelay)
+    ? useDebouncedValueChangedIndicator(value, debounceDelay)
     : true;
   const hasTooltip = hasInitialValueChanged && tooltip != null;
+  const stateColor = getPopOverBgColorForState(state);
+  const isErrorState = state === PasswordInput.STATE.ERROR;
   return (
     <div
       className={classnames([
@@ -43,29 +59,17 @@ export const PasswordInputSkin = (props: Props) => {
         className,
       ])}
     >
-      <Tooltip
-        arrowRelativeToTip
-        isCentered
-        isOpeningUpward={false}
-        isShowingOnHover={hasTooltip && isShowingTooltipOnHover}
-        isVisible={
-          hasTooltip &&
-          (isTooltipOpen || (isShowingTooltipOnFocus && hasInputFocus))
-        }
-        tip={tooltip}
-        theme={props.theme}
-      >
-        <Input
-          {...inputProps}
-          showErrorState={
-            hasInitialValueChanged && state === PasswordInput.STATE.ERROR
-          }
-          value={value}
-          type="password"
-          onBlur={() => setHasInputFocus(false)}
-          onFocus={() => setHasInputFocus(true)}
-        />
-      </Tooltip>
+      <Input
+        {...inputProps}
+        error={hasTooltip ? tooltip : null}
+        showErrorState={hasTooltip && isErrorState}
+        hideErrorState={!isErrorState}
+        value={value}
+        type="password"
+        themeVariables={{
+          '--rp-pop-over-bg-color': stateColor,
+        }}
+      />
       <div className={theme[themeId].indicator}>
         <div
           className={theme[themeId].score}

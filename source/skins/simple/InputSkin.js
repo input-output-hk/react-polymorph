@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import type { ElementRef, Element } from 'react';
 
 // external libraries
 import classnames from 'classnames';
@@ -10,51 +9,46 @@ import { isFunction } from 'lodash';
 import { FormField } from '../../components/FormField';
 import type { InputProps } from '../../components/Input';
 
-// skins
-import { FormFieldSkin } from './FormFieldSkin';
-
 // internal utility functions
 import { pickDOMProps } from '../../utils/props';
 
 type Props = InputProps & {
-  inputRef: ElementRef<'input'>,
   theme: Object,
   themeId: string,
 };
 
 export const InputSkin = (props: Props) => {
-  const renderInput = () => (
+  const renderInput = (setFormFieldRef) => (
     <input
-      ref={props.inputRef}
+      ref={setFormFieldRef}
       {...pickDOMProps(props)}
       className={classnames([
         props.theme[props.themeId].input,
         props.disabled ? props.theme[props.themeId].disabled : null,
-        props.error || props.showErrorState
+        !props.hideErrorState && (props.error || props.showErrorState)
           ? props.theme[props.themeId].errored
           : null,
       ])}
-      readOnly={props.readOnly}
     />
   );
 
-  const useSelectionRenderer = (option) => (
+  const useSelectionRenderer = (setFormFieldRef, option) => (
     <div className={props.theme[props.themeId].customValueWrapper}>
-      {renderInput()}
+      {renderInput(setFormFieldRef)}
       <div className={props.theme[props.themeId].customValueBlock}>
         {option && props.selectionRenderer && props.selectionRenderer(option)}
       </div>
     </div>
   );
 
-  const render = () => {
+  const render = (setFormFieldRef) => {
     // check if user has passed render prop "selectionRenderer"
     const hasSelectionRenderer =
       props.selectionRenderer && isFunction(props.selectionRenderer);
     if (hasSelectionRenderer) {
-      return useSelectionRenderer(props.selectedOption);
+      return useSelectionRenderer(setFormFieldRef, props.selectedOption);
     }
-    return renderInput();
+    return renderInput(setFormFieldRef);
   };
 
   return (
@@ -63,10 +57,12 @@ export const InputSkin = (props: Props) => {
       disabled={props.disabled}
       label={props.label}
       error={props.error}
-      inputRef={props.inputRef}
-      skin={FormFieldSkin}
+      isShowingErrorOnHover={props.isShowingErrorOnHover}
+      isShowingErrorOnFocus={props.isShowingErrorOnFocus}
+      formFieldRef={props.inputRef}
       theme={props.theme}
       render={render}
+      themeVariables={props.themeVariables}
     />
   );
 };

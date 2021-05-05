@@ -9,21 +9,23 @@ exports[`Autocomplete renders correctly 1`] = `
   <div
     class="root"
   >
-    <div
-      class="inputWrapper"
-    >
+    <span>
       <div
-        class="autocompleteContent"
+        class="inputWrapper"
       >
         <div
-          class="selectedWords"
+          class="autocompleteContent"
         >
-          <input
-            value=""
-          />
+          <div
+            class="selectedWords"
+          >
+            <input
+              value=""
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </span>
   </div>
   <div
     class="options firstOptionHighlighted root isFloating isHidden"
@@ -125,22 +127,24 @@ exports[`Autocomplete renders with a placeholder 1`] = `
   <div
     class="root"
   >
-    <div
-      class="inputWrapper"
-    >
+    <span>
       <div
-        class="autocompleteContent"
+        class="inputWrapper"
       >
         <div
-          class="selectedWords"
+          class="autocompleteContent"
         >
-          <input
-            placeholder="Enter recovery phrase"
-            value=""
-          />
+          <div
+            class="selectedWords"
+          >
+            <input
+              placeholder="Enter recovery phrase"
+              value=""
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </span>
   </div>
   <div
     class="options firstOptionHighlighted root isFloating isHidden"
@@ -242,26 +246,23 @@ exports[`Autocomplete renders with an error 1`] = `
   <div
     class="root errored"
   >
-    <div
-      class="error"
-    >
-      Your mnemonic phrase is incorrect
-    </div>
-    <div
-      class="inputWrapper"
-    >
+    <span>
       <div
-        class="autocompleteContent errored"
+        class="inputWrapper"
       >
         <div
-          class="selectedWords"
+          class="autocompleteContent errored"
         >
-          <input
-            value=""
-          />
+          <div
+            class="selectedWords"
+          >
+            <input
+              value=""
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </span>
   </div>
   <div
     class="options firstOptionHighlighted root isFloating isHidden"
@@ -370,21 +371,23 @@ exports[`Autocomplete renders with label 1`] = `
     >
       Enter your recovery phrase below
     </label>
-    <div
-      class="inputWrapper"
-    >
+    <span>
       <div
-        class="autocompleteContent"
+        class="inputWrapper"
       >
         <div
-          class="selectedWords"
+          class="autocompleteContent"
         >
-          <input
-            value=""
-          />
+          <div
+            class="selectedWords"
+          >
+            <input
+              value=""
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </span>
   </div>
   <div
     class="options firstOptionHighlighted root isFloating isHidden"
@@ -486,21 +489,23 @@ exports[`Autocomplete uses render prop - renderOptions 1`] = `
   <div
     class="root"
   >
-    <div
-      class="inputWrapper"
-    >
+    <span>
       <div
-        class="autocompleteContent"
+        class="inputWrapper"
       >
         <div
-          class="selectedWords"
+          class="autocompleteContent"
         >
-          <input
-            value=""
-          />
+          <div
+            class="selectedWords"
+          >
+            <input
+              value=""
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </span>
   </div>
   <div
     class="options firstOptionHighlighted root isFloating isHidden"
@@ -594,21 +599,23 @@ exports[`Autocomplete uses render prop - renderSelections 1`] = `
   <div
     class="root"
   >
-    <div
-      class="inputWrapper"
-    >
+    <span>
       <div
-        class="autocompleteContent"
+        class="inputWrapper"
       >
         <div
-          class="selectedWords"
+          class="autocompleteContent"
         >
-          <input
-            value=""
-          />
+          <div
+            class="selectedWords"
+          >
+            <input
+              value=""
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </span>
   </div>
   <div
     class="options firstOptionHighlighted root isFloating isHidden"

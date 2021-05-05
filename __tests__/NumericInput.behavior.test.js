@@ -1,13 +1,15 @@
+import BigNumber from 'bignumber.js';
 import React from 'react';
 
 import { NumericInput } from '../source/components/NumericInput';
 import { mountInSimpleTheme } from './helpers/theming';
 
 describe('NumericInput onChange simulations', () => {
-
   const mountNumericInputWithProps = (props) => {
     const onChangeMock = jest.fn();
-    const wrapper = mountInSimpleTheme(<NumericInput {...props} onChange={onChangeMock} />);
+    const wrapper = mountInSimpleTheme(
+      <NumericInput {...props} onChange={onChangeMock} />
+    );
     const input = wrapper.find('input');
     return {
       input,
@@ -20,7 +22,8 @@ describe('NumericInput onChange simulations', () => {
     test('valid input triggers onChange listener', () => {
       const { input, onChangeMock } = mountNumericInputWithProps();
       input.simulate('change', { nativeEvent: { target: { value: '19.00' } } });
-      expect(onChangeMock.mock.calls[0][0]).toBe(19.00);
+      const onChangeValue = onChangeMock.mock.calls[0][0];
+      expect(onChangeValue).toEqual('19');
     });
     test('invalid input does not trigger onChange listener', () => {
       const { input, onChangeMock } = mountNumericInputWithProps();
@@ -30,47 +33,37 @@ describe('NumericInput onChange simulations', () => {
   });
 
   describe('configurable number formats', () => {
-    test('handles commas as thousand separators by default', () => {
+    test('handles commas as group separators by default', () => {
       const { input, onChangeMock } = mountNumericInputWithProps();
-      input.simulate('change', { nativeEvent: { target: { value: '9,999,999.00' } } });
-      expect(onChangeMock.mock.calls[0][0]).toBe(9999999.00);
+      input.simulate('change', {
+        nativeEvent: { target: { value: '9,999,999.00' } },
+      });
+      const onChangeValue = onChangeMock.mock.calls[0][0];
+      expect(onChangeValue).toBe('9999999');
     });
     test('can be configured to handle dots as thousand separators', () => {
       const { input, onChangeMock } = mountNumericInputWithProps({
-        numberFormat: {
+        bigNumberFormat: {
           groupSeparator: '.',
           decimalSeparator: ',',
-        }
+        },
       });
-      input.simulate('change', { nativeEvent: { target: { value: '9.999.999,00' } } });
-      expect(onChangeMock.mock.calls[0][0]).toBe(9999999.00);
+      input.simulate('change', {
+        nativeEvent: { target: { value: '9.999.999,00' } },
+      });
+      expect(onChangeMock.mock.calls[0][0]).toBe('9999999');
     });
     test('can be configured to handle spaces as thousand separators', () => {
       const { input, onChangeMock } = mountNumericInputWithProps({
-        numberFormat: {
+        bigNumberFormat: {
           groupSeparator: ' ',
           decimalSeparator: '.',
-        }
+        },
       });
-      input.simulate('change', { nativeEvent: { target: { value: '9 999 999.00' } } });
-      expect(onChangeMock.mock.calls[0][0]).toBe(9999999.00);
+      input.simulate('change', {
+        nativeEvent: { target: { value: '9 999 999.00' } },
+      });
+      expect(onChangeMock.mock.calls[0][0]).toBe('9999999');
     });
   });
-
-  test('enforces given minimumFractionDigits', () => {
-    const { input } = mountNumericInputWithProps({
-      numberLocaleOptions: { minimumFractionDigits: 6 },
-      value: 0,
-    });
-    expect(input.getDOMNode().value).toBe('0.000000');
-  });
-
-  test('enforces given maximumFractionDigits', () => {
-    const { input } = mountNumericInputWithProps({
-      numberLocaleOptions: { maximumFractionDigits: 2 },
-      value: 0.123,
-    });
-    expect(input.getDOMNode().value).toBe('0.12');
-  });
-
 });

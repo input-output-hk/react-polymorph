@@ -27,7 +27,7 @@ type Props = {
   textareaRef?: ElementRef<'textarea'>,
   theme: Object,
   themeId: string,
-  value: string
+  value: string,
 };
 
 export const TextAreaSkin = (props: Props) => {
@@ -38,16 +38,16 @@ export const TextAreaSkin = (props: Props) => {
       disabled={props.disabled}
       label={props.label}
       error={props.error}
-      inputRef={props.textareaRef}
+      formFieldRef={props.textareaRef}
       skin={FormFieldSkin}
-      render={() => (
+      render={(setFormFieldRef) => (
         <textarea
-          ref={props.textareaRef}
+          ref={setFormFieldRef}
           {...pickDOMProps(props)}
           className={classnames([
             theme[themeId].textarea,
             props.disabled ? theme[themeId].disabled : null,
-            props.error ? theme[themeId].errored : null
+            props.error ? theme[themeId].errored : null,
           ])}
         />
       )}

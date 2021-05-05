@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType, Element } from 'react';
-import createRef from 'create-react-ref/lib/createRef';
 
 // internal components
 import { GlobalListeners } from './HOC/GlobalListeners';
@@ -20,21 +19,27 @@ type Props = {
   className?: string,
   context: ThemeContextProp,
   error?: string | Element<any>,
-  label?: string | Element<any>,
+  hasSearch?: boolean,
+  hideSearchClearButton?: boolean,
+  highlightSearch?: boolean,
   isOpeningUpward: boolean,
+  label?: string | Element<any>,
+  noResultsMessage?: string,
   onBlur?: Function,
   onChange?: Function,
   onFocus?: Function,
+  onSearch?: Function,
+  optionHeight?: number,
   optionRenderer?: Function,
   options: Array<any>,
   placeholder?: string,
   selectionRenderer?: Function,
+  searchHeight?: number,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
   value: string,
-  optionHeight?: number
 };
 
 type State = {
@@ -67,9 +72,9 @@ class SelectBase extends Component<Props, State> {
     super(props);
 
     // define ref
-    this.rootElement = createRef();
-    this.inputElement = createRef();
-    this.optionsElement = createRef();
+    this.rootElement = React.createRef();
+    this.inputElement = React.createRef();
+    this.optionsElement = React.createRef();
 
     const { context, themeId, theme, themeOverrides } = props;
 
@@ -157,6 +162,7 @@ class SelectBase extends Component<Props, State> {
       context,
       allowBlank,
       optionHeight,
+      searchHeight,
       ...rest
     } = this.props;
 
@@ -170,6 +176,8 @@ class SelectBase extends Component<Props, State> {
         optionsRef={this.optionsElement}
         rootRef={this.rootElement}
         toggleOpen={this.toggleOpen}
+        hasSearch={this.props.hasSearch}
+        optionsLength={this.props.options.length}
       >
         {({ optionsMaxHeight }) => (
           <SelectSkin
@@ -185,6 +193,7 @@ class SelectBase extends Component<Props, State> {
             toggleOpen={this.toggleOpen}
             toggleMouseLocation={this.toggleMouseLocation}
             optionHeight={optionHeight}
+            searchHeight={searchHeight}
             {...rest}
           />
         )}

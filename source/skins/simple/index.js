@@ -14,6 +14,7 @@ import { LoadingSpinnerSkin } from './LoadingSpinnerSkin';
 import { ModalSkin } from './ModalSkin';
 import { OptionsSkin } from './OptionsSkin';
 import { PasswordInputSkin } from './PasswordInputSkin';
+import { PopOverSkin } from './PopOverSkin';
 import { ProgressBarSkin } from './ProgressBarSkin';
 import { RadioSkin } from './RadioSkin';
 import { ScrollBarSkin } from './ScrollBarSkin';
@@ -39,6 +40,7 @@ export const SimpleSkins = {
   [IDENTIFIERS.MODAL]: ModalSkin,
   [IDENTIFIERS.OPTIONS]: OptionsSkin,
   [IDENTIFIERS.PASSWORD_INPUT]: PasswordInputSkin,
+  [IDENTIFIERS.POP_OVER]: PopOverSkin,
   [IDENTIFIERS.PROGRESS_BAR]: ProgressBarSkin,
   [IDENTIFIERS.RADIO]: RadioSkin,
   [IDENTIFIERS.SCROLLBAR]: ScrollBarSkin,
@@ -47,5 +49,5 @@ export const SimpleSkins = {
   [IDENTIFIERS.SWITCH]: SwitchSkin,
   [IDENTIFIERS.TEXT_AREA]: TextAreaSkin,
   [IDENTIFIERS.TOGGLER]: TogglerSkin,
-  [IDENTIFIERS.TOOLTIP]: TooltipSkin
+  [IDENTIFIERS.TOOLTIP]: TooltipSkin,
 };

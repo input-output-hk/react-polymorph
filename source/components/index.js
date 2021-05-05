@@ -17,6 +17,7 @@ export const IDENTIFIERS = {
   MODAL: 'modal',
   OPTIONS: 'options',
   PASSWORD_INPUT: 'passwordInput',
+  POP_OVER: 'popOver',
   PROGRESS_BAR: 'progressbar',
   RADIO: 'radio',
   SCROLLBAR: 'scrollbar',
@@ -25,5 +26,5 @@ export const IDENTIFIERS = {
   SWITCH: 'switch',
   TEXT_AREA: 'textarea',
   TOGGLER: 'toggler',
-  TOOLTIP: 'tooltip'
+  TOOLTIP: 'tooltip',
 };
