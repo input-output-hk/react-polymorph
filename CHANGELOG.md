@@ -6,13 +6,16 @@ The history of all changes to react-polymorph.
 vNext
 =====
 
+1.0.0
+=====
+
 ### Breaking Changes :boom:
 
 - `Input` now shows errors on hover and focus by default which can be configured via two new props:
 
 ```ts
-  isShowingErrorOnFocus: boolean,
-  isShowingErrorOnHover: boolean,
+  isShowingErrorOnFocus: boolean
+  isShowingErrorOnHover: boolean
 ```
 
 ### Features :sparkles:
