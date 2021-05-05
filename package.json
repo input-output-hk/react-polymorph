@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.9.7-next.2",
+  "version": "1.0.0-rc.2",
   "scripts": {
     "build": "cross-env yarn clean && yarn sass && yarn js",
     "build:watch": "concurrently 'yarn js:watch' 'yarn sass:watch'",
