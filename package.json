@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "0.9.8-rc.21",
+  "version": "1.0.0",
   "scripts": {
     "build": "cross-env yarn clean && yarn sass && yarn js",
     "build:watch": "concurrently 'yarn js:watch' 'yarn sass:watch'",
@@ -17,9 +17,7 @@
     "storybook:build": "build-storybook -c storybook -o dist/storybook",
     "test": "cross-env NODE_ENV=test jest",
     "test:update": "yarn test -u",
-    "test:watch": "yarn test --watchAll",
-    "npm:view:next": "npm view react-polymorph dist-tags.next",
-    "npm:publish:next": "npm publish --tag next"
+    "test:watch": "yarn test --watchAll"
   },
   "dependencies": {
     "@tippyjs/react": "4.2.1",

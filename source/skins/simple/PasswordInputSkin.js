@@ -1,10 +1,9 @@
 // @flow
 import classnames from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
-import { PopOver } from '../../components/PopOver';
 import type { PasswordInputProps } from '../../components/PasswordInput';
 import { SimplePasswordInputVariables } from '../../themes/simple/SimplePasswordInput';
 import { useDebouncedValueChangedIndicator } from '../../utils/hooks';
@@ -30,8 +29,6 @@ function getPopOverBgColorForState(state: PasswordInput.STATE): string {
 }
 
 export const PasswordInputSkin = (props: Props) => {
-  const [hasInputFocus, setHasInputFocus] = useState(false);
-  const [isInputHovered, setIsInputHovered] = useState(false);
   const {
     className,
     error,
@@ -52,6 +49,8 @@ export const PasswordInputSkin = (props: Props) => {
     ? useDebouncedValueChangedIndicator(value, debounceDelay)
     : true;
   const hasTooltip = hasInitialValueChanged && tooltip != null;
+  const stateColor = getPopOverBgColorForState(state);
+  const isErrorState = state === PasswordInput.STATE.ERROR;
   return (
     <div
       className={classnames([
@@ -60,34 +59,17 @@ export const PasswordInputSkin = (props: Props) => {
         className,
       ])}
     >
-      <PopOver
-        visible={
-          hasTooltip &&
-          (isTooltipOpen ||
-            (isShowingTooltipOnHover && isInputHovered) ||
-            (isShowingTooltipOnFocus && hasInputFocus))
-        }
-        content={tooltip}
+      <Input
+        {...inputProps}
+        error={hasTooltip ? tooltip : null}
+        showErrorState={hasTooltip && isErrorState}
+        hideErrorState={!isErrorState}
+        value={value}
+        type="password"
         themeVariables={{
-          '--rp-pop-over-bg-color': getPopOverBgColorForState(state),
+          '--rp-pop-over-bg-color': stateColor,
         }}
-        placement="bottom"
-        popperOptions={{ modifiers: [{ name: 'flip', enabled: false }] }}
-        duration={[300, 0]}
-      >
-        <Input
-          {...inputProps}
-          showErrorState={
-            hasInitialValueChanged && state === PasswordInput.STATE.ERROR
-          }
-          value={value}
-          type="password"
-          onBlur={() => setHasInputFocus(false)}
-          onFocus={() => setHasInputFocus(true)}
-          onMouseEnter={() => setIsInputHovered(true)}
-          onMouseOut={() => setIsInputHovered(false)}
-        />
-      </PopOver>
+      />
       <div className={theme[themeId].indicator}>
         <div
           className={theme[themeId].score}

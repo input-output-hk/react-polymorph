@@ -19,17 +19,6 @@ test('FormField renders with label', () => {
   ).toMatchSnapshot();
 });
 
-test('FormField is disabled', () => {
-  expect(
-    renderInSimpleTheme(
-      <FormField
-        disabled
-        render={({ disabled }) => <span>{disabled.toString()}</span>}
-      />
-    )
-  ).toMatchSnapshot();
-});
-
 test('FormField renders an input element', () => {
   expect(
     renderInSimpleTheme(
