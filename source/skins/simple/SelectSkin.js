@@ -102,6 +102,7 @@ export const SelectSkin = (props: Props) => {
         toggleOpen={props.toggleOpen}
         optionHeight={props.optionHeight}
         searchHeight={props.searchHeight}
+        noResultsMessage={props.noResultsMessage}
       />
     </div>
   );
