@@ -222,6 +222,7 @@ class NumericInputBase extends Component<NumericInputProps, State> {
 
     // Case: Decimal separator was replaced with a number
     if (
+      !!decimalPlaces &&
       value != null &&
       hadDecimalSeparatorBefore &&
       newNumberOfDecimalSeparators === 0 &&
