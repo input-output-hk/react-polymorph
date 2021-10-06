@@ -106,5 +106,19 @@ describe('NumericInput onChange simulations', () => {
       });
       expect(onChangeMock.mock.calls[0][0]).toBe('444.654321');
     });
+    test('it should be possible to replace a number with fixed decimalPlaces, with another number if the trailing numbers after decimal point are all 0', () => {
+      const { input, onChangeMock, wrapper } = mountNumericInputWithProps({
+        bigNumberFormat: {
+          groupSeparator: ' ',
+          decimalSeparator: '.',
+        },
+        value: new BigNumber(5.0),
+        decimalPlaces: 6,
+      });
+      input.simulate('change', {
+        nativeEvent: { target: { value: '20' } },
+      });
+      expect(onChangeMock.mock.calls[0][0]).toBe('20.000000');
+    });
   });
 });
