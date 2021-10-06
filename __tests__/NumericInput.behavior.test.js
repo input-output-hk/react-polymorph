@@ -71,29 +71,40 @@ describe('NumericInput onChange simulations', () => {
           groupSeparator: ' ',
           decimalSeparator: '.',
         },
-        value: '11111.22222'
+        value: '11111.22222',
       });
       input.simulate('change', {
         nativeEvent: { target: { value: '9999999' } },
       });
       expect(onChangeMock.mock.calls[0][0]).toBe('9999999');
     });
-    test('decimaal places cannot be removed if the decimalPlaces prop is passed to component', () => {
-      const { input, onChangeMock,wrapper } = mountNumericInputWithProps({
+    test('decimal places cannot be removed if the decimalPlaces prop is passed to component', () => {
+      const { input, onChangeMock, wrapper } = mountNumericInputWithProps({
         bigNumberFormat: {
           groupSeparator: ' ',
           decimalSeparator: '.',
         },
         value: new BigNumber(111.222222),
-        decimalPlaces:6
+        decimalPlaces: 6,
       });
       input.simulate('change', {
         nativeEvent: { target: { value: '9999999' } },
       });
-      console.log(onChangeMock);
-      console.log(input.value);
-      console.log(wrapper);
       expect(onChangeMock.mock.calls[0][0]).toBe('111.222222');
+    });
+    test('it should be possible to replace a number with fixed decimalPlaces, with another number with fixed decimalPlaces', () => {
+      const { input, onChangeMock, wrapper } = mountNumericInputWithProps({
+        bigNumberFormat: {
+          groupSeparator: ' ',
+          decimalSeparator: '.',
+        },
+        value: new BigNumber(111.222222),
+        decimalPlaces: 6,
+      });
+      input.simulate('change', {
+        nativeEvent: { target: { value: '444.654321' } },
+      });
+      expect(onChangeMock.mock.calls[0][0]).toBe('444.654321');
     });
   });
 });
