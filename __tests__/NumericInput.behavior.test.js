@@ -116,9 +116,9 @@ describe('NumericInput onChange simulations', () => {
         decimalPlaces: 6,
       });
       input.simulate('change', {
-        nativeEvent: { target: { value: '20' } },
+        nativeEvent: { target: { value: '2.0' } },
       });
-      expect(onChangeMock.mock.calls[0][0]).toBe('20.000000');
+      expect(onChangeMock.mock.calls[0][0]).toBe('2.000000');
     });
   });
 });

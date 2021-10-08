@@ -295,11 +295,30 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     const hasDecimalPlaces = decimalPlaces != null;
     const wasDecimalSeparatorRemoved =
       hadDecimalSeparatorBefore && !newNumberOfDecimalSeparators;
+    const newValueSlicedAtNewInputtedNumber = newValue.slice(
+      1,
+      newValue.length
+    );
+
+    const newTrailingNumbersAreAllZero = /^0+$/.test(
+      newValueSlicedAtNewInputtedNumber
+    );
+
+    if (wasDecimalSeparatorRemoved && hasDecimalPlaces && !isInsert) {
+      return {
+        caretPosition: newCaretPosition + deleteCaretCorrection,
+        fallbackInputValue: null,
+        value: this.bigNumberToFixed(currentNumber),
+      };
+    }
+
+    // Edge case for inserts with trailing zeros
     if (
       wasDecimalSeparatorRemoved &&
       hasDecimalPlaces &&
-      !isInsert &&
-      !newValueHasTrailingZeros.test(newValue)
+      isInsert &&
+      !newTrailingNumbersAreAllZero &&
+      newValue.length > 1
     ) {
       return {
         caretPosition: newCaretPosition + deleteCaretCorrection,
