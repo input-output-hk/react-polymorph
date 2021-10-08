@@ -65,5 +65,60 @@ describe('NumericInput onChange simulations', () => {
       });
       expect(onChangeMock.mock.calls[0][0]).toBe('9999999');
     });
+    test('decimal places can be removed if the decimalPlaces prop is not passed to component', () => {
+      const { input, onChangeMock } = mountNumericInputWithProps({
+        bigNumberFormat: {
+          groupSeparator: ' ',
+          decimalSeparator: '.',
+        },
+        value: '11111.22222',
+      });
+      input.simulate('change', {
+        nativeEvent: { target: { value: '9999999' } },
+      });
+      expect(onChangeMock.mock.calls[0][0]).toBe('9999999');
+    });
+    test('decimal places cannot be removed if the decimalPlaces prop is passed to component', () => {
+      const { input, onChangeMock, wrapper } = mountNumericInputWithProps({
+        bigNumberFormat: {
+          groupSeparator: ' ',
+          decimalSeparator: '.',
+        },
+        value: new BigNumber(111.222222),
+        decimalPlaces: 6,
+      });
+      input.simulate('change', {
+        nativeEvent: { target: { value: '9999999' } },
+      });
+      expect(onChangeMock.mock.calls[0][0]).toBe('111.222222');
+    });
+    test('it should be possible to replace a number with fixed decimalPlaces, with another number with fixed decimalPlaces', () => {
+      const { input, onChangeMock, wrapper } = mountNumericInputWithProps({
+        bigNumberFormat: {
+          groupSeparator: ' ',
+          decimalSeparator: '.',
+        },
+        value: new BigNumber(111.222222),
+        decimalPlaces: 6,
+      });
+      input.simulate('change', {
+        nativeEvent: { target: { value: '444.654321' } },
+      });
+      expect(onChangeMock.mock.calls[0][0]).toBe('444.654321');
+    });
+    test('it should be possible to replace a number with fixed decimalPlaces, with another number if the trailing numbers after decimal point are all 0', () => {
+      const { input, onChangeMock, wrapper } = mountNumericInputWithProps({
+        bigNumberFormat: {
+          groupSeparator: ' ',
+          decimalSeparator: '.',
+        },
+        value: new BigNumber(5.0),
+        decimalPlaces: 6,
+      });
+      input.simulate('change', {
+        nativeEvent: { target: { value: '2.0' } },
+      });
+      expect(onChangeMock.mock.calls[0][0]).toBe('2.000000');
+    });
   });
 });
