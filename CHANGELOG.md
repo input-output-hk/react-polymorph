@@ -4,6 +4,10 @@ The history of all changes to react-polymorph.
 
 # vNext
 
+# 1.0.1
+
+- Fixed replacing fixed decimal numbers with another fixed decimal ([PR 189](https://github.com/input-output-hk/react-polymorph/pull/189))
+
 # 1.0.0
 
 ### Breaking Changes :boom:
