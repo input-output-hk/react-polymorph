@@ -131,15 +131,13 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     const validInputNoSignsRegExp = new RegExp(
       `^([0-9${decimalSeparator}${groupSeparator}]+)?$`
     );
-    const validInputOnlyIntegersRegExp = new RegExp(
-      `^([0-9]+)?$`
-    );
+    const validInputOnlyIntegersRegExp = new RegExp(`^([0-9]+)?$`);
     let validInputRegex = allowSigns
       ? validInputSignsRegExp
       : validInputNoSignsRegExp;
     validInputRegex = allowOnlyIntegers
-        ? validInputOnlyIntegersRegExp
-        : validInputRegex;
+      ? validInputOnlyIntegersRegExp
+      : validInputRegex;
     const valueHasLeadingZero = /^0[1-9]/.test(valueToProcess);
 
     /**
@@ -221,11 +219,15 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     }
 
     // Case: Decimal separator was replaced with a number
+    const newValueHasTrailingZeros = new RegExp('^[1-9]+0+$');
     if (
+      !!decimalPlaces &&
       value != null &&
       hadDecimalSeparatorBefore &&
       newNumberOfDecimalSeparators === 0 &&
-      isInsert
+      isInsert &&
+      newValue.length > 1 &&
+      !newValueHasTrailingZeros.test(newValue)
     ) {
       return {
         caretPosition: changedCaretPosition - 1,
@@ -293,7 +295,31 @@ class NumericInputBase extends Component<NumericInputProps, State> {
     const hasDecimalPlaces = decimalPlaces != null;
     const wasDecimalSeparatorRemoved =
       hadDecimalSeparatorBefore && !newNumberOfDecimalSeparators;
+    const newValueSlicedAtNewInputtedNumber = newValue.slice(
+      1,
+      newValue.length
+    );
+
+    const newTrailingNumbersAreAllZero = /^0+$/.test(
+      newValueSlicedAtNewInputtedNumber
+    );
+
     if (wasDecimalSeparatorRemoved && hasDecimalPlaces && !isInsert) {
+      return {
+        caretPosition: newCaretPosition + deleteCaretCorrection,
+        fallbackInputValue: null,
+        value: this.bigNumberToFixed(currentNumber),
+      };
+    }
+
+    // Edge case for inserts with trailing zeros
+    if (
+      wasDecimalSeparatorRemoved &&
+      hasDecimalPlaces &&
+      isInsert &&
+      !newTrailingNumbersAreAllZero &&
+      newValue.length > 1
+    ) {
       return {
         caretPosition: newCaretPosition + deleteCaretCorrection,
         fallbackInputValue: null,
@@ -347,17 +373,22 @@ class NumericInputBase extends Component<NumericInputProps, State> {
   }
 
   valueToFormattedString(number: NumericInputValue) {
-    const { bigNumberFormat, decimalPlaces, roundingMode, allowOnlyIntegers } = this.props;
+    const {
+      bigNumberFormat,
+      decimalPlaces,
+      roundingMode,
+      allowOnlyIntegers,
+    } = this.props;
     const debugSetting = BigNumber.DEBUG;
     if (BigNumber.isBigNumber(number) && number.isNaN()) return '';
     try {
       BigNumber.DEBUG = true;
-      return allowOnlyIntegers ?
-        new BigNumber(number).toString()
+      return allowOnlyIntegers
+        ? new BigNumber(number).toString()
         : new BigNumber(number).toFormat(decimalPlaces, roundingMode, {
-        ...BigNumber.config().FORMAT, // defaults
-        ...bigNumberFormat, // custom overrides;
-      });
+            ...BigNumber.config().FORMAT, // defaults
+            ...bigNumberFormat, // custom overrides;
+          });
     } catch (e) {
       return '';
     } finally {
