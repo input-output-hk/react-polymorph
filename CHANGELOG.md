@@ -6,6 +6,7 @@ The history of all changes to react-polymorph.
 
 # 1.0.1
 
+- Replaced external link icons and styling ([PR 191](https://github.com/input-output-hk/react-polymorph/pull/191))
 - Fixed replacing fixed decimal numbers with another fixed decimal ([PR 189](https://github.com/input-output-hk/react-polymorph/pull/189))
 
 # 1.0.0
