@@ -40,6 +40,7 @@ export function FormFieldSkin(props: Props) {
           aria-hidden
           className={props.theme[props.themeId].label}
           onClick={props.focusChild}
+          htmlFor={props.id}
         >
           {props.label}
         </label>

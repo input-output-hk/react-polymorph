@@ -23,6 +23,7 @@ export type InputProps = {
   inputRef?: RefObject,
   showErrorState?: boolean,
   hideErrorState?: boolean,
+  id?: string,
   isShowingErrorOnFocus: boolean,
   isShowingErrorOnHover: boolean,
   label?: string | Element<any>,
