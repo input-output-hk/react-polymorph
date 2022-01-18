@@ -182,6 +182,32 @@ storiesOf('Select', module)
     ))
   )
 
+  .add('disabled (without value)',
+    withState({ value: '' }, store => (
+      <Select
+        disabled={true}
+        onChange={value => store.set({ value })}
+        label="Countries"
+        options={COUNTRIES_WITH_DISABLED_OPTIONS}
+        placeholder="Select your country …"
+        hasSearch={boolean('hasSearch')}
+      />
+    ))
+  )
+  .add('disabled (with value)',
+    withState({ value: '' }, store => (
+      <Select
+        disabled={true}
+        onChange={value => store.set({ value })}
+        value="EN-en"
+        label="Countries"
+        options={COUNTRIES_WITH_DISABLED_OPTIONS}
+        placeholder="Select your country …"
+        hasSearch={boolean('hasSearch')}
+      />
+    ))
+  )
+
   .add('with disabled options',
     withState({ value: '' }, store => (
       <Select

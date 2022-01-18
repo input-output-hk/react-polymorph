@@ -29,6 +29,7 @@ export const InputSkin = (props: Props) => {
           ? props.theme[props.themeId].errored
           : null,
       ])}
+      disabled={props.disabled}
     />
   );
 
