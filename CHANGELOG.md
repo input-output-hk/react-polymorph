@@ -4,6 +4,10 @@ The history of all changes to react-polymorph.
 
 # vNext
 
+# 1.0.2
+
+- Support data-\* attributes on input field component ([PR 2841](https://github.com/input-output-hk/daedalus/pull/2841))
+
 # 1.0.1
 
 - Replaced external link icons and styling ([PR 191](https://github.com/input-output-hk/react-polymorph/pull/191))
