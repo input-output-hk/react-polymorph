@@ -18,6 +18,7 @@ type Props = {
   autoFocus: boolean,
   className?: string,
   context: ThemeContextProp,
+  disabled?: boolean,
   error?: string | Element<any>,
   hasSearch?: boolean,
   hideSearchClearButton?: boolean,

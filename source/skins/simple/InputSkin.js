@@ -29,6 +29,7 @@ export const InputSkin = (props: Props) => {
           ? props.theme[props.themeId].errored
           : null,
       ])}
+      disabled={props.disabled}
     />
   );
 
@@ -57,6 +58,7 @@ export const InputSkin = (props: Props) => {
       disabled={props.disabled}
       label={props.label}
       error={props.error}
+      id={props.id}
       isShowingErrorOnHover={props.isShowingErrorOnHover}
       isShowingErrorOnFocus={props.isShowingErrorOnFocus}
       formFieldRef={props.inputRef}

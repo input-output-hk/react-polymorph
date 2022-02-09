@@ -205,4 +205,16 @@ storiesOf('Input', module)
         onChange={(value) => store.set({ value })}
       />
     ))
+  )
+  .add(
+    'with html attributes',
+    withState({ value: '' }, (store) => (
+      <Input
+        value={store.state.value}
+        onChange={(value) => store.set({ value })}
+        data-testid="testId"
+        id="input1"
+        label="Click Me to Focus"
+      />
+    ))
   );
