@@ -5,7 +5,6 @@ import type { Element, ElementRef } from 'react';
 // external libraries
 import classnames from 'classnames';
 
-
 // components
 import { Options } from '../../components/Options';
 import { Input } from '../../components/Input';
@@ -16,6 +15,7 @@ import { InputSkin } from './InputSkin';
 
 type Props = {
   className: string,
+  disabled?: boolean,
   error: string | Element<any>,
   getSelectedOption: Function,
   handleChange: Function,
@@ -34,7 +34,7 @@ type Props = {
   onSearch?: Function,
   options: Array<{
     isDisabled: boolean,
-    value: any
+    value: any,
   }>,
   optionRenderer: Function,
   optionsRef: ElementRef<any>,
@@ -59,12 +59,13 @@ export const SelectSkin = (props: Props) => {
   return (
     <div
       ref={props.rootRef}
-      className={classnames([
+      className={classnames(
         props.className,
         theme[themeId].select,
-        props.isOpen ? theme[themeId].isOpen : null,
-        props.isOpeningUpward ? theme[themeId].openUpward : null
-      ])}
+        props.isOpen && theme[themeId].isOpen,
+        props.isOpeningUpward && theme[themeId].openUpward,
+        props.disabled && theme[themeId].disabled
+      )}
     >
       <div className={theme[themeId].selectInput}>
         <Input
@@ -78,6 +79,7 @@ export const SelectSkin = (props: Props) => {
           error={props.error}
           selectionRenderer={props.selectionRenderer}
           readOnly
+          disabled={props.disabled}
           selectedOption={selectedOption}
         />
       </div>

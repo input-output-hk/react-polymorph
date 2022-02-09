@@ -4,6 +4,8 @@ The history of all changes to react-polymorph.
 
 # vNext
 
+- Add disabled state to Select component ([PR 196](https://github.com/input-output-hk/react-polymorph/pull/196))
+
 # 1.0.2
 
 - Support data-\* attributes on input field component ([PR 2841](https://github.com/input-output-hk/daedalus/pull/2841))
