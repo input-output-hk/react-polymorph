@@ -2,7 +2,7 @@
 
 The history of all changes to react-polymorph.
 
-# vNext
+# 1.0.3
 
 - Add disabled state to Select component ([PR 196](https://github.com/input-output-hk/react-polymorph/pull/196))
 
