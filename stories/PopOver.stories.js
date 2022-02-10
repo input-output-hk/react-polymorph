@@ -122,4 +122,30 @@ storiesOf('PopOver', module)
         distanced tip
       </PopOver>
     </div>
+  ))
+  .add('flipping', () => (
+    <div className={styles.flip}>
+      <PopOver
+        popperOptions={{
+          placement: 'top',
+          modifiers: [
+            {
+              name: 'preventOverflow',
+              options: {
+                padding: 20,
+              },
+            },
+            {
+              name: 'flip',
+              options: {
+                fallbackPlacements: ['bottom', 'right', 'top'],
+              },
+            },
+          ],
+        }}
+        content="This tip should flip when reaching the top"
+      >
+        distanced tip
+      </PopOver>
+    </div>
   ));

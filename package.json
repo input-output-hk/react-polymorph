@@ -20,12 +20,12 @@
     "test:watch": "yarn test --watchAll"
   },
   "dependencies": {
-    "@tippyjs/react": "4.2.1",
+    "@popperjs/core": "2.11.2",
+    "@tippyjs/react": "4.2.6",
     "create-react-context": "0.2.2",
     "fast-password-entropy": "1.1.1",
     "filter-invalid-dom-props": "2.1.0",
     "html-attributes": "1.1.0",
-    "popper.js": "1.16.1",
     "react-modal": "3.1.12",
     "react-scrollbars-custom": "4.0.21"
   },
