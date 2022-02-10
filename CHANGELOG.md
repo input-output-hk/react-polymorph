@@ -5,6 +5,7 @@ The history of all changes to react-polymorph.
 # vNext
 
 - Add disabled state to Select component ([PR 196](https://github.com/input-output-hk/react-polymorph/pull/196))
+- Updated popper.js ([PR 202](https://github.com/input-output-hk/react-polymorph/pull/202))
 
 # 1.0.2
 
