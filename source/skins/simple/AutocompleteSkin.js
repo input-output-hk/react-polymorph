@@ -1,22 +1,20 @@
 // @flow
 import React from 'react';
-import type { ElementRef, Element } from 'react';
+import type { ElementRef } from 'react';
 
 // external libraries
-import _ from 'lodash';
+import { slice, some } from 'lodash';
 import classnames from 'classnames';
+import type { AutocompleteProps } from '../../components/Autocomplete';
 
 // components
 import { FormField } from '../../components/FormField';
 import { Options } from '../../components/Options';
 
 // skins
-import { FormFieldSkin } from './FormFieldSkin';
 import { OptionsSkin } from './OptionsSkin';
 
-type Props = {
-  className: string,
-  error: string,
+type Props = AutocompleteProps & {
   filteredOptions: Array<any>,
   getSelectionProps: Function,
   handleAutocompleteClick: Function,
@@ -24,24 +22,14 @@ type Props = {
   handleInputChange: Function,
   inputRef: ElementRef<any>,
   inputValue: string,
-  isOpeningUpward: boolean,
   isOpen: boolean,
-  label: string | Element<any>,
-  maxSelections: number,
-  maxVisibleOptions: number,
   onKeyDown: Function,
-  options: Array<any>,
   optionsRef: ElementRef<any>,
   optionsMaxHeight: number,
-  placeholder: string,
   removeOption: Function,
-  renderSelections: Function,
-  renderOptions: Function,
   rootRef: ElementRef<any>,
   selectedOptions: Array<any>,
   suggestionsRef: ElementRef<any>,
-  theme: Object,
-  themeId: string,
   toggleMouseLocation: Function,
   toggleOpen: Function,
   optionHeight: ?number,
@@ -50,7 +38,7 @@ type Props = {
 export const AutocompleteSkin = (props: Props) => {
   const theme = props.theme[props.themeId];
 
-  const filteredAndLimitedOptions = _.slice(
+  const filteredAndLimitedOptions = slice(
     props.filteredOptions,
     0,
     props.maxVisibleOptions
@@ -68,7 +56,8 @@ export const AutocompleteSkin = (props: Props) => {
     if (props.selectedOptions && props.renderSelections) {
       // call custom renderSelections function
       return props.renderSelections(props.getSelectionProps);
-    } else if (props.selectedOptions && !props.renderSelections) {
+    }
+    if (props.selectedOptions && !props.renderSelections) {
       // render default skin
       return props.selectedOptions.map((selectedOption, index) => (
         <span className={theme.selectedWordBox} key={index}>
@@ -89,39 +78,14 @@ export const AutocompleteSkin = (props: Props) => {
     return null;
   };
 
-  // A label, input, and selected words are the content
-  const renderContent = () => (
-    <FormField
-      error={props.error}
-      inputRef={props.inputRef}
-      label={props.label}
-      skin={FormFieldSkin}
-      render={() => (
-        <div
-          className={classnames([
-            theme.autocompleteContent,
-            props.isOpen ? theme.opened : null,
-            props.selectedOptions.length
-              ? theme.hasSelectedWords
-              : null,
-            props.error ? theme.errored : null
-          ])}
-          ref={props.suggestionsRef}
-        >
-          <div className={theme.selectedWords}>
-            {renderSelectedOptions()}
-            <input
-              ref={props.inputRef}
-              placeholder={placeholder}
-              value={props.inputValue}
-              onChange={props.handleInputChange}
-              onKeyDown={props.onKeyDown}
-            />
-          </div>
-        </div>
-      )}
-    />
-  );
+  const selectedOptionsCount = props.selectedOptions.length;
+  const hasSelectedRequiredNumberOfOptions =
+    props.requiredSelections.length === 0 ||
+    some(
+      props.requiredSelections,
+      (requiredCount) => selectedOptionsCount === requiredCount
+    );
+  const error = hasSelectedRequiredNumberOfOptions ? props.error : null;
 
   return (
     <div
@@ -131,8 +95,43 @@ export const AutocompleteSkin = (props: Props) => {
       ref={props.rootRef}
       role="presentation"
     >
-
-      {renderContent()}
+      {props.requiredSelections.length > 0 &&
+        props.requiredSelectionsInfo != null && (
+          <div className={theme.requiredWordsInfo}>
+            {props.requiredSelectionsInfo(
+              props.requiredSelections,
+              selectedOptionsCount
+            )}
+          </div>
+        )}
+      <FormField
+        error={error}
+        formFieldRef={props.inputRef}
+        label={props.label}
+        isErrorHidden={props.isOpen}
+        render={(setFormFieldRef) => (
+          <div
+            className={classnames([
+              theme.autocompleteContent,
+              props.isOpen ? theme.opened : null,
+              props.selectedOptions.length ? theme.hasSelectedWords : null,
+              error ? theme.errored : null,
+            ])}
+            ref={props.suggestionsRef}
+          >
+            <div className={theme.selectedWords}>
+              {renderSelectedOptions()}
+              <input
+                ref={setFormFieldRef}
+                placeholder={placeholder}
+                value={props.inputValue}
+                onChange={props.handleInputChange}
+                onKeyDown={props.onKeyDown}
+              />
+            </div>
+          </div>
+        )}
+      />
 
       <Options
         isOpen={props.isOpen}

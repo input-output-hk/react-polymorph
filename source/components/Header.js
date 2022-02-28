@@ -37,7 +37,7 @@ type Props = {
 
 type State = { composedTheme: Object };
 
-class HeaderBase extends Component <Props, State> {
+class HeaderBase extends Component<Props, State> {
   // define static properties
   static displayName = 'Header';
   static defaultProps = {
@@ -61,8 +61,10 @@ class HeaderBase extends Component <Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   _assembleInlineStyles = ({ center, lowerCase, left, right, upperCase }) => {
@@ -95,14 +97,18 @@ class HeaderBase extends Component <Props, State> {
 
   _getActiveFont = ({ light, medium, regular, thin, bold }) => {
     const fontProps = pickBy({ light, medium, regular, thin, bold });
-    if (isEmpty(fontProps)) { return; }
+    if (isEmpty(fontProps)) {
+      return;
+    }
     // returns the first active font if more than 1 is passed
     return Object.keys(fontProps)[0];
   };
 
   _getActiveTheme = ({ h1, h2, h3, h4 }) => {
     const themeProps = pickBy({ h1, h2, h3, h4 });
-    if (isEmpty(themeProps)) { return; }
+    if (isEmpty(themeProps)) {
+      return;
+    }
     // returns the first active theme if more than 1 is passed
     return Object.keys(themeProps)[0];
   };
@@ -112,10 +118,14 @@ class HeaderBase extends Component <Props, State> {
     const activeTheme = this._getActiveTheme(styleProps);
     const activeFont = this._getActiveFont(styleProps);
 
-    if (activeTheme) { return [...activeClasses, activeTheme]; }
-    if (activeFont) { return [...activeClasses, activeFont]; }
+    if (activeTheme) {
+      return [...activeClasses, activeTheme];
+    }
+    if (activeFont) {
+      return [...activeClasses, activeFont];
+    }
 
-    return [...activeClasses, activeTheme, activeFont].filter(val => val);
+    return [...activeClasses, activeTheme, activeFont].filter((val) => val);
   };
 
   render() {

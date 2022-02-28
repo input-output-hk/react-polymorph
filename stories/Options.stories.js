@@ -253,7 +253,7 @@ storiesOf('Options', module)
         placeholder="Enter mnemonic..."
         maxSelections={9}
         maxVisibleOptions={5}
-        invalidCharsRegex={/[^a-zA-Z]/g}
+        invalidCharsRegex={/[^a-zA-Z\s]/g}
         onChange={selectedOpts => store.set({ selectedOpts })}
       />
     ))

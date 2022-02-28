@@ -9,7 +9,7 @@ import {
   addWindowListeners,
   removeDocumentListeners,
   removeWindowListeners,
-  targetIsDescendant
+  targetIsDescendant,
 } from '../../utils/events';
 
 type Props = {
@@ -20,54 +20,62 @@ type Props = {
   optionsIsOpeningUpward: boolean,
   optionsRef?: ElementRef<*>,
   optionRenderer?: Function,
+  optionsLength?: number,
   rootRef?: ElementRef<*>,
-  toggleOpen: Function
+  toggleOpen: Function,
+  hasSearch?: boolean,
 };
 
 type State = {
-  optionsMaxHeight: number
+  optionsMaxHeight: number,
 };
 
 export class GlobalListeners extends Component<Props, State> {
   // define static properties
   static displayName = 'GlobalListeners';
   static defaultProps = {
-    optionsIsOpen: false
+    optionsIsOpen: false,
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      optionsMaxHeight: 300
+      optionsMaxHeight: 300,
     };
   }
 
   componentDidMount() {
-    if (this.props.optionsIsOpen) { return; }
+    if (this.props.optionsIsOpen) {
+      return;
+    }
     // adds scroll and resize event listeners for calculating Options max-height
     this._addCalculateMaxHeightListeners();
     // runs initial Options max-height calculation
     this._calculateOptionsMaxHeight();
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    const { optionsIsOpen } = this.props;
+  componentDidUpdate(prevProps: Props) {
+    const { optionsIsOpen, hasSearch, optionsLength } = this.props;
 
     // if Options is transferring from closed to open, add listeners
     // if Options is transferring from open to closed, remove listeners
-    if (!optionsIsOpen && nextProps.optionsIsOpen) {
+    if (!prevProps.optionsIsOpen && optionsIsOpen) {
       // first remove max-height calc handler on scroll and resize
       // then add toggle handler on scroll and resize
       this._removeGlobalListeners();
       addWindowListeners(this._getWindowListeners());
       addDocumentListeners(this._getDocumentListeners());
-
-    } else if (optionsIsOpen && !nextProps.optionsIsOpen) {
+    } else if (prevProps.optionsIsOpen && !optionsIsOpen) {
       // remove toggle handler on scroll and resize
       // then add calc max-height calc handler on scroll and resize
       this._removeGlobalListeners();
       this._addCalculateMaxHeightListeners();
+    }
+
+    // if hasSearch prop or options.length  changed, re-calculates max-height
+    if (prevProps.hasSearch !== hasSearch || prevProps.optionsLength !== optionsLength) {
+      this._calculateOptionsMaxHeight();
     }
   }
 
@@ -88,28 +96,34 @@ export class GlobalListeners extends Component<Props, State> {
     this._removeGlobalListeners();
 
     // before toggle, ensure options is open and optionsRef exists on DOM
-    if (!optionsIsOpen || !optionsRef || !optionsRef.current) { return; }
+    if (!optionsIsOpen || !optionsRef || !optionsRef.current) {
+      return;
+    }
     this.props.toggleOpen();
   };
 
   _getDocumentListeners = () => ({
     click: this._handleDocumentClick,
-    scroll: this._handleDocumentScroll
+    scroll: this._handleDocumentScroll,
   });
 
   _getWindowListeners = () => ({
-    resize: this._handleWindowResize
+    resize: this._handleWindowResize,
   });
 
   _handleDocumentClick = (event: SyntheticMouseEvent<>) => {
     const { optionsIsOpen, rootRef } = this.props;
 
     // ensure Options is open
-    if (!optionsIsOpen || !rootRef || !rootRef.current) { return; }
+    if (!optionsIsOpen || !rootRef || !rootRef.current) {
+      return;
+    }
 
     // return early if the user clicked an element within the parent component
     // for example, the parent component could be Autocomplete or Select
-    if (targetIsDescendant(event, rootRef.current)) { return; }
+    if (targetIsDescendant(event, rootRef.current)) {
+      return;
+    }
 
     // otherwise, remove all listeners and close Options
     this._removeListenersAndToggle();
@@ -120,8 +134,15 @@ export class GlobalListeners extends Component<Props, State> {
   _handleDocumentScroll = () => this._removeListenersAndToggle();
 
   _addCalculateMaxHeightListeners = () => {
-    const scrollListener = ['scroll', debounce(this._calculateOptionsMaxHeight, 300, { leading: true }), true];
-    const resizeListener = ['resize', debounce(this._calculateOptionsMaxHeight, 300)];
+    const scrollListener = [
+      'scroll',
+      debounce(this._calculateOptionsMaxHeight, 300, { leading: true }),
+      true,
+    ];
+    const resizeListener = [
+      'resize',
+      debounce(this._calculateOptionsMaxHeight, 300),
+    ];
     document.addEventListener(...scrollListener);
     window.addEventListener(...resizeListener);
   };
@@ -138,16 +159,23 @@ export class GlobalListeners extends Component<Props, State> {
       toggleOpen,
       mouseIsOverOptions,
       mouseIsOverRoot,
+      hasSearch,
     } = this.props;
 
     // checks if Options are open & being scrolled upon via mouse position prior to toggling closed
     const isOptionsInDOM = optionsRef && optionsRef.current;
     const doDocumentStylesExist = documentElement && documentElement.style;
-    if (!rootRef || !rootRef.current || !doDocumentStylesExist || !isOptionsInDOM) {
+    if (
+      !rootRef ||
+      !rootRef.current ||
+      !doDocumentStylesExist ||
+      !isOptionsInDOM
+    ) {
       return;
     }
     optionsIsOpen && !mouseIsOverOptions && !mouseIsOverRoot && toggleOpen();
     const { height, top } = rootRef.current.getBoundingClientRect();
+    const searchHeight = hasSearch ? 52 : 0;
     // opening upwards case
     if (optionsIsOpeningUpward && top < window.innerHeight) {
       this.setState({ optionsMaxHeight: top - 20 });
@@ -155,7 +183,7 @@ export class GlobalListeners extends Component<Props, State> {
     }
 
     // opening downwards case
-    const optionsMaxHeight = window.innerHeight - top - height - 30;
+    const optionsMaxHeight = window.innerHeight - top - height - 30 - searchHeight;
     if (!optionsIsOpeningUpward && optionsMaxHeight > 0) {
       this.setState({ optionsMaxHeight });
     }

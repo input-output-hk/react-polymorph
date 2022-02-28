@@ -7,7 +7,11 @@ import { Base } from './Base';
 
 // utility functions
 import { createEmptyContext, withTheme } from '../HOC/withTheme';
-import { composeTheme, addThemeId, didThemePropsChange } from '../../utils/themes';
+import {
+  composeTheme,
+  addThemeId,
+  didThemePropsChange
+} from '../../utils/themes';
 import { numberToPx } from '../../utils/props';
 
 // constants
@@ -50,8 +54,10 @@ class GutterBase extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   render() {

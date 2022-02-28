@@ -7,7 +7,10 @@ export const appendToProperty = (dest: {}, name: string, value: string) => {
   dest[name] === '' ? (dest[name] = value) : (dest[name] += ' ' + value);
 };
 
-export const composeComponentStyles = (componentStyles: {}, componentTheme: {}) => {
+export const composeComponentStyles = (
+  componentStyles: {},
+  componentTheme: {}
+) => {
   if (!componentTheme) return;
   for (const property in componentStyles) {
     if (hasProperty(componentStyles, property)) {
@@ -26,7 +29,7 @@ export const addThemeId = (theme: Object = {}, themeId: string): Object => {
   if (theme && !isEmpty(theme) && themeId) {
     const themeIdExists = hasProperty(theme, themeId);
     const themeIdIsObj = typeof theme[themeId] === 'object';
-    return (themeIdExists && themeIdIsObj) ? theme : { [themeId]: theme };
+    return themeIdExists && themeIdIsObj ? theme : { [themeId]: theme };
   }
   return theme;
 };
@@ -69,16 +72,11 @@ type ThemeProps = Object & {
   themeOverrides: Object
 };
 
-// Used in componentWillReceiveProps, this function compares the current
+// Used in componentDidUpdate, this function compares the current
 // set of theme related props against the next set to see if any have changed.
 // If true, a component's theme is recomposed and local state is updated
 export const didThemePropsChange = (
-  {
-    context,
-    themeId,
-    theme,
-    themeOverrides
-  }: ThemeProps,
+  { context, themeId, theme, themeOverrides }: ThemeProps,
   {
     context: nextContext,
     themeId: nextThemeId,

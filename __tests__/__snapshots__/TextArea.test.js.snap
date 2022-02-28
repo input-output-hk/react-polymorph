@@ -4,13 +4,15 @@ exports[`TextArea renders correctly 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <textarea
-      class="textarea"
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <textarea
+        class="textarea"
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -18,14 +20,16 @@ exports[`TextArea renders with 5 rows 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <textarea
-      class="textarea"
-      rows="5"
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <textarea
+        class="textarea"
+        rows="5"
+      />
+    </div>
+  </span>
 </div>
 `;
 
@@ -33,34 +37,17 @@ exports[`TextArea renders with a value 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <textarea
-      class="textarea"
+  <span>
+    <div
+      class="inputWrapper"
     >
-      this one has a value
-    </textarea>
-  </div>
-</div>
-`;
-
-exports[`TextArea renders with an error 1`] = `
-<div
-  class="root errored"
->
-  <div
-    class="error"
-  >
-    Please enter valid input
-  </div>
-  <div
-    class="inputWrapper"
-  >
-    <textarea
-      class="textarea errored"
-    />
-  </div>
+      <textarea
+        class="textarea"
+      >
+        this one has a value
+      </textarea>
+    </div>
+  </span>
 </div>
 `;
 
@@ -68,13 +55,15 @@ exports[`TextArea renders with placeholder 1`] = `
 <div
   class="root"
 >
-  <div
-    class="inputWrapper"
-  >
-    <textarea
-      class="textarea"
-      placeholder="0.0000"
-    />
-  </div>
+  <span>
+    <div
+      class="inputWrapper"
+    >
+      <textarea
+        class="textarea"
+        placeholder="0.0000"
+      />
+    </div>
+  </span>
 </div>
 `;

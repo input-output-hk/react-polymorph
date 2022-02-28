@@ -47,6 +47,10 @@ $input-placeholder-font-family: var(--rp-input-placeholder-font-family, $theme-f
     color: $input-placeholder-color;
     font-family: $input-placeholder-font-family;
   }
+
+  &[type="password"] {
+    padding-top: 16px;
+  }
 }
 
 // BEGIN SPECIAL STATES ---------- //
@@ -78,9 +82,12 @@ $input-placeholder-font-family: var(--rp-input-placeholder-font-family, $theme-f
 // BEGIN CUSTOM VALUE RENDERER ---------- //
 
 .customValueWrapper {
+  input:not(.disabled) {
+    background-color: transparent !important;
+  }
+
   input {
     color: transparent !important;
-    background-color: transparent !important;
     position: absolute;
     z-index: 2;
   }

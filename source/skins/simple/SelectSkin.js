@@ -5,7 +5,6 @@ import type { Element, ElementRef } from 'react';
 // external libraries
 import classnames from 'classnames';
 
-
 // components
 import { Options } from '../../components/Options';
 import { Input } from '../../components/Input';
@@ -16,20 +15,26 @@ import { InputSkin } from './InputSkin';
 
 type Props = {
   className: string,
+  disabled?: boolean,
   error: string | Element<any>,
   getSelectedOption: Function,
   handleChange: Function,
   handleInputClick: Function,
+  hasSearch?: boolean,
+  hideSearchClearButton?: boolean,
+  highlightSearch?: boolean,
   inputRef: ElementRef<'input'>,
   isOpen: boolean,
   isOpeningUpward: boolean,
   label: string | Element<any>,
+  noResultsMessage?: string,
   onBlur: Function,
   onChange: Function,
   onFocus: Function,
+  onSearch?: Function,
   options: Array<{
     isDisabled: boolean,
-    value: any
+    value: any,
   }>,
   optionRenderer: Function,
   optionsRef: ElementRef<any>,
@@ -43,6 +48,7 @@ type Props = {
   toggleMouseLocation: Function,
   value: string,
   optionHeight: ?number,
+  searchHeight: ?number,
 };
 
 export const SelectSkin = (props: Props) => {
@@ -53,12 +59,13 @@ export const SelectSkin = (props: Props) => {
   return (
     <div
       ref={props.rootRef}
-      className={classnames([
+      className={classnames(
         props.className,
         theme[themeId].select,
-        props.isOpen ? theme[themeId].isOpen : null,
-        props.isOpeningUpward ? theme[themeId].openUpward : null
-      ])}
+        props.isOpen && theme[themeId].isOpen,
+        props.isOpeningUpward && theme[themeId].openUpward,
+        props.disabled && theme[themeId].disabled
+      )}
     >
       <div className={theme[themeId].selectInput}>
         <Input
@@ -72,18 +79,23 @@ export const SelectSkin = (props: Props) => {
           error={props.error}
           selectionRenderer={props.selectionRenderer}
           readOnly
+          disabled={props.disabled}
           selectedOption={selectedOption}
         />
       </div>
       <Options
         skin={OptionsSkin}
         theme={theme}
+        hasSearch={props.hasSearch}
+        hideSearchClearButton={props.hideSearchClearButton}
+        highlightSearch={props.highlightSearch}
         isOpen={props.isOpen}
         optionsRef={props.optionsRef}
         optionsMaxHeight={props.optionsMaxHeight}
         options={props.options}
         isOpeningUpward={props.isOpeningUpward}
         onChange={props.handleChange}
+        onSearch={props.onSearch}
         optionRenderer={props.optionRenderer}
         selectedOption={selectedOption}
         noResults={!props.options.length}
@@ -91,6 +103,7 @@ export const SelectSkin = (props: Props) => {
         toggleMouseLocation={props.toggleMouseLocation}
         toggleOpen={props.toggleOpen}
         optionHeight={props.optionHeight}
+        searchHeight={props.searchHeight}
       />
     </div>
   );

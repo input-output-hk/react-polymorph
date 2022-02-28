@@ -1,9 +1,13 @@
 // @flow
 import React from 'react';
 
+// Pkgs
+import { escapeRegExp } from 'lodash';
+
 // storybook
 import { storiesOf } from '@storybook/react';
 import { withState } from '@dump247/storybook-state';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 // components
 import { Select } from '../source/components/Select';
@@ -28,37 +32,19 @@ import { IDENTIFIERS } from '../source/components';
 
 // helpers
 import { decorateWithSimpleTheme } from './helpers/theming';
+import {
+  WALLETS,
+  COUNTRIES,
+  COUNTRIES_WITH_FLAGS,
+  COUNTRIES_WITH_DISABLED_OPTIONS,
+  COUNTRIES_LONG_LIST,
+} from './helpers/dummyData';
 
-const COUNTRIES = [
-  { value: 'EN-gb', label: 'England' },
-  { value: 'ES-es', label: 'Spain' },
-  { value: 'TH-th', label: 'Thailand' },
-  { value: 'EN-en', label: 'USA' }
-];
-
-const COUNTRIES_WITH_FLAGS = [
-  { value: 'EN-gb', label: 'England', flag: flagEngland },
-  { value: 'ES-es', label: 'Spain', flag: flagSpain },
-  { value: 'TH-th', label: 'Thailand', flag: flagThailand },
-  { value: 'EN-en', label: 'USA', flag: flagUSA }
-];
-
-const COUNTRIES_WITH_DISABLED_OPTIONS = [
-  { value: 'EN-gb', label: 'England' },
-  { value: 'ES-es', label: 'Spain' },
-  { value: 'TH-th', label: 'Thailand', isDisabled: true },
-  { value: 'EN-en', label: 'USA' }
-];
-
-const WALLETS = [
-  { value: '100,100 ADA', label: 'Main wallet' },
-  { value: '10,100.2 ADA', label: 'Spending money' },
-  { value: '500,1000 ADA', label: 'Savings' },
-];
 
 storiesOf('Select', module)
 
   .addDecorator(decorateWithSimpleTheme)
+  .addDecorator(withKnobs)
 
   // ====== Stories ======
 
@@ -68,6 +54,7 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
+        hasSearch={boolean('hasSearch', true)}
       />
     ))
   )
@@ -78,7 +65,8 @@ storiesOf('Select', module)
         label="Select a country"
         value={store.state.value}
         onChange={value => store.set({ value })}
-        options={COUNTRIES}
+        options={boolean('Long list?') ? COUNTRIES_LONG_LIST : COUNTRIES}
+        hasSearch={boolean('hasSearch')}
       />
     ))
   )
@@ -90,6 +78,7 @@ storiesOf('Select', module)
         onChange={value => store.set({ value })}
         options={COUNTRIES}
         placeholder="Select your country …"
+        hasSearch={boolean('hasSearch')}
       />
     ))
   )
@@ -100,6 +89,49 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
+        hasSearch={boolean('hasSearch')}
+      />
+    ))
+  )
+
+  .add('with search and long list',
+    withState({ value: '' }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={COUNTRIES_LONG_LIST}
+        hasSearch
+      />
+    ))
+  )
+
+  .add('with custom search and escaped value',
+    withState({ value: '' }, store => (
+      <Select
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        options={[
+          {
+            label: 'Escaped values: /.*+?|,()[]{}\\'
+          },
+          ...COUNTRIES
+        ]}
+        hasSearch
+        onSearch={(searchValue: string, list: Array<any>) => {
+          const regex = new RegExp(escapeRegExp(searchValue), "i");
+          return list
+            .filter((option) => {
+              const { label, value } = option;
+              return regex.test(label) || regex.test(value);
+            })
+            .map((option) => {
+              const { label, value } = option;
+              return {
+                value,
+                label: `${label} (${value})`,
+              };
+            });
+        }}
       />
     ))
   )
@@ -112,6 +144,7 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
+        hasSearch={boolean('hasSearch')}
       />
     ))
   )
@@ -129,6 +162,7 @@ storiesOf('Select', module)
           </div>
           )}
         optionHeight={56}
+        hasSearch={boolean('hasSearch')}
       />
     ))
   )
@@ -143,6 +177,33 @@ storiesOf('Select', module)
         value={store.state.value}
         onChange={value => store.set({ value })}
         options={COUNTRIES}
+        hasSearch={boolean('hasSearch')}
+      />
+    ))
+  )
+
+  .add('disabled (without value)',
+    withState({ value: '' }, store => (
+      <Select
+        disabled={true}
+        onChange={value => store.set({ value })}
+        label="Countries"
+        options={COUNTRIES_WITH_DISABLED_OPTIONS}
+        placeholder="Select your country …"
+        hasSearch={boolean('hasSearch')}
+      />
+    ))
+  )
+  .add('disabled (with value)',
+    withState({ value: '' }, store => (
+      <Select
+        disabled={true}
+        onChange={value => store.set({ value })}
+        value="EN-en"
+        label="Countries"
+        options={COUNTRIES_WITH_DISABLED_OPTIONS}
+        placeholder="Select your country …"
+        hasSearch={boolean('hasSearch')}
       />
     ))
   )
@@ -155,6 +216,7 @@ storiesOf('Select', module)
         label="Countries (has disabled options)"
         options={COUNTRIES_WITH_DISABLED_OPTIONS}
         placeholder="Select your country …"
+        hasSearch={boolean('hasSearch')}
       />
     ))
   )
@@ -166,6 +228,7 @@ storiesOf('Select', module)
           value={store.state.value}
           onChange={value => store.set({ value })}
           options={COUNTRIES}
+          hasSearch={boolean('hasSearch')}
         />
       </div>
     ))
@@ -180,6 +243,7 @@ storiesOf('Select', module)
         label="Countries (has disabled options)"
         options={COUNTRIES_WITH_DISABLED_OPTIONS}
         placeholder="Select your country …"
+        hasSearch={boolean('hasSearch')}
       />
     ))
   )
@@ -201,7 +265,8 @@ storiesOf('Select', module)
                 <Select
                   value={store.state.value}
                   onChange={value => store.set({ value })}
-                  options={COUNTRIES}
+                  options={COUNTRIES_LONG_LIST}
+                  hasSearch={boolean('hasSearch')}
                 />
               </div>
               <div className={styles.actions}>
@@ -248,6 +313,7 @@ storiesOf('Select', module)
           </div>
         )}
         optionHeight={63}
+        hasSearch={boolean('hasSearch')}
       />
     ))
   );

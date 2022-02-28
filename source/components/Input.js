@@ -1,10 +1,9 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 // $FlowFixMe
 import type { ComponentType, Element, SyntheticInputEvent } from 'react';
 
 // external libraries
-import createRef from 'create-react-ref/lib/createRef';
 import { isString, flow } from 'lodash';
 
 // utilities
@@ -15,19 +14,22 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
-type Props = {
+export type InputProps = {
   autoFocus: boolean,
   className?: ?string,
   context: ThemeContextProp,
   disabled?: boolean,
-  error: string | Element<any>,
+  error?: string | Element<any>,
+  inputRef?: RefObject,
+  showErrorState?: boolean,
+  hideErrorState?: boolean,
+  id?: string,
+  isShowingErrorOnFocus: boolean,
+  isShowingErrorOnHover: boolean,
   label?: string | Element<any>,
   maxLength?: number,
   minLength?: number,
-  onBlur?: Function,
   onChange?: Function,
-  onFocus?: Function,
-  onKeyPress?: Function,
   placeholder?: string,
   readOnly: boolean,
   setError?: Function,
@@ -37,37 +39,36 @@ type Props = {
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
   themeOverrides: Object,
-  value: string
+  themeVariables?: Object,
+  value: string,
 };
 
 type State = {
   error: string,
-  composedTheme: Object
+  composedTheme: Object,
 };
 
-class InputBase extends Component<Props, State> {
-  // declare ref types
-  inputElement: Element<'input'>;
+class InputBase extends Component<InputProps, State> {
+  inputElement: RefObject;
 
-  // define static properties
   static displayName = 'Input';
+
   static defaultProps = {
     autoFocus: false,
     context: createEmptyContext(),
     error: '',
+    isShowingErrorOnFocus: true,
+    isShowingErrorOnHover: true,
     readOnly: false,
     theme: null,
     themeId: IDENTIFIERS.INPUT,
     themeOverrides: {},
-    value: ''
+    value: '',
   };
 
-  constructor(props: Props) {
+  constructor(props: InputProps) {
     super(props);
-
-    // define ref
-    this.inputElement = createRef();
-
+    this.inputElement = props.inputRef ?? React.createRef();
     const { context, themeId, theme, themeOverrides } = props;
 
     this.state = {
@@ -76,7 +77,7 @@ class InputBase extends Component<Props, State> {
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
       ),
-      error: ''
+      error: '',
     };
   }
 
@@ -84,14 +85,15 @@ class InputBase extends Component<Props, State> {
     if (this.props.autoFocus) this.focus();
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   onChange = (event: SyntheticInputEvent<Element<'input'>>) => {
-    const { onChange, disabled } = this.props;
-    if (disabled) return;
-
+    const { onChange, disabled, readOnly } = this.props;
+    if (disabled || readOnly) return;
     if (onChange) onChange(this._processValue(event.target.value), event);
   };
 
@@ -116,7 +118,7 @@ class InputBase extends Component<Props, State> {
     return flow([
       this._enforceStringValue,
       this._enforceMaxLength,
-      this._enforceMinLength
+      this._enforceMinLength,
     ]).call(this, value);
   }
 

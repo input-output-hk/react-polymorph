@@ -52,19 +52,15 @@ class ButtonBase extends Component<Props, State> {
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin,
-      theme,
-      themeOverrides,
-      context,
-      ...rest
-    } = this.props;
+    const { skin, theme, themeOverrides, context, ...rest } = this.props;
 
     const ButtonSkin = skin || context.skins[IDENTIFIERS.BUTTON];
 

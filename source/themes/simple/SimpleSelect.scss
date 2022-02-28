@@ -5,16 +5,20 @@
 
 // select-input
 $select-input-bg-color: var(--rp-select-input-bg-color, #fafbfc) !default;
+$select-input-bg-color-disabled: var(--rp-select-input-bg-color-disabled, rgba(45, 45, 45, 0.05)) !default;
 $select-input-border: var(--rp-select-input-border, 1px solid var(--rp-select-input-border-color, #c6cdd6)) !default;
 $select-input-border-color-focus: var(--rp-select-input-border-color-focus, #5e6066) !default;
+$select-input-border-color-disabled: var(--rp-select-input-border-color-disabled, transparent) !default;
 $select-input-cursor: var(--rp-select-input-cursor, default) !default;
 $select-input-padding: var(--rp-select-input-padding, 14px 20px) !default;
 $select-input-placeholder-color: var(--rp-select-input-placeholder-color, rgba(#5e6066, 0.5)) !default;
 $select-input-placeholder-font-family: var(--rp-select-input-placeholder-font-family, $theme-font-light, sans-serif) !default;
 $select-input-text-color: var(--rp-select-input-text-color, #5e6066) !default;
+$select-input-text-color-disabled: var(--rp-select-input-text-color-disabled, rgba(45, 45, 45, 0.5)) !default;
 
 // arrow default
 $select-arrow-bg-color: var(--rp-select-arrow-bg-color, #c6cdd6) !default;
+$select-arrow-bg-color-disabled: var(--rp-select-arrow-bg-color-disabled, #c6cdd6) !default;
 $select-arrow-bottom: var(--rp-select-arrow-bottom, 20px) !default;
 $select-arrow-height: var(--rp-select-arrow-height, 7px) !default;
 $select-arrow-left: var(--rp-select-arrow-left, calc(100% - 32px)) !default;
@@ -70,8 +74,10 @@ $select-arrow-url-open: var(--rp-select-arrow-url-open, url("#{$theme-assets-pat
 
 // ==== STATE: isOpen ====
 .isOpen {
-  input {
-    border-color: $select-input-border-color-focus;
+  .selectInput {
+    input {
+      border-color: $select-input-border-color-focus;
+    }
   }
 
   .selectInput:after {
@@ -95,6 +101,20 @@ $select-arrow-url-open: var(--rp-select-arrow-url-open, url("#{$theme-assets-pat
       mask: $select-arrow-url;
       bottom: $select-arrow-bottom;
     }
+  }
+}
+
+// ==== STATE: disabled ====
+.disabled {
+  pointer-events: none;
+
+  .selectInput input {
+    background-color: $select-input-bg-color-disabled;
+    border-color: $select-input-border-color-disabled;
+  }
+
+  .SimpleInput_customValueBlock {
+    color: $select-input-text-color-disabled;
   }
 }
 // END SPECIAL STATES ---------- //

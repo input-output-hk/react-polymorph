@@ -10,39 +10,53 @@ import { composeTheme, addThemeId, didThemePropsChange } from '../utils/themes';
 import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
-type Props = {
+export type FormFieldProps = {
   className?: ?string,
   context: ThemeContextProp,
   disabled?: boolean,
   error?: string | Element<any>,
-  inputRef?: ElementRef<*>,
+  formFieldRef: ElementRef<*>,
+  id?: string,
+  isErrorHidden?: boolean,
+  isErrorShown?: boolean,
+  isShowingErrorOnFocus: boolean,
+  isShowingErrorOnHover: boolean,
   label?: string | Element<any>,
-  render: Function,
+  onChange: Function,
+  render: (setFormFieldRef: (ElementRef<*>) => void) => React$Node,
   skin?: ComponentType<any>,
   theme: ?Object, // will take precedence over theme in context if passed
   themeId: string,
-  themeOverrides: Object
+  themeOverrides: Object,
+  themeVariables?: Object,
 };
 
 type State = {
   error: string,
-  composedTheme: Object
+  composedTheme: Object,
 };
 
-class FormFieldBase extends Component<Props, State> {
+class FormFieldBase extends Component<FormFieldProps, State> {
   // define static properties
   static displayName = 'FormField';
+
   static defaultProps = {
     context: createEmptyContext(),
+    isShowingErrorOnFocus: true,
+    isShowingErrorOnHover: true,
     theme: null,
     themeId: IDENTIFIERS.FORM_FIELD,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
-  constructor(props: Props) {
+  formFieldRef: ElementRef<*>;
+
+  constructor(props: FormFieldProps) {
     super(props);
 
     const { context, themeId, theme, themeOverrides } = props;
+
+    this.formFieldRef = props.formFieldRef ?? React.createRef();
 
     this.state = {
       error: '',
@@ -50,34 +64,30 @@ class FormFieldBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    didThemePropsChange(this.props, nextProps, this.setState.bind(this));
+  componentDidUpdate(prevProps: FormFieldProps) {
+    if (prevProps !== this.props) {
+      didThemePropsChange(prevProps, this.props, this.setState.bind(this));
+    }
   }
 
   setError = (error: string) => this.setState({ error });
 
   focusChild = () => {
-    const { inputRef } = this.props;
-    if (inputRef && inputRef.current) {
-      if (typeof inputRef.current.focus === 'function') inputRef.current.focus();
+    const { formFieldRef } = this;
+    if (formFieldRef && formFieldRef.current) {
+      if (typeof formFieldRef.current.focus === 'function') {
+        formFieldRef.current.focus();
+      }
     }
   };
 
   render() {
     // destructuring props ensures only the "...rest" get passed down
-    const {
-      skin,
-      theme,
-      themeOverrides,
-      error,
-      context,
-      inputRef,
-      ...rest
-    } = this.props;
+    const { skin, theme, themeOverrides, error, context, ...rest } = this.props;
 
     const FormFieldSkin = skin || context.skins[IDENTIFIERS.FORM_FIELD];
 
@@ -86,6 +96,7 @@ class FormFieldBase extends Component<Props, State> {
         error={error || this.state.error}
         setError={this.setError}
         theme={this.state.composedTheme}
+        formFieldRef={this.formFieldRef}
         focusChild={this.focusChild}
         {...rest}
       />
