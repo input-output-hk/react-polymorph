@@ -2,8 +2,11 @@
 
 The history of all changes to react-polymorph.
 
-# 1.0.4
+# vNext
 
+## Chores
+
+- Fix double triggering of checkbox onChange handler ([PR 206](https://github.com/input-output-hk/react-polymorph/pull/206))
 - Bumped the version of `create-react-context` ([PR 208](https://github.com/input-output-hk/react-polymorph/pull/208))
 
 # 1.0.3
