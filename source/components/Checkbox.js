@@ -11,9 +11,9 @@ import { IDENTIFIERS } from '.';
 import type { ThemeContextProp } from './HOC/withTheme';
 
 type Props = {
-  checked: boolean,
+  checked?: boolean,
   className?: string,
-  context: ThemeContextProp,
+  context?: ThemeContextProp,
   disabled?: boolean,
   label?: string | Element<any>,
   labelLeft?: string | Element<any>,
@@ -22,13 +22,13 @@ type Props = {
   onBlur?: Function,
   onFocus?: Function,
   skin?: ComponentType<any>,
-  theme: ?Object, // will take precedence over theme in context if passed
-  themeId: string,
-  themeOverrides: Object
+  theme?: ?Object, // will take precedence over theme in context if passed
+  themeId?: string,
+  themeOverrides?: Object,
 };
 
 type State = {
-  composedTheme: Object
+  composedTheme: Object,
 };
 
 class CheckboxBase extends Component<Props, State> {
@@ -39,7 +39,7 @@ class CheckboxBase extends Component<Props, State> {
     context: createEmptyContext(),
     theme: null,
     themeId: IDENTIFIERS.CHECKBOX,
-    themeOverrides: {}
+    themeOverrides: {},
   };
 
   constructor(props: Props) {
@@ -52,7 +52,7 @@ class CheckboxBase extends Component<Props, State> {
         addThemeId(theme || context.theme, themeId),
         addThemeId(themeOverrides, themeId),
         context.ROOT_THEME_API
-      )
+      ),
     };
   }
 

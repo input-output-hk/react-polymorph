@@ -35,6 +35,7 @@ export const CheckboxSkin = (props: Props) => (
   >
     <input
       {...pickDOMProps(props)}
+      onChange={() => {}}
       className={props.theme[props.themeId].input}
       type="checkbox"
     />
