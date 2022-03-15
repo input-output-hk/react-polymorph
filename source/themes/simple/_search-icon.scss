@@ -1,0 +1,8 @@
+// search
+$search-icon-color: var(--rp-input-text-color, #5e6066) !default;
+$search-icon-opacity: var(--rp-search-icon-opacity, 0.65) !default;
+$search-icon-opacity-focus: var(--rp-search-icon-hover-focus, 1) !default; 
+$search-icon-side-margin: var(--rp-search-icon-size, 18.5px) !default;
+$search-icon-size: var(--rp-search-icon-size, 15px) !default;
+$search-icon-top-margin: var(--rp-search-icon-size, 16.5px) !default;
+$search-icon-url: var(--rp-search-icon-url, url("#{$theme-assets-path}/search.svg")) !default;

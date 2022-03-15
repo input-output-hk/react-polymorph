@@ -18,20 +18,38 @@ type Props = InputProps & {
 };
 
 export const InputSkin = (props: Props) => {
-  const renderInput = (setFormFieldRef) => (
-    <input
-      ref={setFormFieldRef}
-      {...pickDOMProps(props)}
-      className={classnames([
-        props.theme[props.themeId].input,
-        props.disabled ? props.theme[props.themeId].disabled : null,
-        !props.hideErrorState && (props.error || props.showErrorState)
-          ? props.theme[props.themeId].errored
-          : null,
-      ])}
-      disabled={props.disabled}
-    />
-  );
+  const renderInput = (setFormFieldRef) => {
+    const {
+      theme,
+      themeId,
+      disabled,
+      hasSearch,
+      showErrorState,
+      hideErrorState,
+      error,
+    } = props;
+
+    const input = (
+      <input
+        ref={setFormFieldRef}
+        {...pickDOMProps(props)}
+        className={classnames([
+          theme[themeId].input,
+          disabled ? theme[themeId].disabled : null,
+          !hideErrorState && (error || showErrorState)
+            ? theme[themeId].errored
+            : null,
+        ])}
+        disabled={disabled}
+      />
+    );
+
+    return hasSearch ? (
+      <div className={classnames([theme[themeId].search])}>{input}</div>
+    ) : (
+      input
+    );
+  };
 
   const useSelectionRenderer = (setFormFieldRef, option) => (
     <div className={props.theme[props.themeId].customValueWrapper}>

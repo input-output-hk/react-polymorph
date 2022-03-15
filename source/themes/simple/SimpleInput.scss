@@ -1,4 +1,5 @@
 @import "theme";
+@import "search-icon";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -15,6 +16,7 @@ $input-font-size: var(--rp-input-font-size, 16px) !default;
 $input-line-height: var(--rp-input-line-height, normal) !default;
 $input-outline-focus: var(--rp-input-outline-focus, none) !default;
 $input-padding: var(--rp-input-padding, 14px 20px) !default;
+$input-search-padding: var(--rp-input-padding-search, 43px) !default;
 $input-text-color: var(--rp-input-text-color, #5e6066) !default;
 $input-text-color-disabled: var(--rp-input-text-color-disabled, rgba(#5e6066, 0.5)) !default;
 $input-width: var(--rp-input-width, 100%) !default;
@@ -74,6 +76,38 @@ $input-placeholder-font-family: var(--rp-input-placeholder-font-family, $theme-f
 
   &::-webkit-input-placeholder {
     color: $input-placeholder-color-disabled;
+  }
+}
+
+.search {
+  position: relative;
+
+  .input {
+    padding-left: $input-search-padding;
+  }
+
+  &:focus-within {
+    &:before {
+      opacity: $search-icon-opacity-focus;
+    }
+  }
+
+  &:before {
+    -webkit-mask-image: $search-icon-url;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: $search-icon-size $search-icon-size;
+    background: $search-icon-color;
+    content: "";
+    height: $search-icon-size;
+    margin: $search-icon-top-margin $search-icon-side-margin 0 $search-icon-side-margin;
+    mask-image: $search-icon-url;
+    mask-repeat: no-repeat;
+    mask-size: $search-icon-size $search-icon-size;
+    opacity: $search-icon-opacity;
+    position: absolute;
+    vertical-align: middle;
+    width: $search-icon-size;
+    z-index: 1;
   }
 }
 

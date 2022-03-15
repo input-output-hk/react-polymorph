@@ -1,4 +1,5 @@
 @import "theme";
+@import "search-icon";
 @import "mixins/arrow";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
@@ -29,12 +30,6 @@ $option-search-clear-icon-color: var(--rp-input-text-color, #5e6066) !default;
 $option-search-clear-icon-size: var(--rp-option-search-clear-icon-size, 10px) !default;
 $option-search-clear-icon-url: var(--rp-option-search-clear-icon-url, url("#{$theme-assets-path}/cross.svg")) !default;
 $option-search-highlight-background-color: var(--rp-option-search-highlight-background-color, #f2a218) !default;
-$option-search-icon-color: var(--rp-input-text-color, #5e6066) !default;
-$option-search-icon-opacity: var(--rp-option-search-icon-opacity, 0.65) !default;
-$option-search-icon-side-margin: var(--rp-option-search-icon-size, 18.5px) !default;
-$option-search-icon-size: var(--rp-option-search-icon-size, 15px) !default;
-$option-search-icon-top-margin: var(--rp-option-search-icon-size, 16.5px) !default;
-$option-search-icon-url: var(--rp-option-search-icon-url, url("#{$theme-assets-path}/search.svg")) !default;
 $option-search-input-background-color: var(--rp-select-input-bg-color, #fafbfc);
 $option-search-input-border-radius: var(--rp-option-search-input-border-radius, 1px);
 $option-search-input-border: var(--rp-option-search-input-border, none);
@@ -193,20 +188,20 @@ $options-arrow-height: var(--rp-options-arrow-height, $options-arrow-size) !defa
     }
   }
   &:before {
-    -webkit-mask-image: $option-search-icon-url;
+    -webkit-mask-image: $search-icon-url;
     -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: $option-search-icon-size $option-search-icon-size;
-    background: $option-search-icon-color;
+    -webkit-mask-size: $search-icon-size $search-icon-size;
+    background: $search-icon-color;
     content: "";
-    height: $option-search-icon-size;
-    margin: $option-search-icon-top-margin $option-search-icon-side-margin 0 $option-search-icon-side-margin;
-    mask-image: $option-search-icon-url;
+    height: $search-icon-size;
+    margin: $search-icon-top-margin $search-icon-side-margin 0 $search-icon-side-margin;
+    mask-image: $search-icon-url;
     mask-repeat: no-repeat;
-    mask-size: $option-search-icon-size $option-search-icon-size;
-    opacity: $option-search-icon-opacity;
+    mask-size: $search-icon-size $search-icon-size;
+    opacity: $search-icon-opacity;
     position: absolute;
     vertical-align: middle;
-    width: $option-search-icon-size;
+    width: $search-icon-size;
     z-index: 1;
   }
   :not([dir='rtl']) & {

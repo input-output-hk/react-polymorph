@@ -217,4 +217,15 @@ storiesOf('Input', module)
         label="Click Me to Focus"
       />
     ))
+  )
+  .add(
+    'with search',
+    withState({ value: '' }, (store) => (
+      <Input
+        value={store.state.value}
+        onChange={(value) => store.set({ value })}
+        label="Click Me to Focus"
+        hasSearch
+      />
+    ))
   );
