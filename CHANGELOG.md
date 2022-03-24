@@ -2,6 +2,12 @@
 
 The history of all changes to react-polymorph.
 
+## vNext
+
+### Features
+
+- Add search icon functionality to Input component ([PR 207](https://github.com/input-output-hk/react-polymorph/pull/207))
+
 # 1.0.3
 
 - Add disabled state to Select component ([PR 196](https://github.com/input-output-hk/react-polymorph/pull/196))
