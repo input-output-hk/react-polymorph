@@ -2,6 +2,12 @@
 
 The history of all changes to react-polymorph.
 
+## vNext
+
+### Chores
+
+- Bumped the version of `create-react-context` ([PR 208](https://github.com/input-output-hk/react-polymorph/pull/208))
+
 # 1.0.3
 
 - Add disabled state to Select component ([PR 196](https://github.com/input-output-hk/react-polymorph/pull/196))
