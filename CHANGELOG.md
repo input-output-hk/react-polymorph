@@ -2,9 +2,7 @@
 
 The history of all changes to react-polymorph.
 
-## vNext
-
-### Chores
+# 1.0.4
 
 - Bumped the version of `create-react-context` ([PR 208](https://github.com/input-output-hk/react-polymorph/pull/208))
 
