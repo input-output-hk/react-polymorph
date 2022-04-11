@@ -100,6 +100,8 @@ $pop-over-border-color: var(--rp-pop-over-border-color, transparent) !default;
       justify-content: flex-start;
       align-items: center;
       left: 100%;
+      width: calc(#{$pop-over-arrow-size} * #{math.sqrt(2)} / 2);
+      height: $pop-over-arrow-size;
       &:before {
         margin-left: $pop-over-arrow-nesting;
       }
@@ -109,6 +111,8 @@ $pop-over-border-color: var(--rp-pop-over-border-color, transparent) !default;
       justify-content: flex-end;
       align-items: center;
       right: 100%;
+      width: calc(#{$pop-over-arrow-size} * #{math.sqrt(2)} / 2);
+      height: $pop-over-arrow-size;
       &:before {
         margin-right: $pop-over-arrow-nesting;
       }
