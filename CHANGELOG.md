@@ -2,6 +2,10 @@
 
 The history of all changes to react-polymorph.
 
+# 1.0.4
+
+- Fix overlapping PopOver triangle container ([PR 210](https://github.com/input-output-hk/react-polymorph/pull/210))
+
 # 1.0.3
 
 - Add disabled state to Select component ([PR 196](https://github.com/input-output-hk/react-polymorph/pull/196))
