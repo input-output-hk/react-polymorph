@@ -1,4 +1,5 @@
-@import "theme";
+@use "sass:math";
+@import 'theme';
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -6,7 +7,9 @@ $pop-over-box-shadow: var(--rp-pop-over-box-shadow, 0 1.5px 5px 0 rgba(0, 0, 0, 
 $pop-over-font-family: var(--rp-pop-over-font-family, $theme-font-regular), sans-serif !default;
 $pop-over-font-size: var(--rp-pop-over-font-size, 14px) !default;
 $pop-over-padding: var(--rp-pop-over-padding, 6px 12px) !default;
-$pop-over-arrow-size: var(--rp-pop-over-arrow-size, 16px) !default;
+$pop-over-arrow-width: var(--rp-pop-over-arrow-size, 16px) !default;
+$pop-over-arrow-height: calc(#{$pop-over-arrow-width} * #{math.sqrt(2)} / 2);
+$pop-over-arrow-nesting: calc(-1 * #{$pop-over-arrow-width} * #{math.sqrt(2)} / 2);
 $pop-over-bg-color: var(--rp-pop-over-bg-color, rgba(94, 96, 102, 0.9)) !default;
 $pop-over-text-color: var(--rp-pop-over-text-color, white) !default;
 $pop-over-line-height: var(--rp-pop-over-line-height, 19px) !default;
@@ -22,22 +25,22 @@ $pop-over-border-color: var(--rp-pop-over-border-color, transparent) !default;
   }
 
   [data-tippy-root] {
-    max-width: calc(100vw - 10px)
+    max-width: calc(100vw - 10px);
   }
 
   .tippy-box {
     position: relative;
-    transition-property: transform, visibility, opacity
+    transition-property: transform, visibility, opacity;
   }
 
   .tippy-box[data-inertia][data-state=visible] {
-    transition-timing-function: cubic-bezier(.54, 1.5, .38, 1.11)
+    transition-timing-function: cubic-bezier(.54, 1.5, .38, 1.11);
   }
 
   .tippy-content {
     position: relative;
     line-height: $pop-over-line-height;
-    z-index: 1
+    z-index: 1;
   }
 }
 
@@ -61,13 +64,13 @@ $pop-over-border-color: var(--rp-pop-over-border-color, transparent) !default;
       position: relative;
       overflow: hidden;
       display: flex;
-      width: calc(#{$pop-over-arrow-size} * 1.5);
-      height: calc(#{$pop-over-arrow-size} * 1.5);
+      width: $pop-over-arrow-width;
+      height: $pop-over-arrow-height;
       &:before {
         content: "";
         display: block;
-        width: $pop-over-arrow-size;
-        height: $pop-over-arrow-size;
+        width: $pop-over-arrow-width;
+        height: $pop-over-arrow-width;
         background-color: $pop-over-bg-color;
         border-width: $pop-over-border-width;
         border-color: $pop-over-border-color;
@@ -81,7 +84,7 @@ $pop-over-border-color: var(--rp-pop-over-border-color, transparent) !default;
       justify-content: center;
       align-items: flex-start;
       &:before {
-        margin-top: calc(-1 * #{$pop-over-arrow-size} / 2 - #{$pop-over-border-width} * 2);
+        margin-top: $pop-over-arrow-nesting;
       }
     }
 
@@ -90,7 +93,7 @@ $pop-over-border-color: var(--rp-pop-over-border-color, transparent) !default;
       align-items: flex-end;
       bottom: 100%;
       &:before {
-        margin-bottom: calc(-1 * #{$pop-over-arrow-size} / 2 - #{$pop-over-border-width} * 2);
+        margin-bottom: $pop-over-arrow-nesting;
       }
     }
 
@@ -98,8 +101,10 @@ $pop-over-border-color: var(--rp-pop-over-border-color, transparent) !default;
       justify-content: flex-start;
       align-items: center;
       left: 100%;
+      width: $pop-over-arrow-height;
+      height: $pop-over-arrow-width;
       &:before {
-        margin-left: calc(-1 * #{$pop-over-arrow-size} / 2 - #{$pop-over-border-width} * 2);
+        margin-left: $pop-over-arrow-nesting;
       }
     }
 
@@ -107,8 +112,10 @@ $pop-over-border-color: var(--rp-pop-over-border-color, transparent) !default;
       justify-content: flex-end;
       align-items: center;
       right: 100%;
+      width: $pop-over-arrow-height;
+      height: $pop-over-arrow-width;
       &:before {
-        margin-right: calc(-1 * #{$pop-over-arrow-size} / 2 - #{$pop-over-border-width} * 2);
+        margin-right: $pop-over-arrow-nesting;
       }
     }
   }
