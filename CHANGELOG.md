@@ -4,7 +4,13 @@ The history of all changes to react-polymorph.
 
 # 1.0.4
 
+### Features
+
 - Fix overlapping PopOver triangle container ([PR 210](https://github.com/input-output-hk/react-polymorph/pull/210))
+
+### Chores
+
+- Replace node-sass with sass package ([PR 205](https://github.com/input-output-hk/react-polymorph/pull/205))
 
 # 1.0.3
 
