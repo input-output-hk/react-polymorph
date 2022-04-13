@@ -1,7 +1,7 @@
 {
   "name": "react-polymorph",
   "description": "React components with highly customizable logic, markup and styles.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "build": "cross-env yarn clean && yarn sass && yarn js",
     "build:watch": "concurrently 'yarn js:watch' 'yarn sass:watch'",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@tippyjs/react": "4.2.1",
-    "create-react-context": "0.2.2",
+    "create-react-context": "0.3.0",
     "fast-password-entropy": "1.1.1",
     "filter-invalid-dom-props": "2.1.0",
     "html-attributes": "1.1.0",
