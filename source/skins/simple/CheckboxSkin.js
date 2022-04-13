@@ -1,4 +1,5 @@
 // @flow
+import { omit } from 'lodash';
 import React from 'react';
 import type { Element } from 'react';
 // external libraries
@@ -34,10 +35,10 @@ export const CheckboxSkin = (props: Props) => (
     }}
   >
     <input
-      {...pickDOMProps(props)}
-      onChange={() => {}}
+      {...pickDOMProps(omit(props, 'onChange'))}
       className={props.theme[props.themeId].input}
       type="checkbox"
+      readOnly
     />
     <div
       className={classnames([
