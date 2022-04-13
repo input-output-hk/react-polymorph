@@ -9,6 +9,7 @@ exports[`Checkbox is checked 1`] = `
   <input
     checked=""
     class="input"
+    readonly=""
     type="checkbox"
   />
   <div
@@ -26,6 +27,7 @@ exports[`Checkbox is disabled 1`] = `
   <input
     class="input"
     disabled=""
+    readonly=""
     type="checkbox"
   />
   <div
@@ -42,6 +44,7 @@ exports[`Checkbox renders correctly 1`] = `
 >
   <input
     class="input"
+    readonly=""
     type="checkbox"
   />
   <div
@@ -59,6 +62,7 @@ exports[`Checkbox renders with a label 1`] = `
   <input
     class="input"
     label="check here"
+    readonly=""
     type="checkbox"
   />
   <div
