@@ -1,4 +1,5 @@
 // @flow
+import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 // storybook
@@ -21,13 +22,13 @@ import themeOverrides from './theme-overrides/customCheckbox.scss';
 import { decorateWithSimpleTheme } from './helpers/theming';
 
 storiesOf('Checkbox', module)
-
   .addDecorator(decorateWithSimpleTheme)
 
   // ====== Stories ======
 
-  .add('plain',
-    withState({ checked: false }, store => (
+  .add(
+    'plain',
+    withState({ checked: false }, (store) => (
       <Checkbox
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
@@ -38,8 +39,9 @@ storiesOf('Checkbox', module)
 
   .add('disabled', () => <Checkbox disabled skin={CheckboxSkin} />)
 
-  .add('short label',
-    withState({ checked: false }, store => (
+  .add(
+    'short label',
+    withState({ checked: false }, (store) => (
       <Checkbox
         label="My checkbox"
         checked={store.state.checked}
@@ -53,8 +55,9 @@ storiesOf('Checkbox', module)
     <Checkbox disabled label="My checkbox" skin={CheckboxSkin} />
   ))
 
-  .add('long label',
-    withState({ checked: false }, store => (
+  .add(
+    'long label',
+    withState({ checked: false }, (store) => (
       <Checkbox
         label="I understand that if this application is moved to another device
               or deleted, my money can be only recovered with the backup phrase
@@ -66,8 +69,9 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add('html label',
-    withState({ checked: false }, store => (
+  .add(
+    'html label',
+    withState({ checked: false }, (store) => (
       <Checkbox
         label={
           <div>
@@ -81,8 +85,9 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add('theme overrides',
-    withState({ checked: false }, store => (
+  .add(
+    'theme overrides',
+    withState({ checked: false }, (store) => (
       <Checkbox
         themeOverrides={themeOverrides}
         label="check here"
@@ -93,13 +98,24 @@ storiesOf('Checkbox', module)
     ))
   )
 
-  .add('custom theme',
-    withState({ checked: true }, store => (
+  .add(
+    'custom theme',
+    withState({ checked: true }, (store) => (
       <Checkbox
         theme={CustomCheckboxTheme}
         label="check here"
         checked={store.state.checked}
         onChange={() => store.set({ checked: !store.state.checked })}
+        skin={CheckboxSkin}
+      />
+    ))
+  )
+  .add(
+    'onChange action',
+    withState({ checked: false }, (store) => (
+      <Checkbox
+        defaultChecked={store.state.checked}
+        onChange={action('onChange')}
         skin={CheckboxSkin}
       />
     ))
