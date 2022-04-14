@@ -2,15 +2,15 @@
 
 The history of all changes to react-polymorph.
 
-# vNext
+# 1.0.4
 
-## Fixes
+### Fixes
 
+- Fixed overlapping PopOver triangle container ([PR 210](https://github.com/input-output-hk/react-polymorph/pull/210))
 - Fixed double triggering of checkbox onChange handler ([PR 206](https://github.com/input-output-hk/react-polymorph/pull/206))
 
-## Chores
+### Chores
 
-- Fix overlapping PopOver triangle container ([PR 210](https://github.com/input-output-hk/react-polymorph/pull/210))
 - Bumped the version of `create-react-context` ([PR 208](https://github.com/input-output-hk/react-polymorph/pull/208))
 - Replace node-sass with sass package ([PR 205](https://github.com/input-output-hk/react-polymorph/pull/205))
 
