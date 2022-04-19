@@ -84,6 +84,7 @@
     "react/no-array-index-key": 0,
     "object-curly-newline": 0,
     "jsx-a11y/alt-text": 0,
+    "jsx-a11y/label-has-associated-control": 0,
     "no-await-in-loop": 0,
     "no-restricted-syntax": 0,
     "no-return-assign": 0,

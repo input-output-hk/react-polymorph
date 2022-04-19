@@ -9,26 +9,16 @@ import { ROOT_THEME_API } from '../../themes/API';
 // if the user passes ThemeProvider a theme and/or ROOT_THEME_API,
 // these default values are overwritten
 
-// check to use context pollyfill or not
-let createContext;
-if (React.createContext) {
-  // React module contains createContext method, no polyfill
-  createContext = React.createContext;
-} else {
-  // use create-react-context polyfill
-  createContext = createReactContext;
-}
-
 type Theme = {
   skins: Object,
   theme: Object,
-  ROOT_THEME_API: Object
+  ROOT_THEME_API: Object,
 };
 
 const defaultContext = {
   skins: {},
   theme: ROOT_THEME_API,
-  ROOT_THEME_API
+  ROOT_THEME_API,
 };
 
-export const ThemeContext: Context<Theme> = createContext(defaultContext);
+export const ThemeContext: Context<Theme> = createReactContext(defaultContext);
