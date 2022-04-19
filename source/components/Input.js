@@ -22,6 +22,7 @@ export type InputProps = {
   error?: string | Element<any>,
   inputRef?: RefObject,
   showErrorState?: boolean,
+  hasSearch?: boolean,
   hideErrorState?: boolean,
   id?: string,
   isShowingErrorOnFocus: boolean,

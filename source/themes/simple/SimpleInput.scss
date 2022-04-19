@@ -1,4 +1,5 @@
 @import "theme";
+@import "search-icon";
 
 // OVERRIDABLE CONFIGURATION VARIABLES
 
@@ -74,6 +75,34 @@ $input-placeholder-font-family: var(--rp-input-placeholder-font-family, $theme-f
 
   &::-webkit-input-placeholder {
     color: $input-placeholder-color-disabled;
+  }
+}
+
+.search {
+  position: relative;
+
+  &:focus-within {
+    &:before {
+      opacity: $search-icon-opacity-focus;
+    }
+  }
+
+  &:before {
+    -webkit-mask-image: $search-icon-url;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: $search-icon-size $search-icon-size;
+    background: $search-icon-color;
+    content: "";
+    height: $search-icon-size;
+    margin: $search-icon-top-margin $search-icon-side-margin 0 $search-icon-side-margin;
+    mask-image: $search-icon-url;
+    mask-repeat: no-repeat;
+    mask-size: $search-icon-size $search-icon-size;
+    opacity: $search-icon-opacity;
+    position: absolute;
+    vertical-align: middle;
+    width: $search-icon-size;
+    z-index: 1;
   }
 }
 

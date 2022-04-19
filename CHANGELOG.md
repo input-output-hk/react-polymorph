@@ -2,6 +2,12 @@
 
 The history of all changes to react-polymorph.
 
+## vNext
+
+### Features
+
+- Add search icon functionality to Input component ([PR 207](https://github.com/input-output-hk/react-polymorph/pull/207))
+
 # 1.0.4
 
 ### Fixes
@@ -13,6 +19,7 @@ The history of all changes to react-polymorph.
 
 - Bumped the version of `create-react-context` ([PR 208](https://github.com/input-output-hk/react-polymorph/pull/208))
 - Replace node-sass with sass package ([PR 205](https://github.com/input-output-hk/react-polymorph/pull/205))
+
 
 # 1.0.3
 
