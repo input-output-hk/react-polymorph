@@ -115,10 +115,10 @@ const SimpleFormApp = () => (
 1. You develop a feature on your branch without bumping the version
 2. Once your code is ready to be tested in Daedalus, you [publish a temporary release](#how-to-publish-a-temporary-release):
 
-- checkout to your branch:
-- change the version in package json to `[current version]-next.x` (only add the -next.X suffix keeping the current version)
+- checkout to your branch
+- change the version in package json to `[current version]-next.x` (just add the -next.X suffix keeping the current version)
 - publish the version under the next tag
-- **don't push the version change to upstream**
+- you don't need to push the version change to upstream as you will be changing it again shortly.
 
 3. When you receive a green light for merging from QAs and other devs on your PR in Daeadalus:
 
